@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 2 Quiz</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 2</p>
+  <h1>The Nature &amp; Purpose<br>of <span>Accounting</span></h1>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="qCounter">Question 1 of 1</span>
+    <span id="pctLabel">0%</span>
+  </div>
+  <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="chips">
+  <div class="chip" id="chipTotal">Score: 0 / 0</div>
+  <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+  <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+</div>
+
+<div class="card" id="quizCard">
+  <div class="q-meta">
+    <span class="q-label" id="qLabel">Question 1</span>
+    <span class="type-badge" id="typeBadge"></span>
+  </div>
+  <p class="q-text" id="qText"></p>
+  <p class="q-hint" id="qHint" style="display:none"></p>
+  <div id="interactionZone"></div>
+  <div class="feedback" id="feedback">
+    <div class="feedback-head" id="fbHead"></div>
+    <div id="fbBody"></div>
+    <div class="mnemonic" id="fbMnemonic"></div>
+  </div>
+  <div class="btn-wrap" id="btnWrap">
+    <button class="btn-next" id="btnNext">Next Question →</button>
+  </div>
+</div>
+
+<div id="results">
+  <p class="grade-label">Final Score</p>
+  <div class="big-score" id="bigScore"></div>
+  <p class="grade-label" id="gradeMsg"></p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Multiple Choice</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div>Multi-Select</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--correct)"></div>Drag &amp; Drop</div>
+  </div>
+  <div class="breakdown">
+    <div class="bk-card"><div class="num" id="rcCorrect" style="color:var(--correct)"></div><div class="lbl">Correct</div></div>
+    <div class="bk-card"><div class="num" id="rcWrong" style="color:var(--wrong)"></div><div class="lbl">Wrong</div></div>
+    <div class="bk-card"><div class="num" id="rcTotal"></div><div class="lbl">Total</div></div>
+  </div>
+  <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+</div>
+
+<script src="quiz.js"></script>
+<script>
+const questions = [
+
+// ══ MULTIPLE CHOICE ══════════════════════════
+
+{type:'mc',
+ q:"What is the complete definition of accounting?",
+ opts:["The process of filing taxes and managing payroll for a company",
+       "The recording of day-to-day financial activities AND organizing that information into summary reports used to evaluate a company's financial status",
+       "The process of auditing a company's books for government compliance",
+       "The act of preparing financial forecasts for future business decisions"],
+ correct:1,
+ explanation:"Accounting has two parts: (1) recording daily financial activities and (2) organizing that data into summary reports to evaluate financial status. Both parts are required.",
+ mnemonic:"💡 Memory tip: Accounting = <strong>Record + Report</strong>. Think of an accountant as a journalist — they record events daily, then write a summary story so others can evaluate what happened."},
+
+{type:'mc',
+ q:"What does the Balance Sheet report?",
+ opts:["Net income earned during a period",
+       "Cash collected and paid out in operating, investing, and financing activities",
+       "A company's assets, liabilities, and owners' equity",
+       "A company's revenues and expenses over a fiscal year"],
+ correct:2,
+ explanation:"The Balance Sheet is a snapshot at one point in time showing what a company OWNS (assets), what it OWES (liabilities), and what belongs to the owners (owners' equity).",
+ mnemonic:"💡 Memory tip: <strong>A = L + OE</strong>. Assets = Liabilities + Owners' Equity. The sheet must always 'balance' like a scale."},
+
+{type:'mc',
+ q:"How is net income calculated?",
+ opts:["Total assets minus total liabilities",
+       "Cash collected minus cash paid out",
+       "Total revenues minus total expenses",
+       "Owners' equity minus long-term debt"],
+ correct:2,
+ explanation:"Net income = Revenues − Expenses. If revenues exceed expenses, the company has a profit. If expenses exceed revenues, it has a loss.",
+ mnemonic:"💡 Memory tip: 'Net' means what's left after subtracting. <strong>Revenue IN, expenses OUT — what's left is net income.</strong> Like a paycheck: gross pay minus deductions = net pay."},
+
+{type:'mc',
+ q:"Which statement BEST describes the role of the FASB?",
+ opts:["A U.S. government agency that enforces accounting rules through legal penalties",
+       "A private body supported by the business community that sets U.S. accounting standards",
+       "An international organization that creates worldwide accounting standards",
+       "A government body that regulates stock exchanges"],
+ correct:1,
+ explanation:"The FASB is PRIVATE — not a government agency. It was established and is supported by the U.S. business community, financial analysts, and practicing accountants.",
+ mnemonic:"💡 Memory tip: <strong>FASB = private club, not a government department.</strong> No badge, no government salary — just industry professionals writing the rulebook together."},
+
+{type:'mc',
+ q:"Which organization regulates U.S. stock exchanges and works to ensure investors aren't misled by companies hiding or manipulating financial data?",
+ opts:["FASB","AICPA","IRS","SEC"],
+ correct:3,
+ explanation:"The SEC (Securities and Exchange Commission) is the watchdog for U.S. stock markets. It protects investors by requiring companies to disclose accurate financial information.",
+ mnemonic:"💡 Memory tip: <strong>SEC = Stock Exchange Cop.</strong> The SEC patrols Wall Street to make sure companies play fair with investors."},
+
+{type:'mc',
+ q:"Which statement about the IRS and financial accounting is CORRECT?",
+ opts:["The IRS sets GAAP rules that companies must follow in financial statements",
+       "The IRS uses a company's financial statements to determine its tax bill",
+       "The IRS establishes when income is taxed but has NO role in setting financial accounting rules",
+       "The IRS and the FASB jointly approve accounting standards"],
+ correct:2,
+ explanation:"The IRS defines TAX rules, but plays NO role in financial accounting rules. A company's financial statements are NOT used to determine tax liability — those are two completely separate systems.",
+ mnemonic:"💡 Memory tip: <strong>IRS ≠ FASB.</strong> IRS = tax world. FASB = financial reporting world. Same company, totally different rulebooks. Never mix them up."},
+
+{type:'mc',
+ q:"The IASB's primary purpose is to:",
+ opts:["Inspect the audit practices of U.S. CPA firms",
+       "Regulate the New York Stock Exchange",
+       "Develop a common set of worldwide accounting standards",
+       "Collect taxes from multinational corporations"],
+ correct:2,
+ explanation:"The IASB (International Accounting Standards Board) works to create one universal set of accounting standards globally. However, in the U.S., FASB rules (GAAP) still take precedence.",
+ mnemonic:"💡 Memory tip: <strong>I = International.</strong> IASB thinks globally; FASB thinks locally. Most of the world → IASB. United States → FASB."},
+
+{type:'mc',
+ q:"What does GAAP stand for and what does it ensure?",
+ opts:["General Audit and Accounting Procedures — standardizes how audits are conducted",
+       "Generally Accepted Accounting Principles — ensures consistency and transparency in financial reporting",
+       "Government Approved Accounting Policies — establishes IRS tax collection rules",
+       "Global Accounting and Auditing Protocols — creates international tax standards"],
+ correct:1,
+ explanation:"GAAP = Generally Accepted Accounting Principles. These principles (with origins in the early 1900s) ensure financial reporting is consistent and transparent so all companies can be compared fairly.",
+ mnemonic:"💡 Memory tip: Think of a <strong>gap</strong> between two companies' data. GAAP fills that gap by making everyone report the same way — apples to apples, not apples to oranges."},
+
+{type:'mc',
+ q:"What caused the passage of the Sarbanes-Oxley Act, and what does it specifically increase?",
+ opts:["The 2008 financial crisis; it increased IRS tax audits of corporations",
+       "International competition in the 1990s; it increased IASB authority over U.S. companies",
+       "A wave of corporate accounting scandals starting in 2001; it increased U.S. federal government scrutiny of the production of financial statements",
+       "Rapid advances in technology; it increased cybersecurity requirements for financial data"],
+ correct:2,
+ explanation:"Major corporate scandals (like Enron) starting in 2001 prompted Congress to pass Sarbanes-Oxley (SOX), which increased federal government scrutiny specifically over HOW financial statements are produced.",
+ mnemonic:"💡 Memory tip: <strong>Scandals → SOX.</strong> Companies cooked the books, so Congress cooked up a new law. SOX watches HOW you make the statements, not just what they say."},
+
+{type:'mc',
+ q:"What is the definition of bookkeeping?",
+ opts:["The organization of financial data into summary reports for external users",
+       "The preservation of a systematic, quantitative record of an activity",
+       "The process of auditing financial records for government compliance",
+       "The act of preparing tax returns for a business"],
+ correct:1,
+ explanation:"Bookkeeping is defined as 'the preservation of a systematic, quantitative record of an activity.' Key words: systematic (organized), quantitative (using numbers), record (keeping track).",
+ mnemonic:"💡 Memory tip: Bookkeeping = <strong>keeping the books</strong>. Imagine a librarian who carefully preserves every record in a numbered, organized system. No record = no books = no bookkeeping."},
+
+
+
+{type:'mc',
+ q:"The practice of accounting involves:",
+ opts:["Strict adherence to accounting rules only — no personal judgment involved",
+       "Adherence to established accounting rules as well as the use of judgment",
+       "The use of personal judgment only, without reference to established rules",
+       "Following IRS regulations and ignoring FASB standards"],
+ correct:1,
+ explanation:"Accounting is NOT purely mechanical. It requires BOTH following established rules (like GAAP) AND exercising professional judgment. Many decisions require interpretation and estimates.",
+ mnemonic:"💡 Memory tip: Accounting = <strong>Rules + Judgment</strong>. Like a judge in court — they must follow the law (rules) but also exercise wisdom (judgment) in how they apply it to each unique case."},
+
+{type:'mc',
+ q:"What does a CPA firm do?",
+ opts:["It sets accounting standards and enforces GAAP compliance",
+       "It provides freelance business advice, particularly in connection with accounting issues",
+       "It audits government agencies and politicians' financial disclosures",
+       "It trains new CPAs and administers the CPA exam"],
+ correct:1,
+ explanation:"A CPA firm provides freelance business advice, particularly related to accounting issues. They are outside consultants — businesses hire them when they need expert accounting guidance.",
+ mnemonic:"💡 Memory tip: A CPA firm is like an <strong>accounting doctor's office</strong>. You go there when you have a financial problem that needs expert diagnosis and advice."},
+
+{type:'mc',
+ q:"The PCAOB has the authority to:",
+ opts:["Set U.S. accounting standards (GAAP) for all industries",
+       "Collect federal taxes from publicly traded companies",
+       "Bar an audit firm from auditing SEC-registered companies",
+       "License individual CPAs at the state level"],
+ correct:2,
+ explanation:"The PCAOB (Public Company Accounting Oversight Board) inspects audit practices, investigates questionable behavior, and can impose sanctions — including barring a firm from ever auditing public companies again.",
+ mnemonic:"💡 Memory tip: <strong>PCAOB = The Audit Police.</strong> If an audit firm cheats, PCAOB can kick them out of the game permanently. That's serious enforcement power."},
+
+{type:'mc',
+ q:"Which of the following is NOT listed as one of the three factors causing significant change in accounting?",
+ opts:["Rapid advances in information technology",
+       "International integration of worldwide business",
+       "Increased scrutiny from large corporate accounting scandals",
+       "Rising inflation and interest rates in global markets"],
+ correct:3,
+ explanation:"The three drivers are: (1) rapid IT advances, (2) global business integration, and (3) increased scrutiny from accounting scandals. Rising inflation/interest rates are not listed.",
+ mnemonic:"💡 Memory tip: Remember <strong>TIS</strong> — <strong>T</strong>echnology, <strong>I</strong>nternational business, <strong>S</strong>candals. If it's not TIS, it's not a change driver."},
+
+// ══ MULTI-SELECT ═════════════════════════════
+
+{type:'ms',
+ q:"Which of the following are users of financial accounting information? (Select ALL that apply)",
+ opts:["Lenders","Investors","Managers","The FASB","Reporters","The PCAOB","Competitors","Suppliers, customers, and employees"],
+ correctSet:[0,1,2,4,6,7],
+ explanation:"The seven users listed are: Lenders, Investors, Managers, Suppliers/customers/employees, Competitors, Government agencies & politicians, and Reporters. The FASB and PCAOB SET or OVERSEE accounting rules — they are not listed as users of financial statements.",
+ mnemonic:"💡 Memory tip: Use <strong>LIMSCGR</strong> — <strong>L</strong>enders, <strong>I</strong>nvestors, <strong>M</strong>anagers, <strong>S</strong>uppliers/customers/employees, <strong>C</strong>ompetitors, <strong>G</strong>overnment, <strong>R</strong>eporters. Seven groups, all reading the same statements for different reasons."},
+
+{type:'ms',
+ q:"Which THREE requirements must a person meet to earn the CPA designation? (Select all that apply)",
+ opts:["Take a minimum number of college-level accounting classes",
+       "Pass the CPA exam",
+       "Be appointed by the FASB",
+       "Meet other requirements set by their state",
+       "Work at least 5 years at a public accounting firm",
+       "Get approved by the SEC"],
+ correctSet:[0,1,3],
+ explanation:"A CPA must: (1) take a minimum number of college-level accounting classes, (2) pass the CPA exam, and (3) meet other requirements set by their state. FASB appointment and SEC approval are not requirements.",
+ mnemonic:"💡 Memory tip: CPA = <strong>Classes + Pass the exam + state requirements</strong>. Three legs of a stool — remove any one leg and you don't get to sit down (earn the CPA title)."},
+
+{type:'ms',
+ q:"Managers use financial accounting information for which purposes? (Select ALL that apply)",
+ opts:["To formulate company goals",
+       "To compute bonuses for employees",
+       "To illuminate company weaknesses",
+       "To set new accounting standards",
+       "To regulate stock exchanges",
+       "To assess the attractiveness of the company as an investment"],
+ correctSet:[0,1,2],
+ explanation:"Managers specifically use accounting for three things: (1) formulating company goals, (2) computing employee bonuses, and (3) illuminating (identifying) company weaknesses.",
+ mnemonic:"💡 Memory tip: Managers use accounting for <strong>GBW — Goals, Bonuses, Weaknesses.</strong> A manager asks: Where are we going? Who gets rewarded? Where are we struggling?"},
+
+{type:'ms',
+ q:"Which of the following statements about the IASB are TRUE? (Select all that apply)",
+ opts:["It was formed to develop a common set of worldwide accounting standards",
+       "Its standards are increasingly accepted worldwide",
+       "FASB rules are still the standard in the United States",
+       "It is a division of the U.S. SEC",
+       "It overrides FASB standards in U.S. companies",
+       "It collects international taxes"],
+ correctSet:[0,1,2],
+ explanation:"Three things are true about the IASB: (1) it was formed to develop worldwide standards, (2) those standards are increasingly accepted globally, and (3) FASB rules still govern U.S. companies.",
+ mnemonic:"💡 Memory tip: IASB is <strong>growing globally but not yet in charge in the U.S.</strong> Think of it as the metric system — most of the world uses it, but the U.S. is still on its own system (FASB/GAAP)."},
+
+{type:'ms',
+ q:"Which THREE factors have combined to make this a time of significant change in accounting? (Select all that apply)",
+ opts:["Rapid advance in information technology",
+       "Rising global interest rates",
+       "International integration of worldwide business",
+       "Declining number of CPA firms",
+       "Increased scrutiny from large corporate accounting scandals",
+       "Changes in consumer spending habits"],
+ correctSet:[0,2,4],
+ explanation:"The three factors are: (1) rapid advances in IT, (2) international integration of worldwide business, and (3) increased scrutiny from accounting scandals. The others are not listed.",
+ mnemonic:"💡 Memory tip: <strong>TIS</strong> — <strong>T</strong>echnology, <strong>I</strong>nternational business, <strong>S</strong>candals. If it's not TIS, it doesn't belong."},
+
+{type:'ms',
+ q:"Which of the following are true about the FASB? (Select ALL that apply)",
+ opts:["It is a private body, not a government agency",
+       "It is established and supported by the U.S. business community, financial analysts, and practicing accountants",
+       "It sets U.S. accounting standards (GAAP)",
+       "It is a division of the IRS",
+       "It has the authority to regulate U.S. stock exchanges",
+       "It was formed to develop worldwide accounting standards"],
+ correctSet:[0,1,2],
+ explanation:"The FASB is private (not government), supported by the business community/financial analysts/accountants, and sets U.S. accounting standards (GAAP). It is NOT part of the IRS, does NOT regulate stock exchanges (that's the SEC), and is NOT international (that's the IASB).",
+ mnemonic:"💡 Memory tip: FASB = <strong>Private + U.S. only + writes GAAP.</strong> Three truths. Everything else — government, IRS, SEC, international — belongs to a different organization."},
+
+// ══ DRAG & DROP — MATCHING ═══════════════════
+
+{type:'dd',
+ q:"Drag each organization to its correct description.",
+ cols:["FASB","SEC","AICPA","PCAOB","IRS","IASB"],
+ items:[
+   {text:"Sets U.S. accounting standards (GAAP); private body",            answer:"FASB"},
+   {text:"Regulates U.S. stock exchanges; protects investors",              answer:"SEC"},
+   {text:"Professional organization for CPAs in the United States",         answer:"AICPA"},
+   {text:"Inspects audit firms; can bar them from auditing public companies",answer:"PCAOB"},
+   {text:"Establishes rules for when income is taxed; no role in GAAP",     answer:"IRS"},
+   {text:"Formed to develop a common set of worldwide accounting standards", answer:"IASB"},
+ ],
+ explanation:"Each organization has a distinct role: FASB writes the U.S. rules (GAAP), SEC polices stock markets, AICPA is the CPAs' professional home, PCAOB is the audit watchdog, IRS handles taxes only, and IASB works on global standards.",
+ mnemonic:"💡 Memory tip: <strong>F</strong>AASB = Financial rules. <strong>S</strong>EC = Stock cop. <strong>A</strong>ICPA = Accountants' club. <strong>P</strong>CAOB = Audit police. <strong>I</strong>RS = Tax only. <strong>I</strong>ASB = International."},
+
+{type:'dd',
+ q:"Match each financial statement to what it reports.",
+ cols:["Balance Sheet","Income Statement","Statement of Cash Flows"],
+ items:[
+   {text:"Assets, liabilities, and owners' equity",                                    answer:"Balance Sheet"},
+   {text:"Net income — the excess of revenues over expenses",                           answer:"Income Statement"},
+   {text:"Cash collected and paid out in operating, investing, and financing activities",answer:"Statement of Cash Flows"},
+   {text:"Financial position at a single point in time",                                answer:"Balance Sheet"},
+   {text:"Revenues and expenses over a period of time",                                 answer:"Income Statement"},
+   {text:"Where cash came from and where it went",                                      answer:"Statement of Cash Flows"},
+ ],
+ explanation:"Balance Sheet = snapshot of what you own, owe, and own outright. Income Statement = profit or loss over a period. Statement of Cash Flows = actual cash movement split into operating, investing, and financing.",
+ mnemonic:"💡 Memory tip: <strong>BIC</strong> — Balance Sheet (snapshot), Income Statement (profit/loss), Cash Flows (money movement). Like a BIC pen writing the company's financial story."},
+
+{type:'dd',
+ q:"Match each user of financial statements to their PRIMARY reason for using them.",
+ cols:["Lenders","Investors","Competitors","Reporters"],
+ items:[
+   {text:"Evaluate future cash flows to assess loan repayment ability", answer:"Lenders"},
+   {text:"Assess attractiveness of a company as an investment",         answer:"Investors"},
+   {text:"Reveal strategic opportunities within their industry",        answer:"Competitors"},
+   {text:"Use as background info; flag companies with major financial changes", answer:"Reporters"},
+ ],
+ explanation:"Each group has a different lens: Lenders ask 'can they repay us?', Investors ask 'is this worth buying?', Competitors ask 'where are the opportunities?', and Reporters ask 'what's the story here?'",
+ mnemonic:"💡 Memory tip: <strong>L</strong>enders = Loan repayment. <strong>I</strong>nvestors = Is it worth it? <strong>C</strong>ompetitors = Catch opportunities. <strong>R</strong>eporters = Report the story. Different glasses, same financial statements."},
+
+{type:'dd',
+ q:"Drag each description to the correct accounting term.",
+ cols:["Accounting","Bookkeeping","Accounting System","GAAP"],
+ items:[
+   {text:"Recording daily financial activities AND producing summary reports to evaluate financial status", answer:"Accounting"},
+   {text:"The preservation of a systematic, quantitative record of an activity",                          answer:"Bookkeeping"},
+   {text:"Handles routine bookkeeping tasks and structures info to evaluate performance",                  answer:"Accounting System"},
+   {text:"Generally Accepted Accounting Principles — ensures consistency and transparency",               answer:"GAAP"},
+ ],
+ explanation:"These four terms are related but distinct. Bookkeeping is the raw record-keeping. An accounting system automates and structures that. Accounting uses the system's output to produce reports. GAAP ensures all of it follows the same rules.",
+ mnemonic:"💡 Memory tip: Think of a pyramid — <strong>Bookkeeping</strong> (foundation) → <strong>Accounting System</strong> (organizes it) → <strong>Accounting</strong> (reports it) → <strong>GAAP</strong> (rules it all follows)."},
+
+{type:'mc',
+ q:"Which organization writes U.S. accounting rules (GAAP), and which operates in a completely separate tax world independent of GAAP?",
+ opts:[
+   "FASB writes GAAP; IRS operates separately in the tax world",
+   "SEC writes GAAP; IRS operates separately in the tax world",
+   "FASB writes GAAP; PCAOB operates separately in the tax world",
+   "AICPA writes GAAP; SEC operates separately in the tax world"
+ ],
+ correct:0,
+ explanation:"FASB writes GAAP → companies report to SEC-regulated markets → PCAOB verifies auditors are doing their job → IRS operates in a completely separate tax system that does not use financial statements at all.",
+ mnemonic:"💡 Memory tip: <strong>Write → Enforce → Audit → Tax (separately).</strong> FASB writes. SEC enforces. PCAOB audits the auditors. IRS does its own thing entirely."},
+
+{type:'mc',
+ q:"Which of the following correctly lists all three factors that have combined to make this a time of significant change in accounting?",
+ opts:[
+   "Rising interest rates, demographic shifts, and new IRS tax rules",
+   "Rapid advances in information technology, international integration of worldwide business, and increased scrutiny from corporate accounting scandals",
+   "Decline of CPA firms, inflation, and changes in consumer spending",
+   "New SEC regulations, global interest rate hikes, and the rise of cryptocurrency"
+ ],
+ correct:1,
+ explanation:"The three factors are: (1) rapid advances in information technology, (2) international integration of worldwide business, and (3) increased scrutiny from large corporate accounting scandals — all happening simultaneously.",
+ mnemonic:"💡 Memory tip: <strong>TIS</strong> — <strong>T</strong>echnology, <strong>I</strong>nternational business, <strong>S</strong>candals. If it's not TIS, it doesn't belong."},
+
+// ══ MORE MULTI-SELECT ════════════════════════
+
+{type:'ms',
+ q:"A company's financial statements are used to determine how much tax it must pay — True or False? Select the correct statement(s). (Select all that apply)",
+ opts:["FALSE — a company's financial statements are NOT used in determining how much tax the company must pay",
+       "TRUE — the IRS reads the Income Statement to calculate tax owed",
+       "The IRS has its own separate rules for defining taxable income",
+       "GAAP rules and IRS tax rules are the same thing"],
+ correctSet:[0,2],
+ explanation:"Financial statements (GAAP-based) and tax returns (IRS-based) are two completely separate systems. The IRS establishes its own rules for when and how income is taxed — it does NOT use the financial statements to calculate tax bills.",
+ mnemonic:"💡 Memory tip: <strong>Two books, two worlds.</strong> Companies maintain financial accounting records (GAAP) AND separate tax records (IRS rules). Same transactions, different calculations, different purposes."},
+
+{type:'ms',
+ q:"Which of the following statements about GAAP are TRUE? (Select all that apply)",
+ opts:["GAAP stands for Generally Accepted Accounting Principles",
+       "GAAP ensures consistency and transparency in financial reporting",
+       "GAAP has origins dating back to the early 1900s",
+       "GAAP is set by the IRS",
+       "GAAP is used worldwide and replaces IASB standards",
+       "GAAP is set by the FASB"],
+ correctSet:[0,1,2,5],
+ explanation:"Four things are true about GAAP: it stands for Generally Accepted Accounting Principles, it ensures consistency/transparency, it has origins in the early 1900s, and it is set by the FASB. The IRS doesn't set GAAP, and GAAP is a U.S. standard — not a worldwide one (that's IASB/IFRS).",
+ mnemonic:"💡 Memory tip: GAAP = <strong>G</strong>enerally <strong>A</strong>ccepted, set by <strong>F</strong>ASB, born in the <strong>1</strong>900s, ensures <strong>C</strong>onsistency. FASB + 1900s + consistency = GAAP."},
+
+// ══ MORE MATCHING ════════════════════════════
+
+{type:'dd',
+ q:"Match each user group to the SPECIFIC way they use financial accounting information.",
+ cols:["Suppliers/Customers/Employees","Government Agencies & Politicians","Managers"],
+ items:[
+   {text:"Learn about the long-run prospects of the company",                      answer:"Suppliers/Customers/Employees"},
+   {text:"Bolster political and regulatory positions for and against companies",   answer:"Government Agencies & Politicians"},
+   {text:"Formulate company goals, compute bonuses, identify weaknesses",          answer:"Managers"},
+ ],
+ explanation:"Each internal and external user has a distinct purpose. S/C/E care about long-run survival (their livelihoods depend on it). Government uses data as political ammunition. Managers use it for internal planning and performance.",
+ mnemonic:"💡 Memory tip: <strong>S/C/E = Survival. Gov = Political ammo. Managers = Internal GPS</strong> (goals, performance, weaknesses). Three groups, three completely different lenses."},
+
+];
+
+initQuiz(questions, 'Section 2');
+</script>
+</body>
+</html>
