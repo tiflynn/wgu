@@ -12,6 +12,7 @@
   --text:    #E8EAF0;
   --muted:   #8B92A5;
   --radius:  12px;
+  --content-w: 720px;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -28,13 +29,13 @@ h1 span{color:var(--accent2)}
 .back-link:hover{color:var(--accent)}
 
 /* ── PROGRESS ── */
-.progress-wrap{max-width:720px;margin:0 auto 2rem}
+.progress-wrap{max-width:var(--content-w);margin:0 auto 2rem}
 .progress-meta{display:flex;justify-content:space-between;font-size:.78rem;font-family:'DM Mono',monospace;color:var(--muted);margin-bottom:.4rem}
 .bar-bg{height:6px;background:var(--border);border-radius:99px;overflow:hidden}
 .bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width .4s ease;width:0%}
 
 /* ── SCORE CHIPS ── */
-.chips{max-width:720px;margin:0 auto 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.chips{max-width:var(--content-w);margin:0 auto 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
 .chip{padding:.3rem .75rem;border-radius:99px;font-size:.78rem;font-family:'DM Mono',monospace;border:1px solid var(--border);background:var(--surface);color:var(--muted)}
 .chip.c{border-color:var(--correct);color:var(--correct);background:rgba(52,211,153,.08)}
 .chip.w{border-color:var(--wrong);color:var(--wrong);background:rgba(248,113,113,.08)}
@@ -46,7 +47,7 @@ h1 span{color:var(--accent2)}
 .type-dd{background:rgba(52,211,153,.12);color:var(--correct);border:1px solid rgba(52,211,153,.3)}
 
 /* ── CARD ── */
-.card{max-width:720px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
+.card{max-width:var(--content-w);margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
 .q-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
 .q-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.15em;color:var(--accent);text-transform:uppercase}
 .q-text{font-size:1.12rem;line-height:1.65;margin-bottom:1.5rem;font-weight:600;color:#F0F2FA}
@@ -74,8 +75,18 @@ h1 span{color:var(--accent2)}
 .dd-wrap{display:flex;gap:1.25rem;flex-wrap:wrap}
 .dd-col{flex:1;min-width:200px}
 .dd-col-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.dd-zone{min-height:56px;border:2px dashed #3A4060;border-radius:8px;padding:.5rem;display:flex;flex-direction:column;gap:.4rem;transition:border-color .15s,background .15s}
+.dd-zone{min-height:64px;border:2px dashed #3A4060;border-radius:8px;padding:.6rem;display:flex;flex-direction:column;gap:.5rem;transition:border-color .15s,background .15s}
 .dd-zone.drag-over{border-color:var(--accent);background:rgba(79,142,247,.06)}
+
+/* Stack drag & drop columns vertically on tablets/phones so every
+   column stays full-width and easy to hit — prevents columns from
+   getting squeezed off-screen on iPad-sized viewports. */
+@media (max-width:900px){
+  .dd-wrap{flex-direction:column}
+  .dd-col{min-width:100%}
+  .dd-zone{min-height:72px}
+  .dd-item{padding:.85rem 1rem;font-size:1rem}
+}
 .dd-item{padding:.65rem .9rem;background:#252B3B;border:2px solid #3A4060;border-radius:6px;cursor:grab;font-size:.92rem;color:#EDEEF5;user-select:none;transition:border-color .15s,background .15s;display:flex;align-items:center;gap:.5rem}
 .dd-item:active{cursor:grabbing}
 .dd-item .drag-handle{color:var(--muted);font-size:.75rem;flex-shrink:0}
@@ -103,7 +114,7 @@ h1 span{color:var(--accent2)}
 .btn-next:hover{opacity:.88}
 
 /* ── RESULTS SCREEN ── */
-#results{max-width:720px;margin:0 auto;text-align:center;display:none}
+#results{max-width:var(--content-w);margin:0 auto;text-align:center;display:none}
 .big-score{font-family:'DM Serif Display',serif;font-size:clamp(3.5rem,10vw,5.5rem);line-height:1;margin:.5rem 0}
 .grade-label{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 .breakdown{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:2rem 0}
@@ -117,3 +128,17 @@ h1 span{color:var(--accent2)}
 .btn-restart:hover{border-color:var(--accent)}
 
 @media(prefers-reduced-motion:reduce){.bar-fill{transition:none}}
+
+/* Use more of the available width on tablets and larger screens
+   instead of staying capped at phone-sized 720px. The drag & drop
+   column-stacking breakpoint is also 900px, so at that same point
+   the layout gets both a wider stage AND correctly stacked columns. */
+@media(min-width:900px){
+  :root{--content-w:900px}
+  .card{padding:2.5rem}
+  .q-text{font-size:1.28rem}
+  .opt{font-size:1.05rem;padding:1rem 1.25rem}
+}
+@media(min-width:1200px){
+  :root{--content-w:980px}
+}

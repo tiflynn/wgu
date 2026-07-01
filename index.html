@@ -6,7 +6,7 @@
 <title>C213 Accounting for Decision Makers · Quiz Hub</title>
 <link rel="stylesheet" href="quiz.css">
 <style>
-  .hub-wrap{max-width:720px;margin:0 auto}
+  .hub-wrap{max-width:var(--content-w);margin:0 auto}
   .hub-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
   .hub-card{
     display:block;
@@ -72,6 +72,12 @@
     font-size:.8rem;
     color:var(--muted);
     font-family:'DM Mono',monospace;
+  }
+
+  /* Wider stage + a 2-column card grid once there's room for it */
+  @media(min-width:900px){
+    .hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+    .hub-card-title{font-size:1.65rem}
   }
 </style>
 </head>

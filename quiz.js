@@ -238,9 +238,10 @@ function makeTouchDraggable(el){
   el.addEventListener('touchstart',e=>{
     const t=e.touches[0];
     clone=el.cloneNode(true);
-    clone.style.cssText=`position:fixed;opacity:0.75;pointer-events:none;z-index:9999;width:${el.offsetWidth}px;left:${t.clientX-el.offsetWidth/2}px;top:${t.clientY-el.offsetHeight/2}px;`;
+    clone.style.cssText=`position:fixed;opacity:0.85;pointer-events:none;z-index:9999;width:${el.offsetWidth}px;left:${t.clientX-el.offsetWidth/2}px;top:${t.clientY-el.offsetHeight/2}px;box-shadow:0 8px 24px rgba(0,0,0,.4);`;
     document.body.appendChild(clone);
     el.style.opacity='0.3';
+    document.querySelectorAll('.dd-zone').forEach(z=>z.classList.add('drag-over'));
   },{passive:true});
   el.addEventListener('touchmove',e=>{
     e.preventDefault();
@@ -250,10 +251,26 @@ function makeTouchDraggable(el){
   el.addEventListener('touchend',e=>{
     el.style.opacity='1';
     if(clone){document.body.removeChild(clone);clone=null;}
+    document.querySelectorAll('.dd-zone').forEach(z=>z.classList.remove('drag-over'));
     const t=e.changedTouches[0];
     const target=document.elementFromPoint(t.clientX,t.clientY);
-    const zone=target?target.closest('.dd-zone'):null;
-    if(zone){zone.appendChild(el);}
+    let zone=target?target.closest('.dd-zone'):null;
+
+    // Fallback: if the finger didn't land exactly on a zone (easy to
+    // happen on a glass screen), snap to whichever zone's box is
+    // closest to the touch point instead of doing nothing.
+    if(!zone){
+      let closest=null,closestDist=Infinity;
+      document.querySelectorAll('.dd-zone').forEach(z=>{
+        const r=z.getBoundingClientRect();
+        const cx=Math.max(r.left,Math.min(t.clientX,r.right));
+        const cy=Math.max(r.top,Math.min(t.clientY,r.bottom));
+        const dist=Math.hypot(t.clientX-cx,t.clientY-cy);
+        if(dist<closestDist){closestDist=dist;closest=z;}
+      });
+      if(closest && closestDist<120) zone=closest;
+    }
+    if(zone) zone.appendChild(el);
   });
 }
 
