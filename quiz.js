@@ -16,7 +16,7 @@ function shuffle(arr){
 
 function buildDeck(questions){
   return shuffle(questions).map(q=>{
-    if(q.type==='mc'){
+    if(q.type==='mc'||q.type==='tf'){
       const correctText=q.opts[q.correct];
       const shuffled=shuffle(q.opts);
       return {...q,opts:shuffled,correct:shuffled.indexOf(correctText)};
@@ -27,6 +27,9 @@ function buildDeck(questions){
       return {...q,opts:shuffled,correctSet:correctTexts.map(t=>shuffled.indexOf(t))};
     }
     if(q.type==='dd'){
+      return {...q,items:shuffle(q.items)};
+    }
+    if(q.type==='ord'){
       return {...q,items:shuffle(q.items)};
     }
     return q;
@@ -69,6 +72,9 @@ function render(){
   if(q.type==='mc'){
     badge.textContent='Multiple Choice';badge.className='type-badge type-mc';
     renderMC(q);
+  } else if(q.type==='tf'){
+    badge.textContent='True / False';badge.className='type-badge type-tf';
+    renderMC(q);
   } else if(q.type==='ms'){
     badge.textContent='Select All That Apply';badge.className='type-badge type-ms';
     hintEl.textContent='Click all correct answers, then press Submit.';
@@ -79,6 +85,11 @@ function render(){
     hintEl.textContent='Drag each item from the bank into the correct column, then press Check.';
     hintEl.style.display='block';
     renderDD(q);
+  } else if(q.type==='ord'){
+    badge.textContent='Put in Order';badge.className='type-badge type-ord';
+    hintEl.textContent='Drag the items into the correct order from top to bottom, then press Check.';
+    hintEl.style.display='block';
+    renderORD(q);
   }
 }
 
@@ -232,6 +243,66 @@ function handleDD(q){
   updateChips();showNextBtn();
 }
 
+// ── DRAG & DROP — ORDERING (put steps in the correct sequence) ──
+function renderORD(q){
+  const wrap=document.getElementById('interactionZone');
+  wrap.innerHTML='';
+  const zone=document.createElement('div');
+  zone.className='order-zone';zone.id='ord-zone';
+  q.items.forEach((item,idx)=>{
+    const el=document.createElement('div');
+    el.className='dd-item';el.draggable=true;el.dataset.idx=idx;
+    el.innerHTML=`<span class="drag-handle">⠿</span><span>${item.text}</span>`;
+    el.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',idx);el.style.opacity='0.4';});
+    el.addEventListener('dragend',()=>el.style.opacity='1');
+    makeTouchDraggable(el);
+    zone.appendChild(el);
+  });
+  wrap.appendChild(zone);
+
+  zone.addEventListener('dragover',e=>{
+    e.preventDefault();zone.classList.add('drag-over');
+    const dragging=[...zone.querySelectorAll('.dd-item')].find(el=>el.style.opacity==='0.4');
+    if(!dragging)return;
+    const afterEl=getDragAfterElement(zone,e.clientY);
+    if(!afterEl){zone.appendChild(dragging);}else{zone.insertBefore(dragging,afterEl);}
+  });
+  zone.addEventListener('dragleave',()=>zone.classList.remove('drag-over'));
+  zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag-over');});
+
+  const sub=document.createElement('button');
+  sub.className='dd-submit';sub.textContent='Check Order';
+  sub.onclick=()=>handleORD(q);
+  wrap.appendChild(sub);
+}
+
+function getDragAfterElement(container,y){
+  const els=[...container.querySelectorAll('.dd-item:not(.disabled-item)')].filter(el=>el.style.opacity!=='0.4'&&el.style.opacity!=='0.3');
+  return els.reduce((closest,el)=>{
+    const box=el.getBoundingClientRect();
+    const offset=y-box.top-box.height/2;
+    if(offset<0&&offset>closest.offset){return{offset,element:el};}
+    return closest;
+  },{offset:Number.NEGATIVE_INFINITY}).element;
+}
+
+function handleORD(q){
+  document.querySelectorAll('.dd-submit').forEach(b=>b.disabled=true);
+  const zone=document.getElementById('ord-zone');
+  const items=[...zone.querySelectorAll('.dd-item')];
+  let allCorrect=true;
+  items.forEach((el,pos)=>{
+    const origIdx=parseInt(el.dataset.idx);
+    const correct=q.items[origIdx].order===pos;
+    el.classList.add('disabled-item');
+    if(correct){el.classList.add('correct-item');}else{el.classList.add('wrong-item');allCorrect=false;}
+  });
+  answered++;
+  if(allCorrect){score++;}else{wrong++;}
+  showFeedback(allCorrect,q.explanation,q.mnemonic,'');
+  updateChips();showNextBtn();
+}
+
 // ── TOUCH DRAG ───────────────────────────────────────────────
 function makeTouchDraggable(el){
   let clone=null;
@@ -254,14 +325,14 @@ function makeTouchDraggable(el){
     document.querySelectorAll('.dd-zone').forEach(z=>z.classList.remove('drag-over'));
     const t=e.changedTouches[0];
     const target=document.elementFromPoint(t.clientX,t.clientY);
-    let zone=target?target.closest('.dd-zone'):null;
+    let zone=target?target.closest('.dd-zone,.order-zone'):null;
 
     // Fallback: if the finger didn't land exactly on a zone (easy to
     // happen on a glass screen), snap to whichever zone's box is
     // closest to the touch point instead of doing nothing.
     if(!zone){
       let closest=null,closestDist=Infinity;
-      document.querySelectorAll('.dd-zone').forEach(z=>{
+      document.querySelectorAll('.dd-zone,.order-zone').forEach(z=>{
         const r=z.getBoundingClientRect();
         const cx=Math.max(r.left,Math.min(t.clientX,r.right));
         const cy=Math.max(r.top,Math.min(t.clientY,r.bottom));
@@ -270,7 +341,14 @@ function makeTouchDraggable(el){
       });
       if(closest && closestDist<120) zone=closest;
     }
-    if(zone) zone.appendChild(el);
+    if(!zone) return;
+
+    if(zone.classList.contains('order-zone')){
+      const after=getDragAfterElement(zone,t.clientY);
+      if(!after){zone.appendChild(el);}else{zone.insertBefore(el,after);}
+    } else {
+      zone.appendChild(el);
+    }
   });
 }
 
