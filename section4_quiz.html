@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 4 Quiz</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 4</p>
+  <h1>Individual Accounts &<br><span>Transaction Analysis</span></h1>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="qCounter">Question 1 of 1</span>
+    <span id="pctLabel">0%</span>
+  </div>
+  <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="chips">
+  <div class="chip" id="chipTotal">Score: 0 / 0</div>
+  <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+  <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+</div>
+
+<div class="card" id="quizCard">
+  <div class="q-meta">
+    <span class="q-label" id="qLabel">Question 1</span>
+    <span class="type-badge" id="typeBadge"></span>
+  </div>
+  <p class="q-text" id="qText"></p>
+  <p class="q-hint" id="qHint" style="display:none"></p>
+  <div id="interactionZone"></div>
+  <div class="feedback" id="feedback">
+    <div class="feedback-head" id="fbHead"></div>
+    <div id="fbBody"></div>
+    <div class="mnemonic" id="fbMnemonic"></div>
+  </div>
+  <div class="btn-wrap" id="btnWrap">
+    <button class="btn-next" id="btnNext">Next Question →</button>
+  </div>
+</div>
+
+<div id="results">
+  <p class="grade-label">Final Score</p>
+  <div class="big-score" id="bigScore"></div>
+  <p class="grade-label" id="gradeMsg"></p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Multiple Choice</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div>Multi-Select</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--correct)"></div>Drag &amp; Drop</div>
+  </div>
+  <div class="breakdown">
+    <div class="bk-card"><div class="num" id="rcCorrect" style="color:var(--correct)"></div><div class="lbl">Correct</div></div>
+    <div class="bk-card"><div class="num" id="rcWrong" style="color:var(--wrong)"></div><div class="lbl">Wrong</div></div>
+    <div class="bk-card"><div class="num" id="rcTotal"></div><div class="lbl">Total</div></div>
+  </div>
+  <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+</div>
+
+<script src="quiz.js"></script>
+<script>
+const questions = [
+
+{type:'mc',
+ q:'What is the first item typically listed on a U.S. balance sheet?',
+ opts:['Cash',
+       'Accounts receivable',
+       'Property, plant, and equipment',
+       'Retained earnings'],
+ correct:0,
+ explanation:'Assets are listed in order of liquidity, and cash is already maximally liquid, so it leads a U.S. balance sheet.',
+ mnemonic:'💡 Memory tip: Cash is already "cash" — nothing to convert — so it always goes first in the U.S.'},
+
+{type:'tf',
+ q:'Companies located outside the U.S. often list long-term assets first on the balance sheet.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'Non-U.S. balance sheets frequently reverse the U.S. order, listing property, plant, and equipment before current assets.',
+ mnemonic:'💡 Memory tip: U.S. = cash first. Non-U.S. = often flips it, long-term assets first.'},
+
+{type:'mc',
+ q:'Companies usually provide balance sheets in what format?',
+ opts:['Comparative, side-by-side format covering at least two years',
+       'Only the current year, with no prior comparison',
+       'A five-year rolling average',
+       'Only years in which the company was profitable'],
+ correct:0,
+ explanation:'Showing at least two years side by side lets users see how the company\'s financial position has changed.',
+ mnemonic:'💡 Memory tip: One year is a snapshot; two years side by side is a comparison — accountants always want the comparison.'},
+
+{type:'mc',
+ q:'With respect to the balance sheet, accountants must use judgment regarding which two things?',
+ opts:['Recognition (which items are listed) and valuation (what dollar amounts to use)',
+       'Recognition and taxation',
+       'Valuation and depreciation only',
+       'Auditing and disclosure only'],
+ correct:0,
+ explanation:'Recognition decides whether an item appears on the balance sheet at all; valuation decides what dollar amount to assign it once it\'s there.',
+ mnemonic:'💡 Memory tip: Recognition = "does it make the list?" Valuation = "what number goes next to it?"'},
+
+{type:'ord',
+ q:'Place the five major sections of the balance sheet in the order they are typically presented.',
+ items:[
+   {text:'Current assets', order:0},
+   {text:'Long-term assets', order:1},
+   {text:'Current liabilities', order:2},
+   {text:'Long-term liabilities', order:3},
+   {text:'Stockholders\' equity', order:4},
+ ],
+ explanation:'The standard U.S. presentation order is current assets, long-term assets, current liabilities, long-term liabilities, and finally stockholders\' equity.',
+ mnemonic:'💡 Memory tip: "CLiC-LiS" — Current assets, Long-term assets, Current liabilities, Long-term liabilities, Stockholders\' equity.'},
+
+{type:'mc',
+ q:'A company\'s asset mix (the proportion of total assets in each category) is largely determined by:',
+ opts:['The industry in which the company operates',
+       'Management\'s financing decisions',
+       'The company\'s tax bracket',
+       'The company\'s current stock price'],
+ correct:0,
+ explanation:'A software company and an airline naturally hold very different kinds of assets — that\'s industry driving asset mix.',
+ mnemonic:'💡 Memory tip: An airline needs planes, a software firm needs code — the industry decides the asset mix.'},
+
+{type:'mc',
+ q:'A company\'s financing mix (percentage of total financing in each category) is primarily the result of:',
+ opts:['Management decisions',
+       'The industry the company operates in',
+       'Government regulation of capital structure',
+       'Shareholder votes at the annual meeting'],
+ correct:0,
+ explanation:'Unlike asset mix, financing mix is a strategic choice management makes about how much debt versus equity to use.',
+ mnemonic:'💡 Memory tip: Industry picks your assets; management picks how you pay for them.'},
+
+{type:'mc',
+ q:'Current assets are defined as assets expected to be:',
+ opts:['Used, sold, or replaced within one year',
+       'Held for more than five years',
+       'Immediately liquidated upon purchase',
+       'Depreciated evenly over a fixed 10-year schedule'],
+ correct:0,
+ explanation:'The one-year threshold is what separates current assets from long-term assets on the balance sheet.',
+ mnemonic:'💡 Memory tip: "Current" = happening now, within the year — like current events.'},
+
+{type:'ms',
+ q:'Which of the following qualify as "cash equivalents" (maturity of 3 months or less)? (Select all that apply)',
+ opts:['Certificates of deposit',
+       'US Treasury securities',
+       'Other short-term interest-bearing securities',
+       'Accounts receivable'],
+ correctSet:[0,1,2],
+ explanation:'Cash equivalents are highly liquid, short-term instruments maturing in 3 months or less — CDs, Treasury securities, and similar short-term investments. Accounts receivable is a separate current asset category, not a cash equivalent.',
+ mnemonic:'💡 Memory tip: "3 months or less and interest-bearing" = cash equivalent. Receivables are a promise from a customer, not a near-cash instrument.'},
+
+{type:'mc',
+ q:'How long does it typically take to collect a standard accounts receivable?',
+ opts:['30 to 60 days',
+       '3 to 6 months',
+       '1 to 2 years',
+       'Immediately upon sale'],
+ correct:0,
+ explanation:'Accounts receivable is the standard business credit arrangement, usually collected in 30 to 60 days.',
+ mnemonic:'💡 Memory tip: "Net 30" or "Net 60" terms you\'ve probably seen on invoices are exactly this window.'},
+
+{type:'mc',
+ q:'Inventory is best described as:',
+ opts:['Goods held for resale in the normal course of business',
+       'Cash equivalents maturing within 3 months',
+       'Expenses paid in advance of receiving a service',
+       'Long-term equipment used in production'],
+ correct:0,
+ explanation:'Inventory is the goods a company holds specifically to sell to customers as part of its normal operations.',
+ mnemonic:'💡 Memory tip: If it\'s sitting on a shelf waiting to be sold, it\'s inventory.'},
+
+{type:'mc',
+ q:'Prepaid expenses represent:',
+ opts:['Expenses paid in advance, before the related benefit is received',
+       'Expenses that have been incurred but not yet paid',
+       'Revenue collected in advance of providing a service',
+       'A type of long-term liability'],
+ correct:0,
+ explanation:'Prepaid expenses are current assets because the company has already paid cash for a future benefit (like insurance or rent) it hasn\'t used up yet.',
+ mnemonic:'💡 Memory tip: You paid, but haven\'t "used up" the benefit yet — it\'s sitting there as an asset until you do.'},
+
+{type:'mc',
+ q:'Short-term investment securities held as current assets typically include bonds maturing within:',
+ opts:['3 to 12 months',
+       '1 to 5 years',
+       '5 to 10 years',
+       'Over 10 years'],
+ correct:0,
+ explanation:'Investment securities classified as current assets are short-term stock and bond investments, with bonds generally maturing in 3 to 12 months.',
+ mnemonic:'💡 Memory tip: If it matures within a year, it stays current — just like the current assets bucket it lives in.'},
+
+{type:'dd',
+ q:'Drag each item into the current asset category it belongs to.',
+ cols:['Cash','Accounts Receivable','Inventory','Prepaid Expenses','Investment Securities'],
+ items:[
+   {text:'Coins, currency, and bank accounts', answer:'Cash'},
+   {text:'Standard credit arrangement, collected in 30-60 days', answer:'Accounts Receivable'},
+   {text:'Goods held for resale', answer:'Inventory'},
+   {text:'Rent or insurance paid before it is used', answer:'Prepaid Expenses'},
+   {text:'Short-term stocks and bonds', answer:'Investment Securities'},
+ ],
+ explanation:'These are the five categories of current assets: cash, accounts receivable, inventory, prepaid expenses, and short-term investment securities.',
+ mnemonic:'💡 Memory tip: Picture a store\'s cash register (Cash), an invoice on the counter (Receivable), shelves of goods (Inventory), a paid insurance bill (Prepaid), and a small stock portfolio (Investment Securities).'},
+
+{type:'mc',
+ q:'Long-term assets are expected to:',
+ opts:['Still be on hand in one year, at the time of the next balance sheet',
+       'Be sold or used up within 90 days',
+       'Be immediately expensed when purchased',
+       'Never appear on more than one balance sheet'],
+ correct:0,
+ explanation:'The defining test for a long-term asset is whether it will still be around a year from now, unlike a current asset.',
+ mnemonic:'💡 Memory tip: "Will I still have this next year?" If yes, it\'s long-term.'},
+
+{type:'ms',
+ q:'Which of the following are included under Property, Plant, and Equipment (PPE)? (Select all that apply)',
+ opts:['Land',
+       'Buildings',
+       'Machinery, tools, furniture, and vehicles',
+       'Accounts receivable'],
+ correctSet:[0,1,2],
+ explanation:'PPE covers physical, long-term operating assets: land, buildings, and machinery/tools/furniture/vehicles. Accounts receivable is a current asset, not PPE.',
+ mnemonic:'💡 Memory tip: PPE = the physical stuff a company stands on, works in, and works with.'},
+
+{type:'mc',
+ q:'Intangible assets are best defined as:',
+ opts:['Assets that have no physical or tangible characteristics',
+       'Assets expected to be converted to cash within one year',
+       'Assets that are always the largest line item on the balance sheet',
+       'Assets that are always fully depreciated within 5 years'],
+ correct:0,
+ explanation:'Intangible assets are long-term assets without physical substance — legal rights and claims rather than physical objects.',
+ mnemonic:'💡 Memory tip: In-TANGIBLE = not able to be touched.'},
+
+{type:'tf',
+ q:'A company\'s internally, "home-grown" developed intangible assets (like brand reputation built through years of marketing) are recorded on the balance sheet at their estimated value.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'Home-grown intangibles are NOT recorded on the balance sheet — there\'s no reliable, objective transaction price to measure them by.',
+ mnemonic:'💡 Memory tip: If nobody paid a specific dollar amount for it, it doesn\'t make the balance sheet.'},
+
+{type:'mc',
+ q:'An intangible asset is recorded on the balance sheet when it is:',
+ opts:['Purchased from another company',
+       'Developed internally through years of marketing',
+       'Recognized as valuable by a competitor',
+       'Mentioned in the notes to the financial statements'],
+ correct:0,
+ explanation:'Intangibles are only recorded when there\'s a real, measurable transaction — almost always a purchase from another party.',
+ mnemonic:'💡 Memory tip: "Did money change hands for this specific asset?" If yes, it can be recorded.'},
+
+{type:'ms',
+ q:'Which of the following are examples of intangible assets? (Select all that apply)',
+ opts:['Trademarks',
+       'Goodwill',
+       'Franchises',
+       'Inventory'],
+ correctSet:[0,1,2],
+ explanation:'Trademarks, goodwill, and franchises are all intangible assets. Inventory is a tangible current asset — it has physical form and is meant to be sold.',
+ mnemonic:'💡 Memory tip: Trademarks, goodwill, and franchises are all legal rights on paper — inventory is something you can physically stack on a shelf.'},
+
+{type:'mc',
+ q:'A Deferred Income Tax Asset represents:',
+ opts:['Future income tax benefits from events that have already occurred',
+       'Cash held in a tax-advantaged account',
+       'A liability owed to the IRS',
+       'Prepaid income tax expense for the following year'],
+ correct:0,
+ explanation:'This other long-term asset captures a future tax benefit that stems from something that has already happened, even though the benefit is realized later.',
+ mnemonic:'💡 Memory tip: A tax break earned today, but cashed in later — that "later" makes it an asset sitting on the books now.'},
+
+{type:'mc',
+ q:'A Net Pension Asset arises when:',
+ opts:['Pension fund assets exceed (are overfunded relative to) the pension obligation owed to employees',
+       'A company has not yet funded any of its pension obligation',
+       'Employees have not yet vested in the pension plan',
+       'The company terminates its pension plan entirely'],
+ correct:0,
+ explanation:'When a company has put more money into its pension fund than it currently owes employees, the surplus shows up as a net pension asset.',
+ mnemonic:'💡 Memory tip: Overfunded = extra money sitting there = an asset for the company.'},
+
+{type:'dd',
+ q:'Drag each item into the long-term asset category it belongs to.',
+ cols:['Long-term Investments','PPE','Intangible Assets','Other Long-term Assets'],
+ items:[
+   {text:'Stocks and bonds held for the long term', answer:'Long-term Investments'},
+   {text:'Land, buildings, machinery, and vehicles', answer:'PPE'},
+   {text:'Trademarks, copyrights, and goodwill', answer:'Intangible Assets'},
+   {text:'Deferred income tax asset', answer:'Other Long-term Assets'},
+   {text:'Net pension asset (overfunded)', answer:'Other Long-term Assets'},
+ ],
+ explanation:'Long-term assets break into four buckets: long-term investments, PPE, intangible assets, and a catch-all "other" category like deferred tax assets and net pension assets.',
+ mnemonic:'💡 Memory tip: Investments you hold, property you use, rights you own, and "everything else" long-term.'},
+
+{type:'mc',
+ q:'Current liabilities are obligations expected to be:',
+ opts:['Paid or otherwise satisfied within one year',
+       'Paid over a period of 10 to 30 years',
+       'Converted into equity within 6 months',
+       'Written off as a loss automatically'],
+ correct:0,
+ explanation:'The one-year test applies to liabilities too, mirroring how current assets are defined.',
+ mnemonic:'💡 Memory tip: Same "current" rule as assets — due within a year.'},
+
+{type:'mc',
+ q:'Which current liability is described as the "flip side" of accounts receivable, and is also the most common current liability?',
+ opts:['Accounts payable',
+       'Wages payable',
+       'Unearned revenue',
+       'Short-term loans payable'],
+ correct:0,
+ explanation:'When one company sells on credit (creating a receivable for itself), the buyer records a payable — accounts payable is the most common current liability.',
+ mnemonic:'💡 Memory tip: Every receivable has a payable on the other side of the deal — same transaction, opposite party.'},
+
+{type:'ms',
+ q:'Which of the following are examples of accrued liabilities? (Select all that apply)',
+ opts:['Wages payable',
+       'Taxes payable',
+       'Utilities payable',
+       'Accounts payable'],
+ correctSet:[0,1,2],
+ explanation:'"Accrued" means built up gradually over time — wages, taxes, and utilities all accumulate as a liability before they\'re actually paid. Accounts payable is its own separate category, arising from credit purchases rather than gradual accrual.',
+ mnemonic:'💡 Memory tip: Accrued liabilities grow quietly in the background (a day of wages here, a day of utility usage there) until payday.'},
+
+{type:'mc',
+ q:'A short-term loan payable is best described as:',
+ opts:['A formal, interest-bearing loan expected to be repaid within one year',
+       'An informal credit arrangement with a supplier',
+       'A liability that never accrues interest',
+       'A liability that is always classified as long-term'],
+ correct:0,
+ explanation:'Unlike accounts payable (informal, interest-free credit from suppliers), short-term loans payable are formal, interest-bearing borrowing arrangements.',
+ mnemonic:'💡 Memory tip: "Loan" implies a formal agreement with interest — a supplier invoice does not.'},
+
+{type:'mc',
+ q:'The "current portion of long-term debt" refers to:',
+ opts:['The portion of a long-term liability, such as a mortgage, that is payable within 12 months of the balance sheet date',
+       'The total remaining balance of a mortgage',
+       'A liability that becomes long-term after one year',
+       'A brand-new loan that was just issued'],
+ correct:0,
+ explanation:'Some liabilities like mortgages are paid in installments over many years — the slice due within the next 12 months gets reclassified as a current liability.',
+ mnemonic:'💡 Memory tip: A 20-year mortgage is mostly long-term, but next year\'s payments get pulled into "current" for reporting purposes.'},
+
+{type:'tf',
+ q:'Unearned revenue is reported on the balance sheet as revenue that has already been earned.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'Unearned revenue is NOT revenue at all — it\'s a liability, representing an obligation to provide a service to a customer who has already paid but not yet received it.',
+ mnemonic:'💡 Memory tip: The name is a trap — "unearned revenue" is really a debt you owe in the form of future service, not income.'},
+
+{type:'mc',
+ q:'Unearned revenue represents:',
+ opts:['An obligation to provide a service to customers who have already paid but not yet received it',
+       'Revenue the company expects to earn next quarter',
+       'A form of accounts receivable',
+       'A type of prepaid expense'],
+ correct:0,
+ explanation:'Think of a magazine subscription paid upfront — the publisher owes the subscriber future issues, which is exactly what unearned revenue captures.',
+ mnemonic:'💡 Memory tip: Cash came in first, the work is still owed — that\'s a liability, not income.'},
+
+{type:'dd',
+ q:'Drag each description into the current liability category it belongs to.',
+ cols:['Accounts Payable','Accrued Liabilities','Short-term Loans Payable','Unearned Revenue'],
+ items:[
+   {text:'The flip side of accounts receivable', answer:'Accounts Payable'},
+   {text:'Wages, taxes, and utilities payable', answer:'Accrued Liabilities'},
+   {text:'A formal, interest-bearing loan due within one year', answer:'Short-term Loans Payable'},
+   {text:'An obligation to provide a service already paid for', answer:'Unearned Revenue'},
+ ],
+ explanation:'These are four distinct current liability categories, each arising from a different kind of obligation.',
+ mnemonic:'💡 Memory tip: A supplier invoice (Payable), a growing wage bill (Accrued), a bank loan (Loans Payable), and a prepaid subscription (Unearned Revenue).'},
+
+{type:'tf',
+ q:'Long-term liabilities are those not expected to be paid or satisfied within one year.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'This is exactly the mirror-image definition of a long-term asset, applied to obligations instead of resources.',
+ mnemonic:'💡 Memory tip: If it won\'t be settled within the year, it\'s long-term — simple as that.'},
+
+{type:'ms',
+ q:'Which of the following are included in long-term liabilities? (Select all that apply)',
+ opts:['Traditional loans and bonds',
+       'Loans structured as leases',
+       'Deferred income taxes',
+       'Accounts payable'],
+ correctSet:[0,1,2],
+ explanation:'Long-term liabilities include traditional loans/bonds, lease-structured financing, deferred income taxes, and obligations like pensions. Accounts payable is a current liability.',
+ mnemonic:'💡 Memory tip: Anything due more than a year out — loans, leases-as-debt, deferred taxes, pensions — lands in the long-term bucket.'},
+
+{type:'mc',
+ q:'Which of the following is included under "Long-term debt"?',
+ opts:['Long-term loans, notes, bonds, and mortgages',
+       'Accounts payable and wages payable',
+       'Unearned revenue',
+       'Common stock'],
+ correct:0,
+ explanation:'Long-term debt is the umbrella category for the classic forms of long-term borrowing: loans, notes, bonds, and mortgages.',
+ mnemonic:'💡 Memory tip: If a bank or bondholder is owed money for years to come, it\'s long-term debt.'},
+
+{type:'mc',
+ q:'A capital lease obligation is:',
+ opts:['A lease of property, plant, and equipment structured so it is economically the same as a debt-financed purchase, reported as a long-term liability',
+       'A short-term rental agreement with no long-term liability impact',
+       'A type of intangible asset',
+       'An operating expense reported only on the income statement'],
+ correct:0,
+ explanation:'When a lease effectively transfers ownership-like control for most of the asset\'s life, it\'s treated like debt rather than a simple rental.',
+ mnemonic:'💡 Memory tip: If a lease "acts like" a loan-funded purchase, accounting treats it like one — hence "capital" lease.'},
+
+{type:'mc',
+ q:'A Deferred Income Tax Liability represents:',
+ opts:['Income tax expected to be paid in future years on income already reported in the income statement but not yet taxed under tax law',
+       'Income tax that has already been paid but not yet expensed',
+       'A refund owed to the company by the IRS',
+       'An immediate cash obligation due within 30 days'],
+ correct:0,
+ explanation:'This liability arises from timing differences between when income is reported for accounting purposes versus when it\'s actually taxed.',
+ mnemonic:'💡 Memory tip: The books say "earned it," the tax code says "not taxed yet" — that gap becomes a future liability.'},
+
+{type:'mc',
+ q:'Which of the following is a common example of "other long-term liabilities"?',
+ opts:['Employee retirement/pension benefit obligations',
+       'Accounts payable',
+       'Wages payable',
+       'Short-term loans payable'],
+ correct:0,
+ explanation:'Promises companies make about employee retirement benefits are a classic example of a long-term obligation outside the standard debt categories.',
+ mnemonic:'💡 Memory tip: A promise to pay someone decades from now (a pension) is about as "long-term" as a liability gets.'},
+
+{type:'dd',
+ q:'Drag each characteristic into the stock type it describes.',
+ cols:['Common Stock','Preferred Stock'],
+ items:[
+   {text:'Has voting rights', answer:'Common Stock'},
+   {text:'Unlimited upside if the company does well', answer:'Common Stock'},
+   {text:'Paid last if the company struggles', answer:'Common Stock'},
+   {text:'Typically cannot vote', answer:'Preferred Stock'},
+   {text:'Fixed, capped return', answer:'Preferred Stock'},
+   {text:'Paid before common stockholders if the company struggles', answer:'Preferred Stock'},
+ ],
+ explanation:'Common stock = highest risk, unlimited reward, has a vote. Preferred stock = lower risk, fixed/capped reward, no vote.',
+ mnemonic:'💡 Memory tip: Common stockholders vote and gamble on the upside; preferred stockholders trade that gamble for a safer, fixed payout.'},
+
+{type:'tf',
+ q:'All corporations issue both common stock and preferred stock.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'Every corporation issues common stock, but preferred stock is optional — only some companies issue it.',
+ mnemonic:'💡 Memory tip: Common stock is the "must-have"; preferred stock is the "nice-to-have."'},
+
+{type:'mc',
+ q:'Retained earnings is increased by net income and decreased by:',
+ opts:['Both net losses and the payment of dividends',
+       'Dividends only, never by net losses',
+       'Net losses only, never by dividends',
+       'Neither losses nor dividends'],
+ correct:0,
+ explanation:'It\'s a common mistake to think only dividends reduce retained earnings — a net loss reduces it too, since retained earnings tracks cumulative profit.',
+ mnemonic:'💡 Memory tip: Retained earnings goes up with profit and down with EITHER a loss OR a payout — two separate ways to shrink it.'},
+
+{type:'mc',
+ q:'Treasury stock is best described as:',
+ opts:['Shares a company has repurchased from its own stockholders, reported as a contra-equity (negative equity) account',
+       'New shares issued to the public for the first time',
+       'A liability owed to former shareholders',
+       'An intangible asset representing brand value'],
+ correct:0,
+ explanation:'When a company buys back its own shares, it\'s essentially "un-selling" stock — that shrinks equity rather than adding to it.',
+ mnemonic:'💡 Memory tip: Treasury stock is the company buying back a piece of itself — equity in reverse.'},
+
+{type:'tf',
+ q:'Treasury stock is considered a contra-equity, or negative equity, account.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'Treasury stock is subtracted from total stockholders\' equity — it\'s shown as its own line so anyone reading the balance sheet can see how much the company has spent buying back its own shares.',
+ mnemonic:'💡 Memory tip: "Contra" means "against" — a contra-equity account works against (subtracts from) the equity total instead of adding to it.'},
+
+{type:'mc',
+ q:'How is a treasury stock purchase similar to and different from a dividend payment?',
+ opts:['Both distribute cash to stockholders, but a dividend goes evenly to everyone who keeps their shares, while a treasury purchase pays only stockholders who sell back their shares and give up ownership',
+       'They are identical — both are just different names for the same transaction',
+       'A dividend increases equity while a treasury stock purchase decreases liabilities',
+       'A treasury stock purchase always precedes a dividend payment by law'],
+ correct:0,
+ explanation:'Both send cash out to stockholders, but a dividend keeps everyone\'s ownership intact, while a buyback only pays (and terminates the ownership of) those who choose to sell.',
+ mnemonic:'💡 Memory tip: Dividend = "cash for everyone, keep your seat." Buyback = "cash only if you give up your seat."'},
+
+{type:'mc',
+ q:'Accumulated Other Comprehensive Income (AOCI) groups together:',
+ opts:['Changes in equity resulting from movements in market prices or exchange rates',
+       'Cumulative net income since incorporation',
+       'The total amount invested by common stockholders',
+       'Cash flows from financing activities'],
+ correct:0,
+ explanation:'AOCI captures certain equity swings — like currency translation and unrealized security gains/losses — that are kept separate from regular net income.',
+ mnemonic:'💡 Memory tip: AOCI is the "market weather" bucket — currency swings and price swings that blow equity around without touching net income.'},
+
+{type:'mc',
+ q:'A foreign currency translation adjustment arises when:',
+ opts:['A U.S. company with foreign subsidiaries experiences a change in those subsidiaries\' equity (in dollar terms) due to exchange rate movements',
+       'A company converts its financial statements from GAAP to IFRS',
+       'A domestic company purchases foreign currency for a future transaction',
+       'A company pays a foreign supplier in U.S. dollars'],
+ correct:0,
+ explanation:'This only applies to multinational companies with foreign-based subsidiaries operating in foreign currencies.',
+ mnemonic:'💡 Memory tip: No foreign subsidiary, no foreign currency translation adjustment — it\'s exclusively a multinational company issue.'},
+
+{type:'mc',
+ q:'If the Japanese yen weakens relative to the U.S. dollar, what happens to the dollar-denominated equity of a U.S. company\'s Japanese subsidiary?',
+ opts:['It decreases',
+       'It increases',
+       'It stays exactly the same',
+       'It becomes a liability instead of equity'],
+ correct:0,
+ explanation:'A weaker yen means each yen of the subsidiary\'s equity converts into fewer dollars, so the dollar-measured equity shrinks — even though nothing operationally changed.',
+ mnemonic:'💡 Memory tip: Weaker foreign currency = smaller dollar value when you translate it back — like exchanging fewer dollars for the same pile of yen.'},
+
+{type:'mc',
+ q:'Unrealized gains/losses on which type of securities are reported directly to equity (as part of AOCI), rather than on the income statement?',
+ opts:['Available-for-sale securities',
+       'Trading securities',
+       'Cash equivalents',
+       'Accounts receivable'],
+ correct:0,
+ explanation:'Available-for-sale securities are held with no immediate plan to sell — their unrealized "paper" gains/losses bypass the income statement and go straight to AOCI.',
+ mnemonic:'💡 Memory tip: "Available for sale, but not actively trading" = the value swings go to equity, not the income statement.'},
+
+{type:'mc',
+ q:'Unrealized gains/losses on trading securities are reported:',
+ opts:['On the income statement',
+       'Directly to equity as part of AOCI',
+       'As a current liability',
+       'They are never reported until the securities are sold'],
+ correct:0,
+ explanation:'Trading securities are bought and sold actively, so their value fluctuations flow straight through the income statement, unlike available-for-sale securities.',
+ mnemonic:'💡 Memory tip: Active trading = active impact on net income. Passive holding (AFS) = passive impact on equity only.'},
+
+{type:'mc',
+ q:'A derivative is a financial instrument that:',
+ opts:['Derives its value from the movement of a price, exchange rate, or interest rate associated with some other item',
+       'Always guarantees a fixed return regardless of market conditions',
+       'Is only ever used by government entities',
+       'Represents a direct ownership stake in a company'],
+ correct:0,
+ explanation:'An option or a future doesn\'t have independent value — its worth is "derived" from something else, like the price of the underlying stock.',
+ mnemonic:'💡 Memory tip: "Derivative" literally means "derived from" — its value is borrowed from another asset\'s movement.'},
+
+{type:'mc',
+ q:'Working capital is calculated as:',
+ opts:['Current assets minus current liabilities',
+       'Current assets plus current liabilities',
+       'Total assets minus total liabilities',
+       'Long-term assets minus long-term liabilities'],
+ correct:0,
+ explanation:'This is the "net current assets" figure some non-U.S. balance sheets highlight directly by listing current items together.',
+ mnemonic:'💡 Memory tip: Working capital = what\'s left of your short-term resources after covering your short-term bills.'},
+
+{type:'tf',
+ q:'Non-U.S. balance sheets frequently list property, plant, and equipment first, before current assets.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'This reverses the typical U.S. liquidity-first ordering, reflecting a different reporting convention used in many other countries.',
+ mnemonic:'💡 Memory tip: Flip the U.S. order and you often get the non-U.S. order.'},
+
+{type:'mc',
+ q:'Non-U.S. balance sheets frequently list current assets and current liabilities together and label the difference as:',
+ opts:['Working capital (or net current assets)',
+       'Retained earnings',
+       'Total stockholders\' equity',
+       'Gross margin'],
+ correct:0,
+ explanation:'Grouping current assets and current liabilities together highlights working capital directly on the face of the balance sheet.',
+ mnemonic:'💡 Memory tip: Subtract current liabilities from current assets, right there on the statement, and you get working capital.'},
+
+{type:'mc',
+ q:'Recognition in accounting means:',
+ opts:['Boiling down all estimates and judgments into one number reported in the formal financial statements',
+       'Describing details in a narrative note without including anything in the financial statements',
+       'Verifying financial statements through an independent audit',
+       'Comparing a company\'s results to its competitors'],
+ correct:0,
+ explanation:'Recognition is the essence of accounting — taking something complex and summarizing it into a single dollar figure that appears on the statements themselves.',
+ mnemonic:'💡 Memory tip: Recognized = it made it into the actual numbers, not just a footnote.'},
+
+{type:'mc',
+ q:'Disclosure in accounting means:',
+ opts:['Conveying details in a narrative note without including anything in the financial statements themselves',
+       'Boiling estimates down into a single reported number',
+       'Filing financial statements with the SEC',
+       'Recording a transaction at its historical cost'],
+ correct:0,
+ explanation:'Disclosure is the alternative to recognition — instead of a number in the statements, it\'s a written explanation in the notes.',
+ mnemonic:'💡 Memory tip: Disclosure tells the story in words; recognition tells it in a number.'},
+
+{type:'tf',
+ q:'Recognition is the preferred method of financial reporting, when it is appropriate.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'Recognition is preferred because it\'s what allows users to compute ratios and compare companies using a single summarized figure.',
+ mnemonic:'💡 Memory tip: A number you can compute with beats a paragraph you have to read every time — that\'s why recognition wins when it\'s appropriate.'},
+
+{type:'ord',
+ q:'Place the following steps in the order they occur, from a raw economic event to a finished financial statement.',
+ items:[
+   {text:'Creation - events create economic assets and liabilities', order:0},
+   {text:'Recognition - decision to include an item in the financial statements', order:1},
+   {text:'Valuation - measurement of the dollar amount to record', order:2},
+   {text:'Integration - determination of the total impact on the financial statements', order:3},
+   {text:'Preparation - the financial statements themselves are prepared', order:4},
+ ],
+ explanation:'These five steps trace the full path from a real-world event happening to it showing up in a finished financial statement.',
+ mnemonic:'💡 Memory tip: "Creepy Rats Value Ice cream Pies" — Creation, Recognition, Valuation, Integration, Preparation.'},
+
+{type:'mc',
+ q:'Transaction analysis is defined as:',
+ opts:['The process of determining how an economic event impacts the financial statements',
+       'The process of auditing a company\'s financial statements',
+       'The process of calculating a company\'s tax liability',
+       'The process of forecasting next year\'s revenue'],
+ correct:0,
+ explanation:'Transaction analysis is the discipline of tracing exactly how a real-world event changes the numbers across the financial statements.',
+ mnemonic:'💡 Memory tip: Every transaction "ripples" through the statements — transaction analysis is tracing that ripple.'},
+
+{type:'mc',
+ q:'An executory contract is:',
+ opts:['An exchange of promises about the future, which is not recorded on the balance sheet',
+       'A completed transaction recorded immediately at fair value',
+       'A contract that is always recorded as a long-term liability',
+       'A legally binding agreement that must be recorded as an asset'],
+ correct:0,
+ explanation:'Since neither party has performed yet, an executory contract represents no completed exchange of value — so nothing gets recorded.',
+ mnemonic:'💡 Memory tip: A signature alone isn\'t a transaction — only actual performance triggers a balance sheet entry.'},
+
+{type:'tf',
+ q:'Signing a 2-year employment contract immediately creates a liability on the balance sheet equal to the employee\'s full 2-year salary.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'The contract itself is executory and creates no liability. The company only records wage expense (and any related liability) as the employee actually works and earns it.',
+ mnemonic:'💡 Memory tip: Signing the contract is just a promise on paper — the liability only builds as real work actually happens.'},
+
+{type:'mc',
+ q:'When does a company begin recording wage expense (and any related liability) for an employee under an executory employment contract?',
+ opts:['As the employee actually works and earns it, pay period by pay period',
+       'The moment the contract is signed',
+       'Only at the end of the full contract term',
+       'When the employee is hired, regardless of whether work has begun'],
+ correct:0,
+ explanation:'This reflects accrual accounting: the liability grows as real economic activity (work performed) occurs, not when a promise is made.',
+ mnemonic:'💡 Memory tip: No work yet, no liability yet — the clock only starts ticking once the employee clocks in.'},
+
+{type:'mc',
+ q:'Asset mix refers to:',
+ opts:['The proportion of total assets in each asset category, largely determined by industry',
+       'The percentage of total financing in each liability/equity category',
+       'The ratio of current assets to current liabilities',
+       'The total dollar value of a company\'s long-term assets'],
+ correct:0,
+ explanation:'Asset mix is about what kinds of resources a company holds, shaped mainly by the nature of its industry.',
+ mnemonic:'💡 Memory tip: Asset mix = "what do we own?" — and that\'s mostly dictated by what kind of business you\'re in.'},
+
+{type:'mc',
+ q:'Financing mix refers to:',
+ opts:['The percentage of total financing (liabilities plus equity) in each individual category',
+       'The proportion of total assets held as cash',
+       'The ratio of PPE to total assets',
+       'The industry-specific benchmark for asset allocation'],
+ correct:0,
+ explanation:'Financing mix is about how a company chooses to fund its assets — a strategic decision made by management, not dictated by the industry.',
+ mnemonic:'💡 Memory tip: Financing mix = "how do we pay for it?" — that\'s a management choice, not an industry rule.'},
+
+{type:'mc',
+ q:'The "matching maturities" principle states that:',
+ opts:['Short-term assets should be financed with short-term debt, and long-term assets with long-term debt',
+       'All assets should be financed entirely with long-term debt regardless of type',
+       'Current liabilities should always exceed current assets',
+       'Financing decisions have no relationship to how long an asset will be used'],
+ correct:0,
+ explanation:'Matching the timing of financing to the timing of an asset\'s cash-generating ability keeps a company from being forced to repay debt before the asset has paid for itself.',
+ mnemonic:'💡 Memory tip: Short trip, short loan. Long trip, long loan. Match the timeline of the money to the timeline of the asset.'},
+
+{type:'mc',
+ q:'What risk does mismatching maturities (for example, financing a long-term asset with short-term debt) create?',
+ opts:['Liquidity risk — having to repay or refinance debt before the related asset has generated enough cash',
+       'Currency risk from foreign exchange exposure',
+       'Materiality risk in financial reporting',
+       'Conservatism risk from understating gains'],
+ correct:0,
+ explanation:'If a short-term loan comes due before a long-term asset (like a building) has generated enough cash, the company may be forced to refinance under unfavorable conditions or default.',
+ mnemonic:'💡 Memory tip: A building doesn\'t pay for itself in 90 days — mismatched timing forces a scramble for cash or a risky refinance.'},
+
+{type:'mc',
+ q:'Historical cost as a valuation method is generally very:',
+ opts:['Reliable, but it can lack relevance',
+       'Relevant, but it is never reliable',
+       'Both irrelevant and unreliable',
+       'Neither used nor accepted under GAAP'],
+ correct:0,
+ explanation:'Historical cost is objective and verifiable (reliable), but as time passes it can drift far from an asset\'s current worth (losing relevance).',
+ mnemonic:'💡 Memory tip: What you paid is a solid, trustworthy fact — but it may say very little about what the asset is worth today.'},
+
+{type:'mc',
+ q:'For an asset or liability to be recognized in the financial statements, it must satisfy the appropriate definition and also:',
+ opts:['Be measurable in a reliable way',
+       'Be approved by the SEC individually',
+       'Be purchased with cash only',
+       'Be intangible in nature'],
+ correct:0,
+ explanation:'Meeting the definition alone isn\'t enough — there also has to be a reliable way to attach a dollar figure to it before it can be recognized.',
+ mnemonic:'💡 Memory tip: Two hurdles to clear: "does it fit the definition?" and "can we put a trustworthy number on it?"'},
+
+{type:'mc',
+ q:'Comparing a company\'s balance sheet for two consecutive years primarily reveals:',
+ opts:['Information about the asset and financing changes that took place during the year',
+       'The company\'s exact stock price',
+       'The company\'s tax liability for the year',
+       'The names of the company\'s auditors'],
+ correct:0,
+ explanation:'A side-by-side, two-year comparison highlights exactly what shifted — which assets grew or shrank, and how financing sources changed.',
+ mnemonic:'💡 Memory tip: One balance sheet is a photo; two side by side is a before-and-after that shows what actually moved.'},
+
+];
+
+initQuiz(questions, 'Section 4');
+</script>
+</body>
+</html>
