@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 5 Quiz</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 5</p>
+  <h1>The Income<br><span>Statement</span></h1>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="qCounter">Question 1 of 1</span>
+    <span id="pctLabel">0%</span>
+  </div>
+  <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="chips">
+  <div class="chip" id="chipTotal">Score: 0 / 0</div>
+  <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+  <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+</div>
+
+<div class="card" id="quizCard">
+  <div class="q-meta">
+    <span class="q-label" id="qLabel">Question 1</span>
+    <span class="type-badge" id="typeBadge"></span>
+  </div>
+  <p class="q-text" id="qText"></p>
+  <p class="q-hint" id="qHint" style="display:none"></p>
+  <div id="interactionZone"></div>
+  <div class="feedback" id="feedback">
+    <div class="feedback-head" id="fbHead"></div>
+    <div id="fbBody"></div>
+    <div class="mnemonic" id="fbMnemonic"></div>
+  </div>
+  <div class="btn-wrap" id="btnWrap">
+    <button class="btn-next" id="btnNext">Next Question →</button>
+  </div>
+</div>
+
+<div id="results">
+  <p class="grade-label">Final Score</p>
+  <div class="big-score" id="bigScore"></div>
+  <p class="grade-label" id="gradeMsg"></p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Multiple Choice</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div>Multi-Select</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--correct)"></div>Drag &amp; Drop</div>
+  </div>
+  <div class="breakdown">
+    <div class="bk-card"><div class="num" id="rcCorrect" style="color:var(--correct)"></div><div class="lbl">Correct</div></div>
+    <div class="bk-card"><div class="num" id="rcWrong" style="color:var(--wrong)"></div><div class="lbl">Wrong</div></div>
+    <div class="bk-card"><div class="num" id="rcTotal"></div><div class="lbl">Total</div></div>
+  </div>
+  <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+</div>
+
+<script src="quiz.js"></script>
+<script>
+const questions = [
+
+{type:'mc',
+ q:'What are the four primary categories of income statement items?',
+ opts:['Revenues, expenses, gains, and losses',
+       'Assets, liabilities, equity, and dividends',
+       'Sales, cost, profit, and tax',
+       'Current, long-term, contingent, and deferred'],
+ correct:0,
+ explanation:'The income statement is built from four core categories: revenues, expenses, gains, and losses.',
+ mnemonic:'💡 Memory tip: "R.E.G.L." — Revenues, Expenses, Gains, Losses — the four building blocks of every income statement.'},
+
+{type:'mc',
+ q:'Revenue, in general, is defined as:',
+ opts:['The value of the goods and services provided by a company in its business operations',
+       'The cash collected from customers during the period',
+       'The total assets reported on the balance sheet',
+       'The amount owed to suppliers'],
+ correct:0,
+ explanation:'Revenue reflects value delivered through business operations, not just cash received.',
+ mnemonic:'💡 Memory tip: Revenue is about what you delivered, not what landed in the bank yet.'},
+
+{type:'mc',
+ q:'Expenses, in general, represent:',
+ opts:['The value of resources used in generating the reported revenue',
+       'Cash paid to shareholders as dividends',
+       'The cost of unsold inventory',
+       'Amounts owed to the IRS'],
+ correct:0,
+ explanation:'Expenses record the resources a company consumed in the process of earning its revenue.',
+ mnemonic:'💡 Memory tip: Expenses are the fuel burned to generate the revenue engine\'s output.'},
+
+{type:'mc',
+ q:'How is Gross Profit calculated?',
+ opts:['Sales minus Cost of goods and services',
+       'Sales minus Operating Expenses',
+       'Sales minus Income Tax Expense',
+       'Sales minus Interest Expense'],
+ correct:0,
+ explanation:'Gross Profit is the difference between the selling price of the product and the cost of the product: Sales − Cost of goods and services.',
+ mnemonic:'💡 Memory tip: Gross Profit is the "first cut" — just sales minus what the product itself cost you.'},
+
+{type:'mc',
+ q:'Operating Income is computed as:',
+ opts:['Gross Profit minus Operating Expenses',
+       'Sales minus Cost of Goods Sold',
+       'Net Income plus Other Comprehensive Income',
+       'Income from Continuing Operations minus interest expense'],
+ correct:0,
+ explanation:'Operating Income measures the performance of a company\'s fundamental business operations and equals Gross Profit minus Operating Expenses.',
+ mnemonic:'💡 Memory tip: Operating income is what\'s left after gross profit pays the everyday bills of running the business.'},
+
+{type:'mc',
+ q:'According to the general rule of thumb, all expenses are considered operating expenses except:',
+ opts:['Interest expense and income tax expense',
+       'Cost of goods sold and depreciation expense',
+       'Wages expense and bad debt expense',
+       'Selling expense and administrative expense'],
+ correct:0,
+ explanation:'The rule of thumb is that every expense is operating except interest expense and income tax expense — those two sit below operating income.',
+ mnemonic:'💡 Memory tip: Interest and taxes are the only two VIPs excused from the operating expense line — everything else has to show up.'},
+
+{type:'mc',
+ q:'EBIT stands for Earnings Before Interest and Taxes, and is equivalent to which income measure?',
+ opts:['Operating Income',
+       'Net Income',
+       'Gross Profit',
+       'Comprehensive Income'],
+ correct:0,
+ explanation:'Since Operating Income already excludes interest expense and income tax expense, it\'s the same thing as EBIT.',
+ mnemonic:'💡 Memory tip: EBIT is just Operating Income wearing a different hat.'},
+
+{type:'mc',
+ q:'Income from Continuing Operations is calculated starting from Operating Income by:',
+ opts:['Adjusting for interest expense, miscellaneous revenues/expenses/gains/losses, and income tax expense',
+       'Subtracting Operating Expenses',
+       'Adding back Extraordinary Items',
+       'Subtracting Cost of Goods Sold'],
+ correct:0,
+ explanation:'Income from Continuing Operations = Operating Income − Interest Expense +/− misc. revenues, expenses, gains, losses − Income Tax Expense.',
+ mnemonic:'💡 Memory tip: Continuing operations = Operating Income after it pays interest, settles odd items, and pays its taxes.'},
+
+{type:'mc',
+ q:'Which income measure is considered the best baseline for forecasting a company\'s income in the following year?',
+ opts:['Income from Continuing Operations',
+       'Net Income',
+       'Comprehensive Income',
+       'Gross Profit'],
+ correct:0,
+ explanation:'Because it strips out discontinued operations and extraordinary items, Income from Continuing Operations best reflects the aspects of performance expected to continue into the future.',
+ mnemonic:'💡 Memory tip: "Continuing" operations are what keeps going, so they\'re the best crystal ball for next year.'},
+
+{type:'mc',
+ q:'Net Income is best described as:',
+ opts:['The accountant\'s attempt to summarize a company\'s overall economic performance in one number for a given period',
+       'The change in a company\'s cash balance during the period',
+       'The value of goods sold during the period',
+       'Total assets minus total liabilities'],
+ correct:0,
+ explanation:'Net Income is the famous "bottom line" — one number meant to summarize the company\'s overall economic performance for the period.',
+ mnemonic:'💡 Memory tip: Net income is the "bottom line" — literally the last number squeezed onto the income statement.'},
+
+{type:'mc',
+ q:'Net Income equals Income from Continuing Operations adjusted for which two items?',
+ opts:['Income (loss) from discontinued operations and extraordinary gains/losses',
+       'Gross profit and operating expenses',
+       'OCI and comprehensive income',
+       'Interest expense and income tax expense'],
+ correct:0,
+ explanation:'Net Income = Income from Continuing Operations +/− Income (loss) from discontinued operations +/− Extraordinary gains (losses).',
+ mnemonic:'💡 Memory tip: Continuing Operations picks up two hitchhikers — discontinued ops and extraordinary items — before it becomes Net Income.'},
+
+{type:'mc',
+ q:'Comprehensive Income reflects:',
+ opts:['An overall measure of the change in a company\'s wealth during the period, excluding new investment or withdrawal',
+       'Only the cash inflows during the period',
+       'The company\'s total revenue for the period',
+       'The value of a company\'s total assets'],
+ correct:0,
+ explanation:'Comprehensive Income = Net Income +/− Other Comprehensive Income (OCI), giving the fullest picture of the change in wealth for the period.',
+ mnemonic:'💡 Memory tip: Comprehensive Income is Net Income plus the "everything else" that changed the company\'s wealth.'},
+
+{type:'mc',
+ q:'Other Comprehensive Income (OCI) consists of:',
+ opts:['Unrealized, market-related gains/losses from changing market prices',
+       'Realized gains from selling inventory',
+       'Cash received from customers',
+       'Income tax expense adjustments'],
+ correct:0,
+ explanation:'OCI captures unrealized, market-related gains and losses generated by changing market prices — items that never hit the income statement itself.',
+ mnemonic:'💡 Memory tip: OCI is the "on paper only" wealth swing — not yet cashed in, so it skips the income statement.'},
+
+{type:'mc',
+ q:'"Financial Capital Maintenance," as a conceptual measure of income, refers to:',
+ opts:['An increase in the dollar amount of equity (wealth), excluding new investment or investment withdrawal',
+       'An increase in physical resources or productive capacity',
+       'The cash a company has on hand at year-end',
+       'The total revenue earned during the period'],
+ correct:0,
+ explanation:'Financial capital maintenance is about tracking dollars of wealth (equity), separate from money owners put in or took out.',
+ mnemonic:'💡 Memory tip: Financial capital maintenance counts dollars of wealth, not machines on the factory floor.'},
+
+{type:'mc',
+ q:'"Physical Capital Maintenance," as a conceptual measure of income, refers to:',
+ opts:['An increase of physical resources and productive capacity, excluding new investment or investment withdrawal',
+       'An increase in the dollar value of equity',
+       'A company\'s net income for the year',
+       'The market value of a company\'s stock'],
+ correct:0,
+ explanation:'Physical capital maintenance tracks growth in productive capacity itself — factories, equipment, resources — not dollar-denominated wealth.',
+ mnemonic:'💡 Memory tip: Physical capital maintenance is about keeping (or growing) your factories and equipment, not your bank balance.'},
+
+{type:'mc',
+ q:'Sales Revenue refers to:',
+ opts:['The aggregate selling price of goods sold during the period',
+       'Fees charged for professional services',
+       'Money earned from lending funds to others',
+       'Rent collected from tenants'],
+ correct:0,
+ explanation:'Sales Revenue is the most common type of revenue and reflects the aggregate selling price of goods sold during the period.',
+ mnemonic:'💡 Memory tip: Sold a product? That\'s Sales Revenue, plain and simple.'},
+
+{type:'mc',
+ q:'How does Service (fee) Revenue differ from Sales Revenue?',
+ opts:['Fees are earned in exchange for services, while sales revenue is earned in exchange for goods',
+       'Service revenue is always greater in dollar amount than sales revenue',
+       'Sales revenue is never recognized until cash is collected, but service revenue always is',
+       'Service revenue only applies to government entities'],
+ correct:0,
+ explanation:'Law firms, plumbers, investment banks, and CPAs earn service/fee revenue for services rendered, as opposed to sales revenue earned for goods sold.',
+ mnemonic:'💡 Memory tip: Sell a couch = sales revenue. Fix a leaky faucet = service revenue.'},
+
+{type:'ms',
+ q:'Which of the following are examples of "Other Revenue" listed in the notes? (Select all that apply)',
+ opts:['Licensing Revenue',
+       'Franchise Revenue',
+       'Rent Revenue',
+       'Cost of Goods Sold'],
+ correctSet:[0,1,2],
+ explanation:'Other Revenue includes Licensing Revenue, Franchise Revenue, Rent Revenue, and Premium Revenue. Cost of Goods Sold is an expense, not a revenue.',
+ mnemonic:'💡 Memory tip: Picture a company licensing its logo, franchising its brand, and renting out a spare building — three extra revenue streams beyond sales and services.'},
+
+{type:'mc',
+ q:'Cost of Goods Sold represents:',
+ opts:['The expense recorded when a business sells goods to customers, reflecting the cost of those goods',
+       'The price a customer pays for a good',
+       'The cost of running the corporate head office',
+       'The estimated wear and tear on long-term assets'],
+ correct:0,
+ explanation:'When a business sells goods, the cost of those goods is recorded as an expense called Cost of Goods Sold, or Cost of Sales.',
+ mnemonic:'💡 Memory tip: COGS is the price tag the seller paid, not the price tag the customer paid.'},
+
+{type:'mc',
+ q:'In the U.S., Research and Development costs are classified as:',
+ opts:['An expense, because they represent only a possible — not probable — future economic benefit',
+       'An asset, because they represent a probable future economic benefit',
+       'A liability until the research project is completed',
+       'A gain if the research succeeds, and a loss if it fails'],
+ correct:0,
+ explanation:'R&D only offers a POSSIBLE future benefit, not a PROBABLE one — and probable future benefit is what\'s required to record something as an asset. So in the U.S., all R&D is expensed.',
+ mnemonic:'💡 Memory tip: Possible ≠ Probable. R&D\'s payoff is only "possible," so in the U.S. it\'s expensed, not capitalized as an asset.'},
+
+{type:'tf',
+ q:'In the United States, all Research and Development costs are classified as an expense, and this treatment is identical worldwide.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'While all R&D is expensed in the U.S., this is not the same treatment used worldwide — other countries can capitalize some R&D costs.',
+ mnemonic:'💡 Memory tip: Cross the border, and R&D accounting rules can change — the U.S. "always expense it" rule isn\'t universal.'},
+
+{type:'mc',
+ q:'For a manufacturer such as General Motors, how are production wages typically treated?',
+ opts:['Included in the computation of the cost of the products manufactured and sold',
+       'Reported as a separate wage expense line on the income statement',
+       'Excluded from the income statement entirely',
+       'Recorded as an extraordinary loss'],
+ correct:0,
+ explanation:'For a manufacturer, wages of production workers get folded into the cost of the products made — becoming part of Cost of Goods Sold rather than a separate line.',
+ mnemonic:'💡 Memory tip: A factory worker\'s wages get baked right into the cost of the car — like flour baked into bread.'},
+
+{type:'tf',
+ q:'For a service or retail business, wages are reported as a separate expense rather than folded into cost of goods sold.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'Unlike a manufacturer, a service or retail business reports wages as their own distinct expense line, separate from cost of goods sold.',
+ mnemonic:'💡 Memory tip: A retail cashier\'s wages don\'t get mixed into the cost of the shirts on the rack — they get their own line.'},
+
+{type:'mc',
+ q:'Bad Debt Expense represents:',
+ opts:['The estimated amount of credit extended to customers that will never be collected',
+       'The interest charged on overdue customer accounts',
+       'The cost of goods returned by customers',
+       'A penalty paid to the IRS for late tax filing'],
+ correct:0,
+ explanation:'When a company extends credit and some customers never pay, that estimated uncollectible amount is recorded as Bad Debt Expense.',
+ mnemonic:'💡 Memory tip: Extend credit to enough customers, and some debts inevitably go "bad" — hence Bad Debt Expense.'},
+
+{type:'mc',
+ q:'Depreciation Expense is best defined as:',
+ opts:['The systematic allocation of a long-term asset\'s acquisition cost over its service period',
+       'The market value lost when an asset is sold',
+       'A one-time write-off when an asset is destroyed',
+       'The interest paid on a loan used to buy an asset'],
+ correct:0,
+ explanation:'Depreciation Expense estimates wear and tear by systematically spreading a long-term asset\'s cost across the years it\'s used.',
+ mnemonic:'💡 Memory tip: Depreciation slices up the sticker price of a long-term asset and serves a slice each year it\'s used.'},
+
+{type:'mc',
+ q:'Income Tax Expense on the income statement represents:',
+ opts:['The total estimated amount of income tax expected to eventually be paid, based on current-year reported income',
+       'The exact cash amount paid to the IRS during the year',
+       'A discretionary reserve set aside at management\'s discretion',
+       'The tax refund expected in the following year'],
+ correct:0,
+ explanation:'Income Tax Expense is an estimate of what will eventually be owed based on the current year\'s reported income — not necessarily the exact cash paid this year.',
+ mnemonic:'💡 Memory tip: It\'s an estimate of what\'s owed eventually — not necessarily the check written this year.'},
+
+{type:'mc',
+ q:'An Impairment Loss is recognized when:',
+ opts:['The recorded amount of an asset is reduced because it has declined in value',
+       'A company issues new shares of stock',
+       'A company pays off a loan ahead of schedule',
+       'A customer fails to pay a single invoice'],
+ correct:0,
+ explanation:'Impairment Loss reduces an asset\'s recorded book value to reflect a decline in its value.',
+ mnemonic:'💡 Memory tip: Impairment = writing the asset down to what it\'s actually worth now.'},
+
+{type:'mc',
+ q:'A Restructuring Charge covers which types of costs?',
+ opts:['Asset write-downs and employee termination/relocation costs from reorganizing operations',
+       'Interest expense on newly issued bonds',
+       'Marketing costs for a new product launch',
+       'Dividends paid to preferred shareholders'],
+ correct:0,
+ explanation:'A restructuring charge is a loss recognized when a company reorganizes — closing facilities or shutting down business lines — covering both asset write-downs and employee termination/relocation costs.',
+ mnemonic:'💡 Memory tip: Restructuring = the price tag for closing doors and letting people go: write-downs plus severance.'},
+
+{type:'mc',
+ q:'The "big bath" strategy refers to:',
+ opts:['Dumping extra bad news into an already-bad year so future years look better by comparison',
+       'Paying an unusually large dividend after a great year',
+       'Writing off all inventory every single quarter',
+       'Recognizing revenue before it has been earned'],
+ correct:0,
+ explanation:'Because management has discretion over the amount and timing of restructuring charges, some pile extra bad news into an already-bad year — the "big bath" — to make future years look better by comparison. The SEC has flagged this as a form of earnings manipulation.',
+ mnemonic:'💡 Memory tip: Take one big, ugly "bath" this year so every year after looks squeaky clean by comparison.'},
+
+{type:'tf',
+ q:'The SEC has flagged the use of restructuring charges as a potential form of earnings manipulation.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'Because management controls the timing and size of restructuring charges, the SEC has specifically flagged this as an earnings-manipulation risk (the "big bath" strategy).',
+ mnemonic:'💡 Memory tip: Discretion + timing control = a red flag on the SEC\'s radar.'},
+
+{type:'ms',
+ q:'Which of the following are examples of Gains and Losses — money made or lost outside of a company\'s normal operations? (Select all that apply)',
+ opts:['Impairment loss',
+       'Restructuring charge',
+       'Cost of goods sold',
+       'Sales revenue'],
+ correctSet:[0,1],
+ explanation:'Impairment losses and restructuring charges arise from events outside normal operations. Cost of goods sold and sales revenue are both part of everyday, normal operations.',
+ mnemonic:'💡 Memory tip: Gains/losses are the "surprises" — an asset losing value or a reorg — not the everyday buying and selling.'},
+
+{type:'mc',
+ q:'Below-the-line items (discontinued operations and extraordinary items) are reported:',
+ opts:['Net of taxes',
+       'Gross of taxes, before any tax effect',
+       'Only in the footnotes, never on the income statement',
+       'As adjustments to Comprehensive Income only'],
+ correct:0,
+ explanation:'"The line" is Income from Continuing Operations. Everything below it — discontinued operations and extraordinary items — is reported net of taxes.',
+ mnemonic:'💡 Memory tip: Below the line, taxes are already baked in — "net of tax" is the rule down there.'},
+
+{type:'mc',
+ q:'Income (loss) from Discontinued Operations is best described as:',
+ opts:['The net income or loss from a business segment a company has decided to dispose of, once it qualifies as a discontinued operation',
+       'The loss from a one-time natural disaster',
+       'The interest paid on discontinued lines of credit',
+       'The gain from selling excess office supplies'],
+ correct:0,
+ explanation:'This line captures the net income or loss generated by a segment the company is disposing of, once the disposal meets the one-year timing test to qualify as "discontinued."',
+ mnemonic:'💡 Memory tip: It\'s the final report card for a business segment that\'s already on its way out the door.'},
+
+{type:'tf',
+ q:'For a business segment\'s disposal to be classified as a discontinued operation, the disposal must be expected to be completed within one year of the end of the reporting period.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'This is the one-year timing test: disposal must be expected within one year of the reporting period\'s end for the segment to qualify as a discontinued operation.',
+ mnemonic:'💡 Memory tip: "Discontinued" needs a deadline — disposal within one year of period-end, or it doesn\'t qualify yet.'},
+
+{type:'ms',
+ q:'For a gain or loss to qualify as an Extraordinary Item, it must be: (Select all that apply)',
+ opts:['Unusual in nature',
+       'Infrequent in occurrence',
+       'Pre-approved in advance by the SEC',
+       'Related to the company\'s continuing operations'],
+ correctSet:[0,1],
+ explanation:'Extraordinary items must be both unusual in nature (not the kind of thing that normally happens in this company\'s business) AND infrequent in occurrence (not expected to happen again soon). Both conditions are required.',
+ mnemonic:'💡 Memory tip: "U + I" — Unusual AND Infrequent — both boxes must be checked, or it doesn\'t qualify as extraordinary.'},
+
+{type:'tf',
+ q:'Extraordinary items are a globally standardized accounting concept, used identically under every country\'s accounting rules.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'Extraordinary items are a U.S. concept. Internationally, there are no extraordinary items as a distinct reporting category.',
+ mnemonic:'💡 Memory tip: Cross an ocean, and "extraordinary items" disappear from the books — it\'s a U.S.-only category.'},
+
+{type:'mc',
+ q:'Net Income equals:',
+ opts:['Income from Continuing Operations +/− Discontinued Operations +/− Extraordinary Gains/Losses',
+       'Gross Profit +/− Other Comprehensive Income',
+       'Operating Income +/− Comprehensive Income',
+       'Sales Revenue +/− Income Tax Expense'],
+ correct:0,
+ explanation:'This is the full Net Income formula per the textbook\'s pre-2015 GAAP framework: Income from Continuing Operations, adjusted for discontinued operations and extraordinary items.',
+ mnemonic:'💡 Memory tip: Continuing Operations picks up two "below the line" passengers before it becomes Net Income.'},
+
+{type:'mc',
+ q:'Earnings Per Share (EPS) measures:',
+ opts:['The amount of net income associated with each share of stock',
+       'The total dividends paid to all shareholders',
+       'The market price of one share of stock',
+       'The percentage growth in net income year over year'],
+ correct:0,
+ explanation:'EPS translates the company\'s total net income into a per-share figure, showing how much income "belongs" to each share.',
+ mnemonic:'💡 Memory tip: EPS slices the whole pie (net income) into one slice per share.'},
+
+{type:'mc',
+ q:'How does Diluted EPS differ from Basic EPS?',
+ opts:['Diluted EPS reflects the potential impact of stock options and other rights that could convert into shares in the future',
+       'Diluted EPS excludes preferred stock dividends while Basic EPS includes them',
+       'Basic EPS is always mathematically higher than Diluted EPS',
+       'Diluted EPS is only used by privately held companies'],
+ correct:0,
+ explanation:'Basic EPS uses only shares actually outstanding during the year. Diluted EPS additionally accounts for stock options or other rights that could convert into shares in the future.',
+ mnemonic:'💡 Memory tip: Diluted EPS assumes all those "maybe someday" option shares already exist — spreading earnings a bit thinner.'},
+
+{type:'mc',
+ q:'In a Single-Step Income Statement, items are grouped as:',
+ opts:['All revenues grouped together, all expenses grouped together, and Net Income as the single difference',
+       'Gross profit first, then operating income, then net income as separate subtotals',
+       'Assets, then liabilities, then equity',
+       'Cash flows from operating, investing, and financing activities'],
+ correct:0,
+ explanation:'Single-step format keeps it simple: all revenue in one group, all expenses in another, and Net Income is just the one difference between the two totals.',
+ mnemonic:'💡 Memory tip: Single-step: revenue in one pile, expenses in another pile, subtract once, done.'},
+
+{type:'mc',
+ q:'The Multiple-Step Income Statement format is designed to:',
+ opts:['Emphasize the presentation of gross profit and operating income through multiple subtotals',
+       'Combine all revenue and expense items into a single subtotal',
+       'Eliminate the need to report income tax expense',
+       'Report only cash-basis transactions'],
+ correct:0,
+ explanation:'Unlike the single-step format, the multiple-step statement arranges revenue and expense items to spotlight key profit measures like gross profit and operating income along the way.',
+ mnemonic:'💡 Memory tip: Multi-step = multiple checkpoints (gross profit, operating income) along the road to net income.'},
+
+{type:'mc',
+ q:'Under the revenue recognition guidance in these notes, revenue should be recognized when:',
+ opts:['The work is substantially complete and the customer has paid or promised to pay (typically at the point of sale)',
+       'Cash is received, regardless of whether any work has been performed',
+       'A sales contract is signed, even before any work begins',
+       'The company\'s fiscal year ends'],
+ correct:0,
+ explanation:'Revenue is recognized once value has genuinely been delivered — meaning the required work is substantially complete AND collection of cash is reasonably assured.',
+ mnemonic:'💡 Memory tip: Revenue needs two green lights: "is the work basically done?" and "will we actually get paid?"'},
+
+{type:'mc',
+ q:'The Matching concept states that:',
+ opts:['An expense should be recognized in the same period as the revenue it helped generate',
+       'All expenses should be recognized as soon as cash is paid',
+       'Revenue should always be recognized before any related expenses',
+       'Expenses should be spread evenly across every future fiscal year'],
+ correct:0,
+ explanation:'Matching ties expense recognition to the timing of the revenue that expense helped produce, regardless of when cash actually changes hands.',
+ mnemonic:'💡 Memory tip: Matching pairs up the cost with the payoff it helped create, like matching socks to their pair.'},
+
+{type:'dd',
+ q:'Drag each expense example into the recognition method it illustrates.',
+ cols:['Direct Matching','Systematic Allocation','Immediate Recognition'],
+ items:[
+   {text:'Cost of Goods Sold', answer:'Direct Matching'},
+   {text:'Depreciation Expense', answer:'Systematic Allocation'},
+   {text:'Advertising Expense', answer:'Immediate Recognition'},
+ ],
+ explanation:'The three methods used to recognize expenses are direct matching (as with cost of goods sold), systematic allocation (as with depreciation), and immediate recognition (as with advertising).',
+ mnemonic:'💡 Memory tip: A sold item is directly matched to its cost; a machine\'s cost is systematically spread out; an ad campaign is expensed the moment it runs.'},
+
+{type:'mc',
+ q:'Retained Earnings is calculated as:',
+ opts:['Net Income minus Dividends',
+       'Revenue minus Expenses minus Assets',
+       'Net Income plus Paid-in Capital',
+       'Assets minus Liabilities'],
+ correct:0,
+ explanation:'Retained Earnings, an equity account on the balance sheet, equals Net Income minus Dividends paid out to shareholders.',
+ mnemonic:'💡 Memory tip: Retained Earnings is what the company keeps — Net Income minus whatever it hands out as dividends.'},
+
+{type:'mc',
+ q:'On the income statement, Net Income equals:',
+ opts:['Revenue minus Expenses',
+       'Assets minus Liabilities',
+       'Retained Earnings plus Dividends',
+       'Gross Profit plus Other Comprehensive Income'],
+ correct:0,
+ explanation:'At its simplest, Net Income is produced from the income statement as Revenue minus Expenses.',
+ mnemonic:'💡 Memory tip: Net Income, boiled all the way down: what came in minus what got used up.'},
+
+{type:'mc',
+ q:'In transaction analysis, Revenue is defined as:',
+ opts:['The amount of assets generated or liabilities satisfied through doing business',
+       'The amount of assets consumed through doing business',
+       'A decrease in retained earnings',
+       'The amount of cash collected from investors'],
+ correct:0,
+ explanation:'Revenue represents assets generated (like cash or receivables coming in) or liabilities satisfied (like an obligation being fulfilled) through business operations.',
+ mnemonic:'💡 Memory tip: Revenue either brings assets IN the door or knocks a liability OFF the books.'},
+
+{type:'mc',
+ q:'In transaction analysis, Expense is defined as:',
+ opts:['The amount of assets consumed or liabilities created through doing business',
+       'The amount of assets generated through doing business',
+       'An increase in paid-in capital',
+       'A distribution of profit to shareholders'],
+ correct:0,
+ explanation:'Expense represents assets consumed (like cash or supplies used up) or liabilities created (like an obligation to pay incurred) through business operations.',
+ mnemonic:'💡 Memory tip: Expense either uses assets UP or creates a new liability to deal with.'},
+
+{type:'tf',
+ q:'Revenues increase Retained Earnings, while expenses and dividends decrease Retained Earnings.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'This is the core link between the income statement and the balance sheet: revenues build up Retained Earnings, while expenses and dividends both draw it down.',
+ mnemonic:'💡 Memory tip: Revenue fills the Retained Earnings bucket; expenses and dividends both drain it.'},
+
+{type:'mc',
+ q:'The expanded accounting equation is:',
+ opts:['Assets = Liabilities + Paid-in Capital + (Revenues − Expenses − Dividends)',
+       'Assets = Liabilities + Revenues − Expenses',
+       'Assets − Liabilities = Net Income',
+       'Assets = Paid-in Capital − Retained Earnings'],
+ correct:0,
+ explanation:'The expanded equation decomposes equity into Paid-in Capital and Retained Earnings, showing that Revenues, Expenses, and Dividends are temporary subcategories feeding into Retained Earnings.',
+ mnemonic:'💡 Memory tip: Equity splits in two — what owners put in (Paid-in Capital) and what the business earned and kept (Revenues − Expenses − Dividends).'},
+
+{type:'mc',
+ q:'Pro-forma Financial Statements are best described as:',
+ opts:['A prediction of what future financial statements will look like if planned operating, investing, and financing activities are implemented',
+       'The final, audited financial statements filed with the SEC',
+       'A record of what happened in a prior period',
+       'A statement used only for tax filing purposes'],
+ correct:0,
+ explanation:'Pro-forma statements are forward-looking predictions of future financial statements based on planned operating, investing, and financing activities.',
+ mnemonic:'💡 Memory tip: Pro-forma statements are a sneak preview of the financial statements — if the plan goes as expected.'},
+
+{type:'ms',
+ q:'Pro-forma financial statements are also known by which other names? (Select all that apply)',
+ opts:['Budgeted financial statements',
+       'Forecasted financial statements',
+       'Projected financial statements',
+       'Audited financial statements'],
+ correctSet:[0,1,2],
+ explanation:'Pro-forma statements go by several other names: budgeted, forecasted, or projected financial statements. "Audited" statements refer to something entirely different — historical statements verified by an outside auditor.',
+ mnemonic:'💡 Memory tip: Budgeted, Forecasted, Projected, Pro-forma — four names, one idea: "here\'s what\'s coming."'},
+
+{type:'mc',
+ q:'Most financial statement forecasting exercises start with:',
+ opts:['A forecast of sales, which establishes the expected scale of future operations',
+       'A forecast of income tax rates',
+       'A forecast of dividend payments',
+       'A forecast of the company\'s stock price'],
+ correct:0,
+ explanation:'Sales forecasts come first because they establish the expected scale of a company\'s future operations — everything else tends to build off that.',
+ mnemonic:'💡 Memory tip: Sales sets the stage; every other forecast follows its lead.'},
+
+{type:'ms',
+ q:'Which of the following balance sheet items increase naturally as the level of sales increases? (Select all that apply)',
+ opts:['Cash',
+       'Accounts receivable',
+       'Inventory',
+       'Accounts payable'],
+ correctSet:[0,1,2,3],
+ explanation:'Cash, accounts receivable, inventory, and accounts payable all tend to rise naturally alongside sales growth, since more sales activity requires more of each.',
+ mnemonic:'💡 Memory tip: More sales, more everything: more cash flowing in, more owed to you (AR), more stock to sell (inventory), more owed by you (AP).'},
+
+{type:'mc',
+ q:'Property, plant, and equipment levels typically change in response to:',
+ opts:['A company\'s long-term strategic plans',
+       'The current level of sales alone',
+       'Government regulation',
+       'Quarterly dividend decisions'],
+ correct:0,
+ explanation:'Unlike accounts that scale directly with sales, PP&E moves in response to a company\'s bigger-picture, long-term strategic decisions.',
+ mnemonic:'💡 Memory tip: You don\'t build a new factory because of last quarter\'s sales bump — that\'s a long-term strategic call.'},
+
+{type:'mc',
+ q:'Balance sheet items associated with financing, such as long-term debt and paid-in capital, are determined by:',
+ opts:['The financing decisions made by company management',
+       'The level of sales in the current period',
+       'Automatic formulas tied to inventory levels',
+       'Customer payment patterns'],
+ correct:0,
+ explanation:'Financing-related accounts like long-term debt and paid-in capital reflect deliberate choices management makes about how to fund the company, not automatic reactions to sales.',
+ mnemonic:'💡 Memory tip: Financing accounts follow management\'s playbook, not the sales scoreboard.'},
+
+{type:'mc',
+ q:'For forecasting purposes, Cost of Goods Sold typically:',
+ opts:['Maintains a fairly constant relationship (percentage) with sales',
+       'Stays completely fixed regardless of sales',
+       'Moves only with changes in interest rates',
+       'Is unrelated to any other financial statement item'],
+ correct:0,
+ explanation:'COGS tends to track sales closely, since selling more units usually costs proportionally more to produce or acquire.',
+ mnemonic:'💡 Memory tip: COGS and sales move like dance partners — mostly in step with each other.'},
+
+{type:'mc',
+ q:'For forecasting purposes, Depreciation Expense is most closely tied to:',
+ opts:['The amount of a company\'s property, plant, and equipment',
+       'The level of current-period sales',
+       'Accounts payable balances',
+       'The company\'s income tax bracket'],
+ correct:0,
+ explanation:'Depreciation is a function of the assets a company owns (PP&E), not of how much it sold this period.',
+ mnemonic:'💡 Memory tip: Depreciation tracks the equipment, not the cash register.'},
+
+{type:'mc',
+ q:'For forecasting purposes, Interest Expense is tied to:',
+ opts:['The balance in interest-bearing debt',
+       'The level of sales',
+       'The amount of inventory on hand',
+       'The number of shares outstanding'],
+ correct:0,
+ explanation:'Interest Expense is a function of how much interest-bearing debt a company is carrying, not its sales level.',
+ mnemonic:'💡 Memory tip: More debt on the books, more interest owed — sales don\'t enter into it.'},
+
+{type:'mc',
+ q:'For forecasting purposes, Income Tax Expense is typically:',
+ opts:['A relatively constant percentage of income before taxes',
+       'Completely unrelated to reported income',
+       'Fixed at a flat dollar amount regardless of profit',
+       'Tied directly to accounts receivable'],
+ correct:0,
+ explanation:'Income Tax Expense tends to track as a fairly steady percentage of income before taxes, since tax rates don\'t swing wildly year to year.',
+ mnemonic:'💡 Memory tip: Taxes take roughly the same slice of pre-tax income, year after year.'},
+
+{type:'dd',
+ q:'Drag each income statement item into the factor it is most closely tied to for forecasting purposes.',
+ cols:['Sales level','Property, plant & equipment','Interest-bearing debt balance','Income before taxes'],
+ items:[
+   {text:'Cost of Goods Sold', answer:'Sales level'},
+   {text:'Depreciation Expense', answer:'Property, plant & equipment'},
+   {text:'Interest Expense', answer:'Interest-bearing debt balance'},
+   {text:'Income Tax Expense', answer:'Income before taxes'},
+ ],
+ explanation:'COGS tracks sales, Depreciation tracks PP&E, Interest Expense tracks the debt balance, and Income Tax Expense tracks pre-tax income as a fairly steady percentage.',
+ mnemonic:'💡 Memory tip: Each expense has its own "dance partner" it moves with — sales, equipment, debt, or pre-tax profit.'},
+
+{type:'mc',
+ q:'If a company anticipates a 40% increase in sales volume, it is most likely that the company will need about a 40% increase in:',
+ opts:['Accounts payable',
+       'Property, plant, and equipment',
+       'Bank loans payable',
+       'Operating profit'],
+ correct:0,
+ explanation:'Accounts payable scales directly with purchasing volume — more sales means more inventory purchased on credit. PP&E has excess capacity and moves in lumps; bank loans are a financing choice, not automatic; and operating profit doesn\'t move 1:1 with sales because of fixed costs.',
+ mnemonic:'💡 Memory tip: Buy more to sell more — Accounts Payable is the one account that scales almost automatically with volume.'},
+
+{type:'mc',
+ q:'Accrual accounting means that:',
+ opts:['Revenues and expenses are recorded when earned or incurred, not necessarily when cash changes hands',
+       'Revenues and expenses are recorded only when cash is received or paid',
+       'Only cash transactions are recorded on the financial statements',
+       'Expenses are always recorded a full year after they are incurred'],
+ correct:0,
+ explanation:'Accrual accounting breaks the link between cash timing and reporting timing — revenue is recorded when earned, expenses when incurred, regardless of when cash moves.',
+ mnemonic:'💡 Memory tip: Accrual accounting cares about "when it happened," not "when the cash showed up."'},
+
+{type:'mc',
+ q:'A company has $528,000 of sales revenue, pays $26,400 in dividends, and has net income of $158,400. What were the expenses for the year?',
+ opts:['$369,600',
+       '$343,200',
+       '$501,600',
+       '$686,400'],
+ correct:0,
+ explanation:'Expenses = Sales Revenue − Net Income = $528,000 − $158,400 = $369,600. Dividends are a distraction here — they reduce Retained Earnings, not Net Income, so they don\'t belong in this calculation.',
+ mnemonic:'💡 Memory tip: Dividends live on the Retained Earnings statement, not the income statement — don\'t let them sneak into an expense calculation.'},
+
+{type:'mc',
+ q:'McDyce Corporation reported: Dividends paid $12,800; Service revenue $90,500; Accounts payable $139,750; Capital stock $378,750; Total expenses $67,000; Retained earnings (1/1/13) $43,400. What was Net Income for the year?',
+ opts:['$23,500',
+       '$10,700',
+       '$77,700',
+       '$56,900'],
+ correct:0,
+ explanation:'Net Income = Service Revenue − Total Expenses = $90,500 − $67,000 = $23,500. Dividends, accounts payable, capital stock, and beginning retained earnings are all distractors that belong on the balance sheet or statement of retained earnings, not the income statement.',
+ mnemonic:'💡 Memory tip: When a problem hands you a big list of numbers, ask "does this belong on the income statement?" before you plug anything in.'},
+
+{type:'ms',
+ q:'Which of the following are classified as "below-the-line" items on the income statement? (Select all that apply)',
+ opts:['Income (loss) from discontinued operations',
+       'Extraordinary gains (losses)',
+       'Operating income',
+       'Gross profit'],
+ correctSet:[0,1],
+ explanation:'"The line" is Income from Continuing Operations. Discontinued operations and extraordinary items sit below it, reported net of taxes. Operating income and gross profit both sit above the line.',
+ mnemonic:'💡 Memory tip: Everything "below the line" is on its way out the door — segments being shed and one-off events, not core operations.'},
+
+{type:'ord',
+ q:'Place the components of a Single-Step Income Statement in the order they are presented.',
+ items:[
+   {text:'Revenue', order:0},
+   {text:'Expenses', order:1},
+   {text:'Net Income', order:2},
+ ],
+ explanation:'A single-step income statement groups all revenue together, then all expenses together, then reports the difference as Net Income.',
+ mnemonic:'💡 Memory tip: Single-step is as simple as it sounds: Revenue, then Expenses, then the one final Net Income subtraction.'},
+
+{type:'ord',
+ q:'Place these items in the order they appear from top to bottom on a multiple-step income statement.',
+ items:[
+   {text:'Sales Revenue', order:0},
+   {text:'Cost of Goods Sold', order:1},
+   {text:'Gross Profit', order:2},
+   {text:'Operating Expenses', order:3},
+   {text:'Operating Income', order:4},
+   {text:'Income from Continuing Operations', order:5},
+   {text:'Discontinued Operations & Extraordinary Items', order:6},
+   {text:'Net Income', order:7},
+ ],
+ explanation:'The multiple-step format flows from Sales Revenue, subtracting COGS to reach Gross Profit, subtracting Operating Expenses to reach Operating Income, adjusting for non-operating items and taxes to reach Income from Continuing Operations, and finally adjusting for the below-the-line items to reach Net Income.',
+ mnemonic:'💡 Memory tip: "Sales Chase Gross Operating Cash, Discontinued, Net" — Sales, COGS, Gross profit, Operating expenses/income, Continuing operations, Discontinued/Extraordinary, Net income.'},
+
+];
+
+initQuiz(questions, 'Section 5');
+</script>
+</body>
+</html>
