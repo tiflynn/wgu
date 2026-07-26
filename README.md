@@ -1,6 +1,6 @@
 # C213 Accounting for Decision Makers — Quiz Hub
 
-A self-study quiz site for **C213 Accounting for Decision Makers** (MBA program). Built section by section as the course progresses, with interactive multiple choice, select-all, and drag-and-drop questions.
+A self-study quiz site for **C213 Accounting for Decision Makers** (MBA program). Built section by section as the course progresses, with interactive multiple choice, select-all, drag-and-drop, true/false, and ordering questions.
 
 **Live site:** `https://yourusername.github.io/your-repo-name/`
 
@@ -11,10 +11,13 @@ A self-study quiz site for **C213 Accounting for Decision Makers** (MBA program)
 | File | Purpose |
 |---|---|
 | `index.html` | Home page — lists every section as a clickable card |
-| `quiz.css` | Shared styling used by every quiz page (dark theme, cards, buttons, drag & drop) |
+| `quiz.css` | Shared styling used by every quiz page (light theme, cards, buttons, drag & drop) |
 | `quiz.js` | Shared quiz engine — shuffling, scoring, question rendering, results screen |
 | `section2_quiz.html` | Section 2: The Nature & Purpose of Accounting (29 questions) |
 | `section3_quiz.html` | Section 3: Overview of Financial Statements (92 questions) |
+| `section4_quiz.html` | Section 4: Individual Accounts & Transaction Analysis (67 questions) |
+| `section5_quiz.html` | Section 5: The Income Statement (68 questions) |
+| `section6_quiz.html` | Section 6: The Statement of Cash Flows (86 questions) |
 
 Each new section gets its own `sectionX_quiz.html` file, and reuses `quiz.css` and `quiz.js` rather than duplicating code.
 
@@ -25,6 +28,8 @@ Each new section gets its own `sectionX_quiz.html` file, and reuses `quiz.css` a
 - **Multiple Choice** — pick one correct answer out of four
 - **Select All That Apply** — pick every correct answer from a list, then submit
 - **Drag & Drop Matching** — drag items from a bank into the correct labeled column
+- **True/False** — decide whether a statement is true or false
+- **Ordering** — drag items into the correct sequence
 
 Every question includes an explanation and a memory tip (mnemonic, acronym, or analogy) to help the answer stick.
 
