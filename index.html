@@ -17,11 +17,12 @@
     padding:1.5rem 1.75rem;
     text-decoration:none;
     color:var(--text);
-    transition:border-color .15s, transform .15s, background .15s;
+    transition:border-color .15s, transform .15s, background .15s, box-shadow .15s;
     position:relative;
     overflow:hidden;
+    box-shadow:var(--shadow);
   }
-  .hub-card:hover{border-color:var(--accent);background:#20263A;transform:translateY(-2px)}
+  .hub-card:hover{border-color:var(--accent);background:#F3F7FF;transform:translateY(-2px);box-shadow:0 14px 34px rgba(23,37,84,.16)}
   .hub-card-eyebrow{
     font-family:'DM Mono',monospace;
     font-size:.68rem;
@@ -35,7 +36,7 @@
     font-size:1.5rem;
     font-weight:400;
     margin-bottom:.5rem;
-    color:#F0F2FA;
+    color:var(--text);
   }
   .hub-card-desc{
     font-size:.88rem;

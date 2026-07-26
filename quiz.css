@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg:      #0F1117;
-  --surface: #181C27;
-  --card:    #1A2035;
-  --border:  #2E3655;
-  --accent:  #4F8EF7;
-  --accent2: #A78BFA;
-  --correct: #34D399;
-  --wrong:   #F87171;
-  --text:    #E8EAF0;
-  --muted:   #8B92A5;
+  --bg:      #F4F6FB;
+  --surface: #FFFFFF;
+  --card:    #FFFFFF;
+  --border:  #DCE1EC;
+  --shadow:  0 6px 22px rgba(23,37,84,.10);
+  --accent:  #2563EB;
+  --accent2: #7C3AED;
+  --correct: #059669;
+  --wrong:   #DC2626;
+  --text:    #1A2035;
+  --muted:   #5C677D;
   --radius:  12px;
   --content-w: 720px;
 }
@@ -45,24 +46,24 @@ h1 span{color:var(--accent2)}
 .type-mc{background:rgba(79,142,247,.15);color:var(--accent);border:1px solid rgba(79,142,247,.3)}
 .type-ms{background:rgba(167,139,250,.15);color:var(--accent2);border:1px solid rgba(167,139,250,.3)}
 .type-dd{background:rgba(52,211,153,.12);color:var(--correct);border:1px solid rgba(52,211,153,.3)}
-.type-tf{background:rgba(250,204,21,.14);color:#FACC15;border:1px solid rgba(250,204,21,.32)}
-.type-ord{background:rgba(248,113,113,.12);color:#FB923C;border:1px solid rgba(251,146,60,.32)}
+.type-tf{background:rgba(202,138,4,.12);color:#B45309;border:1px solid rgba(202,138,4,.30)}
+.type-ord{background:rgba(234,88,12,.10);color:#C2410C;border:1px solid rgba(234,88,12,.30)}
 
 /* ── CARD ── */
-.card{max-width:var(--content-w);margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
+.card{max-width:var(--content-w);margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow)}
 .q-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
 .q-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.15em;color:var(--accent);text-transform:uppercase}
-.q-text{font-size:1.12rem;line-height:1.65;margin-bottom:1.5rem;font-weight:600;color:#F0F2FA}
+.q-text{font-size:1.12rem;line-height:1.65;margin-bottom:1.5rem;font-weight:600;color:var(--text)}
 .q-hint{font-size:.82rem;color:var(--muted);margin-bottom:1.1rem;margin-top:-.8rem;font-style:italic}
 
 /* ── MULTIPLE CHOICE ── */
 .options{display:flex;flex-direction:column;gap:.6rem}
-.opt{display:flex;align-items:flex-start;gap:.75rem;padding:.9rem 1.1rem;border:2px solid #3A4060;border-radius:8px;background:#252B3B;cursor:pointer;transition:border-color .15s,background .15s;font-size:1rem;line-height:1.55;text-align:left;color:#EDEEF5;width:100%}
-.opt:hover:not(.disabled){border-color:var(--accent);background:#2C3450}
-.opt .letter{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:600;color:#A0AAC0;min-width:1.4rem;padding-top:3px;flex-shrink:0}
-.opt.correct{border-color:var(--correct);background:rgba(52,211,153,.15);color:#fff}
+.opt{display:flex;align-items:flex-start;gap:.75rem;padding:.9rem 1.1rem;border:2px solid #D2D9E6;border-radius:8px;background:#F7F9FD;cursor:pointer;transition:border-color .15s,background .15s;font-size:1rem;line-height:1.55;text-align:left;color:var(--text);width:100%}
+.opt:hover:not(.disabled){border-color:var(--accent);background:#EAF0FC}
+.opt .letter{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:600;color:var(--muted);min-width:1.4rem;padding-top:3px;flex-shrink:0}
+.opt.correct{border-color:var(--correct);background:rgba(5,150,105,.12);color:#065F46}
 .opt.correct .letter{color:var(--correct);font-weight:700}
-.opt.wrong{border-color:var(--wrong);background:rgba(248,113,113,.15);color:#fff}
+.opt.wrong{border-color:var(--wrong);background:rgba(220,38,38,.10);color:#991B1B}
 .opt.wrong .letter{color:var(--wrong);font-weight:700}
 .opt.selected{border-color:var(--accent2);background:rgba(167,139,250,.12)}
 .opt.selected .letter{color:var(--accent2)}
@@ -77,7 +78,7 @@ h1 span{color:var(--accent2)}
 .dd-wrap{display:flex;gap:1.25rem;flex-wrap:wrap}
 .dd-col{flex:1;min-width:200px}
 .dd-col-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.dd-zone{min-height:64px;border:2px dashed #3A4060;border-radius:8px;padding:.6rem;display:flex;flex-direction:column;gap:.5rem;transition:border-color .15s,background .15s}
+.dd-zone{min-height:64px;border:2px dashed #C6CEDE;border-radius:8px;padding:.6rem;display:flex;flex-direction:column;gap:.5rem;transition:border-color .15s,background .15s}
 .dd-zone.drag-over{border-color:var(--accent);background:rgba(79,142,247,.06)}
 
 /* Stack drag & drop columns vertically on tablets/phones so every
@@ -89,17 +90,17 @@ h1 span{color:var(--accent2)}
   .dd-zone{min-height:72px}
   .dd-item{padding:.85rem 1rem;font-size:1rem}
 }
-.dd-item{padding:.65rem .9rem;background:#252B3B;border:2px solid #3A4060;border-radius:6px;cursor:grab;font-size:.92rem;color:#EDEEF5;user-select:none;transition:border-color .15s,background .15s;display:flex;align-items:center;gap:.5rem}
+.dd-item{padding:.65rem .9rem;background:#F7F9FD;border:2px solid #D2D9E6;border-radius:6px;cursor:grab;font-size:.92rem;color:var(--text);user-select:none;transition:border-color .15s,background .15s;display:flex;align-items:center;gap:.5rem}
 .dd-item:active{cursor:grabbing}
 .dd-item .drag-handle{color:var(--muted);font-size:.75rem;flex-shrink:0}
-.dd-item.correct-item{border-color:var(--correct);background:rgba(52,211,153,.12);color:#fff}
-.dd-item.wrong-item{border-color:var(--wrong);background:rgba(248,113,113,.12);color:#fff}
+.dd-item.correct-item{border-color:var(--correct);background:rgba(5,150,105,.10);color:#065F46}
+.dd-item.wrong-item{border-color:var(--wrong);background:rgba(220,38,38,.09);color:#991B1B}
 .dd-item.disabled-item{cursor:default;pointer-events:none}
 .dd-submit{margin-top:1rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:8px;padding:.6rem 1.4rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s}
 .dd-submit:hover{opacity:.88}
 
 /* ── DRAG TO ORDER ── */
-.order-zone{min-height:64px;border:2px dashed #3A4060;border-radius:8px;padding:.6rem;display:flex;flex-direction:column;gap:.5rem}
+.order-zone{min-height:64px;border:2px dashed #C6CEDE;border-radius:8px;padding:.6rem;display:flex;flex-direction:column;gap:.5rem}
 .order-zone.drag-over{border-color:var(--accent2);background:rgba(167,139,250,.06)}
 .order-zone .dd-item{cursor:grab}
 
