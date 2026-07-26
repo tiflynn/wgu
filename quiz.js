@@ -37,11 +37,12 @@ function buildDeck(questions){
 }
 
 // ── STATE ────────────────────────────────────────────────────
-let deck=[],current=0,score=0,wrong=0,answered=0,sectionLabel='';
+let deck=[],current=0,score=0,wrong=0,answered=0,sectionLabel='',missed=[];
 
 // ── INIT ─────────────────────────────────────────────────────
 function initQuiz(questions, label){
   sectionLabel = label || '';
+  missed=[];
   deck = buildDeck(questions);
   render();
 
@@ -118,6 +119,7 @@ function handleMC(chosen,q){
     showFeedback(true,q.explanation,q.mnemonic,'');
   } else {
     wrong++;
+    recordMiss(q, q.opts[q.correct]);
     opts[chosen].classList.add('wrong');
     opts[q.correct].classList.add('correct');
     showFeedback(false,q.explanation,q.mnemonic,`<strong>Correct answer:</strong> ${q.opts[q.correct]}<br><br>`);
@@ -155,9 +157,9 @@ function handleMS(selected,q){
   q.correctSet.forEach(i=>opts[i].classList.add('correct'));
   [...selected].forEach(i=>{if(!correctSet.has(i))opts[i].classList.add('wrong');});
   answered++;
-  if(isCorrect){score++;}else{wrong++;}
-  const missed=q.correctSet.filter(i=>!selected.has(i));
-  const extra=missed.length>0?`<br><strong>You missed:</strong> ${missed.map(i=>q.opts[i]).join(', ')}`:'';
+  if(isCorrect){score++;}else{wrong++;recordMiss(q, q.correctSet.map(i=>q.opts[i]).join(', '));}
+  const missedOpts=q.correctSet.filter(i=>!selected.has(i));
+  const extra=missedOpts.length>0?`<br><strong>You missed:</strong> ${missedOpts.map(i=>q.opts[i]).join(', ')}`:'';
   showFeedback(isCorrect,q.explanation,q.mnemonic,isCorrect?'':extra);
   updateChips();showNextBtn();
 }
@@ -238,7 +240,7 @@ function handleDD(q){
   const inBank=document.querySelectorAll('#dd-bank .dd-item');
   if(inBank.length>0){allCorrect=false;inBank.forEach(i=>i.classList.add('wrong-item','disabled-item'));}
   answered++;
-  if(allCorrect){score++;}else{wrong++;}
+  if(allCorrect){score++;}else{wrong++;recordMiss(q, q.items.map(it=>`${it.text} → ${it.answer}`).join('<br>'));}
   showFeedback(allCorrect,q.explanation,q.mnemonic,'');
   updateChips();showNextBtn();
 }
@@ -298,7 +300,7 @@ function handleORD(q){
     if(correct){el.classList.add('correct-item');}else{el.classList.add('wrong-item');allCorrect=false;}
   });
   answered++;
-  if(allCorrect){score++;}else{wrong++;}
+  if(allCorrect){score++;}else{wrong++;recordMiss(q, [...q.items].sort((a,b)=>a.order-b.order).map((it,i)=>`${i+1}. ${it.text}`).join('<br>'));}
   showFeedback(allCorrect,q.explanation,q.mnemonic,'');
   updateChips();showNextBtn();
 }
@@ -353,6 +355,8 @@ function makeTouchDraggable(el){
 }
 
 // ── FEEDBACK & HELPERS ───────────────────────────────────────
+function recordMiss(q, answerHtml){ missed.push({q:q.q, answerHtml}); }
+
 function showFeedback(isCorrect,explanation,mnemonic,extra){
   const fb=document.getElementById('feedback');
   fb.className=`feedback ${isCorrect?'correct-fb':'wrong-fb'} show`;
@@ -391,11 +395,24 @@ function showResults(){
   document.getElementById('rcCorrect').textContent=score;
   document.getElementById('rcWrong').textContent=wrong;
   document.getElementById('rcTotal').textContent=deck.length;
+  renderReview();
+}
+
+function renderReview(){
+  const el=document.getElementById('reviewList');
+  if(!el) return;
+  if(missed.length===0){el.innerHTML='';return;}
+  const items=missed.map((m,i)=>
+    `<div class="review-item">
+       <div class="review-q"><span class="review-num">${i+1}.</span> ${m.q}</div>
+       <div class="review-a"><span class="review-a-label">Correct answer:</span> ${m.answerHtml}</div>
+     </div>`).join('');
+  el.innerHTML=`<h3 class="review-head">Review — questions you missed (${missed.length})</h3>${items}`;
 }
 
 function restart(){
   deck=buildDeck(deck);
-  current=0;score=0;wrong=0;answered=0;
+  current=0;score=0;wrong=0;answered=0;missed=[];
   updateChips();
   document.getElementById('results').style.display='none';
   document.getElementById('quizCard').style.display='block';

@@ -51,16 +51,12 @@
   <p class="grade-label">Final Score</p>
   <div class="big-score" id="bigScore"></div>
   <p class="grade-label" id="gradeMsg"></p>
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Multiple Choice</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div>Multi-Select</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--correct)"></div>Drag &amp; Drop</div>
-  </div>
   <div class="breakdown">
     <div class="bk-card"><div class="num" id="rcCorrect" style="color:var(--correct)"></div><div class="lbl">Correct</div></div>
     <div class="bk-card"><div class="num" id="rcWrong" style="color:var(--wrong)"></div><div class="lbl">Wrong</div></div>
     <div class="bk-card"><div class="num" id="rcTotal"></div><div class="lbl">Total</div></div>
   </div>
+  <div class="review" id="reviewList"></div>
   <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
 </div>
 

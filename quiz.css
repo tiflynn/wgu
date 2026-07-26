@@ -129,11 +129,17 @@ h1 span{color:var(--accent2)}
 .bk-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem}
 .bk-card .num{font-family:'DM Serif Display',serif;font-size:2rem}
 .bk-card .lbl{font-size:.8rem;color:var(--muted);margin-top:.2rem}
-.legend{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
-.legend-item{display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-family:'DM Mono',monospace;color:var(--muted)}
-.legend-dot{width:10px;height:10px;border-radius:50%}
 .btn-restart{background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.7rem 1.75rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:border-color .15s}
 .btn-restart:hover{border-color:var(--accent)}
+
+/* ── REVIEW MISSED QUESTIONS ── */
+.review{text-align:left;margin:2rem 0 2.5rem}
+.review-head{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--text);margin-bottom:1rem}
+.review-item{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--wrong);border-radius:8px;padding:1rem 1.1rem;margin-bottom:.75rem}
+.review-q{font-weight:600;color:var(--text);line-height:1.5;margin-bottom:.5rem}
+.review-num{color:var(--muted);font-family:'DM Mono',monospace;font-size:.85rem;margin-right:.15rem}
+.review-a{font-size:.9rem;line-height:1.55;color:var(--text)}
+.review-a-label{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--correct);font-weight:600;display:block;margin-bottom:.15rem}
 
 @media(prefers-reduced-motion:reduce){.bar-fill{transition:none}}
 
