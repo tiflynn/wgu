@@ -159,7 +159,7 @@ function handleMS(selected,q){
   answered++;
   if(isCorrect){score++;}else{wrong++;recordMiss(q, q.correctSet.map(i=>q.opts[i]).join(', '));}
   const missedOpts=q.correctSet.filter(i=>!selected.has(i));
-  const extra=missedOpts.length>0?`<br><strong>You missed:</strong> ${missedOpts.map(i=>q.opts[i]).join(', ')}`:'';
+  const extra=missedOpts.length>0?`<strong>You missed:</strong> ${missedOpts.map(i=>q.opts[i]).join(', ')}<br><br>`:'';
   showFeedback(isCorrect,q.explanation,q.mnemonic,isCorrect?'':extra);
   updateChips();showNextBtn();
 }
