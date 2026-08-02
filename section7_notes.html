@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 7 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+
+  /* ── Stacked fraction: numerator over denominator with a division bar ── */
+  .frac{display:inline-flex;flex-direction:column;align-items:center;text-align:center;
+        vertical-align:middle;line-height:1.35;min-width:0;max-width:100%}
+  .frac .num{border-bottom:2px solid currentColor;padding:0 .45rem .22rem}
+  .frac .den{padding:.22rem .45rem 0}
+  /* compact variant for use inside tables */
+  .frac-sm{font-family:'DM Mono',monospace;font-size:.82rem;line-height:1.3}
+  .frac-sm .num{padding:0 .35rem .16rem}
+  .frac-sm .den{padding:.16rem .35rem 0}
+  /* Section 02 — center the six core ratio titles + formulas in their cards */
+  #big-six .formula-name{justify-content:center;gap:.6rem}
+  #big-six .formula-eq{display:flex;justify-content:center;width:fit-content;margin-left:auto;margin-right:auto}
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-profit{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-eff{background:rgba(79,142,247,.15);color:var(--accent)}
+  .cat-lev{background:rgba(234,88,12,.13);color:#C2410C}
+  .cat-liq{background:rgba(202,138,4,.14);color:#B45309}
+  .cat-mkt{background:rgba(167,139,250,.15);color:var(--accent2)}
+  .cat-cash{background:rgba(5,150,105,.13);color:#065F46}
+
+  .normal-range{
+    display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;
+    background:#F7F9FD;border:1px solid var(--border);border-radius:6px;padding:.35rem .7rem;margin-top:.5rem;
+  }
+  .normal-range .dot{width:7px;height:7px;border-radius:99px;background:var(--accent2)}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+  .pie-arrow{align-self:center;color:var(--muted);font-size:1.1rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 7</p>
+  <h1>Introduction to<br><span>Financial Statement Analysis</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#need-for-analysis">Why Financial Statement Analysis?</a></li>
+      <li><span class="n">02</span><a href="#big-six">The 6 Widely Used Ratios</a></li>
+      <li><span class="n">03</span><a href="#common-size">Common-Size Financial Statements</a></li>
+      <li><span class="n">04</span><a href="#dupont">The DuPont Framework</a></li>
+      <li><span class="n">05</span><a href="#margin-turnover">Margin vs. Turnover</a></li>
+      <li><span class="n">06</span><a href="#leverage-family">The Leverage Ratio Family</a></li>
+      <li><span class="n">07</span><a href="#tie">Times Interest Earned</a></li>
+      <li><span class="n">08</span><a href="#cash-ratios">Cash Flow Ratios</a></li>
+      <li><span class="n">09</span><a href="#pitfalls">Potential Pitfalls</a></li>
+      <li><span class="n">10</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="need-for-analysis">
+    <h2>01 · Why Financial Statement Analysis?</h2>
+    <p class="section-sub">Topic 6.1</p>
+    <ul class="quicklist">
+      <li><strong>Purpose:</strong> diagnose existing problems and forecast future performance — predict future profitability &amp; cash flows from the past, and evaluate performance to identify problem areas.</li>
+      <li><strong>Two dimensions of comparison:</strong> across time for the same company (trend), and across companies at the same point in time (benchmark).</li>
+      <li><strong>Key insight:</strong> a ratio alone means very little — it becomes informative only when compared against <strong>past values</strong> and <strong>industry peers</strong>.</li>
+      <li><strong>Two common methods:</strong> Ratios (relationships between financial statement numbers) and Common-Size Financial Statements (a special category of ratio — everything divided by sales).</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="big-six">
+    <h2>02 · The 6 Widely Used Ratios</h2>
+    <p class="section-sub">Topic 6.2 — memorize these six cold</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Debt Ratio <span class="cat-pill cat-lev">Leverage</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Total Liabilities</span><span class="den">Total Assets</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> % of assets financed by borrowing vs. shareholder money.</div>
+      <div class="normal-range"><span class="dot"></span> Normal range: 50%–60%</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Return on Sales (ROS) <span class="cat-pill cat-profit">Profitability</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Net Income</span><span class="den">Sales</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> pennies of profit kept from each dollar of sales. Also called "margin."</div>
+      <div class="normal-range"><span class="dot"></span> No single normal range — varies widely by industry (e.g., Walmart ~1–2%, a jewelry store much higher). Judge against industry peers, not a fixed benchmark.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Return on Equity (ROE) <span class="cat-pill cat-profit">Profitability</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Net Income</span><span class="den">Stockholders' Equity</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> pennies earned during the year for each dollar shareholders invested.</div>
+      <div class="normal-range"><span class="dot"></span> No fixed normal range given in the notes — compare to the company's own historical trend and industry peers. Watch for ROE inflated mainly by leverage rather than genuine profitability/efficiency.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Current Ratio <span class="cat-pill cat-liq">Liquidity</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Current Assets</span><span class="den">Current Liabilities</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> ability to pay short-term (within one year) bills using short-term assets.</div>
+      <div class="normal-range"><span class="dot"></span> No specific range given in the notes — general rule of thumb is above 1.0 to cover short-term obligations; the specific comfortable level varies by industry.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Asset Turnover <span class="cat-pill cat-eff">Efficiency</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Sales</span><span class="den">Total Assets</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> dollars of sales generated by each dollar of assets — how hard assets are working.</div>
+      <div class="normal-range"><span class="dot"></span> No single normal range — depends heavily on business model (high for Walmart-style volume businesses, low for jewelry-store-style margin businesses). Best read alongside Return on Sales.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Price-Earnings (P/E) Ratio <span class="cat-pill cat-mkt">Market Valuation</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Market Value of Shares</span><span class="den">Net Income</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> $ investors pay for $1 of earnings. Growth potential, earnings stability &amp; management quality, priced in. Equivalent per-share version: Price per Share / EPS (share counts cancel).</div>
+      <div class="normal-range"><span class="dot"></span> No fixed normal range given in the notes — higher signals stronger growth expectations (or overvaluation); lower signals weaker growth expectations (or undervaluation). Interpreted relative to peers and the market, not an absolute number.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Note:</strong> P/E is the only one of the six that's <em>market-based</em> — it pulls in stock price, not just financial-statement numbers. The other five live entirely inside the balance sheet / income statement.
+    </div>
+    <div class="callout tip">
+      <strong>On "normal ranges":</strong> Debt Ratio (50%–60%) is the only ratio in this set of six with an explicit numeric benchmark from the course materials. The rest are context-dependent — always interpreted against a company's own trend over time and against industry peers, not a single fixed number. Don't force-memorize a range that doesn't exist.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="common-size">
+    <h2>03 · Common-Size Financial Statements</h2>
+    <p class="section-sub">Topic 6.3</p>
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Shows all amounts for a given year as <strong>a percentage of a chosen denominator</strong>. Especially useful for comparing companies of very different sizes.
+    </p>
+
+    <table class="compare-table">
+      <tr><th>Statement</th><th>Denominator</th><th>Reveals</th></tr>
+      <tr><td>Income Statement</td><td>Always <strong>Sales</strong></td><td>Pennies of each expense per $1 of sales — best tool for pinpointing a profitability problem</td></tr>
+      <tr><td>Balance Sheet ÷ Sales</td><td>Sales</td><td><strong>Efficiency</strong> — pennies of each asset needed to generate $1 of sales</td></tr>
+      <tr><td>Balance Sheet ÷ Assets</td><td>Total Assets</td><td><strong>Asset Mix</strong> — % of total assets held in each category</td></tr>
+    </table>
+
+    <div class="callout tip"><strong>Exam-ready:</strong> Common-size statements are the fastest, most intuitive starting point for any financial statement analysis — reach for these first.</div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="dupont">
+    <h2>04 · The DuPont Framework</h2>
+    <p class="section-sub">Topic 6.4 — decomposes ROE into 3 drivers</p>
+
+    <div class="formula-card">
+      <div class="formula-name">ROE (full decomposition)</div>
+      <div class="formula-eq">Return on Sales × Asset Turnover × Assets-to-Equity</div>
+      <div class="formula-meaning">= Net Income / Stockholders' Equity (the Sales and Total Assets terms cancel algebraically)</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Component</th><th>Formula</th><th>Measures</th></tr>
+      <tr><td><span class="cat-pill cat-profit">Profitability</span></td><td><span class="frac frac-sm"><span class="num">Net Income</span><span class="den">Sales</span></span></td><td>Return on Sales</td></tr>
+      <tr><td><span class="cat-pill cat-eff">Efficiency</span></td><td><span class="frac frac-sm"><span class="num">Sales</span><span class="den">Total Assets</span></span></td><td>Asset Turnover</td></tr>
+      <tr><td><span class="cat-pill cat-lev">Leverage</span></td><td><span class="frac frac-sm"><span class="num">Total Assets</span><span class="den">Equity</span></span></td><td>Assets-to-Equity (Equity Multiplier)</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Exam trap:</strong> A high ROE isn't automatically good — if it's driven mainly by leverage, that's more fixed interest obligations regardless of how business is going, i.e., more financial risk.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="margin-turnover">
+    <h2>05 · Margin vs. Turnover (Two-Thirds of DuPont)</h2>
+    <p class="section-sub">The "operations" side of DuPont, before leverage</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Return on Assets (ROA)</div>
+      <div class="formula-eq">Return on Sales × Asset Turnover =<span class="frac"><span class="num">Net Income</span><span class="den">Total Assets</span></span></div>
+      <div class="formula-meaning">(Net Income/Sales) × (Sales/Assets) → "Sales" cancels, leaving Net Income/Assets</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th></th><th>Margin (ROS)</th><th>Turnover</th><th>Strategy</th></tr>
+      <tr><td><strong>Walmart</strong></td><td>Very low (~1–2%)</td><td>Very high</td><td>High-volume, thin-margin</td></tr>
+      <tr><td><strong>Jewelry Store</strong></td><td>Very high (100%+ markup)</td><td>Very low</td><td>Low-volume, big-markup</td></tr>
+    </table>
+
+    <div class="callout tip"><strong>Big idea:</strong> No single "correct" combination — margin and turnover are a trade-off. Different business models land at different points on the spectrum while still being profitable.</div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="leverage-family">
+    <h2>06 · The Leverage Ratio Family</h2>
+    <p class="section-sub">Three ratios, same underlying leverage, three different scales</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">More Borrowing</div><span class="chain-sep">→</span>
+      <div class="chain-node">More Assets</div><span class="chain-sep">→</span>
+      <div class="chain-node">More Sales</div><span class="chain-sep">→</span>
+      <div class="chain-node">More Net Income</div><span class="chain-sep">→</span>
+      <div class="chain-node">Higher ROE</div>
+    </div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.1rem">The leverage chain — how borrowing (using other people's money) boosts ROE without shareholders contributing more equity.</p>
+
+    <table class="compare-table">
+      <tr><th>Ratio</th><th>Formula</th><th>Result Format</th><th>Normal Range</th></tr>
+      <tr><td><strong>Debt Ratio</strong></td><td><span class="frac frac-sm"><span class="num">Liabilities</span><span class="den">Assets</span></span></td><td>Percentage</td><td>50%–60%</td></tr>
+      <tr><td><strong>Debt-to-Equity Ratio</strong></td><td><span class="frac frac-sm"><span class="num">Liabilities</span><span class="den">Equity</span></span></td><td>Multiple</td><td>1.0–1.5</td></tr>
+      <tr><td><strong>Assets-to-Equity Ratio</strong></td><td><span class="frac frac-sm"><span class="num">Assets</span><span class="den">Equity</span></span></td><td>Multiple</td><td>(DuPont's leverage term)</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Worked example</strong> (Liabilities = $1, Equity = $1, Assets = $2):<br>
+      Debt Ratio = $1/$2 = <strong>50%</strong> &nbsp;|&nbsp; Debt-to-Equity = $1/$1 = <strong>1.0</strong> &nbsp;|&nbsp; Assets-to-Equity = $2/$1 = <strong>2.0</strong><br>
+      Same financing structure — different lens. Like Celsius vs. Fahrenheit vs. Kelvin: same temperature, different-looking numbers.
+    </div>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-top:.75rem">
+      <strong>Why Walmart/Target run above "normal":</strong> collateral quality. Land and buildings are strong, seizable collateral — banks lend more comfortably against tangible assets than against spending on salaries/marketing (which leaves nothing to repossess).
+    </p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="tie">
+    <h2>07 · Times Interest Earned</h2>
+    <p class="section-sub">The "banker's ratio" — a flow measure, not a balance-sheet snapshot</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Times Interest Earned (TIE)</div>
+      <div class="formula-eq"><span class="frac"><span class="num">EBIT</span><span class="den">Interest Expense</span></span></div>
+      <div class="formula-meaning">EBIT = Earnings Before Interest &amp; Taxes = Operating Income</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem">The "pie" — operating income gets split in strict legal priority order:</p>
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1st</span><div class="step-label">Lenders</div><div class="step-desc">Interest expense — legal priority</div></div>
+      <div class="pie-step"><span class="step-num">2nd</span><div class="step-label">Government</div><div class="step-desc">Taxes, on what's left</div></div>
+      <div class="pie-step"><span class="step-num">3rd</span><div class="step-label">Shareholders</div><div class="step-desc">Net income, on what's left</div></div>
+    </div>
+
+    <div class="formula-card" style="margin-top:1rem">
+      <div class="formula-name">The "Add-Back" — getting to EBIT</div>
+      <div class="formula-eq">EBIT = Net Income + Tax Expense + Interest Expense</div>
+      <div class="formula-meaning">Net Income is already <em>after</em> interest &amp; taxes were subtracted — reverse that to isolate EBIT.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>TIE Result</th><th>Interpretation</th></tr>
+      <tr><td>9.3× (Walmart)</td><td>Large safety cushion — lenders confident</td></tr>
+      <tr><td>1.0×</td><td>Barely covers interest — nothing left for taxes/shareholders. Any disruption = missed payment.</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cash-ratios">
+    <h2>08 · Cash Flow Ratios</h2>
+    <p class="section-sub">Based on the statement of cash flows, not the balance sheet or income statement</p>
+
+    <div class="callout">
+      <strong>When these matter most:</strong> (1) large non-cash expenses distorting net income, (2) rapid growth burning cash while net income looks strong, (3) "window dressing" before a loan/IPO — cash is harder to manipulate than net income.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Cash Flow to Net Income Ratio <span class="cat-pill cat-cash">Cash Flow</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Operating Cash Flow</span><span class="den">Net Income</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> how much accrual assumptions are influencing net income. Usually &gt; 1.0 — mainly due to depreciation (reduces Net Income, but isn't a cash outflow). A big year-over-year swing = investigate (e.g., via common-size income statement).</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Cash Flow Adequacy Ratio <span class="cat-pill cat-cash">Cash Flow</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Cash from Operations</span><span class="den">Cash for Investing Activities</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> can the company fund capex + acquisitions using only operating cash? &gt;1.0 = self-sufficient, with options (pay down debt, dividends, reinvest). Investing = capex + acquisitions only — <em>not</em> dividends (financing) or interest (operating).</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Cash Times Interest Earned <span class="cat-pill cat-cash">Cash Flow</span></div>
+      <div class="formula-eq"><span class="frac"><span class="num">Operating Cash Flow Before Interest &amp; Taxes</span><span class="den">Cash Paid for Interest</span></span></div>
+      <div class="formula-meaning"><strong>Means:</strong> the cash-based version of TIE — strips out accrual assumptions entirely. Get worried as this approaches 1.0, same as regular TIE.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="pitfalls">
+    <h2>09 · Potential Pitfalls of Financial Statement Analysis</h2>
+    <p class="section-sub">Topic 6.6 — four traps to watch for</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Incomplete Information</h3>
+        <p>Statements look precise (exact dollars) but contain estimates. Qualitative business judgment can matter just as much, or more.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Lack of Comparability</h3>
+        <p><strong>Classification</strong> (Nordstrom bundles rent into COGS), <strong>conglomerates</strong> (no clean peer for GE), <strong>accounting methods</strong> (different depreciation assumptions on identical equipment).</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>The "Smoking Gun" Fallacy</h3>
+        <p>Rarely one single cause behind a result — usually many small contributing factors. (Business-school cases are curated to have one clean cause; real companies aren't.)</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">4</span>
+        <h3>Anchoring &amp; Timeliness</h3>
+        <p>Long historical trends can overshadow recent, timely information. What happened last week can matter more than a 10-year trend.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>10 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Debt Ratio vs. Debt-to-Equity vs. Assets-to-Equity</strong> — always check the denominator first. ÷ Assets = percentage. ÷ Equity = multiple.</li>
+      <li><strong>P/E Ratio</strong> — Market Value of Shares / Net Income (whole-company) is the same ratio as Price/Share ÷ EPS (per-share) — share counts cancel.</li>
+      <li><strong>Cash Flow Adequacy</strong> — "investing activities" = capex + acquisitions ONLY. Dividends = financing. Interest = operating. Both are common distractors.</li>
+      <li><strong>Times Interest Earned</strong> — if given Net Income, you MUST add back both Tax Expense and Interest Expense to reach EBIT before dividing.</li>
+      <li><strong>The "Big 6" ratios</strong> are Debt Ratio, ROS, ROE, Current Ratio, Asset Turnover, P/E. Cash flow ratios (Adequacy, Cash TIE, Cash Flow to Net Income) are a <em>separate</em> family — not part of the Big 6.</li>
+      <li><strong>Common-size denominator</strong> — Income Statement is always Sales. Balance Sheet can be Sales (→ efficiency) OR Total Assets (→ asset mix).</li>
+      <li><strong>"All of these are correct" answer choices</strong> — when every specific listed item is a legitimate example of the concept being tested, the "all of the above"-style option is often the correct one, not a trap.</li>
+      <li><strong>Watch for distractor data</strong> — practice problems often include extra given numbers (Total Assets, Financing Cash Flow, etc.) that don't belong in the formula being asked about. Identify the correct formula first, then pull only the numbers it needs.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
