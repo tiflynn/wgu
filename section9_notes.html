@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 9 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-profit{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-eff{background:rgba(79,142,247,.15);color:var(--accent)}
+  .cat-lev{background:rgba(234,88,12,.13);color:#C2410C}
+  .cat-liq{background:rgba(202,138,4,.14);color:#B45309}
+  .cat-mkt{background:rgba(167,139,250,.15);color:var(--accent2)}
+  .cat-cash{background:rgba(5,150,105,.13);color:#065F46}
+  .cat-err{background:rgba(107,114,128,.15);color:#374151}
+  .cat-fraud{background:rgba(248,113,113,.15);color:#B91C1C}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 9</p>
+  <h1>Internal <span>Controls</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#problems">Types of Problems in Financial Statements</a></li>
+      <li><span class="n">02</span><a href="#safeguards">Internal Controls &amp; the 5 Control Activities</a></li>
+      <li><span class="n">03</span><a href="#earnings-why">Earnings Management: Why It Happens</a></li>
+      <li><span class="n">04</span><a href="#continuum">The Earnings Management Continuum &amp; the GAAP Oval</a></li>
+      <li><span class="n">05</span><a href="#sox">The Sarbanes-Oxley Act (SOX)</a></li>
+      <li><span class="n">06</span><a href="#auditors">Internal vs. External Auditors</a></li>
+      <li><span class="n">07</span><a href="#materiality">Materiality &amp; GAAS vs. GAAP</a></li>
+      <li><span class="n">08</span><a href="#sec">The SEC &amp; Required Filings</a></li>
+      <li><span class="n">09</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="problems">
+    <h2>01 · Types of Problems in Financial Statements</h2>
+    <p class="section-sub">Topic 8.1 — LO1</p>
+
+    <ul class="quicklist">
+      <li><strong>Three categories, not two:</strong> Errors, Disagreements, and Frauds. It's tempting to simplify this to "errors vs. fraud," but Disagreements is its own distinct middle category — a legitimate judgment call is neither a mistake nor a lie.</li>
+    </ul>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>What it is</th><th>Examples</th><th>Primary safeguard</th></tr>
+      <tr>
+        <td><span class="cat-pill cat-err">Errors</span></td>
+        <td>Unintentional</td>
+        <td>Wrong amounts, transactions not recorded, duplicate entries, wrong accounts, incorrect physical counts</td>
+        <td>Internal controls (well-designed information system + careful human procedures)</td>
+      </tr>
+      <tr>
+        <td><span class="cat-pill cat-eff">Disagreements</span></td>
+        <td>Differing judgments &amp; estimates — nobody is "wrong"</td>
+        <td>Useful life of a building, % complete on a long-term contract, A/R collectibility, warranty return rates, employee post-retirement lifespan, likelihood of losing a lawsuit, probability of using future tax benefits</td>
+        <td>Auditors + self-regulation to protect reputation</td>
+      </tr>
+      <tr>
+        <td><span class="cat-pill cat-fraud">Frauds</span></td>
+        <td>Intentional lies</td>
+        <td>To get a bank loan, attract investors, increase a manager's bonus — deceiving employees, suppliers, regulators, or the public</td>
+        <td>Auditors + market punishment + legal enforcement</td>
+      </tr>
+    </table>
+
+    <div class="formula-card">
+      <div class="formula-name">The Two Types of Fraud</div>
+      <div class="formula-eq">Misappropriation &nbsp;|&nbsp; Fraudulent Financial Reporting</div>
+      <div class="formula-meaning"><strong>Misappropriation</strong> = stealing assets (cash, inventory). <strong>Fraudulent Financial Reporting</strong> = lying within the statements themselves (overstating revenue, hiding liabilities). Misappropriation often then requires falsifying records to cover the theft up.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="safeguards">
+    <h2>02 · Internal Controls &amp; the 5 Control Activities</h2>
+    <p class="section-sub">Topic 8.2 — LO2</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Internal controls accomplish <strong>five objectives:</strong> (1) provide accurate accounting records, (2) safeguard assets &amp; records, (3) run operations effectively &amp; efficiently, (4) comply with management policies, (5) comply with laws &amp; regulations.
+    </p>
+
+    <div class="callout warn">
+      <strong>Note on your own materials:</strong> Topic 8.2 describes internal control structure with <em>five</em> categories (Control Environment, Risk Assessment, Control Activities, Information &amp; Communication, Monitoring), while the Topic 8.7 review condenses this to <em>three</em> (control environment, accounting systems, control procedures). Both wordings appear in your notes — know both, since either could show up on the assessment.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The five specific <strong>Control Activities</strong> (a sub-category of the structure above):</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Segregation of Duties</h3>
+        <p>"Hands that touch assets do not also touch the accounting records for those assets." Classic example: the cash register separates the cashier (touches cash) from the record (the machine).</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Proper Authorization</h3>
+        <p>Only approved actions should take place — and only people with the right level of authority can approve them.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Physical Control</h3>
+        <p>Locked doors &amp; file cabinets, physical partitions, cameras for remote observation, backup systems for computer records.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">4</span>
+        <h3>Adequate Documents &amp; Records</h3>
+        <p><strong>Documents</strong> = methods of gathering data from the environment (forms, computer inputs). <strong>Records</strong> = the accounting system itself.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">5</span>
+        <h3>Independent Checks</h3>
+        <p>External auditors, internal auditors, and rotation of duties (including mandatory vacations) — someone eventually looks over your shoulder.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="earnings-why">
+    <h2>03 · Earnings Management: Why It Happens</h2>
+    <p class="section-sub">Topic 8.3 — LO3</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Earnings Management (definition)</div>
+      <div class="formula-eq">Strategic choice of accounting estimates &amp; judgments → to meet pre-determined targets</div>
+      <div class="formula-meaning">Companies don't do anything — managers do. It's people making deliberate choices within the flexibility accounting allows.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Reason</th><th>Who it's really for</th><th>Example trigger</th></tr>
+      <tr><td><strong>Meet internal targets</strong></td><td>Internal (the manager, the company)</td><td>Bonus threshold, sales quota, avoiding a loan covenant violation</td></tr>
+      <tr><td><strong>Meet external expectations</strong></td><td>External (investors, the public, creditors)</td><td>Missing analyst EPS by a penny, or turning a net loss into a net profit for outside readers</td></tr>
+      <tr><td><strong>Income smoothing</strong></td><td>External (perception of stability)</td><td>Reporting a steady trend instead of a volatile one — total earnings unchanged, just the pattern</td></tr>
+      <tr><td><strong>Window dressing</strong></td><td>External (a specific upcoming event)</td><td>Cleaning up the financials before an IPO or a big loan application</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>The corrected exam test:</strong> don't require a super-specific trigger (an exact bonus dollar figure, an exact analyst estimate) before calling something "internal" or "external." Ask instead: <em>who is this number really being managed for?</em> A net loss turning into a net profit is about outside perception of company health — that's "meeting external expectations," even with no analyst figure or IPO/loan mentioned.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="continuum">
+    <h2>04 · The Earnings Management Continuum &amp; the GAAP Oval</h2>
+    <p class="section-sub">Topic 8.3 — the most-tested concept in this section</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Savvy Transaction Timing</div><span class="chain-sep">→</span>
+      <div class="chain-node">Aggressive Accounting<br><span style="font-size:.72rem;color:var(--muted)">(disclosed)</span></div><span class="chain-sep">→</span>
+      <div class="chain-node warn">Deceptive Accounting<br><span style="font-size:.72rem;color:var(--muted)">(undisclosed)</span></div><span class="chain-sep">→</span>
+      <div class="chain-node warn">Fraudulent Reporting</div><span class="chain-sep">→</span>
+      <div class="chain-node warn">Fraud<br><span style="font-size:.72rem;color:var(--muted)">(fictitious transactions)</span></div>
+    </div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem">GE's income smoothing (real transactions, just timed cleverly) sits at the safe end; Tino De Angelis's "Great Salad Oil Swindle" (tanks of seawater passed off as valuable oil) sits at the fraud end.</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The Ethics Test</div>
+      <div class="formula-eq">Was there intent to deceive?</div>
+      <div class="formula-meaning">Staying inside the GAAP Oval (technically compliant) does not automatically mean ethical — a manager can pick a GAAP-compliant number specifically to mislead readers without disclosure, and that's still unethical by this test.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Exam trap — the word "always":</strong> the continuum has no hard walls between categories; it explicitly blends from one point to the next. A question asking whether certain categories are "always" ethical is testing whether you recognize that there's <em>no firm universal line</em> — not whether you can recite where the line "should" be.
+    </div>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6">
+      <strong>The GAAP Oval:</strong> because accounting relies on estimates (useful life, bad debt %, etc.), there isn't one single "correct" earnings number — there's a legitimate <em>range</em> of GAAP-compliant figures. Inside the oval = technically legal. Outside the oval = straightforward fraud. Where you land inside the oval, and whether you disclosed why, is what determines the ethics.
+    </p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="sox">
+    <h2>05 · The Sarbanes-Oxley Act (SOX)</h2>
+    <p class="section-sub">Topic 8.4 — LO4</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Named for co-sponsors <strong>Senator Paul Sarbanes (D-MD)</strong> and <strong>Representative Michael Oxley (R-OH)</strong>. Passed in response to the <strong>Enron</strong> (2001, $80B collapse) and <strong>WorldCom</strong> (2002) scandals — both involved management colluding to produce deceptive financial reports. Called the most comprehensive financial-reporting legislation since the SEC's creation in 1933.
+    </p>
+
+    <div class="formula-card">
+      <div class="formula-name">SOX did three primary things</div>
+      <div class="formula-eq">Created the PCAOB &nbsp;|&nbsp; Constrained Auditors &nbsp;|&nbsp; Constrained Management</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Party</th><th>Requirements</th></tr>
+      <tr>
+        <td><strong>PCAOB</strong><br><span style="font-size:.75rem;color:var(--muted)">(5 full-time members, supervised by the SEC)</span></td>
+        <td>Register all public accounting firms · Establish audit report standards · Conduct inspections of accounting firms · Conduct investigations &amp; discipline inadequate firms · Enforce SOX compliance (no authority to imprison — refers cases onward)</td>
+      </tr>
+      <tr>
+        <td><strong>Auditors</strong></td>
+        <td>Prohibited from providing many nonaudit services to audit clients · Audit partners rotate off every 5 years · Report to and are retained by the audit committee, not the CFO/management</td>
+      </tr>
+      <tr>
+        <td><strong>Management</strong></td>
+        <td>CEO &amp; CFO must personally certify the financial statements + provide an internal control assessment · Must maintain an officer code of ethics · No loans to executive officers/directors · Must support a stronger, non-management audit committee</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <strong>Why the Enron detail matters:</strong> Enron's auditor received roughly $25M for the audit and another $25M for other (nonaudit) services in the same year — exactly the kind of financial coziness the nonaudit-services rule was written to eliminate.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="auditors">
+    <h2>06 · Internal vs. External Auditors</h2>
+    <p class="section-sub">Topic 8.5 — LO5</p>
+
+    <table class="compare-table">
+      <tr><th></th><th>Internal Auditors</th><th>External Auditors</th></tr>
+      <tr><td><strong>Who</strong></td><td>Full-time company employees, independent of day-to-day accounting</td><td>Independent CPAs, retained (not employed) by the company</td></tr>
+      <tr><td><strong>Reports to</strong></td><td>Both top management <em>and</em> the audit committee — a channel around management if management itself is the problem</td><td>The audit committee (per SOX), not the CFO</td></tr>
+      <tr><td><strong>Certifies</strong></td><td>N/A — evaluates controls, detects fraud, monitors records</td><td>That statements are presented fairly, in accordance with GAAP (following GAAS while doing so)</td></tr>
+      <tr><td><strong>Does NOT certify</strong></td><td>—</td><td>That statements are 100% free of error (only material misstatements), or that the company is a good investment</td></tr>
+    </table>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Five audit processes — two are external-auditor-only:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Interviews <span class="cat-pill cat-eff" style="margin-left:.3rem">Both</span></h3>
+        <p>Verify procedures are understood, documentation is made, authorization is obtained.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Observations <span class="cat-pill cat-eff" style="margin-left:.3rem">Both</span></h3>
+        <p>Physically view assets — cash, inventory, land, equipment.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Sampling <span class="cat-pill cat-eff" style="margin-left:.3rem">Both</span></h3>
+        <p>Test a statistically reliable subset — auditors can't examine every transaction.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">4</span>
+        <h3>Confirmation <span class="cat-pill cat-fraud" style="margin-left:.3rem">External only</span></h3>
+        <p>Contact outsiders directly (banks, customers) to verify a reported balance actually exists.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">5</span>
+        <h3>Analytical Procedures <span class="cat-pill cat-fraud" style="margin-left:.3rem">External only</span></h3>
+        <p>Comparative ratio analysis to flag relationships that don't make sense (e.g., A/R rising while sales fall).</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Auditor independence is reinforced by three forces:</strong> the law (SOX), litigation risk (lawsuits can run into the hundreds of millions), and reputation (an audit firm's most valuable asset).
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="materiality">
+    <h2>07 · Materiality &amp; GAAS vs. GAAP</h2>
+    <p class="section-sub">Concepts discussed alongside Topic 8.5</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Materiality</div>
+      <div class="formula-eq">Reasonable assurance against MATERIAL misstatement — not a guarantee of zero error</div>
+      <div class="formula-meaning">Auditors aren't hunting every small error — only ones big enough to change a reader's decision. Materiality is <strong>relative to company size</strong>, not a fixed dollar figure: a $50,000 error is likely material for a $200K-revenue company, but immaterial for a $50B one.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Acronym</th><th>Stands for</th><th>Who follows it</th><th>Governs</th></tr>
+      <tr><td><strong>GAAP</strong></td><td>Generally Accepted Accounting Principles</td><td>The company (its accountants)</td><td>How transactions get recorded — the "recipe" for preparing the statements</td></tr>
+      <tr><td><strong>GAAS</strong></td><td>Generally Accepted Auditing Standards</td><td>The external auditor</td><td>How the audit itself is conducted — the "inspection process" rules</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>One sentence to memorize:</strong> "The auditor conducts the audit in accordance with GAAS, in order to determine whether the financial statements are presented fairly in accordance with GAAP." GAAS = how I checked. GAAP = what I was checking for.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="sec">
+    <h2>08 · The SEC &amp; Required Filings</h2>
+    <p class="section-sub">Topic 8.6 — LO6</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Congress's <strong>Commerce Clause</strong> authority (Article 1, §8, Clause 3) was delegated to the SEC via the <strong>Securities Acts of 1933 &amp; 1934</strong>, passed after the deceptive practices behind the 1920s bubble and 1929 crash. Mission: protect investors, maintain fair/orderly/efficient markets, facilitate capital formation — with the accounting-specific slice being to ensure users get <strong>reliable information</strong>.
+    </p>
+
+    <table class="compare-table">
+      <tr><th>Filing</th><th>Frequency</th><th>Audited?</th><th>Contents</th></tr>
+      <tr><td><strong>Registration Statement</strong></td><td>Before going public</td><td>Yes</td><td>Required before a company can sell securities publicly for the first time</td></tr>
+      <tr><td><strong>Form 10-K</strong></td><td>Annual</td><td>Yes — formally audited</td><td>Full financial statements + executive compensation, PP&amp;E details, etc.</td></tr>
+      <tr><td><strong>Form 10-Q</strong></td><td>Quarterly</td><td><strong>No</strong> — CPA-reviewed only</td><td>Quarterly financial statements</td></tr>
+      <tr><td><strong>Form 8-K</strong></td><td>As needed</td><td>N/A</td><td>Significant unscheduled events (acquisitions, auditor changes, etc.)</td></tr>
+    </table>
+
+    <div class="chain-flow">
+      <div class="chain-node">Company's Accounting</div><span class="chain-sep">→</span>
+      <div class="chain-node">External Auditor</div><span class="chain-sep">→</span>
+      <div class="chain-node">FASB (GAAP) / PCAOB (GAAS)</div><span class="chain-sep">→</span>
+      <div class="chain-node">SEC</div>
+    </div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem">The SEC has constitutional authority to set both accounting and auditing rules directly, but in practice delegates day-to-day rule-writing to the FASB (accounting) and the PCAOB (auditing) — while keeping oversight of both.</p>
+
+    <ul class="quicklist">
+      <li><strong>Enforcement powers:</strong> set accounting/disclosure rules, suspend trading, de-list a security, suspend brokers/dealers/accountants, investigate violations, impose civil fines.</li>
+      <li><strong>What the SEC can't do:</strong> imprison anyone directly — there's no "SEC court." It refers cases to a U.S. district attorney for criminal prosecution.</li>
+      <li><strong>Adds credibility by:</strong> requiring independent audits, reviewing financial statements itself, and sanctioning firms that violate its standards.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>09 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Errors / Disagreements / Frauds</strong> — three categories, not two. A judgment call (disagreement) isn't the same as a mistake (error) or a lie (fraud).</li>
+      <li><strong>Form 10-Q is NOT formally audited</strong> — only the annual Form 10-K is. The 10-Q gets CPA involvement/review, not a full audit.</li>
+      <li><strong>Confirmation &amp; Analytical Procedures are external-auditor-only</strong> — Interviews, Observations, and Sampling are used by both internal and external auditors.</li>
+      <li><strong>GAAS vs. GAAP</strong> — GAAS is what the auditor follows while auditing; GAAP is what the company follows while recording transactions and what the auditor is checking for.</li>
+      <li><strong>"Always ethical" questions on the continuum</strong> — be suspicious of absolutes. The continuum has no hard walls, so "there's no clear line" often beats naming a specific "safe" category.</li>
+      <li><strong>Meeting external expectations vs. window dressing</strong> — window dressing is tied to a specific known event (an IPO or loan application). If no such event is mentioned, but the scenario is about how outsiders will perceive the company (e.g., loss vs. profit), it's "meeting external expectations" instead.</li>
+      <li><strong>Materiality is relative, not a fixed dollar figure</strong> — always ask "material relative to what?" (company size, context) before judging a dollar amount.</li>
+      <li><strong>Misappropriation vs. Fraudulent Financial Reporting</strong> — misappropriation = stealing assets; fraudulent financial reporting = lying in the statements themselves.</li>
+      <li><strong>The audit committee must be non-management</strong> — it's a subset of the board made up specifically of outside directors, so it can act as an independent channel even if top management is the source of the problem.</li>
+      <li><strong>Internal control structure: 5 categories vs. 3</strong> — Topic 8.2 uses 5 (Control Environment, Risk Assessment, Control Activities, Information &amp; Communication, Monitoring); the Topic 8.7 review condenses this to 3 (control environment, accounting systems, control procedures). Know both wordings.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
