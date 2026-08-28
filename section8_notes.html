@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 8 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-profit{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-eff{background:rgba(79,142,247,.15);color:var(--accent)}
+  .cat-lev{background:rgba(234,88,12,.13);color:#C2410C}
+  .cat-liq{background:rgba(202,138,4,.14);color:#B45309}
+  .cat-mkt{background:rgba(167,139,250,.15);color:var(--accent2)}
+  .cat-cash{background:rgba(5,150,105,.13);color:#065F46}
+  .cat-err{background:rgba(107,114,128,.15);color:#374151}
+  .cat-fraud{background:rgba(248,113,113,.15);color:#B91C1C}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 8</p>
+  <h1>Cash <span>Budgeting</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#credit-costs">Why Sell on Credit? Costs &amp; Credit Card Companies</a></li>
+      <li><span class="n">02</span><a href="#credit-terms">Credit Terms &amp; Sales Discounts</a></li>
+      <li><span class="n">03</span><a href="#receipts">Budgeting Cash Receipts</a></li>
+      <li><span class="n">04</span><a href="#cannot-determine">The Beginning-A/R "Cannot Be Determined" Trap</a></li>
+      <li><span class="n">05</span><a href="#purchases">From Sales to Purchases (Topic 7.2)</a></li>
+      <li><span class="n">06</span><a href="#disbursements">Budgeting Cash Disbursements</a></li>
+      <li><span class="n">07</span><a href="#net-borrowing">Net Cash Position &amp; the Borrowing Formula</a></li>
+      <li><span class="n">08</span><a href="#advance-planning">Why Budget in Advance</a></li>
+      <li><span class="n">09</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="credit-costs">
+    <h2>01 · Why Sell on Credit? Costs &amp; Credit Card Companies</h2>
+    <p class="section-sub">Topic 7.1</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The trade-off</div>
+      <div class="formula-eq">Benefit: More sales &nbsp;|&nbsp; Cost: Bad debts + Bookkeeping + Carrying costs</div>
+      <div class="formula-meaning">Selling on credit lets a business capture sales it would otherwise lose — the customer who wants to buy but doesn't have cash on hand today. That benefit has to be weighed against three real costs.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The three costs of selling on credit:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Bad Debts</h3>
+        <p>Some customers who buy on credit simply will not pay. It's an unavoidable cost of extending credit at all.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Bookkeeping Costs</h3>
+        <p>Developing and maintaining a system to track sales, evaluate creditworthiness, and bill customers. A cash-only roadside stand has none of this.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Carrying Costs</h3>
+        <p>Money tied up in Accounts Receivable is money not available to use elsewhere — the company must finance operations while it waits to be paid.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Credit card companies as outsourcers:</strong> Visa, MasterCard, Amex, and Discover let a business accept "credit" sales without bearing any of the three costs directly. The business gets cash immediately; the card company waits to collect from the customer and absorbs the bad-debt, bookkeeping, and carrying-cost risk itself — in exchange for a transaction fee (e.g., 0.5%–2% of the sale).
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="credit-terms">
+    <h2>02 · Credit Terms &amp; Sales Discounts</h2>
+    <p class="section-sub">Topic 7.1</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Reading the code</div>
+      <div class="formula-eq">[Discount %] / [Discount days] , net [Final due date]</div>
+      <div class="formula-meaning">Example: <strong>2/10, net 30</strong> — read "two-ten, net thirty" — means pay within 10 days for a 2% discount, or pay the full amount within 30 days. <strong>EOM</strong> means "end of month" and replaces a fixed day count with the calendar's end-of-month date.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Terms</th><th>Discount</th><th>Discount window</th><th>Final due date</th></tr>
+      <tr><td><strong>2/10, net 30</strong></td><td>2%</td><td>Within 10 days</td><td>30 days</td></tr>
+      <tr><td><strong>4/15, net 60</strong></td><td>4%</td><td>Within 15 days</td><td>60 days</td></tr>
+      <tr><td><strong>2/10, net EOM</strong></td><td>2%</td><td>Within 10 days</td><td>End of month</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Skipping the discount is an expensive "loan":</strong> on a $1,000 purchase with 2/10, net 30 terms, paying on day 10 costs $980; waiting until day 30 costs $1,000. That extra $20 is effectively interest on a 20-day loan of $980 (2.04%) — and 20-day periods repeat about 18.25 times a year, so it annualizes to roughly <strong>37.2%</strong>. Well-organized businesses take the discount almost every time.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Sales discounts on the books</div>
+      <div class="formula-eq">Gross Sales − Sales Discounts (contra account) = Net Sales</div>
+      <div class="formula-meaning">A sales discount is a <strong>contra account</strong> — a subtraction from Gross Sales. Externally, published financial statements only show <strong>Net Sales</strong>; the gross price and the discount detail behind it stay internal.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="receipts">
+    <h2>03 · Budgeting Cash Receipts</h2>
+    <p class="section-sub">Topic 7.1</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 .75rem">A given month's cash receipts can be pieced together from up to four sources, depending on how many months the collection pattern spans:</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Current-month<br>cash sales</div><span class="chain-sep">+</span>
+      <div class="chain-node">Current-month<br>credit, collected now</div><span class="chain-sep">+</span>
+      <div class="chain-node">Prior-month<br>credit, collected now</div><span class="chain-sep">+</span>
+      <div class="chain-node">2-months-prior<br>credit, collected now</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Worked example</div>
+      <div class="formula-eq">Jan sales $80,000 · Feb sales $100,000 · 30% same month / 70% month after</div>
+      <div class="formula-meaning">February collections = (Jan sales × 70%) + (Feb sales × 30%) = $56,000 + $30,000 = <strong>$86,000</strong>. Each month's collections draw on that month's own sales plus the "leftover" tail from prior months' sales.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cannot-determine">
+    <h2>04 · The Beginning-A/R "Cannot Be Determined" Trap</h2>
+    <p class="section-sub">Topic 7.1 — high-value exam trap</p>
+
+    <div class="callout warn">
+      <strong>The trap:</strong> if a problem gives you a beginning Accounts Receivable balance <em>and</em> an aging-based collection pattern (e.g., 40% same month / 50% month after / 10% second month after) — but does <em>not</em> break the beginning balance into its month-of-origin components — the correct answer for the very first forecasted month's collections is <strong>"cannot be determined."</strong>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.6;margin:0 0 1rem">
+      Why: the beginning A/R balance is made up of unresolved sales from two or more prior months, each contributing to the next collection at a <em>different</em> rate (one month's remainder collects at the "month following" rate, another's at the "second month following" rate). Without knowing the origin-month split, you can't calculate how much of that lump sum converts to cash specifically in the next month.
+    </p>
+
+    <table class="compare-table">
+      <tr><th>Problem type</th><th>What's given</th><th>First-month answer</th></tr>
+      <tr>
+        <td><strong>Beginning A/R + aging %, no origin breakdown</strong></td>
+        <td>Lump-sum beginning balance + a collection pattern by age</td>
+        <td><span style="color:var(--wrong);font-weight:600">Cannot be determined</span></td>
+      </tr>
+      <tr>
+        <td><strong>Beginning &amp; ending A/R roll-forward</strong></td>
+        <td>Beginning balance, ending balance, and credit sales — no aging %</td>
+        <td>Fully computable: Beg. A/R + Credit Sales − End. A/R</td>
+      </tr>
+      <tr>
+        <td><strong>Later months of an aging-pattern problem</strong></td>
+        <td>Only known monthly sales figures feed the calculation — no lump sum involved</td>
+        <td>Fully computable — apply the % pattern directly</td>
+      </tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>Rule of thumb:</strong> the ambiguity only exists for the <em>first</em> forecasted month, when a lump-sum beginning balance and an aging % pattern appear together. Every later month is fully computable because it only draws on explicitly stated monthly sales figures.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="purchases">
+    <h2>05 · From Sales to Purchases (Topic 7.2)</h2>
+    <p class="section-sub">Topic 7.2 — Budgeting Cash Outflows</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Sales-to-Purchases Conversion</div>
+      <div class="formula-eq">Purchases = Sales × Cost of Goods Sold %</div>
+      <div class="formula-meaning">A company doesn't pay its supplier the retail selling price — it pays the wholesale purchase cost. If COGS runs 80% of sales and sales are forecasted at $100,000, purchases are $80,000.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Steady-state assumption:</strong> when there's no change in inventory levels month to month, a company purchases exactly what it sells (cost-wise) that same month — so forecasted <strong>Purchases = forecasted Cost of Goods Sold</strong>. This is what lets a single COGS% conversion double as the purchases figure.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="disbursements">
+    <h2>06 · Budgeting Cash Disbursements</h2>
+    <p class="section-sub">Topic 7.2</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 .75rem">Just like receipts, disbursements for a given month draw on purchases from that month and prior months, per the payment pattern — but watch for whether a same-month percentage is included:</p>
+
+    <table class="compare-table">
+      <tr><th>Pattern type</th><th>Example</th><th>What it means</th></tr>
+      <tr>
+        <td><strong>No same-month payment</strong></td>
+        <td>50% month following / 50% second month following</td>
+        <td>Nothing is paid in the month purchased — payment starts the month after</td>
+      </tr>
+      <tr>
+        <td><strong>Includes same-month payment</strong></td>
+        <td>30% same month / 50% month following / 20% second month following</td>
+        <td>The target month's own purchases contribute too — don't forget that third piece</td>
+      </tr>
+    </table>
+
+    <div class="formula-card">
+      <div class="formula-name">Worked example (no same-month payment)</div>
+      <div class="formula-eq">Nov purchases $60,000 · Dec purchases $90,000 · 50%/50% pattern</div>
+      <div class="formula-meaning">January payment = (Nov × 50%, second month following) + (Dec × 50%, month following) = $30,000 + $45,000 = <strong>$75,000</strong>.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Worked example (with same-month payment)</div>
+      <div class="formula-eq">Jan $90,000 · Feb $70,000 · Mar $110,000 · 30% / 50% / 20% pattern</div>
+      <div class="formula-meaning">March payment = (Jan × 20%) + (Feb × 50%) + (Mar × 30%) = $18,000 + $35,000 + $33,000 = <strong>$86,000</strong>.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="net-borrowing">
+    <h2>07 · Net Cash Position &amp; the Borrowing Formula</h2>
+    <p class="section-sub">Topic 7.2</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Net Cash Flow</div>
+      <div class="formula-eq">Net Cash Flow = Forecasted Receipts − Forecasted Disbursements</div>
+      <div class="formula-meaning">A positive result is a surplus; a negative result is a deficit — the signal that short-term financing may be needed that month.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Borrowing Needed</div>
+      <div class="formula-eq">Borrowing = Desired Ending Balance − (Beginning Balance + Net Cash Flow)</div>
+      <div class="formula-meaning">Find where the company would land <em>without</em> borrowing (Beginning Balance + Net Cash Flow), then borrow exactly enough to close the gap to the desired ending balance. If the result is negative or zero, no borrowing is needed.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Cash Outflows from Total Expenses</div>
+      <div class="formula-eq">Cash Outflows = Total Budgeted Expenses − Depreciation (and other non-cash expenses)</div>
+      <div class="formula-meaning"><strong>Depreciation is a non-cash expense</strong> — no check is written for it this period, since the related cash was already paid when the asset was purchased. Back it out (along with amortization, if present) to get from total expenses to actual cash outflows.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Scenario</th><th>Numbers</th><th>Borrowing</th></tr>
+      <tr>
+        <td><strong>First year of operation</strong> (beginning cash = $0)</td>
+        <td>Collections $697,500 · Cash outflows $680,000 · Desired ending $30,000</td>
+        <td>$30,000 − ($0 + $17,500) = <strong>$12,500</strong></td>
+      </tr>
+      <tr>
+        <td><strong>With an existing cash cushion</strong></td>
+        <td>Beginning $50,000 · Receipts $500,000 · Disbursements $520,000 · Desired ending $40,000</td>
+        <td>$40,000 − ($50,000 − $20,000) = <strong>$10,000</strong></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="advance-planning">
+    <h2>08 · Why Budget in Advance</h2>
+    <p class="section-sub">Topics 7.1 &amp; 7.2 — the payoff</p>
+
+    <div class="callout">
+      <strong>The Valentine's Day story:</strong> a business owner who shows up at the bank the day they desperately need cash — employees double-parked outside waiting to be paid — looks risky and pays a high interest rate. A business owner who arrives months earlier with a full cash budget, showing exactly when a shortfall will hit and when it will be repaid, looks organized and credible, and gets much better terms.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Once a forecasted deficit is visible (e.g., forecasted on January 1st for a February shortfall), a company on solid footing has several calm options:</p>
+
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1</span><div class="step-label">Arrange a line of credit</div><div class="step-desc">Negotiated in advance, at better rates</div></div>
+      <div class="pie-step"><span class="step-num">2</span><div class="step-label">Delay supplier payments</div><div class="step-desc">Push a payment back with advance notice</div></div>
+      <div class="pie-step"><span class="step-num">3</span><div class="step-label">Encourage faster customer payment</div><div class="step-desc">Speed up incoming collections</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>09 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Increased sales is the BENEFIT, not a cost</strong> — the three costs of selling on credit are bad debts, bookkeeping, and carrying costs. Watch for "increased sales volume" appearing as a wrong-answer distractor among the costs.</li>
+      <li><strong>Beginning A/R + aging % pattern, no origin breakdown → "cannot be determined"</strong> for the first forecasted month's collections. Don't default to "collect it all next month" here — that shortcut only applies to plain beginning/ending A/R roll-forward problems with no aging pattern.</li>
+      <li><strong>"Net 30" is the outer deadline, not the discount window</strong> — in "2/10, net 30," the "10" is the discount window and the "30" is the final due date if no discount is taken.</li>
+      <li><strong>Sales discounts are a contra account</strong> — subtracted from Gross Sales to arrive at Net Sales, which is the only figure reported externally.</li>
+      <li><strong>Skipping a discount is expensive</strong> — the implicit annualized interest rate of missing a typical discount (like 2/10, net 30) is roughly 37%, far worse than most loans.</li>
+      <li><strong>Purchases = Sales × COGS%</strong>, and under the no-inventory-change assumption, Purchases = Cost of Goods Sold. Don't accidentally use the sales figure itself when the question asks for purchases/payments.</li>
+      <li><strong>Check for a same-month payment percentage</strong> in the disbursement pattern — some patterns start payment the month after purchase (nothing paid the same month), others include a same-month portion. Missing this changes which months feed into your target month.</li>
+      <li><strong>Depreciation is subtracted from total expenses</strong> to get cash outflows — it's a non-cash expense, since the related cash was already paid when the asset was purchased.</li>
+      <li><strong>Borrowing formula always starts from where you'd land without borrowing</strong> — Beginning Balance + Net Cash Flow — then makes up the difference to the desired ending balance. First-year companies start beginning cash at $0.</li>
+      <li><strong>Planning ahead gets better loan terms</strong> — a company that forecasts a shortfall weeks in advance looks credible to a lender; one that discovers it the day it happens looks risky and pays more.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

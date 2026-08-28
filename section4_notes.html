@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 4 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-profit{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-eff{background:rgba(79,142,247,.15);color:var(--accent)}
+  .cat-lev{background:rgba(234,88,12,.13);color:#C2410C}
+  .cat-liq{background:rgba(202,138,4,.14);color:#B45309}
+  .cat-mkt{background:rgba(167,139,250,.15);color:var(--accent2)}
+  .cat-cash{background:rgba(5,150,105,.13);color:#065F46}
+  .cat-err{background:rgba(107,114,128,.15);color:#374151}
+  .cat-fraud{background:rgba(248,113,113,.15);color:#B91C1C}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 4</p>
+  <h1>Individual Accounts &<br><span>Transaction Analysis</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#order">Balance Sheet Order &amp; Liquidity</a></li>
+      <li><span class="n">02</span><a href="#current-assets">Current Assets</a></li>
+      <li><span class="n">03</span><a href="#lt-assets">Long-Term Assets &amp; Intangibles</a></li>
+      <li><span class="n">04</span><a href="#current-liab">Current Liabilities</a></li>
+      <li><span class="n">05</span><a href="#lt-liab">Long-Term Liabilities</a></li>
+      <li><span class="n">06</span><a href="#equity">Stockholders' Equity</a></li>
+      <li><span class="n">07</span><a href="#non-us">Non-U.S. Format &amp; Working Capital</a></li>
+      <li><span class="n">08</span><a href="#recognition">Recognition, Valuation &amp; Disclosure</a></li>
+      <li><span class="n">09</span><a href="#transaction">Transaction Analysis &amp; Executory Contracts</a></li>
+      <li><span class="n">10</span><a href="#mix">Asset &amp; Financing Mix, Matching Maturities</a></li>
+      <li><span class="n">11</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="order">
+    <h2>01 · Balance Sheet Order &amp; Liquidity</h2>
+    <p class="section-sub">Topic 3.1 introduction</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Accountants use judgment on two fronts: <strong>recognition</strong> (which items are listed) and <strong>valuation</strong> (what dollar amount to use). U.S. balance sheets present five major sections in a set order, driven by <strong>liquidity</strong> — how quickly an item converts to cash.
+    </p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Current assets</div><span class="chain-sep">→</span>
+      <div class="chain-node">Long-term assets</div><span class="chain-sep">→</span>
+      <div class="chain-node">Current liabilities</div><span class="chain-sep">→</span>
+      <div class="chain-node">Long-term liabilities</div><span class="chain-sep">→</span>
+      <div class="chain-node">Stockholders' equity</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th></th><th>Asset Mix</th><th>Financing Mix</th></tr>
+      <tr><td><strong>What it is</strong></td><td>The proportion of total assets held in each category</td><td>The percentage of total financing (liabilities + equity) in each category</td></tr>
+      <tr><td><strong>Driven by</strong></td><td>The <strong>industry</strong> the company operates in</td><td><strong>Management</strong> decisions about capital structure</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>Comparative reporting:</strong> balance sheets are usually presented with at least two years side by side, so users can see what actually changed — which assets grew or shrank, and how financing sources shifted.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="current-assets">
+    <h2>02 · Current Assets</h2>
+    <p class="section-sub">Topic 3.1 — assets expected to be used, sold, or replaced within one year</p>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>Description</th></tr>
+      <tr><td><strong>Cash</strong></td><td>Coins, currency, and bank accounts</td></tr>
+      <tr><td><strong>Cash equivalents</strong></td><td>CDs, U.S. Treasury securities, and other short-term interest-bearing securities maturing in 3 months or less</td></tr>
+      <tr><td><strong>Accounts receivable</strong></td><td>Standard credit arrangement, typically collected in 30–60 days</td></tr>
+      <tr><td><strong>Inventory</strong></td><td>Goods held for resale in the normal course of business</td></tr>
+      <tr><td><strong>Prepaid expenses</strong></td><td>Expenses paid in advance, before the related benefit is received</td></tr>
+      <tr><td><strong>Investment securities</strong></td><td>Short-term stocks and bonds; bonds typically mature in 3–12 months</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Trading vs. available-for-sale securities:</strong> both are reported at current market value, but unrealized ("paper") gains/losses land differently — <strong>trading securities</strong> flow through the income statement, while <strong>available-for-sale securities</strong> go directly to equity (AOCI), bypassing net income. More on AOCI in section 06.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="lt-assets">
+    <h2>03 · Long-Term Assets &amp; Intangibles</h2>
+    <p class="section-sub">Topic 3.1 — assets still expected to be on hand at the next balance sheet date</p>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>Includes</th></tr>
+      <tr><td><strong>Long-term investments</strong></td><td>Stocks and bonds held for the long term</td></tr>
+      <tr><td><strong>Property, Plant &amp; Equipment (PPE)</strong></td><td>Land, buildings, machinery, tools, furniture, vehicles</td></tr>
+      <tr><td><strong>Intangible assets</strong></td><td>No physical characteristics: trademarks, brand names, copyrights, franchises, goodwill</td></tr>
+      <tr><td><strong>Other long-term assets</strong></td><td>Deferred income tax asset; net pension asset (when the pension fund is overfunded)</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Exam trap — intangibles are only recorded if purchased:</strong> a company's home-grown brand reputation, customer loyalty, or internally developed technology is <strong>never</strong> recorded, no matter how valuable — there's no reliable, objective transaction price. An intangible asset only makes it onto the balance sheet when it's <strong>purchased from another party</strong> (a bought patent, trademark, or copyright) or arises as <strong>goodwill</strong> from acquiring an entire company for more than the fair value of its identifiable net assets.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="current-liab">
+    <h2>04 · Current Liabilities</h2>
+    <p class="section-sub">Topic 3.1 — obligations expected to be paid or satisfied within one year</p>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>Description</th></tr>
+      <tr><td><strong>Accounts payable</strong></td><td>The flip side of accounts receivable — the most common current liability</td></tr>
+      <tr><td><strong>Accrued liabilities</strong></td><td>Built up gradually: wages payable, taxes payable, utilities payable</td></tr>
+      <tr><td><strong>Short-term loans payable</strong></td><td>A formal, interest-bearing loan due within one year</td></tr>
+      <tr><td><strong>Current portion of long-term debt</strong></td><td>The slice of a mortgage or other long-term liability due within the next 12 months</td></tr>
+      <tr><td><strong>Unearned revenue</strong></td><td>An obligation to provide a service to a customer who has already paid but not yet received it</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Exam trap — unearned revenue is NOT revenue:</strong> despite the name, unearned revenue is a <strong>liability</strong>. Cash came in first, but the work/service is still owed — it's a debt in the form of future service, not income.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="lt-liab">
+    <h2>05 · Long-Term Liabilities</h2>
+    <p class="section-sub">Topic 3.1 — obligations not expected to be paid within one year</p>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>Description</th></tr>
+      <tr><td><strong>Long-term debt</strong></td><td>Long-term loans, notes, bonds, and mortgages</td></tr>
+      <tr><td><strong>Capital lease obligations</strong></td><td>A lease structured so it's economically the same as a debt-financed purchase</td></tr>
+      <tr><td><strong>Deferred income tax liability</strong></td><td>Tax expected to be paid in future years on income already reported in the income statement but not yet taxed</td></tr>
+      <tr><td><strong>Other long-term liabilities</strong></td><td>Employee retirement/pension benefit obligations</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="equity">
+    <h2>06 · Stockholders' Equity</h2>
+    <p class="section-sub">Topic 3.1</p>
+
+    <table class="compare-table">
+      <tr><th></th><th>Common Stock</th><th>Preferred Stock</th></tr>
+      <tr><td><strong>Voting rights</strong></td><td>Yes</td><td>Typically no</td></tr>
+      <tr><td><strong>Return if company does well</strong></td><td>Unlimited upside</td><td>Fixed / capped return</td></tr>
+      <tr><td><strong>Priority if company struggles</strong></td><td>Paid last</td><td>Paid before common stockholders</td></tr>
+      <tr><td><strong>Required of all corporations?</strong></td><td>Yes — every corporation issues it</td><td>No — optional, only some companies issue it</td></tr>
+    </table>
+
+    <div class="formula-card">
+      <div class="formula-name">Retained Earnings</div>
+      <div class="formula-eq">Beginning RE + Net Income − Net Losses − Dividends = Ending RE</div>
+      <div class="formula-meaning">A common mistake is thinking retained earnings is only reduced by dividends. It's reduced by <strong>both</strong> net losses <strong>and</strong> dividend payments, and increased by net income.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Treasury stock = contra-equity:</strong> shares a company repurchases from its own stockholders are subtracted from total stockholders' equity — a <strong>negative equity</strong> line, not a liability. Like a dividend, it distributes cash to stockholders, but only to those who sell their shares back and give up ownership; a dividend goes to everyone while all stockholders keep their shares.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Accumulated Other Comprehensive Income (AOCI) groups equity changes from market/exchange-rate movements, kept separate from net income:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Foreign currency translation</h3>
+        <p>Change in a foreign subsidiary's equity (in dollar terms) as exchange rates move — applies only to companies with foreign subsidiaries.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Unrealized gains/losses — AFS securities</h3>
+        <p>Available-for-sale securities' "paper" value swings go to equity/AOCI, not the income statement (contrast with trading securities).</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Unrealized gains/losses — derivatives</h3>
+        <p>Some unrealized gains/losses from options, futures, and similar instruments are also reported as part of AOCI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="non-us">
+    <h2>07 · Non-U.S. Format &amp; Working Capital</h2>
+    <p class="section-sub">Topic 3.2</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Working Capital</div>
+      <div class="formula-eq">Current Assets − Current Liabilities</div>
+      <div class="formula-meaning">Also called <strong>net current assets</strong>.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Non-U.S. balance sheets:</strong> frequently list property, plant, and equipment <strong>first</strong> — before current assets — reversing the U.S. liquidity-first order. They also often group current assets and current liabilities together and label the difference as working capital, right on the face of the statement.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="recognition">
+    <h2>08 · Recognition, Valuation &amp; Disclosure</h2>
+    <p class="section-sub">Topic 3.3</p>
+
+    <table class="compare-table">
+      <tr><th>Term</th><th>What it answers</th></tr>
+      <tr><td><strong>Recognition</strong></td><td>Should this item be included in the financial statements at all, boiled down into one number?</td></tr>
+      <tr><td><strong>Valuation</strong></td><td>Once recognized, what dollar amount should be assigned to it?</td></tr>
+      <tr><td><strong>Disclosure</strong></td><td>The alternative to recognition — describing details in a narrative note, without a number in the statements themselves</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Recognition needs BOTH conditions met:</strong> an item must satisfy the appropriate definition (asset/liability) <strong>and</strong> be measurable in a reliable way. "Probable" alone isn't enough — a lawsuit that's probable to be lost but has no reliably estimable dollar amount doesn't get recognized as a liability; it gets disclosed in the notes instead.
+    </div>
+
+    <div class="callout tip">
+      <strong>Reliability vs. relevance:</strong> historical cost is very <strong>reliable</strong> (an actual, verifiable transaction) but can lack <strong>relevance</strong> over time as market conditions change. Market value is more relevant but not always reliable. This is why an asset's market value going up does <em>not</em> get recognized — but a significant, permanent decline in value can trigger an <strong>impairment</strong> write-down (conservatism: recognize losses promptly, defer gains until realized).
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The five-step path from a real-world event to a finished financial statement:</p>
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1</span><div class="step-label">Creation</div><div class="step-desc">Events create economic assets and liabilities</div></div>
+      <div class="pie-step"><span class="step-num">2</span><div class="step-label">Recognition</div><div class="step-desc">Decision to include an item in the financial statements</div></div>
+      <div class="pie-step"><span class="step-num">3</span><div class="step-label">Valuation</div><div class="step-desc">Measurement of the dollar amount to record</div></div>
+      <div class="pie-step"><span class="step-num">4</span><div class="step-label">Integration</div><div class="step-desc">Total impact on the financial statements is determined</div></div>
+      <div class="pie-step"><span class="step-num">5</span><div class="step-label">Preparation</div><div class="step-desc">The financial statements themselves are prepared</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="transaction">
+    <h2>09 · Transaction Analysis &amp; Executory Contracts</h2>
+    <p class="section-sub">Topic 3.4</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      <strong>Transaction analysis</strong> is the process of determining how an economic event impacts the financial statements.
+    </p>
+
+    <div class="callout warn">
+      <strong>Executory contracts are NOT recognized — not even at $0:</strong> an executory contract is an exchange of <em>promises</em> about the future (e.g., a signed employment contract, a future purchase agreement). Since neither party has performed yet, nothing appears on the balance sheet — not as a $0 placeholder line, just no mention at all. It may be <em>disclosed</em> in the notes if material.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Recognition is triggered once one side begins <em>performing</em> — example: a $1,000/week employee, paid Fridays.</p>
+
+    <table class="compare-table">
+      <tr><th>Point in time</th><th>Wages payable</th></tr>
+      <tr><td>Contract signed (no work yet)</td><td>$0 — nothing recorded, purely executory</td></tr>
+      <tr><td>End of day 1 worked</td><td>$200</td></tr>
+      <tr><td>End of day 4 worked</td><td>$800</td></tr>
+      <tr><td>Day 5 (payday) — work done, then paid</td><td>Liability hits $1,000, then cash pays it off → $0</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>In practice:</strong> companies don't literally post a journal entry every single day. Payroll software tracks accrual in the background, and the wages payable liability is formally recorded at <strong>payroll run dates</strong> and <strong>period-end closing dates</strong> (via adjusting entries) — the daily walkthrough is a teaching model for the underlying accrual <em>logic</em>, not literal daily bookkeeping.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="mix">
+    <h2>10 · Asset &amp; Financing Mix, Matching Maturities</h2>
+    <p class="section-sub">Topic 3.5</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Matching Maturities</div>
+      <div class="formula-eq">Short-term assets ↔ Short-term debt &nbsp;|&nbsp; Long-term assets ↔ Long-term debt</div>
+      <div class="formula-meaning">Financing should be timed to match how long it takes the related asset to generate cash. Mismatching creates <strong>liquidity risk</strong> — being forced to repay or refinance debt before the asset has generated enough cash.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Example of a mismatch:</strong> financing a building (a 20+ year asset) with a 90-day loan. The building can't generate enough cash in 90 days to repay the loan, forcing a risky refinance — exactly the liquidity risk matching maturities is meant to avoid.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>11 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Assets ≠ sources of financing.</strong> Assets are the resources acquired; liabilities <em>and</em> owners' equity together are the sources of financing (evidence of how those resources were acquired).</li>
+      <li><strong>Retained earnings is reduced by BOTH net losses and dividends</strong> — not dividends alone.</li>
+      <li><strong>Unearned revenue is a liability, not revenue</strong> — despite the name, it's an obligation to deliver a service already paid for.</li>
+      <li><strong>Treasury stock is a contra-equity account</strong> (a subtraction from equity), not a liability.</li>
+      <li><strong>Intangible assets are only recorded if purchased</strong> — home-grown brand value, customer loyalty, or internally developed tech never make the balance sheet; goodwill only arises from acquiring another company.</li>
+      <li><strong>Recognition requires the definition AND reliable measurement</strong> — "probable" isn't enough on its own (the unresolved-lawsuit example).</li>
+      <li><strong>Executory contracts are not recognized at all — not even at $0.</strong> A signature alone isn't a transaction; only actual performance triggers an entry.</li>
+      <li><strong>Historical cost doesn't move up for gains, but CAN move down for impairment</strong> — assets aren't written up to market value, but a significant, permanent decline can trigger a write-down (conservatism in action).</li>
+      <li><strong>Non-U.S. balance sheets often flip the order</strong> — PP&amp;E first, current assets/liabilities grouped together as working capital.</li>
+      <li><strong>Matching maturities:</strong> short-term assets funded with short-term debt, long-term assets with long-term debt — mismatching creates liquidity risk.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

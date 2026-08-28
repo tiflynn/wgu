@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 5 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-profit{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-eff{background:rgba(79,142,247,.15);color:var(--accent)}
+  .cat-lev{background:rgba(234,88,12,.13);color:#C2410C}
+  .cat-liq{background:rgba(202,138,4,.14);color:#B45309}
+  .cat-mkt{background:rgba(167,139,250,.15);color:var(--accent2)}
+  .cat-cash{background:rgba(5,150,105,.13);color:#065F46}
+  .cat-err{background:rgba(107,114,128,.15);color:#374151}
+  .cat-fraud{background:rgba(248,113,113,.15);color:#B91C1C}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 5</p>
+  <h1>The Income<br><span>Statement</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#five-measures">The Five Measures of Income</a></li>
+      <li><span class="n">02</span><a href="#capital-maintenance">Two Conceptual Views of Income</a></li>
+      <li><span class="n">03</span><a href="#revenue-items">Revenue Items</a></li>
+      <li><span class="n">04</span><a href="#expense-items">Expense Items</a></li>
+      <li><span class="n">05</span><a href="#gains-losses">Gains, Losses &amp; the "Big Bath"</a></li>
+      <li><span class="n">06</span><a href="#below-the-line">Below-the-Line: Discontinued Ops &amp; Extraordinary Items</a></li>
+      <li><span class="n">07</span><a href="#eps-formats">EPS &amp; Income Statement Formats</a></li>
+      <li><span class="n">08</span><a href="#recognition">Revenue Recognition &amp; Matching</a></li>
+      <li><span class="n">09</span><a href="#transactions">Transaction Analysis &amp; Forecasting</a></li>
+      <li><span class="n">10</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="five-measures">
+    <h2>01 · The Five Measures of Income</h2>
+    <p class="section-sub">Topic 4.1 — each measure is really the same subtraction, done in stages</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      The income statement isn't one calculation — it's <strong>five</strong> checkpoints, each answering a slightly different question about performance. Zoomed all the way out, Net Income is still just <strong>Revenue − Expenses</strong>; the chain below is that same subtraction paused at meaningful stops along the way.
+    </p>
+
+    <div class="formula-card">
+      <div class="formula-name">1 · Gross Profit</div>
+      <div class="formula-eq">Sales − Cost of Goods and Services</div>
+      <div class="formula-meaning">The difference between the selling price of the product and the cost of the product. The "first cut" — profit from the core act of buying/making and selling, before any overhead.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">2 · Operating Income <span class="cat-pill cat-eff">a.k.a. EBIT</span></div>
+      <div class="formula-eq">Gross Profit − Operating Expenses</div>
+      <div class="formula-meaning">Measures the performance of a company's fundamental business operations. Rule of thumb: <strong>every expense is operating except interest expense and income tax expense</strong> — those two are the only ones excused from this line.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">3 · Income from Continuing Operations</div>
+      <div class="formula-eq">Operating Income −/+ Interest Expense, misc. items − Income Tax Expense</div>
+      <div class="formula-meaning">Reflects the aspects of performance <strong>expected to continue into the future</strong> — which is exactly why it's considered the best baseline for forecasting next year's income.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">4 · Net Income <span class="cat-pill cat-mkt">"The Bottom Line"</span></div>
+      <div class="formula-eq">Income from Continuing Ops +/− Discontinued Ops +/− Extraordinary Items</div>
+      <div class="formula-meaning">The accountant's attempt to summarize a company's overall economic performance in one number for the period.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">5 · Comprehensive Income</div>
+      <div class="formula-eq">Net Income +/− Other Comprehensive Income (OCI)</div>
+      <div class="formula-meaning">An overall measure of the change in a company's wealth during the period, excluding new investment or investment withdrawal. OCI = unrealized, market-related gains/losses — value that moved on paper but hasn't been "cashed in" through an actual transaction, so it never touches Net Income.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Best number for forecasting:</strong> Income from Continuing Operations — it strips out the one-time noise (discontinued ops, extraordinary items) that tells you nothing about next year.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="capital-maintenance">
+    <h2>02 · Two Conceptual Views of Income</h2>
+    <p class="section-sub">Topic 4.1 — two different lenses for "did the company actually get richer?"</p>
+
+    <table class="compare-table">
+      <tr><th></th><th>Financial Capital Maintenance</th><th>Physical Capital Maintenance</th></tr>
+      <tr>
+        <td><strong>Tracks</strong></td>
+        <td>The <em>dollar amount</em> of equity (wealth)</td>
+        <td>Actual <em>physical resources</em> &amp; productive capacity</td>
+      </tr>
+      <tr>
+        <td><strong>Ignores</strong></td>
+        <td>What form the wealth takes</td>
+        <td>Dollar price tags / inflation effects</td>
+      </tr>
+      <tr>
+        <td><strong>Both exclude</strong></td>
+        <td colspan="2">New investment or investment withdrawal by owners — neither view counts owners putting money in or taking it out as "income"</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <strong>Inflation example:</strong> a company starts the year with a machine worth $100,000; by year-end, an identical replacement costs $130,000. <em>Financial</em> capital maintenance says equity rose in dollar terms → that's income. <em>Physical</em> capital maintenance says: you'd need that extra $30,000 just to replace what you already had — you haven't gained any real productive capacity, so that's not real income, just inflation.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted)"><strong>Memory anchor:</strong> Financial = <strong>F</strong>igures (dollars). Physical = <strong>P</strong>roduction (machines/capacity).</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="revenue-items">
+    <h2>03 · Revenue Items</h2>
+    <p class="section-sub">Topic 4.2</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem">In transaction analysis, <strong>Revenue</strong> = the amount of assets generated or liabilities satisfied through doing business.</p>
+
+    <table class="compare-table">
+      <tr><th>Revenue type</th><th>Earned from</th></tr>
+      <tr><td><strong>Sales Revenue</strong></td><td>The aggregate selling price of goods sold (retailers/manufacturers)</td></tr>
+      <tr><td><strong>Service (fee) Revenue</strong></td><td>Services rendered, not goods sold — e.g., a plumber, a law firm, a CPA</td></tr>
+      <tr><td><strong>Interest Revenue</strong></td><td>Money earned from lending funds to others</td></tr>
+      <tr><td><strong>Other Revenue</strong></td><td>Licensing revenue, Franchise revenue, Rent revenue, Premium revenue</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="expense-items">
+    <h2>04 · Expense Items</h2>
+    <p class="section-sub">Topic 4.2</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem">In transaction analysis, <strong>Expense</strong> = the amount of assets consumed or liabilities created through doing business.</p>
+
+    <table class="compare-table">
+      <tr><th>Expense</th><th>What it covers</th></tr>
+      <tr><td><strong>Cost of Goods Sold</strong></td><td>The cost recorded when a business sells goods to customers — only counts goods actually <em>sold</em>, not produced/purchased</td></tr>
+      <tr><td><strong>R&amp;D</strong></td><td>Expensed in full in the U.S. — a possible (not probable) future benefit doesn't qualify as an asset. <strong>Not the same treatment worldwide.</strong></td></tr>
+      <tr><td><strong>Wages</strong></td><td>Manufacturer: folded into COGS (part of the cost of the product). Service/retail: a separate wage expense line.</td></tr>
+      <tr><td><strong>Bad Debt Expense</strong></td><td>The estimated amount of credit extended to customers that will never be collected</td></tr>
+      <tr><td><strong>Depreciation Expense</strong></td><td>Systematic allocation of a long-term asset's acquisition cost over its service period</td></tr>
+      <tr><td><strong>Interest Expense</strong></td><td>Cost of borrowing — a financing decision, not part of core operations</td></tr>
+      <tr><td><strong>Income Tax Expense</strong></td><td>The total estimated amount of tax expected to eventually be paid, based on current-year reported income</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Manufacturer vs. service/retail wages:</strong> a factory worker's wages get baked right into the cost of the product — like flour baked into bread. A retail cashier's wages get their own separate expense line instead.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="gains-losses">
+    <h2>05 · Gains, Losses &amp; the "Big Bath"</h2>
+    <p class="section-sub">Topic 4.2 — activities peripheral to a company's main operations</p>
+
+    <table class="compare-table">
+      <tr><th>Item</th><th>Definition</th></tr>
+      <tr><td><strong>Impairment Loss</strong></td><td>Recognized when the recorded amount of an asset is reduced because it has declined in value</td></tr>
+      <tr><td><strong>Restructuring Charge</strong></td><td>Covers asset write-downs <em>and</em> employee termination/relocation costs from reorganizing operations</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>The "big bath" strategy:</strong> because management has discretion over the amount and timing of restructuring charges, some companies dump extra bad news into an already-bad year so future years look better by comparison. The <strong>SEC has flagged this as a potential form of earnings manipulation.</strong>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="below-the-line">
+    <h2>06 · Below-the-Line: Discontinued Ops &amp; Extraordinary Items</h2>
+    <p class="section-sub">Topic 4.2 — everything below Income from Continuing Operations is reported <strong>net of taxes</strong></p>
+
+    <div class="formula-card">
+      <div class="formula-name">Income (Loss) from Discontinued Operations</div>
+      <div class="formula-meaning">The net income or loss from a business segment a company has decided to dispose of, once the disposal qualifies as "discontinued." Includes both the segment's operating results and any gain/loss on disposal, combined into one net summary line — the segment's total <em>revenue</em> is disclosed separately in the footnotes.</div>
+    </div>
+
+    <div class="callout">
+      <strong>The one-year test:</strong> to qualify as a discontinued operation, disposal must be expected to be complete within <strong>one year of the end of the reporting period</strong> — not one year from the decision date. Example: a decision made Feb 1, 2021 falls in FY2021 (ends Dec 31, 2021); the clock runs to Dec 31, 2022. While pending, the segment's assets/liabilities are listed <em>separately</em> on the balance sheet.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Extraordinary Items</div>
+      <div class="formula-meaning">Must be <strong>both</strong>: (1) <strong>Unusual in nature</strong> — not the kind of thing that happens in this company's normal business, and (2) <strong>Infrequent in occurrence</strong> — not reasonably expected to happen again. Examples: government expropriation of property abroad; a natural disaster loss, but only where that type of disaster is rare for the company's location.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Textbook note:</strong> real-world current GAAP eliminated extraordinary items as a separate category in 2015 — but this textbook still teaches the older framework, so keep it in the Net Income formula for exam purposes. It's also a <strong>U.S.-only concept</strong>; internationally, there is no extraordinary items category.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="eps-formats">
+    <h2>07 · EPS &amp; Income Statement Formats</h2>
+    <p class="section-sub">Topic 4.2 &amp; 4.3</p>
+
+    <table class="compare-table">
+      <tr><th>Term</th><th>Meaning</th></tr>
+      <tr><td><strong>EPS</strong></td><td>The amount of net income associated with each share of stock</td></tr>
+      <tr><td><strong>Basic EPS</strong></td><td>Uses only shares actually outstanding during the year</td></tr>
+      <tr><td><strong>Diluted EPS</strong></td><td>Additionally assumes stock options/rights that could convert into shares already exist — spreading earnings a bit thinner</td></tr>
+    </table>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Two ways to format the income statement:</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">S</span>
+        <h3>Single-Step</h3>
+        <p>All revenues grouped together, all expenses grouped together, Net Income as the one difference. Simple, but no subtotals along the way.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">M</span>
+        <h3>Multiple-Step</h3>
+        <p>Emphasizes gross profit and operating income through multiple subtotals — more useful for analysis.</p>
+      </div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Multiple-step flow, top to bottom:</p>
+    <div class="chain-flow">
+      <div class="chain-node">Sales Revenue</div><span class="chain-sep">→</span>
+      <div class="chain-node">COGS</div><span class="chain-sep">→</span>
+      <div class="chain-node">Gross Profit</div><span class="chain-sep">→</span>
+      <div class="chain-node">Operating Expenses</div><span class="chain-sep">→</span>
+      <div class="chain-node">Operating Income</div><span class="chain-sep">→</span>
+      <div class="chain-node">Continuing Ops</div><span class="chain-sep">→</span>
+      <div class="chain-node warn">Discontinued / Extraordinary</div><span class="chain-sep">→</span>
+      <div class="chain-node">Net Income</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="recognition">
+    <h2>08 · Revenue Recognition &amp; Matching</h2>
+    <p class="section-sub">Topic 4.4</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Revenue Recognition</div>
+      <div class="formula-meaning">Revenue is recognized when the work is <strong>substantially complete</strong> and the customer has <strong>paid or promised to pay</strong> — typically at the point of sale, regardless of when cash actually arrives.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">The Matching Concept</div>
+      <div class="formula-meaning">An expense should be recognized in the <strong>same period</strong> as the revenue it helped generate — pairs the cost with the payoff it helped create, like matching socks to their pair.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Three methods used to decide <em>when</em> to recognize an expense:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Direct Matching</h3>
+        <p>A clear, one-to-one link to a specific sale. <strong>Example: Cost of Goods Sold</strong> — you know exactly what the item you sold cost you.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Systematic Allocation</h3>
+        <p>Benefits a measurable stretch of future time, so cost is spread on a schedule. <strong>Example: Depreciation</strong> — also applies to prepaid items like insurance or rent.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Immediate Recognition</h3>
+        <p>No reliable way to trace the cost to any specific future revenue, so it's expensed the moment it's incurred. <strong>Example: Advertising.</strong></p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Quick test:</strong> "Can I trace this to one specific sale?" → Direct Matching. "Does it benefit a measurable stretch of future time?" → Systematic Allocation. "Is there no reliable link to future revenue at all?" → Immediate Recognition.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="transactions">
+    <h2>09 · Transaction Analysis &amp; Forecasting</h2>
+    <p class="section-sub">Topics 4.5 &amp; 4.6</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Retained Earnings</div>
+      <div class="formula-eq">Net Income − Dividends</div>
+      <div class="formula-meaning">Revenues increase Retained Earnings; expenses and dividends both decrease it.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Expanded Accounting Equation</div>
+      <div class="formula-eq">Assets = Liabilities + Paid-in Capital + (Revenues − Expenses − Dividends)</div>
+      <div class="formula-meaning">Equity splits into what owners put in (Paid-in Capital) and what the business earned and kept (the Revenues/Expenses/Dividends piece feeding Retained Earnings).</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Pro-forma Financial Statements</div>
+      <div class="formula-meaning">A prediction of what future financial statements will look like if planned operating, investing, and financing activities are implemented. Also called <strong>budgeted</strong>, <strong>forecasted</strong>, or <strong>projected</strong> financial statements. Forecasting typically starts with a <strong>sales forecast</strong>, which sets the expected scale of future operations.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">What drives each item, for forecasting purposes:</p>
+    <table class="compare-table">
+      <tr><th>Item</th><th>Scales with</th></tr>
+      <tr><td>Cash, Accounts Receivable, Inventory, Accounts Payable</td><td>Sales level — increase naturally as sales increase</td></tr>
+      <tr><td>Cost of Goods Sold</td><td>Sales level — fairly constant % of sales</td></tr>
+      <tr><td>Property, Plant &amp; Equipment</td><td>Long-term strategic plans, <em>not</em> current sales (excess capacity absorbs growth)</td></tr>
+      <tr><td>Depreciation Expense</td><td>The amount of PP&amp;E on the books</td></tr>
+      <tr><td>Interest Expense</td><td>The balance in interest-bearing debt</td></tr>
+      <tr><td>Income Tax Expense</td><td>A fairly constant % of income before taxes</td></tr>
+      <tr><td>Long-term debt, Paid-in Capital</td><td>Management's financing decisions, not sales</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>10 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Dividends are never an expense</strong> — they reduce Retained Earnings, not Net Income. If a problem hands you dividends alongside sales/net income, it's almost always a distractor: Expenses = Sales − Net Income, ignore dividends entirely.</li>
+      <li><strong>Distractor lists in Net Income problems</strong> — accounts payable, capital stock, and beginning retained earnings are recurring distractors. Net Income = Revenue − Expenses only.</li>
+      <li><strong>Extraordinary items are textbook-specific</strong> — this course keeps the pre-2015 GAAP treatment (its own line in Net Income) even though current real-world GAAP eliminated the category in 2015. Also a U.S.-only concept internationally.</li>
+      <li><strong>Extraordinary items need BOTH conditions</strong> — unusual in nature AND infrequent in occurrence. Missing either one disqualifies it.</li>
+      <li><strong>The one-year discontinued-ops test</strong> runs from the <em>end of the reporting period</em>, not from the decision date.</li>
+      <li><strong>Accounts Payable scales with a 40% sales increase</strong> — PP&amp;E doesn't (excess capacity, strategic/lumpy), bank loans don't (a financing choice), and operating profit doesn't move 1:1 (fixed costs create operating leverage).</li>
+      <li><strong>Manufacturer wages vs. service/retail wages</strong> — a manufacturer's production wages get folded into COGS; a service/retail business reports wages as a separate expense line.</li>
+      <li><strong>R&amp;D is always expensed in the U.S.</strong> because the future benefit is only <em>possible</em>, not <em>probable</em> — but this treatment isn't universal worldwide.</li>
+      <li><strong>Advertising vs. insurance/rent</strong> — advertising is Immediate Recognition (no reliable link to specific future revenue), while a prepaid expense like insurance or rent is Systematic Allocation (a measurable stretch of future benefit) — easy to mix up since both "feel" future-oriented.</li>
+      <li><strong>Financial vs. Physical capital maintenance</strong> — Financial tracks dollar-denominated equity; Physical tracks real productive capacity. They can disagree, especially with inflation (or deflation) in asset replacement costs.</li>
+      <li><strong>Single-step vs. multi-step</strong> — single-step groups revenue/expenses into one subtraction; multi-step is the one that emphasizes gross profit and operating income as separate subtotals. Don't swap these two definitions.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
