@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 3 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 3</p>
+  <h1>Overview of <br><span>Financial Statements</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; concept sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#purpose">Purpose of Financial Statements</a></li>
+      <li><span class="n">02</span><a href="#balance-sheet">The Balance Sheet</a></li>
+      <li><span class="n">03</span><a href="#equity-components">Four Classes of Equity</a></li>
+      <li><span class="n">04</span><a href="#concepts">Three Foundational Concepts</a></li>
+      <li><span class="n">05</span><a href="#income-statement">The Income Statement</a></li>
+      <li><span class="n">06</span><a href="#revenue-recognition">Revenue Recognition</a></li>
+      <li><span class="n">07</span><a href="#cash-flows">Statement of Cash Flows</a></li>
+      <li><span class="n">08</span><a href="#notes">Notes to Financial Statements</a></li>
+      <li><span class="n">09</span><a href="#audit">The External Audit</a></li>
+      <li><span class="n">10</span><a href="#conventions">Accounting Concepts &amp; Conventions</a></li>
+      <li><span class="n">11</span><a href="#articulation">Articulation — How the Statements Connect</a></li>
+      <li><span class="n">12</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="purpose">
+    <h2>01 · Purpose of Financial Statements</h2>
+    <p class="section-sub">Section 3 Overview</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The core purpose</div>
+      <div class="formula-eq">More information → Less uncertainty → Better access to capital</div>
+      <div class="formula-meaning">By providing financial data about themselves, companies reduce uncertainty about their financial prospects — allowing them to <strong>borrow at lower interest rates</strong> and <strong>attract investors on more favorable terms</strong>. Financial statements make it easier for a company to attract investors, lenders, and other interested parties.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The three primary financial statements and what each covers:</p>
+    <table class="compare-table">
+      <tr><th>Statement</th><th>What it reports</th><th>Time orientation</th></tr>
+      <tr><td><strong>Balance Sheet</strong></td><td>Financial position — assets, liabilities, and owners' equity</td><td>A specific point in time (a snapshot)</td></tr>
+      <tr><td><strong>Income Statement</strong></td><td>Financial performance — revenues minus expenses = net income</td><td>A period of time (a video)</td></tr>
+      <tr><td><strong>Statement of Cash Flows</strong></td><td>How cash was obtained and spent, categorized as operating, investing, or financing</td><td>A period of time (a video)</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>Snapshot vs. video:</strong> The balance sheet is a photo taken on one specific date. The income statement and cash flow statement are films — they cover everything that happened across a whole period.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="balance-sheet">
+    <h2>02 · The Balance Sheet</h2>
+    <p class="section-sub">Also called: Statement of Financial Position</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The Accounting Equation — memorize this cold</div>
+      <div class="formula-eq">ASSETS = LIABILITIES + OWNERS' EQUITY</div>
+      <div class="formula-meaning">Every transaction keeps this equation in balance. Rearranged: <strong>Owners' Equity = Assets − Liabilities</strong>. This is why equity is called the "residual interest" — it's what's left after subtracting what's owed.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>Formal Definition</th><th>Ordering on balance sheet</th></tr>
+      <tr>
+        <td><strong>Assets</strong></td>
+        <td>Probable future economic benefits obtained or controlled by a particular entity as a result of past transactions or events</td>
+        <td>By <strong>liquidity</strong> — most liquid first. Typical order: Cash → Short-term investments → Accounts receivable → Inventory → Prepaid expenses → PP&amp;E → Intangibles (goodwill last)</td>
+      </tr>
+      <tr>
+        <td><strong>Liabilities</strong></td>
+        <td>Probable future sacrifices of economic benefits arising from present obligations to transfer assets or provide services in the future as a result of past transactions or events</td>
+        <td>By <strong>due date</strong> — short-term (current) liabilities first, long-term liabilities after</td>
+      </tr>
+      <tr>
+        <td><strong>Owners' Equity</strong></td>
+        <td>The residual interest in the assets that remains after deducting liabilities. Also called <em>net assets</em>, stockholders' equity, or shareholders' equity</td>
+        <td>Listed last, after all liabilities</td>
+      </tr>
+    </table>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Breaking down the asset definition — three key phrases:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Probable</h3>
+        <p>Not "certain" — accounting acknowledges uncertainty. A future benefit must be likely, not guaranteed. This is why accounts receivable count as assets even though some customers might not pay.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Future Economic Benefits</h3>
+        <p>Only items with future value qualify. A broken machine that was once paid for no longer counts — the test isn't "did we pay for this?" but "will this generate value going forward?"</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Obtained or Controlled</h3>
+        <p>Legal ownership is not required — <em>economic control</em> is what matters. This is the "substance over form" concept. A financed car the bank still technically owns is still your asset because you control its use.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Substance over form:</strong> financial statements report economic reality, not legal technicalities. A leased building qualifies as an asset if the lease is long-term, non-cancelable, and gives control over most of the building's economic life — even though legal title was never transferred. A short-term, freely cancelable rental does NOT qualify, regardless of how long you've been renewing it.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Two types of assets:</p>
+    <table class="compare-table">
+      <tr><th>Type</th><th>Description</th><th>Examples</th></tr>
+      <tr><td><strong>Tangible</strong></td><td>Have physical substance — you can touch them</td><td>Cash, inventory, property, plant &amp; equipment</td></tr>
+      <tr><td><strong>Intangible</strong></td><td>No physical substance — legal claims or rights</td><td>Accounts receivable (claim to cash), patents (exclusive legal right), goodwill</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Safeway reference numbers (2012):</strong> Total assets $14.657B — Total liabilities $11.724B — Owners' equity $2.933B. Cash ($352.2M) listed first; goodwill listed near last; accounts payable ($3.125B) listed before long-term debt (some not due for 30 years). Balance sheets are presented in <strong>comparative format</strong> — at least two years of data side by side.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="equity-components">
+    <h2>03 · Four Classes of Equity</h2>
+    <p class="section-sub">Components of stockholders' equity</p>
+
+    <table class="compare-table">
+      <tr><th>Component</th><th>What it represents</th></tr>
+      <tr><td><strong>Paid-in Capital</strong></td><td>The value of assets given by owners in exchange for shares of stock — what was directly invested</td></tr>
+      <tr><td><strong>Retained Earnings</strong></td><td>Cumulative profits the company has kept (reinvested) rather than distributed to owners. Grows with profits; shrinks with losses and dividends</td></tr>
+      <tr><td><strong>Treasury Stock</strong></td><td>Shares the company has bought back from shareholders — reduces equity (contra-equity)</td></tr>
+      <tr><td><strong>AOCI</strong> (Accumulated Other Comprehensive Income)</td><td>Equity changes from market price movements or foreign exchange rate fluctuations — reported separately, not through regular net income</td></tr>
+    </table>
+
+    <div class="formula-card">
+      <div class="formula-name">What moves owners' equity — the four factors</div>
+      <div class="formula-eq">↑ Owners invest &nbsp;|&nbsp; ↑ Company earns a profit &nbsp;|&nbsp; ↓ Owners withdraw &nbsp;|&nbsp; ↓ Company suffers a loss</div>
+      <div class="formula-meaning">Two tracks: owner actions (investing/withdrawing) and business performance (profit/loss). Both affect the equity balance directly.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Equity rollforward formula</div>
+      <div class="formula-eq">Beginning Equity + Investments − Withdrawals + Profit − Loss = Ending Equity</div>
+      <div class="formula-meaning">You don't need total assets and liabilities to use this — the beginning equity figure already reflects whatever assets and liabilities existed at that starting point. You're just tracking the changes from there. Both methods (rollforward and Assets − Liabilities) always produce the same ending equity number.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Stock issuance terminology:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">IPO</span>
+        <h3>Initial Public Offering</h3>
+        <p>The very first time a company sells shares of stock to the public. Marks the company's entry into the public market.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">SEO</span>
+        <h3>Seasoned Equity Offering</h3>
+        <p>Any additional stock issuance after the IPO. The company is already "seasoned" — it's been public before.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="concepts">
+    <h2>04 · Three Foundational Concepts</h2>
+    <p class="section-sub">Underlying all balance sheet reporting</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Entity Concept</h3>
+        <p>Personal financial activity is kept separate from business financial activity — even if both are controlled by the same person. With large corporations, identifying the full scope of the "entity" (which subsidiaries to include) can be complex.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Historical Cost Convention</h3>
+        <p>Assets are valued at the price paid at the time of acquisition — not updated to current market value. This means reported accounting values are often <em>less</em> than current market values. Book value = cost − accumulated depreciation.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Going Concern Assumption</h3>
+        <p>Readers of financial statements can assume the company will continue operating long enough to carry out its objectives. Because of this, assets don't have to be reported at liquidation value — no fire-sale pricing needed.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Book value defined:</strong> Book Value = Asset Cost − Accumulated Depreciation. It's how much of the asset's original cost remains "on the books" after accounting for wear and tear. Not the same as market value.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="income-statement">
+    <h2>05 · The Income Statement</h2>
+    <p class="section-sub">Financial performance over a period of time</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Net Income formula</div>
+      <div class="formula-eq">Revenues − Expenses = Net Income (or Net Loss)</div>
+      <div class="formula-meaning">If revenues exceed expenses → <strong>net income</strong>. If expenses exceed revenues → <strong>net loss</strong>. Net income is the accountant's one-number summary of overall economic performance for the period.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Item</th><th>Definition</th></tr>
+      <tr><td><strong>Revenue</strong></td><td>The value of goods and services provided by a company in its normal business operations — NOT simply cash received</td></tr>
+      <tr><td><strong>Expenses</strong></td><td>The value of resources <em>used up</em> in generating the reported revenue — NOT simply cash paid out</td></tr>
+      <tr><td><strong>Gains &amp; Losses</strong></td><td>Money made or lost from activities <em>outside</em> the normal course of business (e.g., a shoe store selling its delivery truck)</td></tr>
+      <tr><td><strong>EPS</strong> (Earnings Per Share)</td><td>Net Income ÷ Shares Outstanding — tells investors how much profit each share generated</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Expense ≠ "money spent":</strong> Expenses are resources <em>consumed</em>, not cash <em>paid</em>. A $12,000 truck bought in January isn't a $12,000 January expense — it's $4,000/year of depreciation expense across 3 years of use. The cash left in January; the cost is recognized as the truck is used up. This is the core of accrual accounting.
+    </div>
+
+    <div class="callout">
+      <strong>Revenue vs. Gains — the distinction that matters:</strong> Revenue comes from the company doing what it normally does. Gains come from doing something outside normal operations. Both appear on the income statement, but they're reported separately because one is recurring and one isn't.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="revenue-recognition">
+    <h2>06 · Revenue Recognition</h2>
+    <p class="section-sub">A cornerstone of accrual accounting</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The principle in one line</div>
+      <div class="formula-eq">Revenue is recognized when value is delivered to the customer — not when cash is received</div>
+      <div class="formula-meaning">Two conditions must be met: (1) <strong>work/value has been delivered</strong> to the customer, and (2) <strong>collectibility of cash is reasonably assured</strong>. Cash timing is irrelevant to revenue timing.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The tuition example — how revenue recognition works in practice:</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Sept 1: $2,000 cash paid</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">Feb 1: $4,000 cash paid</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">Mar 1: $4,000 cash paid</div>
+    </div>
+    <div class="chain-flow">
+      <div class="chain-node">Sept–Dec: 4 months of classes</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">$5,000 revenue THIS year</div>
+      <span class="chain-sep">|</span>
+      <div class="chain-node">Jan–Apr: 4 months of classes</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">$5,000 revenue NEXT year</div>
+    </div>
+
+    <div class="callout">
+      <strong>The liability connection:</strong> when the school receives tuition upfront, it records a <em>liability</em> (deferred revenue / unearned tuition) — because it now owes the student a service. As classes are delivered month by month, that liability converts into revenue. The liability shrinks as the revenue grows.
+    </div>
+
+    <div class="callout tip">
+      <strong>Accrual accounting vs. cash basis:</strong> Accrual accounting records revenues and expenses when earned or incurred — independent of when cash moves. Revenue recognition and the <strong>matching principle</strong> (expenses matched to the period that generated the revenue) are its two cornerstones. Cash basis accounting simply records when cash changes hands — simpler, but a less accurate picture of economic reality.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Time Period Principle</div>
+      <div class="formula-eq">Financial results reported over standard periods — monthly, quarterly, or annually</div>
+      <div class="formula-meaning">A business runs continuously, but users need regular reports. The time period principle chops ongoing operations into comparable, consistent reporting chunks so that decision-makers receive timely information.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cash-flows">
+    <h2>07 · Statement of Cash Flows</h2>
+    <p class="section-sub">Every cash transaction falls into one of three buckets</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The three activity categories</div>
+      <div class="formula-eq">Operating &nbsp;|&nbsp; Investing &nbsp;|&nbsp; Financing</div>
+      <div class="formula-meaning">ALL of a company's cash transactions are categorized as one of these three. If it involves cash, it belongs in one of these buckets — no exceptions.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Activity</th><th>What it covers</th><th>Examples</th></tr>
+      <tr>
+        <td><strong>Operating</strong></td>
+        <td>Day-to-day activities related to delivering or producing goods and providing services — the core business</td>
+        <td>Cash received from customers, cash paid to suppliers, wages paid, utilities paid</td>
+      </tr>
+      <tr>
+        <td><strong>Investing</strong></td>
+        <td>Acquiring and selling long-term productive assets; acquiring and selling investment securities; lending money and collecting on loans</td>
+        <td>Buying equipment, selling a building, purchasing stock in another company, collecting on a loan made to a customer</td>
+      </tr>
+      <tr>
+        <td><strong>Financing</strong></td>
+        <td>Obtaining resources from owners and creditors; providing returns to owners; repaying borrowings</td>
+        <td>Issuing stock, borrowing from a bank, paying dividends, repaying a loan, buying back treasury stock</td>
+      </tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>OIF memory test:</strong> "Is it what the company does every day?" → Operating. "Is it buying or selling long-term assets or investments?" → Investing. "Is it raising or repaying capital from owners or lenders?" → Financing. If you're unsure, ask those three questions in order.
+    </div>
+
+    <div class="callout warn">
+      <strong>Cash flows vs. net income:</strong> Cash from operations on the statement of cash flows and net income on the income statement are NOT the same number. Net income uses accrual adjustments (revenue recognized when earned, expenses when incurred). The cash flow statement undoes those adjustments to show the raw cash reality. The two statements tell complementary, not identical, stories.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="notes">
+    <h2>08 · Notes to Financial Statements</h2>
+    <p class="section-sub">An integral — not optional — part of the financial statements</p>
+
+    <div class="callout">
+      <strong>Key point:</strong> Notes are not optional fine print. They are considered an <em>integral part</em> of the financial statements. Ignoring the notes is like reading only the chapter summaries of a textbook — you're missing essential context.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The four types of notes:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Accounting Policy Summary</h3>
+        <p>Explains the significant accounting methods and assumptions used to prepare the statements — e.g., which depreciation method the company uses.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Additional Detail on Totals</h3>
+        <p>Provides supplementary breakdown of summary line items in the statements — e.g., a breakdown of what's inside "other assets."</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Off-Statement Disclosures</h3>
+        <p>Discloses important information that isn't formally recognized in the statements themselves — e.g., pending lawsuits or contingent liabilities.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">4</span>
+        <h3>Required Supplemental Disclosures</h3>
+        <p>Supplementary information specifically required by the <strong>FASB</strong> (which sets GAAP) or the <strong>SEC</strong> (which regulates public companies).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="audit">
+    <h2>09 · The External Audit</h2>
+    <p class="section-sub">An independent check on the financial statements</p>
+
+    <div class="callout warn">
+      <strong>Why audits exist:</strong> The owners and managers who prepare financial statements have a built-in incentive to make the numbers look as favorable as possible — better numbers mean easier loans, higher stock prices, and larger bonuses. Financial statements can't be fully trusted without an independent outside check.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">What an audit report certifies — and what it does NOT</div>
+      <div class="formula-eq">GAAP was used &nbsp;|&nbsp; Accepted auditing standards were followed</div>
+      <div class="formula-meaning">That's it. The audit report does <strong>NOT</strong> guarantee every number is penny-perfect, does NOT certify the company is well-run or fraud-free, and does NOT predict future performance. It simply says "the rules were followed."</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">What auditors actually do:</p>
+    <ul class="quicklist">
+      <li>Examine original documents underlying key transactions</li>
+      <li>Spot-check that reported inventory physically exists</li>
+      <li>Contact a sample of customers and suppliers to confirm reported transactions</li>
+      <li>Review the company's internal accounting procedures and controls</li>
+    </ul>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Who is required to have an audit:</p>
+    <table class="compare-table">
+      <tr><th>Entity</th><th>Requirement</th></tr>
+      <tr><td>All publicly traded companies</td><td>Required by the SEC</td></tr>
+      <tr><td>Private companies seeking bank loans</td><td>Often required by the bank as a condition of lending</td></tr>
+      <tr><td>New companies wanting investor credibility</td><td>May voluntarily get audited to establish trust</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>The hiring paradox — and why it doesn't break the system:</strong> The company being audited hires and pays its own auditor (like students grading their own exams). Two forces keep auditors honest anyway: (1) <strong>Reputation</strong> — Big 4 firms won't risk their standing by signing off on bad statements; (2) <strong>Legal liability</strong> — auditors get sued by investors who lose money relying on false statements. Both forces push hard toward honest work.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="conventions">
+    <h2>10 · Accounting Concepts &amp; Conventions</h2>
+    <p class="section-sub">The principles underlying how accounting information is prepared and evaluated</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Relevance vs. Reliability — the primary trade-off</div>
+      <div class="formula-eq">Relevance = impacts a decision &nbsp;|&nbsp; Reliability = can be depended on to represent reality</div>
+      <div class="formula-meaning">These two qualities often pull in opposite directions. More reliable information takes longer to verify and avoids estimates. More relevant information is timely but uncertain. <strong>Accounting standards have gradually shifted toward more relevance and less reliability</strong> as the world demands faster information.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Quality</th><th>Definition</th><th>Key characteristic</th></tr>
+      <tr>
+        <td><strong>Relevance</strong></td>
+        <td>Information capable of impacting a decision</td>
+        <td>Must be timely, useful for evaluating past decisions, and provide a basis for forecasting the future</td>
+      </tr>
+      <tr>
+        <td><strong>Reliability</strong></td>
+        <td>Information users can depend on to represent economic reality accurately</td>
+        <td><strong>Verifiability</strong> — multiple independent parties examining the same data would reach similar conclusions</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <strong>Environmental cleanup example:</strong> A forecast of toxic waste cleanup costs is highly <em>uncertain</em> (low reliability) but extremely <em>important</em> for decisions (high relevance). This is the classic illustration of the relevance-reliability trade-off — and it's why accounting has moved toward relevance, not away from it.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem">The other four conventions:</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">C</span>
+        <h3>Comparability</h3>
+        <p>Information is more useful when benchmarked — either against other companies or against the same company across different time periods.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">C</span>
+        <h3>Consistency</h3>
+        <p>A specific form of comparability — the same company uses the same accounting practices, formats, and terminology period after period. No random changes without a clear reason.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">C</span>
+        <h3>Conservatism</h3>
+        <p>When in doubt, recognize all losses immediately but don't recognize gains until they're assured. Historically served lenders who preferred undervalued collateral. FASB has moved away from it formally, but most accountants still apply it informally as a counterbalance to management optimism.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">M</span>
+        <h3>Materiality</h3>
+        <p>Whether an item is large enough to make any difference to a financial statement user. If accounting for it incorrectly wouldn't change any decision, it's immaterial. Rules of thumb: 2% of sales, 5% of equity, or 10% of net income — but judgment always wins over the formula.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Materiality is relative:</strong> What's material to Smith's Shoe Store is noise to General Motors. The same $50,000 error that would shock a small business is literally a rounding difference for a multinational. Always ask "big relative to whom?"
+    </div>
+
+    <div class="callout">
+      <strong>Safeway's $9.50 trash can:</strong> Technically classifiable as PP&amp;E — but Safeway rounds its statements to the nearest $100,000. Recording a $9.50 trash can as a general expense instead of a capital asset is textbook immateriality. No user's decision would change.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="articulation">
+    <h2>11 · Articulation — How the Statements Connect</h2>
+    <p class="section-sub">The three financial statements are one integrated story, not three separate reports</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Income Statement<br><span style="font-size:.72rem;color:var(--muted)">Net income flows into...</span></div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">Retained Earnings<br><span style="font-size:.72rem;color:var(--muted)">...on the Balance Sheet</span></div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">Cash Balance<br><span style="font-size:.72rem;color:var(--muted)">explained by...</span></div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">Statement of Cash Flows</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The three specific links between statements:</p>
+    <ul class="quicklist">
+      <li>The <strong>statement of cash flows</strong> explains exactly why the <strong>cash balance on the balance sheet</strong> changed from the beginning to the end of the year</li>
+      <li>The <strong>income statement</strong> (net income) combined with <strong>dividends declared</strong> during the year explains the change in <strong>retained earnings</strong> on the balance sheet</li>
+      <li><strong>Cash from operations</strong> on the cash flow statement is transformed into <strong>net income</strong> through the accrual accounting adjustments applied to raw cash flow data</li>
+    </ul>
+
+    <div class="callout tip">
+      <strong>The key takeaway:</strong> a change in one financial statement always ripples through and affects the others. They don't tell three separate stories — they tell one connected story from three different angles.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>12 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Balance sheet = snapshot; income statement &amp; cash flows = period.</strong> The balance sheet reports at a point in time. The other two cover a span of time. Don't mix these up on a question about "when" something is reported.</li>
+      <li><strong>Assets don't require legal ownership — they require economic control.</strong> Substance over form means a financed car still in the bank's name is YOUR asset. A freely cancelable truck rental is NOT your asset, even after 8 months of renewals.</li>
+      <li><strong>Expense ≠ money spent.</strong> Expense = resources consumed. A truck bought in January creates depreciation expense across 3 years — not a one-time January expense. If a question says "money spent," it's testing whether you know the accrual distinction.</li>
+      <li><strong>Revenue ≠ cash received.</strong> Revenue is recognized when value is delivered, not when the invoice is paid. Cash timing and revenue timing are separate concepts measured by separate financial statements.</li>
+      <li><strong>Gains and losses are NOT the same as revenue and expenses.</strong> Revenue/expense = normal operations. Gains/losses = outside normal operations. Both hit the income statement but in separate line items.</li>
+      <li><strong>The audit report certifies GAAP + auditing standards — nothing more.</strong> It does NOT certify fraud-free, penny-accurate, or future-profitable. If a question says "the audit guarantees…" it's almost certainly wrong.</li>
+      <li><strong>Notes are integral, not optional.</strong> Notes to financial statements are a required, essential part of the complete financial picture — not fine print to be skipped.</li>
+      <li><strong>Verifiability supports reliability, not relevance.</strong> A common trap: verifiability sounds like it could be a relevance characteristic. It's not — it's what makes information reliable (others can confirm it independently).</li>
+      <li><strong>Conservatism = recognize losses early, delay gains.</strong> Not "be pessimistic about everything." And the FASB has formally stepped back from it — though accountants still use it in practice as a check on management optimism.</li>
+      <li><strong>Materiality is relative to firm size.</strong> There is no universal dollar threshold. The 2%/5%/10% rules of thumb are guidelines, not GAAP rules — professional judgment always applies.</li>
+      <li><strong>Consistency ≠ comparability.</strong> Consistency is comparability applied to the same company over time. Comparability is the broader concept — same company over time OR across different companies.</li>
+      <li><strong>Historical cost ≠ market value.</strong> The balance sheet shows what you paid, minus depreciation. That number usually differs significantly from what the asset would sell for today — especially for land and buildings.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 2 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 2</p>
+  <h1>The Nature &amp; Purpose<br>of <span>Accounting</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#what-is-accounting">What Is Accounting?</a></li>
+      <li><span class="n">02</span><a href="#statements">The Three Financial Statements</a></li>
+      <li><span class="n">03</span><a href="#users">Users of Financial Statements</a></li>
+      <li><span class="n">04</span><a href="#gaap">GAAP &amp; Accounting Rules</a></li>
+      <li><span class="n">05</span><a href="#orgs">Accounting Organizations</a></li>
+      <li><span class="n">06</span><a href="#change">Change Factors &amp; Sarbanes-Oxley</a></li>
+      <li><span class="n">07</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="what-is-accounting">
+    <h2>01 · What Is Accounting?</h2>
+    <p class="section-sub">Core definitions</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Accounting — the two-part definition</div>
+      <div class="formula-eq">Record daily activity &nbsp;+&nbsp; Report it in summary form</div>
+      <div class="formula-meaning">Accounting is <strong>recording</strong> the day-to-day financial activities of a company AND <strong>organizing</strong> that information into summary reports used to evaluate the company's financial status. Both halves are required — recording without reporting is just bookkeeping; reporting without recording is impossible.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td><strong>Bookkeeping</strong></td><td>The preservation of a systematic, quantitative record of an activity. Without it, good business is impossible.</td></tr>
+      <tr><td><strong>Accounting System</strong></td><td>Handles routine bookkeeping tasks AND structures the information so it can be used to evaluate performance and financial status.</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Forward-looking purpose:</strong> accounting information is intended to be useful in making decisions about the <em>future</em> — even though it records the past, the whole point is to inform what happens next.
+    </div>
+
+    <div class="callout tip">
+      <strong>Rules + judgment:</strong> the practice of accounting involves adherence to established rules as well as the use of judgment. It is not purely mechanical — many situations require professional interpretation.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="statements">
+    <h2>02 · The Three Financial Statements</h2>
+    <p class="section-sub">Financial accounting's three primary outputs</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Balance Sheet <span style="font-size:.72rem;color:var(--muted);font-weight:400">Snapshot at a point in time</span></div>
+      <div class="formula-eq">Assets = Liabilities + Owners' Equity</div>
+      <div class="formula-meaning">Reports what a company <strong>owns</strong> (assets), what it <strong>owes</strong> (liabilities), and what belongs to the <strong>owners</strong>. The two sides must always balance.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Income Statement <span style="font-size:.72rem;color:var(--muted);font-weight:400">Over a period of time</span></div>
+      <div class="formula-eq">Net Income = Revenues − Expenses</div>
+      <div class="formula-meaning">Reports the amount of <strong>net income</strong> earned during a period. If revenues exceed expenses, the company has a profit; if expenses exceed revenues, it has a loss.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Statement of Cash Flows <span style="font-size:.72rem;color:var(--muted);font-weight:400">Over a period of time</span></div>
+      <div class="chain-flow" style="margin-top:.5rem">
+        <div class="chain-node">Operating</div><span class="chain-sep">→</span>
+        <div class="chain-node">Investing</div><span class="chain-sep">→</span>
+        <div class="chain-node">Financing</div>
+      </div>
+      <div class="formula-meaning">Reports cash collected and paid out across these three activity types. Together, all three cover where a company's cash came from and where it went.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Snapshot vs. period:</strong> the Balance Sheet is a single point-in-time snapshot. The Income Statement and Statement of Cash Flows both cover a <em>period</em>. Don't mix these up when a question asks which statement to use.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="users">
+    <h2>03 · Users of Financial Statements</h2>
+    <p class="section-sub">Seven groups, seven different reasons for reading the same numbers</p>
+
+    <table class="compare-table">
+      <tr><th>User</th><th>Why They Use It</th></tr>
+      <tr><td><strong>Lenders</strong></td><td>Evaluate future cash flows to assess the ability to repay loans</td></tr>
+      <tr><td><strong>Investors</strong></td><td>Assess the attractiveness of companies as investments</td></tr>
+      <tr><td><strong>Managers</strong></td><td>Formulate company goals, compute employee bonuses, illuminate company weaknesses</td></tr>
+      <tr><td><strong>Suppliers, Customers &amp; Employees</strong></td><td>Learn about the long-run prospects of the company</td></tr>
+      <tr><td><strong>Competitors</strong></td><td>Reveal strategic opportunities within their industry</td></tr>
+      <tr><td><strong>Government &amp; Politicians</strong></td><td>Bolster political and regulatory positions for and against companies</td></tr>
+      <tr><td><strong>Reporters</strong></td><td>Use as background info; flag companies undergoing significant financial changes</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="gaap">
+    <h2>04 · GAAP &amp; Accounting Rules</h2>
+    <p class="section-sub">The rulebook behind consistent reporting</p>
+
+    <div class="formula-card">
+      <div class="formula-name">GAAP <span style="font-size:.72rem;color:var(--muted);font-weight:400">Generally Accepted Accounting Principles</span></div>
+      <div class="formula-eq">Origins: early 1900s &nbsp;|&nbsp; Set by: FASB</div>
+      <div class="formula-meaning">Ensures <strong>consistency and transparency</strong> in financial reporting, so companies can be fairly compared against one another.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory tip:</strong> think of a <em>gap</em> between two companies' data — GAAP fills that gap by making every company report the same way, so comparisons are fair.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="orgs">
+    <h2>05 · Accounting Organizations</h2>
+    <p class="section-sub">Who writes the rules, who enforces them, and who's separate entirely</p>
+
+    <table class="compare-table">
+      <tr><th>Org</th><th>Role</th></tr>
+      <tr><td><strong>FASB</strong> (Financial Accounting Standards Board)</td><td>Private body (NOT government) — supported by the U.S. business community, financial analysts, and practicing accountants. Sets U.S. accounting standards (GAAP).</td></tr>
+      <tr><td><strong>SEC</strong> (Securities and Exchange Commission)</td><td>Regulates U.S. stock exchanges. Ensures a fair information environment so investors aren't misled by hidden or manipulated data.</td></tr>
+      <tr><td><strong>AICPA</strong> (American Institute of CPAs)</td><td>Professional organization of CPAs. A CPA = college accounting classes + passing the CPA exam + state requirements. A CPA firm gives freelance accounting advice.</td></tr>
+      <tr><td><strong>PCAOB</strong> (Public Company Accounting Oversight Board)</td><td>Inspects audit practices of registered firms. Can bar a firm from auditing SEC-registered (public) companies.</td></tr>
+      <tr><td><strong>IRS</strong> (Internal Revenue Service)</td><td>Establishes when income is taxed. NO role in GAAP. Financial statements are NOT used to calculate tax owed.</td></tr>
+      <tr><td><strong>IASB</strong> (International Accounting Standards Board)</td><td>Formed to develop worldwide accounting standards. Increasingly accepted globally, but FASB still governs the U.S.</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Quick reference:</strong> FASB = writes U.S. rules &nbsp;|&nbsp; SEC = stock market cop &nbsp;|&nbsp; AICPA = accountants' club &nbsp;|&nbsp; PCAOB = audit police &nbsp;|&nbsp; IRS = tax only (separate) &nbsp;|&nbsp; IASB = international
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="change">
+    <h2>06 · Change Factors &amp; Sarbanes-Oxley</h2>
+    <p class="section-sub">Why accounting is evolving right now</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Technology</h3>
+        <p>Rapid advance in information technology</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Global Business</h3>
+        <p>International integration of worldwide business</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Scandals</h3>
+        <p>Increased scrutiny associated with large corporate accounting scandals</p>
+      </div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem">A wave of accounting scandals starting in 2001 resulted in the Sarbanes-Oxley Act:</p>
+
+    <div class="chain-flow">
+      <div class="chain-node warn">2001 Scandals</div><span class="chain-sep">→</span>
+      <div class="chain-node">Sarbanes-Oxley Act</div><span class="chain-sep">→</span>
+      <div class="chain-node">↑ Federal Scrutiny of Statement Production</div>
+    </div>
+
+    <div class="formula-meaning" style="margin-top:.5rem">SOX increases U.S. federal government scrutiny of the <strong>production</strong> of financial statements — not just their content.</div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>07 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>FASB is private, not government.</strong> It's supported by the business community, financial analysts, and practicing accountants — not a government agency.</li>
+      <li><strong>Financial statements ≠ tax returns.</strong> The IRS does NOT use a company's financial statements to determine how much tax it owes — these are two separate systems.</li>
+      <li><strong>IASB ≠ the U.S. standard.</strong> IASB standards are increasingly accepted worldwide, but FASB/GAAP still governs the United States.</li>
+      <li><strong>PCAOB inspects auditors, not companies directly.</strong> It has the power to bar an audit FIRM from auditing SEC-registered companies.</li>
+      <li><strong>Balance Sheet = snapshot.</strong> Income Statement and Statement of Cash Flows = over a period of time. Don't mix up "point in time" vs. "period."</li>
+      <li><strong>SOX increases scrutiny of production</strong> of financial statements — not just their content. It targets how statements are made, not only what they say.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
