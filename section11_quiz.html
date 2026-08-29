@@ -10,6 +10,7 @@
 
 <div class="top-nav">
   <a class="back-link" href="index.html">← All Sections</a>
+  <a class="back-link notes" href="section11_notes.html" target="_blank" rel="noopener">📄 Section 11 Notes</a>
 </div>
 
 <header>
@@ -107,18 +108,6 @@ const questions = [
  correct:0,
  explanation:"Vanilla barely creates any overhead — huge batches, no flavor chemist involvement, minimal cleanup. But the flat rate charged it the same overhead as flavors like Gingerbread Cheesecake Supreme, which actually caused far more overhead activity.",
  mnemonic:'💡 Memory tip: Simple products get overcharged, complex products get undercharged, when you spread overhead with your eyes closed.'},
-
-{type:'ms',
- q:"Which of the following new overhead costs did Lily incur specifically because she started making five additional gourmet flavors instead of only Vanilla? Select all that apply.",
- opts:['A flavor chemist added to staff',
-       'More quality control inspectors',
-       'More frequent machine setups and cleanings',
-       'Increased accounting costs and staff',
-       "A lower selling price for Vanilla ice cream",
-       'Lower total direct materials cost company-wide'],
- correctSet:[0,1,2,3],
- explanation:"Adding new flavors meant Lily needed a flavor chemist, more inspectors (every flavor switch needs a check), more frequent machine setup/cleaning (switching flavors), and more accounting staff (tracking different ingredients and suppliers). Vanilla's price and total materials cost aren't overhead-driven consequences of adding flavors.",
- mnemonic:'💡 Memory tip: More flavors = more people needed to manage the complexity: a chemist, inspectors, cleaners, and accountants.'},
 
 {type:'tf',
  q:'Per the textbook review, companies that better understand their costs have an advantage over their competitors.',
@@ -290,53 +279,6 @@ const questions = [
  explanation:"Lily's four specific activities map one-to-one onto the four generic categories: routine production is unit-level, batch changeovers are batch-level, flavor complexity is product-line, and having the factory is facility support.",
  mnemonic:'💡 Memory tip: Lily\'s story is just the four generic categories wearing ice cream costumes.'},
 
-{type:'mc',
- q:'How much overhead did Lily\'s ABC analysis assign to the batch-level cost pool (stopping one batch, starting another)?',
- opts:['$440,000','$750,000','$270,000','$280,000'],
- correct:0,
- explanation:'The batch-level pool totals $440,000 — this includes most of the factory cleaners\' and repair technicians\' time, plus half the production supervisor\'s time and 30% of accounting\'s time.',
- mnemonic:'💡 Memory tip: $440K = the price of constantly stopping and starting the machines.'},
-
-{type:'mc',
- q:"How much overhead did Lily's ABC analysis assign to the product line cost pool (servicing the special needs of each flavor)?",
- opts:['$270,000','$750,000','$440,000','$280,000'],
- correct:0,
- explanation:"The product-line pool totals $270,000 — this is where the flavor chemist's entire salary lands (100%), plus 35% of the supervisor's time and 20% of accounting's time.",
- mnemonic:'💡 Memory tip: $270K is the flavor chemist\'s domain — complexity costs money.'},
-
-{type:'mc',
- q:"How much overhead did Lily's ABC analysis assign to the facility support cost pool (keeping the factory open)?",
- opts:['$280,000','$750,000','$440,000','$270,000'],
- correct:0,
- explanation:"The facility support pool totals $280,000 — building depreciation, security guards, and building insurance in full, plus 40% of the accounting department's time (general company accounting, not flavor-specific).",
- mnemonic:'💡 Memory tip: $280K is Lily\'s "cost of existing as a company" — it doesn\'t care what flavor she makes.'},
-
-{type:'mc',
- q:"What is Lily's total overhead cost across all four cost pools combined?",
- opts:['$1,740,000','$1,460,000','$1,500,000','$1,690,000'],
- correct:0,
- explanation:'$750,000 + $440,000 + $270,000 + $280,000 = $1,740,000 — the same total overhead figure Lily started with under the traditional method. ABC doesn\'t change the total, only how it\'s sliced up. ($1,460,000 is the total assigned to flavors only, without facility support; $1,500,000 is the total gallons produced, a different unit entirely.)',
- mnemonic:'💡 Memory tip: Total overhead never changes with ABC — only its address does.'},
-
-{type:'dd',
- q:'Match each description of how an overhead line item was analyzed in Step 2 to the correct outcome.',
- cols:['100% Unit-level (routine)','100% Facility support','100% Product line','Split across multiple categories'],
- items:[
-   {text:'Electricity and machine depreciation', answer:'100% Unit-level (routine)'},
-   {text:'Building depreciation, security guards, and building insurance', answer:'100% Facility support'},
-   {text:"The flavor chemist's entire salary", answer:'100% Product line'},
-   {text:'The accounting department (10% production / 30% batch / 20% product line / 40% facility support)', answer:'Split across multiple categories'}
- ],
- explanation:"Some line items are easy — electricity and machine depreciation are purely routine, building costs are purely facility-related, and the flavor chemist works entirely on flavor complexity. Accounting, though, touches all four categories, since accountants handle routine bookkeeping, batch-tracking, flavor-specific ordering, AND general company reports.",
- mnemonic:"💡 Memory tip: Accounting is everywhere — the only department that shows up in all four buckets."},
-
-{type:'mc',
- q:"Based on time logs, what percentage of Lily's factory cleaners' time was linked to batch-level activity (stopping one batch and starting another)?",
- opts:['70%','30%','85%','15%'],
- correct:0,
- explanation:"Time logs showed factory cleaners spend 30% of their time on routine (unit-level) cleanup and 70% on cleaning associated with batch changeovers — the bulk of their work is triggered by switching flavors, not by volume.",
- mnemonic:'💡 Memory tip: Cleaners spend most of their time cleaning up AFTER a switch, not during routine runs — 70% batch.'},
-
 {type:'tf',
  q:'Gathering the detailed line-item data needed for Step 2 of an ABC analysis (figuring out what percentage of each cost is caused by each activity) is generally quick and inexpensive to do.',
  opts:['True','False'],
@@ -463,21 +405,21 @@ const questions = [
  mnemonic:'💡 Memory tip: $285,500 — Vanilla is cheap to make in every ABC category: huge batches, tiny recipe.'},
 
 {type:'mc',
- q:'Gingerbread Cheesecake Supreme was produced using 200,000 gallons, 235 batches, and 25 ingredients. Using the ABC rates, what is its total ABC overhead?',
+ q:'Gingerbread Cheesecake Supreme was produced using 200,000 gallons, 235 batches, and 25 ingredients. Using the ABC rates ($0.50/gallon, $880/batch, $2,700/ingredient), what is its total ABC overhead?',
  opts:['$374,300','$232,000','$306,800','$400,000'],
  correct:0,
  explanation:'(200,000 × $0.50) + (235 × $880) + (25 × $2,700) = $100,000 + $206,800 + $67,500 = $374,300. ($232,000 was roughly what its overhead looked like under the traditional method — a good trap.)',
  mnemonic:'💡 Memory tip: $374,300 — small batches (235 of them!) and a 25-ingredient recipe make this the most overhead-expensive flavor.'},
 
 {type:'mc',
- q:'Marshmallow Caramel Delight was produced using 250,000 gallons, 50 batches, and 20 ingredients. Using the ABC rates, what is its total ABC overhead?',
+ q:'Marshmallow Caramel Delight was produced using 250,000 gallons, 50 batches, and 20 ingredients. Using the ABC rates ($0.50/gallon, $880/batch, $2,700/ingredient), what is its total ABC overhead?',
  opts:['$223,000','$169,000','$200,000','$250,000'],
  correct:0,
  explanation:'(250,000 × $0.50) + (50 × $880) + (20 × $2,700) = $125,000 + $44,000 + $54,000 = $223,000.',
  mnemonic:'💡 Memory tip: $223,000 — moderate gallons, moderate batches, moderate ingredients: a "middle of the pack" flavor.'},
 
 {type:'mc',
- q:'Peanut Butter Swirl was produced using 100,000 gallons, 100 batches, and 30 ingredients. Using the ABC rates, what is its total ABC overhead?',
+ q:'Peanut Butter Swirl was produced using 100,000 gallons, 100 batches, and 30 ingredients. Using the ABC rates ($0.50/gallon, $880/batch, $2,700/ingredient), what is its total ABC overhead?',
  opts:['$219,000','$200,000','$169,000','$238,000'],
  correct:0,
  explanation:'(100,000 × $0.50) + (100 × $880) + (30 × $2,700) = $50,000 + $88,000 + $81,000 = $219,000.',
@@ -499,66 +441,6 @@ const questions = [
  correct:0,
  explanation:"True. Not assigning facility support to specific flavors doesn't make it disappear — Lily's business overall still needs to generate enough profit across all flavors to cover that $280,000.",
  mnemonic:'💡 Memory tip: Not assigned ≠ not owed. The $280,000 bill still needs to get paid somehow.'},
-
-{type:'ms',
- q:"Which of the following are the total cost driver event counts Lily used across all six flavors combined? Select all that apply.",
- opts:['1,500,000 gallons','500 batches','100 ingredients','1,740,000 total dollars of overhead','6 ice cream flavors'],
- correctSet:[0,1,2],
- explanation:'The three cost driver totals are 1,500,000 gallons, 500 batches, and 100 ingredients — these are the denominators used to compute the $0.50/$880/$2,700 rates. $1,740,000 is a dollar total (the numerator, not a driver count), and "6 flavors" is a product count, not a cost driver.',
- mnemonic:'💡 Memory tip: Gallons, batches, ingredients — the three real driver counts. Dollars and flavor counts are not drivers.'},
-
-/* ========== TOPIC 10.5 — USING ABC DATA TO MAKE DECISIONS ========== */
-
-{type:'mc',
- q:'Under the traditional profit report, which two flavors appeared to be losing money, prompting Lily to consider dropping them?',
- opts:['Vanilla and Double Dutch Chocolate Brownie',
-       'Gingerbread Cheesecake Supreme and Peanut Butter Swirl',
-       'Marshmallow Caramel Delight and Strawberry Banana Surprise',
-       'Vanilla and Gingerbread Cheesecake Supreme'],
- correct:0,
- explanation:"Vanilla (-$155,000) and Double Dutch Chocolate Brownie (-$164,000) looked like the money-losers under the traditional method — which is exactly backwards from reality, as ABC later revealed.",
- mnemonic:'💡 Memory tip: Vanilla and Chocolate — Lily\'s two best-loved, longest-running flavors — were the ones falsely accused.'},
-
-{type:'mc',
- q:'Under the traditional profit report, Vanilla appeared to be losing how much money per year?',
- opts:['$155,000','$164,000','$139,500','$230,000'],
- correct:0,
- explanation:'The traditional report showed Vanilla losing $155,000 (Sales $750,000 − Direct materials $200,000 − Direct labor $125,000 − Traditional overhead $580,000). ($164,000 was Chocolate\'s traditional loss; $139,500 is actually Vanilla\'s ABC PROFIT — a great trap if you mix up the two reports.)',
- mnemonic:'💡 Memory tip: -$155,000 traditional vs. +$139,500 ABC — same flavor, two wildly different stories.'},
-
-{type:'mc',
- q:"What flawed assumption was built into the traditional report's suggestion to stop making Vanilla?",
- opts:["That stopping Vanilla production would eliminate $580,000 of overhead, when in reality Vanilla's production only caused $285,500 of overhead",
-       "That Vanilla's direct materials cost would increase if production stopped",
-       "That stopping Vanilla would have no effect on the company's total overhead at all",
-       "That Vanilla's selling price would need to be raised to remain profitable"],
- correct:0,
- explanation:"The traditional report assumes if you stop making Vanilla, you get rid of $580,000 in overhead along with the sales and direct costs. But Vanilla's production process only actually causes $285,500 in overhead — the rest was overhead other flavors caused, wrongly loaded onto Vanilla.",
- mnemonic:'💡 Memory tip: $580,000 assumed vs. $285,500 actually caused — that ~$300,000 gap is the whole reason ABC exists.'},
-
-{type:'mc',
- q:'Under the more carefully calculated ABC profit report, how much profit did Vanilla actually generate?',
- opts:['$139,500','-$155,000','$285,500','$99,500'],
- correct:0,
- explanation:"Once overhead is assigned accurately ($285,500 instead of $580,000), Vanilla is revealed to contribute $139,500 to the bottom line — not a loss at all.",
- mnemonic:'💡 Memory tip: $139,500 — Vanilla goes from villain to hero once the real numbers come out.'},
-
-{type:'mc',
- q:'Under the ABC profit report, Gingerbread Cheesecake Supreme — which had looked roughly break-even or profitable under the traditional method — was revealed to actually be:',
- opts:['Losing $124,300',
-       'Earning a profit of $102,000',
-       'Losing $164,000',
-       'Breaking exactly even'],
- correct:0,
- explanation:'Under the traditional method, GCS looked like it was earning around $18,000. Once ABC carefully assigns its true overhead ($374,300, driven by 235 small batches and 25 ingredients), the real picture is a loss of $124,300.',
- mnemonic:'💡 Memory tip: Looked fine at +$18,000 traditional, actually -$124,300 real — GCS was the hidden problem all along.'},
-
-{type:'ms',
- q:"According to the more accurate ABC analysis, which flavors were Lily's true \"money losers\" — not Vanilla or Chocolate? Select all that apply.",
- opts:['Gingerbread Cheesecake Supreme','Strawberry Banana Surprise','Peanut Butter Swirl','Vanilla','Double Dutch Chocolate Brownie'],
- correctSet:[0,1,2],
- explanation:"Once overhead is assigned accurately, the real underperformers are Gingerbread Cheesecake Supreme, Strawberry Banana Surprise, and Peanut Butter Swirl — not Vanilla or Chocolate, which the traditional report had wrongly blamed.",
- mnemonic:'💡 Memory tip: The real culprits are the complex, small-batch flavors — not the simple, high-volume classics.'},
 
 {type:'tf',
  q:'Total company profit (a loss of $230,000) and total overhead ($1,740,000) were exactly the same under both the traditional report and the ABC report — only the allocation to individual flavors changed.',
@@ -611,16 +493,6 @@ const questions = [
  explanation:"High volume allows large batch sizes (batch-level overhead spread over many units), and a standard/simple recipe keeps product-line overhead low. This is exactly Vanilla's situation.",
  mnemonic:'💡 Memory tip: High volume + standard = the Vanilla combo. Both effects stack in the same cheap direction.'},
 
-{type:'mc',
- q:'Why was Gingerbread Cheesecake Supreme being produced in 235 small batches per year (almost daily)?',
- opts:['One customer wanted to advertise that the ice cream was made fresh daily',
-       'The recipe legally requires daily production for food safety reasons',
-       'Lily\'s factory can only physically produce small batches of any flavor',
-       'Small batches were cheaper to produce than large batches'],
- correct:0,
- explanation:'A retail customer wanted to market the product as "made fresh daily," which forced Lily into near-daily batch changeovers — an expensive way to produce, once you know it costs $880 in overhead every single time.',
- mnemonic:'💡 Memory tip: "Fresh daily" sounds great in an ad — but it\'s $880 x 235 in hidden overhead.'},
-
 {type:'ms',
  q:"What two options did Lily's ABC data give her for fixing Gingerbread Cheesecake Supreme's losses? Select all that apply.",
  opts:['Charge the customer a higher price to cover the extra batch-related overhead their demand creates',
@@ -632,7 +504,7 @@ const questions = [
  mnemonic:'💡 Memory tip: Charge for it, or stop causing it — those are the only two real fixes once you know the number.'},
 
 {type:'mc',
- q:'If Lily switched Gingerbread Cheesecake Supreme from 235 batches/year to 50 batches/year (same 200,000 gallons, same 25-ingredient recipe), what would happen to its batch-level overhead?',
+ q:'If Lily switched Gingerbread Cheesecake Supreme from 235 batches/year to 50 batches/year (same 200,000 gallons, same 25-ingredient recipe, batch-level rate $880/batch), what would happen to its batch-level overhead?',
  opts:['It would drop from $206,800 to $44,000',
        'It would drop from $374,300 to $100,000',
        'It would stay exactly the same, since total gallons didn\'t change',
@@ -642,7 +514,7 @@ const questions = [
  mnemonic:'💡 Memory tip: Same gallons, same recipe, fewer switches — only the batch-level line item moves.'},
 
 {type:'mc',
- q:"After switching to weekly production, Gingerbread Cheesecake Supreme's profit picture would change from a loss of $124,300 to:",
+ q:"A flavor is currently losing $124,300 per year. Switching its production schedule reduces batch-level overhead by $162,800 (with no change to sales, materials, labor, or any other cost). What would the flavor's new profit be?",
  opts:['A profit of $38,500','A profit of $124,300','A profit of $18,000','A remaining loss of $46,600'],
  correct:0,
  explanation:'Cutting batch-level overhead from $206,800 to $44,000 (a $162,800 savings) flips GCS from a $124,300 loss to a $38,500 profit — turning a money-loser into a money-maker without changing the recipe or the selling price at all.',
@@ -668,20 +540,6 @@ const questions = [
  correctSet:[0,1],
  explanation:'The textbook names exactly two characteristics: a good measure reflects economic reality (tells the truth about what\'s really happening) and motivates correct behavior (points people toward the right fix).',
  mnemonic:'💡 Memory tip: Tell the truth, and point toward the fix — that\'s all a good accounting measure has to do.'},
-
-{type:'dd',
- q:"Match each example from Lily's Ice Cream Company to the characteristic of good management accounting it illustrates.",
- cols:['Reflects economic reality','Motivates correct behavior'],
- items:[
-   {text:'The ABC report correctly shows that Vanilla is actually profitable, not a money-loser', answer:'Reflects economic reality'},
-   {text:'The ABC report correctly shows that Gingerbread Cheesecake Supreme is actually losing money', answer:'Reflects economic reality'},
-   {text:"The $880-per-batch number shows Lily exactly how to fix Gingerbread Cheesecake Supreme's losses (switch to weekly batches)", answer:'Motivates correct behavior'},
-   {text:'The $2,700-per-ingredient number discourages Lily from needlessly adding ingredients to a recipe', answer:'Motivates correct behavior'}
- ],
- explanation:"Reflecting economic reality means the numbers are TRUE (Vanilla really is profitable; GCS really is losing money). Motivating correct behavior means the numbers point toward ACTION (the batch and ingredient rates tell Lily exactly what to change).",
- mnemonic:'💡 Memory tip: Reality = is it TRUE? Behavior = does it tell you what to DO?'},
-
-/* ========== APPLIED PRACTICE — DAKOTA COMPANY ========== */
 
 {type:'mc',
  q:"Dakota Company is allocating $600,000 of batch-level overhead using number of batches: Product 1 (20 batches) and Product 2 (60 batches). What is the overhead rate per batch?",
