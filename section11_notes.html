@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 11 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-profit{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-eff{background:rgba(79,142,247,.15);color:var(--accent)}
+  .cat-lev{background:rgba(234,88,12,.13);color:#C2410C}
+  .cat-liq{background:rgba(202,138,4,.14);color:#B45309}
+  .cat-mkt{background:rgba(167,139,250,.15);color:var(--accent2)}
+  .cat-cash{background:rgba(5,150,105,.13);color:#065F46}
+  .cat-err{background:rgba(107,114,128,.15);color:#374151}
+  .cat-fraud{background:rgba(248,113,113,.15);color:#B91C1C}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 11</p>
+  <h1>Activity-Based<br><span>Costing (ABC)</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#why-abc">Why ABC Exists</a></li>
+      <li><span class="n">02</span><a href="#five-steps">The Five ABC Steps</a></li>
+      <li><span class="n">03</span><a href="#categories">The Four ABC Cost Categories</a></li>
+      <li><span class="n">04</span><a href="#drivers">Cost Drivers</a></li>
+      <li><span class="n">05</span><a href="#assigning">Assigning Overhead to Production</a></li>
+      <li><span class="n">06</span><a href="#decisions">Using ABC Data to Make Decisions</a></li>
+      <li><span class="n">07</span><a href="#dakota">Worked Example — Dakota Company</a></li>
+      <li><span class="n">08</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="why-abc">
+    <h2>01 · Why ABC Exists</h2>
+    <p class="section-sub">Topic 10.1</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Activity-Based Costing (ABC)</div>
+      <div class="formula-eq">Assign overhead based on the ACTIVITIES that actually create it</div>
+      <div class="formula-meaning">ABC is <strong>a method of attributing overhead costs to products based on measurable factors that relate to the activities that create those overhead costs</strong> — a deliberate alternative to spreading one flat rate over everything.</div>
+    </div>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Direct materials and direct labor are easy to trace to a specific product. <strong>Manufacturing overhead is the hard one</strong> — electricity, supervisor salaries, machine depreciation don't obviously belong to any one product. The traditional fix is to divide total overhead by total units produced and apply that single rate to everything.
+    </p>
+
+    <div class="callout">
+      <strong>Lily's Ice Cream Company:</strong> for years Lily made only Vanilla, so total overhead ÷ total gallons worked fine — every gallon really was roughly identical. Once she added five gourmet flavors (each needing a flavor chemist, more inspectors, more setups, more accounting), the flat rate broke down: Vanilla suddenly looked unprofitable, even though it's the simplest, cheapest-to-make flavor she has.
+    </div>
+
+    <div class="callout warn">
+      <strong>The hidden assumption in a flat overhead rate:</strong> a single traditional rate assumes every product's production process creates the <em>same</em> amount of overhead. That's fine with one product — false the moment products start to differ in complexity, batch size, or number of ingredients.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="five-steps">
+    <h2>02 · The Five ABC Steps</h2>
+    <p class="section-sub">Topic 10.1 — exact textbook wording</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">1. Identify<br><span style="font-size:.72rem;color:var(--muted)">overhead cost activities</span></div><span class="chain-sep">→</span>
+      <div class="chain-node">2. Analyze<br><span style="font-size:.72rem;color:var(--muted)">costs vs. activities</span></div><span class="chain-sep">→</span>
+      <div class="chain-node">3. Identify<br><span style="font-size:.72rem;color:var(--muted)">measurable cost drivers</span></div><span class="chain-sep">→</span>
+      <div class="chain-node">4. Assign<br><span style="font-size:.72rem;color:var(--muted)">overhead</span></div><span class="chain-sep">→</span>
+      <div class="chain-node">5. Use<br><span style="font-size:.72rem;color:var(--muted)">the data to decide</span></div>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>Identify overhead cost activities</strong> — what does the business actually do that creates overhead? (e.g., running machines, switching batches, servicing a flavor's special needs, keeping the facility open)</li>
+      <li><strong>Analyze individual overhead costs</strong> in terms of those activities — go line item by line item and figure out which activity (or activities) is really causing each cost. Some are easy (electricity is 100% routine production); some require real investigation (time logs, surveys) since one department's cost can split across several activities.</li>
+      <li><strong>Identify measurable cost drivers</strong> — a numerical stand-in for each activity (gallons, batches, ingredients).</li>
+      <li><strong>Assign overhead</strong> — turn cost pools and drivers into a rate, then apply that rate to each product.</li>
+      <li><strong>Use the ABC data to make decisions</strong> — set prices, spot unprofitable products, fix expensive production processes.</li>
+    </ul>
+
+    <div class="callout tip">
+      <strong>REMEMBER THIS (verbatim):</strong>
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li>Companies that better understand their costs have an advantage over their competitors.</li>
+        <li>When using an ABC system, a company identifies specific business activities that create overhead costs and then assigns overhead to products or divisions based on the level of those activities.</li>
+        <li>The ultimate purpose of an ABC system is to help a company make better decisions.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="categories">
+    <h2>03 · The Four ABC Cost Categories</h2>
+    <p class="section-sub">Topic 10.2</p>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>Triggered by</th><th>Typical driver</th><th>Examples</th></tr>
+      <tr>
+        <td><strong>Unit-level</strong></td>
+        <td>Producing one more unit</td>
+        <td>Units / gallons produced</td>
+        <td>Machine maintenance, machine depreciation, electricity &amp; other energy costs</td>
+      </tr>
+      <tr>
+        <td><strong>Batch-level</strong></td>
+        <td>Starting/stopping a production run, regardless of its size</td>
+        <td>Number of batches</td>
+        <td>Inspections, machine setups, movement of &amp; accounting for materials</td>
+      </tr>
+      <tr>
+        <td><strong>Product line</strong></td>
+        <td>Supporting one specific product line, regardless of batches or units produced</td>
+        <td>Number of ingredients (or similar complexity measure)</td>
+        <td>Engineering product design, special warehouse storage, a dedicated product-line supervisor, ordering/purchasing unique materials</td>
+      </tr>
+      <tr>
+        <td><strong>Facility support</strong></td>
+        <td>Simply having a facility, unrelated to any specific product</td>
+        <td><em>No driver — not assigned</em></td>
+        <td>Property taxes, factory insurance, security, landscaping, general accounting, general factory administration</td>
+      </tr>
+    </table>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Unit-Level</h3>
+        <p>Scales directly with volume — one more unit means one more round of routine, traditional overhead.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Batch-Level</h3>
+        <p>Triggered by the changeover itself — a huge batch and a tiny batch each cost the same amount once.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Product Line</h3>
+        <p>Exists because a product/flavor exists at all — independent of how many units or batches get made.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">4</span>
+        <h3>Facility Support</h3>
+        <p>The cost of existing as a company. Doesn't care what — or whether anything — gets produced.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Cost pool:</strong> the total dollar amount of overhead grouped together because it's caused by the same activity. Step 2 (analyzing line items) is what produces these four pools — e.g., Lily's $1,740,000 in total overhead split into $750,000 (unit-level) + $440,000 (batch-level) + $270,000 (product line) + $280,000 (facility support).
+    </div>
+
+    <div class="callout warn">
+      <strong>REMEMBER THIS:</strong> in an ABC system, facility support overhead costs are treated as <strong>common costs that are not assigned to any specific product, division, or product line.</strong> Nothing about production activity moves this cost, so there's no valid basis to spread it — it's set aside, not eliminated. It still has to get paid for out of the profits the products actually generate.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="drivers">
+    <h2>04 · Cost Drivers</h2>
+    <p class="section-sub">Topic 10.3</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Cost Driver <span style="font-size:.72rem;color:var(--muted);font-weight:400">REMEMBER THIS — verbatim</span></div>
+      <div class="formula-eq">A NUMERICAL measure, not a description</div>
+      <div class="formula-meaning">A cost driver is <strong>a numerical measure used to reflect the amount of a specific overhead cost that is associated with a particular activity.</strong> "This flavor is messier" isn't a cost driver — "number of ingredients" is.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Worker turnover example:</strong> if Division A has 15 turnover events in a year and Division B has only 3, Division A should be assigned more of the overhead tied to turnover (interviewing, documentation, training) — because number of turnover events is a countable, measurable driver of that cost.
+    </div>
+
+    <div class="callout tip">
+      <strong>What makes a driver "good":</strong> it has to be quantifiable and have a real cause-and-effect relationship with the activity. If you can't count it, it can't drive the cost — that's why "number of ingredients" stands in for recipe complexity, and "number of batches" stands in for changeover activity.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="assigning">
+    <h2>05 · Assigning Overhead to Production</h2>
+    <p class="section-sub">Topic 10.4</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0">The textbook breaks Step 4 into three necessary sub-steps:</p>
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1st</span><div class="step-label">Gather the data</div><div class="step-desc">Overhead cost &amp; cost driver counts</div></div>
+      <div class="pie-step"><span class="step-num">2nd</span><div class="step-label">Compute the rate</div><div class="step-desc">Per cost driver event</div></div>
+      <div class="pie-step"><span class="step-num">3rd</span><div class="step-label">Apply the rate</div><div class="step-desc">To assign overhead to production</div></div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Overhead Rate per Cost Driver Event</div>
+      <div class="formula-eq">Cost Pool ÷ Total Cost Driver Events</div>
+      <div class="formula-meaning"><strong>Example (Lily's unit-level pool):</strong> $750,000 ÷ 1,500,000 gallons = <strong>$0.50/gallon</strong>. Same logic gives $440,000 ÷ 500 batches = <strong>$880/batch</strong>, and $270,000 ÷ 100 ingredients = <strong>$2,700/ingredient</strong>. Always divide by the <em>combined</em> total driver events across every product — not just one product's share.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Overhead Assigned to a Specific Product</div>
+      <div class="formula-eq">Rate × That Product's Driver Usage — summed across every applicable category</div>
+      <div class="formula-meaning"><strong>Example (Vanilla, 500,000 gallons / 25 batches / 5 ingredients):</strong> (500,000 × $0.50) + (25 × $880) + (5 × $2,700) = $250,000 + $22,000 + $13,500 = <strong>$285,500</strong> total ABC overhead.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Reconciliation check:</strong> whatever gets assigned to individual products, plus whatever's left unassigned in facility support, always has to add back up to total overhead. If the flavor-by-flavor totals don't match the grand total, the difference is facility support sitting off to the side — not a calculation error.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="decisions">
+    <h2>06 · Using ABC Data to Make Decisions</h2>
+    <p class="section-sub">Topic 10.5</p>
+
+    <table class="compare-table">
+      <tr><th></th><th>High-Volume, Standard Product</th><th>Low-Volume, Unique Product</th></tr>
+      <tr><td><strong>Batch size</strong></td><td>Large — few changeovers</td><td>Small — frequent changeovers</td></tr>
+      <tr><td><strong>Recipe/complexity</strong></td><td>Simple, few ingredients</td><td>Complex, many ingredients</td></tr>
+      <tr><td><strong>Overhead per unit</strong></td><td>Lowest</td><td>Highest</td></tr>
+      <tr><td><strong>Under a flat traditional rate...</strong></td><td>Looks <em>less</em> profitable than it really is</td><td>Looks <em>more</em> profitable than it really is</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>General principle:</strong> standard, high-volume products create less overhead than a flat rate assumes (large batches + simple recipes), so ABC usually reveals them to be <em>more</em> profitable than they first appeared. Complex, low-volume products create a disproportionate share of overhead (small batches + many ingredients), so ABC usually reveals them to be <em>less</em> profitable than they first appeared.
+    </div>
+
+    <div class="callout tip">
+      <strong>Two ways to fix an expensive activity, once you know its rate:</strong> either charge more (pass the cost of the activity on to whoever is driving it — e.g., a customer demanding small daily batches) or change the process (reduce how often the expensive activity happens — e.g., switch to weekly batches instead of daily). Both are only visible once the ABC rate makes the true cost of the activity obvious.
+    </div>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">A</span>
+        <h3>Reflects Economic Reality</h3>
+        <p>The numbers have to be <em>true</em> — accurately showing which products really are profitable and which aren't.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">B</span>
+        <h3>Motivates Correct Behavior</h3>
+        <p>The numbers have to point toward <em>action</em> — showing exactly what to change to fix a problem.</p>
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:.5rem">REMEMBER THIS (verbatim): these are the two characteristics of a good management accounting measure.</p>
+
+    <div class="callout warn">
+      <strong>REMEMBER THIS:</strong> designing and operating an ABC system usually costs <strong>more</strong> than a simple traditional system based on a single activity measure (like direct labor hours). That increased cost <strong>pays for itself</strong> when the improved data leads to significantly better decisions — ABC isn't automatically worth it, it has to earn its keep.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="dakota">
+    <h2>07 · Worked Example — Dakota Company</h2>
+    <p class="section-sub">Applied practice, outside the ice cream story</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 1 — Compute the rates</div>
+      <div class="formula-eq">Batch-level: $600,000 ÷ (20 + 60) = $7,500/batch &nbsp;|&nbsp; Product-line: $400,000 ÷ (10 + 40) = $8,000/line</div>
+      <div class="formula-meaning">Add <strong>both</strong> products' driver counts together before dividing (80 total batches, 50 total lines) — dividing by only one product's count is the most common mistake here.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 2 — Assign overhead to Product 1 (20 batches, 10 lines)</div>
+      <div class="formula-eq">(20 × $7,500) + (10 × $8,000) = $150,000 + $80,000 = $230,000</div>
+      <div class="formula-meaning">Same two-part-sum pattern as the ice cream flavors — just fewer categories (no unit-level or facility support pool in this problem).</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 3 — Compute the ABC gross margin</div>
+      <div class="formula-eq">Sales $1,400,000 − DM $200,000 − DL $600,000 − OH $230,000 = $370,000</div>
+      <div class="formula-meaning">Product 1's ABC overhead ($230,000) replaces whatever the old single-rate allocation had assigned — the same story as Vanilla, just with generic products instead of ice cream flavors.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>08 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Total profit and total overhead never change under ABC</strong> — only the allocation across products changes. If a problem's grand totals differ between "traditional" and "ABC," something's been miscalculated.</li>
+      <li><strong>Facility support gets NO cost driver</strong> — it's a common cost, set aside and not spread on any basis, arbitrary or otherwise. "Not assigned" does not mean "doesn't have to be paid for."</li>
+      <li><strong>Divide by the COMBINED total driver events</strong>, not one product's count, when computing a rate (Dakota: 80 total batches, not 20).</li>
+      <li><strong>A cost driver must be numerical</strong> — "messy," "complex," or "special" are not cost drivers on their own; they need a countable stand-in (ingredients, batches, setups).</li>
+      <li><strong>Low-volume + unique = highest overhead per unit.</strong> High-volume + standard = lowest. Both effects (batch size and complexity) stack in the same direction.</li>
+      <li><strong>Gathering Step 2 data is genuinely hard</strong> — time logs, surveys, and employee pushback are real costs of doing ABC well, not just an accounting formality.</li>
+      <li><strong>The five ABC steps, in order:</strong> Identify activities → Analyze costs → Identify drivers → Assign overhead → Use the data to decide.</li>
+      <li><strong>ABC costs more to run than a traditional system</strong> — it only "pays for itself" when the better data actually changes a decision for the better.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

@@ -23,6 +23,7 @@
     box-shadow:var(--shadow);
   }
   .hub-card:hover{border-color:var(--accent);background:#F3F7FF;transform:translateY(-2px);box-shadow:0 14px 34px rgba(23,37,84,.16)}
+  .hub-card:focus-within{border-color:var(--accent);background:#F3F7FF}
   .hub-card-eyebrow{
     font-family:'DM Mono',monospace;
     font-size:.68rem;
@@ -58,6 +59,32 @@
     border:1px solid var(--border);
     color:var(--muted);
   }
+  .hub-card-link{
+    color:inherit;
+    text-decoration:none;
+  }
+  /* Stretches the quiz link over the whole card, so the card stays
+     click-anywhere while the Notes link below keeps its own target. */
+  .hub-card-link::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+  }
+  .hub-notes{
+    position:relative;
+    z-index:2;
+    font-family:'DM Mono',monospace;
+    font-size:.7rem;
+    padding:.2rem .55rem;
+    border-radius:6px;
+    text-decoration:none;
+    color:var(--accent2);
+    background:rgba(167,139,250,.12);
+    border:1px solid rgba(167,139,250,.4);
+    transition:background .15s,border-color .15s,color .15s;
+  }
+  .hub-notes:hover{background:var(--accent2);border-color:var(--accent2);color:#fff}
   .hub-arrow{
     position:absolute;
     top:1.5rem;right:1.75rem;
@@ -67,7 +94,8 @@
     transform:translateX(-6px);
     transition:opacity .15s, transform .15s;
   }
-  .hub-card:hover .hub-arrow{opacity:1;transform:translateX(0)}
+  .hub-card:hover .hub-arrow,
+  .hub-card:focus-within .hub-arrow{opacity:1;transform:translateX(0)}
   .hub-footer{
     text-align:center;
     margin-top:3rem;
@@ -93,36 +121,38 @@
 
   <div class="hub-grid">
 
-    <a class="hub-card" href="section2_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 2</div>
-      <div class="hub-card-title">The Nature &amp; Purpose of Accounting</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section2_quiz.html">The Nature &amp; Purpose of Accounting</a></div>
       <div class="hub-card-desc">
         Definitions, the three financial statements, users of financial statements,
         GAAP, and the accounting organizations (FASB, SEC, AICPA, PCAOB, IRS, IASB).
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">29 Questions</span>
+        <a class="hub-notes" href="section2_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section3_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 3</div>
-      <div class="hub-card-title">Overview of Financial Statements</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section3_quiz.html">Overview of Financial Statements</a></div>
       <div class="hub-card-desc">
         Assets, liabilities, and owners' equity — the balance sheet equation,
         residual interest, tangible vs. intangible assets, and liquidity ordering.
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">92 Questions</span>
+        <a class="hub-notes" href="section3_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section4_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 4</div>
-      <div class="hub-card-title">Individual Accounts &amp; Transaction Analysis</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section4_quiz.html">Individual Accounts &amp; Transaction Analysis</a></div>
       <div class="hub-card-desc">
         The five sections of the balance sheet in detail, common vs. preferred stock,
         treasury stock, AOCI, recognition &amp; valuation, executory contracts, and
@@ -130,13 +160,14 @@
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">67 Questions</span>
+        <a class="hub-notes" href="section4_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section5_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 5</div>
-      <div class="hub-card-title">The Income Statement</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section5_quiz.html">The Income Statement</a></div>
       <div class="hub-card-desc">
         Gross profit through comprehensive income, revenue &amp; expense items, gains/losses,
         discontinued operations &amp; extraordinary items, single- vs. multi-step formats,
@@ -144,13 +175,14 @@
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">68 Questions</span>
+        <a class="hub-notes" href="section5_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section6_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 6</div>
-      <div class="hub-card-title">The Statement of Cash Flows</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section6_quiz.html">The Statement of Cash Flows</a></div>
       <div class="hub-card-desc">
         Purpose &amp; the three failure scenarios, cash equivalents, operating/investing/financing
         classification with all the GAAP "gotcha" rules, normal cash flow patterns, non-cash
@@ -158,13 +190,14 @@
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">86 Questions</span>
+        <a class="hub-notes" href="section6_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section7_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 7</div>
-      <div class="hub-card-title">Introduction to Financial Statement Analysis</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section7_quiz.html">Introduction to Financial Statement Analysis</a></div>
       <div class="hub-card-desc">
         The 6 widely used ratios, common-size financial statements, the DuPont framework
         (margin, turnover &amp; leverage), the debt ratio family, times interest earned,
@@ -172,13 +205,14 @@
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">105 Questions</span>
+        <a class="hub-notes" href="section7_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section8_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 8</div>
-      <div class="hub-card-title">Cash Budgeting</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section8_quiz.html">Cash Budgeting</a></div>
       <div class="hub-card-desc">
         The three costs of selling on credit, credit card companies, credit terms &amp;
         sales discounts, budgeting cash receipts using collection patterns, and budgeting cash outflows &mdash;
@@ -187,13 +221,14 @@
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">39 Questions</span>
+        <a class="hub-notes" href="section8_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section9_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 9</div>
-      <div class="hub-card-title">Internal Controls</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section9_quiz.html">Internal Controls</a></div>
       <div class="hub-card-desc">
         Errors, disagreements &amp; fraud, the five internal control activities, earnings management
         and its continuum, the Sarbanes-Oxley Act (PCAOB, auditor &amp; management constraints),
@@ -201,13 +236,14 @@
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">83 Questions</span>
+        <a class="hub-notes" href="section9_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section10_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 10</div>
-      <div class="hub-card-title">Management Accounting &amp; Cost Concepts</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section10_quiz.html">Management Accounting &amp; Cost Concepts</a></div>
       <div class="hub-card-desc">
         Management vs. financial accounting, the FASB/SEC/IASB/IMA, the plan-control-evaluate cycle,
         CVP terms &amp; breakeven formulas, product vs. period costs, direct/indirect &amp; sunk costs,
@@ -215,22 +251,24 @@
       </div>
       <div class="hub-card-meta">
         <span class="hub-tag">77 Questions</span>
+        <a class="hub-notes" href="section10_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
-    <a class="hub-card" href="section11_quiz.html">
+    <article class="hub-card">
       <span class="hub-arrow">→</span>
       <div class="hub-card-eyebrow">Section 11</div>
-      <div class="hub-card-title">Activity-Based Costing (ABC)</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="section11_quiz.html">Activity-Based Costing (ABC)</a></div>
       <div class="hub-card-desc">
         The five ABC steps, the four overhead cost categories (unit-level, batch-level, product line,
         facility support), cost drivers, assigning overhead using ABC rates, and using ABC data to
         make decisions &mdash; including the full Lily's Ice Cream Company example.
       </div>
       <div class="hub-card-meta">
-        <span class="hub-tag">72 Questions</span>
+        <span class="hub-tag">56 Questions</span>
+        <a class="hub-notes" href="section11_notes.html" target="_blank" rel="noopener">📄 Notes</a>
       </div>
-    </a>
+    </article>
 
   </div>
 
@@ -242,7 +280,7 @@
   // Falls back silently to the number already in the HTML (file:// blocks fetch).
   document.querySelectorAll('.hub-card').forEach(card => {
     const tag = card.querySelector('.hub-tag');
-    const src = card.getAttribute('href');
+    const src = card.querySelector('.hub-card-link')?.getAttribute('href');
     if(!tag || !src) return;
 
     fetch(src)
