@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 10 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-profit{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-eff{background:rgba(79,142,247,.15);color:var(--accent)}
+  .cat-lev{background:rgba(234,88,12,.13);color:#C2410C}
+  .cat-liq{background:rgba(202,138,4,.14);color:#B45309}
+  .cat-mkt{background:rgba(167,139,250,.15);color:var(--accent2)}
+  .cat-cash{background:rgba(5,150,105,.13);color:#065F46}
+  .cat-err{background:rgba(107,114,128,.15);color:#374151}
+  .cat-fraud{background:rgba(248,113,113,.15);color:#B91C1C}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 10</p>
+  <h1>Management Accounting &<br><span>Cost Concepts</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#overview">Management vs. Financial Accounting</a></li>
+      <li><span class="n">02</span><a href="#standards">Standard-Setters &amp; Professional Bodies</a></li>
+      <li><span class="n">03</span><a href="#cycle">The Management Process: Plan → Control → Evaluate</a></li>
+      <li><span class="n">04</span><a href="#planning-types">Long-Run vs. Short-Run Planning</a></li>
+      <li><span class="n">05</span><a href="#cvp">CVP Terms &amp; Breakeven Formulas</a></li>
+      <li><span class="n">06</span><a href="#product-period">Product Costs vs. Period Costs</a></li>
+      <li><span class="n">07</span><a href="#decision-costs">Decision-Making Cost Pairs</a></li>
+      <li><span class="n">08</span><a href="#ethics-structure">Ethics: Corporate Structure, SOX &amp; the IMA</a></li>
+      <li><span class="n">09</span><a href="#escalation">Handling Ethical Dilemmas</a></li>
+      <li><span class="n">10</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="overview">
+    <h2>01 · Management vs. Financial Accounting</h2>
+    <p class="section-sub">Topics 9.1 &amp; 9.2</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The one-line distinction</div>
+      <div class="formula-eq">Management Accounting = a COMPETITIVE TOOL &nbsp;|&nbsp; Financial Accounting = an UNBIASED SCOREBOARD</div>
+      <div class="formula-meaning">Management accounting is detailed data used <strong>inside</strong> the business for daily decisions. Financial accounting is summary data used by <strong>outsiders</strong> (banks, investors) making occasional decisions — should we lend to them? invest in them? Good management accounting should never be about deceiving anyone; good financial accounting should never be used to try to gain a competitive edge.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th></th><th>Management Accounting</th><th>Financial Accounting</th></tr>
+      <tr><td><strong>Source</strong></td><td>Evolves from the best practices of companies working to be competitive — nimble, no permission needed</td><td>Legislated and governed by regulatory agencies and professional institutions — a legal/rules-based process</td></tr>
+      <tr><td><strong>Purpose</strong></td><td>Serves the competitive needs of organizations working to uniquely serve specific customers in specific markets</td><td>Serves the need for organizations to periodically report results to outside investors and lenders, consistently and comparably</td></tr>
+      <tr><td><strong>Type of data</strong></td><td>Both financial <em>and</em> nonfinancial (e.g., employee turnover %, customer satisfaction %)</td><td>Restricted to financial (dollar-denominated) data only</td></tr>
+      <tr><td><strong>Availability</strong></td><td>Proprietary — kept secret from competitors and the public</td><td>Often made public — reported consistently to investors &amp; creditors</td></tr>
+      <tr><td><strong>Used for</strong></td><td>Internal planning, control, and evaluation</td><td>Deciding whether to provide capital (loans, investment) to the company</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Restaurant example:</strong> two soup-and-salad restaurants. Restaurant #1 just gets the bills and payroll paid on time — routine bookkeeping. Restaurant #2 tracks item-by-item cost and price, customer buying patterns, and frequent combos, then uses all of it to run targeted promotions and beat the competition. Same industry, same product — the difference is entirely in how each one uses its <em>management</em> accounting data.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="standards">
+    <h2>02 · Standard-Setters &amp; Professional Bodies</h2>
+    <p class="section-sub">Topic 9.2</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Financial accounting needs a <strong>common reporting platform</strong> so outsiders can compare companies on equal footing — that's the whole reason GAAP exists.
+    </p>
+
+    <table class="compare-table">
+      <tr><th>Organization</th><th>Role</th></tr>
+      <tr><td><strong>SEC</strong> (Securities and Exchange Commission)</td><td>U.S. government regulator with the actual legal authority over accounting rules — delegates day-to-day rule-writing to the FASB</td></tr>
+      <tr><td><strong>FASB</strong> (Financial Accounting Standards Board)</td><td>Writes U.S. GAAP, under SEC oversight</td></tr>
+      <tr><td><strong>IASB</strong> (International Accounting Standards Board)</td><td>Sets accounting rules internationally, outside the U.S.</td></tr>
+      <tr><td><strong>IMA</strong> (Institute of Management Accountants)</td><td>Sets professional standards for accountants working <em>inside</em> companies; issues the CMA credential</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>CPA vs. CMA:</strong> a CPA is generally thought of as an <em>external</em>-facing credential (though an internal accountant can hold one too). The CMA, via the IMA, is built specifically around the competencies needed to operate as a management accountant <em>inside</em> a company.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cycle">
+    <h2>03 · The Management Process: Plan → Control → Evaluate</h2>
+    <p class="section-sub">Topic 9.2 — Figure 9.1</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Planning</div><span class="chain-sep">→</span>
+      <div class="chain-node">Controlling</div><span class="chain-sep">→</span>
+      <div class="chain-node">Evaluating</div><span class="chain-sep">→</span>
+      <div class="chain-node">(back to Planning)</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Each phase has its own sub-steps. Planning and Controlling are sequential processes; Evaluating is more a set of related activities:</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">P</span>
+        <h3>Planning</h3>
+        <p>Outlining activities needed to hit objectives. Order: <strong>Recognize needs → Identify alternatives → Evaluate choices → Implement decisions.</strong></p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">C</span>
+        <h3>Controlling</h3>
+        <p>Implementing the plan &amp; tracking actual vs. plan. Order: <strong>Establish expectations → Create performance measures → Gather results → Compute variances.</strong></p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">E</span>
+        <h3>Evaluating</h3>
+        <p>Analyzing results at period-end: <strong>Reward performance, Provide feedback, Analyze results, Identify problems</strong> — which then feeds the next planning cycle.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Baseball radar gun analogy (Controlling):</strong> you don't just send a pitcher out and hope. You track pitch speed in real time against the expected speed, pitch by pitch. When something drifts off-plan — a variance — that's your signal to pay attention and intervene. Most of controlling is about <em>not</em> watching the things that are already on track, and focusing only where a variance shows up.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="planning-types">
+    <h2>04 · Long-Run vs. Short-Run Planning</h2>
+    <p class="section-sub">Topic 9.2</p>
+
+    <table class="compare-table">
+      <tr><th></th><th>Long-Run Planning (3–5 years)</th><th>Short-Run Planning (this year or less)</th></tr>
+      <tr>
+        <td><strong>Sub-types</strong></td>
+        <td><strong>Strategic planning</strong> — broad, long-range, set by top management: which direction, which markets, which customers.<br><br><strong>Capital budgeting</strong> — systematic planning for long-term investments in operating assets (equipment, facilities, key hires).</td>
+        <td><strong>Production &amp; process prioritizing</strong> — continual evaluation of product line/division profitability to spot opportunities.<br><br><strong>Operational budgeting</strong> (profit planning) — regular, frequent planning for current/near-future operations.</td>
+      </tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>Memorable line:</strong> "A company without a budget is like driving with the windshield covered — everything is a surprise." Budgeting lets you foresee problems on paper and solve them before they happen.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cvp">
+    <h2>05 · CVP Terms &amp; Breakeven Formulas</h2>
+    <p class="section-sub">Topic 9.3</p>
+
+    <table class="compare-table">
+      <tr><th>Term</th><th>Definition</th><th>Example</th></tr>
+      <tr><td><strong>Variable cost</strong></td><td>Increases the more you make or sell</td><td>Hamburger meat: 0 burgers = $0, 1,000 burgers = $500</td></tr>
+      <tr><td><strong>Fixed cost</strong></td><td>Stays the same no matter how much you make or sell</td><td>Restaurant rent: $2,300/month whether you sell 1 burger or 1,000</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Careful — total vs. per-unit:</strong> <em>total</em> fixed cost never changes with volume, but fixed cost <em>per unit</em> DOES change — it decreases as volume increases, because the same total is spread across more units ($5,000 rent ÷ 2,000 units = $2.50/unit, but ÷ 3,000 units = only $1.67/unit).
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Units to Break Even <span style="font-size:.72rem;color:var(--wrong);font-weight:400">Not on the official formula sheet — memorize directly</span></div>
+      <div class="formula-eq">Fixed Costs ÷ Contribution Margin per unit</div>
+      <div class="formula-meaning">Contribution margin per unit = Selling price − Variable cost per unit. <strong>Example (Lily Company):</strong> Price $40, VC $24 → CM = $16/unit. Fixed Costs $48,000 ÷ $16 = <strong>3,000 units</strong> to break even.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Sales $ to Break Even <span style="font-size:.72rem;color:var(--wrong);font-weight:400">Also missing from the formula sheet</span></div>
+      <div class="formula-eq">Fixed Costs ÷ Contribution Margin Ratio</div>
+      <div class="formula-meaning">CM ratio = CM per unit ÷ Selling price. <strong>Example (same Lily data):</strong> CM ratio = $16 ÷ $40 = 40%. $48,000 ÷ 0.40 = <strong>$120,000</strong> in sales to break even. Sanity check: 3,000 units × $40 = $120,000 — same answer either way.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Formula sheet shortcut:</strong> the official sheet already shows "Contribution Margin per unit" and "Contribution Margin Ratio" at the bottom of the last page — it's just missing the words <strong>"Fixed costs /"</strong> in front of both lines. Remember to add that, and you've got both breakeven formulas.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="product-period">
+    <h2>06 · Product Costs vs. Period Costs</h2>
+    <p class="section-sub">Topic 9.3</p>
+
+    <table class="compare-table">
+      <tr><th></th><th>Product Costs (Manufacturing)</th><th>Period Costs (Non-Manufacturing)</th></tr>
+      <tr><td><strong>Where incurred</strong></td><td>Inside the production facility (the factory)</td><td>Outside the production facility</td></tr>
+      <tr><td><strong>Becomes an expense</strong></td><td>When the product is <em>sold</em> — first sits on the balance sheet as inventory, then flows to the income statement as Cost of Goods Sold</td><td>In the period it's <em>incurred</em> — regardless of whether anything sold</td></tr>
+      <tr><td><strong>Examples</strong></td><td>Wages of production workers, material costs, rent/depreciation/insurance on production assets</td><td>Company HQ costs, selling costs (commissions, advertising), interest</td></tr>
+    </table>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Product costs break into three specific subtypes:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Direct Materials</h3>
+        <p>The primary raw material that becomes the product. Example: the potatoes used to make french fries.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Direct Labor</h3>
+        <p>Wages of workers directly assembling the product. Example: auto assembly line workers building a car.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Manufacturing Overhead</h3>
+        <p>Every other factory cost — not direct materials, not direct labor. Examples: supervisor salaries, factory depreciation, indirect materials like glue or screws.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Exam trap — location, not direct/indirect, drives product vs. period:</strong> <strong>indirect labor</strong> (like a factory supervisor) is easy to mistake for a period cost because it's "indirect." But it's still physically inside the factory, so it's a <strong>product cost</strong> — specifically, part of manufacturing overhead. Ask "inside the factory or outside?" first — direct/indirect is a separate, second question.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="decision-costs">
+    <h2>07 · Decision-Making Cost Pairs</h2>
+    <p class="section-sub">Topic 9.3 — three pairs, each tied to a type of business question</p>
+
+    <table class="compare-table">
+      <tr><th>Business question</th><th>Term pair</th><th>What it means</th></tr>
+      <tr>
+        <td>Should we stop making this product / close this division?</td>
+        <td><strong>Direct</strong> vs. <strong>Indirect</strong></td>
+        <td>Direct = specifically traceable to the segment; disappears if the segment is dropped. Indirect = a common/joint cost (e.g., corporate HQ) that benefits several segments and <em>remains</em> even if one segment is dropped.</td>
+      </tr>
+      <tr>
+        <td>Should we do Action A (drop a line, fire someone, take a special order)?</td>
+        <td><strong>Differential</strong> vs. <strong>Sunk</strong></td>
+        <td>Differential = a future cost that changes based on the decision (also called incremental/relevant). Sunk = a past cost that can't be changed by any decision now — "spilled milk." <strong>Ignore sunk costs</strong> when deciding, even though it's psychologically hard to do.</td>
+      </tr>
+      <tr>
+        <td>What is the true full cost of a choice?</td>
+        <td><strong>Out-of-pocket</strong> vs. <strong>Opportunity</strong></td>
+        <td>Out-of-pocket = an actual outlay of cash or another asset. Opportunity = the benefit forfeited by NOT choosing an alternative — a real economic cost, but easy to overlook since no cash changes hands.</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <strong>Central Park example (Out-of-pocket vs. Opportunity):</strong> NYC's out-of-pocket cost to maintain Central Park is landscaping, mowing, water management — real, but relatively small. The far bigger cost is the <em>opportunity</em> cost: the billions in rent NYC forgoes by not leasing that land for commercial development. It's easy to ignore because no check gets written for it — but rational decision-makers weigh both.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="ethics-structure">
+    <h2>08 · Ethics: Corporate Structure, SOX &amp; the IMA</h2>
+    <p class="section-sub">Topic 9.4</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">CEO<br><span style="font-size:.72rem;color:var(--muted)">Overall operations</span></div><span class="chain-sep">→</span>
+      <div class="chain-node">CFO<br><span style="font-size:.72rem;color:var(--muted)">All finance &amp; accounting</span></div><span class="chain-sep">→</span>
+      <div class="chain-node">Controller<br><span style="font-size:.72rem;color:var(--muted)">Head accountant</span></div>
+    </div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem">The controller is the chief (head) accountant in most organizations, reporting up through the CFO.</p>
+
+    <div class="formula-card">
+      <div class="formula-name">What Sarbanes-Oxley requires (ethics angle)</div>
+      <div class="formula-eq">CEO/CFO personal certification &nbsp;|&nbsp; Code of ethics &nbsp;|&nbsp; Internal control</div>
+      <div class="formula-meaning">The CEO and CFO must <strong>personally certify</strong> that public financial statements are accurate — creating legal, not just moral, accountability. Public companies must maintain a <strong>code of ethics</strong>, reviewed by the external auditor, and maintain <strong>internal control</strong> to ensure ethical, organized operations. <em>(See Section 9 notes for SOX's auditor-specific requirements and the PCAOB.)</em></div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The IMA's four ethical responsibilities for management accountants:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Competence</h3>
+        <p>Maintain your professional credentials and training — stay current in your field.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Confidentiality</h3>
+        <p>Never disclose the company's proprietary internal information to outsiders.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Integrity</h3>
+        <p>Act with integrity in all situations — you're in a position of trust and power.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">4</span>
+        <h3>Objectivity / Credibility</h3>
+        <p>Report information to decision-makers without bias — don't selectively reveal or conceal to steer a decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="escalation">
+    <h2>09 · Handling Ethical Dilemmas</h2>
+    <p class="section-sub">Topic 9.4</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0">If you spot an ethical problem inside your company, the recommended escalation path stays internal as long as possible — you owe the company loyalty, since it pays your salary:</p>
+
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1st</span><div class="step-label">Immediate supervisor</div><div class="step-desc">Your default first move</div></div>
+      <div class="pie-step"><span class="step-num">2nd</span><div class="step-label">Next level up</div><div class="step-desc">Only if the supervisor IS the problem</div></div>
+      <div class="pie-step"><span class="step-num">3rd</span><div class="step-label">Confidential mentor</div><div class="step-desc">An objective advisor inside the company</div></div>
+      <div class="pie-step"><span class="step-num">4th</span><div class="step-label">Resign</div><div class="step-desc">Absolute last resort</div></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Personal ethical bedrock:</strong> "I will not use accounting to deceive others." Since a management accountant controls the flow of internal information, that access is real power — and the core commitment has to be a flat refusal to use it to mislead anyone.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Examples of internal ethical dilemmas named in the notes:</p>
+    <ul class="quicklist">
+      <li>Padding expense accounts (fake receipts)</li>
+      <li>Theft, embezzlement, or shoplifting</li>
+      <li>Inflating profits on financial reports (e.g., to boost a bonus)</li>
+      <li>Violating the firm's purchasing policies (steering business to friends)</li>
+      <li>Using company assets for personal use</li>
+      <li><strong>Kickbacks</strong> — a vendor pays <em>you</em> personally (not the company) for steering business their way; that's what separates a kickback from a legitimate rebate</li>
+      <li>Adjusting or manipulating reports, or withholding unfavorable information</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>10 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Financial accounting is NEVER a competitive tool</strong> — it's an unbiased scoreboard. Only management accounting is a competitive tool.</li>
+      <li><strong>Fixed cost TOTAL vs. PER UNIT</strong> — total fixed cost never changes with volume; fixed cost per unit decreases as volume rises. Don't mix these up.</li>
+      <li><strong>Breakeven formulas aren't on the official formula sheet</strong> — Fixed Costs ÷ CM per unit (units) and Fixed Costs ÷ CM Ratio (sales $). Memorize both directly.</li>
+      <li><strong>Product vs. Period is about LOCATION, not direct/indirect</strong> — indirect labor (e.g., a factory supervisor) is still a product cost (manufacturing overhead) because it happens inside the factory, even though it's "indirect."</li>
+      <li><strong>Direct/Indirect costs and dropping a segment</strong> — direct costs disappear if the segment is dropped; indirect (common/joint) costs remain, since they were never really caused by that one segment.</li>
+      <li><strong>Sunk costs should be IGNORED</strong> in decision-making, even though it's tempting to weigh them (this is part of why housing markets adjust slowly — sellers anchor on what they originally paid).</li>
+      <li><strong>Opportunity cost is a real economic cost</strong> — even though no cash changes hands, rational decision-makers still have to factor it in (the Central Park example).</li>
+      <li><strong>Kickback vs. rebate</strong> — a rebate goes to the company; a kickback goes to the individual employee personally. That's what makes it unethical/fraudulent.</li>
+      <li><strong>SOX ethics requirements are personal, not just corporate</strong> — the CEO and CFO personally certify the financial statements; it's not just "the company" that's on the hook.</li>
+      <li><strong>Escalation order for ethical problems</strong> — supervisor → next level up (only if supervisor is the problem) → confidential mentor → resign (last resort). Whistleblowing publicly first is NOT the recommended first move.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

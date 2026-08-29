@@ -1,468 +1,556 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>C213 Accounting for Decision Makers · Section 8 Quiz</title>
-<link rel="stylesheet" href="quiz.css">
-<style>
-  .top-nav{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
-  .back-link.notes{color:var(--accent2);background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4)}
-  .back-link.notes:hover{background:var(--accent2);border-color:var(--accent2);color:#fff}
-</style>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C213 Accounting for Decision Makers · Section 8 Quiz</title>
+      <link rel="stylesheet" href="quiz.css">
 </head>
+
 <body>
 
-<div class="top-nav">
-  <a class="back-link" href="index.html">← All Sections</a>
-</div>
+      <div class="top-nav">
+            <a class="back-link" href="index.html">← All Sections</a>
+            <a class="back-link notes" href="section8_notes.html" target="_blank" rel="noopener">📄 Section 8 Notes</a>
+      </div>
 
-<header>
-  <p class="eyebrow">C213 Accounting for Decision Makers · Section 8</p>
-  <h1>Cash <span>Budgeting</span></h1>
-</header>
+      <header>
+            <p class="eyebrow">C213 Accounting for Decision Makers · Section 8</p>
+            <h1>Cash <span>Budgeting</span></h1>
+      </header>
 
-<div class="progress-wrap">
-  <div class="progress-meta">
-    <span id="qCounter">Question 1 of 1</span>
-    <span id="pctLabel">0%</span>
-  </div>
-  <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
-</div>
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
 
-<div class="chips">
-  <div class="chip" id="chipTotal">Score: 0 / 0</div>
-  <div class="chip c" id="chipCorrect">✓ 0 correct</div>
-  <div class="chip w" id="chipWrong">✗ 0 wrong</div>
-</div>
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
 
-<div class="card" id="quizCard">
-  <div class="q-meta">
-    <span class="q-label" id="qLabel">Question 1</span>
-    <span class="type-badge" id="typeBadge"></span>
-  </div>
-  <p class="q-text" id="qText"></p>
-  <p class="q-hint" id="qHint" style="display:none"></p>
-  <div id="interactionZone"></div>
-  <div class="feedback" id="feedback">
-    <div class="feedback-head" id="fbHead"></div>
-    <div id="fbBody"></div>
-    <div class="mnemonic" id="fbMnemonic"></div>
-  </div>
-  <div class="btn-wrap" id="btnWrap">
-    <button class="btn-next" id="btnNext">Next Question →</button>
-  </div>
-</div>
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
 
-<div id="results">
-  <p class="grade-label">Final Score</p>
-  <div class="big-score" id="bigScore"></div>
-  <p class="grade-label" id="gradeMsg"></p>
-  <div class="breakdown">
-    <div class="bk-card"><div class="num" id="rcCorrect" style="color:var(--correct)"></div><div class="lbl">Correct</div></div>
-    <div class="bk-card"><div class="num" id="rcWrong" style="color:var(--wrong)"></div><div class="lbl">Wrong</div></div>
-    <div class="bk-card"><div class="num" id="rcTotal"></div><div class="lbl">Total</div></div>
-  </div>
-  <div class="review" id="reviewList"></div>
-  <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
-</div>
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
 
-<script src="quiz.js"></script>
-<script>
-const questions = [
+      <script src="quiz.js"></script>
+      <script>
+            const questions = [
 
-/* ========== TOPIC 7.1 — BUDGETING CASH RECEIPTS ========== */
+                  /* ========== TOPIC 7.1 — BUDGETING CASH RECEIPTS ========== */
 
-{type:'mc',
- q:'Why do companies choose to sell on credit despite the costs involved?',
- opts:['Selling on credit increases sales — customers who don\'t have cash on hand today can still buy',
-       'It eliminates the need for a bookkeeping system entirely',
-       'It is required by GAAP for all merchandising companies',
-       'It guarantees 100% collection of all amounts owed'],
- correct:0,
- explanation:'The benefit of selling on credit is straightforward: it increases sales. A customer who wants to buy but doesn\'t have cash on them right now would otherwise walk away — credit lets the sale happen anyway. That benefit has to be weighed against the costs of selling on credit (bad debts, bookkeeping, and carrying costs).',
- mnemonic:'💡 Memory tip: No credit, no sale to the customer without cash in hand today. Credit turns "I want it but can\'t pay now" into a sale.'},
+                  {
+                        type: 'mc',
+                        q: 'Why do companies choose to sell on credit despite the costs involved?',
+                        opts: ['Selling on credit increases sales — customers who don\'t have cash on hand today can still buy',
+                              'It eliminates the need for a bookkeeping system entirely',
+                              'It is required by GAAP for all merchandising companies',
+                              'It guarantees 100% collection of all amounts owed'],
+                        correct: 0,
+                        explanation: 'The benefit of selling on credit is straightforward: it increases sales. A customer who wants to buy but doesn\'t have cash on them right now would otherwise walk away — credit lets the sale happen anyway. That benefit has to be weighed against the costs of selling on credit (bad debts, bookkeeping, and carrying costs).',
+                        mnemonic: '💡 Memory tip: No credit, no sale to the customer without cash in hand today. Credit turns "I want it but can\'t pay now" into a sale.'
+                  },
 
-{type:'mc',
- q:'What are "bad debts" in the context of selling on credit?',
- opts:['Some customers who buy on credit simply will not pay',
-       'The interest a company pays on its own loans',
-       'Discounts given to customers who pay within 10 days',
-       'The cost of hiring a collections law firm'],
- correct:0,
- explanation:'Bad debts are one of the three core costs of selling on credit: some individuals who buy on credit are simply not going to pay. That\'s an unavoidable cost of doing business on credit terms.',
- mnemonic:'💡 Memory tip: Bad debts = bad news you can\'t collect. Some percentage of credit customers will just never pay — build it into the cost.'},
+                  {
+                        type: 'mc',
+                        q: 'What are "bad debts" in the context of selling on credit?',
+                        opts: ['Some customers who buy on credit simply will not pay',
+                              'The interest a company pays on its own loans',
+                              'Discounts given to customers who pay within 10 days',
+                              'The cost of hiring a collections law firm'],
+                        correct: 0,
+                        explanation: 'Bad debts are one of the three core costs of selling on credit: some individuals who buy on credit are simply not going to pay. That\'s an unavoidable cost of doing business on credit terms.',
+                        mnemonic: '💡 Memory tip: Bad debts = bad news you can\'t collect. Some percentage of credit customers will just never pay — build it into the cost.'
+                  },
 
-{type:'mc',
- q:'What does the "bookkeeping cost" of selling on credit refer to?',
- opts:['The cost of developing and maintaining a system to track sales, evaluate creditworthiness, and bill customers',
-       'The fee a bank charges to cash a check',
-       'The cost of printing physical price tags',
-       'The salary of the company\'s CEO'],
- correct:0,
- explanation:'When a company sells for cash only (think of a roadside fruit stand), there\'s no record-keeping needed at all — you get the cash and the customer walks away. Selling on credit means a company must build and maintain systems: tracking who owes what, evaluating creditworthiness, sending bills, and hiring accountants to manage it all.',
- mnemonic:'💡 Memory tip: Cash sale = no names, no records, no cost. Credit sale = now you need a whole system to track who owes what.'},
+                  {
+                        type: 'mc',
+                        q: 'What does the "bookkeeping cost" of selling on credit refer to?',
+                        opts: ['The cost of developing and maintaining a system to track sales, evaluate creditworthiness, and bill customers',
+                              'The fee a bank charges to cash a check',
+                              'The cost of printing physical price tags',
+                              'The salary of the company\'s CEO'],
+                        correct: 0,
+                        explanation: 'When a company sells for cash only (think of a roadside fruit stand), there\'s no record-keeping needed at all — you get the cash and the customer walks away. Selling on credit means a company must build and maintain systems: tracking who owes what, evaluating creditworthiness, sending bills, and hiring accountants to manage it all.',
+                        mnemonic: '💡 Memory tip: Cash sale = no names, no records, no cost. Credit sale = now you need a whole system to track who owes what.'
+                  },
 
-{type:'mc',
- q:'What is a "carrying cost" associated with selling on credit?',
- opts:['The cost of financing operations while waiting for customers to pay what they owe',
-       'The shipping fee charged to deliver inventory',
-       'A discount given for paying with a credit card',
-       'The amount lost when inventory is stolen'],
- correct:0,
- explanation:'When a company sells inventory on credit, it doesn\'t get paid right away — but it still has to replace that inventory to sell to the next customer, pay employees, pay rent, and pay for electricity while it waits. That means borrowing extra money to cover operations, which is the carrying cost: money tied up in accounts receivable is money the business doesn\'t have available to use elsewhere.',
- mnemonic:'💡 Memory tip: Carrying cost = the cost of "carrying" unpaid A/R on your books while still having to pay your own bills in the meantime.'},
+                  {
+                        type: 'mc',
+                        q: 'What is a "carrying cost" associated with selling on credit?',
+                        opts: ['The cost of financing operations while waiting for customers to pay what they owe',
+                              'The shipping fee charged to deliver inventory',
+                              'A discount given for paying with a credit card',
+                              'The amount lost when inventory is stolen'],
+                        correct: 0,
+                        explanation: 'When a company sells inventory on credit, it doesn\'t get paid right away — but it still has to replace that inventory to sell to the next customer, pay employees, pay rent, and pay for electricity while it waits. That means borrowing extra money to cover operations, which is the carrying cost: money tied up in accounts receivable is money the business doesn\'t have available to use elsewhere.',
+                        mnemonic: '💡 Memory tip: Carrying cost = the cost of "carrying" unpaid A/R on your books while still having to pay your own bills in the meantime.'
+                  },
 
-{type:'ms',
- q:'Which of the following are the three costs of selling on credit? (Select all that apply)',
- opts:['Bad debts',
-       'Bookkeeping costs',
-       'Carrying costs',
-       'Marketing costs',
-       'Shipping costs'],
- correctSet:[0,1,2],
- explanation:'The three costs of selling on credit are: bad debts (some customers won\'t pay), bookkeeping costs (systems to track sales and collections), and carrying costs (money tied up in A/R that isn\'t available for other uses). Marketing and shipping costs are ordinary business expenses unrelated to the decision to sell on credit specifically.',
- mnemonic:'💡 Memory tip: "3 B\'s and a C" — Bad debts, Bookkeeping, and Carrying costs. Three distinct costs, all born from the decision to let customers pay later.'},
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are the three costs of selling on credit? (Select all that apply)',
+                        opts: ['Bad debts',
+                              'Bookkeeping costs',
+                              'Carrying costs',
+                              'Marketing costs',
+                              'Shipping costs'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'The three costs of selling on credit are: bad debts (some customers won\'t pay), bookkeeping costs (systems to track sales and collections), and carrying costs (money tied up in A/R that isn\'t available for other uses). Marketing and shipping costs are ordinary business expenses unrelated to the decision to sell on credit specifically.',
+                        mnemonic: '💡 Memory tip: "3 B\'s and a C" — Bad debts, Bookkeeping, and Carrying costs. Three distinct costs, all born from the decision to let customers pay later.'
+                  },
 
-{type:'mc',
- q:'What role do credit card companies (Visa, MasterCard, Amex, Discover) play for a business that accepts credit cards?',
- opts:['They absorb the bad-debt, bookkeeping, and carrying costs on the business\'s behalf in exchange for a transaction fee',
-       'They loan the business money directly at a fixed low interest rate',
-       'They audit the business\'s financial statements annually',
-       'They set the business\'s sales prices'],
- correct:0,
- explanation:'A credit card company essentially outsources the three costs of selling on credit for a business. The business gets its cash immediately, while the credit card company waits to collect from the customer and bears the bad-debt, bookkeeping, and carrying-cost risk itself — in exchange for a fee (often a small percentage of each sale).',
- mnemonic:'💡 Memory tip: Credit card companies are outsourcing partners — "you pay us a fee, we\'ll handle bad debts, bookkeeping, and carrying costs for you."'},
+                  {
+                        type: 'mc',
+                        q: 'What role do credit card companies (Visa, MasterCard, Amex, Discover) play for a business that accepts credit cards?',
+                        opts: ['They absorb the bad-debt, bookkeeping, and carrying costs on the business\'s behalf in exchange for a transaction fee',
+                              'They loan the business money directly at a fixed low interest rate',
+                              'They audit the business\'s financial statements annually',
+                              'They set the business\'s sales prices'],
+                        correct: 0,
+                        explanation: 'A credit card company essentially outsources the three costs of selling on credit for a business. The business gets its cash immediately, while the credit card company waits to collect from the customer and bears the bad-debt, bookkeeping, and carrying-cost risk itself — in exchange for a fee (often a small percentage of each sale).',
+                        mnemonic: '💡 Memory tip: Credit card companies are outsourcing partners — "you pay us a fee, we\'ll handle bad debts, bookkeeping, and carrying costs for you."'
+                  },
 
-{type:'dd',
- q:'Match each description to the correct cost of selling on credit.',
- cols:['Bad Debts','Bookkeeping Costs','Carrying Costs'],
- items:[
-   {text:'Some customers who buy on credit will simply never pay', answer:'Bad Debts'},
-   {text:'The system needed to track sales, evaluate creditworthiness, and send bills', answer:'Bookkeeping Costs'},
-   {text:'Extra financing needed to operate while waiting for customers to pay what they owe', answer:'Carrying Costs'}
- ],
- explanation:'These are the three costs of selling on credit: Bad Debts (non-payment), Bookkeeping Costs (systems and administration), and Carrying Costs (financing the gap while waiting to be paid).',
- mnemonic:'💡 Memory tip: Won\'t pay (Bad Debts) → Have to track it (Bookkeeping) → Have to finance the wait (Carrying Costs).'},
+                  {
+                        type: 'dd',
+                        q: 'Match each description to the correct cost of selling on credit.',
+                        cols: ['Bad Debts', 'Bookkeeping Costs', 'Carrying Costs'],
+                        items: [
+                              { text: 'Some customers who buy on credit will simply never pay', answer: 'Bad Debts' },
+                              { text: 'The system needed to track sales, evaluate creditworthiness, and send bills', answer: 'Bookkeeping Costs' },
+                              { text: 'Extra financing needed to operate while waiting for customers to pay what they owe', answer: 'Carrying Costs' }
+                        ],
+                        explanation: 'These are the three costs of selling on credit: Bad Debts (non-payment), Bookkeeping Costs (systems and administration), and Carrying Costs (financing the gap while waiting to be paid).',
+                        mnemonic: '💡 Memory tip: Won\'t pay (Bad Debts) → Have to track it (Bookkeeping) → Have to finance the wait (Carrying Costs).'
+                  },
 
-{type:'mc',
- q:'What is the "credit period" when a company grants credit to a customer?',
- opts:['The length of time a customer has to pay, e.g. credit terms of "net 30" mean the amount is due within 30 days of the sale date',
-       'The number of days a store is open for business each week',
-       'The time it takes a bank to process a credit card payment',
-       'The period during which a customer can return merchandise for a refund'],
- correct:0,
- explanation:'The credit period specifies when the cash will be collected. "Net 30" means the net (full) amount of the invoice is due within 30 days of the date of sale — that\'s the outer limit for payment.',
- mnemonic:'💡 Memory tip: "Net 30" = the finish line. You have 30 days to cross it and pay in full.'},
+                  {
+                        type: 'mc',
+                        q: 'What is the "credit period" when a company grants credit to a customer?',
+                        opts: ['The length of time a customer has to pay, e.g. credit terms of "net 30" mean the amount is due within 30 days of the sale date',
+                              'The number of days a store is open for business each week',
+                              'The time it takes a bank to process a credit card payment',
+                              'The period during which a customer can return merchandise for a refund'],
+                        correct: 0,
+                        explanation: 'The credit period specifies when the cash will be collected. "Net 30" means the net (full) amount of the invoice is due within 30 days of the date of sale — that\'s the outer limit for payment.',
+                        mnemonic: '💡 Memory tip: "Net 30" = the finish line. You have 30 days to cross it and pay in full.'
+                  },
 
-{type:'mc',
- q:'What is a "sales discount"?',
- opts:['A cash reduction offered to customers who purchase on account and pay their bill early',
-       'A reduced price given to any customer who buys in bulk',
-       'A markdown applied to damaged or returned inventory',
-       'A discount available only to employees of the selling company'],
- correct:0,
- explanation:'A sales discount is an incentive: customers who buy merchandise on account and pay early get a percentage knocked off the price. It rewards fast payment rather than bulk purchasing or any other factor.',
- mnemonic:'💡 Memory tip: Sales discount = an "early bird" reward for paying your bill fast, not for buying a lot.'},
+                  {
+                        type: 'mc',
+                        q: 'What is a "sales discount"?',
+                        opts: ['A cash reduction offered to customers who purchase on account and pay their bill early',
+                              'A reduced price given to any customer who buys in bulk',
+                              'A markdown applied to damaged or returned inventory',
+                              'A discount available only to employees of the selling company'],
+                        correct: 0,
+                        explanation: 'A sales discount is an incentive: customers who buy merchandise on account and pay early get a percentage knocked off the price. It rewards fast payment rather than bulk purchasing or any other factor.',
+                        mnemonic: '💡 Memory tip: Sales discount = an "early bird" reward for paying your bill fast, not for buying a lot.'
+                  },
 
-{type:'mc',
- q:'What do the credit terms "2/10, net 30" mean?',
- opts:['Pay within 10 days and get a 2% discount; otherwise the full amount is due within 30 days',
-       'Pay within 2 days and get a 10% discount; otherwise the full amount is due within 30 days',
-       'The customer must make 2 payments of 10% each over 30 days',
-       'The company charges 2% interest per 10-day period for 30 days'],
- correct:0,
- explanation:'"2/10, net 30" is read "two-ten, net thirty": if you pay within 10 days, you get 2% off. If you don\'t take that discount, the full ("net") amount is due within 30 days.',
- mnemonic:'💡 Memory tip: Read it left to right in order: [discount %] / [discount window] , net [final due date]. 2/10 = 2% if paid in 10 days.'},
+                  {
+                        type: 'mc',
+                        q: 'What do the credit terms "2/10, net 30" mean?',
+                        opts: ['Pay within 10 days and get a 2% discount; otherwise the full amount is due within 30 days',
+                              'Pay within 2 days and get a 10% discount; otherwise the full amount is due within 30 days',
+                              'The customer must make 2 payments of 10% each over 30 days',
+                              'The company charges 2% interest per 10-day period for 30 days'],
+                        correct: 0,
+                        explanation: '"2/10, net 30" is read "two-ten, net thirty": if you pay within 10 days, you get 2% off. If you don\'t take that discount, the full ("net") amount is due within 30 days.',
+                        mnemonic: '💡 Memory tip: Read it left to right in order: [discount %] / [discount window] , net [final due date]. 2/10 = 2% if paid in 10 days.'
+                  },
 
-{type:'mc',
- q:'What do the credit terms "4/15, net 60" mean?',
- opts:['Pay within 15 days and get a 4% discount; otherwise the full amount is due within 60 days',
-       'Pay within 60 days and get a 4% discount; otherwise the full amount is due within 15 days',
-       'Pay within 4 days and get a 15% discount; otherwise the full amount is due within 60 days',
-       'The customer receives 4 separate 15% discounts over 60 days'],
- correct:0,
- explanation:'Same pattern as "2/10, net 30" but with different numbers: pay within 15 days and get 4% off, or wait up to 60 days to pay the full amount with no discount.',
- mnemonic:'💡 Memory tip: Same code, different numbers — first number is the discount %, second is the discount window, "net" number is the outer deadline.'},
+                  {
+                        type: 'mc',
+                        q: 'What do the credit terms "4/15, net 60" mean?',
+                        opts: ['Pay within 15 days and get a 4% discount; otherwise the full amount is due within 60 days',
+                              'Pay within 60 days and get a 4% discount; otherwise the full amount is due within 15 days',
+                              'Pay within 4 days and get a 15% discount; otherwise the full amount is due within 60 days',
+                              'The customer receives 4 separate 15% discounts over 60 days'],
+                        correct: 0,
+                        explanation: 'Same pattern as "2/10, net 30" but with different numbers: pay within 15 days and get 4% off, or wait up to 60 days to pay the full amount with no discount.',
+                        mnemonic: '💡 Memory tip: Same code, different numbers — first number is the discount %, second is the discount window, "net" number is the outer deadline.'
+                  },
 
-{type:'mc',
- q:'In credit terms like "2/10, net EOM," what does "EOM" stand for?',
- opts:['End of month',
-       'Estimated order minimum',
-       'Extended overdue margin',
-       'Effective order month'],
- correct:0,
- explanation:'EOM stands for "end of month." Terms like "2/10, net EOM" mean the customer gets 2% off if they pay within 10 days, otherwise they must pay by the end of the month rather than a fixed number of days out.',
- mnemonic:'💡 Memory tip: EOM = End Of Month — the due date rides the calendar instead of counting a fixed number of days.'},
+                  {
+                        type: 'mc',
+                        q: 'In credit terms like "2/10, net EOM," what does "EOM" stand for?',
+                        opts: ['End of month',
+                              'Estimated order minimum',
+                              'Extended overdue margin',
+                              'Effective order month'],
+                        correct: 0,
+                        explanation: 'EOM stands for "end of month." Terms like "2/10, net EOM" mean the customer gets 2% off if they pay within 10 days, otherwise they must pay by the end of the month rather than a fixed number of days out.',
+                        mnemonic: '💡 Memory tip: EOM = End Of Month — the due date rides the calendar instead of counting a fixed number of days.'
+                  },
 
-{type:'mc',
- q:'How is a sales discount reported in a company\'s accounting records?',
- opts:['As a contra account, subtracted from Gross Sales to arrive at Net Sales',
-       'As an addition to Cost of Goods Sold',
-       'As a liability on the balance sheet',
-       'It is not recorded anywhere — it only affects the bank statement'],
- correct:0,
- explanation:'Sales discounts are shown as a contra account — a subtraction from Gross Sales. Gross Sales minus the sales discount equals Net Sales, which is the number companies report externally on their published financial statements.',
- mnemonic:'💡 Memory tip: "Contra" means "against" — a contra account works against (subtracts from) the account it\'s paired with. Sales Discounts works against Gross Sales.'},
+                  {
+                        type: 'mc',
+                        q: 'How is a sales discount reported in a company\'s accounting records?',
+                        opts: ['As a contra account, subtracted from Gross Sales to arrive at Net Sales',
+                              'As an addition to Cost of Goods Sold',
+                              'As a liability on the balance sheet',
+                              'It is not recorded anywhere — it only affects the bank statement'],
+                        correct: 0,
+                        explanation: 'Sales discounts are shown as a contra account — a subtraction from Gross Sales. Gross Sales minus the sales discount equals Net Sales, which is the number companies report externally on their published financial statements.',
+                        mnemonic: '💡 Memory tip: "Contra" means "against" — a contra account works against (subtracts from) the account it\'s paired with. Sales Discounts works against Gross Sales.'
+                  },
 
-{type:'mc',
- q:'A company sells on terms of 2/10, net 30 and a customer chooses NOT to pay within the discount period. In economic terms, what has effectively happened?',
- opts:['The customer has taken out a short-term loan at a very high effective annual interest rate (roughly 37%) by delaying payment',
-       'The customer has received a 2% permanent price reduction anyway',
-       'The seller has broken GAAP by offering the discount',
-       'Nothing — there is no economic cost to skipping the discount'],
- correct:0,
- explanation:'Skipping the discount converts a 20-day delay (day 10 to day 30) into an implicit loan: you keep $980 instead of paying it out, but you pay $20 extra for the privilege. Because 20-day periods repeat roughly 18.25 times in a year, that ~2% cost annualizes to about 37% — far worse than nearly any bank loan.',
- mnemonic:'💡 Memory tip: Skipping a 2/10 net 30 discount is like taking out a payday loan at ~37% APR — always cheaper to just pay early if you can.'},
+                  {
+                        type: 'mc',
+                        q: 'A company sells on terms of 2/10, net 30 and a customer chooses NOT to pay within the discount period. In economic terms, what has effectively happened?',
+                        opts: ['The customer has taken out a short-term loan at a very high effective annual interest rate (roughly 37%) by delaying payment',
+                              'The customer has received a 2% permanent price reduction anyway',
+                              'The seller has broken GAAP by offering the discount',
+                              'Nothing — there is no economic cost to skipping the discount'],
+                        correct: 0,
+                        explanation: 'Skipping the discount converts a 20-day delay (day 10 to day 30) into an implicit loan: you keep $980 instead of paying it out, but you pay $20 extra for the privilege. Because 20-day periods repeat roughly 18.25 times in a year, that ~2% cost annualizes to about 37% — far worse than nearly any bank loan.',
+                        mnemonic: '💡 Memory tip: Skipping a 2/10 net 30 discount is like taking out a payday loan at ~37% APR — always cheaper to just pay early if you can.'
+                  },
 
-{type:'tf',
- q:'Well-organized businesses generally take advantage of sales discounts because the implicit interest cost of not doing so is typically very high.',
- opts:['True','False'],
- correct:0,
- explanation:'True. Because the annualized cost of skipping a typical sales discount (like 2/10, net 30) works out to something like 37%, well-run companies with good bookkeeping and billing systems make a point of taking the discount whenever they can. Disorganized companies tend to miss discounts and effectively pay that high implicit rate.',
- mnemonic:'💡 Memory tip: Taking the discount is basically free money — leaving it on the table is one of the most expensive mistakes a business can make.'},
+                  {
+                        type: 'tf',
+                        q: 'Well-organized businesses generally take advantage of sales discounts because the implicit interest cost of not doing so is typically very high.',
+                        opts: ['True', 'False'],
+                        correct: 0,
+                        explanation: 'True. Because the annualized cost of skipping a typical sales discount (like 2/10, net 30) works out to something like 37%, well-run companies with good bookkeeping and billing systems make a point of taking the discount whenever they can. Disorganized companies tend to miss discounts and effectively pay that high implicit rate.',
+                        mnemonic: '💡 Memory tip: Taking the discount is basically free money — leaving it on the table is one of the most expensive mistakes a business can make.'
+                  },
 
-{type:'mc',
- q:'When a publicly traded company\'s financial statements report "Net Sales," what does that figure already account for?',
- opts:['Sales discounts taken, returns, and other reductions from the gross sale price — all "behind the scenes" and not separately disclosed externally',
-       'Only the sales made in the final month of the reporting period',
-       'Sales made exclusively to repeat customers',
-       'Sales before any credit terms were applied'],
- correct:0,
- explanation:'Externally, all a company reports is "Net Sales" — the gross sales price knocked down by sales discounts, returns, and other reductions. The detail behind that number (how many customers took the discount, how many items were returned, etc.) stays internal.',
- mnemonic:'💡 Memory tip: "Net Sales" on a published statement is the tip of the iceberg — the gross price and every reduction behind it stay hidden from outside view.'},
+                  {
+                        type: 'mc',
+                        q: 'When a publicly traded company\'s financial statements report "Net Sales," what does that figure already account for?',
+                        opts: ['Sales discounts taken, returns, and other reductions from the gross sale price — all "behind the scenes" and not separately disclosed externally',
+                              'Only the sales made in the final month of the reporting period',
+                              'Sales made exclusively to repeat customers',
+                              'Sales before any credit terms were applied'],
+                        correct: 0,
+                        explanation: 'Externally, all a company reports is "Net Sales" — the gross sales price knocked down by sales discounts, returns, and other reductions. The detail behind that number (how many customers took the discount, how many items were returned, etc.) stays internal.',
+                        mnemonic: '💡 Memory tip: "Net Sales" on a published statement is the tip of the iceberg — the gross price and every reduction behind it stay hidden from outside view.'
+                  },
 
-{type:'ms',
- q:'When budgeting cash receipts for a given month using a percentage-based collection pattern, which of the following are legitimate sources of that month\'s cash collections? (Select all that apply)',
- opts:['Cash sales made during the current month',
-       'Credit sales made during the current month that are collected in the current month',
-       'Credit sales made in the prior month that are collected in the current month',
-       'Credit sales made two months prior that are collected in the current month',
-       'Sales that are only forecasted for a future month that hasn\'t happened yet'],
- correctSet:[0,1,2,3],
- explanation:'A given month\'s cash receipts typically come from up to four sources: current-month cash sales, current-month credit sales collected that same month, prior-month credit sales collected this month, and credit sales from two months earlier collected this month (depending on how many months the collection pattern spans). Sales that are only forecasted for a future month can\'t generate cash collections yet — they haven\'t happened.',
- mnemonic:'💡 Memory tip: Think of collections arriving in "waves" — this month\'s cash sale wave, this month\'s eager-payer wave, last month\'s wave, and two-months-ago\'s wave.'},
+                  {
+                        type: 'ms',
+                        q: 'When budgeting cash receipts for a given month using a percentage-based collection pattern, which of the following are legitimate sources of that month\'s cash collections? (Select all that apply)',
+                        opts: ['Cash sales made during the current month',
+                              'Credit sales made during the current month that are collected in the current month',
+                              'Credit sales made in the prior month that are collected in the current month',
+                              'Credit sales made two months prior that are collected in the current month',
+                              'Sales that are only forecasted for a future month that hasn\'t happened yet'],
+                        correctSet: [0, 1, 2, 3],
+                        explanation: 'A given month\'s cash receipts typically come from up to four sources: current-month cash sales, current-month credit sales collected that same month, prior-month credit sales collected this month, and credit sales from two months earlier collected this month (depending on how many months the collection pattern spans). Sales that are only forecasted for a future month can\'t generate cash collections yet — they haven\'t happened.',
+                        mnemonic: '💡 Memory tip: Think of collections arriving in "waves" — this month\'s cash sale wave, this month\'s eager-payer wave, last month\'s wave, and two-months-ago\'s wave.'
+                  },
 
-{type:'mc',
- q:'A company forecasts sales of $80,000 in January and $100,000 in February. It collects 30% of a month\'s sales during the month of sale and 70% the following month. How much cash will it collect in February?',
- opts:['$86,000',
-       '$56,000',
-       '$30,000',
-       '$100,000'],
- correct:0,
- explanation:'February collections = January sales collected in February (70% × $80,000 = $56,000) + February sales collected in February (30% × $100,000 = $30,000) = $86,000.',
- mnemonic:'💡 Memory tip: For any month\'s collections, ask "what fraction of THIS month\'s sales came in now, plus what fraction of LAST month\'s sales is finally coming in?"'},
+                  {
+                        type: 'mc',
+                        q: 'A company forecasts sales of $80,000 in January and $100,000 in February. It collects 30% of a month\'s sales during the month of sale and 70% the following month. How much cash will it collect in February?',
+                        opts: ['$86,000',
+                              '$56,000',
+                              '$30,000',
+                              '$100,000'],
+                        correct: 0,
+                        explanation: 'February collections = January sales collected in February (70% × $80,000 = $56,000) + February sales collected in February (30% × $100,000 = $30,000) = $86,000.',
+                        mnemonic: '💡 Memory tip: For any month\'s collections, ask "what fraction of THIS month\'s sales came in now, plus what fraction of LAST month\'s sales is finally coming in?"'
+                  },
 
-{type:'mc',
- q:'A company has a beginning Accounts Receivable balance and is ALSO given a collection pattern by age (e.g., 40% collected in the month of sale, 50% the following month, 10% the second month following) — but the beginning A/R balance is NOT broken down by the month the sales originated. What is the correct cash collections figure for the very next (first forecasted) month?',
- opts:['Cannot be determined from the information given',
-       'The entire beginning A/R balance, collected in full',
-       'Zero — beginning A/R is never collected',
-       'The beginning A/R balance multiplied by the current month\'s collection percentage'],
- correct:0,
- explanation:'The collection pattern (e.g. 40/50/10%) describes how each month\'s NEW sales get collected over time. The lump-sum beginning A/R balance is made up of unresolved sales from two or more prior months (which contribute at different rates — one month\'s remainder at the "month following" rate, another\'s at the "second month following" rate). Without knowing how much of that balance came from each origin month, you cannot determine how much converts to cash in the very next month specifically. This is a classic exam trap.',
- mnemonic:'💡 Memory tip: Beginning A/R + an aging % pattern + no breakdown by origin month = "cannot be determined." That\'s the trap — don\'t default to "collect it all next month" here.'},
+                  {
+                        type: 'mc',
+                        q: 'A company has a beginning Accounts Receivable balance and is ALSO given a collection pattern by age (e.g., 40% collected in the month of sale, 50% the following month, 10% the second month following) — but the beginning A/R balance is NOT broken down by the month the sales originated. What is the correct cash collections figure for the very next (first forecasted) month?',
+                        opts: ['Cannot be determined from the information given',
+                              'The entire beginning A/R balance, collected in full',
+                              'Zero — beginning A/R is never collected',
+                              'The beginning A/R balance multiplied by the current month\'s collection percentage'],
+                        correct: 0,
+                        explanation: 'The collection pattern (e.g. 40/50/10%) describes how each month\'s NEW sales get collected over time. The lump-sum beginning A/R balance is made up of unresolved sales from two or more prior months (which contribute at different rates — one month\'s remainder at the "month following" rate, another\'s at the "second month following" rate). Without knowing how much of that balance came from each origin month, you cannot determine how much converts to cash in the very next month specifically. This is a classic exam trap.',
+                        mnemonic: '💡 Memory tip: Beginning A/R + an aging % pattern + no breakdown by origin month = "cannot be determined." That\'s the trap — don\'t default to "collect it all next month" here.'
+                  },
 
-{type:'mc',
- q:'Which formula correctly calculates cash collected from Accounts Receivable during a period, when you are given only the beginning A/R balance, ending A/R balance, and credit sales for the period (no aging percentage pattern involved)?',
- opts:['Collections = Beginning A/R + Credit Sales − Ending A/R',
-       'Collections = Ending A/R + Credit Sales − Beginning A/R',
-       'Collections = Beginning A/R − Credit Sales + Ending A/R',
-       'Collections = Credit Sales ÷ (Beginning A/R + Ending A/R)'],
- correct:0,
- explanation:'Think of A/R like a bucket: it starts at the beginning balance, credit sales add to it, and collections drain it down to the ending balance. Rearranging Beginning A/R + Credit Sales − Collections = Ending A/R for Collections gives: Collections = Beginning A/R + Credit Sales − Ending A/R.',
- mnemonic:'💡 Memory tip: A/R is a bucket — what flows in (beginning balance + new credit sales) minus what\'s left (ending balance) equals what flowed out as cash.'},
+                  {
+                        type: 'mc',
+                        q: 'Which formula correctly calculates cash collected from Accounts Receivable during a period, when you are given only the beginning A/R balance, ending A/R balance, and credit sales for the period (no aging percentage pattern involved)?',
+                        opts: ['Collections = Beginning A/R + Credit Sales − Ending A/R',
+                              'Collections = Ending A/R + Credit Sales − Beginning A/R',
+                              'Collections = Beginning A/R − Credit Sales + Ending A/R',
+                              'Collections = Credit Sales ÷ (Beginning A/R + Ending A/R)'],
+                        correct: 0,
+                        explanation: 'Think of A/R like a bucket: it starts at the beginning balance, credit sales add to it, and collections drain it down to the ending balance. Rearranging Beginning A/R + Credit Sales − Collections = Ending A/R for Collections gives: Collections = Beginning A/R + Credit Sales − Ending A/R.',
+                        mnemonic: '💡 Memory tip: A/R is a bucket — what flows in (beginning balance + new credit sales) minus what\'s left (ending balance) equals what flowed out as cash.'
+                  },
 
-{type:'mc',
- q:'The "collect the entire beginning A/R balance in the very next month" shortcut is valid to use in which type of problem?',
- opts:['A plain beginning/ending A/R roll-forward problem (solving algebraically for collections) that does NOT also give an aging-based collection percentage pattern',
-       'Any problem that provides a beginning A/R balance, regardless of what else is given',
-       'Only problems that provide the ending A/R balance but no credit sales figure',
-       'Only problems where the collection percentage pattern spans exactly two months'],
- correct:0,
- explanation:'That shortcut only applies to problems giving you clean beginning and ending A/R balances plus credit sales, where you solve algebraically (Beginning + Sales − Ending = Collections). The moment a problem ALSO hands you an aging-based percentage collection pattern without breaking the beginning balance into its origin months, the shortcut breaks down and "cannot be determined" becomes the correct answer for that first month.',
- mnemonic:'💡 Memory tip: No aging %? Shortcut is safe. Aging % without a monthly breakdown? Shortcut is a trap.'},
+                  {
+                        type: 'mc',
+                        q: 'The "collect the entire beginning A/R balance in the very next month" shortcut is valid to use in which type of problem?',
+                        opts: ['A plain beginning/ending A/R roll-forward problem (solving algebraically for collections) that does NOT also give an aging-based collection percentage pattern',
+                              'Any problem that provides a beginning A/R balance, regardless of what else is given',
+                              'Only problems that provide the ending A/R balance but no credit sales figure',
+                              'Only problems where the collection percentage pattern spans exactly two months'],
+                        correct: 0,
+                        explanation: 'That shortcut only applies to problems giving you clean beginning and ending A/R balances plus credit sales, where you solve algebraically (Beginning + Sales − Ending = Collections). The moment a problem ALSO hands you an aging-based percentage collection pattern without breaking the beginning balance into its origin months, the shortcut breaks down and "cannot be determined" becomes the correct answer for that first month.',
+                        mnemonic: '💡 Memory tip: No aging %? Shortcut is safe. Aging % without a monthly breakdown? Shortcut is a trap.'
+                  },
 
-/* ========== TOPIC 7.2 — BUDGETING CASH OUTFLOWS ========== */
+                  /* ========== TOPIC 7.2 — BUDGETING CASH OUTFLOWS ========== */
 
-{type:'mc',
- q:'What is the primary purpose of budgeting (forecasting) cash payments/outflows?',
- opts:['To anticipate financing needs in advance so a company can arrange a loan or line of credit before it actually needs the cash',
-       'To eliminate the need to ever borrow money',
-       'To calculate the company\'s income tax liability',
-       'To determine how much inventory to physically count at year-end'],
- correct:0,
- explanation:'Just like forecasting cash receipts, forecasting cash payments lets a company see ahead of time whether it will be short on cash in a future month. That advance notice means the company can arrange financing calmly, rather than scrambling for an expensive emergency loan when the shortfall actually hits.',
- mnemonic:'💡 Memory tip: Budgeting outflows is a smoke detector, not a fire extinguisher — it warns you before the shortage happens so you can act calmly.'},
+                  {
+                        type: 'mc',
+                        q: 'What is the primary purpose of budgeting (forecasting) cash payments/outflows?',
+                        opts: ['To anticipate financing needs in advance so a company can arrange a loan or line of credit before it actually needs the cash',
+                              'To eliminate the need to ever borrow money',
+                              'To calculate the company\'s income tax liability',
+                              'To determine how much inventory to physically count at year-end'],
+                        correct: 0,
+                        explanation: 'Just like forecasting cash receipts, forecasting cash payments lets a company see ahead of time whether it will be short on cash in a future month. That advance notice means the company can arrange financing calmly, rather than scrambling for an expensive emergency loan when the shortfall actually hits.',
+                        mnemonic: '💡 Memory tip: Budgeting outflows is a smoke detector, not a fire extinguisher — it warns you before the shortage happens so you can act calmly.'
+                  },
 
-{type:'mc',
- q:'How does a company convert forecasted SALES into forecasted PURCHASES for cash outflow budgeting purposes?',
- opts:['Multiply forecasted sales by the Cost of Goods Sold percentage',
-       'Multiply forecasted sales by the sales discount percentage',
-       'Add forecasted sales to the beginning inventory balance',
-       'Divide forecasted sales by the number of months in the budget period'],
- correct:0,
- explanation:'A company doesn\'t pay its supplier the retail selling price — it pays the wholesale purchase cost. So forecasted Purchases = forecasted Sales × Cost of Goods Sold %. If COGS is 80% of sales and sales are forecasted at $100,000, purchases are $80,000.',
- mnemonic:'💡 Memory tip: You sell at retail, but you PAY at wholesale — multiply sales by the COGS% to get what you actually owe your supplier.'},
+                  {
+                        type: 'mc',
+                        q: 'How does a company convert forecasted SALES into forecasted PURCHASES for cash outflow budgeting purposes?',
+                        opts: ['Multiply forecasted sales by the Cost of Goods Sold percentage',
+                              'Multiply forecasted sales by the sales discount percentage',
+                              'Add forecasted sales to the beginning inventory balance',
+                              'Divide forecasted sales by the number of months in the budget period'],
+                        correct: 0,
+                        explanation: 'A company doesn\'t pay its supplier the retail selling price — it pays the wholesale purchase cost. So forecasted Purchases = forecasted Sales × Cost of Goods Sold %. If COGS is 80% of sales and sales are forecasted at $100,000, purchases are $80,000.',
+                        mnemonic: '💡 Memory tip: You sell at retail, but you PAY at wholesale — multiply sales by the COGS% to get what you actually owe your supplier.'
+                  },
 
-{type:'tf',
- q:'Assuming there is no change in a company\'s inventory levels from month to month, forecasted Purchases equal forecasted Cost of Goods Sold.',
- opts:['True','False'],
- correct:0,
- explanation:'True. If inventory levels stay steady (steady state — buy exactly what you sell), then whatever a company purchases in a month equals what it recorded as cost of goods sold that same month. This assumption is what lets a single COGS% conversion double as the purchases figure.',
- mnemonic:'💡 Memory tip: No inventory buildup or drawdown = you buy exactly what you sell. Purchases and COGS become mirror images of each other.'},
+                  {
+                        type: 'tf',
+                        q: 'Assuming there is no change in a company\'s inventory levels from month to month, forecasted Purchases equal forecasted Cost of Goods Sold.',
+                        opts: ['True', 'False'],
+                        correct: 0,
+                        explanation: 'True. If inventory levels stay steady (steady state — buy exactly what you sell), then whatever a company purchases in a month equals what it recorded as cost of goods sold that same month. This assumption is what lets a single COGS% conversion double as the purchases figure.',
+                        mnemonic: '💡 Memory tip: No inventory buildup or drawdown = you buy exactly what you sell. Purchases and COGS become mirror images of each other.'
+                  },
 
-{type:'mc',
- q:'A company forecasts sales of $200,000 for a month, with Cost of Goods Sold historically running at 75% of sales. What are the company\'s forecasted purchases for that month (assuming no change in inventory levels)?',
- opts:['$150,000',
-       '$200,000',
-       '$50,000',
-       '$75,000'],
- correct:0,
- explanation:'Purchases = Sales × COGS% = $200,000 × 75% = $150,000.',
- mnemonic:'💡 Memory tip: Sales × COGS% = Purchases. Simple multiplication, but easy to rush and use the wrong percentage.'},
+                  {
+                        type: 'mc',
+                        q: 'A company forecasts sales of $200,000 for a month, with Cost of Goods Sold historically running at 75% of sales. What are the company\'s forecasted purchases for that month (assuming no change in inventory levels)?',
+                        opts: ['$150,000',
+                              '$200,000',
+                              '$50,000',
+                              '$75,000'],
+                        correct: 0,
+                        explanation: 'Purchases = Sales × COGS% = $200,000 × 75% = $150,000.',
+                        mnemonic: '💡 Memory tip: Sales × COGS% = Purchases. Simple multiplication, but easy to rush and use the wrong percentage.'
+                  },
 
-{type:'mc',
- q:'A company\'s purchases were $60,000 in November and $90,000 in December. It pays 50% of a month\'s purchases in the month following purchase, and the remaining 50% in the second month following. How much will the company pay in January?',
- opts:['$75,000',
-       '$30,000',
-       '$45,000',
-       '$150,000'],
- correct:0,
- explanation:'January payments = November purchases paid in the second month following (50% × $60,000 = $30,000) + December purchases paid in the month following (50% × $90,000 = $45,000) = $75,000.',
- mnemonic:'💡 Memory tip: No same-month payment in this pattern — January\'s payment only comes from purchases made TWO and ONE months earlier (Nov and Dec).'},
+                  {
+                        type: 'mc',
+                        q: 'A company\'s purchases were $60,000 in November and $90,000 in December. It pays 50% of a month\'s purchases in the month following purchase, and the remaining 50% in the second month following. How much will the company pay in January?',
+                        opts: ['$75,000',
+                              '$30,000',
+                              '$45,000',
+                              '$150,000'],
+                        correct: 0,
+                        explanation: 'January payments = November purchases paid in the second month following (50% × $60,000 = $30,000) + December purchases paid in the month following (50% × $90,000 = $45,000) = $75,000.',
+                        mnemonic: '💡 Memory tip: No same-month payment in this pattern — January\'s payment only comes from purchases made TWO and ONE months earlier (Nov and Dec).'
+                  },
 
-{type:'mc',
- q:'A company\'s purchases are forecasted at $90,000 in January, $70,000 in February, and $110,000 in March. It typically pays 30% of a month\'s purchases in the month of purchase, 50% the following month, and the remaining 20% the second month following. How much will it pay in March?',
- opts:['$86,000',
-       '$110,000',
-       '$68,000',
-       '$33,000'],
- correct:0,
- explanation:'March payments = January purchases paid in the second month following (20% × $90,000 = $18,000) + February purchases paid in the month following (50% × $70,000 = $35,000) + March purchases paid in the same month (30% × $110,000 = $33,000) = $86,000.',
- mnemonic:'💡 Memory tip: When a payment pattern includes a same-month percentage, the target month\'s OWN purchases count too — don\'t forget that third piece.'},
+                  {
+                        type: 'mc',
+                        q: 'A company\'s purchases are forecasted at $90,000 in January, $70,000 in February, and $110,000 in March. It typically pays 30% of a month\'s purchases in the month of purchase, 50% the following month, and the remaining 20% the second month following. How much will it pay in March?',
+                        opts: ['$86,000',
+                              '$110,000',
+                              '$68,000',
+                              '$33,000'],
+                        correct: 0,
+                        explanation: 'March payments = January purchases paid in the second month following (20% × $90,000 = $18,000) + February purchases paid in the month following (50% × $70,000 = $35,000) + March purchases paid in the same month (30% × $110,000 = $33,000) = $86,000.',
+                        mnemonic: '💡 Memory tip: When a payment pattern includes a same-month percentage, the target month\'s OWN purchases count too — don\'t forget that third piece.'
+                  },
 
-{type:'mc',
- q:'When a company compares its forecasted cash receipts to its forecasted cash disbursements for a given month, what does the resulting figure represent?',
- opts:['A net cash surplus (if receipts exceed disbursements) or a net cash deficit (if disbursements exceed receipts)',
-       'The company\'s net income for the month',
-       'The company\'s gross profit for the month',
-       'The change in the company\'s inventory balance'],
- correct:0,
- explanation:'Net cash position for the month = Forecasted Receipts − Forecasted Disbursements. A positive result is a surplus; a negative result is a deficit that signals the company may need short-term financing that month.',
- mnemonic:'💡 Memory tip: Cash budget math is simple subtraction — receipts minus payments tells you if you\'re flush or short.'},
+                  {
+                        type: 'mc',
+                        q: 'When a company compares its forecasted cash receipts to its forecasted cash disbursements for a given month, what does the resulting figure represent?',
+                        opts: ['A net cash surplus (if receipts exceed disbursements) or a net cash deficit (if disbursements exceed receipts)',
+                              'The company\'s net income for the month',
+                              'The company\'s gross profit for the month',
+                              'The change in the company\'s inventory balance'],
+                        correct: 0,
+                        explanation: 'Net cash position for the month = Forecasted Receipts − Forecasted Disbursements. A positive result is a surplus; a negative result is a deficit that signals the company may need short-term financing that month.',
+                        mnemonic: '💡 Memory tip: Cash budget math is simple subtraction — receipts minus payments tells you if you\'re flush or short.'
+                  },
 
-{type:'mc',
- q:'Winthrop Co. (first year of operation) forecasts sales of $900,000 (25% cash, 75% credit) and expects to collect 70% of credit sales during the year. Budgeted expenses are $700,000, including $20,000 of depreciation. If the desired ending cash balance is $30,000, how much must Winthrop borrow during the year?',
- opts:['$12,500',
-       '$17,500',
-       '$30,000',
-       '$0 — no borrowing is needed'],
- correct:0,
- explanation:'Cash collections = cash sales ($900,000 × 25% = $225,000) + credit collections ($900,000 × 75% × 70% = $472,500) = $697,500. Cash outflows = $700,000 − $20,000 depreciation = $680,000. Net cash flow = $697,500 − $680,000 = $17,500 surplus. Since this is the first year, beginning cash is $0. Borrowing = Desired Ending Balance − (Beginning Balance + Net Cash Flow) = $30,000 − ($0 + $17,500) = $12,500.',
- mnemonic:'💡 Memory tip: Borrowing = Desired Ending − (Beginning + Net Flow). First-year companies start beginning cash at $0 — don\'t forget that detail.'},
+                  {
+                        type: 'mc',
+                        q: 'Winthrop Co. (first year of operation) forecasts sales of $900,000 (25% cash, 75% credit) and expects to collect 70% of credit sales during the year. Budgeted expenses are $700,000, including $20,000 of depreciation. If the desired ending cash balance is $30,000, how much must Winthrop borrow during the year?',
+                        opts: ['$12,500',
+                              '$17,500',
+                              '$30,000',
+                              '$0 — no borrowing is needed'],
+                        correct: 0,
+                        explanation: 'Cash collections = cash sales ($900,000 × 25% = $225,000) + credit collections ($900,000 × 75% × 70% = $472,500) = $697,500. Cash outflows = $700,000 − $20,000 depreciation = $680,000. Net cash flow = $697,500 − $680,000 = $17,500 surplus. Since this is the first year, beginning cash is $0. Borrowing = Desired Ending Balance − (Beginning Balance + Net Cash Flow) = $30,000 − ($0 + $17,500) = $12,500.',
+                        mnemonic: '💡 Memory tip: Borrowing = Desired Ending − (Beginning + Net Flow). First-year companies start beginning cash at $0 — don\'t forget that detail.'
+                  },
 
-{type:'mc',
- q:'A company has a beginning cash balance of $50,000, forecasts cash receipts of $500,000 and cash disbursements of $520,000, and wants a desired ending cash balance of $40,000. How much must it borrow during the year?',
- opts:['$10,000',
-       '$20,000',
-       '$30,000',
-       '$0 — no borrowing is needed'],
- correct:0,
- explanation:'Net cash flow = $500,000 − $520,000 = −$20,000 (a deficit). Projected ending balance without borrowing = $50,000 + (−$20,000) = $30,000. Since the company wants $40,000, it must borrow $40,000 − $30,000 = $10,000.',
- mnemonic:'💡 Memory tip: First find where you\'d land without any borrowing, then borrow just enough to close the gap to your target.'},
+                  {
+                        type: 'mc',
+                        q: 'A company has a beginning cash balance of $50,000, forecasts cash receipts of $500,000 and cash disbursements of $520,000, and wants a desired ending cash balance of $40,000. How much must it borrow during the year?',
+                        opts: ['$10,000',
+                              '$20,000',
+                              '$30,000',
+                              '$0 — no borrowing is needed'],
+                        correct: 0,
+                        explanation: 'Net cash flow = $500,000 − $520,000 = −$20,000 (a deficit). Projected ending balance without borrowing = $50,000 + (−$20,000) = $30,000. Since the company wants $40,000, it must borrow $40,000 − $30,000 = $10,000.',
+                        mnemonic: '💡 Memory tip: First find where you\'d land without any borrowing, then borrow just enough to close the gap to your target.'
+                  },
 
-{type:'mc',
- q:'Why is depreciation subtracted from total budgeted expenses when calculating total CASH outflows?',
- opts:['Depreciation is a non-cash expense — no check is written for it in the current period, since the related cash was already paid when the asset was purchased',
-       'Depreciation is not a real expense at all and should never appear on the income statement',
-       'Depreciation is added, not subtracted, when computing cash outflows',
-       'Depreciation only applies to companies that lease their equipment'],
- correct:0,
- explanation:'Depreciation is an accounting allocation of an asset\'s cost over its useful life — it reduces net income but doesn\'t represent cash leaving the business this period. The actual cash outflow happened (often years earlier) when the asset was purchased. So when converting total expenses to cash outflows, depreciation (and other non-cash expenses like amortization) gets backed out.',
- mnemonic:'💡 Memory tip: Depreciation is an expense on paper, not a check in the mail — subtract it out to get to real cash.'},
+                  {
+                        type: 'mc',
+                        q: 'Why is depreciation subtracted from total budgeted expenses when calculating total CASH outflows?',
+                        opts: ['Depreciation is a non-cash expense — no check is written for it in the current period, since the related cash was already paid when the asset was purchased',
+                              'Depreciation is not a real expense at all and should never appear on the income statement',
+                              'Depreciation is added, not subtracted, when computing cash outflows',
+                              'Depreciation only applies to companies that lease their equipment'],
+                        correct: 0,
+                        explanation: 'Depreciation is an accounting allocation of an asset\'s cost over its useful life — it reduces net income but doesn\'t represent cash leaving the business this period. The actual cash outflow happened (often years earlier) when the asset was purchased. So when converting total expenses to cash outflows, depreciation (and other non-cash expenses like amortization) gets backed out.',
+                        mnemonic: '💡 Memory tip: Depreciation is an expense on paper, not a check in the mail — subtract it out to get to real cash.'
+                  },
 
-{type:'mc',
- q:'A company\'s total budgeted expenses for the year are $950,000, which include $42,000 of depreciation. What are the company\'s total cash outflows for the year?',
- opts:['$908,000',
-       '$950,000',
-       '$992,000',
-       '$42,000'],
- correct:0,
- explanation:'Total cash outflows = Total budgeted expenses − Depreciation (non-cash) = $950,000 − $42,000 = $908,000.',
- mnemonic:'💡 Memory tip: Total expenses minus the non-cash pieces (starting with depreciation) equals actual cash outflows.'},
+                  {
+                        type: 'mc',
+                        q: 'A company\'s total budgeted expenses for the year are $950,000, which include $42,000 of depreciation. What are the company\'s total cash outflows for the year?',
+                        opts: ['$908,000',
+                              '$950,000',
+                              '$992,000',
+                              '$42,000'],
+                        correct: 0,
+                        explanation: 'Total cash outflows = Total budgeted expenses − Depreciation (non-cash) = $950,000 − $42,000 = $908,000.',
+                        mnemonic: '💡 Memory tip: Total expenses minus the non-cash pieces (starting with depreciation) equals actual cash outflows.'
+                  },
 
-{type:'mc',
- q:'What is the main advantage of forecasting cash payments well in advance (e.g., on January 1st for the whole quarter) rather than discovering a shortfall on the day it happens?',
- opts:['The company can arrange financing calmly and typically get better loan terms, rather than scrambling for an emergency loan at a high interest rate',
-       'It eliminates the need to ever repay a loan',
-       'It guarantees the company will never have a cash deficit',
-       'It removes the need to track accounts payable'],
- correct:0,
- explanation:'A company that shows up at the bank the day it desperately needs cash looks risky and will likely pay a high interest rate. A company that forecasts the shortfall weeks or months ahead can calmly arrange a line of credit in advance, negotiate delayed supplier payments, or encourage faster customer payments — all while looking organized and credible to lenders.',
- mnemonic:'💡 Memory tip: Planning ahead = calm negotiation and better rates. Waiting until the crisis hits = panic borrowing at a premium.'},
+                  {
+                        type: 'mc',
+                        q: 'What is the main advantage of forecasting cash payments well in advance (e.g., on January 1st for the whole quarter) rather than discovering a shortfall on the day it happens?',
+                        opts: ['The company can arrange financing calmly and typically get better loan terms, rather than scrambling for an emergency loan at a high interest rate',
+                              'It eliminates the need to ever repay a loan',
+                              'It guarantees the company will never have a cash deficit',
+                              'It removes the need to track accounts payable'],
+                        correct: 0,
+                        explanation: 'A company that shows up at the bank the day it desperately needs cash looks risky and will likely pay a high interest rate. A company that forecasts the shortfall weeks or months ahead can calmly arrange a line of credit in advance, negotiate delayed supplier payments, or encourage faster customer payments — all while looking organized and credible to lenders.',
+                        mnemonic: '💡 Memory tip: Planning ahead = calm negotiation and better rates. Waiting until the crisis hits = panic borrowing at a premium.'
+                  },
 
-{type:'tf',
- q:'A company that discovers a cash shortfall on the very day it needs the money will typically get a lower interest rate than one that planned and arranged financing weeks in advance.',
- opts:['True','False'],
- correct:1,
- explanation:'False. The opposite is true — a company desperate for cash immediately looks risky to a lender and will typically pay a higher interest rate. A company that plans ahead and arranges financing calmly, showing a clear cash budget, looks more credible and generally secures better terms.',
- mnemonic:'💡 Memory tip: Panic borrowing costs more. Planned borrowing costs less — lenders reward companies that look organized.'},
+                  {
+                        type: 'tf',
+                        q: 'A company that discovers a cash shortfall on the very day it needs the money will typically get a lower interest rate than one that planned and arranged financing weeks in advance.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. The opposite is true — a company desperate for cash immediately looks risky to a lender and will typically pay a higher interest rate. A company that plans ahead and arranges financing calmly, showing a clear cash budget, looks more credible and generally secures better terms.',
+                        mnemonic: '💡 Memory tip: Panic borrowing costs more. Planned borrowing costs less — lenders reward companies that look organized.'
+                  },
 
-{type:'dd',
- q:'Match each description to the correct cash budgeting formula.',
- cols:['Collections Formula','Purchases Formula','Borrowing Formula'],
- items:[
-   {text:'Beginning A/R + Credit Sales − Ending A/R', answer:'Collections Formula'},
-   {text:'Sales × Cost of Goods Sold %', answer:'Purchases Formula'},
-   {text:'Desired Ending Cash Balance − (Beginning Cash Balance + Net Cash Flow)', answer:'Borrowing Formula'}
- ],
- explanation:'These are the three core formulas from cash budgeting: the Collections Formula solves for cash collected from A/R using a roll-forward, the Purchases Formula converts sales into what a company must buy (at cost) based on COGS%, and the Borrowing Formula tells you how much financing is needed to hit a target ending cash balance.',
- mnemonic:'💡 Memory tip: Collections = A/R roll-forward. Purchases = sales at wholesale cost. Borrowing = the gap between where you\'ll land and where you want to be.'},
+                  {
+                        type: 'dd',
+                        q: 'Match each description to the correct cash budgeting formula.',
+                        cols: ['Collections Formula', 'Purchases Formula', 'Borrowing Formula'],
+                        items: [
+                              { text: 'Beginning A/R + Credit Sales − Ending A/R', answer: 'Collections Formula' },
+                              { text: 'Sales × Cost of Goods Sold %', answer: 'Purchases Formula' },
+                              { text: 'Desired Ending Cash Balance − (Beginning Cash Balance + Net Cash Flow)', answer: 'Borrowing Formula' }
+                        ],
+                        explanation: 'These are the three core formulas from cash budgeting: the Collections Formula solves for cash collected from A/R using a roll-forward, the Purchases Formula converts sales into what a company must buy (at cost) based on COGS%, and the Borrowing Formula tells you how much financing is needed to hit a target ending cash balance.',
+                        mnemonic: '💡 Memory tip: Collections = A/R roll-forward. Purchases = sales at wholesale cost. Borrowing = the gap between where you\'ll land and where you want to be.'
+                  },
 
-{type:'ord',
- q:'Put the steps of building a cash budget in the correct order, from first to last.',
- items:[
-   {text:'Forecast sales for each future month', order:0},
-   {text:'Apply the historical collection pattern to determine forecasted cash receipts', order:1},
-   {text:'Convert forecasted sales to forecasted purchases using the Cost of Goods Sold percentage', order:2},
-   {text:'Apply the payment pattern to determine forecasted cash disbursements', order:3},
-   {text:'Compare forecasted receipts to forecasted disbursements to identify a monthly surplus or deficit', order:4},
-   {text:'Arrange financing (e.g., a line of credit) in advance for any anticipated shortfall', order:5}
- ],
- explanation:'Cash budgeting starts with a sales forecast, which drives both sides of the budget: the receipts side (applying the collection pattern) and the disbursements side (converting sales to purchases via COGS%, then applying the payment pattern). Once both sides are forecasted, comparing them reveals any monthly surplus or deficit — which is exactly the information needed to arrange financing calmly, in advance.',
- mnemonic:'💡 Memory tip: Sales forecast is the seed everything grows from — receipts and payments both branch off of it, and the comparison at the end tells you whether to call the bank.'},
+                  {
+                        type: 'ord',
+                        q: 'Put the steps of building a cash budget in the correct order, from first to last.',
+                        items: [
+                              { text: 'Forecast sales for each future month', order: 0 },
+                              { text: 'Apply the historical collection pattern to determine forecasted cash receipts', order: 1 },
+                              { text: 'Convert forecasted sales to forecasted purchases using the Cost of Goods Sold percentage', order: 2 },
+                              { text: 'Apply the payment pattern to determine forecasted cash disbursements', order: 3 },
+                              { text: 'Compare forecasted receipts to forecasted disbursements to identify a monthly surplus or deficit', order: 4 },
+                              { text: 'Arrange financing (e.g., a line of credit) in advance for any anticipated shortfall', order: 5 }
+                        ],
+                        explanation: 'Cash budgeting starts with a sales forecast, which drives both sides of the budget: the receipts side (applying the collection pattern) and the disbursements side (converting sales to purchases via COGS%, then applying the payment pattern). Once both sides are forecasted, comparing them reveals any monthly surplus or deficit — which is exactly the information needed to arrange financing calmly, in advance.',
+                        mnemonic: '💡 Memory tip: Sales forecast is the seed everything grows from — receipts and payments both branch off of it, and the comparison at the end tells you whether to call the bank.'
+                  },
 
-{type:'tf',
- q:'Credit card companies charge merchants a transaction fee in exchange for bearing the bad-debt, bookkeeping, and carrying costs that the merchant would otherwise have to absorb by selling on credit directly.',
- opts:['True','False'],
- correct:0,
- explanation:'True. This is exactly the value proposition of a credit card company: the business gets cash immediately and hands off the three costs of credit sales (bad debts, bookkeeping, carrying costs) to the card company, which bears that risk in exchange for its fee.',
- mnemonic:'💡 Memory tip: The card company\'s fee is the price of insurance against having to manage credit sales yourself.'},
+                  {
+                        type: 'tf',
+                        q: 'Credit card companies charge merchants a transaction fee in exchange for bearing the bad-debt, bookkeeping, and carrying costs that the merchant would otherwise have to absorb by selling on credit directly.',
+                        opts: ['True', 'False'],
+                        correct: 0,
+                        explanation: 'True. This is exactly the value proposition of a credit card company: the business gets cash immediately and hands off the three costs of credit sales (bad debts, bookkeeping, carrying costs) to the card company, which bears that risk in exchange for its fee.',
+                        mnemonic: '💡 Memory tip: The card company\'s fee is the price of insurance against having to manage credit sales yourself.'
+                  },
 
-{type:'mc',
- q:'Which of the following is NOT one of the three costs of selling on credit?',
- opts:['Increased sales volume',
-       'Bad debts',
-       'Bookkeeping costs',
-       'Carrying costs'],
- correct:0,
- explanation:'Increased sales volume is actually the BENEFIT of selling on credit, not a cost. The three costs are bad debts, bookkeeping costs, and carrying costs — all of which are weighed against that sales benefit when a company decides whether and how aggressively to offer credit.',
- mnemonic:'💡 Memory tip: Don\'t confuse the benefit (more sales) with the costs (the 3 B\'s/C: bad debts, bookkeeping, carrying costs) — this is a classic trap-answer setup.'},
+                  {
+                        type: 'mc',
+                        q: 'Which of the following is NOT one of the three costs of selling on credit?',
+                        opts: ['Increased sales volume',
+                              'Bad debts',
+                              'Bookkeeping costs',
+                              'Carrying costs'],
+                        correct: 0,
+                        explanation: 'Increased sales volume is actually the BENEFIT of selling on credit, not a cost. The three costs are bad debts, bookkeeping costs, and carrying costs — all of which are weighed against that sales benefit when a company decides whether and how aggressively to offer credit.',
+                        mnemonic: '💡 Memory tip: Don\'t confuse the benefit (more sales) with the costs (the 3 B\'s/C: bad debts, bookkeeping, carrying costs) — this is a classic trap-answer setup.'
+                  },
 
-{type:'mc',
- q:'In the credit terms "4/15, net 60," what does the number "60" represent?',
- opts:['The maximum number of days the customer has to pay before being considered late, if the discount is not taken',
-       'The percentage discount available if paid within 60 days',
-       'The number of days the discount remains available',
-       'The interest rate charged after 60 days'],
- correct:0,
- explanation:'The "net 60" portion means the full (net) amount is due within 60 days if the customer doesn\'t take the early-payment discount. It\'s the outer deadline for payment, not a discount percentage or discount window.',
- mnemonic:'💡 Memory tip: The number right after "net" is always the final deadline — the last chance to pay before you\'re late.'},
+                  {
+                        type: 'mc',
+                        q: 'In the credit terms "4/15, net 60," what does the number "60" represent?',
+                        opts: ['The maximum number of days the customer has to pay before being considered late, if the discount is not taken',
+                              'The percentage discount available if paid within 60 days',
+                              'The number of days the discount remains available',
+                              'The interest rate charged after 60 days'],
+                        correct: 0,
+                        explanation: 'The "net 60" portion means the full (net) amount is due within 60 days if the customer doesn\'t take the early-payment discount. It\'s the outer deadline for payment, not a discount percentage or discount window.',
+                        mnemonic: '💡 Memory tip: The number right after "net" is always the final deadline — the last chance to pay before you\'re late.'
+                  },
 
-];
+            ];
 
-initQuiz(questions, 'Section 8');
-</script>
+            initQuiz(questions, 'Section 8');
+      </script>
 </body>
+
 </html>

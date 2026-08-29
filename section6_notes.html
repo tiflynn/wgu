@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 6 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-profit{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-eff{background:rgba(79,142,247,.15);color:var(--accent)}
+  .cat-lev{background:rgba(234,88,12,.13);color:#C2410C}
+  .cat-liq{background:rgba(202,138,4,.14);color:#B45309}
+  .cat-mkt{background:rgba(167,139,250,.15);color:var(--accent2)}
+  .cat-cash{background:rgba(5,150,105,.13);color:#065F46}
+  .cat-err{background:rgba(107,114,128,.15);color:#374151}
+  .cat-fraud{background:rgba(248,113,113,.15);color:#B91C1C}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-node.good{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 6</p>
+  <h1>The Statement of<br><span>Cash Flows</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#purpose">Purpose of the Statement of Cash Flows</a></li>
+      <li><span class="n">02</span><a href="#scenarios">Three Scenarios Where Net Income Fails</a></li>
+      <li><span class="n">03</span><a href="#equivalents">Cash &amp; Cash Equivalents</a></li>
+      <li><span class="n">04</span><a href="#categories">The Three Categories: O / I / F</a></li>
+      <li><span class="n">05</span><a href="#gotchas">The GAAP "Gotcha" Rules</a></li>
+      <li><span class="n">06</span><a href="#connect">How the Statements Connect &amp; Cash Flow Patterns</a></li>
+      <li><span class="n">07</span><a href="#preparing">Preparing the Statement: The Six-Step Process</a></li>
+      <li><span class="n">08</span><a href="#methods">Direct vs. Indirect Method</a></li>
+      <li><span class="n">09</span><a href="#forecast">Forecasting: Pro Forma Statements</a></li>
+      <li><span class="n">10</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="purpose">
+    <h2>01 · Purpose of the Statement of Cash Flows</h2>
+    <p class="section-sub">Topic 5.1</p>
+
+    <div class="formula-card">
+      <div class="formula-name">What it reports</div>
+      <div class="formula-eq">Cash inflow + Cash outflow, with emphasis on CASH GENERATED BY OPERATIONS</div>
+      <div class="formula-meaning">Has been required in the United States since <strong>1988</strong>. It exists as a companion to the balance sheet and income statement, providing information that isn't readily apparent from either one alone.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Why was it created? Because <strong>net income sometimes fails</strong> to reflect a company's true performance. The cash flow statement is the reality check.</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Operating Activities<br><span style="font-size:.72rem;color:var(--muted)">The daily grind — why we're in business</span></div><span class="chain-sep">+</span>
+      <div class="chain-node">Investing Activities<br><span style="font-size:.72rem;color:var(--muted)">Expanding productive capacity</span></div><span class="chain-sep">+</span>
+      <div class="chain-node">Financing Activities<br><span style="font-size:.72rem;color:var(--muted)">Cash to/from owners &amp; creditors</span></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Everything on one page:</strong> the cash flow statement is a one-page summary of the results of a company's operating, investing, and financing activities for the period.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="scenarios">
+    <h2>02 · Three Scenarios Where Net Income Fails</h2>
+    <p class="section-sub">Topic 5.1 — the core justification for why this statement exists</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Big Loss Scenario — too pessimistic</h3>
+        <p>A large net loss from an asset <strong>impairment writedown</strong> reflects a real decline in value, but since the writedown is a <strong>non-cash expense</strong>, it doesn't hurt short-term liquidity or operating cash flow. Net income looks terrible while cash flow stays healthy.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Rapid Growth Scenario — too optimistic</h3>
+        <p>Accrual-based revenue recognition can make net income look strong even as operating cash flow goes <strong>negative</strong>. Growth demands upfront cash for inventory &amp; capex, while credit sales delay collection. A company can be profitable and still hit a liquidity crisis.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Reality Check Scenario — too "iffy"</h3>
+        <p>Net income relies on estimates and assumptions (like useful life for depreciation) that management has some latitude to adjust — especially under pressure to look good for financing or investors. Operating cash flow reflects actual transactions, so it checks the credibility of earnings.</p>
+      </div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Key vocabulary from this topic</div>
+      <div class="formula-meaning">
+        <strong>Asset impairment writedown</strong> — reducing the recorded (book) value of a long-term asset because it's no longer worth what's on the books.<br><br>
+        <strong>Non-cash expense</strong> — an expense that reduces net income but involves no actual cash outflow.
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Forecasting tool:</strong> constructing a <strong>pro forma</strong> (projected) cash flow statement lets you analyze whether operating, investing, and financing plans are consistent and workable before they happen. More on this in section 09 below.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="equivalents">
+    <h2>03 · Cash &amp; Cash Equivalents</h2>
+    <p class="section-sub">Topic 5.2</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The two-part test</div>
+      <div class="formula-eq">Readily convertible to a KNOWN amount of cash + Close enough to maturity (≈3 months or less) that value risk is insignificant</div>
+      <div class="formula-meaning">Only items passing <em>both</em> parts count as a cash equivalent. Not every current asset qualifies — receivables and inventory are current assets but are NOT cash equivalents.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Qualifies</th><th>Does NOT qualify</th></tr>
+      <tr><td>Treasury bills — short-term, U.S.-government-backed, extremely liquid</td><td><strong>Notes receivable</strong> — a company-specific IOU carrying credit risk and often a longer maturity</td></tr>
+      <tr><td>Checking accounts — cash on demand</td><td>Long-term investment securities</td></tr>
+      <tr><td>Money market funds — highly liquid, stable value</td><td>Inventory</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Exam trap:</strong> "notes receivable" is the classic wrong-answer bait in a cash-equivalents question. It fails the test on both liquidity (not readily convertible on demand) and risk (the debtor might not pay).
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="categories">
+    <h2>04 · The Three Categories: Operating / Investing / Financing</h2>
+    <p class="section-sub">Topic 5.2</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 1rem">The core question for every cash transaction: <strong>"What relationship does this cash flow represent?"</strong></p>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>Definition</th><th>Cash Receipts</th><th>Cash Payments</th></tr>
+      <tr>
+        <td><strong>Operating</strong></td>
+        <td>Transactions relating to delivering/producing goods or providing services — activities that enter into the calculation of net income</td>
+        <td>Sale of goods/services · Sale of trading securities · Interest revenue · Dividend revenue</td>
+        <td>Inventory purchases · Wages &amp; salaries · Taxes · Interest expense · Other expenses (utilities, rent) · Purchase of trading securities</td>
+      </tr>
+      <tr>
+        <td><strong>Investing</strong></td>
+        <td>(1) Acquiring/selling productive assets (PP&amp;E), (2) acquiring/selling investment securities, (3) lending money and collecting on loans</td>
+        <td>Sale of plant assets · Sale of a business segment · Sale of nontrading securities · Collection of loan principal</td>
+        <td>Purchase of plant assets · Purchase of nontrading securities · Making loans to other entities</td>
+      </tr>
+      <tr>
+        <td><strong>Financing</strong></td>
+        <td>Obtaining resources from owners &amp; providing a return; obtaining resources from creditors &amp; repaying borrowings</td>
+        <td>Issuance of stock · Borrowing (bonds, notes, mortgages)</td>
+        <td>Cash dividends · Repayment of loans (principal) · Repurchase of stock (treasury stock)</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <strong>Trading vs. nontrading securities twist:</strong> trading securities are bought/sold as part of routine activity, so they stay in <strong>operating</strong>. Nontrading (investment) securities belong in <strong>investing</strong>. Same asset type, different classification, depending on intent.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Net cash provided by operating activities</div>
+      <div class="formula-eq">= the "bottom line" of the cash flow statement</div>
+      <div class="formula-meaning">Just as net income is the bottom line of the income statement, operating cash flow is the headline number of the cash flow statement — long-run survival depends on operations generating cash.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="gotchas">
+    <h2>05 · The GAAP "Gotcha" Rules</h2>
+    <p class="section-sub">Topic 5.2/5.3 — controversial classifications that don't follow the logic above</p>
+
+    <div class="callout warn">
+      <strong>Why "gotcha"?</strong> Interest and dividends relate to debt/investment relationships (which sound like financing or investing), but GAAP puts most of them in <strong>operating</strong> instead — because they flow through the income statement in computing net income.
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Item (U.S. GAAP)</th><th>Classification</th><th>Why</th></tr>
+      <tr><td>Cash paid for interest</td><td><span class="cat-pill cat-eff">Operating</span></td><td>Interest expense enters net income</td></tr>
+      <tr><td>Cash received for interest</td><td><span class="cat-pill cat-eff">Operating</span></td><td>Interest revenue enters net income</td></tr>
+      <tr><td>Cash received for dividends</td><td><span class="cat-pill cat-eff">Operating</span></td><td>Dividend revenue enters net income</td></tr>
+      <tr><td>Cash paid for income taxes</td><td><span class="cat-pill cat-eff">Operating</span></td><td>Tax expense enters net income</td></tr>
+      <tr><td><strong>Cash dividends PAID to stockholders</strong></td><td><span class="cat-pill cat-lev">Financing</span></td><td>The one exception — a distribution of profits <em>to</em> owners, not an income-statement item</td></tr>
+      <tr><td>Repayment of loan principal</td><td><span class="cat-pill cat-lev">Financing</span></td><td>Returning borrowed capital to a creditor (contrast with the <em>interest</em> on that same loan, which is operating)</td></tr>
+      <tr><td>Purchase of treasury stock (your own)</td><td><span class="cat-pill cat-lev">Financing</span></td><td>A transaction with your own owners</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>Memory rule:</strong> "Income items → operating. Capital moves → financing." Interest (both directions) and dividends received all touch the income statement. Dividends paid, loan principal, and stock buybacks all touch the capital structure instead.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">One loan payment can split into two sections:</p>
+    <div class="formula-card">
+      <div class="formula-name">Loan payment = Principal + Interest</div>
+      <div class="formula-eq">Principal portion → Financing &nbsp;|&nbsp; Interest portion → Operating</div>
+      <div class="formula-meaning">Even though both pieces leave the bank account together, the statement of cash flows splits them into different sections.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Item</th><th>U.S. GAAP</th><th>International (IFRS)</th></tr>
+      <tr><td>Cash paid for interest</td><td>Operating only</td><td>Operating <em>or</em> Financing</td></tr>
+      <tr><td>Cash received for interest/dividends</td><td>Operating only</td><td>Operating <em>or</em> Investing</td></tr>
+      <tr><td>Cash paid for income taxes</td><td>Operating only</td><td>Operating, Investing, <em>or</em> Financing</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Whose stock?</strong> Buying <em>another</em> company's stock as an investment → Investing. Buying back <em>your own</em> company's stock (treasury stock) → Financing.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="connect">
+    <h2>06 · How the Statements Connect &amp; Cash Flow Patterns</h2>
+    <p class="section-sub">Topic 5.2</p>
+
+    <div class="chain-flow">
+      <div class="chain-node good">Operating Cash Flow</div><span class="chain-sep">+ accrual adjustments →</span>
+      <div class="chain-node good">Net Income</div>
+    </div>
+    <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 1rem">A company generates cash from day-to-day operations. Accountants then apply accrual adjustments — did you actually earn the revenue yet, even if paid in advance? Did employees work but not get paid yet? These adjustments turn raw cash flow into the refined measure of performance: net income. The two are tightly connected, differing only by accrual accounting.</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0">Each section of the cash flow statement matches up with the corresponding part of the balance sheet — operating with current assets/liabilities, investing with long-term assets, financing with debt and equity.</p>
+
+    <table class="compare-table">
+      <tr><th>Category</th><th>Normal / healthy sign</th><th>What it signals</th></tr>
+      <tr><td>Operating</td><td><strong>Positive</strong></td><td>A healthy business generates cash from its core activity</td></tr>
+      <tr><td>Investing</td><td><strong>Negative</strong></td><td>Most companies are spending cash to expand or enhance long-term assets</td></tr>
+      <tr><td>Financing</td><td><strong>Depends on growth speed</strong></td><td>Positive = young, rapidly expanding company needing external financing. Negative = mature company returning cash (dividends, debt repayment, buybacks) to its capital providers</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <strong>Non-cash investing &amp; financing activities:</strong> some investing/financing activities affect a company's financial position but involve <em>no cash</em> during the period — e.g., purchasing a long-term asset by issuing debt or stock directly to the seller. Since no cash moved, these can't appear in the three cash sections — but they still significantly affect financial position, so they <strong>must be disclosed</strong>.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="preparing">
+    <h2>07 · Preparing the Statement: The Six-Step Process</h2>
+    <p class="section-sub">Topic 5.3</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 1rem"><strong>If detailed cash transaction records are available</strong> (easy path — no accrual assumptions needed):</p>
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1</span><div class="step-label">Identify all cash inflows &amp; outflows</div></div>
+      <div class="pie-step"><span class="step-num">2</span><div class="step-label">Separate into Operating / Investing / Financing</div></div>
+      <div class="pie-step"><span class="step-num">3</span><div class="step-label">Prepare the formal statement</div></div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem"><strong>If detailed cash records are NOT available</strong>, infer cash flows from how the balance sheet and income statement articulate — the full six-step process:</p>
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1</span><div class="step-label">Compute change in cash balance</div></div>
+      <div class="pie-step"><span class="step-num">2</span><div class="step-label">OPERATING: convert income statement accrual → cash, line by line</div></div>
+      <div class="pie-step"><span class="step-num">3</span><div class="step-label">INVESTING: analyze changes in long-term assets</div></div>
+      <div class="pie-step"><span class="step-num">4</span><div class="step-label">FINANCING: analyze changes in debt &amp; equity</div></div>
+      <div class="pie-step"><span class="step-num">5</span><div class="step-label">Reconcile to the computed cash change; prepare formal statement</div></div>
+      <div class="pie-step"><span class="step-num">6</span><div class="step-label">Disclose non-cash items</div></div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 2 (Operating) — three adjustment types</div>
+      <div class="formula-meaning">
+        <strong>1.</strong> Add back non-cash expenses (e.g., depreciation)<br>
+        <strong>2.</strong> Eliminate gains/losses related to investing activities<br>
+        <strong>3.</strong> Adjust for changes in operating (current) assets &amp; liabilities
+      </div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Book Value</div>
+      <div class="formula-eq">Cost − Accumulated Depreciation</div>
+      <div class="formula-meaning">Used in Step 3 (investing analysis): comparing cash received from a sale to the asset's book value determines the gain or loss — which then must be eliminated from operating cash flow in Step 2.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">General pattern for current asset/liability changes</div>
+      <div class="formula-meaning">
+        Current <strong>asset</strong> goes <strong>down</strong> → Add (converted to cash, or cash was avoided)<br>
+        Current <strong>asset</strong> goes <strong>up</strong> → Subtract (cash got tied up)<br>
+        Current <strong>liability</strong> goes <strong>up</strong> → Add (you delayed paying, preserving cash)<br>
+        Current <strong>liability</strong> goes <strong>down</strong> → Subtract (you used cash to pay it)
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory rule:</strong> "Assets oppose, liabilities agree." Asset changes move opposite to cash; liability changes move the same direction as cash.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="methods">
+    <h2>08 · Direct vs. Indirect Method</h2>
+    <p class="section-sub">Topic 5.3 — two ways to REPORT the same operating cash flow number</p>
+
+    <div class="callout">
+      <strong>Same answer, different presentation:</strong> both methods produce the <em>identical</em> operating cash flow figure and rest on the same underlying analysis. Only the operating section differs — investing and financing look the same either way.
+    </div>
+
+    <table class="compare-table">
+      <tr><th></th><th>Direct Method</th><th>Indirect Method</th></tr>
+      <tr><td><strong>Starting point</strong></td><td>Skips net income entirely — lists each operating cash flow line by line (cash collected from customers, cash paid for inventory, interest, taxes, etc.)</td><td>Starts with <strong>net income</strong>, shows a series of adjustments, arrives at operating cash flow</td></tr>
+      <tr><td><strong>How to identify it</strong></td><td>First line is a cash receipt/payment item</td><td>First number shown is net income — that's the giveaway</td></tr>
+      <tr><td><strong>Readability</strong></td><td>Understandable by anyone — no accounting training needed (the "mother test")</td><td>Confusing to non-accountants — "why are we subtracting a gain?"</td></tr>
+      <tr><td><strong>Advantages</strong></td><td>Easy to understand; allows line-item trend analysis over multiple years</td><td>Highlights accrual assumptions; a genuine cash-flow management tool; easy to do after practice</td></tr>
+      <tr><td><strong>Who uses it</strong></td><td>Almost no one</td><td><strong>Almost everyone</strong></td></tr>
+    </table>
+
+    <div class="formula-card">
+      <div class="formula-name">Indirect method adjustment logic</div>
+      <div class="formula-meaning">
+        <strong>Depreciation expense → Add back.</strong> It was subtracted computing net income, but no cash left the company — adding it back reverses a non-cash deduction (it does NOT mean depreciation creates cash).<br><br>
+        <strong>Gain on sale of equipment → Subtract.</strong> The gain was added into net income, but that cash belongs in the <em>investing</em> section — subtracting it evicts investing traces from operating cash flow.
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Why almost every company chooses indirect despite being harder to read:</strong> it puts the #1 most important number in accounting (net income) and the #2 (operating cash flow) on one page — <em>with a reconciliation</em> explaining every reason they differ. It also highlights management levers, e.g., don't aggressively pay down accounts payable if you need short-term cash — the indirect method makes that trade-off visible; the direct method doesn't.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="forecast">
+    <h2>09 · Forecasting: Pro Forma Statements</h2>
+    <p class="section-sub">Topic 5.5</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Pro forma cash flow statement</div>
+      <div class="formula-eq">= A prediction of the future actual cash flow statement, built using the same six-step process on a projected balance sheet &amp; income statement</div>
+      <div class="formula-meaning">Knowledge of how the three primary financial statements articulate allows one to forecast how interactions among management decisions might affect a company's future financial position.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">A cash flow projection serves three audiences:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>The Company</h3>
+        <p>Plans ahead for timing of new loans, stock issuances, and long-term asset acquisitions.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Potential Lenders</h3>
+        <p>Evaluate the likelihood that a loan will be repaid.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Potential Investors</h3>
+        <p>Evaluate the likelihood of receiving cash dividends in the future.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>10 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Notes receivable is NOT a cash equivalent</strong> — it's an IOU with credit risk and a longer maturity, even though it's a current asset.</li>
+      <li><strong>Dividends received vs. dividends paid</strong> — received = operating (investment income). Paid = financing (return of capital to owners). This asymmetry is the single most-tested gotcha.</li>
+      <li><strong>Interest paid AND interest received are both operating</strong> under U.S. GAAP, despite sounding like financing/investing items.</li>
+      <li><strong>One loan payment, two classifications</strong> — the principal portion is financing; the interest portion is operating, even though both leave the bank account in the same transaction.</li>
+      <li><strong>Whose stock?</strong> Buying another company's stock = investing. Buying back your OWN stock (treasury stock) = financing.</li>
+      <li><strong>Trading vs. nontrading securities</strong> — trading securities (routine activity) stay in operating; nontrading (investment) securities go to investing.</li>
+      <li><strong>Direct and indirect methods produce the SAME operating cash flow number</strong> — they differ only in presentation, not calculation.</li>
+      <li><strong>Adding back depreciation does not mean it creates cash</strong> — it only reverses a non-cash subtraction that was made when computing net income.</li>
+      <li><strong>Big Loss Scenario ≠ Rapid Growth Scenario</strong> — Big Loss is a NON-CASH writedown that hurts net income while cash stays healthy. Rapid Growth is a cash-consuming expansion that keeps net income looking strong while cash flow turns negative. Don't mix up which one is "too pessimistic" vs. "too optimistic."</li>
+      <li><strong>Current asset vs. current liability changes move opposite ways</strong> relative to cash — assets oppose, liabilities agree. A decrease in AR is added; a decrease in AP is subtracted.</li>
+      <li><strong>Normal healthy pattern:</strong> Operating positive, Investing negative, Financing depends on growth stage (positive = young/growing, negative = mature).</li>
+      <li><strong>Non-cash investing/financing transactions still require disclosure</strong> even though no cash moved and they never appear in the three main sections.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

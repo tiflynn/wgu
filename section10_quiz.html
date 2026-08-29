@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 10 Quiz</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<div class="top-nav">
+  <a class="back-link" href="index.html">← All Sections</a>
+  <a class="back-link notes" href="section10_notes.html" target="_blank" rel="noopener">📄 Section 10 Notes</a>
+</div>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 10</p>
+  <h1>Management Accounting &<br><span>Cost Concepts</span></h1>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="qCounter">Question 1 of 1</span>
+    <span id="pctLabel">0%</span>
+  </div>
+  <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="chips">
+  <div class="chip" id="chipTotal">Score: 0 / 0</div>
+  <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+  <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+</div>
+
+<div class="card" id="quizCard">
+  <div class="q-meta">
+    <span class="q-label" id="qLabel">Question 1</span>
+    <span class="type-badge" id="typeBadge"></span>
+  </div>
+  <p class="q-text" id="qText"></p>
+  <p class="q-hint" id="qHint" style="display:none"></p>
+  <div id="interactionZone"></div>
+  <div class="feedback" id="feedback">
+    <div class="feedback-head" id="fbHead"></div>
+    <div id="fbBody"></div>
+    <div class="mnemonic" id="fbMnemonic"></div>
+  </div>
+  <div class="btn-wrap" id="btnWrap">
+    <button class="btn-next" id="btnNext">Next Question →</button>
+  </div>
+</div>
+
+<div id="results">
+  <p class="grade-label">Final Score</p>
+  <div class="big-score" id="bigScore"></div>
+  <p class="grade-label" id="gradeMsg"></p>
+  <div class="breakdown">
+    <div class="bk-card"><div class="num" id="rcCorrect" style="color:var(--correct)"></div><div class="lbl">Correct</div></div>
+    <div class="bk-card"><div class="num" id="rcWrong" style="color:var(--wrong)"></div><div class="lbl">Wrong</div></div>
+    <div class="bk-card"><div class="num" id="rcTotal"></div><div class="lbl">Total</div></div>
+  </div>
+  <div class="review" id="reviewList"></div>
+  <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+</div>
+
+<script src="quiz.js"></script>
+<script>
+const questions = [
+
+/* ========== INTRO — MANAGEMENT VS. FINANCIAL ACCOUNTING (OVERVIEW) ========== */
+
+{type:'mc',
+ q:'Management accounting is best defined as:',
+ opts:['The gathering and analysis of detailed information for the purpose of internal decision making',
+       'The gathering, reporting, and analysis of information primarily for the benefit of external users such as investors and creditors',
+       'The process of externally auditing a company\'s financial statements',
+       'A synonym for financial accounting used in international contexts'],
+ correct:0,
+ explanation:'Management accounting is detailed data used internally to make decisions. Contrast this with financial accounting, which is summary data used by external parties like investors and creditors.',
+ mnemonic:'💡 Memory tip: "Management" = "my company, my details." Management accounting stays inside the walls.'},
+
+{type:'mc',
+ q:'Financial accounting is best defined as:',
+ opts:['The gathering, reporting, and analysis of information primarily for the benefit of external users such as investors and creditors',
+       'The gathering and analysis of detailed information for the purpose of internal decision making',
+       'A system used exclusively for tax filing purposes',
+       'The process of setting a company\'s internal budgets'],
+ correct:0,
+ explanation:'Financial accounting is summary data, built for outsiders — investors and creditors deciding whether to put money into the company.',
+ mnemonic:'💡 Memory tip: "Financial" = "for financiers." It exists to serve the people financing the business from outside.'},
+
+{type:'ms',
+ q:'Which of the following are examples of management accounting information needs, per the notes? Select all that apply.',
+ opts:['Product costs',
+       'Breakeven analysis',
+       'Budgeting',
+       'Performance evaluation',
+       'Credit analysis',
+       'Estimating the value of a company for a potential investor'],
+ correctSet:[0,1,2,3],
+ explanation:'Product costs, breakeven analysis, budgeting, and performance evaluation are all internal, decision-focused needs — classic management accounting. Credit analysis and estimating a company\'s value for outside investors are financial accounting uses, since they serve external parties.',
+ mnemonic:'💡 Memory tip: If the question is "how do we run the business better," it\'s management accounting. If it\'s "should someone outside lend to or invest in us," it\'s financial accounting.'},
+
+{type:'ms',
+ q:'Which of the following are examples of financial accounting information needs, per the notes? Select all that apply.',
+ opts:['Credit analysis',
+       'Regulatory uses (such as assessing the financial health of a bank or insurance company)',
+       'Estimating the value of a company',
+       'Breakeven analysis',
+       'Deciding whether to outsource production'],
+ correctSet:[0,1,2],
+ explanation:'Credit analysis, regulatory health checks, and company valuation all serve outside parties evaluating the business — the hallmark of financial accounting. Breakeven analysis and outsourcing decisions are internal, day-to-day management calls.',
+ mnemonic:'💡 Memory tip: Financial accounting answers questions asked by people who don\'t work there — lenders, regulators, potential buyers.'},
+
+/* ========== TOPIC 9.1 — MANAGEMENT ACCOUNTING AS A COMPETITIVE TOOL ========== */
+
+{type:'tf',
+ q:'Good management accounting can be a competitive tool.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'True. Good management accounting helps a business understand its own economics better than its competitors understand theirs, which translates directly into a competitive edge.',
+ mnemonic:'💡 Memory tip: Management accounting is a weapon; financial accounting is a scoreboard.'},
+
+{type:'tf',
+ q:'Financial accounting is a competitive tool that companies can use to outperform their rivals.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False. Financial accounting is meant to be an unbiased scoreboard so outsiders (banks, investors) can fairly compare companies. If a company used it as a competitive tool to gain an edge, that would actually undermine its purpose — it would just be "managing perception."',
+ mnemonic:'💡 Memory tip: A scoreboard doesn\'t play the game for you — it just reports the score fairly.'},
+
+{type:'mc',
+ q:'In the two soup-and-salad restaurant example, what made Restaurant #2 use management accounting as a genuine competitive tool?',
+ opts:['It tracked item-by-item cost and price, customer buying patterns, and used that data to build focused promotions',
+       'It simply made sure payroll and bills were paid on time',
+       'It hired a bigger accounting staff than Restaurant #1',
+       'It switched to a different set of GAAP rules than its competitor'],
+ correct:0,
+ explanation:'Restaurant #2 went far beyond routine bookkeeping (which is all Restaurant #1 did). It tracked cost vs. price per item, knew which products were most profitable, monitored customer patterns, and used all of that detailed internal data to actively run the business better — the definition of management accounting as a competitive tool.',
+ mnemonic:'💡 Memory tip: Restaurant #1 just keeps the lights on. Restaurant #2 uses its data to crush the competition.'},
+
+{type:'mc',
+ q:'Per the "Remember This" summary for Topic 9.1, what do good companies do with their internal information systems?',
+ opts:['Experiment with them in order to generate better data, allowing them to make better decisions than their competitors',
+       'Keep them identical to their competitors\' systems to ensure fair comparison',
+       'Outsource them entirely to an external audit firm',
+       'Use them only to comply with Sarbanes-Oxley requirements'],
+ correct:0,
+ explanation:'The key takeaway is experimentation — good companies actively refine how they gather and use internal data, which is what generates a real decision-making edge over competitors.',
+ mnemonic:'💡 Memory tip: "Experiment to out-decide the competition" — it\'s not a static system, it\'s a constantly improving one.'},
+
+/* ========== TOPIC 9.2 — MANAGEMENT ACCOUNTING AND FINANCIAL ACCOUNTING ========== */
+
+{type:'mc',
+ q:'Why does financial accounting rely on a "common reporting platform" (GAAP)?',
+ opts:['So outside parties like banks and investors can compare different companies on equal, standardized footing',
+       'So companies can customize their accounting to look more attractive to competitors',
+       'So management accountants can share proprietary cost data with the public',
+       'So the IMA can certify management accountants'],
+ correct:0,
+ explanation:'Because financial accounting serves outsiders trying to compare many companies at once, everyone needs to report using the same rules — otherwise a bank couldn\'t fairly judge which of thirty loan applicants is the safest bet.',
+ mnemonic:'💡 Memory tip: A "common reporting platform" is like a common scoring system in sports — you can\'t compare teams fairly if everyone plays by different rules.'},
+
+{type:'mc',
+ q:'In the United States, who has the legal authority to set accounting rules, and to whom have they delegated that authority?',
+ opts:['The SEC has the legal authority and has delegated it to the FASB',
+       'The FASB has the legal authority and has delegated it to the SEC',
+       'The IASB has the legal authority and has delegated it to the IMA',
+       'Congress directly writes and enforces all GAAP rules with no delegation'],
+ correct:0,
+ explanation:'The Securities and Exchange Commission (SEC) is the government regulator with legal authority over U.S. accounting rules, but it delegates the actual rule-writing to the Financial Accounting Standards Board (FASB).',
+ mnemonic:'💡 Memory tip: SEC = the boss with legal power; FASB = the boss\'s appointed rule-writer.'},
+
+{type:'mc',
+ q:'Which organization sets accounting rules internationally (outside the U.S.)?',
+ opts:['The IASB (International Accounting Standards Board)',
+       'The FASB (Financial Accounting Standards Board)',
+       'The IMA (Institute of Management Accountants)',
+       'The SEC (Securities and Exchange Commission)'],
+ correct:0,
+ explanation:'The IASB is the international counterpart to the FASB — FASB sets U.S. GAAP, IASB sets international accounting standards.',
+ mnemonic:'💡 Memory tip: "I" for IASB, "I" for International.'},
+
+{type:'dd',
+ q:'Match each organization to its role.',
+ cols:['FASB','SEC','IASB','IMA'],
+ items:[
+   {text:'Sets U.S. GAAP (Generally Accepted Accounting Principles)', answer:'FASB'},
+   {text:'U.S. government regulator with ultimate legal authority over accounting rules, delegated to a standard-setter', answer:'SEC'},
+   {text:'Sets international accounting rules outside the U.S.', answer:'IASB'},
+   {text:'Sets professional standards for accountants working inside companies (management accountants) and issues the CMA credential', answer:'IMA'}
+ ],
+ explanation:'FASB writes U.S. GAAP under authority delegated by the SEC; the IASB is the international equivalent of the FASB; the IMA is a separate organization focused specifically on internal, management accounting professionals.',
+ mnemonic:'💡 Memory tip: SEC delegates → FASB writes (U.S.). IASB writes (international). IMA trains and certifies the internal accountants (CMA).'},
+
+{type:'dd',
+ q:'Match each description to whether it applies to Management Accounting or Financial Accounting.',
+ cols:['Management Accounting','Financial Accounting'],
+ items:[
+   {text:'Evolves from the best practices of companies working to be competitive', answer:'Management Accounting'},
+   {text:'Is legislated and governed by regulatory agencies and professional institutions', answer:'Financial Accounting'},
+   {text:'Exists to serve the competitive needs of organizations uniquely serving specific customers in specific markets', answer:'Management Accounting'},
+   {text:'Exists so organizations can periodically report results to outside investors and lenders in a consistent, comparative manner', answer:'Financial Accounting'},
+   {text:'Results in both financial and nonfinancial data that are proprietary (guarded from competitors and the public)', answer:'Management Accounting'},
+   {text:'Results in only financial data that are public and reported consistently to investors and creditors', answer:'Financial Accounting'},
+   {text:'Used for internal planning, control, and evaluation', answer:'Management Accounting'},
+   {text:'Used primarily by investors and creditors deciding whether to provide capital to the company', answer:'Financial Accounting'}
+ ],
+ explanation:'This is the full Source / Purpose / Outcome / Use comparison from the review table: management accounting is nimble, competitive, proprietary, and internal-facing; financial accounting is rule-bound, uniform, public, and external-facing.',
+ mnemonic:'💡 Memory tip: Management = evolves, competes, hides, decides. Financial = legislated, compares, publishes, informs.'},
+
+{type:'ms',
+ q:'Management accounting data can be both financial and nonfinancial. Which of the following are examples of NONfinancial management accounting data mentioned in the notes?',
+ opts:['Employee turnover rate',
+       'Customer satisfaction percentage',
+       'Cost of goods sold',
+       'Total revenue for the quarter'],
+ correctSet:[0,1],
+ explanation:'Employee turnover and customer satisfaction are both nonfinancial numbers (not measured in dollars) that management accounting tracks because they eventually impact the business financially. Cost of goods sold and total revenue are financial (dollar-denominated) figures.',
+ mnemonic:'💡 Memory tip: If you can\'t put a dollar sign in front of it, it\'s nonfinancial — but it still matters to management.'},
+
+{type:'mc',
+ q:'What does it mean that management accounting data is "proprietary"?',
+ opts:['It is kept secret — companies don\'t want competitors or the public to see it',
+       'It must be filed with the SEC every quarter',
+       'It is reviewed by an external auditor before release',
+       'It is only used for tax purposes'],
+ correct:0,
+ explanation:'"Proprietary" is a fancier way of saying "secret." Companies don\'t want competitors knowing their costs, their customer satisfaction data, or their strategic plans.',
+ mnemonic:'💡 Memory tip: Proprietary = "it\'s my property, not yours to see."'},
+
+{type:'mc',
+ q:'Management accounting revolves around a repeating cycle. What are the three phases of that cycle, in order?',
+ opts:['Planning → Controlling → Evaluating',
+       'Controlling → Planning → Evaluating',
+       'Evaluating → Planning → Controlling',
+       'Planning → Evaluating → Controlling'],
+ correct:0,
+ explanation:'You plan first (decide what to do), then control (track actual performance against the plan in real time), then evaluate (analyze the results at period-end) — which then feeds back into planning for the next period.',
+ mnemonic:'💡 Memory tip: "PCE" — Plan, Control, Evaluate. Plan the trip, control the car on the road, evaluate how the trip went.'},
+
+{type:'ord',
+ q:'Place the three phases of the management accounting decision-making cycle (Figure 9.1) in the order they occur.',
+ items:[
+   {text:'Planning', order:0},
+   {text:'Controlling', order:1},
+   {text:'Evaluating', order:2}
+ ],
+ explanation:'The cycle runs Planning (deciding what to do) → Controlling (tracking actual vs. plan in real time) → Evaluating (analyzing results at period-end) — and then the cycle restarts with planning for the next period.',
+ mnemonic:'💡 Memory tip: Plan the trip. Control the car while driving. Evaluate how the trip went once you arrive. Then plan the next trip.'},
+
+{type:'mc',
+ q:'Planning, in the management accounting sense, is best described as:',
+ opts:['Outlining the activities needed for an organization to achieve its objectives — recognizing problems/opportunities, identifying alternatives, analyzing them, and choosing/implementing the best one',
+       'Comparing actual performance against a budget and computing variances',
+       'Rewarding good performance and providing feedback at the end of a period',
+       'Filing quarterly reports with the SEC'],
+ correct:0,
+ explanation:'Planning is the front end of the cycle — deciding what to do before you do it, by weighing alternatives and choosing the best path forward.',
+ mnemonic:'💡 Memory tip: Planning = "before you act."'},
+
+{type:'mc',
+ q:'Planning breaks down into two general categories. What are they?',
+ opts:['Long-run planning and short-run planning',
+       'Strategic planning and capital budgeting',
+       'Financial planning and operational planning',
+       'Internal planning and external planning'],
+ correct:0,
+ explanation:'Long-run planning covers roughly 3-5 years out (strategic planning and capital budgeting); short-run planning covers the current/near-term operations (production prioritizing and operational budgeting).',
+ mnemonic:'💡 Memory tip: Long-run = years ahead. Short-run = this week, this month.'},
+
+{type:'mc',
+ q:'Strategic planning is best defined as:',
+ opts:['Broad, long-range planning usually conducted by top management — deciding what direction the business should head',
+       'Detailed daily scheduling of production tasks',
+       'Systematic planning for long-term investments in operating assets',
+       'The process of comparing actual results to a budget'],
+ correct:0,
+ explanation:'Strategic planning is the "which direction do we want to go" question — what products, what customers, what markets — set by top management.',
+ mnemonic:'💡 Memory tip: Strategic = the destination on the map.'},
+
+{type:'mc',
+ q:'Capital budgeting is best defined as:',
+ opts:['Systematic planning for long-term investments in operating assets',
+       'Broad, long-range planning about which direction the business should head',
+       'Managerial planning for current and immediate future (a year or less) operations',
+       'Management\'s continual evaluation of product line profitability'],
+ correct:0,
+ explanation:'Capital budgeting is about committing resources long-term to support the strategic direction — what equipment, facilities, or key hires you need to acquire.',
+ mnemonic:'💡 Memory tip: Capital budgeting = "what big-ticket things do we need to buy to get where we\'re headed?"'},
+
+{type:'ms',
+ q:'Which of the following are types of LONG-RUN planning? Select all that apply.',
+ opts:['Strategic planning',
+       'Capital budgeting',
+       'Operational budgeting (profit planning)',
+       'Production and process prioritizing'],
+ correctSet:[0,1],
+ explanation:'Strategic planning and capital budgeting are both long-run (3-5 year) planning activities. Operational budgeting and production prioritizing are short-run planning activities instead.',
+ mnemonic:'💡 Memory tip: Long-run planning sets the direction and buys the tools; short-run planning runs the show day to day.'},
+
+{type:'mc',
+ q:'Production and process prioritizing is best defined as:',
+ opts:['Management\'s continual evaluation of various product lines\' and divisions\' profitability to identify opportunities to improve profits',
+       'Broad, long-range planning usually conducted by top management',
+       'Systematic planning for long-term investments in operating assets',
+       'Personally certifying the accuracy of financial statements'],
+ correct:0,
+ explanation:'This is a short-run planning activity — an ongoing evaluation of what to prioritize right now, given current product and division profitability.',
+ mnemonic:'💡 Memory tip: Prioritizing = "what do we work on first today?"'},
+
+{type:'mc',
+ q:'Operational budgeting (profit planning) is best described as:',
+ opts:['Managerial planning decisions about current and immediate future (a year or less) operations, characterized by regularity and frequency',
+       'Planning that spans three to five years or more',
+       'A one-time capital investment decision',
+       'A decision about whether to enter a new market permanently'],
+ correct:0,
+ explanation:'Operational budgeting deals with the near-term — typically a year or less — and happens regularly and frequently, unlike the long-range, one-time nature of strategic planning or capital budgeting.',
+ mnemonic:'💡 Memory tip: A business without a budget is like driving with the windshield covered — you can\'t see what\'s coming.'},
+
+{type:'ms',
+ q:'Which of the following are types of SHORT-RUN planning? Select all that apply.',
+ opts:['Production and process prioritizing',
+       'Operational budgeting (profit planning)',
+       'Strategic planning',
+       'Capital budgeting'],
+ correctSet:[0,1],
+ explanation:'Production/process prioritizing and operational budgeting are both short-run planning activities (current and near-future operations). Strategic planning and capital budgeting are long-run instead.',
+ mnemonic:'💡 Memory tip: Short-run = "what do we do this week/month?" — prioritizing and budgeting.'},
+
+{type:'mc',
+ q:'Controlling, in the management accounting cycle, is best described as:',
+ opts:['Implementing management plans and comparing actual performance against the plan, assessing the importance of variances',
+       'Outlining activities needed to achieve objectives',
+       'Rewarding performance and providing feedback at period-end',
+       'Certifying financial statements under Sarbanes-Oxley'],
+ correct:0,
+ explanation:'Controlling is the "are we on track?" phase — tracking actual results in real time against the budget/plan and paying attention to variances.',
+ mnemonic:'💡 Memory tip: The baseball radar gun — controlling means watching performance pitch-by-pitch and catching deviations as they happen.'},
+
+{type:'mc',
+ q:'Evaluating, in the management accounting cycle, is best described as:',
+ opts:['Analyzing results, rewarding performance, providing feedback, and identifying problems',
+       'Outlining activities needed to achieve objectives before they happen',
+       'Tracking actual performance against the budget in real time',
+       'Setting GAAP rules for external reporting'],
+ correct:0,
+ explanation:'Evaluating happens at period-end — you look back at the results, reward good performance, give feedback, and identify problems to feed into the next planning cycle.',
+ mnemonic:'💡 Memory tip: Evaluating = "how did we do, and what do we do differently next time?"'},
+
+{type:'ord',
+ q:'Per Figure 9.1, place these Planning activities in the correct process order.',
+ items:[
+   {text:'Recognize needs', order:0},
+   {text:'Identify alternatives', order:1},
+   {text:'Evaluate choices', order:2},
+   {text:'Implement decisions', order:3}
+ ],
+ explanation:'Planning starts with recognizing a problem or opportunity exists, then identifying possible alternatives, evaluating/analyzing those alternatives, and finally choosing and implementing the best one.',
+ mnemonic:'💡 Memory tip: "RIEI" — Recognize, Identify, Evaluate, Implement. See the need, list the options, weigh them, act.'},
+
+{type:'ord',
+ q:'Per Figure 9.1, place these Controlling activities in the correct process order.',
+ items:[
+   {text:'Establish expectations', order:0},
+   {text:'Create performance measures', order:1},
+   {text:'Gather results', order:2},
+   {text:'Compute variances', order:3}
+ ],
+ explanation:'Controlling starts by setting expectations (the budget/plan), building performance measures to track it, gathering the actual results, and finally computing the variance between planned and actual.',
+ mnemonic:'💡 Memory tip: You can\'t compute a variance until you know what you expected AND what actually happened — expectations and measures come first, variance comes last.'},
+
+{type:'ms',
+ q:'Per Figure 9.1, which of the following are part of the "Evaluating" phase? Select all that apply.',
+ opts:['Reward performance',
+       'Provide feedback',
+       'Analyze results',
+       'Identify problems',
+       'Compute variances',
+       'Establish expectations'],
+ correctSet:[0,1,2,3],
+ explanation:'Evaluating includes rewarding performance, providing feedback, analyzing results, and identifying problems. "Compute variances" and "establish expectations" both belong to the Controlling phase instead.',
+ mnemonic:'💡 Memory tip: Evaluating looks backward at what already happened (reward, feedback, analyze, identify); controlling watches things as they happen.'},
+
+/* ========== TOPIC 9.3 — MANAGERIAL ACCOUNTING TERMINOLOGY: CVP TERMS ========== */
+
+{type:'mc',
+ q:'Cost-Volume-Profit (CVP) Analysis, sometimes called breakeven analysis, is best defined as:',
+ opts:['Techniques for determining how changes in revenues, costs, and level of activity affect the profitability of an organization',
+       'The process of certifying financial statements under Sarbanes-Oxley',
+       'A system for classifying costs as product or period costs',
+       'The process of setting GAAP rules internationally'],
+ correct:0,
+ explanation:'CVP analysis answers questions like "will we sell enough to avoid a loss?" and "how much will profit change if sales rise by 15%?" — it depends on understanding fixed and variable costs.',
+ mnemonic:'💡 Memory tip: CVP = Cost, Volume, Profit — how the three move together.'},
+
+{type:'mc',
+ q:'A variable cost is best defined as:',
+ opts:['A cost that increases the more you make or sell',
+       'A cost that stays the same no matter how much you make or sell',
+       'A cost incurred outside the production facility',
+       'A cost that can never be changed by a future decision'],
+ correct:0,
+ explanation:'Variable costs rise directly with production/sales volume. Classic example: hamburger meat cost — 0 burgers = $0 meat cost, 1,000 burgers = $500 meat cost.',
+ mnemonic:'💡 Memory tip: Variable = "varies with volume."'},
+
+{type:'mc',
+ q:'A fixed cost is best defined as:',
+ opts:['A cost that doesn\'t change based on the level of sales or production',
+       'A cost that increases directly with the level of sales or production',
+       'A cost incurred only when a product is sold',
+       'A cost that can be changed by a decision made right now'],
+ correct:0,
+ explanation:'Fixed costs, like rent, stay the same whether you sell 1 unit or 1,000 units (within a reasonable range).',
+ mnemonic:'💡 Memory tip: Fixed = "frozen" — it doesn\'t move no matter what volume does.'},
+
+{type:'tf',
+ q:'The more units a company produces and sells, the higher its total variable costs will be.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'True — that\'s the defining feature of a variable cost. More hamburgers sold means more total spent on meat.',
+ mnemonic:'💡 Memory tip: Variable costs and volume move in the same direction, like two dance partners.'},
+
+{type:'tf',
+ q:'Fixed cost PER UNIT stays exactly the same no matter how many units a company produces.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False. TOTAL fixed cost stays the same, but fixed cost PER UNIT actually decreases as production volume increases, because the same total is spread across more units. (Example: $5,000 rent ÷ 2,000 units = $2.50/unit, but $5,000 ÷ 3,000 units = only $1.67/unit.)',
+ mnemonic:'💡 Memory tip: "Per" means divided by — the same numerator spread over a bigger denominator always shrinks.'},
+
+{type:'mc',
+ q:'Lily Company has total fixed costs of $48,000 for the period. Each unit sells for $40, and the variable cost per unit is $24. How many units must Lily sell to break even?',
+ opts:['3,000 units',
+       '4,000 units',
+       '1,200 units',
+       '2,000 units'],
+ correct:0,
+ explanation:'Contribution margin per unit = $40 − $24 = $16. Units to break even = Fixed Costs ÷ CM per unit = $48,000 ÷ $16 = 3,000 units. This formula (Fixed Costs ÷ Contribution Margin per unit) isn\'t printed on the official formula sheet, so it\'s worth memorizing directly.',
+ mnemonic:'💡 Memory tip: Each unit "contributes" $16 toward covering fixed costs after variable cost is paid — you need enough $16 contributions to add up to $48,000.'},
+
+{type:'mc',
+ q:'Using the same Lily Company data (Fixed Costs $48,000, selling price $40/unit, variable cost $24/unit), how much SALES REVENUE must Lily generate to break even?',
+ opts:['$120,000',
+       '$48,000',
+       '$80,000',
+       '$200,000'],
+ correct:0,
+ explanation:'Contribution margin ratio = CM per unit ÷ price = $16 ÷ $40 = 40%. Sales$ to break even = Fixed Costs ÷ CM ratio = $48,000 ÷ 0.40 = $120,000. Sanity check: 3,000 breakeven units × $40/unit = $120,000 — same answer either way. Like the units formula, this ratio-based formula isn\'t on the official formula sheet either.',
+ mnemonic:'💡 Memory tip: Whichever path you take — units × price, or Fixed Costs ÷ CM ratio — you should land on the same breakeven dollar figure.'},
+
+/* ========== TOPIC 9.3 — PRODUCT COSTS VS. PERIOD COSTS ========== */
+
+{type:'mc',
+ q:'A product cost is best defined as:',
+ opts:['A cost incurred as part of the production process (inside the factory); first reported as an asset (inventory), then as an expense (COGS) when sold',
+       'A cost incurred outside the factory, reported as an expense in the period it\'s incurred',
+       'A cost that can be changed by a decision made right now',
+       'The benefit lost by not choosing an alternative'],
+ correct:0,
+ explanation:'Product costs "attach" to the inventory itself. They sit on the balance sheet as an asset until the product is sold, at which point they flow to the income statement as Cost of Goods Sold.',
+ mnemonic:'💡 Memory tip: Product costs ride along with the product, all the way to the sale.'},
+
+{type:'mc',
+ q:'A period cost is best defined as:',
+ opts:['A cost incurred outside the factory or production facility, reported as an expense in the period in which it is incurred',
+       'A cost incurred inside the production facility, first recorded as inventory',
+       'A cost that changes as a result of a decision made now',
+       'A cost involving an outlay of cash or another asset'],
+ correct:0,
+ explanation:'Period costs happen outside the factory — corporate HQ, advertising, sales commissions, interest — and are expensed in the period they occur, regardless of whether anything was sold.',
+ mnemonic:'💡 Memory tip: Period costs are expensed on a calendar, not on a sale.'},
+
+{type:'mc',
+ q:'When do product costs become an expense on the income statement?',
+ opts:['When the product is finally sold (they become Cost of Goods Sold)',
+       'The moment raw materials are purchased',
+       'At the end of every calendar month regardless of sales',
+       'Product costs are never expensed — only period costs are'],
+ correct:0,
+ explanation:'Product costs sit on the balance sheet as inventory (an asset) until the product sells — only then do they flow to the income statement as Cost of Goods Sold.',
+ mnemonic:'💡 Memory tip: No sale, no expense yet — product costs wait in inventory until the product walks out the door.'},
+
+{type:'mc',
+ q:'When do period costs become an expense on the income statement?',
+ opts:['In the period in which they are incurred, regardless of whether any product has been sold',
+       'Only when the related product is sold',
+       'Only at fiscal year-end',
+       'Only after SEC review'],
+ correct:0,
+ explanation:'Unlike product costs, period costs don\'t wait for a sale — advertising expense, for instance, is recorded as an expense in the month it happens.',
+ mnemonic:'💡 Memory tip: Period costs are tied to the calendar period, not to any particular unit sold.'},
+
+{type:'ms',
+ q:'Which of the following are examples of PRODUCT costs (manufacturing costs)? Select all that apply.',
+ opts:['Wages of workers directly involved with production',
+       'Material costs',
+       'Rent, depreciation, and insurance on production assets',
+       'Advertising expense',
+       'Interest expense'],
+ correctSet:[0,1,2],
+ explanation:'Wages of production workers, materials, and the factory\'s own rent/depreciation/insurance are all incurred inside the factory — product costs. Advertising and interest happen outside the factory — period costs.',
+ mnemonic:'💡 Memory tip: If it happens on the factory floor, it\'s a product cost.'},
+
+{type:'ms',
+ q:'Which of the following are examples of PERIOD costs (non-manufacturing costs)? Select all that apply.',
+ opts:['Company headquarters costs',
+       'Selling costs',
+       'Interest',
+       'Direct materials',
+       'Factory building depreciation'],
+ correctSet:[0,1,2],
+ explanation:'HQ costs, selling costs, and interest all happen outside the factory — period costs. Direct materials and factory depreciation happen inside the factory — product costs.',
+ mnemonic:'💡 Memory tip: If it happens at corporate HQ or in sales/finance, it\'s a period cost.'},
+
+{type:'mc',
+ q:'Manufacturing overhead is best defined as:',
+ opts:['All factory costs that are not direct materials or direct labor',
+       'All costs incurred outside the factory',
+       'Only the cost of raw materials used in production',
+       'Only the wages of assembly-line workers'],
+ correct:0,
+ explanation:'Manufacturing overhead is the catch-all product cost category — everything in the factory besides the direct materials and direct labor. Examples: factory supervisor salaries, factory depreciation, indirect materials like glue or screws.',
+ mnemonic:'💡 Memory tip: If it\'s in the factory but it isn\'t the raw material or the assembly labor, it\'s overhead.'},
+
+{type:'mc',
+ q:'Direct materials are best defined as:',
+ opts:['The cost of the primary raw materials used in production — for example, the potatoes used to make french fries',
+       'The wages of workers assembling the finished product',
+       'All factory costs that aren\'t direct materials or direct labor',
+       'Costs incurred outside the factory'],
+ correct:0,
+ explanation:'Direct materials are the primary raw material that physically becomes the product — potatoes for french fries, wood for furniture, metal for cars.',
+ mnemonic:'💡 Memory tip: Direct materials = the "star ingredient" that becomes the product itself.'},
+
+{type:'mc',
+ q:'Direct labor is best defined as:',
+ opts:['The cost of wages of the workers who are assembling the direct materials into the finished product — for example, auto assembly line workers',
+       'The cost of the primary raw materials used in production',
+       'Factory supervisor salaries',
+       'Sales commissions paid to the sales force'],
+ correct:0,
+ explanation:'Direct labor is the pay for workers physically assembling the product — the auto workers putting a car together, for instance. This is distinct from indirect factory labor (like supervisors), which counts as manufacturing overhead.',
+ mnemonic:'💡 Memory tip: Direct labor = the hands actually building the product.'},
+
+{type:'ms',
+ q:'Which of the following are examples of manufacturing overhead? Select all that apply.',
+ opts:['Factory supervisor salaries',
+       'Factory building depreciation',
+       'Miscellaneous indirect materials, like glue or screws',
+       'The cost of the primary raw material (e.g., potatoes for french fries)',
+       'Sales commissions'],
+ correctSet:[0,1,2],
+ explanation:'Supervisor salaries, factory depreciation, and small indirect materials like glue/screws are all factory costs that aren\'t direct materials or direct labor — manufacturing overhead. The primary raw material is direct materials, and sales commissions are a period cost.',
+ mnemonic:'💡 Memory tip: Overhead is everything factory-related left over after you pull out the "star" raw material and the assembly labor.'},
+
+{type:'dd',
+ q:'Match each cost item to its correct category (Figure 9.3: Types of Costs).',
+ cols:['Direct Materials','Direct Labor','Manufacturing Overhead','Selling Expenses','Administrative Expenses'],
+ items:[
+   {text:'Cost of the potatoes used to make french fries', answer:'Direct Materials'},
+   {text:'Wages of assembly-line workers building the product', answer:'Direct Labor'},
+   {text:'Factory supervisor\'s salary', answer:'Manufacturing Overhead'},
+   {text:'Sales commissions paid to the sales force', answer:'Selling Expenses'},
+   {text:'Corporate headquarters staff salaries', answer:'Administrative Expenses'},
+   {text:'Glue and screws used on the factory floor', answer:'Manufacturing Overhead'}
+ ],
+ explanation:'Product costs split into Direct Materials, Direct Labor, and Manufacturing Overhead. Period costs split into Selling Expenses and Administrative Expenses. Every cost item belongs to exactly one of these five buckets.',
+ mnemonic:'💡 Memory tip: Ask "inside the factory or outside?" first, then narrow down to the specific bucket.'},
+
+{type:'mc',
+ q:'In a manufacturing company, indirect labor (e.g., a factory supervisor or maintenance worker) is usually classified as a(n):',
+ opts:['Product cost',
+       'Selling cost',
+       'Opportunity cost',
+       'Period cost'],
+ correct:0,
+ explanation:'Indirect labor is still inside the factory, which makes it a product cost — specifically, part of manufacturing overhead. The product/period distinction is about LOCATION (inside vs. outside the factory), not about direct vs. indirect. It\'s easy to mistakenly assume "indirect" automatically means "period cost," but that\'s not the rule.',
+ mnemonic:'💡 Memory tip: Location decides product vs. period. Indirect labor never leaves the factory floor, so it stays a product cost (manufacturing overhead).'},
+
+/* ========== TOPIC 9.3 — DECISION-MAKING COST TERMS ========== */
+
+{type:'mc',
+ q:'A direct cost is best defined as:',
+ opts:['A cost that is specifically traceable to a unit of business or segment being analyzed — if that segment is dropped, the cost disappears',
+       'A cost normally incurred for the benefit of several segments within the organization',
+       'A cost that stays the same regardless of the decision made',
+       'A cost that involves the outlay of cash'],
+ correct:0,
+ explanation:'Direct costs are tied specifically to the product/division in question. If you shut that division down, the direct cost goes away with it — e.g., the division manager\'s salary.',
+ mnemonic:'💡 Memory tip: Direct cost = "created by this thing specifically; disappears if this thing goes away."'},
+
+{type:'mc',
+ q:'An indirect cost is best defined as:',
+ opts:['A cost normally incurred for the benefit of several segments within the organization, sometimes called a common or joint cost',
+       'A cost specifically traceable to a single unit or segment being analyzed',
+       'A future cost that can be changed by a decision made now',
+       'The benefit lost by not choosing an alternative'],
+ correct:0,
+ explanation:'Indirect costs — like corporate headquarters overhead — benefit multiple segments at once. They\'re only loosely (indirectly) connected to any one segment, so they don\'t disappear if a single segment is dropped.',
+ mnemonic:'💡 Memory tip: Indirect cost = "shared by everyone; sticks around even if this one thing goes away."'},
+
+{type:'tf',
+ q:'If a product line or business segment is dropped, the DIRECT costs created by that segment will disappear.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'True — direct costs are specifically caused by that segment, so eliminating the segment eliminates those costs (e.g., the division manager is let go, materials are no longer purchased).',
+ mnemonic:'💡 Memory tip: Direct costs are attached at the hip to the segment — cut the segment, cut the cost.'},
+
+{type:'tf',
+ q:'If a product line or business segment is dropped, the INDIRECT costs assigned to that segment will also disappear.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False — indirect (common/joint) costs, like corporate headquarters expenses, remain even after a segment is dropped, because they were never actually caused by that one segment in the first place.',
+ mnemonic:'💡 Memory tip: Corporate HQ doesn\'t shrink just because one division closes — those costs were never really "theirs" alone.'},
+
+{type:'mc',
+ q:'A differential cost is best defined as:',
+ opts:['A future cost that can be changed by a decision made now; also called an incremental or relevant cost',
+       'A past cost that cannot be changed by any decision made now',
+       'A cost specifically traceable to one segment',
+       'A cost involving an outlay of cash'],
+ correct:0,
+ explanation:'Differential costs are the ones that actually respond to your current decision — for example, realtor fees only occur if you decide to sell your house.',
+ mnemonic:'💡 Memory tip: Differential = "makes a difference" depending on what you decide right now.'},
+
+{type:'mc',
+ q:'A sunk cost is best defined as:',
+ opts:['A past cost that cannot be changed by any decision made now',
+       'A future cost that changes based on the decision made now',
+       'A cost incurred for the benefit of multiple segments',
+       'A benefit forfeited by not choosing an alternative'],
+ correct:0,
+ explanation:'Sunk costs are already spent and gone — "spilled milk." What you originally paid for your house can\'t be changed by your decision to sell it today.',
+ mnemonic:'💡 Memory tip: Sunk = it already sank to the bottom; no decision today can bring it back up.'},
+
+{type:'tf',
+ q:'When making a business decision, sunk costs should be given significant weight because they represent real money already spent.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False. Even though sunk costs are real money spent, they should be IGNORED in decision-making because no current decision can change them. (This is psychologically hard to do — it\'s part of why housing markets adjust slowly, as sellers fixate on what they originally paid.)',
+ mnemonic:'💡 Memory tip: Spilled milk — no amount of crying about the sunk cost will un-spill it, so leave it out of the decision.'},
+
+{type:'mc',
+ q:'An out-of-pocket cost is best defined as:',
+ opts:['A cost that involves the outlay of cash or use of some other asset (like equipment)',
+       'A benefit lost by not choosing an alternative course of action',
+       'A cost that cannot be changed by a decision made now',
+       'A cost incurred for the benefit of several segments'],
+ correct:0,
+ explanation:'Out-of-pocket costs are the ones you can literally feel — you have to actually pay cash or use up a resource, like paying landscapers to maintain Central Park.',
+ mnemonic:'💡 Memory tip: Out-of-pocket = money (or resources) actually leaves your pocket.'},
+
+{type:'mc',
+ q:'An opportunity cost is best defined as:',
+ opts:['The benefits not received because of actions NOT taken',
+       'A cost that involves an actual outlay of cash',
+       'A cost that is specifically traceable to one segment',
+       'A cost that disappears if a segment is dropped'],
+ correct:0,
+ explanation:'Opportunity cost is what you give up by not choosing an alternative — for example, NYC\'s biggest "cost" of keeping Central Park undeveloped is the enormous rent it could have earned leasing that land commercially. It\'s a real economic cost, but it\'s easy to overlook because no cash actually changes hands.',
+ mnemonic:'💡 Memory tip: Opportunity cost = the road not taken, and what you missed by not taking it.'},
+
+{type:'dd',
+ q:'Match each business question/scenario to the cost-term pair it\'s testing.',
+ cols:['Fixed/Variable','Product/Period','Direct/Indirect','Differential/Sunk','Out-of-pocket/Opportunity'],
+ items:[
+   {text:'Given the cost structure, will sales be high enough to break even?', answer:'Fixed/Variable'},
+   {text:'What is the cost per unit to make a product?', answer:'Product/Period'},
+   {text:'Should we close down this division?', answer:'Direct/Indirect'},
+   {text:'Should I sell my current house and buy a new one?', answer:'Differential/Sunk'},
+   {text:'What is the true annual cost to New York City of maintaining Central Park?', answer:'Out-of-pocket/Opportunity'}
+ ],
+ explanation:'Each cost-term pair exists to answer a specific type of business question: Fixed/Variable underlies breakeven analysis; Product/Period underlies per-unit costing; Direct/Indirect underlies drop-a-segment decisions; Differential/Sunk underlies any "should we do X" decision; Out-of-pocket/Opportunity underlies the true full cost of any choice, including costs with no cash outlay.',
+ mnemonic:'💡 Memory tip: Match the QUESTION\'s shape to the term pair — "break even?" = Fixed/Variable. "Cost per unit?" = Product/Period. "Drop it?" = Direct/Indirect. "Change my mind now?" = Differential/Sunk. "What am I really giving up?" = Out-of-pocket/Opportunity.'},
+
+/* ========== TOPIC 9.4 — THE ROLE OF ETHICS IN MANAGEMENT ACCOUNTING ========== */
+
+{type:'mc',
+ q:'The CEO (Chief Executive Officer) is best described as:',
+ opts:['The person with overall responsibility for directing all operations of the business',
+       'The person responsible for all finance and accounting functions, reporting to the head of the company',
+       'The head accountant of the company',
+       'The external auditor who reviews the company\'s financial statements'],
+ correct:0,
+ explanation:'The CEO sits at the top of the structure — overall responsibility for directing all business operations (accounting, finance, marketing, everything).',
+ mnemonic:'💡 Memory tip: CEO = "Chief Everything Officer" — the top of the whole organization.'},
+
+{type:'mc',
+ q:'The CFO (Chief Financial Officer) is best described as:',
+ opts:['The person who, under the CEO\'s direction, has responsibility for all finance and accounting functions',
+       'The person with overall responsibility for directing all operations of the business',
+       'The head accountant of the company',
+       'The organization that issues the CMA credential'],
+ correct:0,
+ explanation:'The CFO works for the CEO and oversees all finance and accounting functions — making sure the accounting system works and that funding from investors/banks is managed properly.',
+ mnemonic:'💡 Memory tip: CFO = "Chief Financial Officer" — all things money and accounting, reporting up to the CEO.'},
+
+{type:'mc',
+ q:'The controller is best described as:',
+ opts:['The head accountant of the company, who works for the CFO',
+       'The person with overall responsibility for directing all business operations',
+       'The government regulator with legal authority over accounting rules',
+       'The organization that certifies management accountants'],
+ correct:0,
+ explanation:'The controller is the head accountant, reporting up through the CFO (who reports to the CEO). This is the standard corporate reporting structure: CEO → CFO → Controller.',
+ mnemonic:'💡 Memory tip: "Controller" sounds like the person who "controls" the books — the top accountant in the building.'},
+
+{type:'dd',
+ q:'Match each title to its responsibility.',
+ cols:['CEO','CFO','Controller'],
+ items:[
+   {text:'Overall responsibility for directing all business operations', answer:'CEO'},
+   {text:'Responsible for all finance and accounting functions; reports to the CEO', answer:'CFO'},
+   {text:'The head accountant of the company; reports to the CFO', answer:'Controller'}
+ ],
+ explanation:'The chain of command runs CEO (overall operations) → CFO (finance & accounting) → Controller (head accountant).',
+ mnemonic:'💡 Memory tip: CEO leads everything, CFO leads the money, Controller leads the books.'},
+
+{type:'tf',
+ q:'The controller is generally the chief (head) accountant of an organization.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'True — per the review summary, "the chief accountant in most organizations is the controller."',
+ mnemonic:'💡 Memory tip: Controller = chief accountant, plain and simple.'},
+
+{type:'mc',
+ q:'Under the Sarbanes-Oxley Act (SOX), what must the CEO and CFO personally do regarding financial statements given to the public?',
+ opts:['Personally certify that the financial statements are accurate and not biased',
+       'Personally audit every transaction line by line',
+       'Personally write the footnotes to the financial statements',
+       'Personally set the company\'s GAAP policies without FASB guidance'],
+ correct:0,
+ explanation:'SOX requires the CEO and CFO to put their names on the accuracy of the financial statements — creating legal (not just moral) accountability, since they\'re now on record with the federal government.',
+ mnemonic:'💡 Memory tip: SOX makes ethics a LAW, not just a nice idea — the CEO/CFO sign their name to it.'},
+
+{type:'mc',
+ q:'What does the Sarbanes-Oxley Act require regarding a company\'s code of ethics?',
+ opts:['Public companies must have a code of ethics, and their external auditor reviews it',
+       'Only private companies need a code of ethics',
+       'The IMA writes each company\'s code of ethics for them',
+       'A code of ethics is optional but recommended'],
+ correct:0,
+ explanation:'SOX requires public companies to maintain a code of ethics, and external auditors are required to review it as part of their work.',
+ mnemonic:'💡 Memory tip: SOX doesn\'t just ask for good intentions — it requires a documented code that gets checked.'},
+
+{type:'ms',
+ q:'Which of the following does the Sarbanes-Oxley Act (SOX) require of public companies? Select all that apply.',
+ opts:['CEO and CFO personal certification of the accuracy of public financial statements',
+       'Maintaining a code of ethics, reviewed by the external auditor',
+       'Maintaining internal control to ensure ethical, organized operations',
+       'Mandatory quarterly re-election of the CFO by shareholders',
+       'Annual personal financial audits of every employee'],
+ correctSet:[0,1,2],
+ explanation:'SOX requires personal certification by the CEO/CFO, a code of ethics reviewed by external auditors, and strong internal controls. It does not require re-electing the CFO quarterly or personally auditing every employee\'s finances.',
+ mnemonic:'💡 Memory tip: SOX = certify, codify (ethics), and control (internally). Nothing about re-electing executives or auditing individual employees.'},
+
+{type:'mc',
+ q:'The IMA (Institute of Management Accountants) is best described as:',
+ opts:['An organization that establishes professional standards for accountants working inside companies',
+       'The U.S. government regulator with legal authority over accounting rules',
+       'The organization that sets GAAP',
+       'A certification exclusively for external auditors'],
+ correct:0,
+ explanation:'The IMA focuses specifically on management accountants — the professionals working inside companies — similar in spirit to how the CPA credential relates to (typically) external accountants.',
+ mnemonic:'💡 Memory tip: IMA = "Inside My Accounting" — standards for accountants who work inside the business.'},
+
+{type:'mc',
+ q:'The CMA (Certified Management Accountant) credential is best described as:',
+ opts:['A certification issued by the IMA showing a person has been trained in management accounting',
+       'A certification issued by the SEC for external auditors',
+       'A certification required to become a company\'s CEO',
+       'A certification that replaces the CPA for all accountants'],
+ correct:0,
+ explanation:'The CMA is the credential the IMA provides, signaling that someone has professional training specifically in management accounting.',
+ mnemonic:'💡 Memory tip: IMA issues the CMA — think of it as the "internal" counterpart to the (often external-facing) CPA.'},
+
+{type:'mc',
+ q:'A CPA (Certified Public Accountant) and a CMA (Certified Management Accountant) differ primarily in that:',
+ opts:['CPA is generally associated with external accountants (though an internal accountant can also hold a CPA), while CMA/IMA focuses on the competencies needed to operate inside a company',
+       'A CPA can never work inside a company',
+       'A CMA can never work outside a company',
+       'CPA and CMA are simply two names for the exact same credential'],
+ correct:0,
+ explanation:'CPA is typically thought of as the external accountant\'s credential, while the CMA (via the IMA) is built specifically around the professional competencies needed for management accounting inside a business — though the two aren\'t mutually exclusive.',
+ mnemonic:'💡 Memory tip: CPA leans "outside-facing," CMA leans "inside-facing" — but a person could hold either, or both.'},
+
+{type:'ms',
+ q:'According to the IMA, which of the following are ethical responsibilities of a management accountant? Select all that apply.',
+ opts:['Competence',
+       'Confidentiality',
+       'Integrity',
+       'Objectivity/Credibility',
+       'Maximizing personal bonuses above all else'],
+ correctSet:[0,1,2,3],
+ explanation:'The IMA\'s four ethical responsibilities are Competence (stay trained and current), Confidentiality (protect proprietary data), Integrity (act honestly given your position of trust), and Objectivity/Credibility (report information without bias). Maximizing personal bonuses is not one of them — in fact it can be the source of ethical dilemmas like inflating profits.',
+ mnemonic:'💡 Memory tip: "CCIO" — Competence, Confidentiality, Integrity, Objectivity.'},
+
+{type:'dd',
+ q:'Match each IMA ethical principle to its description.',
+ cols:['Competence','Confidentiality','Integrity','Objectivity/Credibility'],
+ items:[
+   {text:'Maintain your professional credentials and training, and stay current in your field', answer:'Competence'},
+   {text:'Never disclose the company\'s proprietary internal information to outsiders', answer:'Confidentiality'},
+   {text:'Act honestly and with integrity in all situations, given your position of trust and access to information', answer:'Integrity'},
+   {text:'Report information to decision-makers without bias, rather than selectively revealing or concealing it to influence a decision', answer:'Objectivity/Credibility'}
+ ],
+ explanation:'Each principle addresses a different risk: Competence guards against incompetence, Confidentiality guards against leaks, Integrity guards against dishonest behavior generally, and Objectivity guards specifically against biased reporting that manipulates decision-makers.',
+ mnemonic:'💡 Memory tip: Know your stuff (Competence), keep it secret (Confidentiality), be honest (Integrity), report it straight (Objectivity).'},
+
+{type:'ord',
+ q:'Place these steps for handling an ethical dilemma inside a company in the correct recommended order.',
+ items:[
+   {text:'Talk to your immediate supervisor', order:0},
+   {text:'If the supervisor is the problem, go to the next level up', order:1},
+   {text:'Seek a confidential, objective advisor or mentor inside the company', order:2},
+   {text:'As a last resort, resign', order:3}
+ ],
+ explanation:'The recommended escalation path starts internally and stays internal as long as possible, out of loyalty to the company that pays your salary — going public/whistleblowing isn\'t the first move. Resigning is the very last resort.',
+ mnemonic:'💡 Memory tip: Stay loyal, stay internal, escalate gradually — supervisor, then higher up, then a trusted mentor, and only then walk away.'},
+
+{type:'mc',
+ q:'What is the instructor\'s suggested "personal ethical bedrock" for anyone with access to accounting data?',
+ opts:['"I will not use accounting to deceive others."',
+       '"I will always maximize shareholder value no matter the method."',
+       '"I will report every ethical concern to the media immediately."',
+       '"I will follow my supervisor\'s instructions without question."'],
+ correct:0,
+ explanation:'Since a management accountant controls the flow of information and could selectively reveal or conceal it, the core personal commitment should be a flat refusal to use that access to deceive anyone.',
+ mnemonic:'💡 Memory tip: "Don\'t deceive" — short, simple, and the foundation everything else builds on.'},
+
+{type:'ms',
+ q:'Which of the following are examples of internal ethical dilemmas mentioned in the notes? Select all that apply.',
+ opts:['Padding expense accounts',
+       'Theft, embezzlement, or shoplifting in the workplace',
+       'Inflating profits on financial reports (e.g., to get a higher bonus)',
+       'Violating the firm\'s purchasing policies',
+       'Using company assets for personal use',
+       'Filing a routine SEC quarterly report on time'],
+ correctSet:[0,1,2,3,4],
+ explanation:'Padding expenses, workplace theft, inflating profits, violating purchasing policy, and personal use of company assets are all named as internal ethical dilemmas. Filing a routine, on-time SEC report is normal compliance, not an ethical dilemma.',
+ mnemonic:'💡 Memory tip: These are all ways someone with access and trust could quietly abuse that position for personal gain.'},
+
+{type:'mc',
+ q:'A "kickback," as discussed in the ethics material, is best described as:',
+ opts:['A vendor secretly paying an employee personally (under the table) in exchange for winning the company\'s business — not a rebate to the company',
+       'A legitimate rebate paid by a vendor directly to the company',
+       'A bonus paid to an employee by their own employer for good performance',
+       'A refund given to a customer for a returned product'],
+ correct:0,
+ explanation:'The defining feature of a kickback is that the payment goes to the individual personally (not to the company) in exchange for steering business toward that vendor — that\'s what makes it a form of fraud/bribery rather than a normal rebate.',
+ mnemonic:'💡 Memory tip: A rebate goes to the company; a kickback goes to YOU, secretly — that\'s the line that makes it unethical.'},
+
+{type:'tf',
+ q:'According to the notes, people involved in creating management accounting information will occasionally confront ethical issues inside their organization.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'True — this is explicitly stated in the Topic 9.5 review. Having access to internal information and influence over decision-making naturally creates situations with ethical dimensions.',
+ mnemonic:'💡 Memory tip: Access + influence = eventually facing an ethical judgment call. It comes with the territory.'},
+
+];
+
+initQuiz(questions, 'Section 10');
+</script>
+</body>
+</html>

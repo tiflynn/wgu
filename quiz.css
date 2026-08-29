@@ -29,6 +29,9 @@ h1 span{color:var(--accent2)}
 .subtitle{color:var(--muted);font-size:.9rem;margin-top:.5rem}
 .back-link{display:inline-flex;align-items:center;gap:.45rem;font-family:'DM Mono',monospace;font-size:.78rem;font-weight:500;color:var(--accent);background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.3);border-radius:99px;padding:.5rem 1rem;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem;transition:background .15s,border-color .15s,color .15s}
 .back-link:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.top-nav{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.back-link.notes{color:var(--accent2);background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4)}
+.back-link.notes:hover{background:var(--accent2);border-color:var(--accent2);color:#fff}
 
 /* ── PROGRESS ── */
 .progress-wrap{max-width:var(--content-w);margin:0 auto 2rem}
