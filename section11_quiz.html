@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 11 Quiz</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<div class="top-nav">
+  <a class="back-link" href="index.html">← All Sections</a>
+</div>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 11</p>
+  <h1>Activity-Based<br><span>Costing (ABC)</span></h1>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="qCounter">Question 1 of 1</span>
+    <span id="pctLabel">0%</span>
+  </div>
+  <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="chips">
+  <div class="chip" id="chipTotal">Score: 0 / 0</div>
+  <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+  <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+</div>
+
+<div class="card" id="quizCard">
+  <div class="q-meta">
+    <span class="q-label" id="qLabel">Question 1</span>
+    <span class="type-badge" id="typeBadge"></span>
+  </div>
+  <p class="q-text" id="qText"></p>
+  <p class="q-hint" id="qHint" style="display:none"></p>
+  <div id="interactionZone"></div>
+  <div class="feedback" id="feedback">
+    <div class="feedback-head" id="fbHead"></div>
+    <div id="fbBody"></div>
+    <div class="mnemonic" id="fbMnemonic"></div>
+  </div>
+  <div class="btn-wrap" id="btnWrap">
+    <button class="btn-next" id="btnNext">Next Question →</button>
+  </div>
+</div>
+
+<div id="results">
+  <p class="grade-label">Final Score</p>
+  <div class="big-score" id="bigScore"></div>
+  <p class="grade-label" id="gradeMsg"></p>
+  <div class="breakdown">
+    <div class="bk-card"><div class="num" id="rcCorrect" style="color:var(--correct)"></div><div class="lbl">Correct</div></div>
+    <div class="bk-card"><div class="num" id="rcWrong" style="color:var(--wrong)"></div><div class="lbl">Wrong</div></div>
+    <div class="bk-card"><div class="num" id="rcTotal"></div><div class="lbl">Total</div></div>
+  </div>
+  <div class="review" id="reviewList"></div>
+  <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+</div>
+
+<script src="quiz.js"></script>
+<script>
+const questions = [
+
+/* ========== TOPIC 10.1 — ABC FUNDAMENTALS ========== */
+
+{type:'mc',
+ q:'Per the textbook, Activity-Based Costing (ABC) is best defined as:',
+ opts:['A method of attributing overhead costs to products based on measurable factors that relate to activities that create overhead costs',
+       'A method of tracing direct materials and direct labor costs to specific jobs',
+       'A method of allocating all costs — including direct materials and direct labor — using a single rate based on direct labor hours',
+       'A method of recording revenue only when cash is collected from the customer'],
+ correct:0,
+ explanation:'ABC exists specifically to solve the overhead assignment problem — it uses measurable factors (cost drivers) tied to the actual activities that generate overhead, instead of one blanket rate.',
+ mnemonic:'💡 Memory tip: ABC = Assign Based on Cause. If an activity causes the cost, it should carry the cost.'},
+
+{type:'mc',
+ q:"Lily's old (traditional) overhead application method worked by:",
+ opts:['Dividing total overhead costs by total gallons produced, and applying that single rate evenly to every gallon regardless of flavor',
+       'Assigning overhead based on the specific activities that create it, using multiple cost pools and drivers',
+       'Expensing all overhead immediately in the period incurred rather than assigning it to products',
+       'Assigning overhead only to the flavor with the highest direct labor cost'],
+ correct:0,
+ explanation:'This is the "spread it like peanut butter" approach — total overhead ÷ total gallons = $1.16/gallon, applied to every flavor the same way. It worked fine when Vanilla was her only product.',
+ mnemonic:"💡 Memory tip: Traditional = one rate, eyes closed, spread evenly. It's the opposite of ABC's careful, activity-by-activity approach."},
+
+{type:'mc',
+ q:"What assumption is implicitly baked into using a single, traditional overhead rate across every product?",
+ opts:["That every product's production process creates roughly the same amount of overhead, regardless of its complexity",
+       'That overhead costs never change from year to year',
+       'That direct materials and direct labor should be ignored when pricing a product',
+       'That facility support costs should always be allocated based on square footage'],
+ correct:0,
+ explanation:"The traditional rate assumes each gallon — whether Vanilla or Gingerbread Cheesecake Supreme — uses the same amount of electricity, creates the same mess, and needs the same amount of the flavor chemist's attention. That assumption falls apart once products differ significantly.",
+ mnemonic:'💡 Memory tip: One rate for everyone only works if everyone is basically the same — and once Lily added 5 new flavors, that stopped being true.'},
+
+{type:'mc',
+ q:"Why did Lily's traditional $1.16/gallon overhead rate make Vanilla ice cream look unprofitable?",
+ opts:["Vanilla is simple to produce (large batches, only 5 ingredients), so it was being charged overhead it didn't actually cause, while complex flavors were undercharged",
+       "Vanilla's direct materials cost more per gallon than the other five flavors",
+       "Vanilla's selling price was set too low relative to its direct labor cost",
+       'Vanilla was produced in a smaller total quantity than any other flavor'],
+ correct:0,
+ explanation:"Vanilla barely creates any overhead — huge batches, no flavor chemist involvement, minimal cleanup. But the flat rate charged it the same overhead as flavors like Gingerbread Cheesecake Supreme, which actually caused far more overhead activity.",
+ mnemonic:'💡 Memory tip: Simple products get overcharged, complex products get undercharged, when you spread overhead with your eyes closed.'},
+
+{type:'ms',
+ q:"Which of the following new overhead costs did Lily incur specifically because she started making five additional gourmet flavors instead of only Vanilla? Select all that apply.",
+ opts:['A flavor chemist added to staff',
+       'More quality control inspectors',
+       'More frequent machine setups and cleanings',
+       'Increased accounting costs and staff',
+       "A lower selling price for Vanilla ice cream",
+       'Lower total direct materials cost company-wide'],
+ correctSet:[0,1,2,3],
+ explanation:"Adding new flavors meant Lily needed a flavor chemist, more inspectors (every flavor switch needs a check), more frequent machine setup/cleaning (switching flavors), and more accounting staff (tracking different ingredients and suppliers). Vanilla's price and total materials cost aren't overhead-driven consequences of adding flavors.",
+ mnemonic:'💡 Memory tip: More flavors = more people needed to manage the complexity: a chemist, inspectors, cleaners, and accountants.'},
+
+{type:'tf',
+ q:'Per the textbook review, companies that better understand their costs have an advantage over their competitors.',
+ opts:['True','False'],
+ correct:0,
+ explanation:"This is a direct REMEMBER THIS textbook statement. It's the whole business case for ABC — better cost information is a competitive edge, not just an accounting exercise.",
+ mnemonic:'💡 Memory tip: Know your costs, know your edge. Lily nearly killed her best product because she didn\'t.'},
+
+{type:'mc',
+ q:'Per the textbook review, when using an ABC system, a company identifies specific business activities that create overhead costs and then:',
+ opts:['Assigns overhead to products or divisions based on the level of those activities',
+       'Assigns overhead evenly to all products regardless of activity level',
+       'Removes overhead entirely from the cost of the product',
+       'Assigns overhead only to the highest-volume product'],
+ correct:0,
+ explanation:'This is the textbook definition of how ABC operates end to end: identify the activities, then assign the cost based on how much of that activity each product actually consumes.',
+ mnemonic:'💡 Memory tip: Activity level in, overhead assigned out — that\'s the whole ABC engine in one sentence.'},
+
+{type:'tf',
+ q:'Per the textbook review, the ultimate purpose of an ABC system is simply to produce more detailed financial statements for external investors.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False. The textbook says the ultimate purpose of ABC is to help a company make better decisions — an internal, managerial use, not an external reporting requirement.',
+ mnemonic:'💡 Memory tip: ABC lives in the "Use it to decide" step (Step 5), not in a report mailed to shareholders.'},
+
+{type:'ord',
+ q:"Place ABC's five steps, per the textbook, in the correct order.",
+ items:[
+   {text:'Identify overhead cost activities', order:0},
+   {text:'Analyze individual overhead costs in terms of those cost activities', order:1},
+   {text:'Identify measurable cost drivers', order:2},
+   {text:'Assign overhead', order:3},
+   {text:'Use the ABC data to make decisions', order:4}
+ ],
+ explanation:"This is the exact textbook wording for the five ABC steps. You can't analyze a cost activity before identifying it, can't pick a driver before analyzing what causes the cost, and can't use the data to decide anything until it's actually been assigned.",
+ mnemonic:'💡 Memory tip: I-A-I-A-U — "I Am Incredibly Awesome... Undoubtedly." Identify, Analyze, Identify (drivers), Assign, Use.'},
+
+{type:'mc',
+ q:"Can a real company's ABC analysis be limited to exactly four overhead cost activities — one per category — the way Lily's simplified example is structured?",
+ opts:['No — the four categories (unit-level, batch-level, product line, facility support) are fixed, but a company can identify any number of specific activities within each category',
+       'Yes — ABC always requires exactly one activity to be identified per category',
+       'No — a company can only use ABC if it identifies at least ten separate activities',
+       'Yes — the number of categories and the number of activities are always the same thing in ABC'],
+ correct:0,
+ explanation:"Lily's story uses one activity per category for simplicity. In reality, a company might separately track machine depreciation, electricity, and machine maintenance as three distinct unit-level activities instead of lumping them into one — more precision, but more cost and complexity to maintain.",
+ mnemonic:'💡 Memory tip: Four categories are the walls of the house; how many rooms you build inside each one is up to you.'},
+
+{type:'mc',
+ q:'What is a "cost pool," as the term is used in ABC?',
+ opts:["The total dollar amount of overhead cost grouped together because it's caused by the same overhead cost activity",
+       'The rate charged per gallon of production (e.g., $0.50 per gallon)',
+       'The total number of cost driver events counted for a given activity',
+       'The dollar amount of overhead assigned to a single specific product'],
+ correct:0,
+ explanation:"A cost pool is the dollar total, not the rate and not the driver count. Lily's four cost pools ($750,000 / $440,000 / $270,000 / $280,000) each represent all the overhead dollars traced to one activity.",
+ mnemonic:'💡 Memory tip: A "pool" holds dollars — think of the four cost pools as four separate buckets of money, one per activity.'},
+
+/* ========== TOPIC 10.2 — THE FOUR ABC CATEGORIES ========== */
+
+{type:'mc',
+ q:'Unit-level activities are best defined as:',
+ opts:['Activities that take place each time a unit of product is produced',
+       'Activities that take place to support a batch or production run, regardless of its size',
+       'Activities that take place to support a product line, regardless of the number of batches or units produced',
+       'Activities necessary just to have a production facility in place'],
+ correct:0,
+ explanation:"Unit-level costs scale directly with production volume — make one more unit, and you trigger the activity one more time. This is the traditional, intuitive kind of overhead.",
+ mnemonic:'💡 Memory tip: Unit-level = "per unit." More gallons, more cost, in direct proportion.'},
+
+{type:'ms',
+ q:'Which of the following are textbook examples of unit-level overhead costs? Select all that apply.',
+ opts:['Machine maintenance','Machine depreciation','Electricity and other energy costs','Machine setups','Property taxes'],
+ correctSet:[0,1,2],
+ explanation:"Machine maintenance, machine depreciation, and electricity are all routine costs of simply running the machines — they scale with volume produced. Machine setups are batch-level (triggered by switching production runs), and property taxes are facility support (exist regardless of production).",
+ mnemonic:'💡 Memory tip: Unit-level = keeping the machines running: maintenance, depreciation, power.'},
+
+{type:'mc',
+ q:'Batch-level activities are best defined as:',
+ opts:['Activities that take place in order to support a batch or production run, regardless of the size of the batch',
+       'Activities that take place each time a unit of product is produced',
+       'Activities that take place to support a product line, regardless of the number of batches or units produced',
+       'Activities necessary just to have a production facility in place'],
+ correct:0,
+ explanation:'Batch-level costs are triggered by the act of starting and stopping production — not by volume and not by how complex the recipe is. A huge batch and a tiny batch each trigger the same batch-level cost once.',
+ mnemonic:'💡 Memory tip: Batch-level = "per batch," not "per gallon." Stop, clean, start — that act itself costs money.'},
+
+{type:'ms',
+ q:'Which of the following are textbook examples of batch-level overhead costs? Select all that apply.',
+ opts:['Inspections','Machine setups','Movement of and accounting for materials','Engineering product design','Factory insurance'],
+ correctSet:[0,1,2],
+ explanation:'Inspections, machine setups, and moving/accounting for materials all happen because production is stopping and starting between batches. Engineering product design is product-line overhead, and factory insurance is facility support.',
+ mnemonic:'💡 Memory tip: Batch-level = everything that happens at a "changeover": inspect, set up, move materials.'},
+
+{type:'mc',
+ q:'Product line (product-sustaining) activities are best defined as:',
+ opts:['Activities that take place in order to support a product line, regardless of the number of batches or individual units produced',
+       'Activities that take place each time a unit of product is produced',
+       'Activities that take place in order to support a batch or production run, regardless of batch size',
+       'Activities necessary just to have a production facility in place'],
+ correct:0,
+ explanation:"Product-line overhead exists because a product/flavor exists at all — regardless of how many gallons or batches of it get made. A flavor with 25 ingredients demands ongoing chemist attention no matter the batch size.",
+ mnemonic:"💡 Memory tip: Product line = the cost of a flavor simply existing on the menu, independent of volume or batch count."},
+
+{type:'ms',
+ q:'Which of the following are textbook examples of product line overhead costs? Select all that apply.',
+ opts:['Engineering product design',
+       'Storage in special warehouses',
+       'A special supervisor managing all activities for a particular product line',
+       'Ordering, purchasing, and receiving materials unique to a particular product line',
+       'General factory administration'],
+ correctSet:[0,1,2,3],
+ explanation:"All four of the first options relate to servicing the ongoing, specific needs of one product line. General factory administration is facility support — it exists regardless of which (or how many) product lines the factory runs.",
+ mnemonic:"💡 Memory tip: Product line = design it, store it specially, supervise it, order its unique ingredients."},
+
+{type:'mc',
+ q:'Facility support activities are best defined as:',
+ opts:['Activities necessary to have a production facility in place, but not related to any particular line of products or services',
+       'Activities that take place each time a unit of product is produced',
+       'Activities that take place in order to support a batch or production run, regardless of batch size',
+       'Activities that take place in order to support a product line, regardless of number of batches or units produced'],
+ correct:0,
+ explanation:"Facility support costs exist purely because the company has a facility at all — they don't care what, or how much, gets produced inside it.",
+ mnemonic:"💡 Memory tip: Facility support = the cost of the lights being on, whether or not anyone's making ice cream."},
+
+{type:'ms',
+ q:'Which of the following are textbook examples of facility support overhead costs? Select all that apply.',
+ opts:['Property taxes','Factory insurance','Security','Landscaping','General accounting','General factory administration','Machine setups'],
+ correctSet:[0,1,2,3,4,5],
+ explanation:"Property taxes, factory insurance, security, landscaping, general accounting, and general factory administration all exist regardless of production activity. Machine setups are batch-level — they're triggered by switching production runs, not by simply having a facility.",
+ mnemonic:'💡 Memory tip: Facility support = the "keeping the lights on" bill: taxes, insurance, security, landscaping, admin.'},
+
+{type:'dd',
+ q:'Match each ABC category to its definition.',
+ cols:['Unit-level','Batch-level','Product line','Facility support'],
+ items:[
+   {text:'Activities that take place each time a unit of product is produced', answer:'Unit-level'},
+   {text:'Activities that take place to support a batch or production run, regardless of batch size', answer:'Batch-level'},
+   {text:'Activities that take place to support a product line, regardless of the number of batches or units produced', answer:'Product line'},
+   {text:'Activities necessary to have a production facility in place, unrelated to any specific product line', answer:'Facility support'}
+ ],
+ explanation:'These four definitions are the backbone of ABC category analysis: does the cost scale with units, with batch switches, with a specific product\'s complexity, or with none of those (just existing as a company)?',
+ mnemonic:'💡 Memory tip: Per unit → per batch → per product line → per company. Each level zooms out one notch.'},
+
+{type:'dd',
+ q:'Match each overhead cost example to its ABC category.',
+ cols:['Unit-level','Batch-level','Product line','Facility support'],
+ items:[
+   {text:'Machine depreciation', answer:'Unit-level'},
+   {text:'Electricity and other energy costs', answer:'Unit-level'},
+   {text:'Machine setups', answer:'Batch-level'},
+   {text:'Inspections', answer:'Batch-level'},
+   {text:'Engineering product design', answer:'Product line'},
+   {text:'Storage in special warehouses', answer:'Product line'},
+   {text:'Property taxes', answer:'Facility support'},
+   {text:'Landscaping', answer:'Facility support'}
+ ],
+ explanation:'Machine depreciation/electricity scale with production (unit-level). Setups/inspections happen at changeovers (batch-level). Product design/special storage support one specific flavor (product line). Property taxes/landscaping exist regardless of what\'s produced (facility support).',
+ mnemonic:'💡 Memory tip: Ask "what triggers this cost?" — a gallon, a changeover, a flavor\'s existence, or just having a building?'},
+
+{type:'dd',
+ q:"Match each of Lily's four specific overhead cost activities to the generic ABC category it illustrates.",
+ cols:['Unit-level','Batch-level','Product line','Facility support'],
+ items:[
+   {text:'Operating the ice cream production process (routine wear-and-tear, electricity, cleanup)', answer:'Unit-level'},
+   {text:'Stopping one batch and starting another', answer:'Batch-level'},
+   {text:"Servicing the special needs of each individual ice cream flavor", answer:'Product line'},
+   {text:'Keeping the factory open (property taxes, security, building insurance)', answer:'Facility support'}
+ ],
+ explanation:"Lily's four specific activities map one-to-one onto the four generic categories: routine production is unit-level, batch changeovers are batch-level, flavor complexity is product-line, and having the factory is facility support.",
+ mnemonic:'💡 Memory tip: Lily\'s story is just the four generic categories wearing ice cream costumes.'},
+
+{type:'mc',
+ q:'How much overhead did Lily\'s ABC analysis assign to the batch-level cost pool (stopping one batch, starting another)?',
+ opts:['$440,000','$750,000','$270,000','$280,000'],
+ correct:0,
+ explanation:'The batch-level pool totals $440,000 — this includes most of the factory cleaners\' and repair technicians\' time, plus half the production supervisor\'s time and 30% of accounting\'s time.',
+ mnemonic:'💡 Memory tip: $440K = the price of constantly stopping and starting the machines.'},
+
+{type:'mc',
+ q:"How much overhead did Lily's ABC analysis assign to the product line cost pool (servicing the special needs of each flavor)?",
+ opts:['$270,000','$750,000','$440,000','$280,000'],
+ correct:0,
+ explanation:"The product-line pool totals $270,000 — this is where the flavor chemist's entire salary lands (100%), plus 35% of the supervisor's time and 20% of accounting's time.",
+ mnemonic:'💡 Memory tip: $270K is the flavor chemist\'s domain — complexity costs money.'},
+
+{type:'mc',
+ q:"How much overhead did Lily's ABC analysis assign to the facility support cost pool (keeping the factory open)?",
+ opts:['$280,000','$750,000','$440,000','$270,000'],
+ correct:0,
+ explanation:"The facility support pool totals $280,000 — building depreciation, security guards, and building insurance in full, plus 40% of the accounting department's time (general company accounting, not flavor-specific).",
+ mnemonic:'💡 Memory tip: $280K is Lily\'s "cost of existing as a company" — it doesn\'t care what flavor she makes.'},
+
+{type:'mc',
+ q:"What is Lily's total overhead cost across all four cost pools combined?",
+ opts:['$1,740,000','$1,460,000','$1,500,000','$1,690,000'],
+ correct:0,
+ explanation:'$750,000 + $440,000 + $270,000 + $280,000 = $1,740,000 — the same total overhead figure Lily started with under the traditional method. ABC doesn\'t change the total, only how it\'s sliced up. ($1,460,000 is the total assigned to flavors only, without facility support; $1,500,000 is the total gallons produced, a different unit entirely.)',
+ mnemonic:'💡 Memory tip: Total overhead never changes with ABC — only its address does.'},
+
+{type:'dd',
+ q:'Match each description of how an overhead line item was analyzed in Step 2 to the correct outcome.',
+ cols:['100% Unit-level (routine)','100% Facility support','100% Product line','Split across multiple categories'],
+ items:[
+   {text:'Electricity and machine depreciation', answer:'100% Unit-level (routine)'},
+   {text:'Building depreciation, security guards, and building insurance', answer:'100% Facility support'},
+   {text:"The flavor chemist's entire salary", answer:'100% Product line'},
+   {text:'The accounting department (10% production / 30% batch / 20% product line / 40% facility support)', answer:'Split across multiple categories'}
+ ],
+ explanation:"Some line items are easy — electricity and machine depreciation are purely routine, building costs are purely facility-related, and the flavor chemist works entirely on flavor complexity. Accounting, though, touches all four categories, since accountants handle routine bookkeeping, batch-tracking, flavor-specific ordering, AND general company reports.",
+ mnemonic:"💡 Memory tip: Accounting is everywhere — the only department that shows up in all four buckets."},
+
+{type:'mc',
+ q:"Based on time logs, what percentage of Lily's factory cleaners' time was linked to batch-level activity (stopping one batch and starting another)?",
+ opts:['70%','30%','85%','15%'],
+ correct:0,
+ explanation:"Time logs showed factory cleaners spend 30% of their time on routine (unit-level) cleanup and 70% on cleaning associated with batch changeovers — the bulk of their work is triggered by switching flavors, not by volume.",
+ mnemonic:'💡 Memory tip: Cleaners spend most of their time cleaning up AFTER a switch, not during routine runs — 70% batch.'},
+
+{type:'tf',
+ q:'Gathering the detailed line-item data needed for Step 2 of an ABC analysis (figuring out what percentage of each cost is caused by each activity) is generally quick and inexpensive to do.',
+ opts:['True','False'],
+ correct:1,
+ explanation:"False. The transcript is explicit that this step is genuinely hard — it typically requires time logs, surveys, or watching employees work, and can create real pushback from staff who don't like being tracked.",
+ mnemonic:"💡 Memory tip: Step 2 is the step that scares companies away from ABC — good data is expensive to get."},
+
+{type:'mc',
+ q:'Why might employees resist a company\'s efforts to gather the detailed time-allocation data needed for an ABC analysis?',
+ opts:["People generally don't like having how they spend their time tracked or watched",
+       'It is illegal in most states to track employee time in this way',
+       'Employees are legally entitled to refuse any accounting-related request',
+       'The data is always inaccurate no matter how it is gathered'],
+ correct:0,
+ explanation:"The transcript describes a real example — a student intern doing this kind of data-gathering as a summer project ran into significant pushback, simply because employees don't like being observed or having their time tracked and questioned.",
+ mnemonic:"💡 Memory tip: Nobody loves being watched — that's the human cost of getting good ABC data."},
+
+{type:'tf',
+ q:'If Lily made the exact same total amount of vanilla and chocolate ice cream but switched production every 2 hours instead of running in a few large, multi-week batches, her total overhead cost would stay the same, since direct materials and direct labor are unchanged.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False. Even with identical materials and labor, switching batches more frequently drives up batch-level overhead — more cleaning, more setups, more inspections, more accounting activity — even though total output is unchanged.',
+ mnemonic:'💡 Memory tip: Same ice cream, same materials, same labor — but chop it into small batches and overhead climbs anyway.'},
+
+/* ========== TOPIC 10.3 — COST DRIVERS ========== */
+
+{type:'mc',
+ q:'Per the textbook, a cost driver is best defined as:',
+ opts:['A numerical measure used to reflect the amount of a specific overhead cost that is associated with a particular activity',
+       'The total dollar amount of overhead assigned to a specific product',
+       'A qualitative judgment about how "messy" or complex a production process feels',
+       'The overhead rate charged to the highest-volume product only'],
+ correct:0,
+ explanation:'This is the verbatim REMEMBER THIS textbook definition. A cost driver has to be numerical/measurable — you can\'t just say "this flavor is messier," you need a countable number like gallons, batches, or ingredients.',
+ mnemonic:'💡 Memory tip: A cost driver is a NUMBER, not a feeling. "Messy" isn\'t a cost driver; "number of batches" is.'},
+
+{type:'dd',
+ q:"Match each of Lily's overhead cost activities to the cost driver used to assign it.",
+ cols:['Number of gallons','Number of batches','Number of ingredients','No cost driver assigned'],
+ items:[
+   {text:'Operating the ice cream production process (routine wear-and-tear, electricity)', answer:'Number of gallons'},
+   {text:'Stopping one batch and starting another', answer:'Number of batches'},
+   {text:'Servicing the special needs of each ice cream flavor', answer:'Number of ingredients'},
+   {text:'Keeping the factory open (property taxes, security, building insurance)', answer:'No cost driver assigned'}
+ ],
+ explanation:'Gallons measure unit-level activity, batches measure batch-level activity, and ingredients act as a surrogate for flavor complexity (product-line activity). Facility support gets no driver at all — nothing about production affects it.',
+ mnemonic:'💡 Memory tip: Gallons, batches, ingredients — and then a fourth category that gets... nothing.'},
+
+{type:'mc',
+ q:'Why is there no cost driver for facility support overhead?',
+ opts:["Because facility support costs (like property taxes and security) don't change no matter how much of any flavor is produced — the only way to eliminate them is to shut the company down entirely",
+       'Because facility support costs are too small to bother measuring',
+       'Because facility support costs are set by the government and cannot legally be tracked',
+       'Because facility support costs are already included inside the unit-level cost pool'],
+ correct:0,
+ explanation:"No flavor — Vanilla or Gingerbread Cheesecake Supreme — causes facility support costs to go up or down. Since nothing about production activity moves this cost, there's no valid numerical measure to tie it to any specific flavor.",
+ mnemonic:'💡 Memory tip: You can\'t drive a cost with a number that never changes. Facility support just... exists.'},
+
+{type:'tf',
+ q:'Per the textbook, in an ABC system, facility support overhead costs are treated as common costs that are not assigned to any specific product, division, or product line.',
+ opts:['True','False'],
+ correct:0,
+ explanation:"This is a direct REMEMBER THIS textbook statement. Facility support is set aside as a shared, common cost of doing business at all — not distributed to individual products.",
+ mnemonic:"💡 Memory tip: Facility support is a company-wide bill, not a per-flavor bill."},
+
+{type:'mc',
+ q:'In the worker turnover cost driver example, if Division A has 15 turnover events in a year and Division B has only 3, what should happen to the overhead related to turnover?',
+ opts:['Division A should be assigned more of that overhead, since number of turnover events is the cost driver',
+       'Both divisions should be assigned an equal share of the overhead, since turnover is unpredictable',
+       'Division B should be assigned more of the overhead, to compensate for its stability',
+       'Neither division should be assigned any of the overhead, since turnover is a facility support cost'],
+ correct:0,
+ explanation:"Turnover events (interviewing, documentation, training new hires) is a numerical, measurable cost driver. More turnover events means more of that overhead activity was caused by that division, so more of the cost should follow it.",
+ mnemonic:'💡 Memory tip: 15 turnover events vs. 3 — the division causing more churn should carry more of the overhead it creates.'},
+
+{type:'mc',
+ q:'Per the discussion of what makes a cost driver "good," a measure like "how messy" a production process is fails as a cost driver mainly because:',
+ opts:["It can't be quantified into a specific, countable number",
+       'It is not related to overhead costs in any way',
+       'It only applies to unit-level overhead, never to other categories',
+       'It changes too quickly from month to month to be useful'],
+ correct:0,
+ explanation:"\"Messiness\" might be real, but a cost driver has to be numerical. That's why Lily used number of ingredients as a stand-in — it's a countable, measurable proxy for the complexity/messiness that's actually driving the cost.",
+ mnemonic:'💡 Memory tip: If you can\'t count it, it can\'t drive the cost. Swap "messy" for "number of ingredients."'},
+
+/* ========== TOPIC 10.4 — ASSIGNING OVERHEAD TO PRODUCTION ========== */
+
+{type:'ord',
+ q:'Place the three necessary steps for assigning overhead cost to production, per the textbook review, in the correct order.',
+ items:[
+   {text:'Gather the overhead cost and numerical cost driver data', order:0},
+   {text:'Compute the amount of overhead cost per cost driver event', order:1},
+   {text:'Use these data to assign overhead to production', order:2}
+ ],
+ explanation:"This is the textbook's specific breakdown of Step 4 (\"Assign overhead\") from the main five-step process. You must gather the raw dollar and driver-count data before you can compute a rate, and you must have the rate before you can apply it to any specific product.",
+ mnemonic:'💡 Memory tip: Gather → Compute → Use. You can\'t use a rate you haven\'t computed, and can\'t compute a rate you haven\'t gathered data for.'},
+
+{type:'mc',
+ q:'Using the unit-level cost pool ($750,000) and total gallons produced (1,500,000), what is the overhead rate per gallon?',
+ opts:['$0.50 per gallon','$1.16 per gallon','$0.05 per gallon','$5.00 per gallon'],
+ correct:0,
+ explanation:'$750,000 ÷ 1,500,000 gallons = $0.50 per gallon. ($1.16/gallon was the OLD traditional rate using total overhead — a classic trap if you mix up the two methods.)',
+ mnemonic:'💡 Memory tip: Fifty cents a gallon — half the traditional Vanilla-crushing rate of $1.16.'},
+
+{type:'mc',
+ q:'Using the batch-level cost pool ($440,000) and total batches produced (500), what is the overhead rate per batch?',
+ opts:['$880 per batch','$440 per batch','$1,760 per batch','$500 per batch'],
+ correct:0,
+ explanation:'$440,000 ÷ 500 batches = $880 per batch. Every single time production stops one batch and starts another, that switch alone creates $880 of overhead — regardless of materials or labor.',
+ mnemonic:'💡 Memory tip: $880 per batch — the "price of a switch." Flip flavors twice in a day, and that\'s $1,760 gone.'},
+
+{type:'mc',
+ q:'Using the product-line cost pool ($270,000) and total ingredients (100), what is the overhead rate per ingredient?',
+ opts:['$2,700 per ingredient','$270 per ingredient','$27,000 per ingredient','$1,000 per ingredient'],
+ correct:0,
+ explanation:'$270,000 ÷ 100 total ingredients = $2,700 per ingredient. Every ingredient added to any recipe permanently adds $2,700/year in overhead — a strong incentive to keep recipes simple unless an ingredient is really worth it.',
+ mnemonic:'💡 Memory tip: $2,700 per ingredient — adding "just a hint" of something isn\'t free.'},
+
+{type:'mc',
+ q:'Vanilla was produced using 500,000 gallons, 25 batches, and 5 ingredients. Using the ABC rates ($0.50/gallon, $880/batch, $2,700/ingredient), what is the total ABC overhead assigned to Vanilla?',
+ opts:['$285,500','$250,000','$580,000','$299,000'],
+ correct:0,
+ explanation:'(500,000 × $0.50) + (25 × $880) + (5 × $2,700) = $250,000 + $22,000 + $13,500 = $285,500. ($580,000 was the old TRADITIONAL overhead figure for Vanilla — a good trap if you mix up the two methods; $250,000 is only the unit-level piece, missing batch and ingredient overhead.)',
+ mnemonic:'💡 Memory tip: $285,500 — Vanilla is cheap to make in every ABC category: huge batches, tiny recipe.'},
+
+{type:'mc',
+ q:'Gingerbread Cheesecake Supreme was produced using 200,000 gallons, 235 batches, and 25 ingredients. Using the ABC rates, what is its total ABC overhead?',
+ opts:['$374,300','$232,000','$306,800','$400,000'],
+ correct:0,
+ explanation:'(200,000 × $0.50) + (235 × $880) + (25 × $2,700) = $100,000 + $206,800 + $67,500 = $374,300. ($232,000 was roughly what its overhead looked like under the traditional method — a good trap.)',
+ mnemonic:'💡 Memory tip: $374,300 — small batches (235 of them!) and a 25-ingredient recipe make this the most overhead-expensive flavor.'},
+
+{type:'mc',
+ q:'Marshmallow Caramel Delight was produced using 250,000 gallons, 50 batches, and 20 ingredients. Using the ABC rates, what is its total ABC overhead?',
+ opts:['$223,000','$169,000','$200,000','$250,000'],
+ correct:0,
+ explanation:'(250,000 × $0.50) + (50 × $880) + (20 × $2,700) = $125,000 + $44,000 + $54,000 = $223,000.',
+ mnemonic:'💡 Memory tip: $223,000 — moderate gallons, moderate batches, moderate ingredients: a "middle of the pack" flavor.'},
+
+{type:'mc',
+ q:'Peanut Butter Swirl was produced using 100,000 gallons, 100 batches, and 30 ingredients. Using the ABC rates, what is its total ABC overhead?',
+ opts:['$219,000','$200,000','$169,000','$238,000'],
+ correct:0,
+ explanation:'(100,000 × $0.50) + (100 × $880) + (30 × $2,700) = $50,000 + $88,000 + $81,000 = $219,000.',
+ mnemonic:'💡 Memory tip: $219,000 — lowest total gallons of the group, but still pricey because of its 30-ingredient recipe.'},
+
+{type:'mc',
+ q:"When Lily added up the ABC overhead assigned to all six ice cream flavors, the total came to $1,460,000 — not the full $1,740,000 in total overhead. What accounts for the missing $280,000?",
+ opts:["It's the facility support cost pool, which is deliberately not assigned to any individual flavor",
+       'A calculation error that needs to be corrected',
+       'Overhead that was budgeted but never actually spent',
+       'Direct materials cost, which was mistakenly left out of the total'],
+ correct:0,
+ explanation:'Nothing was lost — $1,460,000 (assigned to flavors) + $280,000 (facility support, set aside) = $1,740,000 (total overhead). This is intentional, not an error.',
+ mnemonic:'💡 Memory tip: $1,460,000 + $280,000 = $1,740,000. The math always has to add back up — if it doesn\'t, look for facility support.'},
+
+{type:'tf',
+ q:'Even though $280,000 of overhead is not assigned to any specific flavor, it still has to be paid for out of the profits generated by the flavors Lily actually sells.',
+ opts:['True','False'],
+ correct:0,
+ explanation:"True. Not assigning facility support to specific flavors doesn't make it disappear — Lily's business overall still needs to generate enough profit across all flavors to cover that $280,000.",
+ mnemonic:'💡 Memory tip: Not assigned ≠ not owed. The $280,000 bill still needs to get paid somehow.'},
+
+{type:'ms',
+ q:"Which of the following are the total cost driver event counts Lily used across all six flavors combined? Select all that apply.",
+ opts:['1,500,000 gallons','500 batches','100 ingredients','1,740,000 total dollars of overhead','6 ice cream flavors'],
+ correctSet:[0,1,2],
+ explanation:'The three cost driver totals are 1,500,000 gallons, 500 batches, and 100 ingredients — these are the denominators used to compute the $0.50/$880/$2,700 rates. $1,740,000 is a dollar total (the numerator, not a driver count), and "6 flavors" is a product count, not a cost driver.',
+ mnemonic:'💡 Memory tip: Gallons, batches, ingredients — the three real driver counts. Dollars and flavor counts are not drivers.'},
+
+/* ========== TOPIC 10.5 — USING ABC DATA TO MAKE DECISIONS ========== */
+
+{type:'mc',
+ q:'Under the traditional profit report, which two flavors appeared to be losing money, prompting Lily to consider dropping them?',
+ opts:['Vanilla and Double Dutch Chocolate Brownie',
+       'Gingerbread Cheesecake Supreme and Peanut Butter Swirl',
+       'Marshmallow Caramel Delight and Strawberry Banana Surprise',
+       'Vanilla and Gingerbread Cheesecake Supreme'],
+ correct:0,
+ explanation:"Vanilla (-$155,000) and Double Dutch Chocolate Brownie (-$164,000) looked like the money-losers under the traditional method — which is exactly backwards from reality, as ABC later revealed.",
+ mnemonic:'💡 Memory tip: Vanilla and Chocolate — Lily\'s two best-loved, longest-running flavors — were the ones falsely accused.'},
+
+{type:'mc',
+ q:'Under the traditional profit report, Vanilla appeared to be losing how much money per year?',
+ opts:['$155,000','$164,000','$139,500','$230,000'],
+ correct:0,
+ explanation:'The traditional report showed Vanilla losing $155,000 (Sales $750,000 − Direct materials $200,000 − Direct labor $125,000 − Traditional overhead $580,000). ($164,000 was Chocolate\'s traditional loss; $139,500 is actually Vanilla\'s ABC PROFIT — a great trap if you mix up the two reports.)',
+ mnemonic:'💡 Memory tip: -$155,000 traditional vs. +$139,500 ABC — same flavor, two wildly different stories.'},
+
+{type:'mc',
+ q:"What flawed assumption was built into the traditional report's suggestion to stop making Vanilla?",
+ opts:["That stopping Vanilla production would eliminate $580,000 of overhead, when in reality Vanilla's production only caused $285,500 of overhead",
+       "That Vanilla's direct materials cost would increase if production stopped",
+       "That stopping Vanilla would have no effect on the company's total overhead at all",
+       "That Vanilla's selling price would need to be raised to remain profitable"],
+ correct:0,
+ explanation:"The traditional report assumes if you stop making Vanilla, you get rid of $580,000 in overhead along with the sales and direct costs. But Vanilla's production process only actually causes $285,500 in overhead — the rest was overhead other flavors caused, wrongly loaded onto Vanilla.",
+ mnemonic:'💡 Memory tip: $580,000 assumed vs. $285,500 actually caused — that ~$300,000 gap is the whole reason ABC exists.'},
+
+{type:'mc',
+ q:'Under the more carefully calculated ABC profit report, how much profit did Vanilla actually generate?',
+ opts:['$139,500','-$155,000','$285,500','$99,500'],
+ correct:0,
+ explanation:"Once overhead is assigned accurately ($285,500 instead of $580,000), Vanilla is revealed to contribute $139,500 to the bottom line — not a loss at all.",
+ mnemonic:'💡 Memory tip: $139,500 — Vanilla goes from villain to hero once the real numbers come out.'},
+
+{type:'mc',
+ q:'Under the ABC profit report, Gingerbread Cheesecake Supreme — which had looked roughly break-even or profitable under the traditional method — was revealed to actually be:',
+ opts:['Losing $124,300',
+       'Earning a profit of $102,000',
+       'Losing $164,000',
+       'Breaking exactly even'],
+ correct:0,
+ explanation:'Under the traditional method, GCS looked like it was earning around $18,000. Once ABC carefully assigns its true overhead ($374,300, driven by 235 small batches and 25 ingredients), the real picture is a loss of $124,300.',
+ mnemonic:'💡 Memory tip: Looked fine at +$18,000 traditional, actually -$124,300 real — GCS was the hidden problem all along.'},
+
+{type:'ms',
+ q:"According to the more accurate ABC analysis, which flavors were Lily's true \"money losers\" — not Vanilla or Chocolate? Select all that apply.",
+ opts:['Gingerbread Cheesecake Supreme','Strawberry Banana Surprise','Peanut Butter Swirl','Vanilla','Double Dutch Chocolate Brownie'],
+ correctSet:[0,1,2],
+ explanation:"Once overhead is assigned accurately, the real underperformers are Gingerbread Cheesecake Supreme, Strawberry Banana Surprise, and Peanut Butter Swirl — not Vanilla or Chocolate, which the traditional report had wrongly blamed.",
+ mnemonic:'💡 Memory tip: The real culprits are the complex, small-batch flavors — not the simple, high-volume classics.'},
+
+{type:'tf',
+ q:'Total company profit (a loss of $230,000) and total overhead ($1,740,000) were exactly the same under both the traditional report and the ABC report — only the allocation to individual flavors changed.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'True. ABC doesn\'t change the company\'s bottom line or total overhead at all — it only changes which flavor gets blamed (or credited) for how much of it.',
+ mnemonic:'💡 Memory tip: Same pie, sliced differently. ABC redraws the slices, not the size of the pie.'},
+
+{type:'mc',
+ q:'If you add up the gross profit/loss for all six individual flavors under the ABC report, they together generate +$50,000. Why does the company still show an overall loss of $230,000?',
+ opts:["Because the $280,000 in facility support overhead still has to be subtracted separately, since it isn't assigned to any flavor",
+       'Because the ABC calculations for each flavor contain a rounding error',
+       'Because direct materials cost was double-counted across flavors',
+       'Because Vanilla\'s profit was mistakenly excluded from the total'],
+ correct:0,
+ explanation:'+$50,000 (combined flavor gross profit) − $280,000 (facility support, subtracted once at the company level) = -$230,000. This reconciles perfectly with the total loss.',
+ mnemonic:'💡 Memory tip: $50,000 from the flavors, minus the $280,000 "cost of existing" = the same -$230,000 as before.'},
+
+{type:'mc',
+ q:'What general principle explains why standard, generic products (like Vanilla) tend to be more profitable than they initially appear?',
+ opts:['They typically create much less overhead than assumed, because they\'re made in large batches with simple, low-ingredient recipes',
+       'They typically have lower direct materials costs than complex products',
+       'They are always sold at a higher price than complex products',
+       'They require no facility support overhead at all'],
+ correct:0,
+ explanation:"Standard/simple products avoid both major sources of extra overhead — few batch switches (large production runs) and few ingredients (simple recipes) — so a careful ABC analysis usually reveals them to be cheaper to make, and therefore more profitable, than a flat traditional rate suggests.",
+ mnemonic:'💡 Memory tip: Simple and steady = cheap overhead. Vanilla wins by not creating problems.'},
+
+{type:'mc',
+ q:'What general principle explains why complex, specialized products (like Gingerbread Cheesecake Supreme) tend to be less profitable than they initially appear?',
+ opts:['They create a disproportionate share of overhead, because they\'re usually made in small batches with complex, high-ingredient recipes',
+       'They always have lower selling prices than simple products',
+       'They require no direct labor at all',
+       'They are automatically classified as facility support costs'],
+ correct:0,
+ explanation:"Complex/specialized products get hit twice — small batch sizes (more batch-level overhead per unit) and lots of ingredients (more product-line overhead) — so a careful ABC analysis usually reveals far more overhead than a flat traditional rate would have assumed.",
+ mnemonic:'💡 Memory tip: Complex and choppy = expensive overhead. GCS loses by creating problems on two fronts.'},
+
+{type:'mc',
+ q:'Based on these two principles, which type of product generally consumes the highest amount of overhead cost per unit?',
+ opts:['Low-volume, unique products','Low-volume, standard products','High-volume, unique products','High-volume, standard products'],
+ correct:0,
+ explanation:"Low volume tends to force small batch sizes (more batch-level overhead spread over fewer units), and uniqueness/complexity adds more product-line overhead (more ingredients, more special handling). A low-volume unique product gets hit by both effects at once.",
+ mnemonic:'💡 Memory tip: Low volume + unique = the GCS combo. Both effects stack in the same expensive direction.'},
+
+{type:'mc',
+ q:'Conversely, which type of product generally consumes the lowest amount of overhead cost per unit?',
+ opts:['High-volume, standard products','Low-volume, unique products','High-volume, unique products','Low-volume, standard products'],
+ correct:0,
+ explanation:"High volume allows large batch sizes (batch-level overhead spread over many units), and a standard/simple recipe keeps product-line overhead low. This is exactly Vanilla's situation.",
+ mnemonic:'💡 Memory tip: High volume + standard = the Vanilla combo. Both effects stack in the same cheap direction.'},
+
+{type:'mc',
+ q:'Why was Gingerbread Cheesecake Supreme being produced in 235 small batches per year (almost daily)?',
+ opts:['One customer wanted to advertise that the ice cream was made fresh daily',
+       'The recipe legally requires daily production for food safety reasons',
+       'Lily\'s factory can only physically produce small batches of any flavor',
+       'Small batches were cheaper to produce than large batches'],
+ correct:0,
+ explanation:'A retail customer wanted to market the product as "made fresh daily," which forced Lily into near-daily batch changeovers — an expensive way to produce, once you know it costs $880 in overhead every single time.',
+ mnemonic:'💡 Memory tip: "Fresh daily" sounds great in an ad — but it\'s $880 x 235 in hidden overhead.'},
+
+{type:'ms',
+ q:"What two options did Lily's ABC data give her for fixing Gingerbread Cheesecake Supreme's losses? Select all that apply.",
+ opts:['Charge the customer a higher price to cover the extra batch-related overhead their demand creates',
+       'Switch to making it in fewer, larger batches (e.g., weekly instead of daily)',
+       'Discontinue Vanilla ice cream instead',
+       'Ignore the loss, since total company profit is unaffected by any one flavor'],
+ correctSet:[0,1],
+ explanation:"With the $880-per-batch number in hand, Lily could either negotiate a higher price with the customer demanding daily batches (to cover the extra cost they're causing), or restructure production to make it weekly instead of daily.",
+ mnemonic:'💡 Memory tip: Charge for it, or stop causing it — those are the only two real fixes once you know the number.'},
+
+{type:'mc',
+ q:'If Lily switched Gingerbread Cheesecake Supreme from 235 batches/year to 50 batches/year (same 200,000 gallons, same 25-ingredient recipe), what would happen to its batch-level overhead?',
+ opts:['It would drop from $206,800 to $44,000',
+       'It would drop from $374,300 to $100,000',
+       'It would stay exactly the same, since total gallons didn\'t change',
+       'It would increase, since fewer batches means larger, more expensive batches'],
+ correct:0,
+ explanation:'235 batches × $880 = $206,800. 50 batches × $880 = $44,000. Only the batch-level piece changes — the unit-level ($100,000, unchanged since gallons are the same) and product-line ($67,500, unchanged since the recipe is the same) pieces stay put.',
+ mnemonic:'💡 Memory tip: Same gallons, same recipe, fewer switches — only the batch-level line item moves.'},
+
+{type:'mc',
+ q:"After switching to weekly production, Gingerbread Cheesecake Supreme's profit picture would change from a loss of $124,300 to:",
+ opts:['A profit of $38,500','A profit of $124,300','A profit of $18,000','A remaining loss of $46,600'],
+ correct:0,
+ explanation:'Cutting batch-level overhead from $206,800 to $44,000 (a $162,800 savings) flips GCS from a $124,300 loss to a $38,500 profit — turning a money-loser into a money-maker without changing the recipe or the selling price at all.',
+ mnemonic:'💡 Memory tip: -$124,300 + $162,800 in batch savings = +$38,500. One production change flips the sign.'},
+
+{type:'tf',
+ q:'Per the textbook review, designing and operating an ABC system usually costs more than using a simple traditional system based on a single activity measure such as direct labor hours.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'This is a direct REMEMBER THIS textbook statement. ABC requires more data-gathering, more analysis, and more ongoing maintenance than a single flat rate.',
+ mnemonic:'💡 Memory tip: Better data isn\'t free — ABC costs more to build and run than the "spread it evenly" approach.'},
+
+{type:'tf',
+ q:'Per the textbook review, the increased cost of operating an ABC system is never worth it, regardless of how much it improves decision-making.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False. The textbook says the increased cost "pays for itself when use of the improved ABC data results in significantly better decisions" — meaning it absolutely CAN be worth it, as Lily\'s Gingerbread Cheesecake Supreme fix demonstrates.',
+ mnemonic:'💡 Memory tip: ABC costs more upfront, but pays for itself the moment it saves you from a bad decision like dropping Vanilla.'},
+
+{type:'ms',
+ q:'Per the textbook review, what are the two characteristics of a good management accounting measure? Select both.',
+ opts:['Reflects economic reality','Motivates correct behavior','Requires no cost to implement','Must be approved by the SEC before use','Is identical across every company in an industry'],
+ correctSet:[0,1],
+ explanation:'The textbook names exactly two characteristics: a good measure reflects economic reality (tells the truth about what\'s really happening) and motivates correct behavior (points people toward the right fix).',
+ mnemonic:'💡 Memory tip: Tell the truth, and point toward the fix — that\'s all a good accounting measure has to do.'},
+
+{type:'dd',
+ q:"Match each example from Lily's Ice Cream Company to the characteristic of good management accounting it illustrates.",
+ cols:['Reflects economic reality','Motivates correct behavior'],
+ items:[
+   {text:'The ABC report correctly shows that Vanilla is actually profitable, not a money-loser', answer:'Reflects economic reality'},
+   {text:'The ABC report correctly shows that Gingerbread Cheesecake Supreme is actually losing money', answer:'Reflects economic reality'},
+   {text:"The $880-per-batch number shows Lily exactly how to fix Gingerbread Cheesecake Supreme's losses (switch to weekly batches)", answer:'Motivates correct behavior'},
+   {text:'The $2,700-per-ingredient number discourages Lily from needlessly adding ingredients to a recipe', answer:'Motivates correct behavior'}
+ ],
+ explanation:"Reflecting economic reality means the numbers are TRUE (Vanilla really is profitable; GCS really is losing money). Motivating correct behavior means the numbers point toward ACTION (the batch and ingredient rates tell Lily exactly what to change).",
+ mnemonic:'💡 Memory tip: Reality = is it TRUE? Behavior = does it tell you what to DO?'},
+
+/* ========== APPLIED PRACTICE — DAKOTA COMPANY ========== */
+
+{type:'mc',
+ q:"Dakota Company is allocating $600,000 of batch-level overhead using number of batches: Product 1 (20 batches) and Product 2 (60 batches). What is the overhead rate per batch?",
+ opts:['$7,500 per batch','$10,000 per batch','$30,000 per batch','$600 per batch'],
+ correct:0,
+ explanation:'$600,000 ÷ (20 + 60) = $600,000 ÷ 80 total batches = $7,500 per batch. Always divide the pool by the COMBINED total driver events across every product, not just one product\'s share.',
+ mnemonic:'💡 Memory tip: Add both products\' batches together first (80), THEN divide — don\'t divide by just one product\'s count.'},
+
+{type:'mc',
+ q:'Dakota Company is allocating $400,000 of product-line overhead using number of product lines: Product 1 (10 lines) and Product 2 (40 lines). What is the overhead rate per line?',
+ opts:['$8,000 per line','$10,000 per line','$40,000 per line','$4,000 per line'],
+ correct:0,
+ explanation:'$400,000 ÷ (10 + 40) = $400,000 ÷ 50 total lines = $8,000 per line.',
+ mnemonic:'💡 Memory tip: 10 + 40 = 50 total lines. $400,000 split 50 ways is $8,000 each.'},
+
+{type:'mc',
+ q:'Using the rates of $7,500/batch and $8,000/line, what is the total ABC overhead assigned to Product 1 (20 batches, 10 lines)?',
+ opts:['$230,000','$150,000','$80,000','$310,000'],
+ correct:0,
+ explanation:'(20 × $7,500) + (10 × $8,000) = $150,000 + $80,000 = $230,000.',
+ mnemonic:'💡 Memory tip: $150,000 from batches, $80,000 from lines — add both pieces, don\'t stop after just one.'},
+
+{type:'mc',
+ q:"Product 1 has sales of $1,400,000, direct materials of $200,000, and direct labor of $600,000. Using its ABC overhead of $230,000, what is Product 1's gross margin under activity-based costing?",
+ opts:['$370,000','$600,000','$140,000','$1,170,000'],
+ correct:0,
+ explanation:'$1,400,000 − $200,000 − $600,000 − $230,000 = $370,000. This is up from the $100,000 gross margin the original direct-labor-hours allocation had shown — the same story as Vanilla, just with a different product.',
+ mnemonic:'💡 Memory tip: $370,000 — Product 1 was being over-charged for overhead under the old method, just like Vanilla.'},
+
+];
+
+initQuiz(questions, 'Section 11');
+</script>
+</body>
+</html>

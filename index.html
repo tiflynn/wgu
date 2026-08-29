@@ -218,10 +218,42 @@
       </div>
     </a>
 
+    <a class="hub-card" href="section11_quiz.html">
+      <span class="hub-arrow">→</span>
+      <div class="hub-card-eyebrow">Section 11</div>
+      <div class="hub-card-title">Activity-Based Costing (ABC)</div>
+      <div class="hub-card-desc">
+        The five ABC steps, the four overhead cost categories (unit-level, batch-level, product line,
+        facility support), cost drivers, assigning overhead using ABC rates, and using ABC data to
+        make decisions &mdash; including the full Lily's Ice Cream Company example.
+      </div>
+      <div class="hub-card-meta">
+        <span class="hub-tag">72 Questions</span>
+      </div>
+    </a>
+
   </div>
 
   <p class="hub-footer">More sections added as the course progresses</p>
 </div>
+
+<script>
+  // Each card links to its quiz file; count that file's questions and label the tag.
+  // Falls back silently to the number already in the HTML (file:// blocks fetch).
+  document.querySelectorAll('.hub-card').forEach(card => {
+    const tag = card.querySelector('.hub-tag');
+    const src = card.getAttribute('href');
+    if(!tag || !src) return;
+
+    fetch(src)
+      .then(r => r.ok ? r.text() : Promise.reject(r.status))
+      .then(text => {
+        const n = (text.match(/[{,\s]type\s*:\s*['"]/g) || []).length;
+        if(n > 0) tag.textContent = n + (n === 1 ? ' Question' : ' Questions');
+      })
+      .catch(() => { /* keep the fallback text already in the tag */ });
+  });
+</script>
 
 </body>
 </html>

@@ -13,11 +13,17 @@ A self-study quiz site for **C213 Accounting for Decision Makers** (MBA program)
 | `index.html` | Home page — lists every section as a clickable card |
 | `quiz.css` | Shared styling used by every quiz page (light theme, cards, buttons, drag & drop) |
 | `quiz.js` | Shared quiz engine — shuffling, scoring, question rendering, results screen |
-| `section2_quiz.html` | Section 2: The Nature & Purpose of Accounting (29 questions) |
-| `section3_quiz.html` | Section 3: Overview of Financial Statements (92 questions) |
-| `section4_quiz.html` | Section 4: Individual Accounts & Transaction Analysis (67 questions) |
-| `section5_quiz.html` | Section 5: The Income Statement (68 questions) |
-| `section6_quiz.html` | Section 6: The Statement of Cash Flows (86 questions) |
+| `section2_quiz.html` | Section 2: The Nature & Purpose of Accounting |
+| `section3_quiz.html` | Section 3: Overview of Financial Statements |
+| `section4_quiz.html` | Section 4: Individual Accounts & Transaction Analysis |
+| `section5_quiz.html` | Section 5: The Income Statement |
+| `section6_quiz.html` | Section 6: The Statement of Cash Flows |
+| `section7_quiz.html` | Section 7: Introduction to Financial Statement Analysis |
+| `section8_quiz.html` | Section 8: Cash Budgeting |
+| `section9_quiz.html` | Section 9: Internal Controls |
+| `section10_quiz.html` | Section 10: Management Accounting & Cost Concepts |
+| `section11_quiz.html` | Section 11: Activity-Based Costing (ABC) |
+| `sectionX_notes.html` | Study notes for a section |
 
 Each new section gets its own `sectionX_quiz.html` file, and reuses `quiz.css` and `quiz.js` rather than duplicating code.
 
@@ -50,7 +56,7 @@ Every question includes an explanation and a memory tip (mnemonic, acronym, or a
 
 1. Share your notes for the section
 2. A new `sectionX_quiz.html` file gets built that links to the existing `quiz.css` and `quiz.js`
-3. `index.html` gets updated with a new card linking to that section
+3. `index.html` gets updated with a new card linking to that section — the question count on the card is counted from the quiz file at page load, so there is no number to keep in sync
 4. Upload the new/updated files to this repo — GitHub Pages updates automatically within a minute or two
 
 ---
