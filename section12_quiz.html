@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 12 Quiz</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<div class="top-nav">
+  <a class="back-link" href="index.html">← All Sections</a>
+  <a class="back-link notes" href="section12_notes.html" target="_blank" rel="noopener">📄 Section 12 Notes</a>
+</div>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 12</p>
+  <h1>Cost Behavior &<br><span>C-V-P Analysis</span></h1>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="qCounter">Question 1 of 1</span>
+    <span id="pctLabel">0%</span>
+  </div>
+  <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="chips">
+  <div class="chip" id="chipTotal">Score: 0 / 0</div>
+  <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+  <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+</div>
+
+<div class="card" id="quizCard">
+  <div class="q-meta">
+    <span class="q-label" id="qLabel">Question 1</span>
+    <span class="type-badge" id="typeBadge"></span>
+  </div>
+  <p class="q-text" id="qText"></p>
+  <p class="q-hint" id="qHint" style="display:none"></p>
+  <div id="interactionZone"></div>
+  <div class="feedback" id="feedback">
+    <div class="feedback-head" id="fbHead"></div>
+    <div id="fbBody"></div>
+    <div class="mnemonic" id="fbMnemonic"></div>
+  </div>
+  <div class="btn-wrap" id="btnWrap">
+    <button class="btn-next" id="btnNext">Next Question →</button>
+  </div>
+</div>
+
+<div id="results">
+  <p class="grade-label">Final Score</p>
+  <div class="big-score" id="bigScore"></div>
+  <p class="grade-label" id="gradeMsg"></p>
+  <div class="breakdown">
+    <div class="bk-card"><div class="num" id="rcCorrect" style="color:var(--correct)"></div><div class="lbl">Correct</div></div>
+    <div class="bk-card"><div class="num" id="rcWrong" style="color:var(--wrong)"></div><div class="lbl">Wrong</div></div>
+    <div class="bk-card"><div class="num" id="rcTotal"></div><div class="lbl">Total</div></div>
+  </div>
+  <div class="review" id="reviewList"></div>
+  <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+</div>
+
+<script src="quiz.js"></script>
+<script>
+const questions = [
+
+/* ========== TOPIC 11.1 — WHY C-V-P ANALYSIS MATTERS ========== */
+
+{type:'mc',
+ q:'The central question C-V-P (cost-volume-profit) analysis answers is:',
+ opts:['How does profit change as sales volume, price, or costs change?',
+       'How should journal entries be recorded for period costs?',
+       'What is the correct method for consolidating subsidiary financial statements?',
+       'How should extraordinary items be reported below the line?'],
+ correct:0,
+ explanation:'C-V-P analysis exists to answer forward-looking "what happens to profit if..." questions — if sales rise 10%, if a price changes, if a cost structure shifts. It is not a bookkeeping or financial-reporting topic.',
+ mnemonic:'💡 Memory tip: C-V-P = Cost, Volume, Profit — three variables, one question: how do they move together?'},
+
+{type:'mc',
+ q:'C-V-P analysis, while useful for several purposes, is primarily useful in:',
+ opts:['Controlling decisions','Planning','Financing decisions','Auditing'],
+ correct:1,
+ explanation:'Every C-V-P example (should I open this business? should I run this ad campaign? how many units to break even?) is a "should I do this?" question asked BEFORE a decision is made — that forward-looking role is Planning, not Controlling (which monitors results against a budget after the fact).',
+ mnemonic:'💡 Memory tip: If the question is about deciding whether to act, C-V-P → Planning.'},
+
+{type:'ms',
+ q:'Per the textbook REMEMBER THIS block, which of the following are key factors involved in C-V-P analysis? Select all that apply.',
+ opts:['Revenues from the sales prices charged for goods and services','Fixed and variable costs','Sales volume','Mix of products','Resulting profits','The company\'s total assets','The company\'s debt-to-equity ratio'],
+ correctSet:[0,1,2,3,4],
+ explanation:'The textbook names exactly five key factors: sales prices/revenue, fixed and variable costs, sales volume, product mix, and the resulting profit. Total assets and debt-to-equity are balance sheet / leverage-ratio concepts, not C-V-P inputs.',
+ mnemonic:'💡 Memory tip: Price, Costs (fixed & variable), Volume, Mix, Profit — the five ingredients of every C-V-P question.'},
+
+{type:'mc',
+ q:'A pottery studio charges $75 per class. The instructor is paid $30 per class taught (a variable cost). The studio\'s monthly rent is $2,700 (a fixed cost). How many classes must be held each month to break even?',
+ opts:['60 classes','36 classes','90 classes','45 classes'],
+ correct:0,
+ explanation:'Contribution margin per class = $75 − $30 = $45. Break-even = Fixed Costs ÷ CM per unit = $2,700 ÷ $45 = 60 classes.',
+ mnemonic:'💡 Memory tip: $2,700 rent ÷ $45 kept per class = 60 classes needed before a single dollar of profit.'},
+
+{type:'tf',
+ q:'C-V-P analysis and break-even analysis are primarily used to monitor actual results against a budget after a decision has already been implemented.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False. C-V-P analysis is a Planning tool used BEFORE a decision is implemented, to test whether the decision makes sense in the first place — not a Controlling tool used to track results afterward.',
+ mnemonic:'💡 Memory tip: C-V-P asks "should we?" before the fact — Controlling asks "how did we do?" after the fact.'},
+
+{type:'mc',
+ q:'A company asks, "How many units must we sell next quarter to earn a profit of $10,000?" This is an example of:',
+ opts:['A target profit C-V-P question','A controlling/variance-analysis question','A cash budgeting question','An internal control evaluation'],
+ correct:0,
+ explanation:'This is a classic target-income C-V-P question — solving for the volume needed to hit a specific profit goal, using the same C-V-P equation as a break-even problem but with a nonzero target instead of zero.',
+ mnemonic:'💡 Memory tip: Break-even is target profit = $0. Any nonzero target profit uses the exact same equation.'},
+
+/* ========== TOPIC 11.2 — BASIC COST BEHAVIOR PATTERNS ========== */
+
+{type:'mc',
+ q:'Which type of cost remains constant on a PER-UNIT basis, within the relevant range?',
+ opts:['Variable costs','Fixed costs','Sunk costs','Stepped costs'],
+ correct:0,
+ explanation:'A variable cost (like $0.50 of meat per hamburger) stays the same per unit no matter how many units are sold — only the total changes. This is the reverse of what "fixed" and "variable" sound like they should mean.',
+ mnemonic:'💡 Memory tip: Variable cost = constant per unit, moving total. Fixed cost = constant total, moving per unit.'},
+
+{type:'mc',
+ q:'Which type of cost remains constant in TOTAL, regardless of volume, within the relevant range?',
+ opts:['Fixed costs','Variable costs','Differential costs','Opportunity costs'],
+ correct:0,
+ explanation:'A fixed cost (like $2,300 monthly rent) stays the same in total no matter how many units are sold — but the per-unit allocation shrinks as volume grows, since that same total gets spread over more units.',
+ mnemonic:'💡 Memory tip: Rent doesn\'t care how many burgers you sell — the check is the same total either way.'},
+
+{type:'dd',
+ q:'Match each cost behavior term to its correct definition.',
+ cols:['Variable cost','Fixed cost','Stepped cost','Mixed cost'],
+ items:[
+   {text:'Total changes with volume; per-unit amount stays constant', answer:'Variable cost'},
+   {text:'Total stays constant regardless of volume; per-unit amount changes inversely with volume', answer:'Fixed cost'},
+   {text:'Remains flat within a range of activity, then jumps to a new flat level once a threshold is crossed', answer:'Stepped cost'},
+   {text:'Contains both a fixed component and a variable component', answer:'Mixed cost'}
+ ],
+ explanation:'These four patterns cover every cost you\'ll see in C-V-P analysis: pure variable, pure fixed, stepped (a special case of fixed), and mixed (a blend of the first two).',
+ mnemonic:'💡 Memory tip: Two pure types (variable, fixed), one that jumps in chunks (stepped), and one that blends the two (mixed).'},
+
+{type:'mc',
+ q:'A cost behaves the same way per unit — constant — whether 10 units or 10,000 units are sold. In TOTAL, however, this cost rises and falls directly with volume. This describes a:',
+ opts:['Variable cost','Fixed cost','Stepped cost','Sunk cost'],
+ correct:0,
+ explanation:'This is the exam-trap wording for a variable cost: per-unit constant, total moving. It\'s easy to misread "constant" as pointing to "fixed" — but fixed costs are constant in TOTAL, not per unit.',
+ mnemonic:'💡 Memory tip: Read carefully — "constant per unit" always means variable, never fixed.'},
+
+{type:'mc',
+ q:'The "relevant range" refers to:',
+ opts:['The span of activity over which a cost\'s fixed or variable behavior can reliably be treated as a straight line',
+       'The range of profit a company expects to earn each year',
+       'The range of legal accounting methods a company may choose under GAAP',
+       'The minimum and maximum prices a company may legally charge for a product'],
+ correct:0,
+ explanation:'Real cost lines curve slightly at the extremes (early units often cost more, later units benefit from economies of scale). The relevant range is the middle band of activity where the line is close enough to straight that treating the cost as strictly fixed or variable is a safe simplification.',
+ mnemonic:'💡 Memory tip: Outside the relevant range, don\'t trust the straight-line assumption — inside it, you can.'},
+
+{type:'mc',
+ q:'A factory needs one additional supervisor for every 2,000 units of weekly production capacity, at $600/week each. This cost is best described as a:',
+ opts:['Stepped (step-fixed) cost','Pure variable cost','Pure fixed cost','Sunk cost'],
+ correct:0,
+ explanation:'You can\'t hire "half a supervisor" — the cost stays flat within a band of activity (0 to 2,000 units = $0, 2,001 to 4,000 units = $600, etc.), then jumps to a new flat level once a threshold is crossed. That flat-then-jump pattern is the definition of a stepped cost.',
+ mnemonic:'💡 Memory tip: Whole-number resources (staff, machines) that can\'t be bought in fractions almost always create stepped costs.'},
+
+{type:'mc',
+ q:'A company pays its salespeople a $2,000 monthly base salary plus a 5% commission on their sales. This cost is best described as a:',
+ opts:['Mixed (semi-variable) cost','Pure fixed cost','Pure variable cost','Stepped cost'],
+ correct:0,
+ explanation:'The $2,000 base is fixed no matter how much is sold; the 5% commission is variable, rising and falling with sales. A cost with both pieces at once is a mixed (semi-variable) cost.',
+ mnemonic:'💡 Memory tip: Base salary + commission is the classic mixed-cost pattern — a floor, plus a slope.'},
+
+{type:'mc',
+ q:'A bakery\'s monthly oven lease is a fixed cost of $1,800. If the bakery produces 3,000 loaves this month, what is the fixed cost per loaf?',
+ opts:['$0.60','$1.80','$6.00','$3,000.00'],
+ correct:0,
+ explanation:'$1,800 ÷ 3,000 loaves = $0.60 per loaf. The total lease cost never changes, but the per-loaf allocation shrinks as more loaves absorb the same fixed amount.',
+ mnemonic:'💡 Memory tip: Same $1,800 rent, more loaves to spread it over = lower cost per loaf.'},
+
+{type:'mc',
+ q:'Each loaf of bread at the same bakery requires $0.85 of flour and yeast (a variable cost). If the bakery produces 3,000 loaves this month, what is the TOTAL variable cost for flour and yeast?',
+ opts:['$2,550','$850','$3,000','$2,000'],
+ correct:0,
+ explanation:'$0.85 per loaf × 3,000 loaves = $2,550. The per-loaf rate never changes, but the total climbs directly with the number of loaves produced.',
+ mnemonic:'💡 Memory tip: Constant $0.85 per loaf × more loaves = a bigger total — that\'s the definition of variable.'},
+
+/* ========== TOPIC 11.3 — ANALYSIS OF MIXED COSTS ========== */
+
+{type:'mc',
+ q:'Before a mixed cost can be used in C-V-P analysis, it must first be:',
+ opts:['Separated into its fixed and variable components','Reclassified as a sunk cost','Removed from the income statement entirely','Converted into a stepped cost'],
+ correct:0,
+ explanation:'C-V-P analysis needs to know which costs move with volume and which don\'t. A mixed cost is neither purely one nor the other, so it has to be decomposed into its fixed piece and its variable piece before it\'s useful.',
+ mnemonic:'💡 Memory tip: C-V-P only understands "fixed" and "variable" — mixed costs have to be translated into that language first.'},
+
+{type:'mc',
+ q:'On a scattergraph of cost data, the FIXED cost is represented by:',
+ opts:['The y-intercept of the regression line','The slope of the regression line','The x-intercept of the regression line','The highest point plotted on the graph'],
+ correct:0,
+ explanation:'Where the regression line crosses the y-axis (at zero activity) shows the cost you\'d have even with zero units produced — that\'s the fixed cost.',
+ mnemonic:'💡 Memory tip: Zero activity, and the line still shows a cost above $0 — that leftover amount is fixed.'},
+
+{type:'mc',
+ q:'On a scattergraph of cost data, the VARIABLE cost per unit is represented by:',
+ opts:['The slope of the regression line','The y-intercept of the regression line','The total number of data points plotted','The average of all plotted costs'],
+ correct:0,
+ explanation:'Slope = rise over run = change in cost ÷ change in activity. That rate — how much cost increases for each additional unit of activity — is the variable cost per unit.',
+ mnemonic:'💡 Memory tip: Steeper line = more cost per extra unit of activity = higher variable cost per unit.'},
+
+{type:'mc',
+ q:'The high-low method identifies the highest and lowest:',
+ opts:['Levels of ACTIVITY (and their associated total costs)','Total COSTS (regardless of activity level)','Fixed costs reported during the year','Variable cost rates reported during the year'],
+ correct:0,
+ explanation:'It\'s easy to mix this up — the high-low method starts by finding the highest and lowest activity level (e.g., machine hours or direct labor hours), not the highest and lowest dollar cost. You then use the total cost associated with each of those two activity levels.',
+ mnemonic:'💡 Memory tip: Sort by ACTIVITY first, then look up the cost that goes with it — not the other way around.'},
+
+{type:'mc',
+ q:'Vantage Corp recorded the following equipment maintenance costs over four months: Month 1 — 1,000 machine hours, $5,000; Month 2 — 2,800 machine hours, $8,600; Month 3 — 3,900 machine hours, $10,800; Month 4 — 5,000 machine hours, $13,000. Using the high-low method, what is the variable maintenance cost per machine hour?',
+ opts:['$2.00','$2.60','$1.85','$13.00'],
+ correct:0,
+ explanation:'Low = 1,000 hrs/$5,000; High = 5,000 hrs/$13,000. Variable cost per hour = ($13,000 − $5,000) ÷ (5,000 − 1,000) = $8,000 ÷ 4,000 = $2.00/hour.',
+ mnemonic:'💡 Memory tip: Rise ÷ Run — the change in cost between the two extreme activity levels, divided by the change in activity.'},
+
+{type:'mc',
+ q:'Using the same Vantage Corp data (low: 1,000 hours/$5,000; high: 5,000 hours/$13,000; variable cost $2.00/hour), what is the TOTAL fixed maintenance cost?',
+ opts:['$3,000','$5,000','$2,000','$8,000'],
+ correct:0,
+ explanation:'Fixed Cost = Total Cost − (Variable Cost per Unit × Activity Level). Using the high point: $13,000 − ($2.00 × 5,000) = $13,000 − $10,000 = $3,000. Checking with the low point: $5,000 − ($2.00 × 1,000) = $5,000 − $2,000 = $3,000. Same answer either way.',
+ mnemonic:'💡 Memory tip: High or low, the fixed cost answer must match — that\'s your built-in check.'},
+
+{type:'mc',
+ q:'Using Vantage Corp\'s cost equation (Fixed Cost $3,000 + $2.00 per machine hour), what would total maintenance cost be at 4,000 machine hours?',
+ opts:['$11,000','$8,000','$9,500','$13,000'],
+ correct:0,
+ explanation:'$3,000 fixed + ($2.00 × 4,000 hours) = $3,000 + $8,000 = $11,000.',
+ mnemonic:'💡 Memory tip: Once you have the equation, plug in any activity level — no need to re-derive it each time.'},
+
+{type:'mc',
+ q:'Compared to the high-low method, the scattergraph method:',
+ opts:['Uses all of the available data points, but relies on a subjective, hand-drawn regression line',
+       'Uses only two data points, but produces a mathematically exact answer for those two points',
+       'Cannot be used to estimate fixed costs',
+       'Requires calculus and is entirely outside the scope of this course'],
+ correct:0,
+ explanation:'The scattergraph incorporates every data point (more representative of the overall trend), but the regression line is drawn by eye — different people will land on slightly different fixed/variable splits. The high-low method is the opposite: mathematically exact, but it throws away every data point except the two extremes.',
+ mnemonic:'💡 Memory tip: Scattergraph = all the data, some judgment. High-low = two points, exact math.'},
+
+{type:'tf',
+ q:'The scattergraph method produces a mathematically precise, exact answer that every analyst will compute identically.',
+ opts:['True','False'],
+ correct:1,
+ explanation:'False. The regression line on a scattergraph is drawn by eye (a subjective judgment call), so two different people analyzing the same data can land on somewhat different fixed and variable cost estimates. It can be made mathematically precise using formal regression analysis, but that\'s outside the scope of this course.',
+ mnemonic:'💡 Memory tip: "By eye" is the opposite of "mathematically exact" — that\'s the scattergraph\'s built-in limitation.'},
+
+/* ========== TOPIC 11.4 — CONTRIBUTION MARGIN & THE C-V-P EQUATION ========== */
+
+{type:'mc',
+ q:'As fixed costs increase, the break-even point in units will:',
+ opts:['Unable to determine without variable cost information','Decrease','Increase','Remain the same'],
+ correct:2,
+ explanation:'Break-even units = Fixed Costs ÷ Contribution Margin per unit. If fixed costs go up and the contribution margin per unit stays the same, the numerator grows, so more units are needed to cover it — break-even increases.',
+ mnemonic:'💡 Memory tip: Bigger fixed cost mountain to climb = more units needed before you reach the top.'},
+
+{type:'mc',
+ q:'If the fixed costs relative to a specific product increase while the variable costs and sales price remain constant, the contribution margin will:',
+ opts:['The answer cannot be determined from the information given','Remain unchanged','Decrease','Increase'],
+ correct:1,
+ explanation:'Contribution Margin = Sales − Variable Costs. Fixed costs don\'t appear anywhere in that formula, so a change in fixed costs has zero effect on contribution margin — it only affects how much profit is left AFTER contribution margin covers fixed costs.',
+ mnemonic:'💡 Memory tip: Contribution margin is calculated BEFORE fixed costs ever enter the picture — fixed costs can\'t touch it.'},
+
+{type:'mc',
+ q:'Which of the following would most likely be an indirect cost?',
+ opts:['Equipment rental','Sales commissions','Sales director\'s salary','Cost of inventory'],
+ correct:2,
+ explanation:'A sales director oversees an entire sales team or product line, not one specific sale — their salary can\'t be traced to any single transaction, which is exactly what makes a cost indirect. Sales commissions and inventory cost, by contrast, ARE directly traceable to specific sales or units.',
+ mnemonic:'💡 Memory tip: If a cost supports many things at once rather than one specific unit or sale, it\'s indirect.'},
+
+{type:'mc',
+ q:'Contribution margin will provide a profit if:',
+ opts:['The contribution margin ratio is high enough','Sales revenues increase','Fixed costs are covered','All variable costs are covered'],
+ correct:2,
+ explanation:'Contribution margin\'s whole job is to first pay off fixed costs — once fixed costs are fully covered, every additional dollar of contribution margin becomes pure profit. A high CM ratio or rising sales don\'t guarantee profit on their own if fixed costs still exceed what\'s been generated.',
+ mnemonic:'💡 Memory tip: Contribution margin pays the fixed-cost bill first — profit only starts after that bill is paid in full.'},
+
+{type:'mc',
+ q:'Bishop Company\'s income statement: Sales Revenue (900 units) $90,000; Variable Costs $45,000; Contribution Margin $45,000; Fixed Costs $38,000; Net Income $7,000. What is Bishop Company\'s per-unit contribution margin?',
+ opts:['$50','$100','$70','$45'],
+ correct:0,
+ explanation:'Contribution Margin ÷ Units = $45,000 ÷ 900 = $50 per unit.',
+ mnemonic:'💡 Memory tip: Total contribution margin divided by units sold — always divide the TOTAL, not sales revenue.'},
+
+{type:'mc',
+ q:'Contribution Margin is calculated as:',
+ opts:['Sales Revenue minus Variable Costs','Sales Revenue minus Fixed Costs','Sales Revenue minus Total Costs','Gross Profit minus Operating Expenses'],
+ correct:0,
+ explanation:'Contribution Margin = Sales Revenue − Variable Costs. This is the amount left over from each sale that goes toward covering fixed costs, and eventually, profit.',
+ mnemonic:'💡 Memory tip: Contribution margin only subtracts the costs that move with volume — variable costs, never fixed.'},
+
+{type:'ms',
+ q:'Per the textbook REMEMBER THIS block on the C-V-P equation, which of the following are accurate? Select all that apply.',
+ opts:['Sales Revenue − Variable Costs − Fixed Costs = Target Income',
+       'At breakeven, Target Income = 0',
+       'Sales Revenue = Sales Price × Number of Units',
+       'Variable Costs = Fixed Cost Ratio × Sales Revenue',
+       'Variable Costs = Variable Cost per Unit × Number of Units'],
+ correctSet:[0,1,2,4],
+ explanation:'The C-V-P equation and its component formulas are: Sales − Variable Costs − Fixed Costs = Target Income (= 0 at breakeven); Sales Revenue = Price × Units; Variable Costs = VC per unit × Units, OR Variable Costs = Variable Cost RATIO × Sales Revenue. There is no such thing as a "fixed cost ratio" applied to sales revenue — fixed costs are a flat dollar amount, not a percentage of sales.',
+ mnemonic:'💡 Memory tip: Variable costs can be expressed as a per-unit rate OR a ratio of sales — fixed costs are always just a flat dollar figure.'},
+
+{type:'mc',
+ q:'A candle company sells candles for $18 each. Variable cost per candle is $8. Fixed costs are $42,000 per month. How many candles must be sold to earn a target profit of $18,000?',
+ opts:['6,000 candles','4,200 candles','5,000 candles','8,000 candles'],
+ correct:0,
+ explanation:'Contribution margin per candle = $18 − $8 = $10. Units for target profit = (Fixed Costs + Target Profit) ÷ CM per unit = ($42,000 + $18,000) ÷ $10 = $60,000 ÷ $10 = 6,000 candles.',
+ mnemonic:'💡 Memory tip: Target profit just gets added right on top of fixed costs before you divide by contribution margin.'},
+
+{type:'mc',
+ q:'Using the same candle company data (price $18, variable cost $8, fixed costs $42,000), how many candles must be sold to BREAK EVEN?',
+ opts:['4,200 candles','6,000 candles','2,100 candles','8,400 candles'],
+ correct:0,
+ explanation:'Break-even units = Fixed Costs ÷ CM per unit = $42,000 ÷ $10 = 4,200 candles. This is the same formula as the target-profit question, just with a target profit of $0.',
+ mnemonic:'💡 Memory tip: Break-even is just the target-profit formula with the target set to zero.'},
+
+{type:'mc',
+ q:'A company has a contribution margin RATIO of 40% and fixed costs of $120,000. What sales dollar volume is required to break even?',
+ opts:['$300,000','$48,000','$480,000','$120,000'],
+ correct:0,
+ explanation:'Break-Even Sales Dollars = Fixed Costs ÷ Contribution Margin Ratio = $120,000 ÷ 0.40 = $300,000.',
+ mnemonic:'💡 Memory tip: When you\'re given a RATIO instead of a per-unit dollar amount, divide by the ratio to get sales dollars, not units.'},
+
+{type:'mc',
+ q:'If a company\'s variable cost ratio is 62%, its contribution margin ratio must be:',
+ opts:['38%','62%','24%','76%'],
+ correct:0,
+ explanation:'Variable Cost Ratio + Contribution Margin Ratio always equals 100%, since every sales dollar splits into exactly those two pieces. 100% − 62% = 38%.',
+ mnemonic:'💡 Memory tip: These two ratios are always a matched pair that adds up to 100% — no exceptions.'},
+
+/* ========== TOPIC 11.5 — VISUALIZING C-V-P WITH GRAPHS ========== */
+
+{type:'mc',
+ q:'On a C-V-P graph, the total revenue line always starts at the origin (0 units, $0) because:',
+ opts:['There is no such thing as fixed revenue — zero units sold means zero revenue',
+       'Fixed costs are always zero at the start of a period',
+       'The break-even point must occur at zero units',
+       'Revenue is always higher than cost at low volumes'],
+ correct:0,
+ explanation:'Unlike costs, which can include a fixed component that exists even with no output, there\'s no such thing as revenue you earn without selling anything. That\'s the key visual difference that lets you tell the revenue line apart from the total cost line on a C-V-P graph.',
+ mnemonic:'💡 Memory tip: If you sell nothing, you earn nothing — the revenue line has nowhere to start but zero.'},
+
+{type:'mc',
+ q:'On a C-V-P graph, the y-intercept of the total cost line represents:',
+ opts:['Total fixed costs','Total variable costs','The break-even point','Total revenue at zero units'],
+ correct:0,
+ explanation:'At zero units produced, there\'s no variable cost yet (nothing has been made), so whatever cost remains on the graph at that point is entirely fixed cost.',
+ mnemonic:'💡 Memory tip: Zero units means the variable cost piece drops out completely, leaving only fixed cost showing on the y-axis.'},
+
+{type:'mc',
+ q:'On a C-V-P graph, the slope of the total cost line represents:',
+ opts:['The variable cost per unit','The selling price per unit','Total fixed costs','The contribution margin ratio'],
+ correct:0,
+ explanation:'Slope = rise (cost) over run (units). Since the total cost line\'s upward movement is driven entirely by the variable cost component, its slope equals the variable cost per unit.',
+ mnemonic:'💡 Memory tip: The cost line\'s STARTING point is fixed cost; its SLOPE is variable cost per unit.'},
+
+{type:'mc',
+ q:'On a C-V-P graph, the slope of the total revenue line represents:',
+ opts:['The selling price per unit','The variable cost per unit','Total fixed costs','The contribution margin per unit'],
+ correct:0,
+ explanation:'Every additional unit sold adds exactly one unit\'s worth of revenue — the selling price. That rate of increase is the slope of the revenue line.',
+ mnemonic:'💡 Memory tip: Revenue line starts at zero and climbs at the price per unit — no fixed component to worry about.'},
+
+{type:'mc',
+ q:'The break-even point on a C-V-P graph is located:',
+ opts:['Where the total revenue line and total cost line intersect',
+       'At the y-intercept of the total cost line',
+       'At the origin of the graph',
+       'Where the total revenue line crosses the x-axis'],
+ correct:0,
+ explanation:'Break-even is defined as the point where Revenue = Total Cost (Profit = $0) — visually, that\'s exactly where those two lines cross on the graph.',
+ mnemonic:'💡 Memory tip: Two lines crossing = the moment revenue finally catches up to cost.'},
+
+{type:'mc',
+ q:'On a profit graph, at zero units sold, the profit line shows:',
+ opts:['A loss equal to total fixed costs','A profit of zero','A loss equal to total variable costs','A profit equal to total fixed costs'],
+ correct:0,
+ explanation:'At zero units, there\'s no revenue and no variable cost — the only cost remaining is fixed cost, which becomes a pure loss since nothing is offsetting it.',
+ mnemonic:'💡 Memory tip: Zero sales, but fixed costs still show up on the bill — that\'s your starting loss.'},
+
+{type:'mc',
+ q:'The slope of the profit line on a profit graph represents:',
+ opts:['The contribution margin per unit','The selling price per unit','The variable cost per unit','Total fixed costs'],
+ correct:0,
+ explanation:'Every unit sold adds exactly its contribution margin to profit (since fixed costs don\'t change as volume increases) — so the rate at which the profit line rises is the contribution margin per unit.',
+ mnemonic:'💡 Memory tip: Each additional unit contributes its CM straight to the bottom line — that\'s the slope.'},
+
+{type:'mc',
+ q:'A C-V-P graph shows revenue starting at $0 and total cost starting at a positive dollar value, at zero units. A PROFIT graph, by contrast, starts:',
+ opts:['Below zero (a negative value) at zero units, since it shows only one line representing the resulting loss',
+       'Above zero at zero units',
+       'Exactly at zero for all lines',
+       'At the same point as the break-even point'],
+ correct:0,
+ explanation:'A C-V-P graph shows revenue and cost as two separate lines. A profit graph condenses that down to a single line showing the net result — and since profit at zero units equals negative fixed cost, that single line starts below zero.',
+ mnemonic:'💡 Memory tip: Two lines starting at different heights = C-V-P graph. One line starting below zero = profit graph.'},
+
+{type:'ord',
+ q:'Place these steps for constructing a C-V-P graph in the correct order.',
+ items:[
+   {text:'Draw the two axes, with dollars on the vertical axis and units on the horizontal axis', order:0},
+   {text:'Draw the fixed cost line as a horizontal line at the total fixed cost amount', order:1},
+   {text:'Draw the total cost line, starting at the fixed cost amount and sloping upward at the variable cost per unit', order:2},
+   {text:'Draw the total revenue line, starting at the origin and sloping upward at the selling price per unit', order:3},
+   {text:'Label the break-even point, where the revenue and total cost lines intersect', order:4}
+ ],
+ explanation:'This is the textbook\'s formal construction sequence: set up the axes, place the fixed cost floor, build the total cost line on top of it, add the revenue line starting from zero, then identify where they cross.',
+ mnemonic:'💡 Memory tip: Axes → Fixed line → Total cost line → Revenue line → Break-even label. Each step builds on the last.'},
+
+/* ========== TOPIC 11.6 — EFFECTS OF SALES MIX ON PROFITABILITY ========== */
+
+{type:'mc',
+ q:'To maximize its profits, a company should pay the highest sales commissions on those products with the:',
+ opts:['Highest contribution margin','Lowest fixed costs','Highest prices','Lowest variable costs'],
+ correct:0,
+ explanation:'Incentivizing salespeople to push high-contribution-margin products means more of each sales dollar earned actually flows toward covering fixed costs and generating profit — that\'s the direct link between sales mix and profitability.',
+ mnemonic:'💡 Memory tip: Reward the sales behavior that maximizes what the company actually keeps, not just what it sells.'},
+
+{type:'mc',
+ q:'Kepler Co. sells three products with the following sales and variable cost rates: Product A — Sales $20,000, Variable Cost Rate 50%; Product B — Sales $30,000, Variable Cost Rate 70%; Product C — Sales $10,000, Variable Cost Rate 80%. Kepler\'s total fixed costs are $17,500. Using the current sales mix, what is Kepler\'s break-even point?',
+ opts:['$50,000','$35,000','$41,667','$60,000'],
+ correct:0,
+ explanation:'CM ratios: A = 50%, B = 30%, C = 20%. Total sales = $60,000, so sales mix is A 33.3%, B 50%, C 16.7%. Weighted-average CM ratio = (0.333×0.50) + (0.50×0.30) + (0.167×0.20) = 0.1667 + 0.15 + 0.0333 = 35%. Break-even sales = $17,500 ÷ 0.35 = $50,000.',
+ mnemonic:'💡 Memory tip: CM ratio per product → sales mix % → weighted average → fixed costs ÷ that weighted average. Four steps, in order, every time.'},
+
+{type:'mc',
+ q:'Jones Company sells two products, Gumbo and Jumbo. Gumbo has a 45% contribution margin and Jumbo has a 55% contribution margin. Given these contribution margin percentages and assuming that other factors are equal, what should Jones Company do?',
+ opts:['It should emphasize Jumbo','It should emphasize Gumbo','It should emphasize both products, since they are equally profitable','No recommendation can be made from the data given'],
+ correct:0,
+ explanation:'Jumbo keeps more of every sales dollar (55 cents vs. 45 cents), so — all else equal — shifting sales mix toward Jumbo increases total company profit even without any change in total sales dollars.',
+ mnemonic:'💡 Memory tip: Higher CM ratio wins, every time other factors are equal — more of each dollar sticks around as profit.'},
+
+{type:'mc',
+ q:'Stella Signs sells two different products. Monthly data: Product A — Sales Revenue $116,000, Variable Costs $40,600; Product B — Sales Revenue $189,000, Variable Costs $103,950. Stella has fixed costs of $65,000. Using the current sales mix, what is Stella\'s break-even point?',
+ opts:['$118,182','$123,574','$144,444','$138,298'],
+ correct:1,
+ explanation:'CM ratios: A = ($116,000 − $40,600) ÷ $116,000 = 65%; B = ($189,000 − $103,950) ÷ $189,000 = 45%. Total sales = $305,000, so mix is A ≈ 38%, B ≈ 62%. Weighted-average CM ratio ≈ (0.38×0.65) + (0.62×0.45) ≈ 52.6%. Break-even sales ≈ $65,000 ÷ 0.526 ≈ $123,574.',
+ mnemonic:'💡 Memory tip: Same four-step process as any sales-mix break-even — just with two products instead of three.'},
+
+{type:'mc',
+ q:'Block Company sells three products, each with a different per-unit contribution margin. To compute Block Company\'s break-even point in units, it is necessary to know:',
+ opts:['The sales mix','The company\'s total fixed costs','The per-unit contribution margin of each product sold','All of these are needed to compute break-even point'],
+ correct:3,
+ explanation:'With multiple products at different contribution margins, you need all three pieces together: the sales mix (to weight each product\'s influence), each product\'s per-unit CM (to know what each unit actually contributes), and total fixed costs (the amount that must be covered). Missing any one of these makes the calculation impossible.',
+ mnemonic:'💡 Memory tip: Multi-product break-even always needs the full picture — mix, per-product CM, and fixed costs together.'},
+
+{type:'mc',
+ q:'Sales mix is defined as:',
+ opts:['The relative proportion of total sales dollars (or units) represented by each of a company\'s products',
+       'The ratio of variable costs to fixed costs across all products',
+       'The order in which products are manufactured during a production run',
+       'The percentage of total overhead assigned to each product line'],
+ correct:0,
+ explanation:'Sales mix describes how a company\'s total sales are split among its different products — it can be expressed either in sales dollars or in units sold.',
+ mnemonic:'💡 Memory tip: Sales mix answers "what share of our total sales does each product represent?" — nothing about production order or overhead.'},
+
+{type:'mc',
+ q:'The weighted-average contribution margin ratio is specifically needed to compute break-even when:',
+ opts:['A company sells more than one product, and those products have different contribution margin ratios',
+       'A company has only fixed costs and no variable costs',
+       'A company operates below the relevant range',
+       'A company uses the high-low method instead of the scattergraph method'],
+ correct:0,
+ explanation:'A single break-even formula only works for one product (or products that happen to share an identical CM ratio). Once a company sells multiple products with DIFFERENT contribution margin ratios, the weighted-average approach is what accounts for the fact that the break-even point depends on which products the sales actually come from.',
+ mnemonic:'💡 Memory tip: One product, one CM ratio, simple break-even. Multiple products with different CM ratios → weighted average required.'},
+
+/* ========== TOPIC 11.7 — COST STRUCTURE & OPERATING LEVERAGE ========== */
+
+{type:'mc',
+ q:'Maintaining low fixed costs and high variable costs, rather than high fixed costs and low variable costs:',
+ opts:['Is a more risky cost structure','Results in a higher contribution margin','Is a more conservative cost structure','Is an equally risky cost structure'],
+ correct:2,
+ explanation:'Low fixed costs mean the company\'s costs shrink automatically as sales slow down — there\'s less locked-in risk if volume drops. That\'s the more conservative posture, compared to a high-fixed-cost structure where costs stay put no matter what sales do.',
+ mnemonic:'💡 Memory tip: Fewer costs locked in place = less exposure if things go badly = more conservative.'},
+
+{type:'mc',
+ q:'Operating leverage deals primarily with the relationship between:',
+ opts:['Debt and equity','Fixed costs and variable costs','Sales revenue and net income','Variable costs and contribution margin'],
+ correct:1,
+ explanation:'Operating leverage describes a company\'s cost STRUCTURE — specifically, how much of its total costs are fixed versus variable. It\'s unrelated to the company\'s capital structure (debt vs. equity), which is a separate type of leverage entirely.',
+ mnemonic:'💡 Memory tip: Operating leverage = fixed vs. variable costs. Financial leverage = debt vs. equity. Don\'t mix them up.'},
+
+{type:'mc',
+ q:'As compared to a company with low operating leverage, a company with high operating leverage will:',
+ opts:['Have smaller profits above the break-even point','Never be at the break-even point','Have smaller losses below the break-even point','Have larger losses below the break-even point'],
+ correct:3,
+ explanation:'High operating leverage means more fixed costs that don\'t shrink when sales fall — so below break-even, losses grow faster and bigger than they would for a low-leverage company with fewer locked-in costs.',
+ mnemonic:'💡 Memory tip: High leverage cuts both ways — bigger gains above break-even, but bigger losses below it too.'},
+
+{type:'mc',
+ q:'Operating leverage is:',
+ opts:['The proportion of total units represented by each product','A measure of risk','A measure of operating performance','None of these are correct'],
+ correct:1,
+ explanation:'Operating leverage measures how sensitive a company\'s profit is to changes in sales volume — the higher the leverage, the more volatile (risky) profit becomes as sales move up or down. It doesn\'t measure performance directly, and it has nothing to do with product mix.',
+ mnemonic:'💡 Memory tip: Operating leverage = a risk dial, not a performance scorecard.'},
+
+{type:'mc',
+ q:'A company with HIGH operating leverage experiences a 20% increase in sales. Compared to a company with LOW operating leverage experiencing the same 20% sales increase, the high-leverage company\'s profit will typically:',
+ opts:['Increase by a larger percentage, since its fixed costs stay flat while contribution margin grows proportionally with sales',
+       'Increase by exactly the same percentage as sales, 20%',
+       'Increase by a smaller percentage than sales',
+       'Decrease, regardless of the sales increase'],
+ correct:0,
+ explanation:'Sales and contribution margin both rise proportionally with volume, but fixed costs don\'t move at all. Since a high-leverage company has more fixed cost sitting still while its contribution margin grows, a bigger share of that added contribution margin flows straight through to profit — producing a larger percentage jump in profit than in sales.',
+ mnemonic:'💡 Memory tip: Fixed costs frozen + contribution margin growing = profit grows faster than sales. More fixed cost, more amplification.'},
+
+{type:'tf',
+ q:'A company with high operating leverage benefits more from a sales increase, but also suffers more from a sales decrease, compared to a company with low operating leverage.',
+ opts:['True','False'],
+ correct:0,
+ explanation:'True. This is the two-sided nature of operating leverage — the same locked-in fixed costs that amplify gains above break-even also amplify losses below it. High leverage is not simply "better," it\'s riskier in both directions.',
+ mnemonic:'💡 Memory tip: Leverage amplifies whatever direction sales are already moving — good news gets better, bad news gets worse.'},
+
+/* ========== TOPIC 11.8 — REVIEW OF KEY POINTS ========== */
+
+{type:'mc',
+ q:'A stepped (step-fixed) cost with very NARROW, frequent steps is best approximated, for C-V-P analysis purposes, as a:',
+ opts:['Variable cost','Fixed cost','Sunk cost','Mixed cost with a large fixed component'],
+ correct:0,
+ explanation:'When the steps are narrow and frequent enough, the staircase pattern starts to look and behave almost like a smooth upward-sloping line — close enough to treat as a variable cost for practical analysis.',
+ mnemonic:'💡 Memory tip: Tiny, frequent steps blur together into what looks like a smooth variable-cost line.'},
+
+{type:'mc',
+ q:'A stepped (step-fixed) cost with very WIDE, infrequent steps is best approximated, for C-V-P analysis purposes, as a:',
+ opts:['Fixed cost','Variable cost','Sunk cost','Differential cost'],
+ correct:0,
+ explanation:'When the steps are wide (like the ice cream supervisor example — one supervisor per 2,000 gallons), the cost stays flat across a large enough range of activity that treating it as a plain fixed cost within that range is a safe, practical simplification.',
+ mnemonic:'💡 Memory tip: Wide steps = long flat stretches = close enough to fixed within the relevant range.'},
+
+{type:'dd',
+ q:'Match each C-V-P variable to what it depends on, per the textbook review.',
+ cols:['Sales Revenue','Variable Cost','Fixed Cost','Profit'],
+ items:[
+   {text:'Number of units sold, selling price per unit, and mix of items sold', answer:'Sales Revenue'},
+   {text:'Number of units sold, variable cost per unit, and mix of items sold', answer:'Variable Cost'},
+   {text:'Management\'s choice of the cost level; does NOT depend on the number of units sold', answer:'Fixed Cost'},
+   {text:'Sales Revenue minus Variable Cost minus Fixed Cost', answer:'Profit'}
+ ],
+ explanation:'This table is the clearest way to see why fixed cost behaves so differently from the other three variables: sales revenue, variable cost, and profit all move with units sold — fixed cost is the one variable that\'s a pure management choice, untouched by volume.',
+ mnemonic:'💡 Memory tip: Three variables move with volume. Fixed cost stands still — that\'s what makes it "fixed."'},
+
+];
+
+initQuiz(questions, 'Section 12');
+</script>
+</body>
+</html>

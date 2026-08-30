@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 12 Notes</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .cat-pill{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+  }
+  .cat-sheet{background:rgba(52,211,153,.15);color:var(--correct)}
+  .cat-nosheet{background:rgba(248,113,113,.15);color:var(--wrong)}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .graph-key{display:grid;grid-template-columns:1fr;gap:.7rem;margin:1rem 0}
+  @media(min-width:700px){.graph-key{grid-template-columns:1fr 1fr}}
+  .graph-key-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem}
+  .graph-key-card .gk-title{font-weight:600;color:var(--accent);font-size:.88rem;margin-bottom:.3rem}
+  .graph-key-card p{font-size:.82rem;color:var(--muted);line-height:1.55;margin:0}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 12</p>
+  <h1>Cost Behavior &<br><span>C-V-P Analysis</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#why-cvp">Why C-V-P Analysis Matters</a></li>
+      <li><span class="n">02</span><a href="#cost-behavior">Basic Cost Behavior Patterns</a></li>
+      <li><span class="n">03</span><a href="#mixed-costs">Analyzing Mixed Costs</a></li>
+      <li><span class="n">04</span><a href="#cvp-equation">Contribution Margin &amp; the C-V-P Equation</a></li>
+      <li><span class="n">05</span><a href="#cvp-graphs">Visualizing C-V-P With Graphs</a></li>
+      <li><span class="n">06</span><a href="#sales-mix">Effects of Sales Mix on Profitability</a></li>
+      <li><span class="n">07</span><a href="#operating-leverage">Cost Structure &amp; Operating Leverage</a></li>
+      <li><span class="n">08</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="why-cvp">
+    <h2>01 · Why C-V-P Analysis Matters</h2>
+    <p class="section-sub">Topic 11.1</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Cost-Volume-Profit (C-V-P) Analysis</div>
+      <div class="formula-eq">How does profit change as sales volume, price, or costs change?</div>
+      <div class="formula-meaning">C-V-P is a <strong>Planning</strong> tool — every C-V-P question is asked <em>before</em> a decision is made ("should I open this business?", "should I raise prices?"), never used to track results after the fact (that's Controlling).</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">What each C-V-P variable depends on:</p>
+    <table class="compare-table">
+      <tr><th>Variable</th><th>Depends on</th></tr>
+      <tr><td><strong>Sales Revenue</strong></td><td>Number of units sold · Selling price per unit · Mix of items sold</td></tr>
+      <tr><td><strong>Variable Cost</strong></td><td>Number of units sold · Variable cost per unit · Mix of items sold</td></tr>
+      <tr><td><strong>Fixed Cost</strong></td><td>Management's choice of the cost level — does <strong>NOT</strong> depend on the number of units sold</td></tr>
+      <tr><td><strong>Profit</strong></td><td>Sales Revenue − Variable Cost − Fixed Cost</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>REMEMBER THIS (verbatim):</strong> Key factors involved in C-V-P analysis are:
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li>Revenues from the sales prices charged for goods and services</li>
+        <li>Fixed and variable costs</li>
+        <li>Sales volume</li>
+        <li>Mix of products</li>
+        <li>Resulting profits</li>
+      </ul>
+    </div>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin:1rem 0">
+      <strong>Break-even analysis</strong> is one specific type of C-V-P analysis: finding the exact sales volume where profit equals $0. The classic illustration is a charity banquet — a $250 ticket price, a $40 per-person caterer cost (variable), and an $18,000 raffle car (fixed). Contribution margin per ticket = $250 − $40 = $210, so break-even = $18,000 ÷ $210 ≈ 86 attendees. The value of running this calculation <em>before</em> committing is that it counteracts the natural over-optimism of anyone launching a new venture — a reality check grounded in numbers rather than gut feeling.
+    </p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cost-behavior">
+    <h2>02 · Basic Cost Behavior Patterns</h2>
+    <p class="section-sub">Topic 11.2</p>
+
+    <table class="compare-table">
+      <tr><th>Cost type</th><th>Total behavior</th><th>Per-unit behavior</th><th>Example</th></tr>
+      <tr><td><strong>Variable</strong></td><td>Changes with volume</td><td>Constant</td><td>Meat cost per hamburger ($0.50, always)</td></tr>
+      <tr><td><strong>Fixed</strong></td><td>Constant</td><td>Changes inversely with volume</td><td>Restaurant rent ($2,300/month, regardless of sales)</td></tr>
+      <tr><td><strong>Stepped</strong></td><td>Constant within a step, jumps at thresholds</td><td>Constant within a step</td><td>One supervisor per 2,000 gallons of ice cream produced</td></tr>
+      <tr><td><strong>Mixed</strong></td><td>Changes with volume, but with a floor</td><td>Decreases toward the variable rate as volume grows</td><td>Mall rent: $4,000 base + 1% of sales</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>REMEMBER THIS (verbatim):</strong>
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li>The two basic cost behavior patterns are: variable → variable in total, fixed per unit; fixed → fixed in total, variable per unit</li>
+        <li>Stepped costs increase with the level of activity but in steps instead of smoothly</li>
+        <li>Mixed costs have both a fixed and a variable component</li>
+      </ul>
+    </div>
+
+    <div class="callout warn">
+      <strong>Exam trap — read carefully:</strong> "Variable cost" and "fixed cost" describe what happens to the <em>total</em> cost, but the <em>per-unit</em> behavior is the opposite of what the name suggests.
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li><strong>Variable cost</strong> → total changes with volume, but <strong>per-unit stays constant</strong> (e.g., $0.50/burger meat cost, always)</li>
+        <li><strong>Fixed cost</strong> → total stays constant, but <strong>per-unit changes</strong> — it decreases as volume increases (e.g., $2,300 rent spread over more burgers = lower rent-per-burger)</li>
+      </ul>
+      A question that asks "which cost stays constant per unit?" is asking about <strong>variable</strong> costs — even though "fixed" sounds like the word that should mean constant.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem"><strong>Relevant range:</strong> the span of activity over which a cost's fixed or variable behavior can reliably be treated as a straight line. Real cost lines curve at the extremes (early units often cost more; later units benefit from economies of scale), so the relevant range is the middle band where the straight-line assumption is safe to use.</p>
+
+    <div class="callout">
+      <strong>Stepped costs, per the Topic 11.8 textbook review:</strong> whether to treat a stepped cost as fixed or variable for analysis depends on the width of the steps. <strong>Wide steps</strong> (like the ice cream supervisor — one hire per 2,000 gallons) → treat as a <strong>fixed cost</strong> within the relevant range. <strong>Narrow, frequent steps</strong> → close enough to a smooth line to approximate as a <strong>variable cost</strong>.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="mixed-costs">
+    <h2>03 · Analyzing Mixed Costs</h2>
+    <p class="section-sub">Topic 11.3 — Scattergraph &amp; High-Low Methods</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Before a mixed cost can be used in C-V-P analysis, it must be separated into its fixed and variable components. Two methods are covered in this course:
+    </p>
+
+    <div class="graph-key">
+      <div class="graph-key-card">
+        <div class="gk-title">Scattergraph Method</div>
+        <p>Plot every data point, then hand-draw a "regression line" that best fits the cloud of points. Uses <strong>all</strong> the data, but the line-drawing is subjective — two different people will get slightly different answers.</p>
+      </div>
+      <div class="graph-key-card">
+        <div class="gk-title">High-Low Method</div>
+        <p>Identify only the <strong>highest and lowest activity levels</strong> (and their associated costs), then compute the line between just those two points. Mathematically exact for those two points, but ignores every other data point.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>REMEMBER THIS (verbatim):</strong>
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li>Two common techniques for analyzing mixed costs are: Scattergraph method, High-low method</li>
+        <li>With both methods, where the line intercepts the cost axis represents the fixed cost, and the slope of the line represents the variable cost per unit</li>
+        <li>The scattergraph method involves visually fitting a straight line (the regression line) through data points plotted on a graph</li>
+        <li>With the high-low method, the high and the low levels of activity are used to define an estimate of the total cost line</li>
+      </ul>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">High-Low Method <span class="cat-pill cat-nosheet">Not on official formula sheet</span></div>
+      <div class="formula-eq">Variable Cost per Unit = (Highest Cost − Lowest Cost) ÷ (Highest Activity − Lowest Activity)</div>
+      <div class="formula-eq">Fixed Cost = Total Cost − (Variable Cost per Unit × Activity Level)</div>
+      <div class="formula-meaning">Use either the high point or the low point in the fixed-cost formula — they'll always produce the <strong>same answer</strong>. That agreement is a built-in check on your work.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Worked example:</strong> Vantage Corp — low point 1,000 machine hours/$5,000; high point 5,000 machine hours/$13,000. Variable cost = ($13,000 − $5,000) ÷ (5,000 − 1,000) = $2.00/hour. Fixed cost = $13,000 − (5,000 × $2.00) = $3,000 (checks out from the low point too: $5,000 − (1,000 × $2.00) = $3,000). Total cost equation: <strong>$3,000 + $2.00 × machine hours</strong>.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin-top:1rem">On a scattergraph, the same logic applies visually: the <strong>y-intercept</strong> of the regression line is the fixed cost, and the <strong>slope</strong> (rise ÷ run) is the variable cost per unit.</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cvp-equation">
+    <h2>04 · Contribution Margin &amp; the C-V-P Equation</h2>
+    <p class="section-sub">Topic 11.4</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Contribution Margin</div>
+      <div class="formula-eq">Contribution Margin = Sales Revenue − Variable Costs</div>
+      <div class="formula-meaning">The amount left from each sale after covering variable costs — what the business gets to keep. It first pays off fixed costs; once fixed costs are fully covered, every additional dollar of contribution margin becomes pure profit.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Contribution Margin Ratio</div>
+      <div class="formula-eq">Contribution Margin Ratio = Contribution Margin ÷ Sales Revenue</div>
+      <div class="formula-meaning">The percentage of each sales dollar kept as contribution margin. <strong>Variable Cost Ratio + Contribution Margin Ratio always = 100%</strong> — every sales dollar splits into exactly those two pieces.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">The Core C-V-P Equation</div>
+      <div class="formula-eq">Sales Revenue − Variable Costs − Fixed Costs = Target Income</div>
+      <div class="formula-meaning">At <strong>breakeven, Target Income = 0</strong>. For any other target profit, just plug in the target — same equation, no code needed. Expanded: Sales Revenue = Sales Price × Number of Units; Variable Costs = Variable Cost per Unit × Number of Units, <em>or</em> Variable Costs = Variable Cost Ratio × Sales Revenue.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>REMEMBER THIS (verbatim):</strong>
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li>Contribution Margin = Sales Revenue − Variable Costs</li>
+        <li>Sales Revenue − Variable Costs − Fixed Costs = Target Income</li>
+        <li>At breakeven, Target Income = 0</li>
+        <li>Sales Revenue = Sales Price × Number of Units</li>
+        <li>Variable Costs = Variable Cost per Unit × Number of Units</li>
+        <li>Variable Costs = Variable Cost Ratio × Sales Revenue</li>
+      </ul>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Break-Even &amp; Target Profit <span class="cat-pill cat-nosheet">Not on official formula sheet</span></div>
+      <div class="formula-eq">Break-Even Units = Fixed Costs ÷ Contribution Margin per Unit</div>
+      <div class="formula-eq">Break-Even Sales $ = Fixed Costs ÷ Contribution Margin Ratio</div>
+      <div class="formula-eq">Units for Target Profit = (Fixed Costs + Target Profit) ÷ CM per Unit</div>
+      <div class="formula-meaning">The official PA/OA formula sheet only shows the second half of these formulas ("Fixed Costs / " is missing at the top). <strong>Memorize the full versions</strong> — don't rely on the sheet alone for break-even.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Worked example (Jewels Baseball Gloves):</strong> Price $200/glove, variable cost $110/glove, fixed costs $63,000. Contribution margin = $90/glove. Break-even = $63,000 ÷ $90 = 700 units ($140,000 in sales). At 1,200 gloves (20% more than 1,000), profit jumps from $27,000 to $45,000 — a ~67% increase, far outpacing the 20% sales increase, because fixed costs never move while contribution margin grows proportionally with sales. <em>(This is the mechanism behind operating leverage — see Topic 11.7.)</em>
+    </div>
+
+    <div class="callout warn">
+      <strong>Rounding rule:</strong> when a target-profit or break-even calculation produces a fractional number of units, <strong>always round UP</strong> to the next whole unit — rounding down would leave the target just short.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin-top:1rem"><strong>Always verify your answer</strong> by plugging the result back into the C-V-P equation. Trust the algebra, but check it.</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cvp-graphs">
+    <h2>05 · Visualizing C-V-P With Graphs</h2>
+    <p class="section-sub">Topic 11.5</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.75rem">Graphing convention (always): dollars on the <strong>Y-axis</strong>, activity level on the <strong>X-axis</strong>.</p>
+
+    <table class="compare-table">
+      <tr><th>Line</th><th>Starts at</th><th>Slope represents</th><th>How to recognize it</th></tr>
+      <tr><td><strong>Total Revenue Line</strong></td><td>Origin ($0, 0 units)</td><td>Selling price per unit</td><td>Only line that starts at zero — there's no such thing as fixed revenue</td></tr>
+      <tr><td><strong>Total Cost Line</strong></td><td>Fixed cost amount (y-intercept)</td><td>Variable cost per unit</td><td>Starts above zero, even at zero units produced</td></tr>
+      <tr><td><strong>Fixed Cost Line</strong></td><td>Fixed cost amount</td><td>0 (flat horizontal line)</td><td>Never moves, regardless of activity</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Break-even point (Point G):</strong> where the Total Revenue line and Total Cost line intersect — Revenue = Total Cost, so Profit = $0. Left of that point is the <strong>loss area</strong> (cost exceeds revenue); right of it is the <strong>profit area</strong> (revenue exceeds cost). The vertical distance between the two lines at any point equals the loss or profit at that volume.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Constructing a C-V-P Graph</div>
+      <div class="formula-eq">1. Axes → 2. Fixed cost line → 3. Total cost line → 4. Revenue line → 5. Label break-even</div>
+      <div class="formula-meaning">Draw dollars (vertical) and units (horizontal) axes. Draw the fixed cost line (horizontal). Draw the total cost line starting at the fixed cost amount, sloping up at the variable cost per unit. Draw the total revenue line starting at the origin, sloping up at the selling price per unit. Label where revenue and total cost intersect as the break-even point.</div>
+    </div>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin:1rem 0">
+      <strong>Profit Graph — an alternative view.</strong> Instead of two separate lines (revenue and cost), a profit graph plots a <strong>single line</strong> showing net profit at each activity level. Only two points are needed to draw it:
+    </p>
+
+    <div class="formula-card">
+      <div class="formula-name">Constructing a Profit Graph</div>
+      <div class="formula-eq">Point 1: (0 units, −Fixed Cost) &nbsp;&nbsp;→&nbsp;&nbsp; Point 2: (Break-even units, $0)</div>
+      <div class="formula-meaning">At zero units, there's no revenue to offset the fixed cost, so profit = a loss equal to fixed cost. At the break-even point, profit = $0 by definition. Connect those two points and extend the line. The <strong>slope of the profit line = contribution margin per unit</strong> — each additional unit sold adds exactly one unit's worth of CM straight to the bottom line.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Telling the two graph types apart at a glance:</strong> a C-V-P graph shows revenue starting at $0 and cost starting at a positive dollar value — two separate lines. A profit graph shows a <strong>single line starting BELOW zero</strong> (a negative value, equal to fixed cost) at zero units. If you see a line beginning in negative territory, you're looking at a profit graph.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="sales-mix">
+    <h2>06 · Effects of Sales Mix on Profitability</h2>
+    <p class="section-sub">Topic 11.6</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Sales Mix</div>
+      <div class="formula-eq">The relative proportion of total sales dollars (or units) represented by each product</div>
+      <div class="formula-meaning">Sales mix can be expressed either in <strong>sales dollars</strong> or in <strong>units sold</strong> — a problem might hand you either one, and the same weighted-average method applies.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>REMEMBER THIS (verbatim):</strong>
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li>Sales mix is the proportion of sales revenue represented by each of a company's products</li>
+        <li>Changes in sales mix can affect profits because not all products have the same contribution margin</li>
+        <li>Other things being equal, to maximize profits, management should put greater emphasis on the sale of products with higher contribution margin ratios</li>
+      </ul>
+    </div>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin:1rem 0">
+      <strong>Why this matters:</strong> once a company sells multiple products with different contribution margin ratios, a single break-even formula no longer works — the answer depends on <em>which</em> products the sales come from. A shift toward higher-CM-ratio products increases total profit even with zero change in total revenue.
+    </p>
+
+    <div class="formula-card">
+      <div class="formula-name">Multi-Product Break-Even <span class="cat-pill cat-nosheet">Not on official formula sheet</span></div>
+      <div class="formula-eq">Break-Even Sales = Fixed Costs ÷ Weighted-Average Contribution Margin Ratio (WACMR)</div>
+      <div class="formula-meaning">Four-step method: (1) compute each product's CM ratio, (2) compute each product's sales-mix %, (3) multiply and sum → WACMR, (4) divide fixed costs by the WACMR.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Worked example (Kepler Co.):</strong> Product A — sales $20,000, CM ratio 50%; Product B — sales $30,000, CM ratio 30%; Product C — sales $10,000, CM ratio 20%. Total sales = $60,000. Sales mix: A 33.3%, B 50%, C 16.7%. WACMR = (0.333×50%) + (0.50×30%) + (0.167×20%) = 35%. With fixed costs of $17,500, break-even sales = $17,500 ÷ 0.35 = <strong>$50,000</strong>.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="operating-leverage">
+    <h2>07 · Cost Structure &amp; Operating Leverage</h2>
+    <p class="section-sub">Topic 11.7</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Operating Leverage</div>
+      <div class="formula-eq">Relates to the mix of fixed vs. variable costs in a company's cost structure</div>
+      <div class="formula-meaning">Operating leverage is <strong>a measure of risk</strong> — not a measure of performance, and not related to product mix or financial (debt/equity) leverage.</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Cost structure</th><th>Operating leverage</th><th>Risk profile</th></tr>
+      <tr><td>High fixed costs, low variable costs</td><td><strong>High</strong></td><td>More aggressive — larger profit swings in either direction as sales move</td></tr>
+      <tr><td>Low fixed costs, high variable costs</td><td><strong>Low</strong></td><td>More conservative — smaller, steadier profit swings</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>REMEMBER THIS (verbatim):</strong>
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li>Operating leverage relates to the amount of fixed costs a company has in its cost structure. High fixed costs mean high operating leverage; low fixed costs indicate low operating leverage.</li>
+        <li>The higher the operating leverage, the more money a company loses if sales are bad, but the more money it makes if sales are good.</li>
+      </ul>
+    </div>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin:1rem 0">
+      <strong>Why it connects to the C-V-P equation:</strong> when sales rise, contribution margin rises <em>proportionally</em> with sales — but fixed costs don't move at all. Since fixed costs stay flat while contribution margin grows, every extra dollar of contribution margin beyond what's needed to cover fixed costs flows straight to profit. The higher the proportion of fixed costs, the more magnified that effect becomes — in both directions. (See the Jewels baseball glove example in Topic 04: a 20% sales increase produced a ~67% profit increase.)
+    </p>
+
+    <div class="callout warn">
+      <strong>Two-sided, not simply "better":</strong> high operating leverage amplifies gains above break-even, but amplifies losses below break-even by the same mechanism. A company with high fixed costs doesn't get to shrink its costs when sales slow down the way a low-leverage, mostly-variable-cost company can.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>08 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Per-unit vs. total — the reverse trap:</strong> "constant per unit" always describes a <em>variable</em> cost, never a fixed one. Fixed costs are constant in <em>total</em>; their per-unit amount is what moves.</li>
+      <li><strong>High-low method sorts by ACTIVITY, not cost:</strong> identify the highest and lowest activity level first (e.g., machine hours), then use the cost associated with each — don't sort by dollar amount.</li>
+      <li><strong>Break-even formulas aren't fully on the official formula sheet:</strong> only "Fixed Costs / [blank]" appears at the bottom for both units and sales-dollar break-even. Memorize the complete formulas — Fixed Costs ÷ CM per Unit, and Fixed Costs ÷ CM Ratio.</li>
+      <li><strong>Fixed costs never touch contribution margin:</strong> Contribution Margin = Sales − Variable Costs. A change in fixed costs changes profit, but has zero effect on contribution margin itself.</li>
+      <li><strong>Variable Cost Ratio + Contribution Margin Ratio = 100%, always</strong> — every sales dollar splits into exactly those two pieces, with nothing left over.</li>
+      <li><strong>Revenue line always starts at the origin on a C-V-P graph</strong> — there's no such thing as fixed revenue. The cost line is the one that starts above zero (at the fixed cost amount).</li>
+      <li><strong>Profit graph vs. C-V-P graph:</strong> a profit graph is a single line starting <em>below</em> zero (negative, equal to fixed cost) at zero units — that's the tell. A C-V-P graph shows two separate lines, revenue at $0 and cost above $0.</li>
+      <li><strong>Multi-product break-even needs the weighted-average CM ratio</strong> — a single-product break-even formula doesn't work once products have different contribution margin ratios.</li>
+      <li><strong>Operating leverage cuts both ways</strong> — it's not simply "riskier is worse." High leverage means bigger gains above break-even AND bigger losses below it, compared to a low-leverage cost structure.</li>
+      <li><strong>Stepped costs — width determines treatment:</strong> wide, infrequent steps → approximate as fixed. Narrow, frequent steps → approximate as variable.</li>
+      <li><strong>Rounding rule for fractional units:</strong> always round UP on break-even or target-profit unit calculations, never down — rounding down would fall short of the goal.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

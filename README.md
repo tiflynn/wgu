@@ -23,6 +23,7 @@ A self-study quiz site for **C213 Accounting for Decision Makers** (MBA program)
 | `section9_quiz.html` | Section 9: Internal Controls |
 | `section10_quiz.html` | Section 10: Management Accounting & Cost Concepts |
 | `section11_quiz.html` | Section 11: Activity-Based Costing (ABC) |
+| `section12_quiz.html` | Section 12: Cost Behavior & C-V-P Analysis |
 | `sectionX_notes.html` | Study notes for a section |
 
 Each new section gets its own `sectionX_quiz.html` file, and reuses `quiz.css` and `quiz.js` rather than duplicating code.
