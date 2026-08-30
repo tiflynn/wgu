@@ -96,6 +96,18 @@
   }
   .hub-card:hover .hub-arrow,
   .hub-card:focus-within .hub-arrow{opacity:1;transform:translateX(0)}
+  .hub-group-label{
+    font-family:'DM Mono',monospace;
+    font-size:.7rem;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:2rem 0 0;
+    padding-bottom:.6rem;
+    border-bottom:1px solid var(--border);
+  }
+  .hub-group-label + .hub-grid{margin-top:1rem}
   .hub-footer{
     text-align:center;
     margin-top:3rem;
@@ -130,6 +142,8 @@
     <h1>C213 Accounting for <span>Decision Makers</span></h1>
     <p class="subtitle">Pick a section to start practicing</p>
   </header>
+
+  <h2 class="hub-group-label">Course Sections</h2>
 
   <div class="hub-grid">
 
@@ -284,6 +298,40 @@
 
   </div>
 
+  <h2 class="hub-group-label">Reference</h2>
+
+  <div class="hub-grid">
+
+    <article class="hub-card">
+      <span class="hub-arrow">→</span>
+      <div class="hub-card-eyebrow">Formula Sheet</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="formulas_provided_notes.html">Available During Testing</a></div>
+      <div class="hub-card-desc">
+        Everything shown on-screen during the Pre-Assessment &amp; Objective Assessment &mdash; statement
+        formats, widely used ratios, DuPont, cash flow ratios, ABC, and CVP. No need to memorize these,
+        just know where to look and what each one means.
+      </div>
+      <div class="hub-card-meta">
+        <span class="hub-tag">Provided at testing</span>
+      </div>
+    </article>
+
+    <article class="hub-card">
+      <span class="hub-arrow">→</span>
+      <div class="hub-card-eyebrow">Formula Sheet</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="formulas_memorize_notes.html">Formulas to Memorize</a></div>
+      <div class="hub-card-desc">
+        The formulas <em>not</em> on the official sheet &mdash; the alternate income statement layout,
+        ratios left off the sheet, the ABC activity rate, and the full CVP set. Commit these to memory
+        before test day.
+      </div>
+      <div class="hub-card-meta">
+        <span class="hub-tag">Memorize before test day</span>
+      </div>
+    </article>
+
+  </div>
+
   <p class="hub-footer">
     More sections added as the course progresses<br>
     <a class="hub-repo" href="https://github.com/tiflynn/wgu/" target="_blank" rel="noopener">
@@ -299,7 +347,7 @@
   document.querySelectorAll('.hub-card').forEach(card => {
     const tag = card.querySelector('.hub-tag');
     const src = card.querySelector('.hub-card-link')?.getAttribute('href');
-    if(!tag || !src) return;
+    if(!tag || !src || !src.endsWith('_quiz.html')) return;
 
     fetch(src)
       .then(r => r.ok ? r.text() : Promise.reject(r.status))

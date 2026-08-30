@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Formulas to Memorize</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .memorize-tag{
+    font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.15rem .55rem;border-radius:99px;font-weight:600;white-space:nowrap;
+    background:rgba(248,113,113,.15);color:var(--wrong);
+  }
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <a class="back-link" href="index.html">← All Sections</a>
+  <a class="back-link notes" href="formulas_provided_notes.html">What's provided instead →</a>
+</div>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Reference</p>
+  <h1>Formulas to<br><span>Memorize</span></h1>
+  <p class="subtitle">Not shown on-screen during the Pre-Assessment or Objective Assessment — commit these to memory before test day</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#income-statement">Income Statement (Alternate Layout)</a></li>
+      <li><span class="n">02</span><a href="#ratios">Ratios Not on the Official Sheet</a></li>
+      <li><span class="n">03</span><a href="#abc-rate">ABC — Activity Rate</a></li>
+      <li><span class="n">04</span><a href="#cvp">CVP — Full Formula Set</a></li>
+      <li><span class="n">05</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="income-statement">
+    <h2>01 · Income Statement (Alternate Layout)</h2>
+    <p class="section-sub">A second income-statement format worth knowing, separate from the one on the official sheet</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Sales</div><span class="chain-sep">−</span>
+      <div class="chain-node">COGS</div><span class="chain-sep">=</span>
+      <div class="chain-node">Gross Profit</div>
+    </div>
+    <div class="chain-flow">
+      <div class="chain-node">Gross Profit</div><span class="chain-sep">−</span>
+      <div class="chain-node">Selling &amp; Admin Exp</div><span class="chain-sep">=</span>
+      <div class="chain-node">Operating Income</div>
+    </div>
+    <div class="chain-flow">
+      <div class="chain-node">Operating Income</div><span class="chain-sep">+</span>
+      <div class="chain-node">Interest Income</div><span class="chain-sep">−</span>
+      <div class="chain-node">Interest Expense</div><span class="chain-sep">−</span>
+      <div class="chain-node">Income Tax Exp</div><span class="chain-sep">=</span>
+      <div class="chain-node">Net Income</div>
+    </div>
+
+    <div class="callout">
+      <strong>Same destination, different route:</strong> this layout nets Interest Income and Interest Expense as two separate lines instead of one combined "Interest" line, and folds admin costs into one "Selling and Administrative Expenses" line rather than splitting out Depreciation and Other Expenses. Whichever version a question uses, the core skeleton is identical: <em>Sales → Gross Profit → Operating Income → Net Income</em>, moving from most-core operations to least.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="ratios">
+    <h2>02 · Ratios Not on the Official Sheet</h2>
+    <p class="section-sub">These six will not appear on your test screen — memorize the formulas directly</p>
+
+    <table class="compare-table">
+      <tr><th>Ratio</th><th>Formula</th><th>What it tells you</th></tr>
+      <tr><td><strong>Fixed Asset Turnover</strong></td><td>Sales / Average Fixed Assets</td><td>How efficiently long-term (fixed) assets specifically generate sales</td></tr>
+      <tr><td><strong>Average Collection Period</strong></td><td>Average A/R / Average Daily Sales</td><td>Average number of days it takes to collect a receivable</td></tr>
+      <tr><td><strong>Number of Days in Sales Inventory</strong></td><td>Average Inventory / Average Daily COGS</td><td>Average number of days inventory sits before being sold</td></tr>
+      <tr><td><strong>Debt-to-Equity Ratio</strong></td><td>Total Liabilities / Total Equity</td><td>How much debt financing exists per dollar of owner financing</td></tr>
+      <tr><td><strong>Times Interest Earned</strong></td><td>Income before Interest &amp; Taxes / Interest Expense</td><td>How many times over the company could pay its interest from operating earnings</td></tr>
+      <tr><td><strong>Assets-to-Equity Ratio</strong></td><td>Total Assets / Shareholder's Equity</td><td>Leverage — the "equity multiplier" piece of DuPont</td></tr>
+    </table>
+
+    <div class="callout tip">
+      <strong>One of these you already half-know:</strong> Assets-to-Equity Ratio isn't really a brand-new formula — it's the exact same ratio embedded in the DuPont framework on the official sheet (ROE = Return on Sales × Asset Turnover × Assets-to-Equity Ratio). If you've got DuPont down, this one's free.
+    </div>
+
+    <div class="callout warn">
+      <strong>"Average daily" means ÷365 first:</strong> for Average Collection Period and Days in Sales Inventory, "Average Daily Sales" and "Average Daily COGS" aren't given directly — you get annual Sales or COGS and have to divide by 365 to get the daily figure before plugging it into the ratio.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="abc-rate">
+    <h2>03 · Activity-Based Costing — Activity Rate</h2>
+    <p class="section-sub">The core rate calculation used in every ABC overhead-assignment problem</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Activity Rate (per Cost Pool) <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Activity Rate = Cost Pool / Cost Driver</div>
+      <div class="formula-meaning">This is the workhorse formula behind ABC. Each overhead cost pool (e.g., all costs tied to machine setups) gets divided by its cost driver (e.g., number of setups) to get a rate per unit of driver activity. Multiply that rate by how much of the driver a specific product actually used, and you've assigned that pool's overhead to the product.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cvp">
+    <h2>04 · CVP — Full Formula Set</h2>
+    <p class="section-sub">The complete breakeven &amp; target-profit toolkit, fully spelled out</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Contribution Margin</div>
+      <div class="formula-eq">Contribution Margin = Sales − Variable Costs</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Contribution Margin Ratio</div>
+      <div class="formula-eq">Contribution Margin Ratio = Contribution Margin / Sales</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Break-Even in Units <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Break-Even Units = Total Fixed Costs / Contribution Margin per Unit</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Break-Even in Sales Dollars <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Break-Even Sales $ = Total Fixed Costs / Contribution Margin Ratio</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Units to Earn Desired Profit <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Units = (Total Fixed Costs + Desired Profit) / Contribution Margin per Unit</div>
+      <div class="formula-meaning">Same shape as the plain breakeven formula — just add the target profit into the numerator before dividing.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Sales Dollars to Earn Desired Profit <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Sales $ = (Total Fixed Costs + Desired Profit) / Contribution Margin Ratio</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>05 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">Don't confuse these with their similar-sounding cousins on the provided sheet</p>
+
+    <table class="compare-table">
+      <tr><th>On the PROVIDED sheet</th><th>On THIS page</th><th>Don't mix them up</th></tr>
+      <tr>
+        <td><strong>Debt ratio</strong><br>Liabilities / Assets</td>
+        <td><strong>Debt-to-Equity Ratio</strong><br>Liabilities / Equity</td>
+        <td>Same numerator, different denominator — Assets vs. Equity</td>
+      </tr>
+      <tr>
+        <td><strong>Asset turnover</strong><br>Sales / Total Assets</td>
+        <td><strong>Fixed Asset Turnover</strong><br>Sales / Average Fixed Assets</td>
+        <td>Total assets vs. only <em>fixed</em> assets, and note the word "Average"</td>
+      </tr>
+      <tr>
+        <td><strong>DuPont's Assets-to-Equity piece</strong><br>embedded in ROE formula</td>
+        <td><strong>Assets-to-Equity Ratio</strong><br>Total Assets / Equity</td>
+        <td>These are the same ratio — not a trap, just a redundant listing</td>
+      </tr>
+    </table>
+
+    <ul class="quicklist">
+      <li><strong>The breakeven formulas here ARE complete</strong> — unlike the provided sheet (which stops at "Contribution Margin Ratio" and expects you to add "Fixed Costs ÷" yourself), this page spells the full division out. Use this page as the source of truth for breakeven math.</li>
+      <li><strong>Activity Rate = Cost Pool / Cost Driver</strong> shows up in nearly every ABC calculation — memorize this one first among everything on this page.</li>
+      <li><strong>"Average" matters.</strong> Fixed Asset Turnover, Average Collection Period, and Days in Sales Inventory all use an <em>average</em> balance (typically (beginning + ending) / 2) rather than a single point-in-time figure — don't plug in an ending balance alone unless that's all you're given.</li>
+      <li><strong>Target-profit formulas are breakeven formulas with an extra term.</strong> Add Desired Profit into the numerator alongside Fixed Costs, then divide exactly like you would for plain breakeven.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

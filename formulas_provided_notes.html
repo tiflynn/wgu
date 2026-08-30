@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Formula Sheet (Provided)</title>
+<link rel="stylesheet" href="quiz.css">
+<style>
+  /* ── Notes-page-specific layout, built from the same design tokens as quiz.css ── */
+  .notes-wrap{max-width:var(--content-w);margin:0 auto}
+
+  .notes-toc{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow);
+  }
+  .notes-toc-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+  .notes-toc ol{list-style:none;display:grid;grid-template-columns:1fr;gap:.35rem}
+  .notes-toc a{color:var(--text);text-decoration:none;font-size:.88rem;display:flex;gap:.5rem}
+  .notes-toc a:hover{color:var(--accent)}
+  .notes-toc .n{font-family:'DM Mono',monospace;color:var(--muted);min-width:1.3rem}
+  @media(min-width:700px){.notes-toc ol{grid-template-columns:1fr 1fr}}
+
+  .section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.75rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);scroll-margin-top:1.5rem;
+  }
+  .section h2{
+    font-family:'DM Serif Display',serif;font-weight:400;font-size:1.5rem;color:var(--text);
+    margin-bottom:.3rem;
+  }
+  .section .section-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
+
+  .formula-card{
+    background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:.9rem;
+  }
+  .formula-name{font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+  .formula-eq{
+    font-family:'DM Mono',monospace;font-size:1.02rem;color:var(--accent);
+    background:rgba(37,99,235,.07);border-radius:6px;padding:.6rem .9rem;margin:.5rem 0;
+    display:inline-flex;align-items:center;flex-wrap:wrap;gap:.45rem;max-width:100%;
+  }
+  .formula-meaning{font-size:.87rem;color:var(--muted);line-height:1.55}
+  .formula-meaning strong{color:var(--text);font-weight:600}
+
+  .callout{
+    border-left:3px solid var(--accent2);background:rgba(167,139,250,.07);
+    border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.87rem;line-height:1.6;color:var(--text);
+  }
+  .callout strong{color:var(--accent2)}
+  .callout.warn{border-left-color:var(--wrong);background:rgba(248,113,113,.07)}
+  .callout.warn strong{color:var(--wrong)}
+  .callout.tip{border-left-color:var(--correct);background:rgba(52,211,153,.07)}
+  .callout.tip strong{color:var(--correct)}
+
+  .compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  .compare-table th{
+    font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:.5rem .6rem;border-bottom:2px solid var(--border);
+  }
+  .compare-table td{padding:.6rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  .compare-table tr:last-child td{border-bottom:none}
+
+  .pie-order{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+  .pie-step{
+    flex:1;min-width:140px;background:var(--surface);border:2px solid #D2D9E6;border-radius:8px;
+    padding:.7rem .85rem;font-size:.82rem;position:relative;
+  }
+  .pie-step .step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);font-weight:700}
+  .pie-step .step-label{font-weight:600;color:var(--text);margin:.15rem 0 .15rem}
+  .pie-step .step-desc{color:var(--muted);font-size:.78rem}
+
+  .chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0;font-size:.85rem}
+  .chain-node{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:.4rem .7rem;color:var(--text)}
+  .chain-node.warn{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+  .chain-sep{color:var(--accent);font-weight:700}
+
+  .pitfall-grid{display:grid;grid-template-columns:1fr;gap:.9rem;margin-top:1rem}
+  @media(min-width:700px){.pitfall-grid{grid-template-columns:1fr 1fr}}
+  .pitfall-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.15rem}
+  .pitfall-card .pf-num{
+    display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;
+    border-radius:99px;background:var(--accent2);color:#fff;font-family:'DM Mono',monospace;
+    font-size:.75rem;font-weight:700;margin-bottom:.5rem;
+  }
+  .pitfall-card h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+  .pitfall-card p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+  .quicklist{margin:.5rem 0 0;padding-left:1.2rem}
+  .quicklist li{font-size:.87rem;color:var(--text);line-height:1.65;margin-bottom:.25rem}
+  .quicklist strong{color:var(--accent)}
+
+  .top-anchor{scroll-margin-top:1.5rem}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <a class="back-link" href="index.html">← All Sections</a>
+  <a class="back-link notes" href="formulas_memorize_notes.html">Also memorize →</a>
+</div>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Reference</p>
+  <h1>Formula Sheet<br><span>Available During Testing</span></h1>
+  <p class="subtitle">Everything shown on-screen during the Pre-Assessment &amp; Objective Assessment — you don't have to memorize these, just know where to look and what each one means</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#statements">Financial Statement Formats</a></li>
+      <li><span class="n">02</span><a href="#widely-used">Widely Used Ratios</a></li>
+      <li><span class="n">03</span><a href="#dupont">DuPont Framework</a></li>
+      <li><span class="n">04</span><a href="#cashflow-ratios">Cash Flow Ratios</a></li>
+      <li><span class="n">05</span><a href="#abc">Activity-Based Costing</a></li>
+      <li><span class="n">06</span><a href="#cvp">Cost-Volume-Profit Analysis</a></li>
+      <li><span class="n">07</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="statements">
+    <h2>01 · Financial Statement Formats</h2>
+    <p class="section-sub">The three core statements, in the exact layout the test screen shows</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Balance Sheet Identity</div>
+      <div class="formula-eq">Assets = Liabilities + Owners' Equity</div>
+      <div class="formula-meaning">The foundational equation. Liabilities + Owners' Equity are the <strong>sources</strong> that funded the assets; Assets are <strong>what the company has</strong> as a result.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.1rem 0 .5rem">Income Statement — flows top to bottom in three stages:</p>
+    <div class="chain-flow">
+      <div class="chain-node">Sales</div><span class="chain-sep">−</span>
+      <div class="chain-node">COGS</div><span class="chain-sep">=</span>
+      <div class="chain-node">Gross Profit</div>
+    </div>
+    <div class="chain-flow">
+      <div class="chain-node">Gross Profit</div><span class="chain-sep">−</span>
+      <div class="chain-node">Admin Exp</div><span class="chain-sep">−</span>
+      <div class="chain-node">Depreciation</div><span class="chain-sep">−</span>
+      <div class="chain-node">Other Exp</div><span class="chain-sep">=</span>
+      <div class="chain-node">EBIT</div>
+    </div>
+    <div class="chain-flow">
+      <div class="chain-node">EBIT</div><span class="chain-sep">−</span>
+      <div class="chain-node">Interest</div><span class="chain-sep">=</span>
+      <div class="chain-node">EBT</div><span class="chain-sep">−</span>
+      <div class="chain-node">Taxes</div><span class="chain-sep">=</span>
+      <div class="chain-node">Net Income</div>
+    </div>
+
+    <div class="formula-card" style="margin-top:1.1rem">
+      <div class="formula-name">Statement of Cash Flows</div>
+      <div class="formula-eq">Operating + Investing + Financing = Net Increase (or Decrease) in Cash</div>
+      <div class="formula-meaning">Every cash transaction the company makes falls into exactly one of these three buckets. Sum all three and you get the total change in the cash balance for the period.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="widely-used">
+    <h2>02 · Widely Used Ratios</h2>
+    <p class="section-sub">The six ratios listed under "Widely Used Ratios" on the official sheet</p>
+
+    <table class="compare-table">
+      <tr><th>Ratio</th><th>Formula</th><th>What it tells you</th></tr>
+      <tr><td><strong>Debt ratio</strong></td><td>Total liabilities / Total assets</td><td>What % of assets are financed by debt (leverage)</td></tr>
+      <tr><td><strong>Current ratio</strong></td><td>Current assets / Current liabilities</td><td>Short-term liquidity — ability to cover near-term bills</td></tr>
+      <tr><td><strong>Return on sales</strong> (profit margin)</td><td>Net income / Sales</td><td>Profit earned per dollar of revenue</td></tr>
+      <tr><td><strong>Asset turnover</strong></td><td>Total sales / Total assets</td><td>How efficiently total assets generate sales</td></tr>
+      <tr><td><strong>Return on equity</strong></td><td>Net income / Stockholders' equity</td><td>Return earned on owners' invested capital</td></tr>
+      <tr><td><strong>Price-Earnings ratio</strong></td><td>Market value of shares / Net income</td><td>How the market values the company relative to its earnings</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="dupont">
+    <h2>03 · DuPont Framework</h2>
+    <p class="section-sub">Breaks Return on Equity into three drivers</p>
+
+    <div class="formula-card">
+      <div class="formula-name">DuPont ROE Decomposition</div>
+      <div class="formula-eq">ROE = Return on Sales × Asset Turnover × Assets-to-Equity Ratio</div>
+      <div class="formula-meaning"><strong>Return on Sales</strong> = profitability. <strong>Asset Turnover</strong> = efficiency. <strong>Assets-to-Equity</strong> = leverage. Two companies can post the identical ROE for very different reasons — one earned it through strong margins, the other through heavier debt financing. DuPont shows you which.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Notice:</strong> the Assets-to-Equity ratio inside this DuPont line IS the "Assets-to-Equity Ratio" listed separately on the additional-formulas sheet (Total Assets ÷ Shareholder's Equity) — same ratio, just embedded here instead of spelled out on its own.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cashflow-ratios">
+    <h2>04 · Cash Flow Ratios</h2>
+    <p class="section-sub">Compare reported earnings against actual cash generated</p>
+
+    <table class="compare-table">
+      <tr><th>Ratio</th><th>Formula</th><th>Interpretation</th></tr>
+      <tr><td><strong>Cash flow to net income</strong></td><td>Cash from operations / Net income</td><td>≈1.0 = earnings well-supported by cash; &lt;1.0 = possible red flag (earnings not converting to cash)</td></tr>
+      <tr><td><strong>Cash flow adequacy</strong></td><td>Cash from operations / Cash required for investing activities</td><td>≥1.0 = "cash cow," self-funds its own investing needs</td></tr>
+      <tr><td><strong>Cash times interest earned</strong></td><td>Cash from operations before interest &amp; taxes / Cash paid for interest</td><td>Cash-basis version of Times Interest Earned — how comfortably cash flow covers interest</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="abc">
+    <h2>05 · Activity-Based Costing</h2>
+    <p class="section-sub">The 4-step version as written on the official formula sheet</p>
+
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1</span><div class="step-label">Identify overhead cost activities</div></div>
+      <div class="pie-step"><span class="step-num">2</span><div class="step-label">Analyze overhead costs</div><div class="step-desc">in terms of those activities</div></div>
+      <div class="pie-step"><span class="step-num">3</span><div class="step-label">Identify measurable cost drivers</div></div>
+      <div class="pie-step"><span class="step-num">4</span><div class="step-label">Assign overhead</div><div class="step-desc">based on the cost drivers</div></div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Watch for a step-count mismatch:</strong> this official sheet gives ABC in <strong>4 steps</strong>. The textbook breaks the same process into <strong>5 steps</strong> (splitting "identify activities" and "create cost pools" into two separate steps, and adding a 5th step — "use the information" — at the end). Both are testable phrasings of the same process; know which wording a question is quoting.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cvp">
+    <h2>06 · Cost-Volume-Profit Analysis</h2>
+    <p class="section-sub">What's actually spelled out on the official sheet</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Breakeven Point</div>
+      <div class="formula-eq">Sales − Variable Costs − Fixed Costs = $0</div>
+      <div class="formula-meaning">The point where profit is exactly zero. Swap the $0 for a target profit number and this same equation solves for target-income scenarios: <strong>Sales − Variable Costs − Fixed Costs = Target Income</strong>.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Contribution Margin</div>
+      <div class="formula-eq">Contribution Margin = Sales − Variable Costs</div>
+      <div class="formula-meaning">What's left from sales after covering variable costs — available to cover fixed costs, then profit.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Contribution Margin Ratio</div>
+      <div class="formula-eq">Contribution Margin Ratio = Contribution Margin / Sales</div>
+      <div class="formula-meaning">The % of every sales dollar left over after variable costs.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>07 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">What this sheet gives you — and what it quietly leaves you to finish yourself</p>
+
+    <ul class="quicklist">
+      <li><strong>The breakeven DIVISION formulas aren't spelled out here.</strong> The sheet shows Contribution Margin and Contribution Margin Ratio, but stops short of "Fixed Costs ÷" in front of them. You have to supply that yourself: <strong>Units to Break Even = Fixed Costs ÷ CM per unit</strong>, and <strong>Sales $ to Break Even = Fixed Costs ÷ CM Ratio</strong>. (Fully spelled out on the "formulas to memorize" page.)</li>
+      <li><strong>ABC is 4 steps here, 5 in the textbook</strong> — same process, different granularity. Don't be thrown if a question's step count doesn't match what you studied.</li>
+      <li><strong>Asset turnover ≠ Fixed Asset Turnover.</strong> This sheet's "Asset turnover" uses <em>Total</em> Assets in the denominator. A separate ratio — Fixed Asset Turnover, using only <em>Average Fixed</em> Assets — is NOT on this sheet; it's on the memorize page.</li>
+      <li><strong>Debt ratio ≠ Debt-to-Equity ratio.</strong> This sheet's "Debt ratio" divides by Total Assets. Debt-to-Equity (divides by Total Equity instead) is a different ratio, and it's not here — it's on the memorize page.</li>
+      <li><strong>This income statement format is a simplified layout for quick math</strong> — it won't show you Discontinued Operations or Extraordinary Items the way the full textbook version does. Don't expect this exact same abbreviated structure to hold for every income-statement question.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
