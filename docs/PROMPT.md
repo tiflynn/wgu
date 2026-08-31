@@ -45,21 +45,21 @@ Output the questions in the shared schema used by my existing quiz.js engine:
 - `dd`: `{ type, q, cols, items: [{ text, answer }], explanation, mnemonic }`
 - `ord`: `{ type, q, items: [{ text, order }], explanation, mnemonic }` — order is the zero-indexed correct position
 
-Build the quiz page as a lean HTML shell that links to the shared quiz.css and quiz.js (`<link rel="stylesheet" href="quiz.css">` and `<script src="quiz.js"></script>`) — do NOT duplicate the CSS or JS engine inline.
+Build the quiz page as a lean HTML shell that links to the shared stylesheet and engine (`<link rel="stylesheet" href="../assets/css/quiz.css">` and `<script src="../assets/js/quiz.js"></script>`) — do NOT duplicate the CSS or JS engine inline.
 
-Copy the HTML shell verbatim from any existing sectionX_quiz.html — the ← All Sections back link, the `<header>`, the `.progress-wrap`, the `.chips`, the `#quizCard`, and the `#results` block — changing only:
+Copy the HTML shell verbatim from any existing `quizzes/sectionNN.html` — the ← All Sections back link, the `<header>`, the `.progress-wrap`, the `.chips`, the `#quizCard`, and the `#results` block — changing only:
 - the `<title>` and the eyebrow to "C213 Accounting for Decision Makers · Section X"
 - the `<h1>` to the section title (a `<span>` may wrap part of it for the accent color)
 - the questions array
 
 The `#results` block MUST include `<div class="review" id="reviewList"></div>` just above the Retake button — this powers the "review missed questions" list. Do NOT include a results-page color legend (it has been removed from all sections).
 
-Name the file `sectionX_quiz.html` (lowercase, matching my existing files).
+Name the file `quizzes/sectionNN.html` — lowercase, zero-padded to two digits (e.g. `quizzes/section13.html`), matching my existing files. Put the matching study notes in `notes/sectionNN.html`.
 
 Also give me an updated index.html with a new card added for this section, following the current card format:
 
 ```html
-<a class="hub-card" href="sectionX_quiz.html">
+<a class="hub-card" href="quizzes/sectionNN.html">
   <span class="hub-arrow">→</span>
   <div class="hub-card-eyebrow">Section X</div>
   <div class="hub-card-title">[Section Title]</div>

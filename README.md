@@ -2,31 +2,47 @@
 
 A self-study quiz site for **C213 Accounting for Decision Makers** (MBA program). Built section by section as the course progresses, with interactive multiple choice, select-all, drag-and-drop, true/false, and ordering questions.
 
-**Live site:** `https://yourusername.github.io/your-repo-name/`
+**Live site:** https://tiflynn.github.io/wgu/
 
 ---
 
-## What's here
+## Repo layout
 
-| File | Purpose |
+```
+.
+├── index.html              Home page — lists every section as a clickable card
+├── assets/
+│   ├── css/quiz.css        Shared styling for every page (light theme, cards, buttons, drag & drop)
+│   └── js/quiz.js          Shared quiz engine — shuffling, scoring, rendering, results screen
+├── quizzes/
+│   ├── section02.html …    One quiz per course section
+│   └── practice-exam.html  Comprehensive practice exam
+├── notes/
+│   ├── section02.html …    Study notes per section
+│   ├── formulas-provided.html   Formulas available during testing
+│   └── formulas-memorize.html   Formulas to memorize
+└── docs/PROMPT.md          Reusable prompt for generating a new section quiz
+```
+
+`index.html` stays at the root because that is the GitHub Pages entry point. Section files are
+zero-padded (`section02`, not `section2`) so they sort correctly.
+
+| Section | Topic |
 |---|---|
-| `index.html` | Home page — lists every section as a clickable card |
-| `quiz.css` | Shared styling used by every quiz page (light theme, cards, buttons, drag & drop) |
-| `quiz.js` | Shared quiz engine — shuffling, scoring, question rendering, results screen |
-| `section2_quiz.html` | Section 2: The Nature & Purpose of Accounting |
-| `section3_quiz.html` | Section 3: Overview of Financial Statements |
-| `section4_quiz.html` | Section 4: Individual Accounts & Transaction Analysis |
-| `section5_quiz.html` | Section 5: The Income Statement |
-| `section6_quiz.html` | Section 6: The Statement of Cash Flows |
-| `section7_quiz.html` | Section 7: Introduction to Financial Statement Analysis |
-| `section8_quiz.html` | Section 8: Cash Budgeting |
-| `section9_quiz.html` | Section 9: Internal Controls |
-| `section10_quiz.html` | Section 10: Management Accounting & Cost Concepts |
-| `section11_quiz.html` | Section 11: Activity-Based Costing (ABC) |
-| `section12_quiz.html` | Section 12: Cost Behavior & C-V-P Analysis |
-| `sectionX_notes.html` | Study notes for a section |
+| 2 | The Nature & Purpose of Accounting |
+| 3 | Overview of Financial Statements |
+| 4 | Individual Accounts & Transaction Analysis |
+| 5 | The Income Statement |
+| 6 | The Statement of Cash Flows |
+| 7 | Introduction to Financial Statement Analysis |
+| 8 | Cash Budgeting |
+| 9 | Internal Controls |
+| 10 | Management Accounting & Cost Concepts |
+| 11 | Activity-Based Costing (ABC) |
+| 12 | Cost Behavior & C-V-P Analysis |
 
-Each new section gets its own `sectionX_quiz.html` file, and reuses `quiz.css` and `quiz.js` rather than duplicating code.
+Every quiz and notes page reuses `assets/css/quiz.css` and `assets/js/quiz.js` rather than
+duplicating code, so pages reference them one level up (`../assets/...`).
 
 ---
 
@@ -55,10 +71,12 @@ Every question includes an explanation and a memory tip (mnemonic, acronym, or a
 
 ## Adding a new section
 
-1. Share your notes for the section
-2. A new `sectionX_quiz.html` file gets built that links to the existing `quiz.css` and `quiz.js`
-3. `index.html` gets updated with a new card linking to that section — the question count on the card is counted from the quiz file at page load, so there is no number to keep in sync
-4. Upload the new/updated files to this repo — GitHub Pages updates automatically within a minute or two
+1. Share your notes for the section (see `docs/PROMPT.md` for the generation prompt)
+2. A new `quizzes/sectionNN.html` file gets built that links to `../assets/css/quiz.css` and `../assets/js/quiz.js`
+3. Notes go in `notes/sectionNN.html`
+4. `index.html` gets a new card linking to `quizzes/sectionNN.html` — the question count on the card is
+   counted from the quiz file at page load, so there is no number to keep in sync
+5. Push to this repo — GitHub Pages updates automatically within a minute or two
 
 ---
 
