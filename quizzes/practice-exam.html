@@ -21,6 +21,7 @@
 
       <p
             style="text-align:center;color:var(--muted);max-width:var(--content-w);margin:-1.5rem auto 2rem;font-size:.9rem;line-height:1.5;">
+            50 questions weighted to match the official C213 test blueprint:<br>
             51% Financial Analysis · 26% Cost Systems · 10% Controls &amp; Regulations · 7% Profit Planning (CVP) · 6%
             Budgeting
       </p>
@@ -356,14 +357,14 @@
 
                   {
                         type: 'mc',
-                        q: 'The Quick Ratio differs from the Current Ratio because it:',
-                        opts: ['Excludes inventory from current assets (using Cash + Accounts Receivable instead), since inventory is the least liquid current asset',
-                              'Excludes accounts receivable instead of inventory',
-                              'Uses total assets instead of current assets',
-                              'Ignores current liabilities entirely'],
+                        q: 'Sterling Co. wants to measure how many days, on average, it takes to collect its accounts receivable. Which ratio and formula should it use?',
+                        opts: ['Average Collection Period = Average Accounts Receivable ÷ Average Daily Sales',
+                              'Current Ratio = Current Assets ÷ Current Liabilities',
+                              'Debt-to-Equity Ratio = Total Liabilities ÷ Total Equity',
+                              'Return on Sales = Net Income ÷ Sales'],
                         correct: 0,
-                        explanation: 'The Quick Ratio is a stricter liquidity test: (Cash + Accounts Receivable) ÷ Current Liabilities. It strips out inventory because inventory must first be sold, and then collected, before it becomes cash.',
-                        mnemonic: '💡 Memory tip: "Quick" = only the assets that convert to cash quickly — inventory is too slow to make the cut.'
+                        explanation: 'Average Collection Period measures the average number of days it takes customers to pay off their outstanding receivables. It\'s one of the six ratios on the "must memorize" formula list — it is NOT provided during the PA/OA, so you need this formula committed to memory.',
+                        mnemonic: '💡 Memory tip: "Collection Period" is literally asking "how many days until we collect?" — divide the receivable balance by a daily sales figure to land on a number of days.'
                   },
 
                   {
@@ -494,11 +495,11 @@
                         type: 'ord',
                         q: 'Place the five steps of the Activity-Based Costing (ABC) method in the correct order.',
                         items: [
-                              { text: 'Step 1: Identify activities that generate overhead costs (e.g., machine setup, inspections)', order: 0 },
-                              { text: 'Step 2: Create cost pools — accumulate overhead costs so each pool represents one activity', order: 1 },
-                              { text: 'Step 3: Identify cost drivers — a measurable quantity that captures how much each activity is used', order: 2 },
-                              { text: 'Step 4: Allocate costs to products using Cost Driver Rate × Activity Usage by Product', order: 3 },
-                              { text: 'Step 5: Use the information to set prices, identify unprofitable products, and improve processes', order: 4 }
+                              { text: 'Identify activities that generate overhead costs (e.g., machine setup, inspections)', order: 0 },
+                              { text: 'Create cost pools — accumulate overhead costs so each pool represents one activity', order: 1 },
+                              { text: 'Identify cost drivers — a measurable quantity that captures how much each activity is used', order: 2 },
+                              { text: 'Allocate costs to products using Cost Driver Rate × Activity Usage by Product', order: 3 },
+                              { text: 'Use the information to set prices, identify unprofitable products, and improve processes', order: 4 }
                         ],
                         explanation: 'ABC moves from identifying WHY overhead is generated, to pooling those costs, to measuring usage, to assigning cost, and finally to acting on the more accurate information.',
                         mnemonic: '💡 Memory tip: "Identify, Pool, Drive, Allocate, Use" — you can\'t allocate a cost pool before you\'ve identified the activity and its driver.'
