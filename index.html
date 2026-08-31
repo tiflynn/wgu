@@ -132,6 +132,8 @@
   @media(min-width:900px){
     .hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
     .hub-card-title{font-size:1.65rem}
+    /* The lone practice-exam card spans both columns instead of leaving a gap */
+    .hub-card-wide{grid-column:1 / -1}
   }
 </style>
 </head>
@@ -308,6 +310,27 @@
       <div class="hub-card-meta">
         <span class="hub-tag">60 Questions</span>
         <a class="hub-notes" href="section12_notes.html" target="_blank" rel="noopener">📄 Notes</a>
+      </div>
+    </article>
+
+  </div>
+
+  <h2 class="hub-group-label">Comprehensive Review</h2>
+
+  <div class="hub-grid">
+
+    <article class="hub-card hub-card-wide">
+      <span class="hub-arrow">→</span>
+      <div class="hub-card-eyebrow">Practice Exam</div>
+      <div class="hub-card-title"><a class="hub-card-link" href="practice_exam_quiz.html">Comprehensive Practice Exam</a></div>
+      <div class="hub-card-desc">
+        A cumulative test drawn from every section and weighted to match the official C213
+        blueprint &mdash; 51% financial analysis, 26% cost systems, 10% controls &amp; regulations,
+        7% profit planning (CVP), and 6% budgeting.
+      </div>
+      <div class="hub-card-meta">
+        <span class="hub-tag">50 Questions</span>
+        <span class="hub-tag">All sections</span>
       </div>
     </article>
 

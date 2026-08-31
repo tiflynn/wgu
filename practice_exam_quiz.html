@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C213 Accounting for Decision Makers · Comprehensive Practice Exam</title>
+      <link rel="stylesheet" href="quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="index.html">← All Sections</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C213 Accounting for Decision Makers · Cumulative Review</p>
+            <h1>Comprehensive<br><span>Practice Exam</span></h1>
+      </header>
+
+      <p
+            style="text-align:center;color:var(--muted);max-width:var(--content-w);margin:-1.5rem auto 2rem;font-size:.9rem;line-height:1.5;">
+            51% Financial Analysis · 26% Cost Systems · 10% Controls &amp; Regulations · 7% Profit Planning (CVP) · 6%
+            Budgeting
+      </p>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="quiz.js"></script>
+      <script>
+            const questions = [
+
+                  /* ══════════════════════════════════════════════════════════════
+                     FINANCIAL ANALYSIS — 51% (26 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'mc',
+                        q: 'Accounting is best defined as:',
+                        opts: ['The broad process of identifying, recording, analyzing, and communicating a company\'s financial information',
+                              'The systematic recording of transactions into journals, and nothing more',
+                              'The process of externally auditing a company\'s financial statements',
+                              'A government function limited to tax collection'],
+                        correct: 0,
+                        explanation: 'Accounting captures a company\'s day-to-day financial activity and organizes it into summary reports (income statement, balance sheet, statement of cash flows) used to evaluate financial status and performance.',
+                        mnemonic: '💡 Memory tip: Accounting = the big picture; bookkeeping = the data entry underneath it.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'How does bookkeeping relate to accounting?',
+                        opts: ['Bookkeeping is a subset of accounting — it\'s the systematic recording of transactions, while accounting also analyzes and reports on that data',
+                              'Bookkeeping and accounting are two words for the exact same activity',
+                              'Bookkeeping is the analysis phase, while accounting is only the recording phase',
+                              'Bookkeeping replaces the need for financial statements'],
+                        correct: 0,
+                        explanation: 'Bookkeeping is the recording phase (journals, account balances). Accounting builds on that raw data — making adjustments, preparing statements, and interpreting results for decision-making.',
+                        mnemonic: '💡 Memory tip: Bookkeeping feeds accounting the raw ingredients; accounting cooks the meal.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place the five steps of the Decision Cycle in the correct order.',
+                        items: [
+                              { text: 'Gather Information (raw, unorganized data — sales, costs, market conditions)', order: 0 },
+                              { text: 'Prepare Financial Statements (organize data using GAAP into income statement, balance sheet, statement of cash flows)', order: 1 },
+                              { text: 'Analyze Financial Statements (look for trends, ratios, strengths/weaknesses — "what does this mean?")', order: 2 },
+                              { text: 'Make the Decision (choose a course of action, e.g., expand, cut costs, seek financing)', order: 3 },
+                              { text: 'Implement the Decision (put the choice into practice; results feed the next cycle)', order: 4 }
+                        ],
+                        explanation: 'The Decision Cycle moves from raw data → formal statements → interpretation → choice → action. Analysis always comes after the statements are prepared, and implementation is always last.',
+                        mnemonic: '💡 Memory tip: "Gather, Prepare, Analyze, Decide, Implement" — data before reports, reports before meaning, meaning before action.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The core balance sheet identity is:',
+                        opts: ['Assets = Liabilities + Owners\' Equity',
+                              'Assets = Liabilities − Owners\' Equity',
+                              'Assets + Liabilities = Owners\' Equity',
+                              'Revenues − Expenses = Assets'],
+                        correct: 0,
+                        explanation: 'Liabilities and owners\' equity are the sources that fund the purchase of assets. Assets must always equal the total of what\'s owed to creditors plus what belongs to owners.',
+                        mnemonic: '💡 Memory tip: "What you have = who paid for it." Assets on one side, the two funding sources on the other.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'The balance sheet reports a company\'s financial position as of a specific point in time — a snapshot — rather than over a period.',
+                        opts: ['True', 'False'],
+                        correct: 0,
+                        explanation: 'True. The balance sheet is always labeled "As of" a specific date, showing assets, liabilities, and equity at that instant. The income statement and cash flow statement, by contrast, cover a period of time.',
+                        mnemonic: '💡 Memory tip: Balance sheet = photograph; income statement = video clip.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'On the income statement, net income is calculated as:',
+                        opts: ['Revenues − Expenses',
+                              'Assets − Liabilities',
+                              'Assets − Expenses',
+                              'Liabilities − Revenues'],
+                        correct: 0,
+                        explanation: 'Net income is the accountant\'s single-number summary of performance for a period: the excess of revenues over expenses (or a net loss if expenses exceed revenues).',
+                        mnemonic: '💡 Memory tip: Net income answers "did we earn a profit?" — that\'s a Revenue-vs-Expense question, not an Asset-vs-Liability one.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is the primary purpose of the Statement of Cash Flows?',
+                        opts: ['To explain the change in a company\'s cash balance between two balance-sheet dates, by classifying all cash transactions into operating, investing, and financing activities',
+                              'To report assets, liabilities, and equity at a single point in time',
+                              'To show revenues and expenses on an accrual basis',
+                              'To disclose accounting policy choices such as depreciation method'],
+                        correct: 0,
+                        explanation: 'Unlike the accrual-based income statement, the cash flow statement tracks only actual cash inflows and outflows, sorted into the three required categories: operating, investing, and financing.',
+                        mnemonic: '💡 Memory tip: If the question is about actual cash moving in or out, it\'s the Statement of Cash Flows — not the income statement.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which method for reporting the operating section of the Statement of Cash Flows is used in C213?',
+                        opts: ['The Direct Method — reports major classes of cash receipts and payments directly, without starting from net income',
+                              'The Indirect Method — starts with net income and adjusts for non-cash items and working-capital changes',
+                              'The Accrual Method',
+                              'The Cost Method'],
+                        correct: 0,
+                        explanation: 'C213 uses the Direct Method, which mirrors a cash-basis income statement (cash from customers, cash paid to suppliers/employees, etc.). The Indirect Method — reconciling net income to operating cash flow — is covered in C214.',
+                        mnemonic: '💡 Memory tip: Direct method = "direct from the cash register," no detour through net income.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Match each accounting concept or qualitative characteristic to its definition.',
+                        cols: ['Articulation', 'Comparability', 'Conservatism', 'Materiality', 'Relevance'],
+                        items: [
+                              { text: 'Figures on one financial statement explain and connect to changes on another (e.g., net income increases retained earnings)', answer: 'Articulation' },
+                              { text: 'Information is more useful when it can be measured against a benchmark, a prior period, or another company', answer: 'Comparability' },
+                              { text: 'When faced with uncertainty between two reporting options, choose the one with the least favorable impact on income or assets', answer: 'Conservatism' },
+                              { text: 'Whether an item is large enough to influence the decisions made by users of the financial statements', answer: 'Materiality' },
+                              { text: 'Information is useful if it can affect a decision — by helping predict future outcomes or confirm past ones', answer: 'Relevance' }
+                        ],
+                        explanation: 'These five concepts show up constantly as "exam cues": statement-to-statement connections point to Articulation, comparisons point to Comparability, caution under uncertainty points to Conservatism, "big enough to matter" points to Materiality, and "affects a decision" points to Relevance.',
+                        mnemonic: '💡 Memory tip: Articulation links statements, Comparability links companies/periods, Conservatism leans cautious, Materiality asks "does size matter," Relevance asks "does it matter to a decision."'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Under the Cost (Historical Cost) Principle, an asset is recorded on the balance sheet at:',
+                        opts: ['Its exchange price on the date of the transaction — not adjusted upward for current market value',
+                              'Its current market value, updated every reporting period',
+                              'Management\'s best estimate of future resale value',
+                              'Replacement cost at year-end'],
+                        correct: 0,
+                        explanation: 'The Cost Principle records what was actually paid on the transaction date. Assets are not revalued to reflect current worth under this principle.',
+                        mnemonic: '💡 Memory tip: Cost Principle = "what you paid," not "what it\'s worth today."'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Under accrual accounting, the Revenue Recognition Principle says revenue should generally be recognized when:',
+                        opts: ['It is earned — goods or services have been delivered and payment is reasonably assured — regardless of when cash changes hands',
+                              'Cash is received from the customer',
+                              'A purchase order is signed, even before delivery',
+                              'The company\'s fiscal year ends'],
+                        correct: 0,
+                        explanation: 'Revenue can be recognized before cash is collected (creating Accounts Receivable) or, if cash is collected before delivery, it\'s recorded as Unearned Revenue — a liability — until it\'s actually earned.',
+                        mnemonic: '💡 Memory tip: Revenue Recognition follows the work, not the wallet.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The Matching Principle requires that:',
+                        opts: ['Expenses be recorded in the same period as the revenues they helped generate',
+                              'Expenses be recorded only when cash is paid',
+                              'Revenues be delayed until all related expenses are known',
+                              'All costs be treated as period costs for simplicity'],
+                        correct: 0,
+                        explanation: 'Matching links costs to the revenue they helped produce — a sales commission is recorded when the related sale occurs, and depreciation is spread over an asset\'s useful life, aligning cost with benefit.',
+                        mnemonic: '💡 Memory tip: Matching = revenue and its related expense show up on the income statement together, in the same period.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The Going Concern assumption assumes that:',
+                        opts: ['The company will continue operating into the foreseeable future, so assets are not valued at fire-sale liquidation prices',
+                              'The company is about to be liquidated',
+                              'Only cash transactions should be recorded',
+                              'Transactions must occur between related parties'],
+                        correct: 0,
+                        explanation: 'Going Concern lets accountants report assets at their normal cost/value rather than what they\'d fetch in a forced, fire-sale liquidation — because the business is assumed to keep operating.',
+                        mnemonic: '💡 Memory tip: Going Concern = "the lights stay on." No fire-sale pricing needed.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'Per this course\'s textbook, extraordinary items are still reported as a distinct "below the line" category on the income statement — net of tax, after Income from Continuing Operations — which differs from current post-2015 GAAP treatment.',
+                        opts: ['True', 'False'],
+                        correct: 0,
+                        explanation: 'True. Current GAAP eliminated the separate extraordinary-items category after 2015, but the C213 textbook retains it as its own line. Study to what the course tests, since the exam follows the textbook\'s structure.',
+                        mnemonic: '💡 Memory tip: When the textbook and current real-world GAAP disagree, study for the test the textbook gives you.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'When a company earns net income during the year, that amount flows into which balance sheet account — illustrating the concept of articulation between the income statement and balance sheet?',
+                        opts: ['Retained Earnings, within Owners\' Equity',
+                              'Accounts Receivable',
+                              'Cash, within Current Assets',
+                              'Accounts Payable'],
+                        correct: 0,
+                        explanation: 'Net income increases Retained Earnings (and a net loss decreases it). This is the classic example of articulation: a number on the income statement directly changes a balance on the balance sheet.',
+                        mnemonic: '💡 Memory tip: Profits get "retained" in Retained Earnings — that\'s the bridge between the two statements.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are EXTERNAL users of financial statements? Select all that apply.',
+                        opts: ['Lenders / Creditors',
+                              'Investors',
+                              'Employees',
+                              'Suppliers and Customers',
+                              'Government Agencies',
+                              'Company Management'],
+                        correctSet: [0, 1, 2, 3, 4],
+                        explanation: 'Lenders, investors, employees, suppliers/customers, and government agencies are all outside the company looking in. Company management is an internal user — they run the business day-to-day and also rely on management accounting, not just the external financial statements.',
+                        mnemonic: '💡 Memory tip: If they work for the company and help run it, they\'re internal. Everyone else evaluating the company from outside is external.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which organization has ultimate LEGAL authority to regulate financial reporting for U.S. publicly traded companies, even though it delegates day-to-day standard-setting to another body?',
+                        opts: ['The SEC (Securities and Exchange Commission)',
+                              'The FASB (Financial Accounting Standards Board)',
+                              'The IASB (International Accounting Standards Board)',
+                              'The AICPA (American Institute of CPAs)'],
+                        correct: 0,
+                        explanation: 'The SEC has legal, enforceable authority over public company reporting — it can suspend trading, de-list securities, or bar brokers. It delegates standard-setting to the FASB but retains ultimate authority to intervene.',
+                        mnemonic: '💡 Memory tip: SEC = the boss with legal teeth; FASB = the technical experts it hires to write the rulebook.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The Financial Accounting Standards Board (FASB) is best described as:',
+                        opts: ['A private-sector board that develops U.S. GAAP under authority delegated by the SEC, with no legal enforcement power of its own',
+                              'A U.S. government agency with legal enforcement power',
+                              'The body that develops IFRS for use outside the U.S.',
+                              'The organization that licenses CPAs'],
+                        correct: 0,
+                        explanation: 'FASB is NOT a government agency and cannot itself enforce anything — its authority to set GAAP for public companies flows from the SEC\'s delegation.',
+                        mnemonic: '💡 Memory tip: FASB writes the rules; the SEC is the one who can actually make you follow them.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The International Accounting Standards Board (IASB):',
+                        opts: ['Develops International Financial Reporting Standards (IFRS) to improve global comparability, but has no enforcement power',
+                              'Sets U.S. GAAP under SEC delegation',
+                              'Licenses CPAs in the United States',
+                              'Regulates state and local government accounting'],
+                        correct: 0,
+                        explanation: 'The IASB is the global counterpart to the FASB — it develops IFRS, used by many countries outside the U.S. — but like the FASB, it has no legal power to force compliance.',
+                        mnemonic: '💡 Memory tip: FASB : GAAP :: IASB : IFRS — same relationship, different letters, different geography.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The American Institute of Certified Public Accountants (AICPA):',
+                        opts: ['Writes and grades the CPA exam and sets ethical standards for CPAs, but does NOT itself license CPAs',
+                              'Licenses CPAs directly in every U.S. state',
+                              'Is a U.S. government regulatory agency',
+                              'Sets GAAP for public companies'],
+                        correct: 0,
+                        explanation: 'The AICPA is the professional organization representing CPAs — it writes/grades the exam and provides continuing education, but actual CPA licensure comes from each state\'s Board of Accountancy.',
+                        mnemonic: '💡 Memory tip: AICPA grades the test; the STATE hands out the license.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The Governmental Accounting Standards Board (GASB) sets accounting standards for:',
+                        opts: ['State and local governments',
+                              'Publicly traded corporations',
+                              'Private, non-public U.S. companies',
+                              'International companies reporting under IFRS'],
+                        correct: 0,
+                        explanation: 'GASB is separate from the FASB and focuses on public accountability for state and local governments, rather than profit-focused private-sector reporting.',
+                        mnemonic: '💡 Memory tip: GASB = "Government" Accounting Standards Board — the clue is right in the name.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Foster Co. has current assets of $180,000 and current liabilities of $90,000. What is its current ratio, and what does that generally suggest?',
+                        opts: ['2.0 — a strong ability to pay short-term bills, though possibly a sign of excess idle assets',
+                              '0.5 — a liquidity risk, meaning the firm may struggle to pay short-term bills',
+                              '2.0 — a sign of dangerously high long-term debt',
+                              '$90,000 — the dollar cushion the firm has, not a true ratio'],
+                        correct: 0,
+                        explanation: 'Current Ratio = Current Assets ÷ Current Liabilities = $180,000 ÷ $90,000 = 2.0. A high current ratio signals strong short-term liquidity, though an unusually high number can also mean the firm is sitting on more cash/assets than it needs.',
+                        mnemonic: '💡 Memory tip: Current Ratio just compares "what\'s coming due soon that I owe" to "what I have that turns into cash soon."'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The Quick Ratio differs from the Current Ratio because it:',
+                        opts: ['Excludes inventory from current assets (using Cash + Accounts Receivable instead), since inventory is the least liquid current asset',
+                              'Excludes accounts receivable instead of inventory',
+                              'Uses total assets instead of current assets',
+                              'Ignores current liabilities entirely'],
+                        correct: 0,
+                        explanation: 'The Quick Ratio is a stricter liquidity test: (Cash + Accounts Receivable) ÷ Current Liabilities. It strips out inventory because inventory must first be sold, and then collected, before it becomes cash.',
+                        mnemonic: '💡 Memory tip: "Quick" = only the assets that convert to cash quickly — inventory is too slow to make the cut.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A HIGH Debt-to-Equity ratio generally indicates:',
+                        opts: ['Aggressive use of debt financing (leverage), which increases financial risk',
+                              'A very conservative capital structure with little debt',
+                              'Strong short-term liquidity',
+                              'High profitability relative to sales'],
+                        correct: 0,
+                        explanation: 'Debt-to-Equity = Total Liabilities ÷ Total Equity. A high ratio means the company is funding more of its assets with borrowed money relative to owner funds — riskier, though potentially more rewarding if things go well.',
+                        mnemonic: '💡 Memory tip: More debt relative to equity = more leverage = more risk, for better or worse.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The DuPont formula breaks Return on Equity (ROE) into three components. Those three components are:',
+                        opts: ['Profit Margin (Net Income/Sales) × Asset Turnover (Sales/Total Assets) × Equity Multiplier (Total Assets/Equity)',
+                              'Current Ratio × Quick Ratio × Debt Ratio',
+                              'Gross Profit × Operating Income × Net Income',
+                              'Revenue × Expenses × Net Income'],
+                        correct: 0,
+                        explanation: 'DuPont decomposes ROE into profitability (profit margin), efficiency (asset turnover), and financial leverage (equity multiplier) — so two firms with the same ROE can be understood as achieving it for very different reasons.',
+                        mnemonic: '💡 Memory tip: DuPont answers "profitable, efficient, or leveraged — which one is driving my ROE?"'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which type of income statement separates operating from non-operating activity and provides subtotals such as Gross Profit, Operating Income, and Earnings Before Taxes?',
+                        opts: ['The Multiple-Step Income Statement',
+                              'The Single-Step Income Statement',
+                              'The Common-Size Income Statement',
+                              'The Comprehensive Income Statement'],
+                        correct: 0,
+                        explanation: 'The Multiple-Step format is the "exam favorite" because it\'s more detailed and useful for analysis. The Single-Step format simply combines all revenues/gains and all expenses/losses into one calculation.',
+                        mnemonic: '💡 Memory tip: More steps = more subtotals = more insight. Multiple-step is the detailed version.'
+                  },
+
+                  /* ══════════════════════════════════════════════════════════════
+                     COST SYSTEMS — 26% (13 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'mc',
+                        q: 'Product costs are best described as:',
+                        opts: ['All costs used to produce a good or service (direct materials, direct labor, manufacturing overhead), capitalized as inventory and expensed as COGS only when the product sells',
+                              'Costs expensed immediately in the period incurred, regardless of production',
+                              'Only costs that are directly traceable to a specific unit',
+                              'Costs incurred exclusively by service companies'],
+                        correct: 0,
+                        explanation: 'Product costs are inventoried first, expensed later (as COGS, once sold). This is the key distinction from period costs, which never touch inventory.',
+                        mnemonic: '💡 Memory tip: Product costs ride along "inside the box" until the box is sold.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Period costs are best described as:',
+                        opts: ['Costs not used to produce a good or service — they are expensed immediately in the period incurred and never inventoried (e.g., office rent, sales salaries, advertising)',
+                              'Direct materials and direct labor only',
+                              'Costs that only exist in manufacturing companies',
+                              'Costs capitalized as inventory and expensed later as COGS'],
+                        correct: 0,
+                        explanation: 'Period costs appear directly on the income statement in the period they occur — they never sit in inventory the way product costs do.',
+                        mnemonic: '💡 Memory tip: Period costs hit the income statement the moment they happen — no detour through inventory.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Indirect labor — such as wages paid to factory maintenance and cleanup staff — should be classified as:',
+                        opts: ['A product cost, specifically manufacturing overhead, because the classification depends on WHERE the cost occurs (inside the factory), not whether it\'s direct or indirect',
+                              'A period cost, because it cannot be directly traced to specific units produced',
+                              'Neither a product cost nor a period cost',
+                              'Always a variable cost, regardless of location'],
+                        correct: 0,
+                        explanation: 'This is a common trap. Product vs. period cost is determined by LOCATION — inside the factory (production) vs. outside the factory (selling/admin) — not by whether the cost is direct or indirect. Since indirect labor occurs inside the factory, it\'s manufacturing overhead, which is a product cost.',
+                        mnemonic: '💡 Memory tip: "Inside the factory walls" = product cost, direct or indirect. Direct-vs-indirect is a separate question from product-vs-period.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Job Order Costing is most appropriate when:',
+                        opts: ['Products or services are unique/customized and costs can be clearly traced to a specific job (e.g., construction, custom furniture, consulting)',
+                              'Products are mass-produced, homogeneous, and identical unit-to-unit',
+                              'A company has no manufacturing overhead at all',
+                              'A company only sells services with no traceable costs'],
+                        correct: 0,
+                        explanation: 'Job costing tracks direct materials, direct labor, and applied overhead separately for each individual, custom job — each job gets its own Job Cost Sheet.',
+                        mnemonic: '💡 Memory tip: Job costing = one cost sheet per custom job, like a tailor measuring one customer at a time.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Process (Product) Costing is most appropriate when:',
+                        opts: ['Products are mass-produced and essentially identical, with costs accumulated by department and averaged over total units (e.g., oil refining, food manufacturing)',
+                              'Every unit produced is unique and customized',
+                              'The company provides consulting services only',
+                              'Costs cannot be accumulated by department'],
+                        correct: 0,
+                        explanation: 'Because units are homogeneous, process costing averages total department costs over total units produced (Total Department Costs ÷ Total Units = Cost per Unit) rather than tracking each unit separately.',
+                        mnemonic: '💡 Memory tip: Process costing = one big batch, one average cost — no reason to track units individually when they\'re all the same.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The Predetermined Overhead Rate (POHR) is calculated as:',
+                        opts: ['Estimated Total Manufacturing Overhead ÷ Estimated Total Allocation Base (e.g., direct labor hours, machine hours)',
+                              'Actual Total Manufacturing Overhead ÷ Actual Units Produced',
+                              'Total Manufacturing Costs ÷ Total Direct Labor Cost',
+                              'Estimated Total Sales ÷ Estimated Total Overhead'],
+                        correct: 0,
+                        explanation: 'The POHR is set BEFORE the period begins, using estimates, so overhead can be applied to jobs or departments throughout the period rather than waiting until actual overhead is known at year-end.',
+                        mnemonic: '💡 Memory tip: "Pre" in Predetermined means it\'s built from estimates set in advance, not actuals after the fact.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A key weakness of Traditional Costing (a single overhead rate based on one cost driver) is that it tends to:',
+                        opts: ['Over-cost simple, high-volume products and under-cost complex, low-volume products, since it assumes all products consume overhead the same way',
+                              'Under-cost all products equally',
+                              'Only work for service companies',
+                              'Eliminate the need for any allocation base'],
+                        correct: 0,
+                        explanation: 'Traditional costing treats all overhead as one pool driven by a single factor. This distorts costs when products actually consume overhead resources very differently — which is exactly the problem Activity-Based Costing (ABC) was designed to fix.',
+                        mnemonic: '💡 Memory tip: One rate for everyone means simple products quietly subsidize complex ones.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place the five steps of the Activity-Based Costing (ABC) method in the correct order.',
+                        items: [
+                              { text: 'Step 1: Identify activities that generate overhead costs (e.g., machine setup, inspections)', order: 0 },
+                              { text: 'Step 2: Create cost pools — accumulate overhead costs so each pool represents one activity', order: 1 },
+                              { text: 'Step 3: Identify cost drivers — a measurable quantity that captures how much each activity is used', order: 2 },
+                              { text: 'Step 4: Allocate costs to products using Cost Driver Rate × Activity Usage by Product', order: 3 },
+                              { text: 'Step 5: Use the information to set prices, identify unprofitable products, and improve processes', order: 4 }
+                        ],
+                        explanation: 'ABC moves from identifying WHY overhead is generated, to pooling those costs, to measuring usage, to assigning cost, and finally to acting on the more accurate information.',
+                        mnemonic: '💡 Memory tip: "Identify, Pool, Drive, Allocate, Use" — you can\'t allocate a cost pool before you\'ve identified the activity and its driver.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A city is assigning the cost of police officers needed for crowd control during a marathon. What is the best cost driver?',
+                        opts: ['Number of race participants and spectators',
+                              'Hours the race director spends organizing the event',
+                              'The race\'s registration fee',
+                              'The cost of liability insurance for the race'],
+                        correct: 0,
+                        explanation: 'The best cost driver has a cause-and-effect relationship with the activity: the larger the crowd, the more police officers are needed. Participants/spectators directly drive the need for the cost — the other options don\'t.',
+                        mnemonic: '💡 Memory tip: Ask "what actually causes this cost to go up or down?" — that\'s your cost driver.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Match each overhead cost example to its ABC activity level.',
+                        cols: ['Unit-Level', 'Batch-Level', 'Product-Line', 'Facility-Level'],
+                        items: [
+                              { text: 'Direct materials usage and machine time consumed per individual unit produced', answer: 'Unit-Level' },
+                              { text: 'A machine setup performed once per production run, regardless of how many units are in that run', answer: 'Batch-Level' },
+                              { text: 'Engineering hours spent designing and testing one specific product', answer: 'Product-Line' },
+                              { text: 'Factory rent and the plant manager\'s salary', answer: 'Facility-Level' }
+                        ],
+                        explanation: 'Unit-level costs scale with each unit made; batch-level costs scale with the number of batches (not units); product-line costs support a product\'s existence regardless of volume; facility-level costs support the whole plant and exist even if nothing is produced.',
+                        mnemonic: '💡 Memory tip: Ask "does this cost repeat per unit, per batch, per product line, or does it exist no matter what?" — that answers the activity level.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Under Activity-Based Costing, which type of product typically shows the HIGHEST overhead cost per unit?',
+                        opts: ['Low-volume, unique/customized products',
+                              'High-volume, standardized products',
+                              'Products that use no overhead at all',
+                              'All products show identical overhead per unit under ABC'],
+                        correct: 0,
+                        explanation: 'Because ABC assigns overhead based on actual activity consumption rather than one blanket rate, low-volume unique products — which often require more setups, inspections, and specialized handling per unit — end up carrying the highest overhead per unit. High-volume standardized products spread their overhead-driving activities over many more units, so they carry the lowest.',
+                        mnemonic: '💡 Memory tip: Small, custom batches eat up disproportionate setup/inspection time per unit — ABC exposes that cost instead of hiding it.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Beacon Manufacturing began the month with $8,000 in Work in Process (WIP) inventory. During the month it incurred $52,000 in total manufacturing costs (direct materials, direct labor, and manufacturing overhead). Ending WIP was $6,000. What was the Cost of Goods Manufactured (COGM)?',
+                        opts: ['$54,000',
+                              '$60,000',
+                              '$46,000',
+                              '$52,000'],
+                        correct: 0,
+                        explanation: 'COGM = Beginning WIP + Total Manufacturing Costs − Ending WIP = $8,000 + $52,000 − $6,000 = $54,000. Costs still sitting in ending WIP haven\'t finished production yet, so they aren\'t part of this period\'s COGM.',
+                        mnemonic: '💡 Memory tip: Same roll-forward logic as inventory everywhere — beginning balance plus what came in, minus what\'s still left, equals what moved out.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which sequence correctly shows how costs flow through a manufacturing company\'s inventory accounts?',
+                        opts: ['Raw Materials → Work in Process → Finished Goods → Cost of Goods Sold',
+                              'Finished Goods → Work in Process → Raw Materials → Cost of Goods Sold',
+                              'Work in Process → Cost of Goods Sold → Raw Materials → Finished Goods',
+                              'Raw Materials → Cost of Goods Sold → Finished Goods → Work in Process'],
+                        correct: 0,
+                        explanation: 'Costs move in one direction: materials sit in Raw Materials until pulled into production (WIP); once production is complete they move to Finished Goods; only once sold do they become Cost of Goods Sold on the income statement.',
+                        mnemonic: '💡 Memory tip: "Raw, In-Process, Finished, Sold" — costs march forward through the factory, never backward.'
+                  },
+
+                  /* ══════════════════════════════════════════════════════════════
+                     CONTROLS & REGULATIONS — 10% (5 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'mc',
+                        q: 'Which of the following is a requirement of the Sarbanes-Oxley Act (SOX)?',
+                        opts: ['Personal certification by the CEO and CFO of the accuracy of public financial statements',
+                              'Mandatory quarterly re-election of the CFO by shareholders',
+                              'Annual personal financial audits of every employee',
+                              'Elimination of the external audit requirement for public companies'],
+                        correct: 0,
+                        explanation: 'SOX was passed in response to major accounting scandals (Enron, WorldCom) and increased federal oversight: it requires CEO/CFO certification, stronger internal controls, independent audit committees, and a reviewed code of ethics.',
+                        mnemonic: '💡 Memory tip: SOX makes the people at the top personally sign their name to the numbers.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The Public Company Accounting Oversight Board (PCAOB), created by SOX, is best described as an organization that:',
+                        opts: ['Oversees and inspects the audit firms that audit public companies, regardless of state CPA licensure',
+                              'Sets GAAP for private-sector U.S. companies',
+                              'Regulates companies directly, not their auditors',
+                              'Licenses individual CPAs in each state'],
+                        correct: 0,
+                        explanation: 'The PCAOB regulates auditors, not companies directly, and its authority applies only to firms that audit public companies — it determines who is allowed to do that work and inspects audit quality.',
+                        mnemonic: '💡 Memory tip: PCAOB watches the watchdogs — it regulates the auditors, not the companies being audited.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which of the following best illustrates the "meeting external expectations" motivation for earnings management, per course materials?',
+                        opts: ['A manager adjusts an estimate so the company reports a net profit instead of a net loss to outside readers — even without a specific named analyst forecast to beat',
+                              'A manager only manages earnings when a specific stock analyst has issued a specific published forecast',
+                              'A manager reports results with absolutely no adjustments or estimates at all',
+                              'A manager discloses every accounting estimate change in a footnote, in full detail'],
+                        correct: 0,
+                        explanation: '"Meeting external expectations" does not require a named analyst figure or a specific stock-price trigger. Simply turning a net loss into a net profit for outside readers — investors, lenders, credit agencies in general — qualifies as this motivation.',
+                        mnemonic: '💡 Memory tip: The audience is "outsiders in general," not one specific analyst with a specific number.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Segregation of duties, the most important internal control, is built around three key functions that should never be controlled by one person for the same transaction. Those three functions are:',
+                        opts: ['Authorization (approving), Recording (entering into the books), and Custody (physically handling the asset)',
+                              'Hiring, Training, and Firing',
+                              'Budgeting, Forecasting, and Reporting',
+                              'Sales, Marketing, and Production'],
+                        correct: 0,
+                        explanation: 'Spreading authorization, recording, and custody across different people means committing fraud and hiding it would require collusion between multiple employees — much harder to pull off than if one person controls all three.',
+                        mnemonic: '💡 Memory tip: "Approve it, Record it, Hold it" — one person should never do all three for the same transaction.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'According to the IMA\'s Code of Ethical Professional Practice, "Objectivity/Credibility" for a management accountant means:',
+                        opts: ['Communicating information fairly and objectively, disclosing all relevant information, and avoiding bias in reporting and analysis',
+                              'Keeping all company data secret from everyone, including management',
+                              'Maintaining technical training and staying current in the field',
+                              'Never questioning a supervisor\'s instructions'],
+                        correct: 0,
+                        explanation: 'Objectivity guards specifically against biased reporting that could manipulate a decision-maker — it\'s distinct from Competence (staying trained), Confidentiality (protecting proprietary data), and Integrity (honesty in general).',
+                        mnemonic: '💡 Memory tip: Objectivity = report it straight, without spin, so the decision-maker gets the real picture.'
+                  },
+
+                  /* ══════════════════════════════════════════════════════════════
+                     PROFIT PLANNING (CVP) — 7% (3 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'mc',
+                        q: 'Lakeside Kayak Co. has total fixed costs of $45,000. Each kayak sells for $300, and the variable cost per kayak is $180. How many kayaks must Lakeside sell to break even?',
+                        opts: ['375 kayaks',
+                              '250 kayaks',
+                              '150 kayaks',
+                              '300 kayaks'],
+                        correct: 0,
+                        explanation: 'Contribution Margin per unit = $300 − $180 = $120. Break-Even Units = Fixed Costs ÷ CM per Unit = $45,000 ÷ $120 = 375 units. Remember: this formula is NOT on the official formula sheet — you must have "Fixed Costs ÷" memorized in front of the CM-per-unit line.',
+                        mnemonic: '💡 Memory tip: Break-even units = how many times the fixed-cost "hole" gets filled by each unit\'s contribution margin.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Foster Supply has sales of $500,000 and variable costs of $300,000. What is its Contribution Margin Ratio?',
+                        opts: ['40%',
+                              '60%',
+                              '30%',
+                              '50%'],
+                        correct: 0,
+                        explanation: 'Contribution Margin = Sales − Variable Costs = $500,000 − $300,000 = $200,000. Contribution Margin Ratio = CM ÷ Sales = $200,000 ÷ $500,000 = 40%. That means 40 cents of every sales dollar is available to cover fixed costs and then generate profit.',
+                        mnemonic: '💡 Memory tip: CM ratio tells you what percent of each sales dollar survives past variable costs.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Compared to a company with LOW operating leverage (low fixed costs, high variable costs), a company with HIGH operating leverage (high fixed costs, low variable costs) will:',
+                        opts: ['Experience larger losses when sales fall below the break-even point',
+                              'Never experience a loss, regardless of sales volume',
+                              'Have identical risk, since operating leverage doesn\'t affect risk',
+                              'Automatically have a lower break-even point'],
+                        correct: 0,
+                        explanation: 'Operating leverage is a measure of risk. High fixed costs mean the company is locked into paying those costs no matter what — so when volume drops below break-even, losses grow faster than they would for a company with a more variable, flexible cost structure.',
+                        mnemonic: '💡 Memory tip: High fixed costs = high stakes. Great when volume is strong, painful when it isn\'t.'
+                  },
+
+                  /* ══════════════════════════════════════════════════════════════
+                     BUDGETING — 6% (3 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'mc',
+                        q: 'Sunrise Co. has a December 31 Accounts Receivable balance of $25,000. Its collection pattern for credit sales is 40% collected in the month of sale, 50% the month after, and 10% the second month after. Based on this information ALONE, how much of the $25,000 beginning A/R balance will be collected in January?',
+                        opts: ['Cannot be determined from the information given',
+                              '$25,000 — the entire balance is collected in January',
+                              '$10,000 — 40% of the $25,000 balance',
+                              '$0 — none of a beginning balance is ever collected the next month'],
+                        correct: 0,
+                        explanation: 'This is a classic exam trap. The aging pattern (40%/50%/10%) tells you how NEW sales get collected over time — it does not tell you which months the $25,000 beginning balance originated from. Without knowing how much of that $25,000 came from November sales vs. December sales, you cannot apply the aging percentages to it. (Note: a plain beginning/ending A/R roll-forward problem solved algebraically — with NO aging pattern given — is a different situation, and that full-balance shortcut does not apply here.)',
+                        mnemonic: '💡 Memory tip: An aging % pattern only works on sales you can trace to a specific month. A lump-sum beginning balance with no month breakdown can\'t be aged.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company changes its credit terms from Net 10 to Net 30. What is the most likely effect of this change?',
+                        opts: ['The company becomes more competitive and may increase sales volume, since customers get more time to pay and face less cash pressure',
+                              'Bad debt expense automatically decreases',
+                              'Cash collections accelerate immediately',
+                              'The current ratio automatically improves as a direct result'],
+                        correct: 0,
+                        explanation: 'Longer credit terms reduce customers\' cash pressure and make the firm more attractive to do business with, which can increase sales volume — but it does this by extending, not accelerating, collections, and it doesn\'t automatically change bad debt or the current ratio on its own.',
+                        mnemonic: '💡 Memory tip: More time to pay = more attractive to buyers, but also more patience required from the seller.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which action is most likely to INCREASE a company\'s bad debt expense?',
+                        opts: ['Increasing credit limits for all customers',
+                              'Offering a 2/10, n/30 early-payment discount',
+                              'Tightening the credit approval policy',
+                              'Shortening the payment period from 60 days to 30 days'],
+                        correct: 0,
+                        explanation: 'Raising credit limits lets customers carry larger outstanding balances and take on more debt, increasing the chance some won\'t be able to pay — more credit exposure means higher expected uncollectible accounts. Early-payment discounts and a tighter credit policy both tend to REDUCE bad debt, and shortening the payment window changes collection timing, not the amount of credit extended.',
+                        mnemonic: '💡 Memory tip: More credit exposure (higher limits) = more risk of not getting paid back.'
+                  },
+
+            ];
+
+            initQuiz(questions, 'Comprehensive Practice Exam');
+      </script>
+</body>
+
+</html>
