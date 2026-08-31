@@ -116,16 +116,17 @@
 
                   {
                         type: 'ord',
-                        q: 'Place the five steps of the Decision Cycle in the correct order.',
+                        q: 'When detailed cash transaction records aren\'t available, a company must infer its Statement of Cash Flows from how the balance sheet and income statement articulate. Place these six steps in the correct order.',
                         items: [
-                              { text: 'Gather Information (raw, unorganized data — sales, costs, market conditions)', order: 0 },
-                              { text: 'Prepare Financial Statements (organize data using GAAP into income statement, balance sheet, statement of cash flows)', order: 1 },
-                              { text: 'Analyze Financial Statements (look for trends, ratios, strengths/weaknesses — "what does this mean?")', order: 2 },
-                              { text: 'Make the Decision (choose a course of action, e.g., expand, cut costs, seek financing)', order: 3 },
-                              { text: 'Implement the Decision (put the choice into practice; results feed the next cycle)', order: 4 }
+                              { text: 'Compute the change in the cash balance', order: 0 },
+                              { text: 'Operating: convert income statement accrual items to cash, line by line', order: 1 },
+                              { text: 'Investing: analyze changes in long-term assets', order: 2 },
+                              { text: 'Financing: analyze changes in debt and equity', order: 3 },
+                              { text: 'Reconcile to the computed cash change and prepare the formal statement', order: 4 },
+                              { text: 'Disclose non-cash investing and financing activities', order: 5 }
                         ],
-                        explanation: 'The Decision Cycle moves from raw data → formal statements → interpretation → choice → action. Analysis always comes after the statements are prepared, and implementation is always last.',
-                        mnemonic: '💡 Memory tip: "Gather, Prepare, Analyze, Decide, Implement" — data before reports, reports before meaning, meaning before action.'
+                        explanation: 'This six-step process works backward from the balance sheet and income statement to reconstruct the cash flow statement, since not every company keeps a detailed running log of every cash transaction. Operating comes first (tied to current assets/liabilities), then Investing (long-term assets), then Financing (debt/equity) — followed by reconciliation and disclosure.',
+                        mnemonic: '💡 Memory tip: Change first, then O-I-F in the same order they appear on the statement itself, then reconcile and disclose.'
                   },
 
                   {
@@ -175,14 +176,14 @@
 
                   {
                         type: 'mc',
-                        q: 'Which method for reporting the operating section of the Statement of Cash Flows is used in C213?',
-                        opts: ['The Direct Method — reports major classes of cash receipts and payments directly, without starting from net income',
-                              'The Indirect Method — starts with net income and adjusts for non-cash items and working-capital changes',
-                              'The Accrual Method',
-                              'The Cost Method'],
+                        q: 'Under U.S. GAAP, cash paid for interest expense is classified on the Statement of Cash Flows as:',
+                        opts: ['An Operating activity — because interest expense flows through net income, even though it relates to a financing (debt) relationship',
+                              'A Financing activity, since it relates to borrowed money',
+                              'An Investing activity',
+                              'It is excluded from the Statement of Cash Flows entirely'],
                         correct: 0,
-                        explanation: 'C213 uses the Direct Method, which mirrors a cash-basis income statement (cash from customers, cash paid to suppliers/employees, etc.). The Indirect Method — reconciling net income to operating cash flow — is covered in C214.',
-                        mnemonic: '💡 Memory tip: Direct method = "direct from the cash register," no detour through net income.'
+                        explanation: 'This is one of GAAP\'s "gotcha" rules: even though interest is tied to a debt relationship (which sounds like financing), U.S. GAAP classifies both interest paid and interest received as Operating, because both flow through net income on the income statement. Only the loan\'s principal repayment — not the interest — goes in Financing.',
+                        mnemonic: '💡 Memory tip: "Income items → Operating. Capital moves → Financing." Interest touches the income statement, so it stays in Operating.'
                   },
 
                   {
@@ -333,14 +334,14 @@
 
                   {
                         type: 'mc',
-                        q: 'The Governmental Accounting Standards Board (GASB) sets accounting standards for:',
-                        opts: ['State and local governments',
-                              'Publicly traded corporations',
-                              'Private, non-public U.S. companies',
-                              'International companies reporting under IFRS'],
+                        q: 'Which organization determines when income is taxed, but plays NO role in setting GAAP — and does not use a company\'s financial statements to calculate the tax it owes?',
+                        opts: ['The IRS (Internal Revenue Service)',
+                              'The FASB (Financial Accounting Standards Board)',
+                              'The SEC (Securities and Exchange Commission)',
+                              'The PCAOB (Public Company Accounting Oversight Board)'],
                         correct: 0,
-                        explanation: 'GASB is separate from the FASB and focuses on public accountability for state and local governments, rather than profit-focused private-sector reporting.',
-                        mnemonic: '💡 Memory tip: GASB = "Government" Accounting Standards Board — the clue is right in the name.'
+                        explanation: 'The IRS and financial reporting are two separate systems. GAAP-based financial statements exist to inform investors and creditors, not to calculate tax liability — the IRS has its own separate rules for that.',
+                        mnemonic: '💡 Memory tip: Financial statements ≠ tax returns. Don\'t let the IRS wander into a GAAP question.'
                   },
 
                   {
@@ -383,7 +384,7 @@
                         type: 'mc',
                         q: 'The DuPont formula breaks Return on Equity (ROE) into three components. Those three components are:',
                         opts: ['Profit Margin (Net Income/Sales) × Asset Turnover (Sales/Total Assets) × Equity Multiplier (Total Assets/Equity)',
-                              'Current Ratio × Quick Ratio × Debt Ratio',
+                              'Current Ratio × Asset Turnover × Debt Ratio',
                               'Gross Profit × Operating Income × Net Income',
                               'Revenue × Expenses × Net Income'],
                         correct: 0,
@@ -445,38 +446,38 @@
 
                   {
                         type: 'mc',
-                        q: 'Job Order Costing is most appropriate when:',
-                        opts: ['Products or services are unique/customized and costs can be clearly traced to a specific job (e.g., construction, custom furniture, consulting)',
-                              'Products are mass-produced, homogeneous, and identical unit-to-unit',
-                              'A company has no manufacturing overhead at all',
-                              'A company only sells services with no traceable costs'],
+                        q: 'A company is deciding whether to shut down one of its divisions. Which statement correctly distinguishes a Direct cost from an Indirect (common) cost in this decision?',
+                        opts: ['A Direct cost is specifically traceable to that division and disappears if the division is dropped; an Indirect cost (like corporate HQ overhead) benefits multiple segments and remains even after the division is dropped',
+                              'A Direct cost always remains after the division is dropped, while an Indirect cost always disappears',
+                              'Direct and Indirect costs behave identically in a shut-down decision',
+                              'Only Indirect costs are relevant to a shut-down decision'],
                         correct: 0,
-                        explanation: 'Job costing tracks direct materials, direct labor, and applied overhead separately for each individual, custom job — each job gets its own Job Cost Sheet.',
-                        mnemonic: '💡 Memory tip: Job costing = one cost sheet per custom job, like a tailor measuring one customer at a time.'
+                        explanation: 'Direct costs belong to that one segment, so they vanish when the segment does. Indirect (common/joint) costs — like corporate headquarters expense — support multiple segments at once, so they stick around even after one segment is gone. Dropping a segment doesn\'t save you its share of common costs, only its direct costs.',
+                        mnemonic: '💡 Memory tip: Direct costs live and die with the segment. Indirect costs were never really "theirs" to begin with.'
                   },
 
                   {
                         type: 'mc',
-                        q: 'Process (Product) Costing is most appropriate when:',
-                        opts: ['Products are mass-produced and essentially identical, with costs accumulated by department and averaged over total units (e.g., oil refining, food manufacturing)',
-                              'Every unit produced is unique and customized',
-                              'The company provides consulting services only',
-                              'Costs cannot be accumulated by department'],
+                        q: 'When deciding whether to take a specific business action (such as accepting a special order or dropping a product line), how should a Sunk cost be treated?',
+                        opts: ['It should be ignored — a sunk cost was incurred in the past and cannot be changed by any decision made now',
+                              'It should always be added to the cost of the new decision',
+                              'It should be treated the same as a Differential cost',
+                              'It should be subtracted from any future revenue'],
                         correct: 0,
-                        explanation: 'Because units are homogeneous, process costing averages total department costs over total units produced (Total Department Costs ÷ Total Units = Cost per Unit) rather than tracking each unit separately.',
-                        mnemonic: '💡 Memory tip: Process costing = one big batch, one average cost — no reason to track units individually when they\'re all the same.'
+                        explanation: 'Sunk costs are past costs no future decision can undo — "spilled milk." Only Differential (incremental/relevant) costs — the ones that actually change depending on which choice you make — belong in the decision. It\'s psychologically hard to ignore money already spent, but rationally it\'s irrelevant to what happens next.',
+                        mnemonic: '💡 Memory tip: Sunk costs are already spent — no decision today un-spends them, so leave them out of the math.'
                   },
 
                   {
                         type: 'mc',
-                        q: 'The Predetermined Overhead Rate (POHR) is calculated as:',
-                        opts: ['Estimated Total Manufacturing Overhead ÷ Estimated Total Allocation Base (e.g., direct labor hours, machine hours)',
-                              'Actual Total Manufacturing Overhead ÷ Actual Units Produced',
-                              'Total Manufacturing Costs ÷ Total Direct Labor Cost',
-                              'Estimated Total Sales ÷ Estimated Total Overhead'],
+                        q: 'In Activity-Based Costing, the overhead rate for a specific cost pool is calculated as:',
+                        opts: ['Cost Pool ÷ Total Cost Driver Events (the combined total across every product that uses that activity)',
+                              'Cost Pool ÷ Total Units Produced, regardless of activity',
+                              'Total Overhead ÷ Number of Products',
+                              'Cost Driver ÷ Cost Pool'],
                         correct: 0,
-                        explanation: 'The POHR is set BEFORE the period begins, using estimates, so overhead can be applied to jobs or departments throughout the period rather than waiting until actual overhead is known at year-end.',
-                        mnemonic: '💡 Memory tip: "Pre" in Predetermined means it\'s built from estimates set in advance, not actuals after the fact.'
+                        explanation: 'The ABC Activity Rate is the workhorse formula behind every ABC calculation: divide each cost pool by the combined total driver events across every product that uses that activity — not just one product\'s share — to get a rate per unit of driver activity.',
+                        mnemonic: '💡 Memory tip: Rate = Pool ÷ Driver. Always the COMBINED driver total, never just one product\'s slice of it.'
                   },
 
                   {
@@ -507,14 +508,14 @@
 
                   {
                         type: 'mc',
-                        q: 'A city is assigning the cost of police officers needed for crowd control during a marathon. What is the best cost driver?',
-                        opts: ['Number of race participants and spectators',
-                              'Hours the race director spends organizing the event',
-                              'The race\'s registration fee',
-                              'The cost of liability insurance for the race'],
+                        q: 'New York City spends money on landscaping and maintenance to keep Central Park open to the public, rather than leasing the land for billions of dollars in commercial development. How should these two costs be classified?',
+                        opts: ['Landscaping/maintenance is an Out-of-pocket cost (actual cash spent); the forgone commercial rent is an Opportunity cost (a real economic cost, even though no cash changes hands)',
+                              'Both are Out-of-pocket costs',
+                              'Both are Opportunity costs',
+                              'The forgone rent isn\'t a real cost at all, since no cash is paid'],
                         correct: 0,
-                        explanation: 'The best cost driver has a cause-and-effect relationship with the activity: the larger the crowd, the more police officers are needed. Participants/spectators directly drive the need for the cost — the other options don\'t.',
-                        mnemonic: '💡 Memory tip: Ask "what actually causes this cost to go up or down?" — that\'s your cost driver.'
+                        explanation: 'Out-of-pocket costs are actual cash outlays — landscaping and mowing are real bills the city pays. Opportunity cost is the benefit given up by not choosing the alternative — here, the billions in rent NYC forgoes by not leasing the land commercially. It\'s a real economic cost even though no check gets written for it, which is exactly why it\'s easy to overlook.',
+                        mnemonic: '💡 Memory tip: If cash left your hand, it\'s out-of-pocket. If cash you COULD have had never showed up, it\'s opportunity cost — just as real, just invisible.'
                   },
 
                   {
@@ -545,26 +546,26 @@
 
                   {
                         type: 'mc',
-                        q: 'Beacon Manufacturing began the month with $8,000 in Work in Process (WIP) inventory. During the month it incurred $52,000 in total manufacturing costs (direct materials, direct labor, and manufacturing overhead). Ending WIP was $6,000. What was the Cost of Goods Manufactured (COGM)?',
-                        opts: ['$54,000',
-                              '$60,000',
-                              '$46,000',
-                              '$52,000'],
+                        q: 'Harbor Co. has two products sharing a batch-level overhead cost pool of $450,000. Product A requires 15 batches and Product B requires 45 batches this period. What is the batch-level overhead rate per batch?',
+                        opts: ['$7,500 per batch',
+                              '$30,000 per batch',
+                              '$10,000 per batch',
+                              '$4,500 per batch'],
                         correct: 0,
-                        explanation: 'COGM = Beginning WIP + Total Manufacturing Costs − Ending WIP = $8,000 + $52,000 − $6,000 = $54,000. Costs still sitting in ending WIP haven\'t finished production yet, so they aren\'t part of this period\'s COGM.',
-                        mnemonic: '💡 Memory tip: Same roll-forward logic as inventory everywhere — beginning balance plus what came in, minus what\'s still left, equals what moved out.'
+                        explanation: '$450,000 ÷ (15 + 45 total batches) = $450,000 ÷ 60 = $7,500 per batch. The most common mistake here is dividing by only one product\'s batch count (e.g., $450,000 ÷ 15 = $30,000) — always divide by the COMBINED total driver events across every product sharing that cost pool.',
+                        mnemonic: '💡 Memory tip: One cost pool, ALL the products that share it — combine every product\'s driver count before you divide.'
                   },
 
                   {
                         type: 'mc',
-                        q: 'Which sequence correctly shows how costs flow through a manufacturing company\'s inventory accounts?',
-                        opts: ['Raw Materials → Work in Process → Finished Goods → Cost of Goods Sold',
-                              'Finished Goods → Work in Process → Raw Materials → Cost of Goods Sold',
-                              'Work in Process → Cost of Goods Sold → Raw Materials → Finished Goods',
-                              'Raw Materials → Cost of Goods Sold → Finished Goods → Work in Process'],
+                        q: 'Under Activity-Based Costing, how are Facility-Support overhead costs (like property taxes, factory insurance, and general factory administration) typically treated?',
+                        opts: ['Treated as a common cost and NOT assigned to any specific product, division, or product line, since no production activity drives them',
+                              'Assigned equally across every unit produced, regardless of complexity',
+                              'Assigned only to the highest-volume product',
+                              'Eliminated from the cost accounting system entirely'],
                         correct: 0,
-                        explanation: 'Costs move in one direction: materials sit in Raw Materials until pulled into production (WIP); once production is complete they move to Finished Goods; only once sold do they become Cost of Goods Sold on the income statement.',
-                        mnemonic: '💡 Memory tip: "Raw, In-Process, Finished, Sold" — costs march forward through the factory, never backward.'
+                        explanation: 'Facility-support costs exist simply because the company has a facility — they don\'t change based on what, or how much, gets produced. Since there\'s no meaningful driver to attach them to, ABC sets them aside as a common cost rather than forcing them onto any one product. "Not assigned" doesn\'t mean "doesn\'t have to be paid" — it still comes out of the profits the products generate.',
+                        mnemonic: '💡 Memory tip: Facility-support costs are the price of existing as a company — no activity drives them, so no activity gets blamed for them.'
                   },
 
                   /* ══════════════════════════════════════════════════════════════
@@ -609,14 +610,14 @@
 
                   {
                         type: 'mc',
-                        q: 'Segregation of duties, the most important internal control, is built around three key functions that should never be controlled by one person for the same transaction. Those three functions are:',
-                        opts: ['Authorization (approving), Recording (entering into the books), and Custody (physically handling the asset)',
-                              'Hiring, Training, and Firing',
-                              'Budgeting, Forecasting, and Reporting',
-                              'Sales, Marketing, and Production'],
+                        q: 'Segregation of Duties, the most important of the five Control Activities, is best defined as:',
+                        opts: ['Hands that touch assets should not also touch the accounting records for those assets',
+                              'Every employee must be able to perform every job in the company',
+                              'Only the CEO and CFO may handle company cash',
+                              'All transactions must be approved by an outside auditor before they occur'],
                         correct: 0,
-                        explanation: 'Spreading authorization, recording, and custody across different people means committing fraud and hiding it would require collusion between multiple employees — much harder to pull off than if one person controls all three.',
-                        mnemonic: '💡 Memory tip: "Approve it, Record it, Hold it" — one person should never do all three for the same transaction.'
+                        explanation: 'The core idea is separating custody (physically handling an asset) from recording (entering it into the accounting system) — the classic example is a cash register, which separates the cashier who touches the cash from the machine that keeps the record, so one person can\'t quietly take cash and also erase the evidence.',
+                        mnemonic: '💡 Memory tip: If the same hands that touch the cash also touch the books, there\'s nothing stopping them from making both disappear together.'
                   },
 
                   {
@@ -688,27 +689,27 @@
                   },
 
                   {
-                        type: 'mc',
-                        q: 'A company changes its credit terms from Net 10 to Net 30. What is the most likely effect of this change?',
-                        opts: ['The company becomes more competitive and may increase sales volume, since customers get more time to pay and face less cash pressure',
-                              'Bad debt expense automatically decreases',
-                              'Cash collections accelerate immediately',
-                              'The current ratio automatically improves as a direct result'],
-                        correct: 0,
-                        explanation: 'Longer credit terms reduce customers\' cash pressure and make the firm more attractive to do business with, which can increase sales volume — but it does this by extending, not accelerating, collections, and it doesn\'t automatically change bad debt or the current ratio on its own.',
-                        mnemonic: '💡 Memory tip: More time to pay = more attractive to buyers, but also more patience required from the seller.'
+                        type: 'ms',
+                        q: 'Which of the following are the real COSTS of selling on credit (as opposed to the benefit)? Select all that apply.',
+                        opts: ['Bad debts — some customers who buy on credit simply won\'t pay',
+                              'Bookkeeping costs — tracking sales, evaluating creditworthiness, and billing customers',
+                              'Carrying costs — money tied up in Accounts Receivable that isn\'t available for other uses',
+                              'Increased sales volume'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Selling on credit lets a business capture sales it would otherwise lose — that increased sales volume is the BENEFIT of selling on credit, not a cost. The three real costs are bad debts, bookkeeping costs, and carrying costs. This is a classic exam trap: watch for "increased sales" sneaking into a list of costs.',
+                        mnemonic: '💡 Memory tip: More sales is the prize you\'re playing for — bad debts, bookkeeping, and carrying costs are the price of admission.'
                   },
 
                   {
                         type: 'mc',
-                        q: 'Which action is most likely to INCREASE a company\'s bad debt expense?',
-                        opts: ['Increasing credit limits for all customers',
-                              'Offering a 2/10, n/30 early-payment discount',
-                              'Tightening the credit approval policy',
-                              'Shortening the payment period from 60 days to 30 days'],
+                        q: 'Meridian Co. starts March with a cash balance of $20,000. It forecasts March cash receipts of $150,000 and cash disbursements of $180,000, and wants to maintain a desired ending cash balance of $25,000. How much must Meridian borrow in March?',
+                        opts: ['$35,000',
+                              '$5,000',
+                              '$30,000',
+                              '$0 — no borrowing needed'],
                         correct: 0,
-                        explanation: 'Raising credit limits lets customers carry larger outstanding balances and take on more debt, increasing the chance some won\'t be able to pay — more credit exposure means higher expected uncollectible accounts. Early-payment discounts and a tighter credit policy both tend to REDUCE bad debt, and shortening the payment window changes collection timing, not the amount of credit extended.',
-                        mnemonic: '💡 Memory tip: More credit exposure (higher limits) = more risk of not getting paid back.'
+                        explanation: 'Net Cash Flow = Receipts − Disbursements = $150,000 − $180,000 = −$30,000. Without borrowing, Meridian would land at Beginning Balance + Net Cash Flow = $20,000 − $30,000 = −$10,000. Borrowing Needed = Desired Ending Balance − that projected balance = $25,000 − (−$10,000) = $35,000.',
+                        mnemonic: '💡 Memory tip: Figure out where you\'d land with no help, then borrow exactly enough to close the gap to where you want to be.'
                   },
 
             ];
