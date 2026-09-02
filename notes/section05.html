@@ -146,7 +146,11 @@
     <div class="formula-card">
       <div class="formula-name">1 · Gross Profit</div>
       <div class="formula-eq">Sales − Cost of Goods and Services</div>
-      <div class="formula-meaning">The difference between the selling price of the product and the cost of the product. The "first cut" — profit from the core act of buying/making and selling, before any overhead.</div>
+      <div class="formula-meaning">The difference between the selling price of the product and the cost of the product. The "first cut" — profit from the core act of buying/making and selling, before any overhead. <strong>Manufacturer</strong> (e.g., GM): selling price − cost to manufacture (raw materials + labor + overhead — a complex number to compute). <strong>Merchandiser</strong> (e.g., Walmart): selling price − cost to purchase — much simpler, just "bought for this, sold for that."</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Gross profit is the floor:</strong> if gross profit isn't positive, nothing further down the income statement can rescue the company — there's no magic way to generate net income if you're not even making money on the core product itself. This is why a company's very first focus has to be here.
     </div>
 
     <div class="formula-card">
@@ -155,10 +159,14 @@
       <div class="formula-meaning">Measures the performance of a company's fundamental business operations. Rule of thumb: <strong>every expense is operating except interest expense and income tax expense</strong> — those two are the only ones excused from this line.</div>
     </div>
 
+    <div class="callout">
+      <strong>The operating income "pie":</strong> think of operating income as a pie divided among three groups, in order of claim: <strong>1) Lenders</strong> get their slice first — interest expense. <strong>2) The government</strong> gets its slice next — income tax expense. <strong>3) Owners</strong> get whatever's left — either paid out as dividends or kept in the business as retained earnings. This is exactly why interest and taxes are excluded from operating expenses: they're not costs of running the business, they're claims on the profit the business already generated.
+    </div>
+
     <div class="formula-card">
       <div class="formula-name">3 · Income from Continuing Operations</div>
       <div class="formula-eq">Operating Income −/+ Interest Expense, misc. items − Income Tax Expense</div>
-      <div class="formula-meaning">Reflects the aspects of performance <strong>expected to continue into the future</strong> — which is exactly why it's considered the best baseline for forecasting next year's income.</div>
+      <div class="formula-meaning">Reflects the aspects of performance <strong>expected to continue into the future</strong> — which is exactly why it's considered the best baseline for forecasting next year's income. <strong>Placement note:</strong> companies have full freedom in where miscellaneous revenues/expenses/gains/losses go — above or below operating income. There's no fixed rule; the order shown here is just one common, prototypical way to lay it out.</div>
     </div>
 
     <div class="formula-card">
@@ -170,7 +178,7 @@
     <div class="formula-card">
       <div class="formula-name">5 · Comprehensive Income</div>
       <div class="formula-eq">Net Income +/− Other Comprehensive Income (OCI)</div>
-      <div class="formula-meaning">An overall measure of the change in a company's wealth during the period, excluding new investment or investment withdrawal. OCI = unrealized, market-related gains/losses — value that moved on paper but hasn't been "cashed in" through an actual transaction, so it never touches Net Income.</div>
+      <div class="formula-meaning">An overall measure of the change in a company's wealth during the period, excluding new investment or investment withdrawal. OCI = unrealized, market-related gains/losses — value that moved on paper but hasn't been "cashed in" through an actual transaction, so it never touches Net Income. Common examples: <strong>foreign subsidiary translation</strong> (exchange rates shift), <strong>available-for-sale securities</strong> (portfolio value fluctuates), and <strong>hedging derivatives</strong> — all market-driven and outside the company's control. The <strong>FASB and IASB</strong> specifically instruct companies to prominently highlight comprehensive income, since it comes closest to an economist's concept of income: the total change in wealth.</div>
     </div>
 
     <div class="callout tip">
@@ -207,6 +215,37 @@
       <strong>Inflation example:</strong> a company starts the year with a machine worth $100,000; by year-end, an identical replacement costs $130,000. <em>Financial</em> capital maintenance says equity rose in dollar terms → that's income. <em>Physical</em> capital maintenance says: you'd need that extra $30,000 just to replace what you already had — you haven't gained any real productive capacity, so that's not real income, just inflation.
     </div>
 
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">A worked example — there isn't just one right answer, there are (at least) three:</p>
+    <div class="formula-card">
+      <div class="formula-name">The House Example</div>
+      <div class="formula-meaning">Buy a house Jan 1 for <strong>$200,000</strong> (your primary residence). Sell it Dec 31 for <strong>$220,000</strong>. General price inflation during the year: <strong>3%</strong>. How much income did you have?</div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>View</th><th>Logic</th><th>Income</th></tr>
+        <tr>
+        <td><strong>Financial capital maintenance (simple)</strong></td>
+        <td>Just the cash difference: $220,000 − $200,000</td>
+        <td><strong>$20,000</strong></td>
+        </tr>
+        <tr>
+        <td><strong>Inflation-adjusted financial</strong></td>
+        <td>$200,000 × 3% = $6,000 was only "keeping pace" with inflation, not a real gain — so only $20,000 − $6,000 counts</td>
+        <td><strong>$14,000</strong></td>
+        </tr>
+        <tr>
+        <td><strong>Physical capital maintenance</strong></td>
+        <td>Since this is your primary residence, you have to buy a replacement — and a similar house now costs about $220,000. You're no better housed than before.</td>
+        <td><strong>$0</strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>The takeaway:</strong> "income" isn't a single obvious number — it depends entirely on which lens you're using. This is exactly why, whenever someone says "income" in an accounting context, the first question has to be: <em>income by which measure?</em>
+    </div>
+
     <p style="font-size:.85rem;color:var(--muted)"><strong>Memory anchor:</strong> Financial = <strong>F</strong>igures (dollars). Physical = <strong>P</strong>roduction (machines/capacity).</p>
   </section>
 
@@ -215,7 +254,7 @@
     <h2>03 · Revenue Items</h2>
     <p class="section-sub">Topic 4.2</p>
 
-    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem">In transaction analysis, <strong>Revenue</strong> = the amount of assets generated or liabilities satisfied through doing business.</p>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem">In transaction analysis, <strong>Revenue</strong> = the amount of assets generated or liabilities satisfied through doing business. Revenue isn't the asset itself — it's the <em>source</em> of an asset (as opposed to borrowing or owner investment).</p>
 
     <div class="table-scroll">
       <table class="compare-table">
@@ -239,17 +278,25 @@
       <table class="compare-table">
         <tr><th>Expense</th><th>What it covers</th></tr>
         <tr><td><strong>Cost of Goods Sold</strong></td><td>The cost recorded when a business sells goods to customers — only counts goods actually <em>sold</em>, not produced/purchased</td></tr>
-        <tr><td><strong>R&amp;D</strong></td><td>Expensed in full in the U.S. — a possible (not probable) future benefit doesn't qualify as an asset. <strong>Not the same treatment worldwide.</strong></td></tr>
-        <tr><td><strong>Wages</strong></td><td>Manufacturer: folded into COGS (part of the cost of the product). Service/retail: a separate wage expense line.</td></tr>
+        <tr><td><strong>R&amp;D</strong></td><td>Expensed in full in the U.S. since 1974 (FASB ruling) — a possible (not probable) future benefit doesn't qualify as an asset. <strong>Not the same treatment worldwide.</strong></td></tr>
+        <tr><td><strong>Wages</strong></td><td>Manufacturer: folded into COGS. Service/retail: a separate wage expense line. Either way, "wages" is bigger than base pay — it bundles healthcare, payroll taxes, pensions, and stock-based comp too.</td></tr>
         <tr><td><strong>Bad Debt Expense</strong></td><td>The estimated amount of credit extended to customers that will never be collected</td></tr>
-        <tr><td><strong>Depreciation Expense</strong></td><td>Systematic allocation of a long-term asset's acquisition cost over its service period</td></tr>
-        <tr><td><strong>Interest Expense</strong></td><td>Cost of borrowing — a financing decision, not part of core operations</td></tr>
+        <tr><td><strong>Depreciation Expense</strong></td><td>Systematic allocation of a long-term asset's acquisition cost over its service period. Land doesn't depreciate — it doesn't wear out.</td></tr>
+        <tr><td><strong>Interest Expense</strong></td><td>Cost of borrowing — a financing decision, not part of core operations. Tax-deductible.</td></tr>
         <tr><td><strong>Income Tax Expense</strong></td><td>The total estimated amount of tax expected to eventually be paid, based on current-year reported income</td></tr>
       </table>
     </div>
 
     <div class="callout warn">
-      <strong>Manufacturer vs. service/retail wages:</strong> a factory worker's wages get baked right into the cost of the product — like flour baked into bread. A retail cashier's wages get their own separate expense line instead.
+      <strong>Manufacturer vs. service/retail wages:</strong> a factory worker's wages get baked right into the cost of the product. A retail cashier's wages get their own separate expense line instead.
+    </div>
+
+    <div class="callout tip">
+      <strong>Optimal bad debt expense isn't zero.</strong> Zero bad debt means you're turning away customers who were creditworthy enough to pay — the skill in selling on credit is picking the right risk tolerance, not avoiding bad debt entirely.
+    </div>
+
+    <div class="callout">
+      <strong>Why net income ≠ taxable income:</strong> companies keep three sets of books — financial reporting (GAAP, for lenders/investors), income tax books (IRS rules), and internal management books. Different purposes, different rules, different numbers. Income Tax Expense estimates what's eventually owed under set #2, reported alongside set #1.
     </div>
   </section>
 
@@ -257,6 +304,11 @@
   <section class="section top-anchor" id="gains-losses">
     <h2>05 · Gains, Losses &amp; the "Big Bath"</h2>
     <p class="section-sub">Topic 4.2 — activities peripheral to a company's main operations</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The rule: normal business or not?</div>
+      <div class="formula-meaning">Revenues/expenses = <strong>primary</strong> items (assets created/consumed doing what the company normally does). Gains/losses = <strong>peripheral</strong> items (money made/lost outside normal operations). It's not about the transaction type — it's about whether that transaction is this company's business. <strong>Example:</strong> Ford sells trucks for a living, so selling a truck is revenue/expense for Ford. Walmart sells an old delivery truck it no longer needs — same transaction, but it's a gain/loss for Walmart, since selling trucks isn't what Walmart does.</div>
+    </div>
 
     <div class="table-scroll">
       <table class="compare-table">
@@ -285,9 +337,13 @@
       <strong>The one-year test:</strong> to qualify as a discontinued operation, disposal must be expected to be complete within <strong>one year of the end of the reporting period</strong> — not one year from the decision date. Example: a decision made Feb 1, 2021 falls in FY2021 (ends Dec 31, 2021); the clock runs to Dec 31, 2022. While pending, the segment's assets/liabilities are listed <em>separately</em> on the balance sheet.
     </div>
 
+    <div class="callout tip">
+      <strong>Net of taxes, worked:</strong> a $100 extraordinary gain taxed at 40% shows as one line: <strong>$60</strong>. The tax effect is embedded right in the number — nothing else to add or subtract.
+    </div>
+
     <div class="formula-card">
       <div class="formula-name">Extraordinary Items</div>
-      <div class="formula-meaning">Must be <strong>both</strong>: (1) <strong>Unusual in nature</strong> — not the kind of thing that happens in this company's normal business, and (2) <strong>Infrequent in occurrence</strong> — not reasonably expected to happen again. Examples: government expropriation of property abroad; a natural disaster loss, but only where that type of disaster is rare for the company's location.</div>
+      <div class="formula-meaning">Must be <strong>both</strong>: (1) <strong>Unusual in nature</strong> — not the kind of thing that happens in this company's normal business, and (2) <strong>Infrequent in occurrence</strong> — not reasonably expected to happen again. Real example: <strong>ExxonMobil, 2000</strong> — forced to divest pipeline assets on antitrust grounds during the Exxon-Mobil merger, resulting in a $1.7 billion extraordinary gain.</div>
     </div>
 
     <div class="callout warn">
@@ -430,6 +486,8 @@
       <li><strong>Advertising vs. insurance/rent</strong> — advertising is Immediate Recognition (no reliable link to specific future revenue), while a prepaid expense like insurance or rent is Systematic Allocation (a measurable stretch of future benefit) — easy to mix up since both "feel" future-oriented.</li>
       <li><strong>Financial vs. Physical capital maintenance</strong> — Financial tracks dollar-denominated equity; Physical tracks real productive capacity. They can disagree, especially with inflation (or deflation) in asset replacement costs.</li>
       <li><strong>Single-step vs. multi-step</strong> — single-step groups revenue/expenses into one subtraction; multi-step is the one that emphasizes gross profit and operating income as separate subtotals. Don't swap these two definitions.</li>
+      <li><strong>Gain/loss vs. revenue/expense depends on the company, not the transaction</strong> — selling a truck is revenue for Ford (that's their business) but a gain/loss for Walmart (it isn't). Same transaction, different classification.</li>
+      <li><strong>Bad debt expense of $0 is a red flag, not a good sign</strong> — it means the company is too conservative in extending credit, not that it's doing well.</li>
     </ul>
   </section>
 
