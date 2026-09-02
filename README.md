@@ -31,7 +31,7 @@ zero-padded (`section02`, not `section2`) so they sort correctly.
 |---|---|
 | 2 | The Nature & Purpose of Accounting |
 | 3 | Overview of Financial Statements |
-| 4 | Individual Accounts & Transaction Analysis |
+| 4 | The Balance Sheet |
 | 5 | The Income Statement |
 | 6 | The Statement of Cash Flows |
 | 7 | Introduction to Financial Statement Analysis |
