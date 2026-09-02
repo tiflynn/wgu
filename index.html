@@ -1,401 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>C213 Accounting for Decision Makers · Quiz Hub</title>
-<link rel="stylesheet" href="assets/css/quiz.css">
-<style>
-  .hub-wrap{max-width:var(--content-w);margin:0 auto}
-  .hub-wrap header h1{font-size:clamp(2.4rem,6vw,3.8rem);letter-spacing:-.01em}
-  .hub-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
-  .hub-card{
-    display:block;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:1.5rem 1.75rem;
-    text-decoration:none;
-    color:var(--text);
-    transition:border-color .15s, transform .15s, background .15s, box-shadow .15s;
-    position:relative;
-    overflow:hidden;
-    box-shadow:var(--shadow);
-  }
-  .hub-card:hover{border-color:var(--accent);background:#F3F7FF;transform:translateY(-2px);box-shadow:0 14px 34px rgba(23,37,84,.16)}
-  .hub-card:focus-within{border-color:var(--accent);background:#F3F7FF}
-  .hub-card-eyebrow{
-    font-family:'DM Mono',monospace;
-    font-size:.68rem;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--accent);
-    margin-bottom:.4rem;
-  }
-  .hub-card-title{
-    font-family:'DM Serif Display',serif;
-    font-size:1.5rem;
-    font-weight:400;
-    margin-bottom:.5rem;
-    color:var(--text);
-  }
-  .hub-card-desc{
-    font-size:.88rem;
-    color:var(--muted);
-    line-height:1.5;
-  }
-  .hub-card-meta{
-    display:flex;
-    gap:.6rem;
-    margin-top:1rem;
-    flex-wrap:wrap;
-  }
-  .hub-tag{
-    font-family:'DM Mono',monospace;
-    font-size:.7rem;
-    padding:.2rem .55rem;
-    border-radius:6px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    color:var(--muted);
-  }
-  .hub-card-link{
-    color:inherit;
-    text-decoration:none;
-  }
-  /* Stretches the quiz link over the whole card, so the card stays
-     click-anywhere while the Notes link below keeps its own target. */
-  .hub-card-link::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    z-index:1;
-  }
-  .hub-notes{
-    position:relative;
-    z-index:2;
-    font-family:'DM Mono',monospace;
-    font-size:.7rem;
-    padding:.2rem .55rem;
-    border-radius:6px;
-    text-decoration:none;
-    color:var(--accent2);
-    background:rgba(167,139,250,.12);
-    border:1px solid rgba(167,139,250,.4);
-    transition:background .15s,border-color .15s,color .15s;
-  }
-  .hub-notes:hover{background:var(--accent2);border-color:var(--accent2);color:#fff}
-  .hub-arrow{
-    position:absolute;
-    top:1.5rem;right:1.75rem;
-    font-size:1.3rem;
-    color:var(--accent2);
-    opacity:0;
-    transform:translateX(-6px);
-    transition:opacity .15s, transform .15s;
-  }
-  .hub-card:hover .hub-arrow,
-  .hub-card:focus-within .hub-arrow{opacity:1;transform:translateX(0)}
-  .hub-group-label{
-    font-family:'DM Mono',monospace;
-    font-size:.7rem;
-    font-weight:500;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin:2rem 0 0;
-    padding-bottom:.6rem;
-    border-bottom:1px solid var(--border);
-  }
-  .hub-group-label + .hub-grid{margin-top:1rem}
-  .hub-footer{
-    text-align:center;
-    margin-top:3rem;
-    font-size:.8rem;
-    color:var(--muted);
-    font-family:'DM Mono',monospace;
-  }
-  .hub-repo{
-    display:inline-flex;
-    align-items:center;
-    gap:.45rem;
-    margin-top:.7rem;
-    color:var(--muted);
-    text-decoration:none;
-    border-bottom:1px solid transparent;
-    transition:color .15s, border-color .15s;
-  }
-  .hub-repo svg{width:14px;height:14px;flex-shrink:0}
-  .hub-repo:hover{color:var(--accent);border-bottom-color:currentColor}
 
-  /* Wider stage + a 2-column card grid once there's room for it */
-  @media(min-width:900px){
-    .hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-    .hub-card-title{font-size:1.65rem}
-    /* The lone practice-exam card spans both columns instead of leaving a gap */
-    .hub-card-wide{grid-column:1 / -1}
-  }
-</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C213 Accounting for Decision Makers · Quiz Hub</title>
+  <link rel="stylesheet" href="assets/css/quiz.css">
+  <style>
+    .hub-wrap {
+      max-width: var(--content-w);
+      margin: 0 auto
+    }
+
+    .hub-wrap header h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      letter-spacing: -.01em
+    }
+
+    .hub-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem
+    }
+
+    .hub-card {
+      display: block;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .15s, transform .15s, background .15s, box-shadow .15s;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hub-card:hover {
+      border-color: var(--accent);
+      background: #F3F7FF;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(23, 37, 84, .16)
+    }
+
+    .hub-card:focus-within {
+      border-color: var(--accent);
+      background: #F3F7FF
+    }
+
+    .hub-card-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .4rem;
+    }
+
+    .hub-card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: .5rem;
+      color: var(--text);
+    }
+
+    .hub-card-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hub-card-meta {
+      display: flex;
+      gap: .6rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hub-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
+      padding: .2rem .55rem;
+      border-radius: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .hub-card-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Stretches the quiz link over the whole card, so the card stays
+     click-anywhere while the Notes link below keeps its own target. */
+    .hub-card-link::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hub-notes {
+      position: relative;
+      z-index: 2;
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
+      padding: .2rem .55rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--accent2);
+      background: rgba(167, 139, 250, .12);
+      border: 1px solid rgba(167, 139, 250, .4);
+      transition: background .15s, border-color .15s, color .15s;
+    }
+
+    .hub-notes:hover {
+      background: var(--accent2);
+      border-color: var(--accent2);
+      color: #fff
+    }
+
+    .hub-arrow {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.75rem;
+      font-size: 1.3rem;
+      color: var(--accent2);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity .15s, transform .15s;
+    }
+
+    .hub-card:hover .hub-arrow,
+    .hub-card:focus-within .hub-arrow {
+      opacity: 1;
+      transform: translateX(0)
+    }
+
+    .hub-group-label {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 2rem 0 0;
+      padding-bottom: .6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hub-group-label+.hub-grid {
+      margin-top: 1rem
+    }
+
+    .hub-footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: .8rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .hub-repo {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      margin-top: .7rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+
+    .hub-repo svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0
+    }
+
+    .hub-repo:hover {
+      color: var(--accent);
+      border-bottom-color: currentColor
+    }
+
+    /* ── LINKEDIN CTA ──
+     Brand-blue pill under the subtitle; the pulsing ring draws the eye
+     without moving anything on the page. */
+    .hub-linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      margin-top: 1.4rem;
+      padding: .75rem 1.5rem;
+      border-radius: 99px;
+      background: #0A66C2;
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(10, 102, 194, .38);
+      transition: background .15s, transform .15s, box-shadow .15s;
+      animation: linkedin-pulse 2.8s ease-out infinite;
+    }
+
+    .hub-linkedin:hover,
+    .hub-linkedin:focus-visible {
+      background: #004182;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(10, 102, 194, .5);
+      animation: none;
+    }
+
+    .hub-linkedin svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0
+    }
+
+    @keyframes linkedin-pulse {
+      0% {
+        box-shadow: 0 8px 22px rgba(10, 102, 194, .38), 0 0 0 0 rgba(10, 102, 194, .45)
+      }
+
+      70% {
+        box-shadow: 0 8px 22px rgba(10, 102, 194, .38), 0 0 0 15px rgba(10, 102, 194, 0)
+      }
+
+      100% {
+        box-shadow: 0 8px 22px rgba(10, 102, 194, .38), 0 0 0 0 rgba(10, 102, 194, 0)
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .hub-linkedin {
+        animation: none;
+        transition: none
+      }
+
+      .hub-linkedin:hover {
+        transform: none
+      }
+    }
+
+    /* Wider stage + a 2-column card grid once there's room for it */
+    @media(min-width:900px) {
+      .hub-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem
+      }
+
+      .hub-card-title {
+        font-size: 1.65rem
+      }
+
+      /* The lone practice-exam card spans both columns instead of leaving a gap */
+      .hub-card-wide {
+        grid-column: 1 / -1
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="hub-wrap">
-  <header>
-    <h1>C213 Accounting for <span>Decision Makers</span></h1>
-    <p class="subtitle">Pick a section to start practicing</p>
-  </header>
+  <div class="hub-wrap">
+    <header>
+      <h1>C213 Accounting for <span>Decision Makers</span></h1>
+      <br />
+      <br />
+      <p class="subtitle">If these notes helped you, connet with me on LinkedIn</p>
+      <a class="hub-linkedin" href="https://www.linkedin.com/in/tiffany-stokley/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z" />
+        </svg>
+        Connect with me on LinkedIn
+      </a>
 
-  <h2 class="hub-group-label">Course Sections</h2>
+    </header>
 
-  <div class="hub-grid">
+    <h2 class="hub-group-label">Course Sections</h2>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 2</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section02.html">The Nature &amp; Purpose of Accounting</a></div>
-      <div class="hub-card-desc">
-        Definitions, the three financial statements, users of financial statements,
-        GAAP, and the accounting organizations (FASB, SEC, AICPA, PCAOB, IRS, IASB).
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">29 Questions</span>
-        <a class="hub-notes" href="notes/section02.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+    <div class="hub-grid">
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 3</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section03.html">Overview of Financial Statements</a></div>
-      <div class="hub-card-desc">
-        Assets, liabilities, and owners' equity — the balance sheet equation,
-        residual interest, tangible vs. intangible assets, and liquidity ordering.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">92 Questions</span>
-        <a class="hub-notes" href="notes/section03.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 2</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section02.html">The Nature &amp; Purpose of
+            Accounting</a></div>
+        <div class="hub-card-desc">
+          Definitions, the three financial statements, users of financial statements,
+          GAAP, and the accounting organizations (FASB, SEC, AICPA, PCAOB, IRS, IASB).
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">29 Questions</span>
+          <a class="hub-notes" href="notes/section02.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 4</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section04.html">The Balance Sheet</a></div>
-      <div class="hub-card-desc">
-        The five sections of the balance sheet in detail, common vs. preferred stock,
-        treasury stock, AOCI, recognition &amp; valuation, executory contracts, and
-        matching maturities.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">67 Questions</span>
-        <a class="hub-notes" href="notes/section04.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 3</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section03.html">Overview of Financial
+            Statements</a></div>
+        <div class="hub-card-desc">
+          Assets, liabilities, and owners' equity — the balance sheet equation,
+          residual interest, tangible vs. intangible assets, and liquidity ordering.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">92 Questions</span>
+          <a class="hub-notes" href="notes/section03.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 5</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section05.html">The Income Statement</a></div>
-      <div class="hub-card-desc">
-        Gross profit through comprehensive income, revenue &amp; expense items, gains/losses,
-        discontinued operations &amp; extraordinary items, single- vs. multi-step formats,
-        revenue recognition, matching, and forecasting.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">68 Questions</span>
-        <a class="hub-notes" href="notes/section05.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 4</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section04.html">The Balance Sheet</a></div>
+        <div class="hub-card-desc">
+          The five sections of the balance sheet in detail, common vs. preferred stock,
+          treasury stock, AOCI, recognition &amp; valuation, executory contracts, and
+          matching maturities.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">67 Questions</span>
+          <a class="hub-notes" href="notes/section04.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 6</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section06.html">The Statement of Cash Flows</a></div>
-      <div class="hub-card-desc">
-        Purpose &amp; the three failure scenarios, cash equivalents, operating/investing/financing
-        classification with all the GAAP "gotcha" rules, normal cash flow patterns, non-cash
-        disclosures, the six-step preparation process, direct vs. indirect methods, and forecasting.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">86 Questions</span>
-        <a class="hub-notes" href="notes/section06.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 5</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section05.html">The Income Statement</a>
+        </div>
+        <div class="hub-card-desc">
+          Gross profit through comprehensive income, revenue &amp; expense items, gains/losses,
+          discontinued operations &amp; extraordinary items, single- vs. multi-step formats,
+          revenue recognition, matching, and forecasting.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">68 Questions</span>
+          <a class="hub-notes" href="notes/section05.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 7</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section07.html">Introduction to Financial Statement Analysis</a></div>
-      <div class="hub-card-desc">
-        The 6 widely used ratios, common-size financial statements, the DuPont framework
-        (margin, turnover &amp; leverage), the debt ratio family, times interest earned,
-        cash flow ratios, and the four potential pitfalls of financial statement analysis.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">105 Questions</span>
-        <a class="hub-notes" href="notes/section07.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 6</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section06.html">The Statement of Cash
+            Flows</a></div>
+        <div class="hub-card-desc">
+          Purpose &amp; the three failure scenarios, cash equivalents, operating/investing/financing
+          classification with all the GAAP "gotcha" rules, normal cash flow patterns, non-cash
+          disclosures, the six-step preparation process, direct vs. indirect methods, and forecasting.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">86 Questions</span>
+          <a class="hub-notes" href="notes/section06.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 8</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section08.html">Cash Budgeting</a></div>
-      <div class="hub-card-desc">
-        The three costs of selling on credit, credit card companies, credit terms &amp;
-        sales discounts, budgeting cash receipts using collection patterns, and budgeting cash outflows &mdash;
-        converting sales to purchases, payment patterns, and solving for required
-        borrowing.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">39 Questions</span>
-        <a class="hub-notes" href="notes/section08.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 7</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section07.html">Introduction to Financial
+            Statement Analysis</a></div>
+        <div class="hub-card-desc">
+          The 6 widely used ratios, common-size financial statements, the DuPont framework
+          (margin, turnover &amp; leverage), the debt ratio family, times interest earned,
+          cash flow ratios, and the four potential pitfalls of financial statement analysis.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">105 Questions</span>
+          <a class="hub-notes" href="notes/section07.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 9</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section09.html">Internal Controls</a></div>
-      <div class="hub-card-desc">
-        Errors, disagreements &amp; fraud, the five internal control activities, earnings management
-        and its continuum, the Sarbanes-Oxley Act (PCAOB, auditor &amp; management constraints),
-        internal vs. external auditors, and the SEC's role and required filings.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">83 Questions</span>
-        <a class="hub-notes" href="notes/section09.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 8</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section08.html">Cash Budgeting</a></div>
+        <div class="hub-card-desc">
+          The three costs of selling on credit, credit card companies, credit terms &amp;
+          sales discounts, budgeting cash receipts using collection patterns, and budgeting cash outflows &mdash;
+          converting sales to purchases, payment patterns, and solving for required
+          borrowing.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">39 Questions</span>
+          <a class="hub-notes" href="notes/section08.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 10</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section10.html">Management Accounting &amp; Cost Concepts</a></div>
-      <div class="hub-card-desc">
-        Management vs. financial accounting, the FASB/SEC/IASB/IMA, the plan-control-evaluate cycle,
-        CVP terms &amp; breakeven formulas, product vs. period costs, direct/indirect &amp; sunk costs,
-        and ethics under Sarbanes-Oxley and the IMA.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">77 Questions</span>
-        <a class="hub-notes" href="notes/section10.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 9</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section09.html">Internal Controls</a></div>
+        <div class="hub-card-desc">
+          Errors, disagreements &amp; fraud, the five internal control activities, earnings management
+          and its continuum, the Sarbanes-Oxley Act (PCAOB, auditor &amp; management constraints),
+          internal vs. external auditors, and the SEC's role and required filings.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">83 Questions</span>
+          <a class="hub-notes" href="notes/section09.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 11</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section11.html">Activity-Based Costing (ABC)</a></div>
-      <div class="hub-card-desc">
-        The five ABC steps, the four overhead cost categories (unit-level, batch-level, product line,
-        facility support), cost drivers, assigning overhead using ABC rates, and using ABC data to
-        make decisions &mdash; including the full Lily's Ice Cream Company example.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">56 Questions</span>
-        <a class="hub-notes" href="notes/section11.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 10</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section10.html">Management Accounting &amp;
+            Cost Concepts</a></div>
+        <div class="hub-card-desc">
+          Management vs. financial accounting, the FASB/SEC/IASB/IMA, the plan-control-evaluate cycle,
+          CVP terms &amp; breakeven formulas, product vs. period costs, direct/indirect &amp; sunk costs,
+          and ethics under Sarbanes-Oxley and the IMA.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">77 Questions</span>
+          <a class="hub-notes" href="notes/section10.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Section 12</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section12.html">Cost Behavior &amp; C-V-P Analysis</a></div>
-      <div class="hub-card-desc">
-        Variable, fixed, stepped &amp; mixed cost patterns, splitting mixed costs with the scattergraph
-        and high-low methods, contribution margin &amp; the C-V-P equation, break-even and target-profit
-        calculations, C-V-P and profit graphs, sales mix, and cost structure &amp; operating leverage.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">60 Questions</span>
-        <a class="hub-notes" href="notes/section12.html" target="_blank" rel="noopener">📄 Notes</a>
-      </div>
-    </article>
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 11</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section11.html">Activity-Based Costing
+            (ABC)</a></div>
+        <div class="hub-card-desc">
+          The five ABC steps, the four overhead cost categories (unit-level, batch-level, product line,
+          facility support), cost drivers, assigning overhead using ABC rates, and using ABC data to
+          make decisions &mdash; including the full Lily's Ice Cream Company example.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">56 Questions</span>
+          <a class="hub-notes" href="notes/section11.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
 
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Section 12</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/section12.html">Cost Behavior &amp; C-V-P
+            Analysis</a></div>
+        <div class="hub-card-desc">
+          Variable, fixed, stepped &amp; mixed cost patterns, splitting mixed costs with the scattergraph
+          and high-low methods, contribution margin &amp; the C-V-P equation, break-even and target-profit
+          calculations, C-V-P and profit graphs, sales mix, and cost structure &amp; operating leverage.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">60 Questions</span>
+          <a class="hub-notes" href="notes/section12.html" target="_blank" rel="noopener">📄 Notes</a>
+        </div>
+      </article>
+
+    </div>
+
+    <h2 class="hub-group-label">Comprehensive Review</h2>
+
+    <div class="hub-grid">
+
+      <article class="hub-card hub-card-wide">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Practice Exam</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="quizzes/practice-exam.html">Comprehensive Practice
+            Exam</a></div>
+        <div class="hub-card-desc">
+          A cumulative test drawn from every section and weighted to match the official C213
+          blueprint &mdash; 51% financial analysis, 26% cost systems, 10% controls &amp; regulations,
+          7% profit planning (CVP), and 6% budgeting.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">50 Questions</span>
+          <span class="hub-tag">All sections</span>
+        </div>
+      </article>
+
+    </div>
+
+    <h2 class="hub-group-label">Reference</h2>
+
+    <div class="hub-grid">
+
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Formula Sheet</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="notes/formulas-provided.html">Available During
+            Testing</a></div>
+        <div class="hub-card-desc">
+          Everything shown on-screen during the Pre-Assessment &amp; Objective Assessment &mdash; statement
+          formats, widely used ratios, DuPont, cash flow ratios, ABC, and CVP. No need to memorize these,
+          just know where to look and what each one means.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">Provided at testing</span>
+        </div>
+      </article>
+
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">Formula Sheet</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="notes/formulas-memorize.html">Formulas to
+            Memorize</a></div>
+        <div class="hub-card-desc">
+          The formulas <em>not</em> on the official sheet &mdash; the alternate income statement layout,
+          ratios left off the sheet, the ABC activity rate, the high-low method, and the full CVP set. Commit these to
+          memory
+          before test day.
+        </div>
+        <div class="hub-card-meta">
+          <span class="hub-tag">Memorize before test day</span>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="hub-footer">
+      More sections added as the course progresses<br>
+      <a class="hub-repo" href="https://github.com/tiflynn/wgu/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path fill="currentColor" fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+        </svg>
+        View the source on GitHub
+      </a>
+    </p>
   </div>
 
-  <h2 class="hub-group-label">Comprehensive Review</h2>
+  <script>
+    // Each card links to its quiz file; count that file's questions and label the tag.
+    // Falls back silently to the number already in the HTML (file:// blocks fetch).
+    document.querySelectorAll('.hub-card').forEach(card => {
+      const tag = card.querySelector('.hub-tag');
+      const src = card.querySelector('.hub-card-link')?.getAttribute('href');
+      if (!tag || !src || !src.startsWith('quizzes/')) return;
 
-  <div class="hub-grid">
-
-    <article class="hub-card hub-card-wide">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Practice Exam</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="quizzes/practice-exam.html">Comprehensive Practice Exam</a></div>
-      <div class="hub-card-desc">
-        A cumulative test drawn from every section and weighted to match the official C213
-        blueprint &mdash; 51% financial analysis, 26% cost systems, 10% controls &amp; regulations,
-        7% profit planning (CVP), and 6% budgeting.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">50 Questions</span>
-        <span class="hub-tag">All sections</span>
-      </div>
-    </article>
-
-  </div>
-
-  <h2 class="hub-group-label">Reference</h2>
-
-  <div class="hub-grid">
-
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Formula Sheet</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="notes/formulas-provided.html">Available During Testing</a></div>
-      <div class="hub-card-desc">
-        Everything shown on-screen during the Pre-Assessment &amp; Objective Assessment &mdash; statement
-        formats, widely used ratios, DuPont, cash flow ratios, ABC, and CVP. No need to memorize these,
-        just know where to look and what each one means.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">Provided at testing</span>
-      </div>
-    </article>
-
-    <article class="hub-card">
-      <span class="hub-arrow">→</span>
-      <div class="hub-card-eyebrow">Formula Sheet</div>
-      <div class="hub-card-title"><a class="hub-card-link" href="notes/formulas-memorize.html">Formulas to Memorize</a></div>
-      <div class="hub-card-desc">
-        The formulas <em>not</em> on the official sheet &mdash; the alternate income statement layout,
-        ratios left off the sheet, the ABC activity rate, the high-low method, and the full CVP set. Commit these to memory
-        before test day.
-      </div>
-      <div class="hub-card-meta">
-        <span class="hub-tag">Memorize before test day</span>
-      </div>
-    </article>
-
-  </div>
-
-  <p class="hub-footer">
-    More sections added as the course progresses<br>
-    <a class="hub-repo" href="https://github.com/tiflynn/wgu/" target="_blank" rel="noopener">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-      View the source on GitHub
-    </a>
-  </p>
-</div>
-
-<script>
-  // Each card links to its quiz file; count that file's questions and label the tag.
-  // Falls back silently to the number already in the HTML (file:// blocks fetch).
-  document.querySelectorAll('.hub-card').forEach(card => {
-    const tag = card.querySelector('.hub-tag');
-    const src = card.querySelector('.hub-card-link')?.getAttribute('href');
-    if(!tag || !src || !src.startsWith('quizzes/')) return;
-
-    fetch(src)
-      .then(r => r.ok ? r.text() : Promise.reject(r.status))
-      .then(text => {
-        const n = (text.match(/[{,\s]type\s*:\s*['"]/g) || []).length;
-        if(n > 0) tag.textContent = n + (n === 1 ? ' Question' : ' Questions');
-      })
-      .catch(() => { /* keep the fallback text already in the tag */ });
-  });
-</script>
+      fetch(src)
+        .then(r => r.ok ? r.text() : Promise.reject(r.status))
+        .then(text => {
+          const n = (text.match(/[{,\s]type\s*:\s*['"]/g) || []).length;
+          if (n > 0) tag.textContent = n + (n === 1 ? ' Question' : ' Questions');
+        })
+        .catch(() => { /* keep the fallback text already in the tag */ });
+    });
+  </script>
 
 </body>
+
 </html>
