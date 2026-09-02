@@ -179,12 +179,14 @@
       <div class="formula-meaning">Example: <strong>2/10, net 30</strong> — read "two-ten, net thirty" — means pay within 10 days for a 2% discount, or pay the full amount within 30 days. <strong>EOM</strong> means "end of month" and replaces a fixed day count with the calendar's end-of-month date.</div>
     </div>
 
-    <table class="compare-table">
-      <tr><th>Terms</th><th>Discount</th><th>Discount window</th><th>Final due date</th></tr>
-      <tr><td><strong>2/10, net 30</strong></td><td>2%</td><td>Within 10 days</td><td>30 days</td></tr>
-      <tr><td><strong>4/15, net 60</strong></td><td>4%</td><td>Within 15 days</td><td>60 days</td></tr>
-      <tr><td><strong>2/10, net EOM</strong></td><td>2%</td><td>Within 10 days</td><td>End of month</td></tr>
-    </table>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Terms</th><th>Discount</th><th>Discount window</th><th>Final due date</th></tr>
+        <tr><td><strong>2/10, net 30</strong></td><td>2%</td><td>Within 10 days</td><td>30 days</td></tr>
+        <tr><td><strong>4/15, net 60</strong></td><td>4%</td><td>Within 15 days</td><td>60 days</td></tr>
+        <tr><td><strong>2/10, net EOM</strong></td><td>2%</td><td>Within 10 days</td><td>End of month</td></tr>
+      </table>
+    </div>
 
     <div class="callout warn">
       <strong>Skipping the discount is an expensive "loan":</strong> on a $1,000 purchase with 2/10, net 30 terms, paying on day 10 costs $980; waiting until day 30 costs $1,000. That extra $20 is effectively interest on a 20-day loan of $980 (2.04%) — and 20-day periods repeat about 18.25 times a year, so it annualizes to roughly <strong>37.2%</strong>. Well-organized businesses take the discount almost every time.
@@ -231,24 +233,26 @@
       Why: the beginning A/R balance is made up of unresolved sales from two or more prior months, each contributing to the next collection at a <em>different</em> rate (one month's remainder collects at the "month following" rate, another's at the "second month following" rate). Without knowing the origin-month split, you can't calculate how much of that lump sum converts to cash specifically in the next month.
     </p>
 
-    <table class="compare-table">
-      <tr><th>Problem type</th><th>What's given</th><th>First-month answer</th></tr>
-      <tr>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Problem type</th><th>What's given</th><th>First-month answer</th></tr>
+        <tr>
         <td><strong>Beginning A/R + aging %, no origin breakdown</strong></td>
         <td>Lump-sum beginning balance + a collection pattern by age</td>
         <td><span style="color:var(--wrong);font-weight:600">Cannot be determined</span></td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
         <td><strong>Beginning &amp; ending A/R roll-forward</strong></td>
         <td>Beginning balance, ending balance, and credit sales — no aging %</td>
         <td>Fully computable: Beg. A/R + Credit Sales − End. A/R</td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
         <td><strong>Later months of an aging-pattern problem</strong></td>
         <td>Only known monthly sales figures feed the calculation — no lump sum involved</td>
         <td>Fully computable — apply the % pattern directly</td>
-      </tr>
-    </table>
+        </tr>
+      </table>
+    </div>
 
     <div class="callout tip">
       <strong>Rule of thumb:</strong> the ambiguity only exists for the <em>first</em> forecasted month, when a lump-sum beginning balance and an aging % pattern appear together. Every later month is fully computable because it only draws on explicitly stated monthly sales figures.
@@ -278,19 +282,21 @@
 
     <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 .75rem">Just like receipts, disbursements for a given month draw on purchases from that month and prior months, per the payment pattern — but watch for whether a same-month percentage is included:</p>
 
-    <table class="compare-table">
-      <tr><th>Pattern type</th><th>Example</th><th>What it means</th></tr>
-      <tr>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Pattern type</th><th>Example</th><th>What it means</th></tr>
+        <tr>
         <td><strong>No same-month payment</strong></td>
         <td>50% month following / 50% second month following</td>
         <td>Nothing is paid in the month purchased — payment starts the month after</td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
         <td><strong>Includes same-month payment</strong></td>
         <td>30% same month / 50% month following / 20% second month following</td>
         <td>The target month's own purchases contribute too — don't forget that third piece</td>
-      </tr>
-    </table>
+        </tr>
+      </table>
+    </div>
 
     <div class="formula-card">
       <div class="formula-name">Worked example (no same-month payment)</div>
@@ -328,19 +334,21 @@
       <div class="formula-meaning"><strong>Depreciation is a non-cash expense</strong> — no check is written for it this period, since the related cash was already paid when the asset was purchased. Back it out (along with amortization, if present) to get from total expenses to actual cash outflows.</div>
     </div>
 
-    <table class="compare-table">
-      <tr><th>Scenario</th><th>Numbers</th><th>Borrowing</th></tr>
-      <tr>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Scenario</th><th>Numbers</th><th>Borrowing</th></tr>
+        <tr>
         <td><strong>First year of operation</strong> (beginning cash = $0)</td>
         <td>Collections $697,500 · Cash outflows $680,000 · Desired ending $30,000</td>
         <td>$30,000 − ($0 + $17,500) = <strong>$12,500</strong></td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
         <td><strong>With an existing cash cushion</strong></td>
         <td>Beginning $50,000 · Receipts $500,000 · Disbursements $520,000 · Desired ending $40,000</td>
         <td>$40,000 − ($50,000 − $20,000) = <strong>$10,000</strong></td>
-      </tr>
-    </table>
+        </tr>
+      </table>
+    </div>
   </section>
 
   <!-- ============================================================ -->
