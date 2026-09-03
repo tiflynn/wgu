@@ -266,6 +266,157 @@
         grid-column: 1 / -1
       }
     }
+
+    /* ── LINKEDIN INVITE MODAL ──
+       Appears once per visitor a few seconds after landing. The header pill
+       stays the permanent path; this is the one-time ask. */
+    .li-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    /* An author `display` rule beats the UA stylesheet's [hidden]{display:none},
+       so without this the modal ignores its hidden attribute entirely — it would
+       show on load and refuse to close. */
+    .li-modal[hidden] {
+      display: none;
+    }
+
+    .li-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(23, 37, 84, .55);
+      animation: li-fade .25s ease-out;
+    }
+
+    .li-card {
+      position: relative;
+      width: 100%;
+      max-width: 26rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 60px rgba(23, 37, 84, .3);
+      padding: 2rem 1.75rem 1.5rem;
+      text-align: center;
+      animation: li-rise .28s ease-out;
+    }
+
+    .li-logo {
+      width: 40px;
+      height: 40px;
+      color: #0A66C2;
+      margin-bottom: .75rem;
+    }
+
+    .li-card h2 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: .5rem;
+    }
+
+    .li-card p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 1.4rem;
+    }
+
+    .li-go {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      width: 100%;
+      padding: .8rem 1.5rem;
+      border-radius: 99px;
+      background: #0A66C2;
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(10, 102, 194, .38);
+      transition: background .15s, transform .15s, box-shadow .15s;
+    }
+
+    .li-go:hover,
+    .li-go:focus-visible {
+      background: #004182;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(10, 102, 194, .5);
+    }
+
+    .li-later {
+      display: block;
+      width: 100%;
+      margin-top: .5rem;
+      padding: .6rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-radius: 8px;
+      transition: color .15s, background .15s;
+    }
+
+    .li-later:hover,
+    .li-later:focus-visible {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .li-x {
+      position: absolute;
+      top: .6rem;
+      right: .75rem;
+      width: 2rem;
+      height: 2rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      line-height: 1;
+      color: var(--muted);
+      border-radius: 50%;
+      transition: color .15s, background .15s;
+    }
+
+    .li-x:hover,
+    .li-x:focus-visible {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    @keyframes li-fade {
+      from { opacity: 0 }
+      to   { opacity: 1 }
+    }
+
+    @keyframes li-rise {
+      from { opacity: 0; transform: translateY(12px) }
+      to   { opacity: 1; transform: none }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .li-backdrop,
+      .li-card { animation: none }
+      .li-go { transition: none }
+      .li-go:hover { transform: none }
+    }
   </style>
 </head>
 
@@ -276,7 +427,7 @@
       <h1>C213 Accounting for <span>Decision Makers</span></h1>
       <br />
       <br />
-      <p class="subtitle">If these notes helped you, connet with me on LinkedIn</p>
+      <p class="subtitle">If these notes helped you, connect with me on LinkedIn</p>
       <a class="hub-linkedin" href="https://www.linkedin.com/in/tiffany-stokley/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor"
@@ -536,6 +687,23 @@
     </p>
   </div>
 
+  <div class="li-modal" id="liModal" hidden>
+    <div class="li-backdrop" data-li-close></div>
+    <div class="li-card" role="dialog" aria-modal="true" aria-labelledby="liTitle" aria-describedby="liBody">
+      <button class="li-x" type="button" data-li-close aria-label="Close">&times;</button>
+      <svg class="li-logo" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor"
+          d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z" />
+      </svg>
+      <h2 id="liTitle">Connect with me on LinkedIn</h2>
+      <p id="liBody">If these notes helped you get through C213, I'd love to connect.</p>
+      <a class="li-go" href="https://www.linkedin.com/in/tiffany-stokley/" target="_blank" rel="noopener">
+        Connect on LinkedIn
+      </a>
+      <button class="li-later" type="button" data-li-close>Maybe later</button>
+    </div>
+  </div>
+
   <script>
     // Each card links to its quiz file; count that file's questions and label the tag.
     // Falls back silently to the number already in the HTML (file:// blocks fetch).
@@ -552,7 +720,80 @@
         })
         .catch(() => { /* keep the fallback text already in the tag */ });
     });
+    // ── LinkedIn invite ──
+    // Shown once per visitor, a few seconds in. Dismissing and connecting are
+    // both terminal: the modal is marked seen the moment it opens.
+    (function () {
+      const KEY = 'c213-linkedin-ask';
+      const modal = document.getElementById('liModal');
+      if (!modal) return;
+
+      // localStorage throws on file:// origins and in some privacy modes.
+      // A storage failure must never break the page, so fall back to showing
+      // the modal once for this page load and move on.
+      const seen = () => { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } };
+      const markSeen = () => { try { localStorage.setItem(KEY, '1'); } catch (e) { /* nothing to do */ } };
+
+      if (seen()) return;
+
+      const card = modal.querySelector('.li-card');
+      const SEL = 'a[href], button:not([disabled])';
+      let lastFocus = null, scrollY = 0;
+
+      function open() {
+        markSeen();                       // before showing, so a refresh won't re-ask
+        lastFocus = document.activeElement;
+        scrollY = window.scrollY;
+        modal.hidden = false;
+        document.body.style.position = 'fixed';
+        document.body.style.top = -scrollY + 'px';
+        document.body.style.width = '100%';
+        card.querySelector('.li-x').focus();
+        document.addEventListener('keydown', onKey);
+      }
+
+      function close() {
+        // Blur first: the modal is about to be hidden, and leaving focus on an
+        // invisible element strands keyboard and screen-reader users.
+        if (card.contains(document.activeElement)) document.activeElement.blur();
+        modal.hidden = true;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+        document.removeEventListener('keydown', onKey);
+        // body isn't focusable, so calling focus() on it would be a no-op that
+        // silently leaves focus stranded — only restore a real element.
+        if (lastFocus && lastFocus !== document.body && lastFocus.focus) lastFocus.focus();
+      }
+
+      function onKey(e) {
+        if (e.key === 'Escape') { close(); return; }
+        if (e.key !== 'Tab') return;
+        const f = [...card.querySelectorAll(SEL)];
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+
+      modal.querySelectorAll('[data-li-close]').forEach(el => el.addEventListener('click', close));
+
+      // Don't burn the one-and-only showing on a tab the visitor never looked at.
+      function start() { setTimeout(open, 5000); }
+      if (document.visibilityState === 'hidden') {
+        document.addEventListener('visibilitychange', function once() {
+          if (document.visibilityState !== 'hidden') {
+            document.removeEventListener('visibilitychange', once);
+            start();
+          }
+        });
+      } else {
+        start();
+      }
+    })();
   </script>
+
 
 </body>
 
