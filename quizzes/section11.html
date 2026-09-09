@@ -85,7 +85,7 @@
 
                   {
                         type: 'mc',
-                        q: 'Per the textbook, Activity-Based Costing (ABC) is best defined as:',
+                        q: 'Activity-Based Costing (ABC) is best defined as:',
                         opts: ['A method of attributing overhead costs to products based on measurable factors that relate to activities that create overhead costs',
                               'A method of tracing direct materials and direct labor costs to specific jobs',
                               'A method of allocating all costs — including direct materials and direct labor — using a single rate based on direct labor hours',
@@ -133,7 +133,7 @@
 
                   {
                         type: 'tf',
-                        q: 'Per the textbook review, companies that better understand their costs have an advantage over their competitors.',
+                        q: 'Companies that better understand their costs have an advantage over their competitors.',
                         opts: ['True', 'False'],
                         correct: 0,
                         explanation: "This is a direct REMEMBER THIS textbook statement. It's the whole business case for ABC — better cost information is a competitive edge, not just an accounting exercise.",
@@ -153,17 +153,8 @@
                   },
 
                   {
-                        type: 'tf',
-                        q: 'Per the textbook review, the ultimate purpose of an ABC system is simply to produce more detailed financial statements for external investors.',
-                        opts: ['True', 'False'],
-                        correct: 1,
-                        explanation: 'False. The textbook says the ultimate purpose of ABC is to help a company make better decisions — an internal, managerial use, not an external reporting requirement.',
-                        mnemonic: '💡 Memory tip: ABC lives in the "Use it to decide" step (Step 5), not in a report mailed to shareholders.'
-                  },
-
-                  {
                         type: 'ord',
-                        q: "Place ABC's five steps, per the textbook, in the correct order.",
+                        q: "Place ABC's five steps in the correct order.",
                         items: [
                               { text: 'Identify overhead cost activities', order: 0 },
                               { text: 'Analyze individual overhead costs in terms of those cost activities', order: 1 },
@@ -173,18 +164,6 @@
                         ],
                         explanation: "This is the exact textbook wording for the five ABC steps. You can't analyze a cost activity before identifying it, can't pick a driver before analyzing what causes the cost, and can't use the data to decide anything until it's actually been assigned.",
                         mnemonic: '💡 Memory tip: I-A-I-A-U — "I Am Incredibly Awesome... Undoubtedly." Identify, Analyze, Identify (drivers), Assign, Use.'
-                  },
-
-                  {
-                        type: 'mc',
-                        q: "Can a real company's ABC analysis be limited to exactly four overhead cost activities — one per category — the way Lily's simplified example is structured?",
-                        opts: ['No — the four categories (unit-level, batch-level, product line, facility support) are fixed, but a company can identify any number of specific activities within each category',
-                              'Yes — ABC always requires exactly one activity to be identified per category',
-                              'No — a company can only use ABC if it identifies at least ten separate activities',
-                              'Yes — the number of categories and the number of activities are always the same thing in ABC'],
-                        correct: 0,
-                        explanation: "Lily's story uses one activity per category for simplicity. In reality, a company might separately track machine depreciation, electricity, and machine maintenance as three distinct unit-level activities instead of lumping them into one — more precision, but more cost and complexity to maintain.",
-                        mnemonic: '💡 Memory tip: Four categories are the walls of the house; how many rooms you build inside each one is up to you.'
                   },
 
                   {
@@ -336,15 +315,6 @@
                   },
 
                   {
-                        type: 'tf',
-                        q: 'Gathering the detailed line-item data needed for Step 2 of an ABC analysis (figuring out what percentage of each cost is caused by each activity) is generally quick and inexpensive to do.',
-                        opts: ['True', 'False'],
-                        correct: 1,
-                        explanation: "False. The transcript is explicit that this step is genuinely hard — it typically requires time logs, surveys, or watching employees work, and can create real pushback from staff who don't like being tracked.",
-                        mnemonic: "💡 Memory tip: Step 2 is the step that scares companies away from ABC — good data is expensive to get."
-                  },
-
-                  {
                         type: 'mc',
                         q: 'Why might employees resist a company\'s efforts to gather the detailed time-allocation data needed for an ABC analysis?',
                         opts: ["People generally don't like having how they spend their time tracked or watched",
@@ -369,7 +339,7 @@
 
                   {
                         type: 'mc',
-                        q: 'Per the textbook, a cost driver is best defined as:',
+                        q: 'A cost driver is best defined as:',
                         opts: ['A numerical measure used to reflect the amount of a specific overhead cost that is associated with a particular activity',
                               'The total dollar amount of overhead assigned to a specific product',
                               'A qualitative judgment about how "messy" or complex a production process feels',
@@ -407,7 +377,7 @@
 
                   {
                         type: 'tf',
-                        q: 'Per the textbook, in an ABC system, facility support overhead costs are treated as common costs that are not assigned to any specific product, division, or product line.',
+                        q: 'In an ABC system, facility support overhead costs are treated as common costs that are not assigned to any specific product, division, or product line.',
                         opts: ['True', 'False'],
                         correct: 0,
                         explanation: "This is a direct REMEMBER THIS textbook statement. Facility support is set aside as a shared, common cost of doing business at all — not distributed to individual products.",
@@ -442,7 +412,7 @@
 
                   {
                         type: 'ord',
-                        q: 'Place the three necessary steps for assigning overhead cost to production, per the textbook review, in the correct order.',
+                        q: 'Place the three necessary steps for assigning overhead cost to productio in the correct order.',
                         items: [
                               { text: 'Gather the overhead cost and numerical cost driver data', order: 0 },
                               { text: 'Compute the amount of overhead cost per cost driver event', order: 1 },
@@ -622,7 +592,7 @@
 
                   {
                         type: 'tf',
-                        q: 'Per the textbook review, designing and operating an ABC system usually costs more than using a simple traditional system based on a single activity measure such as direct labor hours.',
+                        q: 'Designing and operating an ABC system usually costs more than using a simple traditional system based on a single activity measure such as direct labor hours.',
                         opts: ['True', 'False'],
                         correct: 0,
                         explanation: 'This is a direct REMEMBER THIS textbook statement. ABC requires more data-gathering, more analysis, and more ongoing maintenance than a single flat rate.',
@@ -631,7 +601,7 @@
 
                   {
                         type: 'tf',
-                        q: 'Per the textbook review, the increased cost of operating an ABC system is never worth it, regardless of how much it improves decision-making.',
+                        q: 'The increased cost of operating an ABC system is never worth it, regardless of how much it improves decision-making.',
                         opts: ['True', 'False'],
                         correct: 1,
                         explanation: 'False. The textbook says the increased cost "pays for itself when use of the improved ABC data results in significantly better decisions" — meaning it absolutely CAN be worth it, as Lily\'s Gingerbread Cheesecake Supreme fix demonstrates.',
@@ -640,7 +610,7 @@
 
                   {
                         type: 'ms',
-                        q: 'Per the textbook review, what are the two characteristics of a good management accounting measure? Select both.',
+                        q: 'What are the two characteristics of a good management accounting measure? Select both.',
                         opts: ['Reflects economic reality', 'Motivates correct behavior', 'Requires no cost to implement', 'Must be approved by the SEC before use', 'Is identical across every company in an industry'],
                         correctSet: [0, 1],
                         explanation: 'The textbook names exactly two characteristics: a good measure reflects economic reality (tells the truth about what\'s really happening) and motivates correct behavior (points people toward the right fix).',
