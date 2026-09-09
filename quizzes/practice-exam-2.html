@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C213 Accounting for Decision Makers · Diagnostic Practice Exam</title>
+      <link rel="stylesheet" href="../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Sections</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C213 Accounting for Decision Makers · Cumulative Review</p>
+            <h1>Diagnostic<br><span>Practice Exam</span></h1>
+      </header>
+
+      <p
+            style="text-align:center;color:var(--muted);max-width:var(--content-w);margin:-1.5rem auto 2rem;font-size:.9rem;line-height:1.5;">
+            69 questions — the same length and topic mix as the real Pre-Assessment/OA, weighted to the official test blueprint:<br>
+            51% Financial Analysis · 26% Cost Systems · 10% Controls &amp; Regulations · 7% Profit Planning (CVP) · 6% Budgeting
+      </p>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  /* ══════════════════════════════════════════════════════════════
+                     FINANCIAL ANALYSIS — 51% (35 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'mc',
+                        q: 'What is the primary focus of accounting?',
+                        opts: ['The impact of a business\'s activities on its overall financial performance',
+                              'The impact of a business\'s activities on its brand reputation',
+                              'The impact of a business\'s activities on employee morale',
+                              'The impact of a business\'s activities on local community relations'],
+                        correct: 0,
+                        explanation: 'Accounting exists to answer questions like "Is the company profitable? Can it pay its debts? Is it financially stable?" — all of which describe financial performance, not reputation, morale, or community standing.',
+                        mnemonic: '💡 Memory tip: Accounting = the financial big picture, not the PR department.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which financial report summarizes cash inflows and outflows from operating, investing, and financing activities over a period of time?',
+                        opts: ['Statement of cash flows', 'Cash disbursement ledger', 'Treasury cash summary', 'Operating cash worksheet'],
+                        correct: 0,
+                        explanation: 'The statement of cash flows is the one financial statement built specifically around actual cash movement, organized into the three required categories: operating, investing, and financing.',
+                        mnemonic: '💡 Memory tip: Only one of the three primary statements is cash-basis — that\'s the SCF.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which group of financial statement users would have a primary concern with a company\'s ability to fund employee healthcare benefits?',
+                        opts: ['Employees', 'Competitors', 'Suppliers', 'The press'],
+                        correct: 0,
+                        explanation: 'Employees directly depend on benefits like healthcare, pensions, and job stability, making them the user group most concerned with whether the company can actually fund those promises.',
+                        mnemonic: '💡 Memory tip: Match the concern to who it personally affects — benefits affect the people receiving them.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is a key benefit a company gains by preparing its financial statements in accordance with GAAP?',
+                        opts: ['Greater comparability to other companies\' financial statements',
+                              'A guaranteed reduction in income tax owed',
+                              'A guaranteed increase in reported net income',
+                              'Exemption from external audit requirements'],
+                        correct: 0,
+                        explanation: 'GAAP is a shared set of rules and conventions. Following it doesn\'t change tax owed or net income by itself, and it doesn\'t exempt a company from audits — its real benefit is that it lets users compare one company\'s statements to another\'s on a consistent basis.',
+                        mnemonic: '💡 Memory tip: GAAP\'s job is comparability, not favorable numbers.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which factor has had the most significant impact on accounting practices in recent years?',
+                        opts: ['Information technology', 'New tax legislation', 'Changes in consumer spending habits', 'International currency exchange rates'],
+                        correct: 0,
+                        explanation: 'Technology has transformed accounting through speed, volume, automation, accuracy, and access to real-time data — ERP systems, cloud accounting platforms, and automated reporting are all direct results.',
+                        mnemonic: '💡 Memory tip: Technology is called out as the single most significant driver of change in the field.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two categories of information are revealed on the balance sheet?',
+                        opts: ['Ownership', 'Debt', 'Revenues', 'Expenses'],
+                        correctSet: [0, 1],
+                        explanation: 'The balance sheet reports Assets = Liabilities + Owners\' Equity — meaning what a company owns, what it owes (debt), and who owns the residual claim (ownership). Revenues and expenses belong on the income statement instead.',
+                        mnemonic: '💡 Memory tip: Balance sheet = ownership + debt (a snapshot); Income statement = revenues − expenses (a period).'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which term describes the residual interest in a company\'s net assets after liabilities are subtracted?',
+                        opts: ['Owners\' equity', 'Operating income', 'Liabilities', 'Revenues'],
+                        correct: 0,
+                        explanation: 'Owners\' equity = Assets − Liabilities, which is exactly the definition of "residual interest" — what\'s left over for owners once every obligation to creditors is satisfied.',
+                        mnemonic: '💡 Memory tip: "Residual" = what\'s left over — that\'s equity, by definition.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A corporation has total liabilities of $420 million, total owners\' equity of $180 million, and current assets of $95 million. What is the value of the firm\'s long-term assets?',
+                        opts: ['$505 million', '$600 million', '$685 million', '$325 million'],
+                        correct: 0,
+                        explanation: 'Total assets = Liabilities + Equity = $420M + $180M = $600M. Long-term assets = Total assets − Current assets = $600M − $95M = $505M.',
+                        mnemonic: '💡 Memory tip: Build total assets from the balance sheet identity first, then subtract off what\'s current to isolate long-term.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which situation should result in revenue recognition for the year ending 12/31/15 if the firm uses accrual-basis accounting?',
+                        opts: ['In 2015, a company performs consulting services for a client who will pay the invoice in 2016',
+                              'In 2015, a company signs a contract to provide consulting services next year (2016)',
+                              'In 2015, a company collects a retainer for services it will perform in 2016',
+                              'In 2015, a company collects cash for consulting services it performed in 2014'],
+                        correct: 0,
+                        explanation: 'Revenue is recognized when the service is delivered, not when a contract is merely signed and not when cash changes hands. Performing the service in 2015 triggers 2015 revenue, even if payment lags into 2016.',
+                        mnemonic: '💡 Memory tip: The trigger is delivery of goods/services — not signing a contract, and not the movement of cash.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which category on the statement of cash flows summarizes cash receipts and payments involving a company\'s owners and creditors?',
+                        opts: ['Cash flows from financing activities', 'Cash flows from operating activities', 'Cash flows from investing activities', 'Cash flows from business activities'],
+                        correct: 0,
+                        explanation: 'Financing activities capture how the company is funded — cash to/from stockholders (issuing stock, dividends, buybacks) and cash to/from creditors (borrowing, repaying loan principal).',
+                        mnemonic: '💡 Memory tip: Financing = the company\'s own stock and debt obligations.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Where would an investor find a summary of a company\'s significant accounting policies?',
+                        opts: ['In the notes to the financial statements', 'In the balance sheet', 'In the income statement', 'In the statement of cash flows'],
+                        correct: 0,
+                        explanation: 'GAAP allows multiple acceptable methods for things like depreciation and inventory valuation — the notes disclose which specific methods a company chose, so readers can properly interpret the numbers.',
+                        mnemonic: '💡 Memory tip: If a question mentions "methods," "assumptions," or "policies," think Notes.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Match each definition to the accounting concept or qualitative characteristic it describes.',
+                        cols: ['Verifiability', 'Relevance', 'Materiality', 'Conservatism'],
+                        items: [
+                              { text: 'Information that can be confirmed or checked by an independent party', answer: 'Verifiability' },
+                              { text: 'Information that relates directly to the decision at hand', answer: 'Relevance' },
+                              { text: 'Information significant enough that leaving it out could change a user\'s decision', answer: 'Materiality' },
+                              { text: 'The practice of recognizing losses as soon as they\'re anticipated, while gains wait until they\'re realized', answer: 'Conservatism' }
+                        ],
+                        explanation: 'These four are common exam cues: "can be checked" points to Verifiability, "matters to the decision" points to Relevance, "big enough to matter" points to Materiality, and "cautious about losses" points to Conservatism.',
+                        mnemonic: '💡 Memory tip: Verifiable = checkable, Relevant = matters now, Material = big enough, Conservative = cautious on losses.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place the five steps of the accounting decision cycle in the correct order, from first to last.',
+                        items: [
+                              { text: 'Gather information', order: 0 },
+                              { text: 'Prepare financial statements', order: 1 },
+                              { text: 'Analyze financial statements', order: 2 },
+                              { text: 'Make the decision', order: 3 },
+                              { text: 'Implement the decision', order: 4 }
+                        ],
+                        explanation: 'The cycle always starts with raw, unorganized data (gathering), which is then formally organized under GAAP (preparing statements), then interpreted (analysis) before a choice is made (decision) and finally acted on (implementation).',
+                        mnemonic: '💡 Memory tip: Gather → Prepare → Analyze → Decide → Implement — you can\'t analyze what hasn\'t been prepared, and you can\'t implement what hasn\'t been decided.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company reports net income of $5,000 and a market value of shares outstanding of $60,000. What is the price-earnings (PE) ratio for this company?',
+                        opts: ['12.0', '10.5', '14.4', '8.3'],
+                        correct: 0,
+                        explanation: 'Price-Earnings Ratio = Market Value of Shares ÷ Net Income = $60,000 ÷ $5,000 = 12.0.',
+                        mnemonic: '💡 Memory tip: PE ratio asks "how many dollars of market value does each dollar of earnings support?"'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What does it mean if a company has a debt ratio of 108%?',
+                        opts: ['The company has 8% more total liabilities than total assets',
+                              'The company has 8% more current liabilities than current assets',
+                              'The company has 8% more total liabilities than net income',
+                              'The company has 8% more total liabilities than gross sales'],
+                        correct: 0,
+                        explanation: 'Debt Ratio = Total Liabilities ÷ Total Assets. A ratio over 100% means liabilities exceed assets — meaning the company technically has negative equity.',
+                        mnemonic: '💡 Memory tip: Debt ratio always compares liabilities to assets — nothing else.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is consistent with a continual decline in gross profit if a firm\'s cost of goods sold remains the same each period?',
+                        opts: ['Continual decrease in sales', 'Continual increase in interest expense', 'Continual increase in income taxes', 'Continual decrease in salaries'],
+                        correct: 0,
+                        explanation: 'Gross Profit = Sales − COGS. If COGS is holding steady but gross profit keeps falling, the only variable left that could be driving the decline is Sales itself dropping. Interest, taxes, and salaries all sit below the gross profit line and don\'t affect it.',
+                        mnemonic: '💡 Memory tip: Gross profit only has two inputs — Sales and COGS. If one\'s frozen, the other is doing all the moving.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two cash flow adequacy ratios (Cash from Operations ÷ Cash Required for Investing Activities) represent a "cash cow" — a company generating enough cash from operations to fund its own investing needs?',
+                        opts: ['$3,200 / $2,900', '$4,100 / $5,650', '$6,750 / $6,200', '$2,400 / $3,900'],
+                        correctSet: [0, 2],
+                        explanation: 'A cash cow has a ratio ≥ 1.0, meaning operations alone generate enough cash to cover investing needs. $3,200/$2,900 ≈ 1.10 and $6,750/$6,200 ≈ 1.09 both clear that bar. The other two fall below 1.0, meaning those companies would need outside financing.',
+                        mnemonic: '💡 Memory tip: Cash cow means the numerator (operations) beats the denominator (investing needs) — ratio ≥ 1.0.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which formula yields a cash times interest earned ratio of 9?',
+                        opts: ['Cash before interest and taxes of $18,000 / cash paid for interest of $2,000',
+                              'Cash before interest and taxes of $18,000 / cash paid for income taxes of $2,000',
+                              'Cash before interest and taxes of $18,000 / cash from operations of $2,000',
+                              'Cash before interest and taxes of $18,000 / cash paid for acquisitions of $2,000'],
+                        correct: 0,
+                        explanation: 'Cash Times Interest Earned = Cash from Operations before Interest and Taxes ÷ Cash Paid for Interest = $18,000 ÷ $2,000 = 9. The denominator must specifically be cash paid for interest — not taxes, operations, or acquisitions.',
+                        mnemonic: '💡 Memory tip: The name of the ratio tells you the denominator — "interest earned" means interest paid sits on the bottom.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which form of debt should be reported in the long-term liability category?',
+                        opts: ['Notes payable expected to be paid in 20 months',
+                              'Unearned revenue that will be earned in 6 months',
+                              'Accounts payable due in 45 days',
+                              'Salaries payable due in 10 days'],
+                        correct: 0,
+                        explanation: 'The one-year rule governs current vs. long-term classification. Notes payable due in 20 months falls outside the one-year window, making it long-term. The other three are all due within a year, making them current liabilities.',
+                        mnemonic: '💡 Memory tip: Anything settling within 12 months is current — anything beyond that is long-term.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company purchased office furniture to be used in the business for $85,000 cash. What will be the impact of this event on the company\'s balance sheet on that date?',
+                        opts: ['Furniture will increase $85,000, and cash will decrease $85,000',
+                              'Cash will decrease $85,000, and paid-in capital will decrease $85,000',
+                              'Furniture will increase $85,000, and retained earnings will decrease $85,000',
+                              'Cash will decrease $85,000, and notes payable will decrease $85,000'],
+                        correct: 0,
+                        explanation: 'This is an asset swap — cash decreases and furniture (an asset) increases by the same amount. Total assets, liabilities, and equity are all unaffected in total; only the composition of assets changes.',
+                        mnemonic: '💡 Memory tip: Buying an asset for cash is always an asset-for-asset trade — equity never moves.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company paid $9,000 cash for a one-year insurance policy. The policy period begins the following month. What will be the impact of this event on the company\'s balance sheet on the date of payment?',
+                        opts: ['Prepaid insurance will increase $9,000, and cash will decrease $9,000',
+                              'Cash will decrease $9,000, and paid-in capital will decrease $9,000',
+                              'Prepaid insurance will decrease $9,000, and accounts payable will decrease $9,000',
+                              'Cash will decrease $9,000, and accounts receivable will increase $9,000'],
+                        correct: 0,
+                        explanation: 'Since the coverage period hasn\'t started yet, no expense has been incurred. The payment is recorded as Prepaid Insurance — an asset — with cash decreasing by the same amount. It\'s another asset-for-asset swap.',
+                        mnemonic: '💡 Memory tip: Paid but not yet incurred = Prepaid Expense (an asset), not an expense yet.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two items affect the measurement of net income?',
+                        opts: ['Dividends distributed to shareholders', 'Additional capital contributed by owners', 'Selling and administrative expenses', 'Gains and losses from ordinary operations'],
+                        correctSet: [2, 3],
+                        explanation: 'Net Income = Revenues − Expenses (including ordinary gains/losses). Dividends and owner capital contributions are transactions with owners — they affect equity directly but never pass through the income statement.',
+                        mnemonic: '💡 Memory tip: Owner transactions (dividends, contributions) skip the income statement entirely.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two subtotals appear on a multi-step income statement?',
+                        opts: ['Gross profit', 'Total liabilities', 'Current assets', 'Operating income'],
+                        correctSet: [0, 3],
+                        explanation: 'A multi-step income statement builds toward net income through subtotals like Gross Profit and Operating Income (EBIT), separating core operating performance from non-operating items. Total liabilities and current assets are balance sheet items.',
+                        mnemonic: '💡 Memory tip: "Multi-step" means multiple subtotals along the way to net income — gross profit and operating income are the classic two.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A bakery using accrual accounting purchased 15 display cases in August 2015. In September 2015, 6 of the 15 cases were sold to customers, who signed contracts to pay half in November 2015 and the remaining half in December 2015. The bakery pays sales commissions on each case sold, with September commissions paid in October. The bakery paid $2,200 for a radio ad that ran in August 2015. In which month should the advertising cost be expensed?',
+                        opts: ['August 2015', 'September 2015', 'October 2015', 'November 2015'],
+                        correct: 0,
+                        explanation: 'Advertising is a period cost, directly expensed in the period the benefit occurs — which is when the ad actually ran (August), not when related sales, commissions, or collections happen.',
+                        mnemonic: '💡 Memory tip: Direct expensing means the cost hits the income statement the moment the benefit occurs — payment timing is irrelevant.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'On March 1, 2015, a company purchased machinery costing $650,000 with a useful life of five years. At the time of purchase, the company also bought a one-year insurance policy on the machinery for $7,200. How much insurance expense should the company recognize for the year ending in 2015?',
+                        opts: ['$6,000', '$3,600', '$7,200', '$4,800'],
+                        correct: 0,
+                        explanation: 'The policy runs 12 months at $600/month ($7,200 ÷ 12). From March 1 through December 31 is 10 months of coverage: $600 × 10 = $6,000. The remaining 2 months of coverage carry into 2016 as prepaid insurance.',
+                        mnemonic: '💡 Memory tip: Prorate by counting only the months of coverage that actually fall within the fiscal year.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'In February, a company provided consulting services worth $18,000. Customers paid $7,000 cash for these services and promised to pay the remainder the following month. What will be the total impact of these services on the company\'s balance sheet, other than the $7,000 increase in cash?',
+                        opts: ['Accounts receivable will increase $11,000', 'Retained earnings will increase $18,000', 'Retained earnings will decrease $4,000', 'Accounts receivable will decrease $11,000'],
+                        correctSet: [0, 1],
+                        explanation: 'Revenue is recognized in full ($18,000) once the service is delivered, regardless of how much cash was collected. The $11,000 not yet collected ($18,000 − $7,000) becomes Accounts Receivable. Revenue increases Retained Earnings by the full $18,000.',
+                        mnemonic: '💡 Memory tip: Total revenue earned always flows to retained earnings in full — the cash/receivable split only affects which asset account absorbs the rest.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What was the 2015 net profit amount if the 2016 pro-forma net profit of $214,000 was based on an 18% increase?',
+                        opts: ['$181,356', '$252,520', '$175,480', '$196,880'],
+                        correct: 0,
+                        explanation: 'If $214,000 reflects an 18% increase over 2015, then $214,000 = 2015 profit × 1.18. Solving: 2015 profit = $214,000 ÷ 1.18 ≈ $181,356. Divide to reverse a percentage increase — don\'t multiply.',
+                        mnemonic: '💡 Memory tip: To undo a percentage increase, divide by (1 + the rate) — don\'t multiply by it.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is a common category in a statement of cash flows?',
+                        opts: ['Cash from financing activities', 'Cash from marketing activities', 'Cash from production activities', 'Cash from planning activities'],
+                        correct: 0,
+                        explanation: 'The three required categories are Operating, Investing, and Financing — "marketing," "production," and "planning" activities are not SCF categories.',
+                        mnemonic: '💡 Memory tip: Only three categories exist — Operating, Investing, Financing. Memorize those three and rule out everything else.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which cash flow category would include "cash received from the issuance of company stock"?',
+                        opts: ['Cash from financing activities', 'Cash from investing activities', 'Cash from charitable activities', 'Cash from sponsoring activities'],
+                        correct: 0,
+                        explanation: 'Issuing stock is a transaction with the company\'s own owners — that places it squarely in financing activities, alongside borrowing, repaying debt principal, and paying dividends.',
+                        mnemonic: '💡 Memory tip: Financing = the company\'s own stock and debt, full stop.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which item is an investing activity?',
+                        opts: ['Cash payments for the purchase of long-term equipment', 'Cash receipts from issuance of stock', 'Cash payments of dividends', 'Cash receipts from dividend revenue'],
+                        correct: 0,
+                        explanation: 'Investing activities relate to long-term assets — buying or selling PPE, or investing in other entities. Issuing stock and paying dividends are financing activities; receiving dividend revenue is operating (under U.S. GAAP).',
+                        mnemonic: '💡 Memory tip: Investing = long-term assets and stakes in other entities.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What impact does the sale of a company vehicle have on the statement of cash flows?',
+                        opts: ['Increase in cash from investing activities', 'Increase in cash from operating activities', 'Increase in cash from financing activities', 'Decrease in cash from operating activities'],
+                        correct: 0,
+                        explanation: 'Selling a long-term asset like a vehicle is an investing transaction — the cash received increases cash from investing activities.',
+                        mnemonic: '💡 Memory tip: Anything involving a long-term asset changing hands belongs in Investing.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is known about the direct and indirect methods of preparing the statement of cash flows?',
+                        opts: ['The indirect method is more popular among large U.S. companies',
+                              'The direct method is more popular among large U.S. companies',
+                              'Both methods have equal popularity among large U.S. companies',
+                              'Neither method is commonly used by large U.S. companies'],
+                        correct: 0,
+                        explanation: 'The indirect method is more widely used because it\'s easier to prepare from existing financial statements — it starts with net income and adjusts for non-cash items and changes in working capital. Note: even firms that use the direct method must still disclose the indirect reconciliation in the footnotes.',
+                        mnemonic: '💡 Memory tip: Direct is easier to understand; indirect is easier to prepare — and "easier to prepare" wins in practice.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company\'s statement of cash flows includes the following cash transactions: Sales $980,000; Inventory Purchase −$610,000; Property and Equipment Purchase −$190,000; Interest Payment on Long-Term Debt −$18,000; Payment of Wages −$240,000; Payment of Rent −$32,000; Borrowing Long-Term Debt $150,000; Payment of Cash Dividends −$12,000; Repurchase of Treasury Stock −$25,000. Assuming the company uses US GAAP standards, what is the total cash flow from financing activities?',
+                        opts: ['$113,000', '$150,000', '$138,000', '$125,000'],
+                        correct: 0,
+                        explanation: 'Financing activities here are: Borrowing Long-Term Debt (+$150,000), Payment of Cash Dividends (−$12,000), and Repurchase of Treasury Stock (−$25,000). $150,000 − $12,000 − $25,000 = $113,000. Sales, inventory, wages, and rent are operating; the equipment purchase is investing; interest paid is operating under US GAAP.',
+                        mnemonic: '💡 Memory tip: Sort every line item into O/I/F first — financing only includes debt principal and equity transactions.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company has current assets of $240,000 and current liabilities of $160,000. What is the company\'s current ratio, and what does it indicate?',
+                        opts: ['1.5 — the company has $1.50 in current assets for every $1.00 of current liabilities',
+                              '0.67 — the company has $0.67 in current liabilities for every $1.00 of current assets',
+                              '1.5 — the company has $1.50 in current liabilities for every $1.00 of current assets',
+                              '$80,000 — the dollar amount of working capital available'],
+                        correct: 0,
+                        explanation: 'Current Ratio = Current Assets ÷ Current Liabilities = $240,000 ÷ $160,000 = 1.5. The interpretation follows the same direction as the formula: assets on top, liabilities on bottom.',
+                        mnemonic: '💡 Memory tip: Whatever\'s in the numerator is what the ratio is measured "per dollar of" the denominator.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company reports net income of $45,000 for the year and pays no dividends. How does this net income affect the balance sheet?',
+                        opts: ['Retained earnings increases by $45,000', 'Cash increases by $45,000', 'Common stock increases by $45,000', 'Retained earnings decreases by $45,000'],
+                        correct: 0,
+                        explanation: 'Net income flows directly into retained earnings through articulation between the income statement and balance sheet. It does not automatically mean cash increased by the same amount, since net income is measured on an accrual basis.',
+                        mnemonic: '💡 Memory tip: Net income → Retained Earnings is the classic articulation link between the two statements.'
+                  },
+
+                  /* ══════════════════════════════════════════════════════════════
+                     COST SYSTEMS — 26% (18 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'ms',
+                        q: 'What does management accounting provide?',
+                        opts: ['The insight that management needs so the business can operate more effectively',
+                              'The insight that outside stakeholders need to compare companies within an industry',
+                              'The detailed data managers need to make decisions that create a competitive edge',
+                              'The information the IRS needs to determine whether to audit a company'],
+                        correctSet: [0, 2],
+                        explanation: 'Management accounting is built for internal decision-makers — planning, controlling, and evaluating the business. It is not designed for external stakeholders or tax authorities; that\'s the domain of financial accounting and tax reporting.',
+                        mnemonic: '💡 Memory tip: Management accounting looks inward, toward the people running the business.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'How does management accounting differ from financial accounting?',
+                        opts: ['Management accounting is used primarily for internal planning, control, and evaluation',
+                              'Management accounting presents an unbiased view of a company\'s economic performance',
+                              'Management accounting is restricted to providing financial rather than nonfinancial data',
+                              'Management accounting is not used to gain a competitive advantage in the marketplace'],
+                        correct: 0,
+                        explanation: 'Financial accounting is standardized and built for outside users (GAAP-based, historical). Management accounting is flexible, forward-looking, and customized specifically for internal planning and decision-making.',
+                        mnemonic: '💡 Memory tip: Financial accounting reports outward and backward; management accounting reports inward and forward.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which account appears on the balance sheet of a manufacturing company but not on the balance sheet of a service-oriented company?',
+                        opts: ['Inventory', 'Cash', 'Accounts receivable', 'Equipment'],
+                        correct: 0,
+                        explanation: 'Service companies sell services, not physical goods — they carry no inventory at all. Manufacturing companies carry three types of inventory (raw materials, WIP, finished goods). Cash, receivables, and equipment can appear on either type of company\'s balance sheet.',
+                        mnemonic: '💡 Memory tip: No physical product to sell means no inventory account — that\'s the service-company giveaway.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What term describes a cost that will change in the future depending on which decision is made?',
+                        opts: ['Differential cost', 'Sunk cost', 'Opportunity cost', 'Out-of-pocket cost'],
+                        correct: 0,
+                        explanation: 'A differential (incremental/relevant) cost is a future cost that changes based on which alternative is chosen — exactly matching this definition. Sunk costs are already spent and irrelevant to the decision; opportunity cost is the benefit given up, not a cash cost that changes.',
+                        mnemonic: '💡 Memory tip: Differential = the cost that\'s different between your options.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two examples are period costs?',
+                        opts: ['Direct labor', 'Administrative salaries', 'Advertising expense', 'Manufacturing overhead'],
+                        correctSet: [1, 2],
+                        explanation: 'Period costs are expensed immediately, not inventoried — administrative salaries and advertising are classic examples, since they\'re incurred outside the factory. Direct labor and manufacturing overhead are both product costs, tied to producing the goods.',
+                        mnemonic: '💡 Memory tip: Product costs happen inside the factory; period costs happen outside it (selling and admin).'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'A company manufactures custom leather handbags. Which two costs would the company classify as period costs?',
+                        opts: ['Leather cost', 'Salary of the craftsperson sewing the bags', 'Salary of the front-desk receptionist', 'Marketing and advertising cost'],
+                        correctSet: [2, 3],
+                        explanation: 'Leather (direct material) and the craftsperson\'s wages (direct labor) are both product costs — they happen inside production. The receptionist\'s salary and marketing costs happen outside the manufacturing process, making them period costs.',
+                        mnemonic: '💡 Memory tip: Ask "does this cost happen on the factory floor, or in the office/marketing department?"'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What role do ethical standards play in management accounting?',
+                        opts: ['To guide the resolution of possible ethical dilemmas the management accountant may encounter',
+                              'To prevent all unethical behavior by anyone the management accountant works with',
+                              'To guarantee the management accountant can always predict how others will act',
+                              'To restrict the management accountant to working only with fully ethical companies'],
+                        correct: 0,
+                        explanation: 'The IMA\'s Code of Ethical Professional Practice (Competence, Confidentiality, Integrity, Objectivity) is a guide for navigating gray areas — it can\'t guarantee others\' behavior or predict outcomes, but it gives the accountant a framework for resolving dilemmas.',
+                        mnemonic: '💡 Memory tip: Ethical standards are a compass for the accountant\'s own choices, not a shield against everyone else\'s.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'During its first month of operations, a manufacturer incurs the following costs related to activities within its factory: Direct materials $9,000; Indirect materials $1,500; Direct labor $22,000; Indirect labor $4,000; Factory rent $6,000; Depreciation on factory equipment $5,500. What are the manufacturer\'s total product costs for the month?',
+                        opts: ['$48,000', '$31,000', '$36,500', '$42,500'],
+                        correct: 0,
+                        explanation: 'Product cost = Direct Materials + Direct Labor + ALL Manufacturing Overhead. Overhead includes indirect materials, indirect labor, factory rent, AND depreciation on factory equipment — everything happening "inside the factory." $9,000 + $22,000 + $1,500 + $4,000 + $6,000 + $5,500 = $48,000.',
+                        mnemonic: '💡 Memory tip: If you see the word "factory" anywhere in a cost\'s description, it belongs in the product cost total.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'During its first month of operations, a manufacturer incurs the following costs: Direct materials $20,000; Direct labor $35,000; Manufacturing overhead $45,000. What amount should be reported as cost of goods sold if 4,000 units are produced and 3,200 are sold?',
+                        opts: ['$80,000', '$100,000', '$64,000', '$88,000'],
+                        correct: 0,
+                        explanation: 'Total production cost = $20,000 + $35,000 + $45,000 = $100,000. Cost per unit = $100,000 ÷ 4,000 units = $25/unit. COGS = $25 × 3,200 units sold = $80,000. The remaining 800 units stay in Finished Goods Inventory, not expensed yet.',
+                        mnemonic: '💡 Memory tip: COGS only reflects units actually SOLD — unsold units stay parked in inventory, not on the income statement.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two costs are included when calculating inventory costs?',
+                        opts: ['Selling expenses', 'Direct materials', 'Manufacturing overhead', 'Legal fees'],
+                        correctSet: [1, 2],
+                        explanation: 'Inventory (product) costs include direct materials, direct labor, and manufacturing overhead. Selling expenses and legal fees are period costs, expensed immediately rather than capitalized into inventory.',
+                        mnemonic: '💡 Memory tip: Inventory costs are always the three product-cost ingredients: materials, labor, overhead.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'In which scenario would activity-based costing (ABC) provide more accurate cost information than traditional costing?',
+                        opts: ['A company produces six highly differentiated products with significantly different demands on overhead resources',
+                              'Direct materials and direct labor make up nearly all of a company\'s costs, and the small remaining overhead is closely tied to direct labor hours',
+                              'A company produces only one product line, so all overhead is allocated to that single line',
+                              'A company produces several products that require very similar production processes with minimal variation in overhead demands'],
+                        correct: 0,
+                        explanation: 'ABC shines when products are diverse and consume overhead differently — a single cost driver can\'t capture that variation accurately. When products are similar, overhead is simple, or there\'s only one product line, traditional costing works just fine and ABC\'s added complexity isn\'t worth it.',
+                        mnemonic: '💡 Memory tip: More product diversity + more complex overhead = more reason to use ABC.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Match each overhead cost example to its ABC activity level.',
+                        cols: ['Unit-Level', 'Batch-Level', 'Product-Line', 'Facility-Level'],
+                        items: [
+                              { text: 'Direct materials consumed for each individual unit produced', answer: 'Unit-Level' },
+                              { text: 'A quality inspection performed once per production batch, regardless of batch size', answer: 'Batch-Level' },
+                              { text: 'Engineering time spent designing a specific new product model', answer: 'Product-Line' },
+                              { text: 'Property taxes on the factory building', answer: 'Facility-Level' }
+                        ],
+                        explanation: 'Ask what triggers the cost: a unit made (unit-level), a batch run (batch-level), a product\'s existence (product-line), or nothing at all — the factory just exists (facility-level).',
+                        mnemonic: '💡 Memory tip: Per unit, per batch, per product, or per plant — that order maps directly to the four ABC levels.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A city\'s parks department wants to assign the cost of hiring extra sanitation crews for a weekend food festival. Which consideration is the most appropriate cost driver?',
+                        opts: ['The number of festival attendees and vendors',
+                              'The hours the festival director spends planning the event',
+                              'The cost of the festival\'s liability insurance',
+                              'The amount of the vendor registration fee'],
+                        correct: 0,
+                        explanation: 'A good cost driver has a cause-and-effect relationship with the activity. More attendees and vendors directly means more trash and more sanitation work needed — that\'s what actually drives the crew size, not planning hours, insurance cost, or registration fees.',
+                        mnemonic: '💡 Memory tip: Ask "what actually causes this activity to grow or shrink?" — that\'s your driver.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A manufacturer produces three products: X, Y, and Z. The company uses the following information to determine activity rates for each cost pool:\n\nCost Pool 1: $240,000 total cost, 16,000 hours total activity\nCost Pool 2: $30,000 total cost, 600 pounds total activity\nCost Pool 3: $15,000 total cost, 150 moves total activity\n\nProduct X uses: 8,000 hours, 200 pounds, 30 moves.\n\nWhat is the total amount of overhead applied to Product X?',
+                        opts: ['$133,000', '$130,000', '$120,000', '$142,500'],
+                        correct: 0,
+                        explanation: 'Rates: Pool 1 = $240,000 ÷ 16,000 hrs = $15/hr. Pool 2 = $30,000 ÷ 600 lbs = $50/lb. Pool 3 = $15,000 ÷ 150 moves = $100/move. Applied to Product X: (8,000 × $15) + (200 × $50) + (30 × $100) = $120,000 + $10,000 + $3,000 = $133,000.',
+                        mnemonic: '💡 Memory tip: Calculate each pool\'s rate first, then apply each rate to that specific product\'s own usage — and don\'t forget any of the three pools.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A manufacturer produces three products: X, Y, and Z. The company uses the following information to determine activity rates for each cost pool:\n\nCost Pool 1: $240,000 total cost, 16,000 hours total activity\nCost Pool 2: $30,000 total cost, 600 pounds total activity\nCost Pool 3: $15,000 total cost, 150 moves total activity\n\nProduct Z uses: 2,000 hours, 100 pounds, 60 moves.\n\nWhat is the total amount of overhead applied to Product Z?',
+                        opts: ['$41,000', '$35,000', '$46,000', '$30,000'],
+                        correct: 0,
+                        explanation: 'Using the same rates as Product X (Pool 1 = $15/hr, Pool 2 = $50/lb, Pool 3 = $100/move): (2,000 × $15) + (100 × $50) + (60 × $100) = $30,000 + $5,000 + $6,000 = $41,000. Note Product Z uses far fewer hours than Product X, but far more moves — that\'s exactly the kind of variation ABC is built to capture.',
+                        mnemonic: '💡 Memory tip: Once you\'ve found the pool rates, applying them to a second product is just plugging in that product\'s own usage numbers.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Given the following information: Pairs of shoes expected to be produced: 2,100,000. Pairs of shoes actually produced: 2,600,000. Overhead rate: $0.60 per pair. What is the amount of applied overhead?',
+                        opts: ['$1,560,000', '$1,260,000', '$1,000,000', '$3,120,000'],
+                        correct: 0,
+                        explanation: 'The overhead rate itself is built from ESTIMATED figures, but overhead APPLIED during the period uses ACTUAL activity. $0.60 × 2,600,000 actual pairs = $1,560,000. Using the expected 2,100,000 figure instead is the classic trap ($1,260,000).',
+                        mnemonic: '💡 Memory tip: The rate comes from estimates; what you apply comes from what actually happened.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Company B calculated the following information under traditional and activity-based costing for the production and sale of 2,000 units of Product D:\n\nTraditional: Sales $150,000, COGS $95,000, Gross margin $55,000\nActivity-Based Costing: Sales $150,000, COGS $165,000, Gross margin ($15,000)\n\nWhich decision should be made about the selling price of Product D?',
+                        opts: ['The price of Product D should be increased',
+                              'The price of Product D should be decreased',
+                              'The number of production batches of Product D should be increased',
+                              'Traditional costing should be used instead of activity-based costing'],
+                        correct: 0,
+                        explanation: 'ABC reveals the more accurate picture — Product D is actually generating a $15,000 loss once overhead is properly traced, even though traditional costing made it look profitable. Since ABC costs are more accurate, the price needs to go up to actually cover the product\'s real cost.',
+                        mnemonic: '💡 Memory tip: When ABC shows a hidden loss that traditional costing missed, trust the ABC number and reprice accordingly.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company reported the following information for the production and sale of 300,000 units of a chemical product: Sales $900,000; Total production cost $930,000; Gross profit ($30,000). What would be the gross profit if the company increased their selling price per unit by $0.15?',
+                        opts: ['$15,000', '$30,000', '$45,000', '$75,000'],
+                        correct: 0,
+                        explanation: 'A price increase flows straight to the bottom line since costs don\'t change. Extra revenue = 300,000 units × $0.15 = $45,000. New gross profit = current gross profit (−$30,000) + $45,000 = $15,000.',
+                        mnemonic: '💡 Memory tip: A pure price increase is 100% incremental profit — multiply the per-unit increase by total units and add it straight to the existing gross profit.'
+                  },
+
+                  /* ══════════════════════════════════════════════════════════════
+                     CONTROLS & REGULATIONS — 10% (7 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'mc',
+                        q: 'Which body regulates a certified public accounting firm\'s audit practices when the firm is auditing a large publicly traded company?',
+                        opts: ['The Public Company Accounting Oversight Board (PCAOB)',
+                              'The Financial Accounting Standards Board (FASB)',
+                              'Another certified public accounting (CPA) firm',
+                              'The Internal Revenue Service (IRS)'],
+                        correct: 0,
+                        explanation: 'The PCAOB, created by Sarbanes-Oxley, oversees audit firms that audit public companies — inspecting them and enforcing audit quality standards. FASB sets GAAP itself, not audit practices; it doesn\'t regulate auditors.',
+                        mnemonic: '💡 Memory tip: PCAOB regulates the auditors; FASB sets the accounting rules those auditors check against.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which assurance does an external audit report provide for its readers?',
+                        opts: ['The company\'s financial statements fairly reflect its financial position',
+                              'The company will generate positive cash flows',
+                              'The company will be a good credit risk',
+                              'The company will generate net income'],
+                        correct: 0,
+                        explanation: 'An external audit provides reasonable assurance that the statements fairly present the company\'s financial position and comply with GAAP — it says nothing about future performance, cash flows, profitability, or creditworthiness.',
+                        mnemonic: '💡 Memory tip: An audit opinion is about whether the numbers are presented fairly — not whether the company is doing well.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two examples represent financial statement errors, as opposed to fraud or disagreements?',
+                        opts: ['A warehouse manager steals inventory and falsifies the count sheet to hide the theft',
+                              'An accounting clerk transposes digits when entering an invoice, understating an expense',
+                              'An outside auditor disagrees with management\'s estimate of warranty liability',
+                              'A staff accountant mistakenly records a prepaid expense as a current period expense'],
+                        correctSet: [1, 3],
+                        explanation: 'Errors are unintentional mistakes — transposed digits and a misclassified expense both fit that definition. The stolen inventory involves deliberate concealment (fraud), and the auditor\'s disagreement over an estimate is a judgment call between reasonable people (a disagreement), not a mistake.',
+                        mnemonic: '💡 Memory tip: Errors = accidental. Fraud = intentional deception. Disagreements = honest differences of judgment on the same facts.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which internal control is intended to ensure that a company does not mistakenly pay a supplier for an invoice that includes more items than were actually received?',
+                        opts: ['The receiving department counts and inspects items as received and forwards the receiving record to accounts payable',
+                              'The purchasing department authorizes the order of all items before they occur',
+                              'The company requires two signatures on each check before it is sent',
+                              'The accounts payable department uses prenumbered checks to pay supplier invoices'],
+                        correct: 0,
+                        explanation: 'The specific risk here is being billed for more than was physically received — that requires an independent physical count at receiving, cross-checked against the invoice. Authorization, dual signatures, and prenumbered checks are all good controls, but none of them verify the actual quantity received.',
+                        mnemonic: '💡 Memory tip: Match the control to the specific risk — "did we get what we\'re being billed for" needs an independent count.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two requirements must management of public companies meet under the Sarbanes-Oxley Act?',
+                        opts: ['They must provide an assessment of the effectiveness of internal controls with each annual report',
+                              'They must support a stronger, more independent board and audit committee',
+                              'Executives must be rotated to a new company every five years',
+                              'They must personally authorize every loan the company issues to any customer'],
+                        correctSet: [0, 1],
+                        explanation: 'SOX requires management to certify and assess internal controls annually, and it strengthens the independence and authority of the board and audit committee. It does not require executive rotation between companies, and it doesn\'t reach down to authorizing routine customer loans.',
+                        mnemonic: '💡 Memory tip: SOX targets internal control assessment and board/audit-committee independence — those are its two biggest management-facing requirements.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which two actions do internal auditors perform to help maintain the integrity of financial statements?',
+                        opts: ['They search for and investigate potential fraud',
+                              'They review financial records and evaluate internal controls',
+                              'They perform the initial accounting entries for day-to-day transactions',
+                              'They issue the official opinion on whether financial statements comply with GAAP'],
+                        correctSet: [0, 1],
+                        explanation: 'Internal auditors monitor operations, evaluate internal controls, and investigate fraud — serving as the company\'s front-line defense. They don\'t perform routine bookkeeping (that\'s a segregation-of-duties violation) and they aren\'t independent enough to issue the formal GAAP opinion — that\'s the external auditor\'s job.',
+                        mnemonic: '💡 Memory tip: Internal auditors investigate and evaluate; external auditors are the ones who issue the formal opinion.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is a significant role of the U.S. Securities and Exchange Commission (SEC) in financial reporting?',
+                        opts: ['They ensure that financial statement users are provided with reliable information to use in decision-making',
+                              'They ensure that external auditors have the resources needed to perform valuable professional services',
+                              'They support company management and boards of directors in the effective discharge of their responsibilities',
+                              'They provide training and representation to the controllers of public companies'],
+                        correct: 0,
+                        explanation: 'The SEC\'s mission centers on protecting investors and ensuring reliable financial reporting — its focus is the end user of the information, not resourcing auditors or supporting company management/controllers directly.',
+                        mnemonic: '💡 Memory tip: The SEC\'s core mission is protecting the people reading the financial statements.'
+                  },
+
+                  /* ══════════════════════════════════════════════════════════════
+                     PROFIT PLANNING (CVP) — 7% (5 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'ms',
+                        q: 'Which two concepts are studied in cost-volume-profit (CVP) analysis?',
+                        opts: ['Liabilities', 'Profit', 'Levels of activity (volume)', 'Inventory valuation method'],
+                        correctSet: [1, 2],
+                        explanation: 'CVP analysis, as the name states, studies the relationship between Cost, Volume, and Profit — specifically how changes in sales volume and cost behavior affect profitability. Liabilities and inventory valuation methods aren\'t part of the CVP relationship.',
+                        mnemonic: '💡 Memory tip: The name is the answer — Cost, Volume, Profit.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'What are two impacts on costs as sales volume increases?',
+                        opts: ['Total fixed costs will increase in direct proportion',
+                              'Total fixed costs will stay the same',
+                              'Fixed cost per unit will increase',
+                              'Fixed cost per unit will decrease'],
+                        correctSet: [1, 3],
+                        explanation: 'Total fixed costs don\'t change with volume (that\'s the definition of "fixed") — but since that same fixed dollar amount is now spread over more units, the fixed cost per unit goes down as volume rises.',
+                        mnemonic: '💡 Memory tip: Total fixed costs are frozen; fixed cost PER UNIT melts as volume climbs.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company manufactures and sells garden planters. Each planter sells for $45. The variable cost per planter is $17. Total fixed costs per month are $196,000. How many planters does the company need to sell each month to break even?',
+                        opts: ['7,000 planters', '5,000 planters', '8,400 planters', '4,000 planters'],
+                        correct: 0,
+                        explanation: 'Contribution Margin per unit = $45 − $17 = $28. Break-Even Units = Fixed Costs ÷ CM per Unit = $196,000 ÷ $28 = 7,000. Remember, this formula isn\'t on the provided formula sheet — you have to add "Fixed Costs ÷" in front of the CM-per-unit line yourself.',
+                        mnemonic: '💡 Memory tip: Break-even units = how many times the fixed-cost "hole" gets filled by each unit\'s contribution margin.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company\'s CVP graph shows fixed costs of $3,000 and a break-even point at 200 units. If each unit sells for $30, what do total revenues equal at the break-even point?',
+                        opts: ['$6,000', '$3,000', '$4,500', '$9,000'],
+                        correct: 0,
+                        explanation: 'At break-even, the revenue line and total cost line intersect — meaning Total Revenue = Total Costs. Total Revenue at that point is simply price × break-even units: $30 × 200 = $6,000.',
+                        mnemonic: '💡 Memory tip: At break-even, revenue and total costs are the SAME number — read either line at that point and you get the same answer.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company sells a product for $25 per unit, with variable costs of $15 per unit and fixed costs of $2,000 per month. What are total costs when the company sells 150 units in a month?',
+                        opts: ['$4,250', '$3,750', '$2,250', '$6,250'],
+                        correct: 0,
+                        explanation: 'Total Costs = Fixed Costs + (Variable Cost per Unit × Units) = $2,000 + ($15 × 150) = $2,000 + $2,250 = $4,250. Notice that price ($25) isn\'t used here at all — total cost only depends on fixed and variable costs, not the selling price.',
+                        mnemonic: '💡 Memory tip: Total costs = fixed + variable — selling price plays no role in that calculation at all.'
+                  },
+
+                  /* ══════════════════════════════════════════════════════════════
+                     BUDGETING — 6% (4 questions)
+                     ══════════════════════════════════════════════════════════════ */
+
+                  {
+                        type: 'mc',
+                        q: 'A company is experiencing an increase in its bad debt expense. Which change in credit policy would most likely cause this increase?',
+                        opts: ['Credit limits were increased for all customers',
+                              'The company tightened its credit standards for new customers',
+                              'Credit terms of 1/15, n/30 were granted on all credit sales',
+                              'Some customers were allowed to pay within 45 days instead of the normal 30 days'],
+                        correct: 0,
+                        explanation: 'Raising credit limits lets customers carry larger balances, directly increasing the pool of credit at risk of non-payment. Tightening standards reduces risk; an early-payment discount (1/15, n/30) encourages faster payment; extending the due date alone doesn\'t increase the total credit extended.',
+                        mnemonic: '💡 Memory tip: More credit exposure (bigger limits) = more bad debt risk. A longer deadline alone isn\'t the same as more exposure.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company has projected the following sales for the fall quarter: September $180,000; October $210,000; November $240,000. 70% of all sales are cash sales. The remainder is on credit. The pattern for credit receivables collections is: Month of Sale 55%, Month After Sale 35%, Second Month After Sale 10%. What are the forecasted cash collections for the month of November?',
+                        opts: ['$235,050', '$168,000', '$202,050', '$240,000'],
+                        correct: 0,
+                        explanation: 'First split each month into cash (70%) and credit (30%) sales. November cash sales = 70% × $240,000 = $168,000. November credit collections = 55% of November credit ($72,000 × 55% = $39,600) + 35% of October credit ($63,000 × 35% = $22,050) + 10% of September credit ($54,000 × 10% = $5,400) = $67,050. Total = $168,000 + $67,050 = $235,050.',
+                        mnemonic: '💡 Memory tip: Split cash vs. credit FIRST, then apply the aging pattern only to the credit slice of each month — never to the full sales figure.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company budgeted the following purchases for raw materials: January $12,000; February $18,000; March $24,000; April $20,000; May $26,000; June $28,000; July $22,000. The company pays for 45% of purchases in the month of purchase, 30% in the month following the purchase, and 25% in the second month following the purchase. Based on this information, what are the budgeted cash disbursements for April?',
+                        opts: ['$20,700', '$18,500', '$22,200', '$24,000'],
+                        correct: 0,
+                        explanation: 'April disbursements = 45% of April\'s purchases ($20,000 × 45% = $9,000) + 30% of March\'s purchases ($24,000 × 30% = $7,200) + 25% of February\'s purchases ($18,000 × 25% = $4,500) = $9,000 + $7,200 + $4,500 = $20,700.',
+                        mnemonic: '💡 Memory tip: Each month\'s disbursement pulls from THREE different purchase months — the current one, and the two before it.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A company plans to purchase inventory for the second half of the year as follows: July $80,000; August $50,000; September $180,000; October $100,000; November $210,000; December $40,000. They pay 60% of inventory purchases in the month of purchase, 25% in the following month, and 15% in the second month. Based on this information, what are the forecasted total cash payments made during July through December for inventory purchased in that same six-month window?',
+                        opts: ['$612,500', '$660,000', '$580,000', '$690,000'],
+                        correct: 0,
+                        explanation: 'Build a month-by-month schedule: each month\'s cash payment includes 60% of that month\'s own purchases, plus 25% of the prior month\'s purchases, plus 15% of the purchases from two months earlier (only counting tranches that fall within July–December). Summing all six months\' payments gives $612,500 — note this is less than the full $660,000 total purchased, because the November and December purchases still have some payment tranches spilling into the following January and February.',
+                        mnemonic: '💡 Memory tip: Build a month-by-month table rather than trying to shortcut it — each month draws from itself and the two months before it, and late-year purchases leave a "tail" of payments outside the window you\'re asked about.'
+                  },
+
+            ];
+
+            initQuiz(questions, 'Diagnostic Practice Exam');
+      </script>
+</body>
+
+</html>
