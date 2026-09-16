@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C214 Financial Management · Topic 1 Notes</title>
+<link rel="stylesheet" href="../../assets/css/quiz.css">
+<link rel="stylesheet" href="../../assets/css/notes.css">
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← All Topics</a>
+
+<header>
+  <p class="eyebrow">C214 Financial Management · Topic 1</p>
+  <h1>Overview of <span>Finance</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; key terms</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#what-is-finance">What Is Finance?</a></li>
+      <li><span class="n">02</span><a href="#securities">Financial Securities</a></li>
+      <li><span class="n">03</span><a href="#primary">Primary Financial Markets</a></li>
+      <li><span class="n">04</span><a href="#secondary">Secondary Financial Markets</a></li>
+      <li><span class="n">05</span><a href="#role">The Role of Financial Markets</a></li>
+      <li><span class="n">06</span><a href="#trading">Trading in Financial Markets</a></li>
+      <li><span class="n">07</span><a href="#goal">The Goal of the Firm</a></li>
+      <li><span class="n">08</span><a href="#glossary">Key Terms Glossary</a></li>
+      <li><span class="n">09</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="what-is-finance">
+    <h2>01 · What Is Finance?</h2>
+    <p class="section-sub">Topic 1.1</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Finance, in one line</div>
+      <div class="formula-eq">Finance = the study of the management (allocation) of <strong>capital</strong></div>
+      <div class="formula-meaning"><strong>Capital</strong> is a financial asset a firm can use — cash, machinery, and the like. Finance is the discipline of deciding where that capital should go.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The three main areas of finance:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Corporate Finance</h3>
+        <p>The finance function <em>inside</em> a business. Focuses on financial decision-making by the firm's own management — which projects to fund, how to raise the money.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Investments</h3>
+        <p>Understanding financial instruments — stocks and bonds — and how to value them. Which assets to invest in, and what they are actually worth.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Financial Institutions</h3>
+        <p>Intermediaries such as banks that link <strong>savers to borrowers</strong>. A bank profits by paying depositors a lower rate than it charges borrowers.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory tip:</strong> <em>C-I-B</em> — <strong>C</strong>orporate finance (inside the firm), <strong>I</strong>nvestments (valuing the instruments), <strong>B</strong>anking (connecting savers and borrowers).
+    </div>
+
+    <div class="callout">
+      <strong>How a bank actually makes money:</strong> it is a middleman on interest. Pay the depositor 1%, charge the borrower 6%, keep the spread. That spread is the whole business model — the same idea you will see again with the bid-ask spread in Topic 1.5.
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Instrument</th><th>What it is</th><th>What the holder gets</th></tr>
+        <tr><td><strong>Stocks</strong></td><td>Proof of <strong>equity ownership</strong> in a firm</td><td>Voting rights, plus a claim on assets <em>after</em> debt and preferred stockholders are paid</td></tr>
+        <tr><td><strong>Bonds</strong></td><td>A <strong>fixed-income</strong> financing instrument (debt)</td><td>Scheduled interest payments and repayment of principal</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="securities">
+    <h2>02 · Financial Securities</h2>
+    <p class="section-sub">Topic 1.2</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:0 0 .5rem">Three core securities are covered in this course — two debt, one equity:</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Security</th><th>Debt or equity?</th><th>Issued by</th><th>Key details</th></tr>
+        <tr>
+          <td><strong>Treasury securities</strong></td>
+          <td>Debt</td>
+          <td>U.S. government</td>
+          <td>Issued to raise capital. Maturities range from about <strong>60 days to 30 years</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Corporate bonds</strong></td>
+          <td>Debt</td>
+          <td>A corporation</td>
+          <td>Typically <strong>$1,000 face value</strong>, pay annual or semiannual coupons, repaid over a set term (e.g. 20 years). In bankruptcy, bondholders have a <strong>claim on assets</strong> during liquidation.</td>
+        </tr>
+        <tr>
+          <td><strong>Stocks</strong></td>
+          <td>Equity</td>
+          <td>A corporation</td>
+          <td>A share of ownership. If the firm fails, shareholders <strong>cannot force bankruptcy</strong>, and their claim ranks <strong>below</strong> bondholders in liquidation.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>The liquidation pecking order is a favorite exam target.</strong> Bondholders are creditors and get paid first; shareholders are owners and get whatever is left — which is often nothing. Owning a piece of the company does <em>not</em> mean being first in line.
+    </div>
+
+    <div class="chain-flow">
+      <div class="chain-node">Bondholders<br>(creditors)</div><span class="chain-sep">→</span>
+      <div class="chain-node">Preferred<br>stockholders</div><span class="chain-sep">→</span>
+      <div class="chain-node">Common<br>stockholders</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory tip:</strong> <em>Lenders before owners.</em> You have to pay back the people you borrowed from before the owners see a dime.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="primary">
+    <h2>03 · Primary Financial Markets</h2>
+    <p class="section-sub">Topic 1.3</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Primary market</div>
+      <div class="formula-eq">Where securities are <strong>first sold</strong></div>
+      <div class="formula-meaning">Issuers (firms) and buyers (investors) transact directly. This is the only point at which the company itself receives money from the security.</div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">The syndicate</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">A <strong>syndicate</strong> is a group of intermediaries — typically large investment banks or institutional investors — <strong>temporarily formed</strong> to oversee the issuance of a stock or bond.</p>
+
+    <ul class="quicklist">
+      <li>Syndicate members are often also the <strong>underwriters</strong> of the issue.</li>
+      <li>An <strong>underwriter</strong> determines the value of the security, then — in most cases — <strong>purchases the entire issue</strong> from the issuer and resells it to investors.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Why "temporarily formed" matters:</strong> a syndicate is assembled for one issuance and dissolves afterward. It is not a standing institution, which is exactly what makes it a syndicate rather than a firm.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">How bonds are placed with a syndicate</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Method</th><th>How it works</th></tr>
+        <tr>
+          <td><strong>Competitive sale</strong></td>
+          <td>Underwriters submit bids on price and interest rate. The firm selects the underwriter offering the <strong>highest price</strong> and <strong>lowest interest rate</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Negotiated sale</strong></td>
+          <td>Underwriters submit proposals/bids, but the process involves a more thorough <strong>interview</strong>. The firm carefully selects its underwriting management team rather than just taking the best bid.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory tip:</strong> <em>Competitive = the numbers decide. Negotiated = the conversation decides.</em>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Stock issuance (IPO)</h3>
+    <ul class="quicklist">
+      <li>A firm selling shares of ownership for the <strong>first time</strong> performs an <strong>Initial Public Offering (IPO)</strong>.</li>
+      <li>Stock issuance follows underwriting procedures similar to bonds.</li>
+    </ul>
+
+    <div class="formula-card">
+      <div class="formula-name">Underwriting fees — know these two numbers</div>
+      <div class="formula-eq">Bonds &asymp; <strong>2%</strong> &nbsp;|&nbsp; Stock &asymp; <strong>7%</strong></div>
+      <div class="formula-meaning">Stock costs more to underwrite because it is riskier and harder to price, and far more labor-intensive to place.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Don't flip these.</strong> The riskier, harder-to-value instrument (stock) carries the <em>higher</em> fee. A bond has a known coupon and maturity; a stock's value is a judgment call.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="secondary">
+    <h2>04 · Secondary Financial Markets</h2>
+    <p class="section-sub">Topic 1.4</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Secondary market</div>
+      <div class="formula-eq">Where securities trade <strong>after</strong> the initial issuance</div>
+      <div class="formula-meaning">The company is <strong>not involved</strong> and receives <strong>no proceeds</strong> from these trades. This is what people commonly call "the stock market."</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>The single most common mix-up in Topic 1.</strong> When you buy Apple stock from another investor, Apple gets nothing. The firm only raised money in the <em>primary</em> market. Secondary trading moves ownership between investors.
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Auction market</th><th>Dealer market</th></tr>
+        <tr><td><strong>Example</strong></td><td>NYSE</td><td>NASDAQ</td></tr>
+        <tr><td><strong>Size</strong></td><td>World's <strong>largest</strong> secondary market</td><td>World's <strong>second-largest</strong></td></tr>
+        <tr><td><strong>Physical location</strong></td><td>Yes — a trading floor, plus a computer network</td><td><strong>Not</strong> required; a computer network</td></tr>
+        <tr><td><strong>How prices are set</strong></td><td>The highest price an investor is willing to pay</td><td>Multiple dealers hold inventory and quote prices</td></tr>
+        <tr><td><strong>Typical listings</strong></td><td>Broad mix of established firms</td><td>Often <strong>technology</strong>-related companies going public</td></tr>
+        <tr><td><strong>Transaction costs</strong></td><td>—</td><td>Competing dealers tend to <strong>lower</strong> costs (tighter bid-ask spread)</td></tr>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Why NYSE is still an "auction market" even though it's electronic:</strong> "auction" describes <em>how prices are determined</em> — competing bids and asks matching — not whether trading happens on a physical floor. NASDAQ, by contrast, relies on dealers actively quoting prices.
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory tip:</strong> <em>Auction = bidders compete. Dealer = dealers compete.</em> On the NYSE the investors set the price; on NASDAQ the dealers post it.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="role">
+    <h2>05 · The Role of Financial Markets</h2>
+    <p class="section-sub">Topic 1.5</p>
+
+    <div class="formula-card">
+      <div class="formula-name">What financial markets do</div>
+      <div class="formula-eq">Reduce the <strong>cost of financing</strong> for firms &nbsp;+&nbsp; provide <strong>liquidity</strong> to traders</div>
+      <div class="formula-meaning"><strong>Liquidity</strong> = the ability to convert an asset to cash quickly without losing significant value.</div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">The specialist (NYSE)</h3>
+    <ul class="quicklist">
+      <li>A <strong>market maker on the NYSE</strong> who holds an inventory of a particular stock and acts as the liquidity provider.</li>
+      <li>Hired by the NYSE to maintain a <strong>"fair and orderly" market</strong> — must be willing to buy from sellers and sell to buyers.</li>
+      <li>Because the specialist bears <strong>risk</strong> (holding inventory in a fluctuating stock), they charge a slightly <strong>higher ask</strong> and pay a slightly <strong>lower bid</strong>.</li>
+    </ul>
+
+    <div class="formula-card">
+      <div class="formula-name">Bid-ask spread — worked example</div>
+      <div class="formula-eq">Ask $100.03 &minus; Bid $99.97 = <strong>$0.06 spread</strong></div>
+      <div class="formula-meaning">On a stock trading around $100, the specialist sells to you at $100.03 and buys from you at $99.97. That six-cent spread is their compensation for bearing inventory risk.</div>
+    </div>
+
+    <div class="chain-flow">
+      <div class="chain-node">You <strong>buy</strong> at<br>the ask ($100.03)</div><span class="chain-sep">|</span>
+      <div class="chain-node">Specialist<br>bears the risk</div><span class="chain-sep">|</span>
+      <div class="chain-node">You <strong>sell</strong> at<br>the bid ($99.97)</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Direction trap:</strong> the ask is always the <em>higher</em> number and the bid the <em>lower</em> one. You buy at the ask and sell at the bid — the spread works against you in both directions, which is exactly why it is the market maker's pay.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Specialist vs. dealer</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Specialist (NYSE)</th><th>Dealer (NASDAQ)</th></tr>
+        <tr><td><strong>Number per stock</strong></td><td>One</td><td>Multiple, competing</td></tr>
+        <tr><td><strong>Effect on spread</strong></td><td>No competition</td><td>Competition <strong>narrows</strong> the spread</td></tr>
+        <tr><td><strong>Exchange</strong></td><td>NYSE</td><td>NASDAQ</td></tr>
+      </table>
+    </div>
+
+    <div class="callout">
+      NASDAQ follows a similar liquidity-provision process, except <strong>multiple dealers</strong> provide liquidity instead of a single specialist — which is why NASDAQ spreads tend to be tighter.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="trading">
+    <h2>06 · Trading in Financial Markets</h2>
+    <p class="section-sub">Topic 1.6</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:0 0 .5rem">Trading volume has grown enormously over the decades, and electronic trading has steadily reduced the specialist's role along with it.</p>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Order types</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Order type</th><th>Sensitivity</th><th>Description</th></tr>
+        <tr>
+          <td><strong>Market order</strong></td>
+          <td><strong>Time</strong>-sensitive</td>
+          <td>Executes immediately ("first come, first served") at the current ask/bid. <strong>Price is not guaranteed.</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Limit order</strong></td>
+          <td><strong>Price</strong>-sensitive</td>
+          <td>Executes only when the market reaches the specified "limit" price. <strong>Execution is not guaranteed</strong> — it may be delayed, or never happen.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory tip:</strong> <em>Market order buys time; limit order buys price.</em> You always give one up to get the other — nobody gets both guaranteed.
+    </div>
+
+    <div class="callout">
+      <strong>Worked example.</strong> Stock trading at $100 (ask $100.03 / bid $99.97).
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li>A <strong>market order to buy</strong> executes immediately at <strong>$100.03</strong>.</li>
+        <li>A <strong>limit order to buy at $100.00</strong> won't execute until the ask drops to $100.00 — or until another investor places a matching limit sell order at $100.00, at which point the two orders "cross" and execute without the specialist quoting a different price.</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Why liquidity matters</h3>
+    <ul class="quicklist">
+      <li>More liquid markets produce <strong>more reliable stock prices</strong> as signals of value.</li>
+      <li>A stock that trades rarely can carry a <strong>"stale" price</strong> that doesn't reflect current information.</li>
+      <li>Liquidity therefore benefits both <strong>(1)</strong> the cost of financing for firms and <strong>(2)</strong> the reliability of price signals for everyone.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="goal">
+    <h2>07 · The Goal of the Firm</h2>
+    <p class="section-sub">Topic 1.7</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Traditional goal of the firm</div>
+      <div class="formula-eq">Maximize <strong>shareholder value</strong> — <em>not</em> simply maximize net income</div>
+      <div class="formula-meaning">Achieved through profitable decision-making: investing capital in projects that increase the firm's stock price, and avoiding investments that cost more than they return.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Classic distractor:</strong> "maximize net income" or "maximize profit" will show up as a wrong answer. Net income is an accounting figure for one period; shareholder value reflects the <em>whole future</em> of the firm. A decision can raise this year's income and still destroy value.
+    </div>
+
+    <ul class="quicklist">
+      <li>Management decisions — new products, acquisitions, and the like — affect the stock price by <strong>creating new information</strong> for the market.</li>
+      <li>A <strong>shareholder</strong> is an individual or entity that holds a share (a fraction of ownership) in a company.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="glossary">
+    <h2>08 · Key Terms Glossary</h2>
+    <p class="section-sub">Every defined term in Topic 1</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td><strong>Capital</strong></td><td>A financial asset that can be used by a firm (e.g. cash, machinery).</td></tr>
+        <tr><td><strong>Corporate finance</strong></td><td>Financial decision-making within a business.</td></tr>
+        <tr><td><strong>Investments</strong> (area of finance)</td><td>Choosing which financial assets to invest in and how to value them.</td></tr>
+        <tr><td><strong>Financial institutions</strong></td><td>Intermediaries (e.g. banks) linking savers to borrowers.</td></tr>
+        <tr><td><strong>Treasury securities</strong></td><td>Debt instruments issued by the U.S. government.</td></tr>
+        <tr><td><strong>Corporate bonds</strong></td><td>Debt instruments issued by a corporation.</td></tr>
+        <tr><td><strong>Stocks</strong></td><td>Equity instrument representing ownership in a firm.</td></tr>
+        <tr><td><strong>Primary financial markets</strong></td><td>Markets where securities are first sold.</td></tr>
+        <tr><td><strong>Syndicate</strong></td><td>Temporary group of intermediaries overseeing a stock/bond issuance.</td></tr>
+        <tr><td><strong>Underwriter</strong></td><td>Determines a security's value and typically purchases/resells the issue.</td></tr>
+        <tr><td><strong>Competitive sale</strong></td><td>Underwriters bid; issuer picks best price/rate.</td></tr>
+        <tr><td><strong>Negotiated sale</strong></td><td>Issuer selects underwriter via a thorough interview process.</td></tr>
+        <tr><td><strong>IPO</strong></td><td>A firm's first sale of shares to the public.</td></tr>
+        <tr><td><strong>Secondary financial markets</strong></td><td>Where securities trade after initial issuance.</td></tr>
+        <tr><td><strong>Auction market</strong></td><td>Physical-location market; prices set by highest bidder (e.g. NYSE).</td></tr>
+        <tr><td><strong>Dealer market</strong></td><td>Market of competing dealers quoting prices; no physical location required (e.g. NASDAQ).</td></tr>
+        <tr><td><strong>Liquidity</strong></td><td>Ability to convert an asset to cash quickly without losing significant value.</td></tr>
+        <tr><td><strong>Specialist</strong></td><td>NYSE market maker holding inventory and providing liquidity.</td></tr>
+        <tr><td><strong>Bid-ask spread</strong></td><td>Difference between a dealer/specialist's buy (bid) and sell (ask) price.</td></tr>
+        <tr><td><strong>Market order</strong></td><td>Time-sensitive order executed immediately at current price.</td></tr>
+        <tr><td><strong>Limit order</strong></td><td>Price-sensitive order executed only at a specified price.</td></tr>
+        <tr><td><strong>Goal of the firm</strong></td><td>Traditionally, to maximize shareholder value.</td></tr>
+        <tr><td><strong>Shareholder</strong></td><td>An individual/entity holding a share of ownership in a company.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="exam-traps">
+    <h2>09 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The distinctions Topic 1 questions are built on</p>
+
+    <ul class="quicklist">
+      <li><strong>Primary vs. secondary market</strong> — the firm receives proceeds <em>only</em> in the primary market. Secondary trades move ownership between investors; the company gets nothing.</li>
+      <li><strong>Bondholders outrank shareholders in liquidation</strong> — and shareholders cannot force a bankruptcy. Lenders before owners.</li>
+      <li><strong>Underwriting fees: ~2% bonds, ~7% stock</strong> — the harder-to-value, riskier instrument costs more to place. Don't reverse them.</li>
+      <li><strong>Competitive sale = best bid wins; negotiated sale = interview process</strong> — one is decided on numbers, the other on the relationship.</li>
+      <li><strong>"Auction market" is about price discovery, not a physical floor</strong> — NYSE is electronic now and is still an auction market, because orders compete to set the price.</li>
+      <li><strong>NYSE = one specialist; NASDAQ = multiple competing dealers</strong> — and competition is what narrows the NASDAQ spread.</li>
+      <li><strong>Ask is high, bid is low</strong> — you buy at the ask, sell at the bid, and the difference pays the market maker for bearing inventory risk.</li>
+      <li><strong>Market order = guaranteed execution, unguaranteed price. Limit order = guaranteed price, unguaranteed execution.</strong> Never both.</li>
+      <li><strong>The goal is maximizing shareholder value, not net income</strong> — an accounting profit for one period is not the same as value created for owners.</li>
+      <li><strong>A syndicate is temporary</strong> — formed for a single issuance, then dissolved.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

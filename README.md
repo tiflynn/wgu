@@ -9,7 +9,7 @@ questions.
 | Course | Status |
 |---|---|
 | **C213** Accounting for Decision Makers | 11 sections, 2 practice exams, 2 formula sheets |
-| **C214** Financial Management | Scaffolded — sections added as the course progresses |
+| **C214** Financial Management | Topic 1 — more added as the course progresses |
 
 ---
 
@@ -36,7 +36,7 @@ root and is used by every course, so a fix lands once.
 │       ├── section02.html …    Study notes per section
 │       ├── formulas-provided.html   Formulas available during testing
 │       └── formulas-memorize.html   Formulas to memorize
-├── c214/                   Same shape, awaiting content
+├── c214/                   Same shape — Topic 1 built, more to come
 └── docs/PROMPT.md          Reusable prompt for generating a new section quiz
 ```
 
@@ -102,8 +102,10 @@ Every question includes an explanation and a memory tip (mnemonic, acronym, or a
 ## Adding a new course
 
 1. `mkdir -p cNNN/quizzes cNNN/notes`
-2. Copy `c214/index.html` as the starting hub — it is the empty-state scaffold. Update the `<title>`
-   and `<h1>`, and keep the `← All Courses` back link and both `../assets/` stylesheet links
+2. Copy any course's `index.html` as the starting hub. Update the `<title>` and `<h1>`, and keep the
+   `← All Courses` back link and both `../assets/` stylesheet links. Until the first quiz exists,
+   swap the card grid for a single `<article class="hub-card hub-empty">` placeholder — `hub.css`
+   styles it as a dashed, non-clickable empty state
 3. Add a card for the course to the root `index.html`, pointing at `cNNN/index.html`
 4. Add sections using the steps above
 
