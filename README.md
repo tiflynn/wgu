@@ -1,31 +1,54 @@
-# C213 Accounting for Decision Makers — Quiz Hub
+# WGU MBA Study Hub
 
-A self-study quiz site for **C213 Accounting for Decision Makers** (MBA program). Built section by section as the course progresses, with interactive multiple choice, select-all, drag-and-drop, true/false, and ordering questions.
+Self-study quiz and notes site for my WGU MBA courses. Built section by section as each course
+progresses, with interactive multiple choice, select-all, drag-and-drop, true/false, and ordering
+questions.
 
 **Live site:** https://tiflynn.github.io/wgu/
+
+| Course | Status |
+|---|---|
+| **C213** Accounting for Decision Makers | 11 sections, 2 practice exams, 2 formula sheets |
+| **C214** Financial Management | Scaffolded — sections added as the course progresses |
 
 ---
 
 ## Repo layout
 
+One directory per course. Everything shared — the stylesheets and the quiz engine — lives at the
+root and is used by every course, so a fix lands once.
+
 ```
 .
-├── index.html              Home page — lists every section as a clickable card
+├── index.html              Landing page — one card per course
+├── 404.html                Redirects pre-restructure /quizzes/* and /notes/* links into c213/
 ├── assets/
-│   ├── css/quiz.css        Shared styling for every page (light theme, cards, buttons, drag & drop)
+│   ├── css/quiz.css        Design tokens + shared styling for every page
+│   ├── css/hub.css         Card grid and hub layout, shared by the landing page and course hubs
+│   ├── css/notes.css       Notes-page styling
 │   └── js/quiz.js          Shared quiz engine — shuffling, scoring, rendering, results screen
-├── quizzes/
-│   ├── section02.html …    One quiz per course section
-│   └── practice-exam.html  Comprehensive practice exam
-├── notes/
-│   ├── section02.html …    Study notes per section
-│   ├── formulas-provided.html   Formulas available during testing
-│   └── formulas-memorize.html   Formulas to memorize
+├── c213/
+│   ├── index.html          Course hub — lists every section as a clickable card
+│   ├── quizzes/
+│   │   ├── section02.html …    One quiz per course section
+│   │   └── practice-exam.html, practice-exam-2.html
+│   └── notes/
+│       ├── section02.html …    Study notes per section
+│       ├── formulas-provided.html   Formulas available during testing
+│       └── formulas-memorize.html   Formulas to memorize
+├── c214/                   Same shape, awaiting content
 └── docs/PROMPT.md          Reusable prompt for generating a new section quiz
 ```
 
 `index.html` stays at the root because that is the GitHub Pages entry point. Section files are
 zero-padded (`section02`, not `section2`) so they sort correctly.
+
+Quiz and notes pages sit two levels deep, so they reach the shared files with `../../assets/...`.
+Their `← All Sections` back link and their cross-links to notes stay at `../` — one level up is the
+course hub, which is where they should go. Course hub cards link with plain `quizzes/sectionNN.html`
+relative paths; the hub's question-count script keys off that `quizzes/` prefix.
+
+### C213 sections
 
 | Section | Topic |
 |---|---|
@@ -40,9 +63,6 @@ zero-padded (`section02`, not `section2`) so they sort correctly.
 | 10 | Management Accounting & Cost Concepts |
 | 11 | Activity-Based Costing (ABC) |
 | 12 | Cost Behavior & C-V-P Analysis |
-
-Every quiz and notes page reuses `assets/css/quiz.css` and `assets/js/quiz.js` rather than
-duplicating code, so pages reference them one level up (`../assets/...`).
 
 ---
 
@@ -72,13 +92,20 @@ Every question includes an explanation and a memory tip (mnemonic, acronym, or a
 ## Adding a new section
 
 1. Share your notes for the section (see `docs/PROMPT.md` for the generation prompt)
-2. A new `quizzes/sectionNN.html` file gets built that links to `../assets/css/quiz.css` and `../assets/js/quiz.js`
-3. Notes go in `notes/sectionNN.html`
-4. `index.html` gets a new card linking to `quizzes/sectionNN.html` — the question count on the card is
-   counted from the quiz file at page load, so there is no number to keep in sync
+2. A new `<course>/quizzes/sectionNN.html` file gets built that links to `../../assets/css/quiz.css`
+   and `../../assets/js/quiz.js`
+3. Notes go in `<course>/notes/sectionNN.html`
+4. `<course>/index.html` gets a new card linking to `quizzes/sectionNN.html` — the question count on
+   the card is counted from the quiz file at page load, so there is no number to keep in sync
 5. Push to this repo — GitHub Pages updates automatically within a minute or two
 
----
+## Adding a new course
+
+1. `mkdir -p cNNN/quizzes cNNN/notes`
+2. Copy `c214/index.html` as the starting hub — it is the empty-state scaffold. Update the `<title>`
+   and `<h1>`, and keep the `← All Courses` back link and both `../assets/` stylesheet links
+3. Add a card for the course to the root `index.html`, pointing at `cNNN/index.html`
+4. Add sections using the steps above
 
 ## Studying on mobile
 

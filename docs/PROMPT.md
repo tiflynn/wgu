@@ -3,9 +3,14 @@
 Reusable prompt for generating a new section quiz that plugs into this site.
 Fill in the `[BRACKETED]` placeholders and paste your section notes at the bottom.
 
+The site holds one directory per course (`c213/`, `c214/`, …), each with its own
+`quizzes/` and `notes/` folders and its own hub `index.html`. `[COURSE]` below is that
+directory — e.g. `c213` — and `[COURSE TITLE]` is the full name, e.g.
+"C213 Accounting for Decision Makers".
+
 ---
 
-You are my Accounting tutor for my MBA Accounting class (C213 Accounting for Decision Makers). I'm a beginner to the topic, so break things down when needed. You'll help me study to pass the assessment at the end, and help me build study guides and quizzes for each section.
+You are my tutor for my MBA class [COURSE TITLE]. I'm a beginner to the topic, so break things down when needed. You'll help me study to pass the assessment at the end, and help me build study guides and quizzes for each section.
 
 Below are my notes for Section X: [SECTION TITLE]. Create a quiz file for this section that fits into my existing site, using the following requirements:
 
@@ -45,29 +50,32 @@ Output the questions in the shared schema used by my existing quiz.js engine:
 - `dd`: `{ type, q, cols, items: [{ text, answer }], explanation, mnemonic }`
 - `ord`: `{ type, q, items: [{ text, order }], explanation, mnemonic }` — order is the zero-indexed correct position
 
-Build the quiz page as a lean HTML shell that links to the shared stylesheet and engine (`<link rel="stylesheet" href="../assets/css/quiz.css">` and `<script src="../assets/js/quiz.js"></script>`) — do NOT duplicate the CSS or JS engine inline.
+Build the quiz page as a lean HTML shell that links to the shared stylesheet and engine (`<link rel="stylesheet" href="../../assets/css/quiz.css">` and `<script src="../../assets/js/quiz.js"></script>`) — do NOT duplicate the CSS or JS engine inline.
 
-Copy the HTML shell verbatim from any existing `quizzes/sectionNN.html` — the ← All Sections back link, the `<header>`, the `.progress-wrap`, the `.chips`, the `#quizCard`, and the `#results` block — changing only:
-- the `<title>` and the eyebrow to "C213 Accounting for Decision Makers · Section X"
+Copy the HTML shell verbatim from any existing `[COURSE]/quizzes/sectionNN.html` — the ← All Sections back link, the `<header>`, the `.progress-wrap`, the `.chips`, the `#quizCard`, and the `#results` block — changing only:
+- the `<title>` and the eyebrow to "[COURSE TITLE] · Section X"
 - the `<h1>` to the section title (a `<span>` may wrap part of it for the accent color)
 - the questions array
 
 The `#results` block MUST include `<div class="review" id="reviewList"></div>` just above the Retake button — this powers the "review missed questions" list. Do NOT include a results-page color legend (it has been removed from all sections).
 
-Name the file `quizzes/sectionNN.html` — lowercase, zero-padded to two digits (e.g. `quizzes/section13.html`), matching my existing files. Put the matching study notes in `notes/sectionNN.html`.
+Name the file `[COURSE]/quizzes/sectionNN.html` — lowercase, zero-padded to two digits (e.g. `c213/quizzes/section13.html`), matching my existing files. Put the matching study notes in `[COURSE]/notes/sectionNN.html`.
 
-Also give me an updated index.html with a new card added for this section, following the current card format:
+Both the back link (`../index.html`) and the notes link (`../notes/sectionNN.html`) stay one level up — they resolve to the course hub and the course's notes, which is correct. Only the `assets/` paths go two levels up.
+
+Also give me an updated `[COURSE]/index.html` with a new card added for this section. Card hrefs stay relative to the course hub (`quizzes/sectionNN.html`, not `[COURSE]/quizzes/...`) — the hub's question-count script depends on that. Follow the current card format:
 
 ```html
-<a class="hub-card" href="quizzes/sectionNN.html">
+<article class="hub-card">
   <span class="hub-arrow">→</span>
   <div class="hub-card-eyebrow">Section X</div>
-  <div class="hub-card-title">[Section Title]</div>
+  <div class="hub-card-title"><a class="hub-card-link" href="quizzes/sectionNN.html">[Section Title]</a></div>
   <div class="hub-card-desc">[one- to two-line summary of the topics covered]</div>
   <div class="hub-card-meta">
     <span class="hub-tag">[N] Questions</span>
+    <a class="hub-notes" href="notes/sectionNN.html" target="_blank" rel="noopener">📄 Notes</a>
   </div>
-</a>
+</article>
 ```
 
 Cards show a summary description and a SINGLE question-count tag — no question-type pills.

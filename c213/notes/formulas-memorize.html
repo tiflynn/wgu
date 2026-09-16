@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Formulas to Memorize</title>
+<link rel="stylesheet" href="../../assets/css/quiz.css">
+<link rel="stylesheet" href="../../assets/css/notes.css">
+</head>
+<body>
+
+<div class="top-nav">
+  <a class="back-link" href="../index.html">← All Sections</a>
+  <a class="back-link notes" href="../notes/formulas-provided.html">What's provided instead →</a>
+</div>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Reference</p>
+  <h1>Formulas to<br><span>Memorize</span></h1>
+  <p class="subtitle">Not shown on-screen during the Pre-Assessment or Objective Assessment — commit these to memory before test day</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#income-statement">Income Statement (Alternate Layout)</a></li>
+      <li><span class="n">02</span><a href="#ratios">Ratios Not on the Official Sheet</a></li>
+      <li><span class="n">03</span><a href="#abc-rate">ABC — Activity Rate</a></li>
+      <li><span class="n">04</span><a href="#cvp">CVP — Full Formula Set</a></li>
+      <li><span class="n">05</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="income-statement">
+    <h2>01 · Income Statement (Alternate Layout)</h2>
+    <p class="section-sub">A second income-statement format worth knowing, separate from the one on the official sheet</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Sales</div><span class="chain-sep">−</span>
+      <div class="chain-node">COGS</div><span class="chain-sep">=</span>
+      <div class="chain-node">Gross Profit</div>
+    </div>
+    <div class="chain-flow">
+      <div class="chain-node">Gross Profit</div><span class="chain-sep">−</span>
+      <div class="chain-node">Selling &amp; Admin Exp</div><span class="chain-sep">=</span>
+      <div class="chain-node">Operating Income</div>
+    </div>
+    <div class="chain-flow">
+      <div class="chain-node">Operating Income</div><span class="chain-sep">+</span>
+      <div class="chain-node">Interest Income</div><span class="chain-sep">−</span>
+      <div class="chain-node">Interest Expense</div><span class="chain-sep">−</span>
+      <div class="chain-node">Income Tax Exp</div><span class="chain-sep">=</span>
+      <div class="chain-node">Net Income</div>
+    </div>
+
+    <div class="callout">
+      <strong>Same destination, different route:</strong> this layout nets Interest Income and Interest Expense as two separate lines instead of one combined "Interest" line, and folds admin costs into one "Selling and Administrative Expenses" line rather than splitting out Depreciation and Other Expenses. Whichever version a question uses, the core skeleton is identical: <em>Sales → Gross Profit → Operating Income → Net Income</em>, moving from most-core operations to least.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="ratios">
+    <h2>02 · Ratios Not on the Official Sheet</h2>
+    <p class="section-sub">These six will not appear on your test screen — memorize the formulas directly</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Ratio</th><th>Formula</th><th>What it tells you</th></tr>
+        <tr><td><strong>Fixed Asset Turnover</strong></td><td><span class="frac frac-sm"><span class="num">Sales</span><span class="den">Average Fixed Assets</span></span></td><td>How efficiently long-term (fixed) assets specifically generate sales</td></tr>
+        <tr><td><strong>Average Collection Period</strong></td><td><span class="frac frac-sm"><span class="num">Average A/R</span><span class="den">Average Daily Sales</span></span></td><td>Average number of days it takes to collect a receivable</td></tr>
+        <tr><td><strong>Number of Days in Sales Inventory</strong></td><td><span class="frac frac-sm"><span class="num">Average Inventory</span><span class="den">Average Daily COGS</span></span></td><td>Average number of days inventory sits before being sold</td></tr>
+        <tr><td><strong>Debt-to-Equity Ratio</strong></td><td><span class="frac frac-sm"><span class="num">Total Liabilities</span><span class="den">Total Equity</span></span></td><td>How much debt financing exists per dollar of owner financing</td></tr>
+        <tr><td><strong>Times Interest Earned</strong></td><td><span class="frac frac-sm"><span class="num">Income before Interest &amp; Taxes</span><span class="den">Interest Expense</span></span></td><td>How many times over the company could pay its interest from operating earnings</td></tr>
+        <tr><td><strong>Assets-to-Equity Ratio</strong></td><td><span class="frac frac-sm"><span class="num">Total Assets</span><span class="den">Shareholder's Equity</span></span></td><td>Leverage — the "equity multiplier" piece of DuPont</td></tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>One of these you already half-know:</strong> Assets-to-Equity Ratio isn't really a brand-new formula — it's the exact same ratio embedded in the DuPont framework on the official sheet (ROE = Return on Sales × Asset Turnover × Assets-to-Equity Ratio). If you've got DuPont down, this one's free.
+    </div>
+
+    <div class="callout warn">
+      <strong>"Average daily" means ÷365 first:</strong> for Average Collection Period and Days in Sales Inventory, "Average Daily Sales" and "Average Daily COGS" aren't given directly — you get annual Sales or COGS and have to divide by 365 to get the daily figure before plugging it into the ratio.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="abc-rate">
+    <h2>03 · Activity-Based Costing — Activity Rate</h2>
+    <p class="section-sub">The core rate calculation used in every ABC overhead-assignment problem</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Activity Rate (per Cost Pool) <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Activity Rate = <span class="frac"><span class="num">Cost Pool</span><span class="den">Cost Driver</span></span></div>
+      <div class="formula-meaning">This is the workhorse formula behind ABC. Each overhead cost pool (e.g., all costs tied to machine setups) gets divided by its cost driver (e.g., number of setups) to get a rate per unit of driver activity. Multiply that rate by how much of the driver a specific product actually used, and you've assigned that pool's overhead to the product.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="cvp">
+    <h2>04 · CVP — Full Formula Set</h2>
+    <p class="section-sub">Splitting mixed costs, plus the complete breakeven &amp; target-profit toolkit, fully spelled out</p>
+
+    <div class="formula-card">
+      <div class="formula-name">High-Low Method &mdash; Variable Cost per Unit <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Variable Cost per Unit = <span class="frac"><span class="num">Highest Cost − Lowest Cost</span><span class="den">Highest Activity − Lowest Activity</span></span></div>
+      <div class="formula-meaning">Splits a <strong>mixed cost</strong> into its variable and fixed pieces using only the highest- and lowest-<em>activity</em> months &mdash; pick the rows by activity level, not by dollar amount.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">High-Low Method &mdash; Fixed Cost <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Fixed Cost = Total Cost − (Variable Cost per Unit × Activity Level)</div>
+      <div class="formula-meaning">Plug either the high or the low row back in &mdash; both give the same fixed cost.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Contribution Margin</div>
+      <div class="formula-eq">Contribution Margin = Sales − Variable Costs</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Contribution Margin Ratio</div>
+      <div class="formula-eq">Contribution Margin Ratio = <span class="frac"><span class="num">Contribution Margin</span><span class="den">Sales</span></span></div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Break-Even in Units <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Break-Even Units = <span class="frac"><span class="num">Total Fixed Costs</span><span class="den">Contribution Margin per Unit</span></span></div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Break-Even in Sales Dollars <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Break-Even Sales $ = <span class="frac"><span class="num">Total Fixed Costs</span><span class="den">Contribution Margin Ratio</span></span></div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Units to Earn Desired Profit <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Units = <span class="frac"><span class="num">Total Fixed Costs + Desired Profit</span><span class="den">Contribution Margin per Unit</span></span></div>
+      <div class="formula-meaning">Same shape as the plain breakeven formula — just add the target profit into the numerator before dividing.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Sales Dollars to Earn Desired Profit <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Sales $ = <span class="frac"><span class="num">Total Fixed Costs + Desired Profit</span><span class="den">Contribution Margin Ratio</span></span></div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Multi-Product Break-Even <span class="memorize-tag">Memorize</span></div>
+      <div class="formula-eq">Break-Even Sales $ = <span class="frac"><span class="num">Total Fixed Costs</span><span class="den">Weighted-Average Contribution Margin Ratio</span></span></div>
+      <div class="formula-meaning">With more than one product, weight each product's CM ratio by its share of the <strong>sales mix</strong>. Change the mix and break-even moves, even if no price or cost changed.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>05 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">Don't confuse these with their similar-sounding cousins on the provided sheet</p>
+
+    <table class="compare-table trap-table">
+      <tr><th>On the PROVIDED sheet</th><th>On THIS page</th><th>Don't mix them up</th></tr>
+      <tr>
+        <td><span class="trap-eq"><span class="trap-name">Debt ratio</span><span class="trap-rhs"><span class="trap-op">=</span><span class="frac frac-sm"><span class="num">Liabilities</span><span class="den">Assets</span></span></span></span></td>
+        <td><span class="trap-eq"><span class="trap-name">Debt-to-Equity Ratio</span><span class="trap-rhs"><span class="trap-op">=</span><span class="frac frac-sm"><span class="num">Liabilities</span><span class="den">Equity</span></span></span></span></td>
+        <td>Same numerator, different denominator — Assets vs. Equity</td>
+      </tr>
+      <tr>
+        <td><span class="trap-eq"><span class="trap-name">Asset turnover</span><span class="trap-rhs"><span class="trap-op">=</span><span class="frac frac-sm"><span class="num">Sales</span><span class="den">Total Assets</span></span></span></span></td>
+        <td><span class="trap-eq"><span class="trap-name">Fixed Asset Turnover</span><span class="trap-rhs"><span class="trap-op">=</span><span class="frac frac-sm"><span class="num">Sales</span><span class="den">Average Fixed Assets</span></span></span></span></td>
+        <td>Total assets vs. only <em>fixed</em> assets, and note the word "Average"</td>
+      </tr>
+      <tr>
+        <td><span class="trap-eq"><span class="trap-name">DuPont's Assets-to-Equity piece</span><span class="trap-note">embedded in ROE formula</span></span></td>
+        <td><span class="trap-eq"><span class="trap-name">Assets-to-Equity Ratio</span><span class="trap-rhs"><span class="trap-op">=</span><span class="frac frac-sm"><span class="num">Total Assets</span><span class="den">Equity</span></span></span></span></td>
+        <td>These are the same ratio — not a trap, just a redundant listing</td>
+      </tr>
+    </table>
+
+    <ul class="quicklist">
+      <li><strong>The breakeven formulas here ARE complete</strong> — unlike the provided sheet (which stops at "Contribution Margin Ratio" and expects you to add "Fixed Costs ÷" yourself), this page spells the full division out. Use this page as the source of truth for breakeven math.</li>
+      <li><strong>Activity Rate = Cost Pool / Cost Driver</strong> shows up in nearly every ABC calculation — memorize this one first among everything on this page.</li>
+      <li><strong>"Average" matters.</strong> Fixed Asset Turnover, Average Collection Period, and Days in Sales Inventory all use an <em>average</em> balance (typically (beginning + ending) / 2) rather than a single point-in-time figure — don't plug in an ending balance alone unless that's all you're given.</li>
+      <li><strong>Target-profit formulas are breakeven formulas with an extra term.</strong> Add Desired Profit into the numerator alongside Fixed Costs, then divide exactly like you would for plain breakeven.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

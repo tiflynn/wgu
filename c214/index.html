@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C214 Financial Management · Quiz Hub</title>
+  <link rel="stylesheet" href="../assets/css/quiz.css">
+  <link rel="stylesheet" href="../assets/css/hub.css">
+</head>
+
+<body>
+
+  <div class="hub-wrap">
+    <a class="back-link" href="../index.html">← All Courses</a>
+
+    <header>
+      <h1>C214 <span>Financial Management</span></h1>
+    </header>
+
+    <h2 class="hub-group-label">Course Sections</h2>
+
+    <div class="hub-grid">
+
+      <article class="hub-card hub-empty">
+        <div class="hub-card-eyebrow">Nothing here yet</div>
+        <div class="hub-card-title">Sections coming soon</div>
+        <div class="hub-card-desc">
+          Quizzes and study notes are built section by section as the course progresses.
+          The first ones will show up here &mdash; in the meantime,
+          <a href="../c213/index.html">C213 is fully built out</a>.
+        </div>
+      </article>
+
+    </div>
+
+    <p class="hub-footer">
+      More sections added as the course progresses<br>
+      <a class="hub-repo" href="https://github.com/tiflynn/wgu/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path fill="currentColor" fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+        </svg>
+        View the source on GitHub
+      </a>
+    </p>
+  </div>
+
+  <script>
+    // Each card links to its quiz file; count that file's questions and label the tag.
+    // Falls back silently to the number already in the HTML (file:// blocks fetch).
+    document.querySelectorAll('.hub-card').forEach(card => {
+      const tag = card.querySelector('.hub-tag');
+      const src = card.querySelector('.hub-card-link')?.getAttribute('href');
+      if (!tag || !src || !src.startsWith('quizzes/')) return;
+
+      fetch(src)
+        .then(r => r.ok ? r.text() : Promise.reject(r.status))
+        .then(text => {
+          const n = (text.match(/[{,\s]type\s*:\s*['"]/g) || []).length;
+          if (n > 0) tag.textContent = n + (n === 1 ? ' Question' : ' Questions');
+        })
+        .catch(() => { /* keep the fallback text already in the tag */ });
+    });
+  </script>
+
+</body>
+
+</html>
