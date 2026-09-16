@@ -9,7 +9,7 @@ questions.
 | Course | Status |
 |---|---|
 | **C213** Accounting for Decision Makers | 11 sections, 2 practice exams, 2 formula sheets |
-| **C214** Financial Management | Topic 1 — more added as the course progresses |
+| **C214** Financial Management | Topics 1–2 — more added as the course progresses |
 
 ---
 
