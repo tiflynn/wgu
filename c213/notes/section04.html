@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C213 Accounting for Decision Makers · Section 4 Notes</title>
+<link rel="stylesheet" href="../../assets/css/quiz.css">
+<link rel="stylesheet" href="../../assets/css/notes.css">
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C213 Accounting for Decision Makers · Section 4</p>
+  <h1>The<br><span>Balance Sheet</span></h1>
+  <p class="subtitle">Quick-reference notes &amp; formula sheet</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#order">Balance Sheet Order &amp; Liquidity</a></li>
+      <li><span class="n">02</span><a href="#current-assets">Current Assets</a></li>
+      <li><span class="n">03</span><a href="#lt-assets">Long-Term Assets &amp; Intangibles</a></li>
+      <li><span class="n">04</span><a href="#current-liab">Current Liabilities</a></li>
+      <li><span class="n">05</span><a href="#lt-liab">Long-Term Liabilities</a></li>
+      <li><span class="n">06</span><a href="#equity">Stockholders' Equity</a></li>
+      <li><span class="n">07</span><a href="#non-us">Non-U.S. Format &amp; Working Capital</a></li>
+      <li><span class="n">08</span><a href="#recognition">Recognition, Valuation &amp; Disclosure</a></li>
+      <li><span class="n">09</span><a href="#transaction">Transaction Analysis &amp; Executory Contracts</a></li>
+      <li><span class="n">10</span><a href="#mix">Asset &amp; Financing Mix, Matching Maturities</a></li>
+      <li><span class="n">11</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="order">
+    <h2>01 · Balance Sheet Order &amp; Liquidity</h2>
+    <p class="section-sub">Topic 3.1 introduction</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      Accountants use judgment on two fronts: <strong>recognition</strong> (which items are listed) and <strong>valuation</strong> (what dollar amount to use). U.S. balance sheets present five major sections in a set order, driven by <strong>liquidity</strong> — how quickly an item converts to cash.
+    </p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Current assets</div><span class="chain-sep">→</span>
+      <div class="chain-node">Long-term assets</div><span class="chain-sep">→</span>
+      <div class="chain-node">Current liabilities</div><span class="chain-sep">→</span>
+      <div class="chain-node">Long-term liabilities</div><span class="chain-sep">→</span>
+      <div class="chain-node">Stockholders' equity</div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Asset Mix</th><th>Financing Mix</th></tr>
+        <tr><td><strong>What it is</strong></td><td>The proportion of total assets held in each category</td><td>The percentage of total financing (liabilities + equity) in each category</td></tr>
+        <tr><td><strong>Driven by</strong></td><td>The <strong>industry</strong> the company operates in</td><td><strong>Management</strong> decisions about capital structure</td></tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>Comparative reporting:</strong> balance sheets are usually presented with at least two years side by side, so users can see what actually changed — which assets grew or shrank, and how financing sources shifted.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="current-assets">
+    <h2>02 · Current Assets</h2>
+    <p class="section-sub">Topic 3.1 — assets expected to be used, sold, or replaced within one year</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      "Current" doesn't mean the asset disappears — it means it gets <strong>used, sold, or replaced</strong> within the year. You'll still have cash a year from now, just not <em>that</em> $100 bill; a grocery store will still have milk inventory, just not <em>that</em> carton. Current assets are constantly cycling in and out of the business.
+    </p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Category</th><th>Description</th></tr>
+        <tr><td><strong>Cash</strong> <span class="cat-pill cat-mkt">★ Big 3</span></td><td>Coins, currency, and bank accounts — plus <strong>cash equivalents</strong>: CDs, U.S. Treasury securities, and other short-term interest-bearing securities maturing in 3 months or less. Reported together on the balance sheet as "cash and cash equivalents."</td></tr>
+        <tr><td><strong>Accounts receivable</strong> <span class="cat-pill cat-mkt">★ Big 3</span></td><td>Standard credit arrangement, typically collected in 30–60 days</td></tr>
+        <tr><td><strong>Inventory</strong> <span class="cat-pill cat-mkt">★ Big 3</span></td><td>Goods held for resale in the normal course of business</td></tr>
+        <tr><td><strong>Prepaid expenses</strong></td><td>Expenses paid in advance, before the related benefit is received</td></tr>
+        <tr><td><strong>Investment securities</strong></td><td>Short-term stocks and bonds; bonds typically mature in 3–12 months</td></tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>The "Big 3" current assets:</strong> if you're ever asked to list current assets from memory, start with <strong>cash, accounts receivable, and inventory</strong> — these are the most common current assets and form the core of a business's day-to-day operations (see the operating cycle below). Prepaid expenses and investment securities round out the full list of five.
+    </div>
+
+    <div class="callout">
+      <strong>Factoring accounts receivable:</strong> a company that needs cash now, rather than waiting the usual 30–60 days to collect, can <strong>sell its accounts receivable</strong> to a financial institution in exchange for immediate cash — this is called <strong>factoring</strong>. It's a good illustration of why AR is a genuine asset: it's valuable enough that someone else will pay real cash for it today, before the customer has even paid.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem">The Big 3 aren't just common — they're the three assets a business cycles through repeatedly to generate cash:</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Cash</div><span class="chain-sep">→</span>
+      <div class="chain-node">Inventory<br><span style="font-size:.72rem;color:var(--muted)">buy stuff</span></div><span class="chain-sep">→</span>
+      <div class="chain-node">Accounts Receivable<br><span style="font-size:.72rem;color:var(--muted)">sell on credit</span></div><span class="chain-sep">→</span>
+      <div class="chain-node">Cash<br><span style="font-size:.72rem;color:var(--muted)">collect &amp; repeat</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>The Operating Cycle:</strong> a business starts with <strong>cash</strong>, uses it to buy <strong>inventory</strong>, sells that inventory (often on credit, creating <strong>accounts receivable</strong>), then collects the cash owed — ideally ending up with <em>more</em> cash than it started with. That surplus gets reinvested, and the cycle repeats. This is exactly why cash, inventory, and accounts receivable are grouped together as the Big 3 current assets: they're not "current" just by definition — they're actively recycling through this loop within the year, and the whole point of running the cycle is to generate a cash surplus each time through.
+    </div>
+
+    <div class="callout">
+      <strong>Trading vs. available-for-sale securities:</strong> both are reported at current market value, but unrealized ("paper") gains/losses land differently — <strong>trading securities</strong> flow through the income statement, while <strong>available-for-sale securities</strong> go directly to equity (AOCI), bypassing net income. More on AOCI in section 06.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="lt-assets">
+    <h2>03 · Long-Term Assets &amp; Intangibles</h2>
+    <p class="section-sub">Topic 3.1 — assets still expected to be on hand at the next balance sheet date</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Category</th><th>Includes</th></tr>
+        <tr><td><strong>Long-term investments</strong></td><td>Stocks and bonds held for the long term</td></tr>
+        <tr><td><strong>Property, Plant &amp; Equipment (PPE)</strong></td><td>Land, buildings, machinery, tools, furniture, vehicles</td></tr>
+        <tr><td><strong>Intangible assets</strong></td><td>No physical characteristics: trademarks, brand names, copyrights, franchises, goodwill</td></tr>
+        <tr><td><strong>Other long-term assets</strong></td><td>Deferred income tax asset; net pension asset (when the pension fund is overfunded)</td></tr>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>Exam trap — intangibles are only recorded if purchased:</strong> a company's home-grown brand reputation, customer loyalty, or internally developed technology is <strong>never</strong> recorded, no matter how valuable — there's no reliable, objective transaction price. An intangible asset only makes it onto the balance sheet when it's <strong>purchased from another party</strong> (a bought patent, trademark, or copyright) or arises as <strong>goodwill</strong> from acquiring an entire company for more than the fair value of its identifiable net assets.
+    </div>
+
+    <div class="callout">
+      <strong>What goodwill actually represents:</strong> think of goodwill as the economic value of the <em>relationships</em> a company has built up over time — with customers, suppliers, banks, employees, and government officials. Those relationships make a business run better, but they're hard to put a reliable number on until an acquisition actually happens and a real price gets paid for the whole company.
+    </div>
+
+    <div class="callout tip">
+      <strong>Companies don't actually want deferred tax assets or overfunded pension assets:</strong> it sounds backwards, but neither is a "win." A deferred tax asset means a tax benefit the company would rather have <em>now</em> is instead delayed to a future year. An overfunded pension plan means cash is tied up protecting employee pensions instead of being available to buy buildings, equipment, or inventory. Both are real assets — just not ones a company is eager to hold.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="current-liab">
+    <h2>04 · Current Liabilities</h2>
+    <p class="section-sub">Topic 3.1 — obligations expected to be paid or satisfied within one year</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Category</th><th>Description</th></tr>
+        <tr><td><strong>Accounts payable</strong></td><td>The flip side of accounts receivable — the most common current liability</td></tr>
+        <tr><td><strong>Accrued liabilities</strong></td><td>Built up gradually: wages payable, taxes payable, utilities payable</td></tr>
+        <tr><td><strong>Short-term loans payable</strong></td><td>A formal, interest-bearing loan due within one year</td></tr>
+        <tr><td><strong>Current portion of long-term debt</strong></td><td>The slice of a mortgage or other long-term liability due within the next 12 months</td></tr>
+        <tr><td><strong>Unearned revenue</strong></td><td>An obligation to provide a service to a customer who has already paid but not yet received it</td></tr>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>Exam trap — unearned revenue is NOT revenue:</strong> despite the name, unearned revenue is a <strong>liability</strong>. Cash came in first, but the work/service is still owed — it's a debt in the form of future service, not income.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="lt-liab">
+    <h2>05 · Long-Term Liabilities</h2>
+    <p class="section-sub">Topic 3.1 — obligations not expected to be paid within one year</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Category</th><th>Description</th></tr>
+        <tr><td><strong>Long-term debt</strong></td><td>Long-term loans, notes, bonds, and mortgages</td></tr>
+        <tr><td><strong>Capital lease obligations</strong></td><td>A lease structured so it's economically the same as a debt-financed purchase</td></tr>
+        <tr><td><strong>Deferred income tax liability</strong></td><td>Tax expected to be paid in future years on income already reported in the income statement but not yet taxed</td></tr>
+        <tr><td><strong>Other long-term liabilities</strong></td><td>Employee retirement/pension benefit obligations</td></tr>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Loan vs. note — what's the difference?</strong> A "loan" typically implies borrowing from a bank or financial institution. A "note" is more general — it's just a written promise to repay, and you could write one to borrow from anyone (another company, an individual investor). Economically they function the same way; the terminology just signals who's usually on the other side of the transaction.
+    </div>
+
+    <div class="callout">
+      <strong>Bonds are tradable:</strong> unlike a typical bank loan, the original bondholder isn't stuck holding the bond until maturity. They can sell it to someone else, who can sell it to someone else again — the bond changes hands while the company keeps making the same interest and principal payments to whoever holds it at the time. This tradability is a key feature that sets bonds apart from a standard note or loan.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="equity">
+    <h2>06 · Stockholders' Equity</h2>
+    <p class="section-sub">Topic 3.1</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Common Stock</th><th>Preferred Stock</th></tr>
+        <tr><td><strong>Voting rights</strong></td><td>Yes</td><td>Typically no</td></tr>
+        <tr><td><strong>Return if company does well</strong></td><td>Unlimited upside</td><td>Fixed / capped return</td></tr>
+        <tr><td><strong>Priority if company struggles</strong></td><td>Paid last</td><td>Paid before common stockholders</td></tr>
+        <tr><td><strong>Required of all corporations?</strong></td><td>Yes — every corporation issues it</td><td>No — optional, only some companies issue it</td></tr>
+      </table>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Retained Earnings</div>
+      <div class="formula-eq">Beginning RE + Net Income − Net Losses − Dividends = Ending RE</div>
+      <div class="formula-meaning">A common mistake is thinking retained earnings is only reduced by dividends. It's reduced by <strong>both</strong> net losses <strong>and</strong> dividend payments, and increased by net income.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Treasury stock = contra-equity:</strong> shares a company repurchases from its own stockholders are subtracted from total stockholders' equity — a <strong>negative equity</strong> line, not a liability. Like a dividend, it distributes cash to stockholders, but only to those who sell their shares back and give up ownership; a dividend goes to everyone while all stockholders keep their shares.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Accumulated Other Comprehensive Income (AOCI) groups equity changes from market/exchange-rate movements, kept separate from net income:</p>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Foreign currency translation</h3>
+        <p>Change in a foreign subsidiary's equity (in dollar terms) as exchange rates move — applies only to companies with foreign subsidiaries.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Unrealized gains/losses — AFS securities</h3>
+        <p>Available-for-sale securities' "paper" value swings go to equity/AOCI, not the income statement (contrast with trading securities).</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Unrealized gains/losses — derivatives</h3>
+        <p>Some unrealized gains/losses from options, futures, and similar instruments are also reported as part of AOCI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="non-us">
+    <h2>07 · Non-U.S. Format &amp; Working Capital</h2>
+    <p class="section-sub">Topic 3.2</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Working Capital</div>
+      <div class="formula-eq">Current Assets − Current Liabilities</div>
+      <div class="formula-meaning">Also called <strong>net current assets</strong>.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Non-U.S. balance sheets:</strong> frequently list property, plant, and equipment <strong>first</strong> — before current assets — reversing the U.S. liquidity-first order. They also often group current assets and current liabilities together and label the difference as working capital, right on the face of the statement.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="recognition">
+    <h2>08 · Recognition, Valuation &amp; Disclosure</h2>
+    <p class="section-sub">Topic 3.3</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Term</th><th>What it answers</th></tr>
+        <tr><td><strong>Recognition</strong></td><td>Should this item be included in the financial statements at all, boiled down into one number?</td></tr>
+        <tr><td><strong>Valuation</strong></td><td>Once recognized, what dollar amount should be assigned to it?</td></tr>
+        <tr><td><strong>Disclosure</strong></td><td>The alternative to recognition — describing details in a narrative note, without a number in the statements themselves</td></tr>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>Recognition needs BOTH conditions met:</strong> an item must satisfy the appropriate definition (asset/liability) <strong>and</strong> be measurable in a reliable way. "Probable" alone isn't enough — a lawsuit that's probable to be lost but has no reliably estimable dollar amount doesn't get recognized as a liability; it gets disclosed in the notes instead.
+    </div>
+
+    <div class="callout tip">
+      <strong>Reliability vs. relevance:</strong> historical cost is very <strong>reliable</strong> (an actual, verifiable transaction) but can lack <strong>relevance</strong> over time as market conditions change. Market value is more relevant but not always reliable. This is why most assets — land, buildings, inventory — stay at historical cost rather than being written up for gains, though a significant, permanent decline in value can still trigger an <strong>impairment</strong> write-down (conservatism: recognize losses promptly, defer gains until realized).
+    </div>
+
+    <div class="callout">
+      <strong>Exception: investment securities ARE reported at fair value.</strong> Stocks and bonds a company holds as investments are already carried at current fair value, not historical cost — unlike land, buildings, or machinery, where appraisals are considered less objective/certain. Outside the U.S., the rules are more flexible: companies have the <strong>option</strong> to report long-term assets (land, buildings, equipment) at fair value instead of historical cost. Accounting is slowly trending toward fair value overall, but historical cost still remains the backbone for most U.S. assets.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">The five-step path from a real-world event to a finished financial statement:</p>
+    <div class="pie-order">
+      <div class="pie-step"><span class="step-num">1</span><div class="step-label">Creation</div><div class="step-desc">Events create economic assets and liabilities</div></div>
+      <div class="pie-step"><span class="step-num">2</span><div class="step-label">Recognition</div><div class="step-desc">Decision to include an item in the financial statements</div></div>
+      <div class="pie-step"><span class="step-num">3</span><div class="step-label">Valuation</div><div class="step-desc">Measurement of the dollar amount to record</div></div>
+      <div class="pie-step"><span class="step-num">4</span><div class="step-label">Integration</div><div class="step-desc">The new item is paired with an offsetting entry so Assets = Liabilities + Equity still holds</div></div>
+      <div class="pie-step"><span class="step-num">5</span><div class="step-label">Preparation</div><div class="step-desc">The financial statements themselves are prepared</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="transaction">
+    <h2>09 · Transaction Analysis &amp; Executory Contracts</h2>
+    <p class="section-sub">Topic 3.4</p>
+
+    <p style="font-size:.88rem;color:var(--text);line-height:1.6;margin-bottom:1rem">
+      <strong>Transaction analysis</strong> is the process of determining how an economic event impacts the financial statements.
+    </p>
+
+    <div class="callout warn">
+      <strong>Executory contracts are NOT recognized — not even at $0:</strong> an executory contract is an exchange of <em>promises</em> about the future (e.g., a signed employment contract, a future purchase agreement). Since neither party has performed yet, nothing appears on the balance sheet — not as a $0 placeholder line, just no mention at all. It may be <em>disclosed</em> in the notes if material.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">Recognition is triggered once one side begins <em>performing</em> — example: a $1,000/week employee, paid Fridays.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Point in time</th><th>Wages payable</th></tr>
+        <tr><td>Contract signed (no work yet)</td><td>$0 — nothing recorded, purely executory</td></tr>
+        <tr><td>End of day 1 worked</td><td>$200</td></tr>
+        <tr><td>End of day 4 worked</td><td>$800</td></tr>
+        <tr><td>Day 5 (payday) — work done, then paid</td><td>Liability hits $1,000, then cash pays it off → $0</td></tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>In practice:</strong> companies don't literally post a journal entry every single day. Payroll software tracks accrual in the background, and the wages payable liability is formally recorded at <strong>payroll run dates</strong> and <strong>period-end closing dates</strong> (via adjusting entries) — the daily walkthrough is a teaching model for the underlying accrual <em>logic</em>, not literal daily bookkeeping.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.5rem 0 .5rem">Worked example — <strong>Veda Landscape Solutions</strong>, Day 1 of business. The accounting equation must hold after every single transaction: if it doesn't balance, something hasn't been recorded yet.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th class="col-num">#</th><th>Transaction</th><th>Asset effect</th><th>Liability/Equity effect</th></tr>
+        <tr><td class="col-num">1</td><td>Initial investment</td><td>Cash +$700,000</td><td>Paid-in capital (equity) +$700,000</td></tr>
+        <tr><td class="col-num">2</td><td>Bank loan</td><td>Cash +$300,000</td><td>Bank loan payable +$300,000</td></tr>
+        <tr><td class="col-num">3</td><td>Purchased warehouse (land + building)</td><td>Land +$50,000, Buildings +$400,000, Cash −$100,000</td><td>Mortgage payable +$350,000</td></tr>
+        <tr><td class="col-num">4</td><td>Purchased equipment</td><td>Equipment +$650,000, Cash −$650,000</td><td>No change (asset swap)</td></tr>
+        <tr><td class="col-num">5</td><td>Hired employees</td><td>No change</td><td>No change — <strong>executory contract</strong></td></tr>
+        <tr><td class="col-num">6</td><td>Leased truck ($800/month)</td><td>No change</td><td>No change — <strong>executory contract</strong></td></tr>
+        <tr><td class="col-num">7</td><td>Purchased inventory</td><td>Inventory +$90,000, Cash −$10,000</td><td>Accounts payable +$80,000</td></tr>
+        <tr><td class="col-num">8</td><td>Paid insurance in advance</td><td>Prepaid insurance +$15,000, Cash −$15,000</td><td>No change (asset swap)</td></tr>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Two transaction "shapes" to recognize:</strong> an <strong>asset-for-asset swap</strong> (equipment and prepaid insurance, both paid in cash — one asset up, another down by the same amount, no new financing needed) versus an <strong>asset increase funded by new liability or equity</strong> (the bank loan, the mortgage on the warehouse, the accounts payable on inventory, and Veda's own investment). Both executory contracts (employees, truck) contribute nothing to either side — a promise for a promise, not yet a transaction.
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem">The resulting Day-1 balance sheet, built entirely from the transactions above:</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th></th></tr>
+        <tr><td><strong>Current assets</strong></td><td>Cash $225,000 + Inventory $90,000 + Prepaid insurance $15,000 = <strong>$330,000</strong></td></tr>
+        <tr><td><strong>Long-term assets</strong></td><td>Land $50,000 + Buildings $400,000 + Equipment $650,000 = <strong>$1,100,000</strong></td></tr>
+        <tr><td><strong>Total assets</strong></td><td><strong>$1,430,000</strong></td></tr>
+        <tr><td><strong>Current liabilities</strong></td><td>Accounts payable = <strong>$80,000</strong></td></tr>
+        <tr><td><strong>Long-term liabilities</strong></td><td>Bank loan payable $300,000 + Mortgage payable $350,000 = <strong>$650,000</strong></td></tr>
+        <tr><td><strong>Total liabilities</strong></td><td><strong>$730,000</strong></td></tr>
+        <tr><td><strong>Equity</strong></td><td>Veda's paid-in capital = <strong>$700,000</strong></td></tr>
+        <tr><td><strong>Total L + E</strong></td><td><strong>$1,430,000</strong> ✓ balances</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="mix">
+    <h2>10 · Asset &amp; Financing Mix, Matching Maturities</h2>
+    <p class="section-sub">Topic 3.5</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Asset Mix</div>
+      <div class="formula-eq">Each Individual Asset ÷ Total Assets</div>
+      <div class="formula-meaning">Converts every asset line into a percentage of total assets. All the percentages must sum to <strong>100%</strong>. Industries have distinctive "fingerprints" here — retailers run heavy on inventory + PP&amp;E, manufacturers are dominated by PP&amp;E, and banks are dominated by <strong>loans receivable</strong> (not cash — a bank's core business is lending out deposited money to earn interest).</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Between industries vs. within an industry:</strong> differences in asset mix <em>between</em> industries reflect the different nature of those industries (a bank vs. a retailer vs. a manufacturer). Differences in asset mix <em>within</em> an industry reveal the strategic choices a specific company has made to position itself — e.g., Target carrying unusually large receivables compared to Sears and Walmart because it runs its own credit card, even though all three are retailers.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Financing Mix</div>
+      <div class="formula-eq">Each Individual Liability/Equity Item ÷ Total Liabilities &amp; Equity</div>
+      <div class="formula-meaning">Same idea, applied to the other side of the balance sheet. The denominator (total liabilities + equity) is the same dollar amount as total assets, since the balance sheet balances. Percentages must sum to <strong>100%</strong>.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Two different ways to standardize a balance sheet — don't mix them up:</strong> dividing every line by <strong>sales</strong> gives you a common-size balance sheet that measures <em>asset efficiency</em> — how well the company uses its assets to generate sales. Dividing every line by <strong>total assets</strong> (same as total liabilities + equity) gives you <em>asset mix and financing mix</em> — the company's composition, not its efficiency. Neither is right or wrong; they just answer different questions, so be clear on which one you're computing.
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Matching Maturities</div>
+      <div class="formula-eq">Short-term assets ↔ Short-term debt &nbsp;|&nbsp; Long-term assets ↔ Long-term debt</div>
+      <div class="formula-meaning">Financing should be timed to match how long it takes the related asset to generate cash. Mismatching creates <strong>liquidity risk</strong> — being forced to repay or refinance debt before the asset has generated enough cash.</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Example of a mismatch:</strong> financing a building (a 20+ year asset) with a 90-day loan. The building can't generate enough cash in 90 days to repay the loan, forcing a risky refinance — exactly the liquidity risk matching maturities is meant to avoid.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="exam-traps">
+    <h2>11 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The mix-ups that show up most often</p>
+
+    <ul class="quicklist">
+      <li><strong>Assets ≠ sources of financing.</strong> Assets are the resources acquired; liabilities <em>and</em> owners' equity together are the sources of financing (evidence of how those resources were acquired).</li>
+      <li><strong>Retained earnings is reduced by BOTH net losses and dividends</strong> — not dividends alone.</li>
+      <li><strong>Unearned revenue is a liability, not revenue</strong> — despite the name, it's an obligation to deliver a service already paid for.</li>
+      <li><strong>Treasury stock is a contra-equity account</strong> (a subtraction from equity), not a liability.</li>
+      <li><strong>Intangible assets are only recorded if purchased</strong> — home-grown brand value, customer loyalty, or internally developed tech never make the balance sheet; goodwill only arises from acquiring another company. Goodwill itself represents the value of built-up relationships (customers, suppliers, banks, employees, government) — hard to price until a real acquisition happens.</li>
+      <li><strong>Deferred tax assets and overfunded pension assets are NOT things companies want</strong> — despite being assets, both mean a benefit (tax savings, freed-up cash) is delayed or tied up rather than available now.</li>
+      <li><strong>Bonds are tradable; a standard loan or note usually isn't</strong> — the original bondholder can resell to someone else, who keeps collecting the interest and principal payments in their place.</li>
+      <li><strong>Recognition requires the definition AND reliable measurement</strong> — "probable" isn't enough on its own (the unresolved-lawsuit example).</li>
+      <li><strong>Executory contracts are not recognized at all — not even at $0.</strong> A signature alone isn't a transaction; only actual performance triggers an entry.</li>
+      <li><strong>Historical cost doesn't move up for gains, but CAN move down for impairment</strong> — assets aren't written up to market value, but a significant, permanent decline can trigger a write-down (conservatism in action).</li>
+      <li><strong>Non-U.S. balance sheets often flip the order</strong> — PP&amp;E first, current assets/liabilities grouped together as working capital.</li>
+      <li><strong>Matching maturities:</strong> short-term assets funded with short-term debt, long-term assets with long-term debt — mismatching creates liquidity risk.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

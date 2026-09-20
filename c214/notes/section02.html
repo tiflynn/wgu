@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C214 Financial Management · Topic 2 Notes</title>
+<link rel="stylesheet" href="../../assets/css/quiz.css">
+<link rel="stylesheet" href="../../assets/css/notes.css">
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← All Topics</a>
+
+<header>
+  <p class="eyebrow">C214 Financial Management · Topic 2</p>
+  <h1>Financial Statements <span>Part 1</span></h1>
+  <p class="subtitle">The Income Statement &amp; Balance Sheet — quick-reference notes</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#three-statements">The Three Financial Statements</a></li>
+      <li><span class="n">02</span><a href="#finance-vs-accounting">Finance vs. Accounting</a></li>
+      <li><span class="n">03</span><a href="#accrual">Accrual Accounting &amp; the Matching Principle</a></li>
+      <li><span class="n">04</span><a href="#income-statement">The Income Statement</a></li>
+      <li><span class="n">05</span><a href="#balance-sheet">The Balance Sheet — Structure</a></li>
+      <li><span class="n">06</span><a href="#asset-side">The Asset Side</a></li>
+      <li><span class="n">07</span><a href="#financing-side">The Financing Side</a></li>
+      <li><span class="n">08</span><a href="#linking">Linking the Statements</a></li>
+      <li><span class="n">09</span><a href="#electrocar">The ElectroCar Case</a></li>
+      <li><span class="n">10</span><a href="#equations">Key Equations &amp; Glossary</a></li>
+      <li><span class="n">11</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="three-statements">
+    <h2>01 · The Three Financial Statements</h2>
+    <p class="section-sub">Topic 2.1</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Each statement describes a different aspect of a firm's economic character. The first thing to get straight is <strong>what span of time each one covers</strong> — that single distinction drives most of the confusion in this topic.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Statement</th><th>What it shows</th><th>Time span</th></tr>
+        <tr>
+          <td><strong>Income Statement</strong><br><span style="color:var(--muted);font-size:.8rem">a.k.a. P&amp;L</span></td>
+          <td>Results of operations — starts with sales, subtracts expenses, ends with net income</td>
+          <td><strong>Over a period</strong> — a <em>video camera</em> recording performance</td>
+        </tr>
+        <tr>
+          <td><strong>Balance Sheet</strong></td>
+          <td>Assets, liabilities, and equity — what the firm owns and how it financed those things</td>
+          <td><strong>A single point in time</strong> — a <em>still photo</em> of what the firm has right now</td>
+        </tr>
+        <tr>
+          <td><strong>Statement of Cash Flows</strong><br><span style="color:var(--muted);font-size:.8rem">SCF — covered in Topic 3</span></td>
+          <td>All cash moving into and out of the firm</td>
+          <td><strong>Over a period</strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory tip:</strong> <em>Video vs. photo.</em> The income statement rolls film across a quarter or a year; the balance sheet is a shutter click on one date. Ask "as of when?" and you will always know which statement you are looking at.
+    </div>
+
+    <div class="callout">
+      <strong>Why does a finance course start with accounting?</strong> Because <strong>accountants control the data</strong>. To analyze a company you first have to understand its financial position and its operations — and that means reading its financial statements.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="finance-vs-accounting">
+    <h2>02 · Finance vs. Accounting</h2>
+    <p class="section-sub">Topic 2.1</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The one distinction that matters</div>
+      <div class="formula-eq">Accounting looks <strong>backward</strong> &nbsp;|&nbsp; Finance looks <strong>forward</strong></div>
+      <div class="formula-meaning">Accounting reports what already happened. Finance is concerned with liquidity and with providing capital for what comes next.</div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Finance</th><th>Accounting</th></tr>
+        <tr><td>Liquidity &amp; Capitalization</td><td>Financial Reporting &amp; Stewardship</td></tr>
+        <tr><td>Financial Analysis</td><td>Management Reporting</td></tr>
+        <tr><td>Budgeting &amp; Control</td><td>Taxation</td></tr>
+        <tr><td>Performance Management</td><td>Cost &amp; Managerial Accounting</td></tr>
+        <tr><td>Forecasting</td><td>Internal &amp; External Auditing</td></tr>
+        <tr><td>Short- &amp; Long-Term Planning</td><td>Forensic Accounting</td></tr>
+        <tr><td>Risk Management</td><td>Wage &amp; Benefits Administration</td></tr>
+        <tr><td>Investment Management</td><td>Information Systems</td></tr>
+        <tr><td>Ethics</td><td>Ethics</td></tr>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>Financial statements are a starting line, not a finish line.</strong> They are an important data source for financial analysis — but analyzing the past is only a springboard to <em>managing the future</em>. Treating the statements as the endpoint is the error.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="accrual">
+    <h2>03 · Accrual Accounting &amp; the Matching Principle</h2>
+    <p class="section-sub">Topic 2.3</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Two definitions to lock down</div>
+      <div class="formula-eq">Accrual accounting = historical prices + the matching principle</div>
+      <div class="formula-meaning"><strong>Accrual accounting</strong> records accounts at historical prices and applies the matching principle. In this course it is used interchangeably with <strong>GAAP</strong> (Generally Accepted Accounting Principles). The <strong>matching principle</strong> means revenues and expenses are recognized <em>in the same period</em>.</div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Cash accounting</th><th>Accrual accounting</th></tr>
+        <tr>
+          <td><strong>Revenue recorded</strong></td>
+          <td>When cash comes in</td>
+          <td>When the <strong>earnings process is complete</strong> and receipt of payment is likely</td>
+        </tr>
+        <tr>
+          <td><strong>Expense recorded</strong></td>
+          <td>When cash goes out</td>
+          <td><strong>Matched</strong> to the revenue it helped generate</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Worked example — the chair company</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">A firm spends <strong>$75,000</strong> in 20X1 to produce 1,000 chairs but sells none. In 20X2 it produces nothing and sells all 1,000 chairs for $100 each — <strong>$100,000</strong>.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Cash accounting</th><th>20X1</th><th>20X2</th></tr>
+        <tr><td>Revenue</td><td>$0</td><td>$100,000</td></tr>
+        <tr><td>− Cost</td><td>75,000</td><td>0</td></tr>
+        <tr><td><strong>Net Income</strong></td><td><strong>−$75,000</strong></td><td><strong>$100,000</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Accrual accounting</th><th>20X1</th><th>20X2</th></tr>
+        <tr><td>Revenue</td><td>$0</td><td>$100,000</td></tr>
+        <tr><td>− Cost</td><td>0</td><td>75,000</td></tr>
+        <tr><td><strong>Net Income</strong></td><td><strong>$0</strong></td><td><strong>$25,000</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>What the example proves:</strong> cash accounting throws off wild swings — a $75,000 loss followed by a $100,000 gain — that spread the real $25,000 profit arbitrarily across two periods. Accrual accounting matches the $75,000 cost to the $100,000 revenue in the period the sale actually happened, giving a far more accurate picture of operations.
+    </div>
+
+    <div class="callout warn">
+      <strong>The judgment call hiding inside "earned."</strong> Management has considerable discretion over <em>when</em> revenue is earned. Is it when the order is taken? When the product ships? When payment arrives? When the customer is satisfied? Each choice moves revenue between periods.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="income-statement">
+    <h2>04 · The Income Statement</h2>
+    <p class="section-sub">Topics 2.4 &amp; 2.5</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Basic equation</div>
+      <div class="formula-eq">Revenue &minus; Expenses = Net Income</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem">The standard layout, top to bottom:</p>
+
+    <div class="stacked-eq">
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">Revenues</span></div>
+      <div class="eq-row"><span class="op">−</span><span class="label">Cost of Goods Sold</span></div>
+      <div class="eq-rule"></div>
+      <div class="eq-row subtotal"><span class="op">=</span><span class="label">Gross Profit</span></div>
+      <div class="eq-row"><span class="op">−</span><span class="label">Operating Expenses <span
+            class="sub">(wages, rent, non-direct labor, office &amp; clerical, depreciation)</span></span></div>
+      <div class="eq-rule"></div>
+      <div class="eq-row subtotal"><span class="op">=</span><span class="label">EBIT <span
+            class="sub">(Earnings Before Interest and Taxes)</span></span></div>
+      <div class="eq-row"><span class="op">−</span><span class="label">Interest Expense</span></div>
+      <div class="eq-rule"></div>
+      <div class="eq-row subtotal"><span class="op">=</span><span class="label">EBT <span
+            class="sub">(Earnings Before Taxes)</span></span></div>
+      <div class="eq-row"><span class="op">−</span><span class="label">Tax Expense</span></div>
+      <div class="eq-rule double"></div>
+      <div class="eq-row subtotal final"><span class="op">=</span><span class="label">Net Income</span></div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Three ways to think about "income"</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Type</th><th>What it is</th><th>Managerial discretion</th></tr>
+        <tr>
+          <td><strong>Cash-based income</strong></td>
+          <td>Informal: cash in minus cash out. Close cousin of CFO (cash flow from operations), covered in Topic 3.</td>
+          <td>Least</td>
+        </tr>
+        <tr>
+          <td><strong>Income for tax purposes</strong></td>
+          <td>The government's own definition of income, used to compute tax owed.</td>
+          <td><strong>Fewer</strong> managerial choices than accounting income</td>
+        </tr>
+        <tr>
+          <td><strong>Accounting income</strong></td>
+          <td>Net income as reported on the income statement, calculated under accrual accounting (GAAP). Best metric for understanding operations.</td>
+          <td><strong>Most</strong> — and the most complicated</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Line-by-line hazards</h3>
+    <ul class="quicklist">
+      <li><strong>Revenue</strong> — recognition timing is a judgment call. Contract signed, product shipped, payment received: which month counts? Management's discretion here is significant.</li>
+      <li><strong>EBIT</strong> ("ee-bit," a.k.a. operating profit) — Gross Profit minus Operating Expenses. Frequently used as a proxy for <strong>operating income</strong>.</li>
+      <li><strong>Interest Expense</strong> — sits between EBIT and EBT. Sometimes interest actually paid isn't reported here, and sometimes interest that was never paid still is.</li>
+      <li><strong>Tax Expense</strong> — second-to-last line before net income. Firms keep one set of books for the IRS and another for everyone else.</li>
+      <li><strong>Net Income</strong> — EBIT minus interest minus taxes. Every line feeding it is subject to accounting assumptions, timing differences, subjectivity, and occasionally outright deceit.</li>
+    </ul>
+
+    <div class="callout warn">
+      <strong>The four "≠ cash" traps.</strong> None of these reported figures equals the cash that actually moved:
+      <ul class="quicklist" style="margin-top:.5rem">
+        <li><strong>Revenue</strong> &ne; cash collected</li>
+        <li><strong>COGS &amp; operating expenses</strong> &ne; cash paid</li>
+        <li><strong>Interest expense</strong> &ne; interest paid</li>
+        <li><strong>Tax expense</strong> &ne; tax paid</li>
+      </ul>
+    </div>
+
+    <div class="callout tip">
+      <strong>The line to remember:</strong> <em>"Cash flow is a fact, while net income is only an opinion."</em> Cash either moved or it didn't. Net income is the product of a long chain of choices about timing and estimation.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="balance-sheet">
+    <h2>05 · The Balance Sheet — Structure</h2>
+    <p class="section-sub">Topic 2.6</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The fundamental equation</div>
+      <div class="formula-eq">Assets = Liabilities + Owner's Equity</div>
+      <div class="formula-meaning">Commonly rearranged as <strong>Equity = Assets &minus; Liabilities</strong>. The left side is what the firm <strong>owns</strong>; the right side is <strong>how it financed</strong> those things — every asset is paid for either by borrowing (liabilities) or by investing (equity).</div>
+    </div>
+
+    <div class="chain-flow">
+      <div class="chain-node">What the firm<br><strong>owns</strong><br><span style="font-size:.75rem">(assets)</span></div><span class="chain-sep">=</span>
+      <div class="chain-node">What it<br><strong>borrowed</strong><br><span style="font-size:.75rem">(liabilities)</span></div><span class="chain-sep">+</span>
+      <div class="chain-node">What owners<br><strong>put in</strong><br><span style="font-size:.75rem">(equity)</span></div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Historical cost vs. fair value</h3>
+    <div class="callout">
+      <strong>The historical cost principle:</strong> assets and liabilities are recorded at their cost <em>when acquired</em>, and are not updated for changes in market value. Land bought in 1972 for $1 million still appears at $1 million today, whatever it would actually fetch.
+    </div>
+
+    <div class="callout warn">
+      <strong>Why one misstatement is never alone.</strong> Because the balance sheet must always balance, a misstatement of value on the asset side implies an <em>offsetting</em> misstatement somewhere on the financing side. This is why analysts sometimes <strong>"recast"</strong> financial statements to better reflect economic reality.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="asset-side">
+    <h2>06 · The Asset Side</h2>
+    <p class="section-sub">Topic 2.7</p>
+
+    <h3 style="font-size:1rem;margin:0 0 .5rem">Current assets — listed in order of liquidity</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Cash, or assets convertible to cash within a year. <strong>Liquidity</strong> is how easily an asset converts to cash without losing value — and the statement lists them <strong>most liquid first</strong>:</p>
+
+    <div class="chain-flow">
+      <div class="chain-node good">Cash</div><span class="chain-sep">→</span>
+      <div class="chain-node">Marketable<br>Securities</div><span class="chain-sep">→</span>
+      <div class="chain-node">Accounts<br>Receivable</div><span class="chain-sep">→</span>
+      <div class="chain-node warn">Inventory</div>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>Cash</strong> — currency, bills, coins, checking deposits. The most liquid current asset.</li>
+      <li><strong>Marketable Securities</strong> — short-term, high-quality securities such as T-bills and CDs.</li>
+      <li><strong>Accounts Receivable (AR)</strong> — cash owed to the firm by customers for goods or services already delivered but not yet paid for. Management discretion in recognizing <strong>bad debt</strong> affects how "real" the AR balance actually is.</li>
+      <li><strong>Inventory</strong> — raw materials, work-in-process, and finished goods. The <strong>least liquid</strong> current asset, exposed to salability, spoilage, and shrinkage risk, plus management discretion in valuation.</li>
+    </ul>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Fixed assets (PP&amp;E)</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Property, plant &amp; equipment — assets with a useful life of <strong>more than one year</strong>, normally recorded at historical cost.</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Net PP&amp;E (book value)</div>
+      <div class="formula-eq">Gross PP&amp;E &minus; Accumulated Depreciation = Net PP&amp;E</div>
+      <div class="formula-meaning"><strong>Gross PP&amp;E</strong> is the original cost of all non-current assets held for use. <strong>Accumulated depreciation</strong> is the cumulative total of all depreciation claimed against it.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Depreciation expense vs. accumulated depreciation.</strong> A $100 asset with a 5-year life might carry <strong>$20/year of depreciation <em>expense</em></strong> — that lands on the <em>income statement</em>, one period at a time. The running total of every dollar of depreciation ever claimed against that asset is <strong>accumulated depreciation</strong>, and that lives on the <em>balance sheet</em>.
+    </div>
+
+    <div class="callout warn">
+      <strong>Book value is not market value.</strong> Net PP&amp;E can diverge significantly from an asset's actual fair value, because depreciation schedules rarely mirror true economic depreciation.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="financing-side">
+    <h2>07 · The Financing Side</h2>
+    <p class="section-sub">Topic 2.8</p>
+
+    <h3 style="font-size:1rem;margin:0 0 .5rem">Current liabilities — listed in order of maturity</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Obligations due within a year, shortest maturity first.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Item</th><th>What it is</th><th>Carries interest?</th></tr>
+        <tr>
+          <td><strong>Accounts Payable (AP)</strong></td>
+          <td>Money owed to suppliers for purchases made on credit — the mirror image of AR</td>
+          <td><strong>No</strong> — typically interest-free</td>
+        </tr>
+        <tr>
+          <td><strong>Notes Payable (NP)</strong></td>
+          <td>Short-term borrowed money, typically under 5 years</td>
+          <td><strong>Yes</strong> — NP does carry interest expense</td>
+        </tr>
+        <tr>
+          <td><strong>Accruals</strong></td>
+          <td>Expenses incurred but not yet paid — wages earned in March but paid April 10 show as "accrued wages" on the March 31 balance sheet</td>
+          <td>No</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>AP vs. NP is the trap here.</strong> Both are short-term obligations sitting next to each other, but only <strong>notes payable</strong> costs you interest. Owing your supplier is free; owing the bank is not.
+    </div>
+
+    <p style="font-size:.87rem;line-height:1.65;margin:1.25rem 0 .75rem"><strong>Long-term liabilities</strong> are debt obligations maturing in more than a year. Their stated balance sheet value can differ substantially from market value.</p>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Equity — the three components</h3>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Common Stock (CS)</h3>
+        <p>Equity sold to common shareholders at <strong>par value</strong> — often just $1/share. Common shareholders are last in line in bankruptcy.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Additional Paid-In Capital</h3>
+        <p><strong>APIC</strong> — the proceeds from issuing stock <em>minus</em> the par value of that stock. The premium investors paid above par.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Retained Earnings (RE)</h3>
+        <p>Cumulative net income <em>not</em> paid out as dividends over the <strong>entire life of the firm</strong>.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Retained earnings is not cash.</strong> RE has already been reinvested into the firm's asset base — it cannot be used to pay bills. A company with $50 million in retained earnings may have almost no cash. This is one of the two biggest conceptual traps in Topic 2.
+    </div>
+
+    <div class="callout">
+      <strong>Equity absorbs the errors.</strong> Since A = L + OE, any misstatement on the asset or liability side gets absorbed here — which is why the <em>book</em> value of equity often bears little resemblance to the <em>market</em> value of the company's equity.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="linking">
+    <h2>08 · Linking the Statements</h2>
+    <p class="section-sub">Topic 2.9</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Net income can only go <strong>two places</strong>: out the door as dividends, or retained inside the firm.</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 1 — where net income goes</div>
+      <div class="formula-eq">Net Income = Dividends + &Delta;RE</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 2 — this year's balance sheet from last year's</div>
+      <div class="formula-eq">New RE = Old RE + &Delta;RE</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 3 — substitute, and you get the form you will actually use</div>
+      <div class="formula-eq"><strong>New RE = Old RE + Net Income &minus; Dividends</strong></div>
+      <div class="formula-meaning">This is the bridge between the income statement and the balance sheet, and you will see it repeatedly for the rest of the course — including in forecasting. Rearrange it to solve for whichever piece the question withholds.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Solving for dividends:</strong> Dividends = Old RE + Net Income &minus; New RE. If you have two years of retained earnings and one year of net income, the dividend figure falls right out.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="electrocar">
+    <h2>09 · The ElectroCar Case</h2>
+    <p class="section-sub">Topic 2.2 — the running example</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Jimmy Aweshock, a new equity analyst at High Return, LLC (a private equity growth fund), is handed two years of ElectroCar's financial statements and asked to evaluate the company. ElectroCar is a growth-stage firm: revenue roughly doubled year over year, but so did its losses.</p>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1rem 0 .5rem">What the numbers reveal — each one is an application of a concept above (figures in $1,000s):</p>
+
+    <ul class="quicklist">
+      <li><strong>Revenue doubled, gross profit halved.</strong> Revenue rose from $204,242 to $413,256, but cost of goods sold rose faster — so gross profit <em>fell</em> from $61,595 to $30,067. Growing sales does not mean growing profit.</li>
+      <li><strong>Dividends were essentially zero.</strong> Retained earnings fell from $(669,392) to $(1,065,606) — a drop of $396,214 — against a net loss of $396,213. Run it through <strong>New RE = Old RE + NI &minus; Dividends</strong> and the entire change is explained by the loss alone. A money-losing growth company pays no dividends.</li>
+      <li><strong>Accounts payable exploded.</strong> AP rose from $88,250 to $343,180 — an increase of <strong>$254,930</strong>. A jump that size means the firm is stretching its suppliers to conserve cash, which is a warning sign about its cash position.</li>
+      <li><strong>Long-term debt rose $140,295.</strong> From $271,165 to $411,460 — the company is funding its losses by borrowing.</li>
+      <li><strong>Cash fell while inventory ballooned.</strong> Cash dropped $57,758 while inventory rose $218,422. Cash is being converted into unsold product.</li>
+      <li><strong>Accruals are everywhere.</strong> Receivables ($26,842) and payables ($343,180) are both accruals — revenue recorded before cash arrives, and expenses recorded before cash leaves. That $413,256 of revenue is emphatically <em>not</em> $413,256 of collected cash.</li>
+    </ul>
+
+    <div class="callout tip">
+      <strong>The takeaway:</strong> ElectroCar is the whole topic in one company. Accruals separate reported figures from cash, the balance sheet shows how the losses were financed, and the RE linkage ties the two statements together.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="equations">
+    <h2>10 · Key Equations &amp; Glossary</h2>
+    <p class="section-sub">Everything worth committing to memory</p>
+
+    <div class="formula-card">
+      <div class="formula-name">The five equations</div>
+      <div class="formula-eq">Assets = Liabilities + Owner's Equity</div>
+      <div class="formula-meaning">
+        Equity = Assets &minus; Liabilities<br>
+        Revenue &minus; Expenses = Net Income<br>
+        Net Income = Dividends + &Delta;RE<br>
+        <strong>New RE = Old RE + Net Income &minus; Dividends</strong>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td><strong>Income Statement</strong></td><td>Covers a period of time; starts with sales, subtracts expenses, ends with net income (a.k.a. P&amp;L).</td></tr>
+        <tr><td><strong>Balance Sheet</strong></td><td>Snapshot of assets, liabilities, and equity at one point in time.</td></tr>
+        <tr><td><strong>Statement of Cash Flows</strong></td><td>Cash flow from operations, investing, and financing over a period.</td></tr>
+        <tr><td><strong>Accrual Accounting</strong></td><td>Recording based on historical prices plus the matching principle; used interchangeably with GAAP here.</td></tr>
+        <tr><td><strong>Matching Principle</strong></td><td>Revenues and expenses are recognized in the same period.</td></tr>
+        <tr><td><strong>GAAP</strong></td><td>Generally Accepted Accounting Principles.</td></tr>
+        <tr><td><strong>Revenue Recognition</strong></td><td>Accrual rules governing the timing of when a sale is recorded.</td></tr>
+        <tr><td><strong>EBIT</strong></td><td>Earnings Before Interest and Taxes; a proxy for operating income.</td></tr>
+        <tr><td><strong>Interest Expense</strong></td><td>Amount owed to creditors; sits between EBIT and EBT.</td></tr>
+        <tr><td><strong>Tax Expense</strong></td><td>Reported income taxes; not necessarily equal to taxes actually paid.</td></tr>
+        <tr><td><strong>Net Income</strong></td><td>EBIT &minus; Interest &minus; Taxes; the accounting "opinion" of profit.</td></tr>
+        <tr><td><strong>Current Assets</strong></td><td>Assets expected to be turned to cash within a year.</td></tr>
+        <tr><td><strong>Liquidity</strong></td><td>How easily an asset converts to cash without losing value.</td></tr>
+        <tr><td><strong>Marketable Securities</strong></td><td>Highly liquid short-term investments (T-bills, CDs).</td></tr>
+        <tr><td><strong>Accounts Receivable (AR)</strong></td><td>Money owed to the firm by customers.</td></tr>
+        <tr><td><strong>Inventory</strong></td><td>Raw materials, work-in-process, finished goods; least-liquid current asset.</td></tr>
+        <tr><td><strong>Fixed Assets / PP&amp;E</strong></td><td>Property, plant &amp; equipment; useful life greater than 1 year.</td></tr>
+        <tr><td><strong>Gross PP&amp;E</strong></td><td>Original (historical) cost of fixed assets.</td></tr>
+        <tr><td><strong>Accumulated Depreciation</strong></td><td>Total depreciation claimed against gross PP&amp;E to date.</td></tr>
+        <tr><td><strong>Net PP&amp;E / Book Value</strong></td><td>Gross PP&amp;E &minus; Accumulated Depreciation.</td></tr>
+        <tr><td><strong>Historical Cost Principle</strong></td><td>Assets and liabilities recorded at original transaction cost, not updated for market value.</td></tr>
+        <tr><td><strong>Current Liabilities</strong></td><td>Obligations due within a year.</td></tr>
+        <tr><td><strong>Accounts Payable (AP)</strong></td><td>Money owed to suppliers; generally interest-free.</td></tr>
+        <tr><td><strong>Notes Payable (NP)</strong></td><td>Short-term borrowed money that <em>does</em> carry interest.</td></tr>
+        <tr><td><strong>Accruals</strong></td><td>Expenses incurred but not yet paid.</td></tr>
+        <tr><td><strong>Long-Term Liabilities</strong></td><td>Debt obligations with maturity greater than 1 year.</td></tr>
+        <tr><td><strong>Common Stock (CS)</strong></td><td>Equity sold to shareholders at par value.</td></tr>
+        <tr><td><strong>Additional Paid-In Capital (APIC)</strong></td><td>Stock issuance proceeds minus par value.</td></tr>
+        <tr><td><strong>Retained Earnings (RE)</strong></td><td>Cumulative net income kept in the firm rather than paid as dividends.</td></tr>
+        <tr><td><strong>Owner's Equity (OE)</strong></td><td>Sum of CS + APIC + RE.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="exam-traps">
+    <h2>11 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The distinctions Topic 2 questions are built on</p>
+
+    <ul class="quicklist">
+      <li><strong>Tax expense &ne; taxes actually paid.</strong> Firms keep one set of books for the IRS and another for everyone else. The same goes for revenue vs. cash collected, expenses vs. cash paid, and interest expense vs. interest paid.</li>
+      <li><strong>Retained earnings is not cash.</strong> It is already reinvested in the asset base and cannot pay a bill. Never treat RE as a pile of money.</li>
+      <li><strong>Income statement = a period. Balance sheet = a point in time.</strong> Video camera vs. still photo.</li>
+      <li><strong>Accounts payable is free; notes payable is not.</strong> Only NP carries interest expense.</li>
+      <li><strong>Inventory is the least liquid current asset</strong>, cash the most. The order is Cash → Marketable Securities → AR → Inventory.</li>
+      <li><strong>Depreciation <em>expense</em> is one period on the income statement; <em>accumulated</em> depreciation is the lifetime total on the balance sheet.</strong></li>
+      <li><strong>Book value &ne; market value</strong> — for fixed assets (depreciation schedules aren't economic reality) and for equity (it absorbs every misstatement elsewhere).</li>
+      <li><strong>New RE = Old RE + Net Income &minus; Dividends.</strong> Rearrange for whichever term the question leaves out — usually dividends.</li>
+      <li><strong>Accounting looks backward; finance looks forward.</strong> Statements are a springboard for managing the future, not the endpoint of analysis.</li>
+      <li><strong>Accrual accounting = historical prices + matching</strong>, and in this course it is interchangeable with GAAP.</li>
+      <li><strong>Income for tax purposes involves <em>fewer</em> managerial choices than accounting income</strong> — accounting income is the most discretionary of the three.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

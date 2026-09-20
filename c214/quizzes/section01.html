@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C214 Financial Management · Topic 1 Quiz</title>
+      <link rel="stylesheet" href="../../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Topics</a>
+            <a class="back-link notes" href="../notes/section01.html" target="_blank" rel="noopener">📄 Topic 1 Notes</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C214 Financial Management · Topic 1</p>
+            <h1>Overview of <span>Finance</span></h1>
+      </header>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  /* ========== TOPIC 1.1 — WHAT IS FINANCE? ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Finance is best defined as the study of:',
+                        opts: ['The management, or allocation, of capital',
+                              'The recording and reporting of historical transactions',
+                              'The taxation of business income',
+                              'The legal structure of corporations'],
+                        correct: 0,
+                        explanation: 'Finance is the study of the management — or allocation — of capital. Capital is a financial asset used by a firm, such as cash or machinery. Recording and reporting historical transactions describes accounting, not finance.',
+                        mnemonic: '💡 Memory tip: Accounting looks backward at what happened; finance looks forward at where the money should go.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'In the context of this course, "capital" refers to:',
+                        opts: ['A financial asset used by a firm, such as cash or machinery',
+                              'The capital city where a firm is headquartered',
+                              'The total number of shares a firm has issued',
+                              'Money owed to a firm by its customers'],
+                        correct: 0,
+                        explanation: 'Capital is a financial asset that can be used by a firm — cash and machinery are the two examples given. Finance is fundamentally about deciding how to allocate that capital.',
+                        mnemonic: '💡 Memory tip: Capital = the resources the firm has to work with. Finance decides where to point them.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are the three main areas of finance? (Select all that apply)',
+                        opts: ['Corporate finance',
+                              'Investments',
+                              'Financial institutions (banking)',
+                              'Managerial accounting'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'The three main areas of finance are corporate finance (the finance function within a business), investments (understanding and valuing financial instruments), and financial institutions/banking (intermediaries linking savers to borrowers). Managerial accounting is a separate discipline.',
+                        mnemonic: '💡 Memory tip: C-I-B — Corporate, Investments, Banking.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'How does a bank primarily earn a profit?',
+                        opts: ['By paying depositors a lower interest rate than it charges borrowers',
+                              'By charging depositors a fee to hold their money',
+                              'By issuing its own stock every quarter',
+                              'By paying borrowers a lower rate than it charges depositors'],
+                        correct: 0,
+                        explanation: 'Banks are intermediaries that link savers to borrowers. They profit on the spread: they pay depositors a lower interest rate than the rate they charge borrowers, and keep the difference.',
+                        mnemonic: '💡 Memory tip: Pay little, charge more, keep the spread — the same logic you will see again in the bid-ask spread.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A stock gives its holder which of the following?',
+                        opts: ['Voting rights and a claim to assets after debt and preferred stockholders are paid',
+                              'A fixed interest payment and first claim on assets in bankruptcy',
+                              'A guaranteed annual dividend regardless of firm performance',
+                              'The right to force the firm into bankruptcy if it underperforms'],
+                        correct: 0,
+                        explanation: 'Stocks are proof of equity ownership in a firm. The holder gets voting rights and a claim to assets — but only after debt holders and preferred stockholders have been paid.',
+                        mnemonic: '💡 Memory tip: Owners vote, but owners also get paid last.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each description into the area of finance it belongs to.',
+                        cols: ['Corporate Finance', 'Investments', 'Financial Institutions'],
+                        items: [
+                              { text: 'Financial decision-making by a firm\'s management', answer: 'Corporate Finance' },
+                              { text: 'Valuing stocks and bonds', answer: 'Investments' },
+                              { text: 'Banks linking savers to borrowers', answer: 'Financial Institutions' },
+                        ],
+                        explanation: 'Corporate finance is the finance function within a business. Investments covers understanding and valuing financial instruments. Financial institutions are the intermediaries, like banks, that connect savers with borrowers.',
+                        mnemonic: '💡 Memory tip: Inside the firm (corporate), pricing the paper (investments), in the middle (institutions).'
+                  },
+
+                  /* ========== TOPIC 1.2 — FINANCIAL SECURITIES ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Treasury securities are issued by:',
+                        opts: ['The U.S. government, to raise capital',
+                              'Large corporations, to raise capital',
+                              'Commercial banks, to fund mortgages',
+                              'State-chartered credit unions'],
+                        correct: 0,
+                        explanation: 'Treasury securities are debt instruments (bonds) issued by the U.S. government to raise capital. Corporate bonds, by contrast, are issued by corporations.',
+                        mnemonic: '💡 Memory tip: The U.S. Treasury issues Treasury securities — the name gives it away.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is the typical maturity range for Treasury securities?',
+                        opts: ['About 60 days to 30 years',
+                              'Exactly 20 years in all cases',
+                              'One to five years only',
+                              '50 to 100 years'],
+                        correct: 0,
+                        explanation: 'Treasury security maturities range from roughly 60 days on the short end to 30 years on the long end.',
+                        mnemonic: '💡 Memory tip: Two months to three decades — the Treasury borrows across the whole spectrum.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are typical characteristics of a corporate bond? (Select all that apply)',
+                        opts: ['A $1,000 face value',
+                              'Annual or semiannual coupon payments',
+                              'Repayment over a set term, such as 20 years',
+                              'Voting rights at the annual shareholder meeting'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Corporate bonds typically have a $1,000 face value, pay annual or semiannual coupons, and are repaid over a set term. Voting rights belong to stockholders — bondholders are lenders, not owners.',
+                        mnemonic: '💡 Memory tip: Bondholders get paid, not a say. Voting is an ownership privilege.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place these claimants in the order they are paid during a liquidation, first to last.',
+                        items: [
+                              { text: 'Bondholders (creditors)', order: 0 },
+                              { text: 'Preferred stockholders', order: 1 },
+                              { text: 'Common stockholders', order: 2 },
+                        ],
+                        explanation: 'Debt is paid before equity. Bondholders, as creditors, are paid first; preferred stockholders come next; common stockholders hold the residual claim and are paid last — often receiving nothing.',
+                        mnemonic: '💡 Memory tip: Lenders, then preferred owners, then ordinary owners. The further down you are, the more risk you took.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each security into the correct category.',
+                        cols: ['Debt', 'Equity'],
+                        items: [
+                              { text: 'Treasury securities', answer: 'Debt' },
+                              { text: 'Corporate bonds', answer: 'Debt' },
+                              { text: 'Stocks', answer: 'Equity' },
+                        ],
+                        explanation: 'Treasury securities and corporate bonds are both debt instruments — the issuer is borrowing. Stocks are equity instruments representing a share of ownership.',
+                        mnemonic: '💡 Memory tip: If it has a maturity date and pays interest, it\'s debt. If it represents ownership, it\'s equity.'
+                  },
+
+                  /* ========== TOPIC 1.3 — PRIMARY FINANCIAL MARKETS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Primary financial markets are markets where securities are:',
+                        opts: ['First sold, with issuers and buyers transacting directly',
+                              'Traded between investors after the original issuance',
+                              'Retired and cancelled by the issuing firm',
+                              'Audited by the SEC before listing'],
+                        correct: 0,
+                        explanation: 'Primary financial markets are where securities — stocks and/or bonds — are first sold. Issuers (firms) and buyers (investors) transact directly. Trading after issuance happens in the secondary market.',
+                        mnemonic: '💡 Memory tip: "Primary" = the first time. The firm only gets money here.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A syndicate is best described as:',
+                        opts: ['A temporarily formed group of intermediaries overseeing a stock or bond issuance',
+                              'A permanent department within the issuing corporation',
+                              'A government agency that approves new securities',
+                              'A group of shareholders who vote as a bloc'],
+                        correct: 0,
+                        explanation: 'A syndicate is a group of intermediaries — typically large investment banks or institutional investors — temporarily formed to oversee the issuance of a stock or bond. The "temporary" part matters: it assembles for one issue and then dissolves.',
+                        mnemonic: '💡 Memory tip: A syndicate is a pop-up team. It forms for the deal and disbands when the deal is done.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What does an underwriter do?',
+                        opts: ['Determines the value of the security, then typically buys the entire issue and resells it to investors',
+                              'Guarantees investors a minimum return on the security',
+                              'Audits the issuing firm\'s financial statements',
+                              'Sets the firm\'s dividend policy for the coming year'],
+                        correct: 0,
+                        explanation: 'An underwriter determines the value of the security, then in most cases purchases the entire issue from the issuer and resells it to investors. That purchase is what transfers the placement risk from the issuer to the underwriter.',
+                        mnemonic: '💡 Memory tip: The underwriter prices it, buys it all, then flips it — and takes the risk of not being able to resell.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each description into the bond placement method it describes.',
+                        cols: ['Competitive Sale', 'Negotiated Sale'],
+                        items: [
+                              { text: 'Firm picks the highest price and lowest interest rate', answer: 'Competitive Sale' },
+                              { text: 'Underwriters submit bids on price and rate', answer: 'Competitive Sale' },
+                              { text: 'Involves a thorough interview process', answer: 'Negotiated Sale' },
+                              { text: 'Firm carefully selects its underwriting management team', answer: 'Negotiated Sale' },
+                        ],
+                        explanation: 'A competitive sale is decided on the bid numbers: underwriters bid on price and rate, and the best combination wins. A negotiated sale adds a thorough interview, with the issuer choosing its underwriting management team rather than just the best bid.',
+                        mnemonic: '💡 Memory tip: Competitive is an auction; negotiated is a job interview.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm selling shares of ownership for the first time is performing a(n):',
+                        opts: ['Initial Public Offering (IPO)',
+                              'Secondary market transaction',
+                              'Leveraged buyout',
+                              'Bond refunding'],
+                        correct: 0,
+                        explanation: 'A firm selling shares of ownership for the first time performs an Initial Public Offering (IPO). Stock issuance follows underwriting procedures similar to those used for bonds.',
+                        mnemonic: '💡 Memory tip: "Initial" means first. The IPO is the company\'s debut on the public market.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Approximately what are the underwriting fees for bonds versus stock?',
+                        opts: ['About 2% for bonds and about 7% for stock',
+                              'About 7% for bonds and about 2% for stock',
+                              'About 2% for both',
+                              'About 7% for both'],
+                        correct: 0,
+                        explanation: 'Underwriting fees run roughly 2% for bonds and roughly 7% for stock. Stock is riskier and harder to price, and more labor-intensive to place, so it costs more to underwrite.',
+                        mnemonic: '💡 Memory tip: Stock is harder to price, so it costs more — 7% for stock, 2% for bonds. The riskier instrument carries the bigger fee.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why is the underwriting fee for stock higher than for bonds?',
+                        opts: ['Stock is riskier and harder to price, and more labor-intensive to place',
+                              'Stock issues are always much smaller in dollar value',
+                              'Federal law sets a minimum 7% fee on all equity issues',
+                              'Bonds do not require an underwriter at all'],
+                        correct: 0,
+                        explanation: 'Stock carries the higher fee (~7% vs. ~2%) because it is riskier and harder to price than a bond, and placing it takes more work. A bond has a known coupon and maturity; a stock\'s value is a judgment call.',
+                        mnemonic: '💡 Memory tip: Harder to value = more work = higher fee.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'Syndicate members are often also the underwriters of the issue.',
+                        opts: ['True', 'False'],
+                        correct: 0,
+                        explanation: 'True. The intermediaries that form a syndicate to oversee an issuance are frequently the same parties that underwrite it — valuing the security and purchasing the issue for resale.',
+                        mnemonic: '💡 Memory tip: The group that runs the deal usually also buys the deal.'
+                  },
+
+                  /* ========== TOPIC 1.4 — SECONDARY FINANCIAL MARKETS ========== */
+
+                  {
+                        type: 'tf',
+                        q: 'When an investor buys shares of a company on the secondary market, the company receives the proceeds of that sale.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. In a secondary market trade, the company is not involved and receives no proceeds — the money goes from one investor to another. The firm only raises capital in the primary market.',
+                        mnemonic: '💡 Memory tip: The firm gets paid once, at issuance. Everything after that is investors trading with each other.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why is the NYSE still considered an auction market even though most of its trading is now electronic?',
+                        opts: ['"Auction market" describes how prices are determined — competing bids and asks matching — not whether trading is physical',
+                              'Because it still requires all traders to be physically present on the floor',
+                              'Because the exchange auctions off seats to member firms each year',
+                              'Because the SEC legally classifies all exchanges as auction markets'],
+                        correct: 0,
+                        explanation: '"Auction market" refers to the price-discovery mechanism: orders compete to set the price. That remains true on the NYSE regardless of whether the matching happens on a floor or in a computer. NASDAQ, by contrast, relies on dealers actively quoting prices.',
+                        mnemonic: '💡 Memory tip: Auction is about how the price is found, not where the traders stand.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each characteristic into the market type it describes.',
+                        cols: ['Auction Market (NYSE)', 'Dealer Market (NASDAQ)'],
+                        items: [
+                              { text: 'Has a physical location', answer: 'Auction Market (NYSE)' },
+                              { text: 'World\'s largest secondary market', answer: 'Auction Market (NYSE)' },
+                              { text: 'No physical location required', answer: 'Dealer Market (NASDAQ)' },
+                              { text: 'Typically home to technology companies', answer: 'Dealer Market (NASDAQ)' },
+                        ],
+                        explanation: 'The NYSE is an auction market with a physical location and is the world\'s largest secondary market. NASDAQ is a dealer market that requires no physical location and is typically home to technology-related companies going public.',
+                        mnemonic: '💡 Memory tip: NYSE has a floor and the crown; NASDAQ has a network and the tech.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are true of secondary financial markets? (Select all that apply)',
+                        opts: ['Securities trade after the initial issuance',
+                              'The issuing company receives no proceeds from the trades',
+                              'This is what is commonly called "the stock market"',
+                              'This is where a firm performs its IPO'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Secondary markets host trading after issuance, the company is uninvolved and receives no proceeds, and this is what people commonly call the stock market. An IPO is a primary market event.',
+                        mnemonic: '💡 Memory tip: IPO = primary. Everything afterward = secondary.'
+                  },
+
+                  /* ========== TOPIC 1.5 — THE ROLE OF FINANCIAL MARKETS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Liquidity is best defined as:',
+                        opts: ['The ability to convert an asset to cash quickly without losing significant value',
+                              'The total amount of cash a firm holds on its balance sheet',
+                              'The percentage of a firm financed with debt',
+                              'The rate at which a firm pays dividends'],
+                        correct: 0,
+                        explanation: 'Liquidity is the ability to convert an asset to cash quickly without losing significant value. Both halves matter — speed and preserving value.',
+                        mnemonic: '💡 Memory tip: Liquid means it flows — fast, and without losing much on the way out.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A specialist on the NYSE is:',
+                        opts: ['A market maker who holds an inventory of a particular stock and acts as a liquidity provider',
+                              'An analyst who publishes buy and sell recommendations',
+                              'A regulator who investigates insider trading',
+                              'A corporate officer responsible for investor relations'],
+                        correct: 0,
+                        explanation: 'A specialist is a market maker on the NYSE who holds an inventory of a particular stock and acts as a liquidity provider. They are hired by the NYSE to maintain a "fair and orderly" market.',
+                        mnemonic: '💡 Memory tip: The specialist specializes in one stock and always stands ready to trade it.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A stock trades around $100. The specialist sells at $100.03 and buys at $99.97. What is the bid-ask spread?',
+                        opts: ['$0.06',
+                              '$0.03',
+                              '$100.00',
+                              '$0.60'],
+                        correct: 0,
+                        explanation: 'The bid-ask spread is the ask price minus the bid price: $100.03 − $99.97 = $0.06. That six cents is the specialist\'s compensation for bearing inventory risk.',
+                        mnemonic: '💡 Memory tip: Spread = ask − bid. Three cents above and three cents below $100 makes a six-cent spread.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'In the quote "ask $100.03 / bid $99.97," an investor who wants to sell shares immediately will receive:',
+                        opts: ['$99.97 — the bid price',
+                              '$100.03 — the ask price',
+                              '$100.00 — the midpoint',
+                              '$0.06 — the spread'],
+                        correct: 0,
+                        explanation: 'You sell at the bid and buy at the ask. An investor selling immediately receives the bid price of $99.97; an investor buying immediately pays the ask price of $100.03.',
+                        mnemonic: '💡 Memory tip: Ask is high, bid is low. You buy high at the ask and sell low at the bid — the spread works against you both ways.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each characteristic into the correct liquidity provider.',
+                        cols: ['Specialist (NYSE)', 'Dealer (NASDAQ)'],
+                        items: [
+                              { text: 'One per stock', answer: 'Specialist (NYSE)' },
+                              { text: 'No competition on the spread', answer: 'Specialist (NYSE)' },
+                              { text: 'Multiple per stock, competing', answer: 'Dealer (NASDAQ)' },
+                              { text: 'Competition narrows the spread', answer: 'Dealer (NASDAQ)' },
+                        ],
+                        explanation: 'The NYSE assigns one specialist per stock, so there is no competition on the spread. NASDAQ has multiple competing dealers per stock, and that competition narrows the spread.',
+                        mnemonic: '💡 Memory tip: One provider, wider spread. Many providers, tighter spread.'
+                  },
+
+                  /* ========== TOPIC 1.6 — TRADING IN FINANCIAL MARKETS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'What has electronic trading done to the specialist\'s role over time?',
+                        opts: ['Reduced it',
+                              'Expanded it significantly',
+                              'Left it completely unchanged',
+                              'Made it legally mandatory on every exchange'],
+                        correct: 0,
+                        explanation: 'Electronic trading has reduced the specialist\'s role over time, as trading volume has grown enormously and matching has increasingly been handled by computers.',
+                        mnemonic: '💡 Memory tip: Computers took over the matching, so the human in the middle matters less.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A stock is quoted at ask $100.03 / bid $99.97. An investor places a limit order to buy at $100.00. What happens?',
+                        opts: ['It waits — it will not execute until the ask drops to $100.00, or another investor places a matching limit sell order at $100.00',
+                              'It executes immediately at $100.00',
+                              'It executes immediately at $100.03',
+                              'It is rejected because $100.00 is below the ask'],
+                        correct: 0,
+                        explanation: 'The limit order will not execute until the ask drops to $100.00, or until another investor places a matching limit sell order at $100.00 — at which point the two orders "cross" and execute without the specialist quoting a different price.',
+                        mnemonic: '💡 Memory tip: A limit order sits and waits for the market to come to it, or for a matching order to cross with it.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'When two matching limit orders "cross," what happens?',
+                        opts: ['They execute against each other without the specialist quoting a different price',
+                              'The specialist cancels both orders',
+                              'Both orders convert into market orders',
+                              'The exchange charges both investors the full bid-ask spread'],
+                        correct: 0,
+                        explanation: 'If one investor has a limit order to buy at $100.00 and another places a limit sell order at $100.00, the two orders cross and execute directly — no specialist quote is needed in between.',
+                        mnemonic: '💡 Memory tip: When a buyer and seller name the same price, they just trade with each other. No middleman needed.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each characteristic into the order type it describes.',
+                        cols: ['Market Order', 'Limit Order'],
+                        items: [
+                              { text: 'Time-sensitive', answer: 'Market Order' },
+                              { text: 'Executes immediately; price not guaranteed', answer: 'Market Order' },
+                              { text: 'Price-sensitive', answer: 'Limit Order' },
+                              { text: 'Executes only at a specified price; may never execute', answer: 'Limit Order' },
+                        ],
+                        explanation: 'A market order is time-sensitive and executes immediately, but the price is not guaranteed. A limit order is price-sensitive and executes only at the specified price, with no guarantee it executes at all.',
+                        mnemonic: '💡 Memory tip: Market order buys time; limit order buys price. You always trade one for the other.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Why does liquidity matter in financial markets? (Select all that apply)',
+                        opts: ['More liquid markets produce more reliable stock prices as signals of value',
+                              'A rarely traded stock can have a "stale" price that does not reflect current information',
+                              'Liquidity lowers the cost of financing for firms',
+                              'Liquidity guarantees that a stock price will rise over time'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Liquidity makes prices more reliable as signals of value, prevents stale prices on rarely traded stocks, and lowers the cost of financing for firms. It does not guarantee that any price will rise.',
+                        mnemonic: '💡 Memory tip: Liquidity does two jobs — cheaper financing for firms, and more trustworthy prices for everyone.'
+                  },
+
+                  /* ========== TOPIC 1.7 — THE GOAL OF THE FIRM ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'What is the traditional goal of the firm?',
+                        opts: ['To maximize shareholder value',
+                              'To maximize net income',
+                              'To maximize total revenue',
+                              'To minimize total expenses'],
+                        correct: 0,
+                        explanation: 'The traditional goal of the firm is to maximize shareholder value — not simply to maximize net income. Net income is one period\'s accounting figure; shareholder value reflects the whole future of the firm.',
+                        mnemonic: '💡 Memory tip: Value, not income. A decision can raise this year\'s profit and still destroy value.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'How is the goal of maximizing shareholder value achieved? (Select all that apply)',
+                        opts: ['Through profitable decision-making',
+                              'By investing capital in projects that increase the firm\'s stock price',
+                              'By avoiding investments that cost more than they return',
+                              'By issuing as many new shares as possible each year'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Shareholder value is maximized through profitable decision-making, investing capital in projects that increase the stock price, and avoiding investments that cost more than they return. Issuing shares is a financing action, not a value-creating goal.',
+                        mnemonic: '💡 Memory tip: Fund what returns more than it costs; skip what doesn\'t. That is the whole rule.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'How do management decisions such as launching new products or making acquisitions affect the stock price?',
+                        opts: ['They create new information for the market, which the market prices in',
+                              'They have no effect until the annual report is published',
+                              'They change the price only if the SEC approves the decision',
+                              'They always increase the stock price by a fixed percentage'],
+                        correct: 0,
+                        explanation: 'Management decisions — new products, acquisitions, and so on — affect the stock price by creating new information for the market. The market reacts to that information by repricing the stock.',
+                        mnemonic: '💡 Memory tip: Price moves on news. A management decision is news.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A shareholder is:',
+                        opts: ['An individual or entity that holds a share — a fraction of ownership — in a company',
+                              'Anyone who has lent money to the company',
+                              'A member of the company\'s board of directors only',
+                              'An employee who receives a salary from the company'],
+                        correct: 0,
+                        explanation: 'A shareholder is an individual or entity that holds a share, meaning a fraction of ownership, in a company. Lenders are bondholders or creditors, not shareholders.',
+                        mnemonic: '💡 Memory tip: A share is a slice of ownership. Hold a slice, you are a shareholder.'
+                  },
+
+                  /* ========== CROSS-TOPIC SYNTHESIS ========== */
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each event into the market where it takes place.',
+                        cols: ['Primary Market', 'Secondary Market'],
+                        items: [
+                              { text: 'A firm performs its IPO', answer: 'Primary Market' },
+                              { text: 'An underwriter buys the entire bond issue from the issuer', answer: 'Primary Market' },
+                              { text: 'An investor buys shares from another investor on the NYSE', answer: 'Secondary Market' },
+                              { text: 'A dealer on NASDAQ quotes a bid and an ask', answer: 'Secondary Market' },
+                        ],
+                        explanation: 'The primary market is where securities are first sold — the IPO and the underwriter\'s purchase of the issue both happen there, and the firm receives the proceeds. Once securities trade between investors, whether on the NYSE or NASDAQ, that is the secondary market and the firm receives nothing.',
+                        mnemonic: '💡 Memory tip: Follow the money. If the company gets paid, it\'s primary. If two investors swap, it\'s secondary.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place these events in the order they occur in the life of a new stock issue.',
+                        items: [
+                              { text: 'A syndicate forms to oversee the issuance', order: 0 },
+                              { text: 'The underwriter values the security and buys the issue', order: 1 },
+                              { text: 'The firm completes its IPO and receives the proceeds', order: 2 },
+                              { text: 'Investors trade the shares among themselves on an exchange', order: 3 },
+                        ],
+                        explanation: 'A syndicate forms temporarily to oversee the issuance; the underwriter values the security and typically purchases the entire issue; the IPO completes and the firm receives its capital — all primary market activity. Only afterward do investors trade the shares among themselves in the secondary market.',
+                        mnemonic: '💡 Memory tip: Assemble the team, price and buy the issue, sell it to the public, then let the market trade it.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are true about the bid-ask spread? (Select all that apply)',
+                        opts: ['It is the difference between the price a market maker sells at and the price they buy at',
+                              'It compensates the market maker for bearing inventory risk',
+                              'Competition among multiple dealers tends to narrow it',
+                              'It is set by federal regulation at a fixed amount'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'The bid-ask spread is the difference between the ask (the market maker\'s selling price) and the bid (their buying price). It compensates them for the risk of holding inventory in a fluctuating stock, and competition among multiple dealers — as on NASDAQ — tends to narrow it. It is not set by regulation.',
+                        mnemonic: '💡 Memory tip: Spread = ask − bid = the market maker\'s pay for taking risk. Competition shrinks it.'
+                  },
+
+            ];
+
+            initQuiz(questions, 'Topic 1');
+      </script>
+</body>
+
+</html>

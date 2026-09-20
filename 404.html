@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page moved · WGU MBA Study Hub</title>
+  <link rel="stylesheet" href="/wgu/assets/css/quiz.css">
+  <link rel="stylesheet" href="/wgu/assets/css/hub.css">
+  <script>
+    // The C213 material used to live at /quizzes/* and /notes/*; it now sits
+    // under /c213/. Old bookmarks and shared links land here, so send them on
+    // to the new location instead of dead-ending. Anything else goes home.
+    (function () {
+      var path = window.location.pathname;
+      // A miss *inside* a course directory must never be re-prefixed — that
+      // would 404 again one level deeper and loop forever. Those go home.
+      var inCourse = /\/c\d{3}\//.test(path);
+      var m = inCourse ? null : path.match(/^(.*?)\/(quizzes|notes)\/(.+)$/);
+      // The stylesheet links above are pinned to the production base; repoint
+      // them at wherever this copy actually lives so the fallback renders.
+      var base;
+      if (m) base = m[1];                                          // .../<base>/quizzes/x.html
+      else if (inCourse) base = path.replace(/\/c\d{3}(\/.*)?$/, '');  // strip the course dir
+      else base = path.replace(/\/[^\/]*$/, '');                    // strip the missing leaf
+
+      document.querySelectorAll('link[href^="/wgu/"]').forEach(function (l) {
+        l.setAttribute('href', base + l.getAttribute('href').slice(4));
+      });
+
+      if (m) {
+        window.location.replace(base + '/c213/' + m[2] + '/' + m[3] +
+          window.location.search + window.location.hash);
+        return;
+      }
+
+      // No redirect to make: show the chooser below, with links pointed at
+      // this deployment's base rather than the hardcoded production one.
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('a[href^="/wgu/"]').forEach(function (a) {
+          a.setAttribute('href', base + a.getAttribute('href').slice(4));
+        });
+        var n = document.querySelector('.subtitle');
+        if (n) n.textContent = 'The site is organized by course now. Pick a course to continue.';
+      });
+    })();
+  </script>
+</head>
+
+<body>
+
+  <div class="hub-wrap">
+    <header>
+      <h1>This page <span>moved</span></h1>
+      <p class="subtitle">The site is organized by course now. Taking you to the new location&hellip;</p>
+    </header>
+
+    <div class="hub-grid">
+
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">C213</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="/wgu/c213/index.html">Accounting for Decision
+            Makers</a></div>
+        <div class="hub-card-desc">Section quizzes, study notes, practice exams, and formula sheets.</div>
+      </article>
+
+      <article class="hub-card">
+        <span class="hub-arrow">→</span>
+        <div class="hub-card-eyebrow">C214</div>
+        <div class="hub-card-title"><a class="hub-card-link" href="/wgu/c214/index.html">Financial Management</a></div>
+        <div class="hub-card-desc">Sections are added as the course progresses.</div>
+      </article>
+
+    </div>
+
+    <p class="hub-footer">
+      <a class="hub-repo" href="/wgu/">← Back to all courses</a>
+    </p>
+  </div>
+
+</body>
+
+</html>

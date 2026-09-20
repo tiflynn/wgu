@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C214 Financial Management · Topic 2 Quiz</title>
+      <link rel="stylesheet" href="../../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Topics</a>
+            <a class="back-link notes" href="../notes/section02.html" target="_blank" rel="noopener">📄 Topic 2 Notes</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C214 Financial Management · Topic 2</p>
+            <h1>Financial Statements <span>Part 1</span></h1>
+      </header>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  /* ========== TOPIC 2.1 — THE THREE FINANCIAL STATEMENTS ========== */
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each description into the financial statement it belongs to.',
+                        cols: ['Income Statement', 'Balance Sheet', 'Statement of Cash Flows'],
+                        items: [
+                              { text: 'Shows results of operations over a period of time', answer: 'Income Statement' },
+                              { text: 'Starts with sales and ends with net income', answer: 'Income Statement' },
+                              { text: 'A snapshot at one single point in time', answer: 'Balance Sheet' },
+                              { text: 'Shows what the firm owns and how it financed it', answer: 'Balance Sheet' },
+                              { text: 'Tracks all cash moving in and out during a period', answer: 'Statement of Cash Flows' },
+                        ],
+                        explanation: 'The income statement covers a period — it starts with sales, subtracts expenses, and ends with net income. The balance sheet is a snapshot at one point in time showing assets, liabilities, and equity. The statement of cash flows tracks cash movement over a period.',
+                        mnemonic: '💡 Memory tip: The income statement is a video camera rolling across the year; the balance sheet is a still photo taken on one date.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is the key difference between accounting and finance?',
+                        opts: ['Accounting is backward-looking (reports what already happened); finance is forward-looking (liquidity and providing capital for the future)',
+                              'Accounting is forward-looking; finance reports what already happened',
+                              'Accounting deals only with taxes; finance deals only with stocks',
+                              'They are the same discipline under two different names'],
+                        correct: 0,
+                        explanation: 'Accounting is backward-looking — it reports what already happened. Finance is forward-looking, focused on liquidity and on providing capital for the future.',
+                        mnemonic: '💡 Memory tip: Accounting writes the history book. Finance plans the next chapter.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why does a finance course begin with accounting?',
+                        opts: ['Because accountants control the data — you cannot analyze a company without understanding its financial statements',
+                              'Because finance students are required to pass the CPA exam',
+                              'Because accounting and finance use identical methods',
+                              'Because accounting rules determine a stock\'s market price'],
+                        correct: 0,
+                        explanation: 'Accountants control the data. To analyze a company you must first understand its financial position and operations — which means being able to read its financial statements.',
+                        mnemonic: '💡 Memory tip: You can\'t analyze the numbers until you can read the scoreboard, and accountants keep the scoreboard.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'Financial statements are the endpoint of financial analysis — once you have analyzed them, the analysis is complete.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. Financial statements are an important data source, but analyzing the past is only a springboard to managing the future. The analysis starts there; it does not end there.',
+                        mnemonic: '💡 Memory tip: The statements are the diving board, not the pool. They launch the analysis forward.'
+                  },
+
+                  /* ========== TOPIC 2.3 — ACCRUAL ACCOUNTING & MATCHING ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'The matching principle states that:',
+                        opts: ['Revenues and expenses are recognized in the same period',
+                              'Assets must always equal liabilities plus equity',
+                              'Every debit must have an offsetting credit',
+                              'Cash receipts must match cash disbursements each month'],
+                        correct: 0,
+                        explanation: 'The matching principle means revenues and expenses are matched — recognized — in the same period. It is one of the two core ideas behind accrual accounting.',
+                        mnemonic: '💡 Memory tip: Match the cost to the sale it produced, in the period the sale happened.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Accrual accounting is best described as an accounting system based on:',
+                        opts: ['Recording accounts at historical prices and applying the matching principle',
+                              'Recording every account at its current market value each period',
+                              'Recording revenue only when cash is received',
+                              'Recording only those transactions that affect the tax return'],
+                        correct: 0,
+                        explanation: 'Accrual accounting records accounts at historical prices and applies the matching principle. In this course the term is used interchangeably with GAAP (Generally Accepted Accounting Principles).',
+                        mnemonic: '💡 Memory tip: Accrual = historical prices + matching. In this course, accrual and GAAP mean the same thing.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm spends $75,000 in 20X1 producing 1,000 chairs but sells none. In 20X2 it produces nothing and sells all 1,000 chairs for $100 each. Under CASH accounting, what is net income in 20X1?',
+                        opts: ['−$75,000',
+                              '$0',
+                              '$25,000',
+                              '$100,000'],
+                        correct: 0,
+                        explanation: 'Under cash accounting, cash out is an expense in the period it leaves. The firm spent $75,000 in 20X1 and collected nothing, so 20X1 net income is −$75,000. This is exactly the distortion accrual accounting exists to fix.',
+                        mnemonic: '💡 Memory tip: Cash accounting books the cost the moment the money leaves — even if nothing has been sold yet.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Same firm: $75,000 spent in 20X1 producing 1,000 chairs, all sold in 20X2 for $100 each. Under ACCRUAL accounting, what is net income in 20X2?',
+                        opts: ['$25,000',
+                              '$100,000',
+                              '$0',
+                              '−$75,000'],
+                        correct: 0,
+                        explanation: 'Accrual accounting matches the $75,000 cost to the $100,000 of revenue in the period the sale occurred: $100,000 − $75,000 = $25,000. The full profit shows up in 20X2, and 20X1 correctly reports $0.',
+                        mnemonic: '💡 Memory tip: The real profit on the chairs was always $25,000. Accrual puts all of it in the year they actually sold.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Under accrual accounting, revenue is recognized when:',
+                        opts: ['The earnings process is complete and receipt of payment is likely',
+                              'Cash is deposited in the firm\'s bank account',
+                              'The customer first expresses interest in buying',
+                              'The firm files its annual tax return'],
+                        correct: 0,
+                        explanation: 'Under accrual accounting, revenue is recognized when the earnings process is complete and receipt of payment is likely — not when the cash actually arrives. That is cash accounting.',
+                        mnemonic: '💡 Memory tip: Earned, not received. Accrual asks "did we do the work?", not "did we get paid?"'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why is "when revenue is earned" considered a significant area of managerial discretion?',
+                        opts: ['Management can reasonably argue the earnings process is complete at the order, the delivery, the payment, or customer satisfaction — and each choice shifts revenue between periods',
+                              'Management can choose whether or not to report revenue at all',
+                              'Revenue recognition rules change every fiscal year by law',
+                              'Auditors, not management, decide the recognition date'],
+                        correct: 0,
+                        explanation: 'Management has considerable discretion over when revenue is "earned." Is it when the order is taken, when the product is delivered, when payment is received, or when the customer is satisfied? Each defensible answer moves revenue into a different period.',
+                        mnemonic: '💡 Memory tip: Four plausible moments, one reported number. Whoever picks the moment shapes the quarter.'
+                  },
+
+                  /* ========== TOPICS 2.4 & 2.5 — THE INCOME STATEMENT ========== */
+
+                  {
+                        type: 'ord',
+                        q: 'Place these income statement lines in the order they appear, top to bottom.',
+                        items: [
+                              { text: 'Revenues', order: 0 },
+                              { text: 'Cost of Goods Sold', order: 1 },
+                              { text: 'Gross Profit', order: 2 },
+                              { text: 'Operating Expenses', order: 3 },
+                              { text: 'EBIT', order: 4 },
+                              { text: 'Interest Expense', order: 5 },
+                              { text: 'EBT', order: 6 },
+                              { text: 'Tax Expense', order: 7 },
+                              { text: 'Net Income', order: 8 },
+                        ],
+                        explanation: 'Revenues less cost of goods sold gives gross profit. Less operating expenses gives EBIT. Less interest expense gives EBT (earnings before taxes). Less tax expense gives net income.',
+                        mnemonic: '💡 Memory tip: Work down the page subtracting: goods, then operations, then interest, then taxes. Interest always sits between EBIT and EBT.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'EBIT is calculated as:',
+                        opts: ['Gross Profit − Operating Expenses',
+                              'Revenue − Cost of Goods Sold',
+                              'Net Income + Dividends',
+                              'Earnings Before Taxes − Interest Expense'],
+                        correct: 0,
+                        explanation: 'EBIT (Earnings Before Interest and Taxes, pronounced "ee-bit") equals gross profit minus operating expenses. It is frequently used as a proxy for operating income.',
+                        mnemonic: '💡 Memory tip: EBIT is the profit from running the business — before the lenders and the government take their cut.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each description into the type of income it defines.',
+                        cols: ['Cash-Based Income', 'Income for Tax Purposes', 'Accounting Income'],
+                        items: [
+                              { text: 'An informal metric: cash in minus cash out', answer: 'Cash-Based Income' },
+                              { text: 'The government\'s own definition, used to compute tax owed', answer: 'Income for Tax Purposes' },
+                              { text: 'Net income reported on the income statement under GAAP', answer: 'Accounting Income' },
+                        ],
+                        explanation: 'Cash-based income is the informal cash-in-minus-cash-out metric, a close cousin of cash flow from operations. Income for tax purposes is the government\'s definition used to compute tax owed. Accounting income is net income as reported under accrual accounting (GAAP).',
+                        mnemonic: '💡 Memory tip: Three different scorekeepers — the bank account, the IRS, and GAAP — all counting "income" differently.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following reported income statement figures do NOT equal the actual cash that moved? (Select all that apply)',
+                        opts: ['Revenue does not equal cash collected',
+                              'Tax expense does not equal tax actually paid',
+                              'Interest expense does not equal interest actually paid',
+                              'The net income figure is always identical to the change in the cash balance'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Under accrual accounting none of these reported figures equals the cash that actually moved: revenue is not cash collected, COGS and operating expenses are not cash paid, interest expense is not interest paid, and tax expense is not tax paid. Net income is emphatically not the change in cash.',
+                        mnemonic: '💡 Memory tip: Every line on the income statement is an accrual figure, not a bank statement. Tax expense in particular — firms keep one set of books for the IRS and another for everyone else.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: '"Cash flow is a fact, while net income is only an opinion." What does this mean?',
+                        opts: ['Cash either moved or it did not, while every line feeding net income is subject to accounting assumptions, timing differences, and subjectivity',
+                              'Net income is deliberately falsified by most companies',
+                              'Cash flow is always larger than net income',
+                              'Net income is unaudited while cash flow is audited'],
+                        correct: 0,
+                        explanation: 'Cash movement is an observable fact. Net income is the end of a long chain of judgment calls — accounting assumptions, timing differences, subjectivity, and occasionally deceit — so reasonable people applying GAAP can arrive at different numbers.',
+                        mnemonic: '💡 Memory tip: You can argue about net income. You cannot argue about whether the money left the account.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Compared with accounting income, income for tax purposes involves:',
+                        opts: ['Fewer managerial choices',
+                              'More managerial choices',
+                              'Exactly the same degree of managerial choice',
+                              'No rules at all — the firm reports whatever it wishes'],
+                        correct: 0,
+                        explanation: 'Income for tax purposes is the government\'s own definition and involves fewer managerial choices than accounting income. Accounting income, calculated under GAAP, is the most complicated of the three and the most subject to managerial discretion.',
+                        mnemonic: '💡 Memory tip: The IRS leaves less wiggle room than GAAP does. Accounting income is the most discretionary of the three.'
+                  },
+
+                  /* ========== TOPIC 2.6 — THE BALANCE SHEET, STRUCTURE ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'The fundamental balance sheet equation is Assets = Liabilities + Owner\'s Equity. What do the two sides represent?',
+                        opts: ['The left side is what the firm owns; the right side is how it financed those things',
+                              'The left side is revenue; the right side is expenses',
+                              'The left side is this year; the right side is last year',
+                              'The left side is cash; the right side is everything else'],
+                        correct: 0,
+                        explanation: 'Assets are what the firm owns. Liabilities and equity show how those assets were financed — every asset is paid for either by borrowing (liabilities) or by owner investment (equity). That is why it must always balance.',
+                        mnemonic: '💡 Memory tip: What you have, and where you got the money for it. Those two totals can never disagree.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Under the historical cost principle, land purchased in 1972 for $1 million appears on today\'s balance sheet at:',
+                        opts: ['$1 million — its original cost, regardless of current market value',
+                              'Its current appraised market value',
+                              '$1 million adjusted for inflation since 1972',
+                              'Zero, because land is fully depreciated after 50 years'],
+                        correct: 0,
+                        explanation: 'The historical cost principle records assets and liabilities at their cost when acquired and does not update them for market value changes. The 1972 land stays at $1 million no matter what it would sell for today.',
+                        mnemonic: '💡 Memory tip: The balance sheet remembers the price tag, not the appraisal. (Land is also never depreciated.)'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why does a misstatement of value on the asset side of the balance sheet imply a misstatement on the financing side as well?',
+                        opts: ['Because the balance sheet must always balance, so an error on one side requires an offsetting error on the other',
+                              'Because auditors always find errors in pairs',
+                              'Because liabilities are calculated as a fixed percentage of assets',
+                              'Because assets and equity are always equal to each other'],
+                        correct: 0,
+                        explanation: 'Since A = L + OE must hold, overstating or understating an asset forces an offsetting misstatement somewhere on the financing side. This is why analysts sometimes "recast" financial statements to better reflect economic reality.',
+                        mnemonic: '💡 Memory tip: The equation always balances — so a lie on the left needs a matching lie on the right.'
+                  },
+
+                  /* ========== TOPIC 2.7 — THE ASSET SIDE ========== */
+
+                  {
+                        type: 'ord',
+                        q: 'Place these current assets in the order they are listed on the balance sheet, most liquid first.',
+                        items: [
+                              { text: 'Cash', order: 0 },
+                              { text: 'Marketable Securities', order: 1 },
+                              { text: 'Accounts Receivable', order: 2 },
+                              { text: 'Inventory', order: 3 },
+                        ],
+                        explanation: 'Current assets are listed in order of liquidity, most liquid first: cash, then marketable securities (T-bills and CDs), then accounts receivable, then inventory — the least liquid current asset.',
+                        mnemonic: '💡 Memory tip: The closer to actual money, the higher up the list. Cash is already money; inventory still has to be sold and then collected.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why is inventory considered the least liquid current asset?',
+                        opts: ['It is subject to salability, spoilage, and shrinkage risk, plus management discretion in valuation',
+                              'It is legally prohibited from being sold within one year',
+                              'It always has a market value of zero',
+                              'It is reported on the income statement rather than the balance sheet'],
+                        correct: 0,
+                        explanation: 'Inventory — raw materials, work-in-process, and finished goods — must first be sold and then collected before it becomes cash. Along the way it faces salability risk, spoilage, and shrinkage, and its stated value depends on management\'s valuation choices.',
+                        mnemonic: '💡 Memory tip: Inventory is two steps from cash: sell it, then get paid for it. Plenty can go wrong in between.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Accounts receivable represents:',
+                        opts: ['Cash owed to the firm by customers for goods or services already delivered but not yet paid for',
+                              'Cash the firm owes to its suppliers',
+                              'Cash the firm has already collected from customers',
+                              'Short-term securities the firm holds for investment'],
+                        correct: 0,
+                        explanation: 'Accounts receivable is cash owed to the firm by customers for goods or services already delivered but not yet paid for. Management discretion in recognizing bad debt affects how "real" the reported AR balance actually is.',
+                        mnemonic: '💡 Memory tip: Receivable = they owe you. Payable = you owe them. AR is money on its way in.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm reports gross PP&E of $850,000 and accumulated depreciation of $310,000. What is its net PP&E (book value)?',
+                        opts: ['$540,000',
+                              '$1,160,000',
+                              '$310,000',
+                              '$850,000'],
+                        correct: 0,
+                        explanation: 'Net PP&E equals gross PP&E minus accumulated depreciation: $850,000 − $310,000 = $540,000. Gross PP&E is the original cost of the fixed assets; accumulated depreciation is every dollar of depreciation claimed against them to date.',
+                        mnemonic: '💡 Memory tip: Start with what you paid, subtract what you have written off, and what remains is book value.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is the difference between depreciation expense and accumulated depreciation?',
+                        opts: ['Depreciation expense is one period\'s charge on the income statement; accumulated depreciation is the lifetime running total on the balance sheet',
+                              'Depreciation expense is the lifetime total; accumulated depreciation is one period\'s charge',
+                              'They are two names for the same balance sheet figure',
+                              'Depreciation expense applies to current assets; accumulated depreciation applies to fixed assets'],
+                        correct: 0,
+                        explanation: 'A $100 asset with a five-year life might carry $20 per year of depreciation expense — that charge appears on the income statement, one period at a time. The running total of all depreciation ever claimed against that asset is accumulated depreciation, and it sits on the balance sheet.',
+                        mnemonic: '💡 Memory tip: Expense is this year\'s slice. Accumulated is every slice you have taken so far.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why can an asset\'s book value diverge significantly from its actual fair market value?',
+                        opts: ['Because depreciation schedules rarely mirror true economic depreciation',
+                              'Because book value is always updated to market value each quarter',
+                              'Because fair value is prohibited from being estimated under GAAP',
+                              'Because accumulated depreciation is calculated from market prices'],
+                        correct: 0,
+                        explanation: 'Book value is gross PP&E less accumulated depreciation, and depreciation schedules are accounting conventions — they rarely track how an asset actually loses economic value. A fully depreciated machine may still be productive and worth real money.',
+                        mnemonic: '💡 Memory tip: The depreciation schedule is a calendar, not an appraiser.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'An asset is classified as a fixed asset (PP&E) rather than a current asset when:',
+                        opts: ['It has a useful life of more than one year',
+                              'It costs more than $10,000',
+                              'It cannot be sold at all',
+                              'It was purchased with borrowed money'],
+                        correct: 0,
+                        explanation: 'Current assets are cash or assets expected to be converted to cash within a year. Fixed assets — property, plant & equipment — have a useful life greater than one year and are normally recorded at historical cost.',
+                        mnemonic: '💡 Memory tip: One year is the dividing line. Inside a year it is current; beyond a year it is fixed.'
+                  },
+
+                  /* ========== TOPIC 2.8 — THE FINANCING SIDE ========== */
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each balance sheet line item into its correct category.',
+                        cols: ['Current Asset', 'Fixed Asset', 'Current Liability', 'Long-Term Liability'],
+                        items: [
+                              { text: 'Marketable Securities', answer: 'Current Asset' },
+                              { text: 'Property, Plant & Equipment', answer: 'Fixed Asset' },
+                              { text: 'Accounts Payable', answer: 'Current Liability' },
+                              { text: 'Notes Payable', answer: 'Current Liability' },
+                              { text: 'Accruals', answer: 'Current Liability' },
+                              { text: 'Long-Term Debt', answer: 'Long-Term Liability' },
+                        ],
+                        explanation: 'Marketable securities are a current asset (convertible to cash within a year). PP&E is a fixed asset (useful life over a year). Accounts payable, notes payable, and accruals are all current liabilities, due within a year. Long-term debt matures beyond one year.',
+                        mnemonic: '💡 Memory tip: Sort on two questions — is it something we own or something we owe, and does it resolve inside a year or beyond one?'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What is the key difference between accounts payable and notes payable?',
+                        opts: ['Notes payable carries interest expense; accounts payable typically does not',
+                              'Accounts payable carries interest; notes payable does not',
+                              'Accounts payable is a long-term liability; notes payable is current',
+                              'There is no difference — they are two names for the same account'],
+                        correct: 0,
+                        explanation: 'Accounts payable is money owed to suppliers for credit purchases and is typically interest-free — the mirror image of accounts receivable. Notes payable is short-term borrowed money, typically under five years, and unlike AP it does carry interest expense.',
+                        mnemonic: '💡 Memory tip: Owing your supplier is free. Owing the bank is not.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Wages are earned by employees in March but not paid until April 10. On the March 31 balance sheet, this appears as:',
+                        opts: ['An accrual (accrued wages) — a current liability for an expense incurred but not yet paid',
+                              'A current asset, since the cash is still in the bank',
+                              'Nothing at all, because no cash has moved',
+                              'A long-term liability until the payment clears'],
+                        correct: 0,
+                        explanation: 'Accruals are expenses incurred but not yet paid. The work was done in March, so the expense belongs to March under the matching principle, and the unpaid obligation sits on the March 31 balance sheet as a current liability.',
+                        mnemonic: '💡 Memory tip: Earned but not yet paid = accrued. The expense is booked when incurred, not when the check clears.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Additional Paid-In Capital (APIC) represents:',
+                        opts: ['Proceeds from issuing stock minus the par value of that stock',
+                              'Cumulative profits the firm has retained over its life',
+                              'The market value of the firm\'s shares today',
+                              'Interest paid to bondholders during the period'],
+                        correct: 0,
+                        explanation: 'APIC is the proceeds from issuing stock minus the par value of that stock. Par is often just $1 per share, so if shares are issued at $25, then $1 goes to common stock and $24 to APIC.',
+                        mnemonic: '💡 Memory tip: Par value goes in the Common Stock bucket; everything paid above par spills into APIC.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'Retained earnings represents cash the firm has available to pay its bills.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False, and this is one of the biggest traps in Topic 2. Retained earnings is not cash — it has already been reinvested into the firm\'s asset base and cannot be used to pay bills. A firm can show enormous retained earnings and still have almost no cash.',
+                        mnemonic: '💡 Memory tip: Retained earnings is a history of profits kept, not a bank balance. The money is already spent on assets.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Retained earnings is defined as:',
+                        opts: ['Cumulative net income not paid out as dividends over the entire life of the firm',
+                              'Net income from the current year only',
+                              'Total dividends paid since the firm was founded',
+                              'The cash balance left over at the end of the year'],
+                        correct: 0,
+                        explanation: 'Retained earnings is the cumulative total of net income that was not paid out as dividends across the firm\'s entire life — not a single year\'s figure.',
+                        mnemonic: '💡 Memory tip: Cumulative, not annual. It is every dollar of profit the firm ever kept instead of distributing.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are components of Owner\'s Equity? (Select all that apply)',
+                        opts: ['Common Stock',
+                              'Additional Paid-In Capital',
+                              'Retained Earnings',
+                              'Notes Payable'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Owner\'s Equity is the sum of common stock, additional paid-in capital, and retained earnings. Notes payable is borrowed money — a liability, not equity.',
+                        mnemonic: '💡 Memory tip: OE = CS + APIC + RE. Anything with "payable" in the name is money owed, not ownership.'
+                  },
+
+                  /* ========== TOPIC 2.9 — LINKING THE STATEMENTS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Which equation correctly links the income statement to the balance sheet?',
+                        opts: ['New RE = Old RE + Net Income − Dividends',
+                              'New RE = Old RE − Net Income + Dividends',
+                              'New RE = Net Income + Dividends',
+                              'New RE = Old RE + Dividends − Net Income'],
+                        correct: 0,
+                        explanation: 'Net income can only go two places: out as dividends, or retained. That gives Net Income = Dividends + change in RE, which rearranges to the form you will use for the rest of the course: New RE = Old RE + Net Income − Dividends.',
+                        mnemonic: '💡 Memory tip: Start with what you had, add what you earned, subtract what you paid out. What is left is what you kept.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm began the year with retained earnings of $400,000, earned net income of $150,000, and ended the year with retained earnings of $500,000. How much did it pay in dividends?',
+                        opts: ['$50,000',
+                              '$100,000',
+                              '$150,000',
+                              '$250,000'],
+                        correct: 0,
+                        explanation: 'Rearrange New RE = Old RE + Net Income − Dividends to solve for dividends: $400,000 + $150,000 − $500,000 = $50,000. Retained earnings rose only $100,000 on $150,000 of income, so the missing $50,000 went out the door.',
+                        mnemonic: '💡 Memory tip: Dividends = Old RE + Net Income − New RE. Whatever the earnings did not add to RE was paid out.'
+                  },
+
+                  /* ========== THE ELECTROCAR CASE ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'ElectroCar\'s retained earnings fell from $(669,392) to $(1,065,606) — a change of $(396,214) — while its net loss for the year was $(396,213). What does this tell you about dividends?',
+                        opts: ['Essentially no dividends were paid — the entire change in retained earnings is explained by the loss alone',
+                              'The firm paid roughly $396,000 in dividends',
+                              'The firm paid roughly $669,000 in dividends',
+                              'Dividends cannot be determined from this information'],
+                        correct: 0,
+                        explanation: 'Apply New RE = Old RE + Net Income − Dividends. The loss of $396,213 accounts for essentially the entire $396,214 decline in retained earnings, leaving nothing for dividends. That is exactly what you would expect from a money-losing growth company.',
+                        mnemonic: '💡 Memory tip: If the change in RE equals net income, dividends were zero. Firms burning cash do not pay dividends.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'ElectroCar\'s accounts payable rose from $88,250 to $343,180 in one year. What does an increase of this size most likely indicate?',
+                        opts: ['The firm is stretching payments to suppliers to conserve cash — a warning sign about its cash position',
+                              'The firm collected far more cash from its customers than expected',
+                              'The firm paid off most of its long-term debt',
+                              'The firm issued a large amount of new common stock'],
+                        correct: 0,
+                        explanation: 'Accounts payable is money owed to suppliers. A jump of $254,930 means the firm is taking much longer to pay them — using its suppliers as a source of short-term financing to conserve cash. Combined with a falling cash balance, that is a warning sign.',
+                        mnemonic: '💡 Memory tip: A ballooning payables balance means somebody is not getting paid on time. That is usually about cash, not generosity.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'ElectroCar\'s long-term debt went from $271,165 to $411,460. By how much did it increase?',
+                        opts: ['$140,295',
+                              '$411,460',
+                              '$271,165',
+                              '$682,625'],
+                        correct: 0,
+                        explanation: '$411,460 − $271,165 = $140,295. The firm took on substantial additional long-term borrowing during the year — one of the ways it financed its operating losses.',
+                        mnemonic: '💡 Memory tip: A company losing money has to fund the losses somehow. Watch the debt line to see how.'
+                  },
+
+            ];
+
+            initQuiz(questions, 'Topic 2');
+      </script>
+</body>
+
+</html>
