@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C214 Financial Management · Topic 3 Quiz</title>
+      <link rel="stylesheet" href="../../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Topics</a>
+            <a class="back-link notes" href="../notes/section03.html" target="_blank" rel="noopener">📄 Topic 3 Notes</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C214 Financial Management · Topic 3</p>
+            <h1>Financial Statements <span>Part 2</span></h1>
+      </header>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  /* ========== TOPIC 3.2 — THE BIG PICTURE & THE CASH IDENTITY ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Why is the statement of cash flows often considered the "most honest" of the three financial statements?',
+                        opts: ['Because it reports actual cash movement rather than accruals — cash flow is a fact, while net income is an accounting opinion',
+                              'Because it is the only statement audited by the SEC',
+                              'Because it is prepared before the income statement and balance sheet',
+                              'Because it is the only statement that cannot legally be restated'],
+                        correct: 0,
+                        explanation: 'The SCF tracks cash in and cash out, not accrual figures. Cash either moved or it did not — which is why cash flow is called a fact while net income is called an opinion.',
+                        mnemonic: '💡 Memory tip: The income statement is what management says happened. The SCF is what the bank account says happened.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place the lines of the statement of cash flows in the correct order, top to bottom.',
+                        items: [
+                              { text: 'Cash Flow from Operations (CFO)', order: 0 },
+                              { text: 'Cash Flow from Investing (CFI)', order: 1 },
+                              { text: 'Cash Flow from Financing (CFF)', order: 2 },
+                              { text: 'Change in Cash', order: 3 },
+                              { text: 'Beginning Cash', order: 4 },
+                              { text: 'Ending Cash', order: 5 },
+                        ],
+                        explanation: 'The order is always operating, investing, financing. Those three sum to the change in cash; add beginning cash and you arrive at ending cash.',
+                        mnemonic: '💡 Memory tip: O-I-F — Operations, Investing, Financing. Run the business, buy the equipment, then pay for it all. Then add where you started to see where you ended.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The master cash flow identity states that CFO + CFI + CFF equals:',
+                        opts: ['The change in cash — ending cash minus beginning cash',
+                              'Net income for the period',
+                              'Total assets minus total liabilities',
+                              'Ending cash'],
+                        correct: 0,
+                        explanation: 'CFO + CFI + CFF = change in cash = ending cash − beginning cash. Adding beginning cash to that total is what gives you ending cash.',
+                        mnemonic: '💡 Memory tip: The three buckets explain the MOVE in cash, not the LEVEL of cash. You still have to add where you started.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each cash item into the section of the statement of cash flows where it belongs.',
+                        cols: ['CFO', 'CFI', 'CFF'],
+                        items: [
+                              { text: 'Cash collected from customers', answer: 'CFO' },
+                              { text: 'Payments to suppliers for materials', answer: 'CFO' },
+                              { text: 'Wages paid to employees', answer: 'CFO' },
+                              { text: 'Taxes paid to tax authorities', answer: 'CFO' },
+                              { text: 'Purchase of a new factory', answer: 'CFI' },
+                              { text: 'Proceeds from selling old equipment', answer: 'CFI' },
+                              { text: 'Proceeds from new bank borrowing', answer: 'CFF' },
+                              { text: 'Dividends paid to shareholders', answer: 'CFF' },
+                              { text: 'Repurchase of the company\'s own stock', answer: 'CFF' },
+                        ],
+                        explanation: 'CFO is cash tied to making and selling the product — customers, suppliers, employees, taxes. CFI is buying and disposing of long-term assets (PP&E). CFF is how the firm funds itself — borrowing, repaying, issuing or buying back stock, and dividends.',
+                        mnemonic: '💡 Memory tip: Ask "which decision caused this?" Running the business = CFO. Buying the building = CFI. Paying for the building = CFF.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Cash flow from financing (CFF) captures which type of management decision?',
+                        opts: ['How the firm pays for its assets — borrowing, repaying debt, issuing or repurchasing stock, and dividends',
+                              'What to make, how to make it, and which suppliers to use',
+                              'Which long-term assets to buy and sell',
+                              'How much depreciation to claim each year'],
+                        correct: 0,
+                        explanation: 'CFF is the financing decision: how the firm funds the assets it holds. CFO covers the production and selling decisions; CFI covers buying and selling long-term assets.',
+                        mnemonic: '💡 Memory tip: Financing answers "where did the money come from?" — lenders, owners, or retained profits.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'The course text describes cash flow as a fact and net income as an accounting opinion.',
+                        opts: ['True', 'False'],
+                        correct: 0,
+                        explanation: 'True. Cash either moved or it did not, so cash flow is a fact. Net income is the product of a long chain of accrual choices about timing and estimation, so it is an opinion.',
+                        mnemonic: '💡 Memory tip: Facts come from the bank statement. Opinions come from the accounting department.'
+                  },
+
+                  /* ========== TOPIC 3.2 — "THE MYTH": CASH FLOW CAN BE MISSTATED ========== */
+
+                  {
+                        type: 'tf',
+                        q: 'Total (gross) cash flow is fairly easy to misstate, but the split between CFO, CFI, and CFF is rigidly fixed by GAAP.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False — it is exactly backwards. Total cash flow is HARD to misstate, but the SPLIT between CFO, CFI, and CFF is flexible. A firm can make one category look better by shrinking another.',
+                        mnemonic: '💡 Memory tip: The size of the pie is honest; the way it is sliced is negotiable.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which features of a firm\'s operating environment affect how its cash flows are classified? (Select all that apply)',
+                        opts: ['Core activities — the same item lands in different buckets depending on the business',
+                              'Cash flow management — managers whose bonuses depend on CFO may recategorize items',
+                              'Market pressure — a firm raising capital does not want to report falling CFO',
+                              'The statutory corporate tax rate in the firm\'s home state'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'The three factors are core activities, cash flow management (incentives), and market pressure. The tax rate affects the amount of tax paid, not how cash flows are categorized.',
+                        mnemonic: '💡 Memory tip: What the firm DOES, what management WANTS, and what the market DEMANDS.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A medical equipment dealer buys hospital beds to resell. In its statement of cash flows, that purchase is:',
+                        opts: ['CFO — for a dealer the beds are inventory, part of producing and selling the product',
+                              'CFI — beds are long-lived physical assets no matter who buys them',
+                              'CFF — inventory purchases are a form of short-term financing',
+                              'Excluded from the SCF entirely until the beds are sold'],
+                        correct: 0,
+                        explanation: 'Classification depends on the firm\'s core activities. For a health care provider a hospital bed is a long-term asset (CFI). For a dealer that resells it, the same bed is inventory — an operating item (CFO).',
+                        mnemonic: '💡 Memory tip: Same bed, different bucket. Ask what the firm is in the business of doing.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why might a manager be tempted to shift items into the CFO category?',
+                        opts: ['Because bonuses may be tied to CFO, and recategorizing for a year or two can often be done without violating GAAP',
+                              'Because CFO is the only section the SEC reviews',
+                              'Because items in CFO are exempt from taxation',
+                              'Because GAAP requires ambiguous items to be reported as operating'],
+                        correct: 0,
+                        explanation: 'When compensation depends on CFO, there is an incentive to inflate it. Because the split between categories is flexible, this can be done for a year or two without technically breaking GAAP.',
+                        mnemonic: '💡 Memory tip: Follow the bonus. If CFO pays the manager, CFO is the number that gets flattered.'
+                  },
+
+                  /* ========== TOPIC 3.3 — WHY CFO IS NOT NET INCOME ========== */
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following explain why CFO differs from net income? (Select all that apply)',
+                        opts: ['Accounts receivable — revenue is recorded when earned, not when collected',
+                              'Depreciation is a non-cash expense that reduces net income but moves no cash',
+                              'A gain or loss on the sale of PP&E sits in net income, but the sale proceeds belong to CFI',
+                              'CFO is calculated using a lower tax rate than net income'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'The three sources of difference are receivables (timing of collection), non-cash expenses like depreciation, and gains/losses on PP&E sales that belong in CFI. There is no separate tax rate for CFO.',
+                        mnemonic: '💡 Memory tip: Timing (AR), non-cash (depreciation), and wrong bucket (PP&E gains). Those three gaps separate profit from cash.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'In the indirect method, why is depreciation added back to net income?',
+                        opts: ['Because it reduced net income but no cash actually left the firm',
+                              'Because it will be paid in cash in the following year',
+                              'Because it represents cash the firm collected from customers',
+                              'Because depreciation is recorded on the balance sheet rather than the income statement'],
+                        correct: 0,
+                        explanation: 'Depreciation is a non-cash expense. It lowers reported net income, but no cash was disbursed, so it has to be added back to get to cash flow. Amortization and depletion are treated the same way.',
+                        mnemonic: '💡 Memory tip: Depreciation is a paper cut, not a cash cut. Add it back.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm sells a piece of equipment for more than its book value. How is the resulting gain treated?',
+                        opts: ['It appears in net income, but the sale proceeds are an investing cash flow — so the gain is not part of CFO',
+                              'It is part of CFO because equipment is used in operations',
+                              'It is part of CFF because selling assets is a way of raising money',
+                              'It is ignored entirely, since gains are non-cash'],
+                        correct: 0,
+                        explanation: 'Gain = sale price − book value, and it flows through net income. But the cash from the sale is an investing activity (CFI), so the gain must be removed from CFO. This course simplifies by assuming no PP&E is sold.',
+                        mnemonic: '💡 Memory tip: The gain rides in on the income statement but gets off at the CFI stop.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each description to the type of depreciation it describes.',
+                        cols: ['Accounting depreciation', 'Economic depreciation'],
+                        items: [
+                              { text: 'A scheduled, mechanical allocation of cost over an asset\'s useful life', answer: 'Accounting depreciation' },
+                              { text: 'Appears on the income statement', answer: 'Accounting depreciation' },
+                              { text: 'Often calculated straight-line', answer: 'Accounting depreciation' },
+                              { text: 'The actual loss in market value from wear, obsolescence, and demand', answer: 'Economic depreciation' },
+                              { text: 'Not scheduled and does not directly appear in the financial statements', answer: 'Economic depreciation' },
+                        ],
+                        explanation: 'Accounting depreciation is a scheduled allocation (e.g. straight-line) reported on the income statement. Economic depreciation is the real loss of market value — unscheduled and absent from the statements. Neither one is a cash outlay.',
+                        mnemonic: '💡 Memory tip: Accounting depreciation is the plan; economic depreciation is reality. Neither writes a check.'
+                  },
+
+                  /* ========== TOPIC 3.4 & 3.5 — CALCULATING CFO (INDIRECT METHOD) ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'The indirect method of calculating CFO begins with which figure?',
+                        opts: ['Net income',
+                              'Cash collected from customers',
+                              'EBIT',
+                              'Ending cash'],
+                        correct: 0,
+                        explanation: 'The indirect method is a bottom-up approach: start at net income, add back non-cash expenses, then adjust for changes in the operating accounts.',
+                        mnemonic: '💡 Memory tip: Indirect means you start at the BOTTOM line of the income statement and work toward cash.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Which expression correctly states CFO under the indirect method?',
+                        opts: ['Net income + Depreciation − (Δ operating assets − Δ operating liabilities)',
+                              'Net income − Depreciation + (Δ operating assets − Δ operating liabilities)',
+                              'Net income + Depreciation + Δ cash − Δ notes payable',
+                              'EBIT × (1 − tax rate) + Depreciation − CAPEX'],
+                        correct: 0,
+                        explanation: 'CFO = net income + depreciation expense − change in operating accounts, where the change in operating accounts = Δ operating assets − Δ operating liabilities. The last option is FCFF, not CFO.',
+                        mnemonic: '💡 Memory tip: Start with profit, add back the paper expense, then subtract what working capital swallowed.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Accounts receivable rises from 400 to 450 during the year. What is the effect on CFO?',
+                        opts: ['A cash outflow of 50 — an operating asset increased',
+                              'A cash inflow of 50 — the firm earned more revenue',
+                              'A cash outflow of 450',
+                              'No effect — receivables are not an operating account'],
+                        correct: 0,
+                        explanation: 'Receivables are an operating asset. An increase means revenue was booked but the cash has not been collected, so it is a 50 cash outflow in the CFO section.',
+                        mnemonic: '💡 Memory tip: Assets up → cash down. A bigger receivable means more of your sales are still sitting in someone else\'s wallet.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each balance sheet account into the correct category for the CFO adjustment.',
+                        cols: ['Operating asset', 'Operating liability', 'Excluded from CFO'],
+                        items: [
+                              { text: 'Accounts receivable', answer: 'Operating asset' },
+                              { text: 'Inventory', answer: 'Operating asset' },
+                              { text: 'Accounts payable', answer: 'Operating liability' },
+                              { text: 'Accrued wages', answer: 'Operating liability' },
+                              { text: 'Cash', answer: 'Excluded from CFO' },
+                              { text: 'Notes payable', answer: 'Excluded from CFO' },
+                        ],
+                        explanation: 'Operating assets are current assets other than cash; operating liabilities are current liabilities other than notes payable. Cash is excluded because its change is the end result of the whole SCF, and notes payable is excluded because interest-bearing borrowing is a financing item (CFF).',
+                        mnemonic: '💡 Memory tip: Two accounts sit out of the CFO adjustment — Cash (it is the answer) and Notes Payable (it pays interest, so it is financing).'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'Because notes payable is listed under current liabilities, its change is treated as an operating liability in the CFO calculation.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. Notes payable is interest-bearing borrowing, so the text treats it as a financing item (CFF) even though it appears among the current liabilities. This is one of the most common Topic 3 traps.',
+                        mnemonic: '💡 Memory tip: If it charges interest, it is financing. Accounts payable is free; notes payable is not.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'The income statement does not list depreciation expense, and the firm sold no assets. How do you find depreciation?',
+                        opts: ['It equals the change in accumulated depreciation on the balance sheet',
+                              'It equals the change in net PP&E',
+                              'It equals gross PP&E divided by the asset\'s useful life',
+                              'It cannot be determined without the depreciation schedule'],
+                        correct: 0,
+                        explanation: 'With no disposals, accumulated depreciation grows by exactly the year\'s depreciation expense. So depreciation expense = Δ accumulated depreciation.',
+                        mnemonic: '💡 Memory tip: Accumulated depreciation is the running total. This year\'s expense is just how much the total grew.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Cedar Ridge reports net income of 300. Accumulated depreciation went 500 → 560, AR 400 → 450, inventory 300 → 280, accounts payable 250 → 310, and accrued expenses 80 → 70. What is CFO?',
+                        opts: ['380',
+                              '320',
+                              '340',
+                              '300'],
+                        correct: 0,
+                        explanation: 'Depreciation = 560 − 500 = 60. CFO = 300 + 60 − 50 (AR up) + 20 (inventory down) + 60 (AP up) − 10 (accruals down) = 380. Choosing 320 means you forgot the depreciation add-back; 340 means the operating-account signs were flipped.',
+                        mnemonic: '💡 Memory tip: Add back the paper expense first, then let each account tell you its sign: assets up → minus, liabilities up → plus.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Logan Enterprises has net income of 150, accumulated depreciation of 2,400 → 2,500, AR 900 → 1,100, inventories 1,700 → 2,000, accounts payable 300 → 500, and accruals flat at 100. What is CFO?',
+                        opts: ['−50',
+                              '−150',
+                              '+250',
+                              '+150'],
+                        correct: 0,
+                        explanation: 'Depreciation = 2,500 − 2,400 = 100. CFO = 150 + 100 − 200 (AR) − 300 (inventory) + 200 (AP) + 0 (accruals) = −50. Logan is profitable on paper but its operations consumed cash.',
+                        mnemonic: '💡 Memory tip: Receivables and inventory grew 500 while payables grew only 200 — working capital ate the profit and then some.'
+                  },
+
+                  /* ========== TOPIC 3.6 — CASH FLOW FROM INVESTING ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Under the course\'s simplifying assumptions, CFI is calculated as:',
+                        opts: ['The negative of the change in gross PP&E',
+                              'The change in gross PP&E, with no sign change',
+                              'The negative of the change in net PP&E, with no depreciation adjustment',
+                              'The change in accumulated depreciation'],
+                        correct: 0,
+                        explanation: 'CFI = −(Δ gross PP&E). Equivalently, CFI = −(Δ net PP&E + depreciation expense). An increase in PP&E means cash was spent, so CFI is negative for a growing firm.',
+                        mnemonic: '💡 Memory tip: The formula carries the minus sign for you. Buying assets drains cash, so growth shows up as negative CFI.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Net PP&E rises from 800 to 950 and depreciation expense for the year is 120. What is CFI?',
+                        opts: ['−270',
+                              '−150',
+                              '−30',
+                              '+270'],
+                        correct: 0,
+                        explanation: 'Purchases = (950 − 800) + 120 = 270, so CFI = −270. Cross-check on the gross side: accumulated depreciation went 200 → 320 while gross PP&E went 1,000 → 1,270 — a change of 270. Answering −150 means the depreciation add-back was skipped.',
+                        mnemonic: '💡 Memory tip: Net PP&E grew 150 DESPITE losing 120 to depreciation, so the firm must have bought 270.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'When computing CFI from NET PP&E, why must depreciation expense be added back?',
+                        opts: ['Because depreciation shrinks net PP&E on its own, so purchases = Δ net PP&E + depreciation — skip it and you understate the spending',
+                              'Because depreciation is a cash outflow that belongs in the investing section',
+                              'Because depreciation increases gross PP&E each year',
+                              'Because the add-back cancels the gain on assets sold'],
+                        correct: 0,
+                        explanation: 'Net PP&E falls each year purely from depreciation, even with no sales. So the observed change in net PP&E understates what was actually purchased by exactly the amount of depreciation.',
+                        mnemonic: '💡 Memory tip: Net PP&E is fighting a headwind called depreciation. To see the real spending, add the headwind back.'
+                  },
+
+                  /* ========== TOPIC 3.7 — CASH FLOW FROM FINANCING & DIVIDENDS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Which expression correctly states CFF?',
+                        opts: ['Δ Debt + Δ Stock − Dividends paid',
+                              'Δ Debt − Δ Stock + Dividends paid',
+                              'Δ Debt + Δ Stock + Dividends paid',
+                              'Δ Debt + Δ Retained earnings − Δ Stock'],
+                        correct: 0,
+                        explanation: 'CFF = change in debt (notes payable + long-term debt) + change in stock (common stock + paid-in capital) − dividends paid. Financing accounts that increase are inflows; dividends are always an outflow.',
+                        mnemonic: '💡 Memory tip: Money in from lenders and owners, money out to owners. Only the dividend gets a minus sign.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'Dividends paid are reported as a line item on the income statement, so they can simply be read off the statement.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. Dividends appear on neither the income statement nor the balance sheet. They must be derived: Dividends = (Old RE + Net income) − New RE.',
+                        mnemonic: '💡 Memory tip: Dividends hide. Net income can only be paid out or retained, so whatever did not stay in retained earnings went out the door.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Cedar Ridge earned net income of 300, and retained earnings went from 370 to 550. What were dividends?',
+                        opts: ['120',
+                              '180',
+                              '300',
+                              '480'],
+                        correct: 0,
+                        explanation: 'Dividends = (Old RE + Net income) − New RE = (370 + 300) − 550 = 120. Retained earnings rose only 180 against net income of 300, so the missing 120 was paid out. (180 is the change in RE, not the dividend.)',
+                        mnemonic: '💡 Memory tip: If retained earnings rose by LESS than net income, the gap is the dividend.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Logan Enterprises earned net income of 150, and retained earnings went from 400 to 500. What were dividends?',
+                        opts: ['50',
+                              '100',
+                              '150',
+                              '250'],
+                        correct: 0,
+                        explanation: 'Dividends = (400 + 150) − 500 = 50. Retained earnings rose only 100 against 150 of net income, so 50 was distributed.',
+                        mnemonic: '💡 Memory tip: Net income splits two ways only — retained or paid. 100 stayed, so 50 left.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'For Cedar Ridge, notes payable went 100 → 60, long-term debt 600 → 700, common stock 500 → 540, and dividends were 120. What is CFF?',
+                        opts: ['−20',
+                              '+100',
+                              '+220',
+                              '−180'],
+                        correct: 0,
+                        explanation: 'CFF = −40 (notes payable repaid) + 100 (new long-term debt) + 40 (stock issued) − 120 (dividends) = −20. Remember that notes payable belongs in CFF, not CFO.',
+                        mnemonic: '💡 Memory tip: Financing accounts up = cash in, down = cash out, and the dividend is always a minus.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following belong in the CFF section? (Select all that apply)',
+                        opts: ['Issuing new common stock',
+                              'Repaying long-term debt',
+                              'Dividends paid to shareholders',
+                              'Purchasing new manufacturing equipment'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'CFF covers new borrowing, debt repayment, stock issuance, stock repurchase, and dividends — plus changes in notes payable. Buying equipment is investing (CFI).',
+                        mnemonic: '💡 Memory tip: CFF is the money pipeline between the firm and its lenders and owners. Equipment is not in that pipeline.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place the steps for building a statement of cash flows from two balance sheets and a net income figure in the correct order.',
+                        items: [
+                              { text: 'Derive depreciation expense from the change in accumulated depreciation', order: 0 },
+                              { text: 'Derive dividends from retained earnings and net income', order: 1 },
+                              { text: 'Calculate CFO — net income, plus depreciation, adjusted for the operating accounts', order: 2 },
+                              { text: 'Calculate CFI from the change in PP&E', order: 3 },
+                              { text: 'Calculate CFF from the changes in debt and stock, less dividends', order: 4 },
+                              { text: 'Tie out: confirm CFO + CFI + CFF equals the change in cash', order: 5 },
+                        ],
+                        explanation: 'Derive the two missing figures first — depreciation (from accumulated depreciation) and dividends (from retained earnings) — because CFO needs the first and CFF needs the second. Then work the three sections in order and finish with the tie-out.',
+                        mnemonic: '💡 Memory tip: Find the two hidden numbers, work the three buckets in O-I-F order, then prove it by tying out to cash.'
+                  },
+
+                  /* ========== TOPIC 3.8 — WHAT THE SCF CAN (AND CAN'T) TELL YOU ========== */
+
+                  {
+                        type: 'dd',
+                        q: 'Firm A and Firm B report the same net income ($82M), the same depreciation ($20M), and the same increase in cash (+$15M). Drag each characteristic to the correct firm.',
+                        cols: ['Firm A', 'Firm B'],
+                        items: [
+                              { text: 'CFO of +122', answer: 'Firm A' },
+                              { text: 'CFO of −22', answer: 'Firm B' },
+                              { text: 'Used operating cash to pay long-term debt down from 300 to 234', answer: 'Firm A' },
+                              { text: 'Borrowed more — long-term debt rose from 300 to 358 — to stay afloat', answer: 'Firm B' },
+                              { text: 'Receivables and inventory ballooned, consuming cash', answer: 'Firm B' },
+                              { text: 'Operations generate enough cash to fund the business', answer: 'Firm A' },
+                        ],
+                        explanation: 'Identical net income, depreciation, and change in cash hide completely different businesses. Firm A generates operating cash and pays down debt (CFF −66). Firm B\'s operations consume cash, so it borrows to survive (CFF +58) and invests less.',
+                        mnemonic: '💡 Memory tip: Same bottom line, opposite stories. Always read the three sections, not just the change in cash.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why is persistently negative CFO unsustainable?',
+                        opts: ['The funding sources eventually run out — cash balances get used up, assets cannot be sold forever, lenders stop lending, and equity investors lose interest',
+                              'Because GAAP prohibits reporting negative CFO for more than two consecutive years',
+                              'Because negative CFO automatically triggers negative net income',
+                              'Because auditors are required to force a restatement'],
+                        correct: 0,
+                        explanation: 'A year or two of negative CFO is not fatal, but the firm has to fund the shortfall from somewhere — and every one of those sources eventually dries up.',
+                        mnemonic: '💡 Memory tip: You can bail a leaking boat for a while. You cannot bail forever.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What can one year of statement of cash flows data NOT tell you?',
+                        opts: ['Whether the firm is actually performing well — that requires comparison to competitors and industry benchmarks through ratio analysis',
+                              'Whether operations generated or consumed cash',
+                              'How the firm funded its capital spending',
+                              'Whether cash increased or decreased during the year'],
+                        correct: 0,
+                        explanation: 'A single year\'s SCF can show whether a firm\'s pattern is sustainable, but not whether it is good. Judging performance needs benchmarking against competitors and the industry — that is ratio analysis, the subject of Topic 4.',
+                        mnemonic: '💡 Memory tip: Sustainable is not the same as good. "Good" is a comparison, and comparisons come from ratios.'
+                  },
+
+                  /* ========== TOPIC 3.9 — CFO VS. FREE CASH FLOW ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Why is CFO not the amount an owner can distribute each year?',
+                        opts: ['Because equipment and buildings wear out and must be replaced — take all of CFO and the firm eventually stops generating CFO',
+                              'Because dividends are legally capped at retained earnings',
+                              'Because CFO is stated before taxes are paid',
+                              'Because CFO includes the proceeds of asset sales'],
+                        correct: 0,
+                        explanation: 'CFO ignores the required reinvestment in PP&E and working capital. Free cash flow is what remains after funding that reinvestment — that is the amount genuinely available for distribution.',
+                        mnemonic: '💡 Memory tip: Don\'t eat the seed corn. CFO includes money the machines are going to need.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each measure to the group whose cash it represents.',
+                        cols: ['All capital providers (debt + equity)', 'Equity holders only', 'Cash actually paid out'],
+                        items: [
+                              { text: 'FCFF — free cash flow to the firm', answer: 'All capital providers (debt + equity)' },
+                              { text: 'Measured before creditors or owners are paid', answer: 'All capital providers (debt + equity)' },
+                              { text: 'FCFE — free cash flow to equity', answer: 'Equity holders only' },
+                              { text: 'Measured after debt interest and principal obligations', answer: 'Equity holders only' },
+                              { text: 'Dividends', answer: 'Cash actually paid out' },
+                        ],
+                        explanation: 'FCFF is available to all capital providers and is measured before creditors or owners are compensated — it is the most common measure in analysis. FCFE is what is left for equity holders after debt obligations and required reinvestment. Dividends are the cash actually distributed.',
+                        mnemonic: '💡 Memory tip: FCFF is the whole pot, FCFE is the shareholders\' slice, and dividends are what actually got served.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'EBIT is 500, the tax rate is 30%, depreciation is 80, CAPEX is 150, and the increase in NWC is 40. What is FCFF?',
+                        opts: ['240',
+                              '390',
+                              '320',
+                              '160'],
+                        correct: 0,
+                        explanation: 'FCFF = EBIT(1 − t) + Depreciation − CAPEX − Δ NWC = 500(0.70) + 80 − 150 − 40 = 350 + 80 − 150 − 40 = 240. Answering 390 means the taxes were never applied; 160 means depreciation was left out.',
+                        mnemonic: '💡 Memory tip: Tax the EBIT first (that is NOPAT), add back depreciation, then pay for the equipment and the working capital.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why does FCFF start from EBIT rather than from net income?',
+                        opts: ['Because FCFF is measured before creditors and owners are compensated, and EBIT comes before interest is subtracted',
+                              'Because EBIT is always larger than net income',
+                              'Because net income is not reported by most firms',
+                              'Because EBIT already excludes depreciation'],
+                        correct: 0,
+                        explanation: 'FCFF is the cash available to ALL capital providers, so it must be measured before any of them is paid. EBIT sits above interest expense on the income statement, which makes it the right starting point. FCFE, by contrast, starts from net income because equity holders are paid last.',
+                        mnemonic: '💡 Memory tip: FCFF is measured upstream of the lenders. Interest has not been taken out yet, so start at EBIT.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following statements about free cash flow are correct? (Select all that apply)',
+                        opts: ['NOPAT — net operating profit after taxes — equals EBIT × (1 − tax rate)',
+                              'NWC is net working capital: current assets minus current liabilities',
+                              'CAPEX is spending on fixed assets and is often measured as CFI',
+                              'FCFE is calculated by subtracting any increase in debt'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'NOPAT = EBIT(1 − t), NWC = current assets − current liabilities, and CAPEX is fixed asset spending often proxied by CFI. FCFE ADDS the increase in debt — new borrowing is cash available to equity holders: FCFE = Net income + Depreciation − CAPEX − Δ NWC + Δ Debt.',
+                        mnemonic: '💡 Memory tip: In FCFE, new debt is a plus. The lender hands over cash, and the equity holders get to use it.'
+                  },
+
+            ];
+
+            initQuiz(questions, 'Topic 3');
+      </script>
+</body>
+
+</html>
