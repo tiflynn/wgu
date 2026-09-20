@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C214 Financial Management · Topic 3 Notes</title>
+<link rel="stylesheet" href="../../assets/css/quiz.css">
+<link rel="stylesheet" href="../../assets/css/notes.css">
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← All Topics</a>
+
+<header>
+  <p class="eyebrow">C214 Financial Management · Topic 3</p>
+  <h1>Financial Statements <span>Part 2</span></h1>
+  <p class="subtitle">The Statement of Cash Flows — quick-reference notes</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#big-picture">The Big Picture &amp; the Cash Identity</a></li>
+      <li><span class="n">02</span><a href="#the-myth">The "Myth" — Cash Flow Can Be Misstated</a></li>
+      <li><span class="n">03</span><a href="#cfo-vs-ni">Why CFO Is Not Net Income</a></li>
+      <li><span class="n">04</span><a href="#indirect">Calculating CFO — Indirect Method</a></li>
+      <li><span class="n">05</span><a href="#cfi">Cash Flow from Investing (CFI)</a></li>
+      <li><span class="n">06</span><a href="#cff">Cash Flow from Financing &amp; Finding Dividends</a></li>
+      <li><span class="n">07</span><a href="#cedar-ridge">Worked Example — Cedar Ridge Co.</a></li>
+      <li><span class="n">08</span><a href="#can-cant">What the SCF Can (and Can't) Tell You</a></li>
+      <li><span class="n">09</span><a href="#fcf">CFO vs. Free Cash Flow</a></li>
+      <li><span class="n">10</span><a href="#logan">The Logan Enterprises Case</a></li>
+      <li><span class="n">11</span><a href="#cheat-sheet">Formula Cheat Sheet &amp; Key Terms</a></li>
+      <li><span class="n">12</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="big-picture">
+    <h2>01 · The Big Picture &amp; the Cash Identity</h2>
+    <p class="section-sub">Topic 3.2</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Each of the three statements answers a different question. The statement of cash flows (<strong>SCF</strong>) is the one that follows the actual money.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Statement</th><th>Analogy</th><th>What it shows</th></tr>
+        <tr>
+          <td><strong>Income Statement</strong></td>
+          <td><em>Video camera</em></td>
+          <td>Results of operations over a period</td>
+        </tr>
+        <tr>
+          <td><strong>Balance Sheet</strong></td>
+          <td><em>Snapshot</em></td>
+          <td>Assets and financing at one point in time</td>
+        </tr>
+        <tr>
+          <td><strong>Statement of Cash Flows</strong></td>
+          <td><em>Cash tracker</em></td>
+          <td>All cash moving in and out during a period</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>The line that defines this whole topic:</strong> <em>Cash flow is a fact; net income is an accounting opinion.</em> The SCF is often called the "most honest" statement because it reports cash, not accruals.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Three buckets, three kinds of management decision</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Every cash movement is sorted into exactly one of three categories, and each category corresponds to a type of decision management makes.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Bucket</th><th>Decisions it captures</th><th>Typical items</th></tr>
+        <tr>
+          <td><strong>CFO</strong><br><span style="color:var(--muted);font-size:.8rem">Operating</span></td>
+          <td>What to make, how to make it, for whom, which suppliers to use</td>
+          <td>Cash from customers; payments to suppliers, employees, and tax authorities</td>
+        </tr>
+        <tr>
+          <td><strong>CFI</strong><br><span style="color:var(--muted);font-size:.8rem">Investing</span></td>
+          <td>Buying and selling long-term assets</td>
+          <td>Purchases of equipment and factories (PP&amp;E)</td>
+        </tr>
+        <tr>
+          <td><strong>CFF</strong><br><span style="color:var(--muted);font-size:.8rem">Financing</span></td>
+          <td>How the firm pays for its assets</td>
+          <td>Borrowing, repaying debt, issuing or repurchasing stock, dividends</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">The master identity — use it as a check on every problem</div>
+      <div class="formula-eq">CFO + CFI + CFF = &Delta; Cash = Ending Cash &minus; Beginning Cash</div>
+      <div class="formula-meaning">If your three buckets don't add up to the change in the balance sheet cash account, something is misclassified or has the wrong sign. There is no partial credit on the tie-out — it either reconciles or you have an error.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem">The standard layout — <strong>the order matters</strong>: operating, then investing, then financing:</p>
+
+    <div class="stacked-eq">
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">Cash Flow from Operations <span class="sub">(CFO)</span></span></div>
+      <div class="eq-row"><span class="op">+</span><span class="label">Cash Flow from Investing <span class="sub">(CFI)</span></span></div>
+      <div class="eq-row"><span class="op">+</span><span class="label">Cash Flow from Financing <span class="sub">(CFF)</span></span></div>
+      <div class="eq-rule"></div>
+      <div class="eq-row subtotal"><span class="op">=</span><span class="label">Change in Cash</span></div>
+      <div class="eq-row"><span class="op">+</span><span class="label">Beginning Cash</span></div>
+      <div class="eq-rule double"></div>
+      <div class="eq-row subtotal final"><span class="op">=</span><span class="label">Ending Cash</span></div>
+    </div>
+
+    <div class="chain-flow">
+      <div class="chain-node good">CFO<br><span style="font-size:.75rem">operations</span></div><span class="chain-sep">+</span>
+      <div class="chain-node">CFI<br><span style="font-size:.75rem">investing</span></div><span class="chain-sep">+</span>
+      <div class="chain-node">CFF<br><span style="font-size:.75rem">financing</span></div><span class="chain-sep">=</span>
+      <div class="chain-node">&Delta; Cash</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="the-myth">
+    <h2>02 · The "Myth" — Cash Flow Can Be Misstated</h2>
+    <p class="section-sub">Topic 3.2</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Myth vs. reality</div>
+      <div class="formula-eq">Total cash flow is hard to misstate &nbsp;|&nbsp; the <strong>split</strong> is flexible</div>
+      <div class="formula-meaning"><strong>The myth:</strong> cash flow can't be manipulated, so the SCF can be taken at face value. <strong>The reality:</strong> the <em>gross</em> (total) cash flow is indeed hard to misstate — but the division between CFO, CFI, and CFF is flexible, so a firm can make one category look better by shrinking another.</div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem">Three features of the firm's <strong>operating environment</strong> drive how cash flows get classified:</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Core Activities</h3>
+        <p>The same purchase lands in different buckets depending on the business. A <strong>hospital bed</strong> is a long-term asset for a health care provider (<strong>CFI</strong>) but <em>inventory</em> for a medical equipment dealer (<strong>CFO</strong>).</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Cash Flow Management</h3>
+        <p>Managers whose <strong>bonuses depend on CFO</strong> are tempted to recategorize items to inflate it. Doing this for a year or two is fairly easy <em>without breaking GAAP</em>.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Market Pressure</h3>
+        <p>A firm trying to <strong>raise capital</strong> does not want to report falling CFO, so managers may use accounting discretion to prop it up.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Takeaway:</strong> read the SCF as skeptically as the other two statements. <strong>Check the categories, not just the total.</strong> A healthy-looking bottom line can hide an operating business that consumes cash.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="cfo-vs-ni">
+    <h2>03 · Why CFO Is Not Net Income</h2>
+    <p class="section-sub">Topic 3.3</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">CFO covers the cash tied to producing and selling the product — cash in from customers, cash out for materials, operating expenses, and taxes. It <em>looks</em> like net income but isn't, because net income is built on accrual accounting.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Source of difference</th><th>Why it matters</th></tr>
+        <tr>
+          <td><strong>Accounts Receivable (AR)</strong></td>
+          <td>Revenue is recorded when <em>earned</em>, not when <em>collected</em>. If AR rises, the firm booked revenue it has not collected yet. <strong>Revenue &ne; cash collected.</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Gain or loss on sale of PP&amp;E</strong></td>
+          <td>Gain = sale price &minus; book value. It sits <em>in net income</em>, but the sale proceeds are an <strong>investing</strong> cash flow (CFI) — so it is not part of CFO.</td>
+        </tr>
+        <tr>
+          <td><strong>Non-cash expenses (depreciation)</strong></td>
+          <td>Depreciation reduces net income but <strong>no cash leaves the firm</strong>. It must be <strong>added back</strong>.</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Two kinds of depreciation</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Accounting depreciation</th><th>Economic depreciation</th></tr>
+        <tr>
+          <td><strong>What it is</strong></td>
+          <td>A scheduled, mechanical allocation of an asset's cost over its useful life (e.g. straight-line)</td>
+          <td>The actual loss in market value from wear, obsolescence, and falling demand</td>
+        </tr>
+        <tr>
+          <td><strong>Where it appears</strong></td>
+          <td>On the income statement</td>
+          <td>Nowhere — it does not directly appear in the statements</td>
+        </tr>
+        <tr>
+          <td><strong>Scheduled?</strong></td>
+          <td>Yes</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>Cash outlay?</strong></td>
+          <td><strong>No</strong></td>
+          <td><strong>No</strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>Memory tip:</strong> neither kind of depreciation is cash. Accounting depreciation is a <em>bookkeeping schedule</em>; economic depreciation is <em>reality</em>. They rarely match, and neither one writes a check.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="indirect">
+    <h2>04 · Calculating CFO — Indirect Method</h2>
+    <p class="section-sub">Topics 3.4 &amp; 3.5</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">The <strong>indirect method</strong> is the bottom-up approach used by most analysts: start with net income, then adjust for everything that makes it differ from cash.</p>
+
+    <div class="stacked-eq">
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">Net Income</span></div>
+      <div class="eq-row"><span class="op">+</span><span class="label">Depreciation <span class="sub">(and other non-cash expenses)</span></span></div>
+      <div class="eq-row"><span class="op">−</span><span class="label">Increase in operating <strong>assets</strong> <span class="sub">(or + a decrease)</span></span></div>
+      <div class="eq-row"><span class="op">+</span><span class="label">Increase in operating <strong>liabilities</strong> <span class="sub">(or − a decrease)</span></span></div>
+      <div class="eq-rule double"></div>
+      <div class="eq-row subtotal final"><span class="op">=</span><span class="label">CFO</span></div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">The same thing, in formula-sheet form</div>
+      <div class="formula-eq">CFO = Net Income + Depreciation Expense &minus; &Delta; Operating Accounts</div>
+      <div class="formula-meaning"><strong>&Delta; Operating Accounts = &Delta; Operating Assets &minus; &Delta; Operating Liabilities.</strong> Note the single minus sign in front of the whole term — that is what produces the opposite signs for assets and liabilities.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Course simplification:</strong> assume the firm <strong>sells no PP&amp;E</strong>, so there is never a gain/loss adjustment to make. <strong>If depreciation isn't listed on the income statement</strong>, infer it — under the no-disposal assumption, <strong>depreciation expense = &Delta; accumulated depreciation</strong>. Other non-cash items (amortization, depletion) are treated exactly like depreciation.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Which accounts are "operating"?</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Category</th><th>Definition</th><th>Examples</th></tr>
+        <tr>
+          <td><strong>Operating assets</strong></td>
+          <td>Current assets <em>other than cash</em></td>
+          <td>Accounts receivable, inventory</td>
+        </tr>
+        <tr>
+          <td><strong>Operating liabilities</strong></td>
+          <td>Current liabilities <em>other than notes payable</em></td>
+          <td>Accounts payable, accrued wages/expenses</td>
+        </tr>
+        <tr>
+          <td><strong>Excluded — Cash</strong></td>
+          <td>Its change is the <strong>end result</strong> of the whole SCF, not an input</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Excluded — Notes payable</strong></td>
+          <td>Even though it sits under current liabilities, interest-bearing borrowing (short- <em>or</em> long-term) is a <strong>financing</strong> item</td>
+          <td>Goes in CFF</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Sign rules — memorize this table</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Account type</th><th>If it <strong>increases</strong></th><th>If it <strong>decreases</strong></th></tr>
+        <tr>
+          <td><strong>Operating asset</strong><br><span style="color:var(--muted);font-size:.8rem">AR, inventory</span></td>
+          <td>Cash <strong>outflow</strong> (&minus;)</td>
+          <td>Cash <strong>inflow</strong> (+)</td>
+        </tr>
+        <tr>
+          <td><strong>Operating liability</strong><br><span style="color:var(--muted);font-size:.8rem">AP, accruals</span></td>
+          <td>Cash <strong>inflow</strong> (+)</td>
+          <td>Cash <strong>outflow</strong> (&minus;)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>Remember:</strong> <em>Assets up &rarr; cash down. Liabilities up &rarr; cash up.</em><br>
+      <strong>Intuition:</strong> buying a car raises your assets and lowers your cash. A rising accounts payable balance means you paid suppliers <em>less</em> cash than your expenses imply — so you kept more cash.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="cfi">
+    <h2>05 · Cash Flow from Investing (CFI)</h2>
+    <p class="section-sub">Topic 3.6</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">CFI is cash moving in or out because of buying or disposing of <strong>fixed assets</strong>. Course simplification: no asset sales, and all investing shows up in PP&amp;E.</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Two equivalent formulas — pick the one matching the data you're given</div>
+      <div class="formula-eq">CFI = &minus;(&Delta; Gross PP&amp;E)</div>
+      <div class="formula-meaning"><strong>or</strong>, if only <em>net</em> PP&amp;E is given:<br><strong>CFI = &minus;(&Delta; Net PP&amp;E + Depreciation Expense)</strong></div>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>Gross PP&amp;E</strong> — the balance before subtracting accumulated depreciation.</li>
+      <li><strong>Net PP&amp;E</strong> — Gross PP&amp;E &minus; Accumulated Depreciation.</li>
+      <li>An <strong>increase</strong> in PP&amp;E means the firm spent cash on assets, so CFI is an <strong>outflow (negative)</strong> for a growing firm.</li>
+      <li><strong>Why add depreciation back when starting from net PP&amp;E?</strong> Depreciation shrinks net PP&amp;E every year all on its own. So new purchases = (&Delta; net PP&amp;E) + depreciation. Skip the add-back and you understate what was actually spent.</li>
+    </ul>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Mini-example</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Net PP&amp;E rises from <strong>800 to 950</strong> and depreciation expense is <strong>120</strong>.</p>
+
+    <div class="stacked-eq">
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">Purchases = (950 &minus; 800) + 120 = <strong>270</strong></span></div>
+      <div class="eq-row subtotal"><span class="op">=</span><span class="label">CFI = &minus;270</span></div>
+      <div class="eq-rule"></div>
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">Cross-check with gross: accumulated depreciation 200 &rarr; 320, <span class="sub">so gross PP&amp;E goes 1,000 &rarr; 1,270 (&Delta; = 270) ✓</span></span></div>
+    </div>
+
+    <div class="callout warn">
+      <strong>The sign is the trap.</strong> The formulas already carry the negative sign. Compute the <em>change</em> in PP&amp;E, then flip it. A growing firm reports negative CFI — that is normal and healthy, not a red flag.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="cff">
+    <h2>06 · Cash Flow from Financing &amp; Finding Dividends</h2>
+    <p class="section-sub">Topic 3.7</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">CFF captures how the firm funds itself: new borrowing, debt repayment, stock issuance, stock repurchase, and dividends.</p>
+
+    <div class="formula-card">
+      <div class="formula-name">CFF</div>
+      <div class="formula-eq">CFF = &Delta; Debt + &Delta; Stock &minus; Dividends Paid</div>
+      <div class="formula-meaning"><strong>&Delta; Debt</strong> = notes payable + long-term debt. <strong>&Delta; Stock</strong> = common stock + paid-in capital. A financing account that <strong>increases</strong> is a cash <strong>inflow</strong>; one that <strong>decreases</strong> is a cash <strong>outflow</strong> (repaying lenders or repurchasing stock). Dividends paid are always an outflow.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Formula-sheet note:</strong> the C214 reference sheet writes CFF as &Delta; LT debt + &Delta; stock &minus; dividends. If the balance sheet includes <strong>notes payable</strong>, the text treats it as financing too — so include its change.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Finding dividends — they aren't on any statement</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Dividends appear on neither the income statement nor the balance sheet. But net income can only be <strong>paid out</strong> or <strong>retained</strong>, so it can always be derived:</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 1 — where net income goes</div>
+      <div class="formula-eq">Net Income = Dividends + &Delta; Retained Earnings</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 2 — the retained earnings roll-forward</div>
+      <div class="formula-eq">New RE = Old RE + Net Income &minus; Dividends</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Step 3 — rearranged for the piece you actually need</div>
+      <div class="formula-eq"><strong>Dividends = (Old RE + Net Income) &minus; New RE</strong></div>
+      <div class="formula-meaning">This is the same bridge equation from Topic 2, solved for dividends.</div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Quick check:</strong> if retained earnings rose by <em>less</em> than net income, the difference was paid out as dividends. If RE rose by exactly net income, dividends were zero.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="cedar-ridge">
+    <h2>07 · Worked Example — Cedar Ridge Co.</h2>
+    <p class="section-sub">A full SCF from two balance sheets</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem"><strong>Given:</strong> net income = <strong>300</strong>. No assets were sold. Dividends are not stated, so they have to be derived from retained earnings. Beginning cash was 200.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Line</th><th>20X1</th><th>20X2</th><th>Change</th><th>Effect on cash</th><th>Bucket</th></tr>
+        <tr><td>Accounts receivable</td><td>400</td><td>450</td><td>+50</td><td>&minus;50</td><td>CFO</td></tr>
+        <tr><td>Inventory</td><td>300</td><td>280</td><td>&minus;20</td><td>+20</td><td>CFO</td></tr>
+        <tr><td>Accounts payable</td><td>250</td><td>310</td><td>+60</td><td>+60</td><td>CFO</td></tr>
+        <tr><td>Accrued expenses</td><td>80</td><td>70</td><td>&minus;10</td><td>&minus;10</td><td>CFO</td></tr>
+        <tr><td>Accumulated depreciation</td><td>500</td><td>560</td><td>+60</td><td>+60 <span style="color:var(--muted);font-size:.8rem">(add-back)</span></td><td>CFO</td></tr>
+        <tr><td>Gross PP&amp;E</td><td>1,500</td><td>1,650</td><td>+150</td><td>&minus;150</td><td>CFI</td></tr>
+        <tr><td>Notes payable</td><td>100</td><td>60</td><td>&minus;40</td><td>&minus;40</td><td>CFF</td></tr>
+        <tr><td>Long-term debt</td><td>600</td><td>700</td><td>+100</td><td>+100</td><td>CFF</td></tr>
+        <tr><td>Common stock <span style="color:var(--muted);font-size:.8rem">(incl. paid-in capital)</span></td><td>500</td><td>540</td><td>+40</td><td>+40</td><td>CFF</td></tr>
+        <tr><td>Retained earnings</td><td>370</td><td>550</td><td>+180</td><td>Dividends = 120 &rarr; &minus;120</td><td>CFF</td></tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Step 1 — depreciation (not given, so infer it)</h3>
+    <div class="formula-card">
+      <div class="formula-eq">&Delta; Accumulated Depreciation = 560 &minus; 500 = <strong>60</strong></div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Step 2 — dividends (not given either)</h3>
+    <div class="formula-card">
+      <div class="formula-eq">(370 + 300) &minus; 550 = <strong>120</strong></div>
+      <div class="formula-meaning">Net income was 300 but retained earnings only rose 180, so 120 went out the door.</div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Step 3 — CFO</h3>
+    <div class="stacked-eq">
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">300 <span class="sub">net income</span></span></div>
+      <div class="eq-row"><span class="op">+</span><span class="label">60 <span class="sub">depreciation add-back</span></span></div>
+      <div class="eq-row"><span class="op">−</span><span class="label">50 <span class="sub">AR rose (asset up, cash down)</span></span></div>
+      <div class="eq-row"><span class="op">+</span><span class="label">20 <span class="sub">inventory fell (asset down, cash up)</span></span></div>
+      <div class="eq-row"><span class="op">+</span><span class="label">60 <span class="sub">AP rose (liability up, cash up)</span></span></div>
+      <div class="eq-row"><span class="op">−</span><span class="label">10 <span class="sub">accruals fell (liability down, cash down)</span></span></div>
+      <div class="eq-rule double"></div>
+      <div class="eq-row subtotal final"><span class="op">=</span><span class="label">CFO = 380</span></div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Step 4 — CFI</h3>
+    <div class="formula-card">
+      <div class="formula-eq">CFI = &minus;(1,650 &minus; 1,500) = <strong>&minus;150</strong></div>
+      <div class="formula-meaning">Net PP&amp;E check: net PP&amp;E goes 1,000 &rarr; 1,090, so &minus;[(1,090 &minus; 1,000) + 60] = &minus;150 ✓</div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Step 5 — CFF</h3>
+    <div class="formula-card">
+      <div class="formula-eq">&minus;40 + 100 + 40 &minus; 120 = <strong>&minus;20</strong></div>
+      <div class="formula-meaning">Notes payable repaid (&minus;40), new long-term debt (+100), stock issued (+40), dividends paid (&minus;120).</div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Step 6 — tie out</h3>
+    <div class="stacked-eq">
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">380 &minus; 150 &minus; 20 = <strong>+210</strong> <span class="sub">change in cash</span></span></div>
+      <div class="eq-row subtotal final"><span class="op">=</span><span class="label">Ending cash = 200 + 210 = 410</span></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>How to read it:</strong> operations comfortably fund the capital spending, and cash still grows. Dividends are largely covered by CFO rather than by new borrowing. This is the healthy pattern.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="can-cant">
+    <h2>08 · What the SCF Can (and Can't) Tell You</h2>
+    <p class="section-sub">Topic 3.8</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Two firms can look identical on the surface and be completely different underneath. In the text's comparison, Firm A and Firm B report the <strong>same net income ($82M)</strong>, the <strong>same depreciation ($20M)</strong>, and the <strong>same increase in cash (+$15M, from $22M to $37M)</strong>.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>($ millions)</th><th>Firm A</th><th>Firm B</th></tr>
+        <tr><td><strong>CFO</strong></td><td>+122</td><td>&minus;22</td></tr>
+        <tr><td><strong>CFI</strong></td><td>&minus;41</td><td>&minus;21</td></tr>
+        <tr><td><strong>CFF</strong></td><td>&minus;66</td><td>+58</td></tr>
+        <tr><td><strong>Change in cash</strong></td><td><strong>+15</strong></td><td><strong>+15</strong></td></tr>
+      </table>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>Firm A</strong> — operations <em>generate</em> cash, and it uses that cash to pay down long-term debt (300 &rarr; 234). Negative CFF here is a sign of strength.</li>
+      <li><strong>Firm B</strong> — operations <em>consume</em> cash (receivables and inventory ballooned), so it borrowed more (300 &rarr; 358) just to stay afloat, and it likely invests less because operations are constraining it.</li>
+    </ul>
+
+    <div class="callout warn">
+      <strong>Why negative CFO is unsustainable.</strong> A year or two is not fatal, but over time <strong>the funding sources run out</strong>: cash balances get used up, assets cannot be sold forever, lenders eventually stop lending, and equity investors lose interest.
+    </div>
+
+    <div class="callout">
+      <strong>The limit of the SCF.</strong> One year of data can show that Firm A is <em>sustainable</em>, but it cannot show that Firm A is <em>good</em>. Judging performance requires comparison to competitors and industry benchmarks — which is the job of <strong>ratio analysis (Topic 4)</strong>.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="fcf">
+    <h2>09 · CFO vs. Free Cash Flow</h2>
+    <p class="section-sub">Topic 3.9</p>
+
+    <div class="callout warn">
+      <strong>Why CFO is not distributable.</strong> Equipment and buildings wear out and must be replaced. If an owner took out <em>all</em> of CFO every year, nothing would be left to reinvest and the firm would eventually stop generating CFO at all.
+    </div>
+
+    <p style="font-size:.87rem;line-height:1.65;margin:1.25rem 0 .75rem"><strong>Free cash flow (FCF)</strong> is the cash that <em>can</em> be distributed after funding required reinvestment in PP&amp;E and working capital.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Measure</th><th>Who it's available to</th><th>Notes</th></tr>
+        <tr>
+          <td><strong>FCFF</strong><br><span style="color:var(--muted);font-size:.8rem">free cash flow to the firm</span></td>
+          <td>All capital providers — <strong>debt + equity</strong></td>
+          <td>Most common in analysis; measured <em>before</em> creditors or owners are paid</td>
+        </tr>
+        <tr>
+          <td><strong>FCFE</strong><br><span style="color:var(--muted);font-size:.8rem">free cash flow to equity</span></td>
+          <td><strong>Equity holders only</strong></td>
+          <td>After debt obligations (interest and principal) and required reinvestment</td>
+        </tr>
+        <tr>
+          <td><strong>Dividends</strong></td>
+          <td>Stockholders</td>
+          <td>The cash <em>actually</em> paid out</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">FCFF — starts from EBIT</div>
+      <div class="formula-eq">FCFF = EBIT &times; (1 &minus; Tax Rate) + Depreciation &minus; CAPEX &minus; &Delta; NWC</div>
+      <div class="formula-meaning">FCFF starts from <strong>EBIT</strong> rather than net income because it is measured <em>before</em> creditors and owners are compensated — interest has not been subtracted yet.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">FCFE — starts from net income</div>
+      <div class="formula-eq">FCFE = Net Income + Depreciation &minus; CAPEX &minus; &Delta; NWC + &Delta; Debt</div>
+      <div class="formula-meaning">Net income is already after interest, and new borrowing is cash available to equity holders — so &Delta; debt is <strong>added</strong>.</div>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>NOPAT</strong> — net operating profit after taxes = <strong>EBIT &times; (1 &minus; tax rate)</strong>. That is the first term of FCFF.</li>
+      <li><strong>CAPEX</strong> — capital expenditures: spending on fixed assets, often measured as CFI.</li>
+      <li><strong>NWC</strong> — net working capital = <strong>current assets &minus; current liabilities</strong>.</li>
+      <li><strong>&Delta; Debt</strong> — new borrowings &minus; repayments of old debt.</li>
+    </ul>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Mini-example (FCFF)</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">EBIT 500, tax rate 30%, depreciation 80, CAPEX 150, increase in NWC 40:</p>
+    <div class="formula-card">
+      <div class="formula-eq">500(0.70) + 80 &minus; 150 &minus; 40 = 350 + 80 &minus; 150 &minus; 40 = <strong>240</strong></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Where this goes next:</strong> free cash flow returns later in the course for <strong>valuation</strong> — it is the cash flow you discount in a discounted cash flow (DCF) model.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="logan">
+    <h2>10 · The Logan Enterprises Case</h2>
+    <p class="section-sub">Topic 3.1 — the opening case, worked</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem"><strong>Given (20X1 &rarr; 20X2):</strong> net income = 150; no assets sold.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Line</th><th>20X1</th><th>20X2</th><th>Change</th></tr>
+        <tr><td>Cash</td><td>500</td><td>700</td><td>+200</td></tr>
+        <tr><td>Accounts receivable</td><td>900</td><td>1,100</td><td>+200</td></tr>
+        <tr><td>Inventories</td><td>1,700</td><td>2,000</td><td>+300</td></tr>
+        <tr><td>Accounts payable</td><td>300</td><td>500</td><td>+200</td></tr>
+        <tr><td>Accruals</td><td>100</td><td>100</td><td>0</td></tr>
+        <tr><td>Notes payable</td><td>400</td><td>300</td><td>&minus;100</td></tr>
+        <tr><td>Long-term debt</td><td>900</td><td>1,500</td><td>+600</td></tr>
+        <tr><td>Gross fixed assets</td><td>3,300</td><td>3,500</td><td>+200</td></tr>
+        <tr><td>Accumulated depreciation</td><td>2,400</td><td>2,500</td><td>+100</td></tr>
+        <tr><td>Common stock</td><td>2,000</td><td>2,000</td><td>0</td></tr>
+        <tr><td>Retained earnings</td><td>400</td><td>500</td><td>+100</td></tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Q1 · How does CFO differ from net income?</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Net income is an <strong>accrual</strong> measure. CFO removes non-cash expenses (depreciation) and reflects the timing differences buried in the operating accounts — receivables, inventory, payables, and accruals.</p>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Q2 · Logan's CFO</h3>
+    <div class="formula-card">
+      <div class="formula-eq">Depreciation = 2,500 &minus; 2,400 = 100</div>
+      <div class="formula-meaning">CFO = 150 + 100 &minus; 200 (AR) &minus; 300 (inventory) + 200 (AP) + 0 (accruals) = <strong>&minus;50</strong></div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Q3 · Logan's CFI</h3>
+    <div class="formula-card">
+      <div class="formula-eq">CFI = &minus;(3,500 &minus; 3,300) = <strong>&minus;200</strong></div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Q4 · Logan's CFF</h3>
+    <div class="formula-card">
+      <div class="formula-eq">Dividends = (400 + 150) &minus; 500 = 50</div>
+      <div class="formula-meaning">CFF = &minus;100 (notes payable) + 600 (LT debt) + 0 (stock) &minus; 50 (dividends) = <strong>+450</strong></div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Tie-out</div>
+      <div class="formula-eq">&minus;50 &minus; 200 + 450 = <strong>+200</strong> = 700 &minus; 500 ✓</div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Q5 · What does the SCF tell us?</h3>
+    <div class="callout warn">
+      Logan is <strong>profitable on paper</strong> (net income of 150) but its operations <strong>consumed 50 in cash</strong>, because receivables and inventory grew faster than payables. Capital spending (200) plus that operating shortfall were funded by <strong>600 in new long-term debt</strong>. This is the same warning pattern as Firm B: <em>growth financed by borrowing rather than by operations</em>, which is not sustainable long-term.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="cheat-sheet">
+    <h2>11 · Formula Cheat Sheet &amp; Key Terms</h2>
+    <p class="section-sub">Everything worth committing to memory</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Item</th><th>Formula</th></tr>
+        <tr><td><strong>Cash identity</strong></td><td>CFO + CFI + CFF = Ending cash &minus; Beginning cash</td></tr>
+        <tr><td><strong>CFO</strong></td><td>Net income + Depreciation &minus; (&Delta; operating assets &minus; &Delta; operating liabilities)</td></tr>
+        <tr><td><strong>Depreciation</strong> <span style="color:var(--muted);font-size:.8rem">(if not given, no disposals)</span></td><td>&Delta; Accumulated depreciation</td></tr>
+        <tr><td><strong>CFI</strong></td><td>&minus;(&Delta; Gross PP&amp;E) &nbsp;<em>or</em>&nbsp; &minus;(&Delta; Net PP&amp;E + Depreciation)</td></tr>
+        <tr><td><strong>CFF</strong></td><td>&Delta; Debt + &Delta; Stock &minus; Dividends</td></tr>
+        <tr><td><strong>Dividends</strong></td><td>(Old RE + Net income) &minus; New RE</td></tr>
+        <tr><td><strong>Net income split</strong></td><td>Net income = Dividends + &Delta; RE</td></tr>
+        <tr><td><strong>FCFF</strong></td><td>EBIT(1 &minus; t) + Depreciation &minus; CAPEX &minus; &Delta; NWC</td></tr>
+        <tr><td><strong>FCFE</strong></td><td>Net income + Depreciation &minus; CAPEX &minus; &Delta; NWC + &Delta; Debt</td></tr>
+        <tr><td><strong>NOPAT</strong></td><td>EBIT &times; (1 &minus; tax rate)</td></tr>
+        <tr><td><strong>NWC</strong></td><td>Current assets &minus; Current liabilities</td></tr>
+      </table>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Term</th><th>Meaning</th></tr>
+        <tr><td><strong>SCF</strong></td><td>Statement showing all cash in and out for a period, split into CFO, CFI, and CFF.</td></tr>
+        <tr><td><strong>CFO</strong></td><td>Net cash from operating decisions — what to make, how, for whom, from which suppliers.</td></tr>
+        <tr><td><strong>CFI</strong></td><td>Net cash from investing decisions — buying and selling long-term assets.</td></tr>
+        <tr><td><strong>CFF</strong></td><td>Net cash from financing decisions — how the firm pays for its assets.</td></tr>
+        <tr><td><strong>Indirect method</strong></td><td>Start from net income and adjust to arrive at CFO.</td></tr>
+        <tr><td><strong>Non-cash expense</strong></td><td>Expense recorded in the statements with no cash outlay (e.g. depreciation).</td></tr>
+        <tr><td><strong>Operating accounts</strong></td><td>Current assets other than cash, and current liabilities other than notes payable.</td></tr>
+        <tr><td><strong>Accounting depreciation</strong></td><td>Scheduled allocation of an asset's cost over its useful life; on the income statement.</td></tr>
+        <tr><td><strong>Economic depreciation</strong></td><td>Actual loss of market value from wear, obsolescence, and demand; not in the statements.</td></tr>
+        <tr><td><strong>Gross PP&amp;E</strong></td><td>Fixed assets before subtracting accumulated depreciation.</td></tr>
+        <tr><td><strong>Net PP&amp;E</strong></td><td>Gross PP&amp;E &minus; accumulated depreciation.</td></tr>
+        <tr><td><strong>CAPEX</strong></td><td>Capital expenditures: spending on fixed assets.</td></tr>
+        <tr><td><strong>NWC</strong></td><td>Net working capital = current assets &minus; current liabilities.</td></tr>
+        <tr><td><strong>NOPAT</strong></td><td>EBIT &times; (1 &minus; tax rate).</td></tr>
+        <tr><td><strong>FCFF</strong></td><td>Free cash flow to the firm — available to all capital providers, debt and equity.</td></tr>
+        <tr><td><strong>FCFE</strong></td><td>Free cash flow to equity — available to equity holders after debt obligations.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="exam-traps">
+    <h2>12 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The distinctions Topic 3 questions are built on</p>
+
+    <ul class="quicklist">
+      <li><strong>Notes payable belongs in CFF, not CFO</strong> — even though it is listed under current liabilities. If it carries interest, it is financing.</li>
+      <li><strong>Never adjust for the change in cash.</strong> It is the <em>answer</em>, not an input.</li>
+      <li><strong>Don't forget the depreciation add-back</strong> — in CFO, and again when computing CFI from <em>net</em> PP&amp;E.</li>
+      <li><strong>Sign errors.</strong> Assets up = cash down; liabilities up = cash up. CFI is normally negative for a growing firm.</li>
+      <li><strong>Dividends aren't listed anywhere.</strong> Derive them: Dividends = (Old RE + Net income) &minus; New RE.</li>
+      <li><strong>Gain/loss on a PP&amp;E sale</strong> sits in net income but belongs to <strong>CFI</strong>, not CFO.</li>
+      <li><strong>Positive net income does not guarantee positive CFO.</strong> Growth in receivables and inventory can drain cash — that is the Logan / Firm B pattern.</li>
+      <li><strong>Total cash flow is hard to misstate; the split between the three buckets is not.</strong> Check the categories, not just the total.</li>
+      <li><strong>Always tie out.</strong> If CFO + CFI + CFF &ne; the change in balance-sheet cash, something is misclassified or mis-signed.</li>
+      <li><strong>FCFF starts from EBIT, FCFE from net income.</strong> FCFF is measured before creditors and owners are paid; FCFE adds back &Delta; debt.</li>
+      <li><strong>CFO is not distributable.</strong> Assets must be replaced — free cash flow is what's left after required reinvestment.</li>
+      <li><strong>One year of SCF shows sustainability, not quality.</strong> Judging whether a firm is <em>good</em> takes ratio analysis (Topic 4).</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
