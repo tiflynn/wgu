@@ -9,7 +9,7 @@ questions.
 | Course | Status |
 |---|---|
 | **C213** Accounting for Decision Makers | 11 sections, 2 practice exams, 2 formula sheets |
-| **C214** Financial Management | Topics 1–2 — more added as the course progresses |
+| **C214** Financial Management | Topics 1–3 — more added as the course progresses |
 
 ---
 
@@ -36,7 +36,7 @@ root and is used by every course, so a fix lands once.
 │       ├── section02.html …    Study notes per section
 │       ├── formulas-provided.html   Formulas available during testing
 │       └── formulas-memorize.html   Formulas to memorize
-├── c214/                   Same shape — Topic 1 built, more to come
+├── c214/                   Same shape — Topics 1–3 built, more to come
 └── docs/PROMPT.md          Reusable prompt for generating a new section quiz
 ```
 
@@ -63,6 +63,14 @@ relative paths; the hub's question-count script keys off that `quizzes/` prefix.
 | 10 | Management Accounting & Cost Concepts |
 | 11 | Activity-Based Costing (ABC) |
 | 12 | Cost Behavior & C-V-P Analysis |
+
+### C214 topics
+
+| Topic | Title |
+|---|---|
+| 1 | Overview of Finance |
+| 2 | Financial Statements Part 1 — Income Statement & Balance Sheet |
+| 3 | Financial Statements Part 2 — The Statement of Cash Flows |
 
 ---
 
@@ -96,8 +104,11 @@ Every question includes an explanation and a memory tip (mnemonic, acronym, or a
    and `../../assets/js/quiz.js`
 3. Notes go in `<course>/notes/sectionNN.html`
 4. `<course>/index.html` gets a new card linking to `quizzes/sectionNN.html` — the question count on
-   the card is counted from the quiz file at page load, so there is no number to keep in sync
-5. Push to this repo — GitHub Pages updates automatically within a minute or two
+   the card is counted from the quiz file at page load, so that number stays in sync on its own (the
+   number written into the HTML is only the `file://` fallback, but keep it accurate anyway)
+5. Bump the course's section/topic count on the root `index.html` — that `hub-tag` is hardcoded with
+   no counting script behind it, so it is the one number that does need updating by hand
+6. Push to this repo — GitHub Pages updates automatically within a minute or two
 
 ## Adding a new course
 
