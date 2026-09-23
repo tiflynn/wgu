@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C214 Financial Management · Topic 4 Notes</title>
+<link rel="stylesheet" href="../../assets/css/quiz.css">
+<link rel="stylesheet" href="../../assets/css/notes.css">
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← All Topics</a>
+
+<header>
+  <p class="eyebrow">C214 Financial Management · Topic 4</p>
+  <h1>Financial Ratio <span>Analysis</span></h1>
+  <p class="subtitle">Liquidity, efficiency, financing, profitability, and DuPont — quick-reference notes</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#why-ratios">Why Ratios?</a></li>
+      <li><span class="n">02</span><a href="#liquidity">Liquidity Ratios</a></li>
+      <li><span class="n">03</span><a href="#efficiency">Efficiency Ratios</a></li>
+      <li><span class="n">04</span><a href="#financing">Financing (Solvency) Ratios</a></li>
+      <li><span class="n">05</span><a href="#profitability">Profitability Ratios</a></li>
+      <li><span class="n">06</span><a href="#dupont">The DuPont Decomposition</a></li>
+      <li><span class="n">07</span><a href="#using-ratios">How to Use Ratios</a></li>
+      <li><span class="n">08</span><a href="#art-science">The Art and Science of Ratios</a></li>
+      <li><span class="n">09</span><a href="#wisdom">Risk, Legality, and Social Responsibility</a></li>
+      <li><span class="n">10</span><a href="#cheat-sheet">Formula Cheat Sheet &amp; Key Terms</a></li>
+      <li><span class="n">11</span><a href="#exam-traps">Exam-Trap Cheat Sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="why-ratios">
+    <h2>01 · Why Ratios?</h2>
+    <p class="section-sub">Topic 4.1</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">A head-to-head comparison of raw financial numbers (revenue, profit, debt) is often meaningless because <strong>firms differ in size</strong>. <strong>Ratio analysis</strong> scales one number against an economically relevant variable — for example revenue &divide; assets = asset turnover — so that firms of different sizes can be compared.</p>
+
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Standardization</h3>
+        <p>"$1M in debt" means little on its own. Scaled by assets, the <strong>debt ratio</strong> reveals the relative load — a firm 90% debt-financed looks very different from one that is 20% debt-financed.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Flexibility</h3>
+        <p>Unlike GAAP, ratio analysis has <strong>no fixed rulebook</strong>. Which ratios to use, how many years of data, and how to handle accounting differences are all <strong>analyst judgment calls</strong>.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>Focus</h3>
+        <p>Ratios don't tell you <em>what is happening</em> — they tell you <em>what questions to ask</em>. A ratio that shifts over time or departs from industry norms says "investigate here."</p>
+      </div>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin:1.25rem 0 .5rem">Ratios are grouped into <strong>four categories</strong>:</p>
+
+    <div class="chain-flow">
+      <div class="chain-node">Liquidity<br><span style="font-size:.75rem">can I pay?</span></div><span class="chain-sep">·</span>
+      <div class="chain-node">Efficiency<br><span style="font-size:.75rem">do I use assets well?</span></div><span class="chain-sep">·</span>
+      <div class="chain-node">Financing<br><span style="font-size:.75rem">who funds me?</span></div><span class="chain-sep">·</span>
+      <div class="chain-node">Profitability<br><span style="font-size:.75rem">do I earn?</span></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Where set rules apply vs. judgment:</strong> the entries on the financial statements themselves follow GAAP guidelines. What the analyst <em>does</em> with them — which ratios, which years, which adjustments — is judgment.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="liquidity">
+    <h2>02 · Liquidity Ratios</h2>
+    <p class="section-sub">Topic 4.2 — a firm's ability to meet short-term obligations</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Ratio</th><th>Formula</th></tr>
+        <tr><td><strong>Current Ratio</strong></td><td>Current Assets &divide; Current Liabilities</td></tr>
+        <tr><td><strong>Quick Ratio</strong></td><td>(Current Assets &minus; Inventory) &divide; Current Liabilities</td></tr>
+      </table>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>Current liabilities</strong> — obligations requiring cash within one year. <strong>Current assets</strong> — items generating cash within one year.</li>
+      <li>A <strong>higher</strong> current ratio means a better likelihood of meeting short-term obligations.</li>
+      <li>The <strong>quick ratio</strong> strips out <strong>inventory</strong> — the least liquid current asset — for a stricter test.</li>
+      <li>A <strong>liquid asset</strong> can be converted to cash quickly without loss of significant value.</li>
+    </ul>
+
+    <div class="callout warn">
+      <strong>Key principle:</strong> you cannot judge liquidity from any single ratio. Take an <strong>integrated view</strong> of several.
+    </div>
+
+    <div class="callout">
+      <strong>Quick-ratio formula note:</strong> the official Formula References sheet (Pre-Assessment and OA) uses <strong>(Current Assets &minus; Inventory) &divide; Current Liabilities</strong>. Some study materials show (Cash + AR) &divide; Current Liabilities instead — they usually give the same result, but use the Current Assets &minus; Inventory version on the assessment.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Mini-example</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Current assets 900, inventory 360, current liabilities 600:</p>
+    <div class="formula-card">
+      <div class="formula-eq">Current = 900 &divide; 600 = <strong>1.50</strong> &nbsp;|&nbsp; Quick = (900 &minus; 360) &divide; 600 = <strong>0.90</strong></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="efficiency">
+    <h2>03 · Efficiency Ratios</h2>
+    <p class="section-sub">Topic 4.3 — how effectively management uses assets to generate sales and profits</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Ratio</th><th>Formula</th></tr>
+        <tr><td><strong>Total Asset Turnover (TAT)</strong></td><td>Sales &divide; Total Assets</td></tr>
+        <tr><td><strong>Fixed Asset Turnover (FAT)</strong></td><td>Sales &divide; Fixed Assets</td></tr>
+        <tr><td><strong>Accounts Receivable (AR) Turnover</strong></td><td>Credit Sales &divide; AR</td></tr>
+        <tr><td><strong>Average Collection Period (ACP)</strong></td><td>365 &divide; AR Turnover</td></tr>
+        <tr><td><strong>Inventory Turnover</strong></td><td>COGS &divide; Inventory</td></tr>
+        <tr><td><strong>Days Inventory on Hand (DOH)</strong></td><td>365 &divide; Inventory Turnover</td></tr>
+      </table>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>Reading TAT:</strong> a TAT of 3 means $3 of sales per $1 of assets.</li>
+      <li><strong>Why FAT?</strong> It removes <em>current</em> assets from the denominator, because current assets reflect <strong>management's risk tolerance</strong>. That isolates the long-term (fixed) assets the industry requires.</li>
+      <li><strong>Turnover vs. days:</strong> turnover is <em>times per year</em>; ACP and DOH convert that to <em>days per turn</em> by dividing 365 by the turnover.</li>
+      <li><strong>Match numerator to denominator:</strong> AR is tied to <em>credit</em> sales; inventory is carried at cost, so it is tied to <em>COGS</em>, not sales.</li>
+    </ul>
+
+    <div class="callout warn">
+      <strong>"When is good really bad?"</strong> A high TAT is not automatically good. It might mean efficient asset use — <em>or</em> the firm has failed to reinvest in modern equipment and is squeezing sales out of outdated assets. Don't assume higher = better without context.
+    </div>
+
+    <div class="callout warn">
+      <strong>Accounting distorts efficiency ratios.</strong> A firm that depreciates assets <em>more slowly</em> reports higher asset values, so it appears to have <em>lower</em> turnover — even with operations identical to a peer. That is an accounting artifact, not an economic difference.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Mini-example</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Credit sales 7,300 with AR 1,000; COGS 8,400 with inventory 1,400:</p>
+    <div class="stacked-eq">
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">AR turnover = 7,300 &divide; 1,000 = 7.3 &rarr; ACP = 365 &divide; 7.3 = <strong>50 days</strong></span></div>
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">Inventory turnover = 8,400 &divide; 1,400 = 6.0 &rarr; DOH = 365 &divide; 6 &asymp; <strong>61 days</strong></span></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="financing">
+    <h2>04 · Financing (Solvency) Ratios</h2>
+    <p class="section-sub">Topic 4.4 — the proportions of debt vs. equity used to finance assets</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Recall the balance sheet identity</div>
+      <div class="formula-eq">Assets = Liabilities + Owner's Equity</div>
+      <div class="formula-meaning">There are only <strong>two</strong> financing sources, so if you know the debt share, the equity share is whatever is left.</div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Ratio</th><th>Formula</th><th>How to read it</th></tr>
+        <tr><td><strong>Debt Ratio</strong></td><td>Total Liabilities &divide; Total Assets</td><td>Cents of every asset-dollar that are debt-financed</td></tr>
+        <tr><td><strong>Debt-to-Equity (D/E)</strong></td><td>Total Liabilities &divide; Total Equity</td><td>Dollars of debt for every $1 of equity</td></tr>
+        <tr><td><strong>Times Interest Earned (TIE)</strong></td><td>EBIT &divide; Interest Expense</td><td>How many times operating earnings cover the interest bill</td></tr>
+        <tr><td><strong>Financial Leverage Ratio</strong></td><td>Total Assets &divide; Equity</td><td>Equals <strong>1 + D/E</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>Reading the numbers:</strong> a debt ratio of 0.75 means 75&cent; of each asset-dollar is debt-financed and the other <strong>25&cent; is equity</strong>. A D/E of 2 means the firm carries $2 of debt for every $1 of equity.
+    </div>
+
+    <div class="callout">
+      <strong>Why 1 + D/E?</strong> Since Assets = Liabilities + Equity, Assets &divide; Equity = (Liabilities + Equity) &divide; Equity = <strong>1 + Liabilities &divide; Equity</strong>. This is the leverage term in the DuPont formula.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Mini-example</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Total liabilities 1,800; total equity 1,200 (so total assets 3,000); EBIT 840; interest 120:</p>
+    <div class="formula-card">
+      <div class="formula-eq">Debt ratio = 0.60 &nbsp;|&nbsp; D/E = 1,800 &divide; 1,200 = <strong>1.50</strong> &nbsp;|&nbsp; Assets &divide; Equity = 2.50 = 1 + 1.50 &nbsp;|&nbsp; TIE = 840 &divide; 120 = <strong>7.0</strong></div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Financial risk</strong> is the increased volatility in earnings that comes from using debt. <strong>Leverage</strong> — using cost structure or debt to magnify returns — magnifies risk along with them.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="profitability">
+    <h2>05 · Profitability Ratios</h2>
+    <p class="section-sub">Topic 4.5 — sales-based margins and investment-based returns</p>
+
+    <h3 style="font-size:1rem;margin:1rem 0 .5rem">Sales-based margins</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">The numerators trace the flow of the income statement — <strong>gross profit &rarr; EBIT &rarr; net income</strong> — so the three margins are usually analyzed together as a set.</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Ratio</th><th>Formula</th></tr>
+        <tr><td><strong>Gross Margin</strong></td><td>Gross Profit &divide; Sales</td></tr>
+        <tr><td><strong>Operating Margin</strong></td><td>EBIT &divide; Sales</td></tr>
+        <tr><td><strong>Net Margin</strong></td><td>Net Income &divide; Sales</td></tr>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <strong>Interpreting margin gaps:</strong> if a firm's operating margin trails the industry by the <em>same</em> amount as its gross margin gap, the shortfall traces back to <strong>COGS</strong> (the top of the income statement) — <em>not</em> to poor operating expense control. Read margins together, not in isolation.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Investment-based returns</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Ratio</th><th>Formula</th></tr>
+        <tr><td><strong>Return on Assets (ROA)</strong></td><td>Net Income &divide; Total Assets</td></tr>
+        <tr><td><strong>Return on Equity (ROE)</strong></td><td>Net Income &divide; Owner's Equity</td></tr>
+      </table>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>ROA</strong> = earnings as a percentage of <em>all</em> the capital entrusted to management; comparable across industries.</li>
+      <li><strong>ROE</strong> answers <em>"As an owner, how much did I earn per dollar invested?"</em> It is the ratio managers are most often judged by.</li>
+      <li>Same numerator (net income); the denominators differ by the balance sheet equation. A firm using debt effectively will show <strong>ROE &gt; ROA</strong>.</li>
+      <li>Returns are the <strong>bottom-line</strong> measures used to assess and compare company performance.</li>
+    </ul>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Mini-example</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Sales 8,000; COGS 5,200; operating expenses 1,800; interest 200; tax rate 40%:</p>
+    <div class="stacked-eq">
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">Gross profit = 8,000 &minus; 5,200 = 2,800 <span class="sub">&rarr; gross margin 35.0%</span></span></div>
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">EBIT = 2,800 &minus; 1,800 = 1,000 <span class="sub">&rarr; operating margin 12.5%</span></span></div>
+      <div class="eq-row"><span class="op">&nbsp;</span><span class="label">Pre-tax = 1,000 &minus; 200 = 800; tax 320; net income = 480 <span class="sub">&rarr; net margin 6.0%</span></span></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="dupont">
+    <h2>06 · The DuPont Decomposition</h2>
+    <p class="section-sub">Topic 4.6 — the "grand-daddy of ratios"</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">The <strong>DuPont formula</strong> breaks ROE into profitability, efficiency, and leverage components:</p>
+
+    <div class="formula-card">
+      <div class="formula-name">DuPont — three multiplicative drivers</div>
+      <div class="formula-eq">ROE = Net Margin &times; TAT &times; (1 + D/E)</div>
+      <div class="formula-meaning">= (Net Income &divide; Sales) &times; (Sales &divide; Total Assets) &times; (Assets &divide; Equity). The middle terms cancel to leave Net Income &divide; Equity. <strong>Assets &divide; Equity = 1 + D/E</strong> because Assets = Liabilities + Equity.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Alternate form</div>
+      <div class="formula-eq">ROE = ROA &times; (1 + D/E)</div>
+      <div class="formula-meaning">Because Net Margin &times; TAT = ROA.</div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">The three levers to raise ROE</h3>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Higher margins</h3>
+        <p>Cut costs relative to sales.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Greater efficiency</h3>
+        <p>Generate more sales per dollar of assets.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">3</span>
+        <h3>More leverage</h3>
+        <p>Use more debt relative to equity.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Why it matters — same ROE, different quality</h3>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Firm P</th><th>Firm Q</th></tr>
+        <tr><td><strong>Net margin</strong></td><td>5.0%</td><td>2.5%</td></tr>
+        <tr><td><strong>TAT</strong></td><td>2.0x</td><td>1.0x</td></tr>
+        <tr><td><strong>(1 + D/E)</strong></td><td>2.0</td><td>8.0</td></tr>
+        <tr><td><strong>ROE</strong></td><td><strong>20%</strong></td><td><strong>20%</strong></td></tr>
+      </table>
+    </div>
+
+    <ul class="quicklist">
+      <li><strong>Firm P</strong> — strong margin and efficiency with modest leverage: a <em>high-quality</em> ROE.</li>
+      <li><strong>Firm Q</strong> — weak on both fundamentals; it only matches P by taking on heavy leverage, which makes it <em>much riskier</em>.</li>
+    </ul>
+
+    <div class="callout warn">
+      <strong>Leverage cuts both ways.</strong> If the earnings on debt-financed assets fall <em>below the cost of debt</em>, ROE swings hard in the other direction.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Working backwards</h3>
+    <div class="formula-card">
+      <div class="formula-eq">ROA 8%, ROE 20% &rarr; 1 + D/E = 20 &divide; 8 = 2.5 &rarr; D/E = <strong>1.5</strong></div>
+      <div class="formula-meaning">Don't forget to subtract the 1 — 2.5 is Assets &divide; Equity, not D/E.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="using-ratios">
+    <h2>07 · How to Use Ratios</h2>
+    <p class="section-sub">Topic 4.7 — from numbers to information</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">A ratio is meaningless without a <strong>comparison standard</strong>. There are three:</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Standard</th><th>Compare the firm to&hellip;</th></tr>
+        <tr><td><strong>Trend analysis</strong></td><td>its <em>own history</em> — often five years back</td></tr>
+        <tr><td><strong>Cross-sectional analysis</strong></td><td><em>peers, competitors, or industry averages</em></td></tr>
+        <tr><td><strong>Internal goal monitoring</strong></td><td><em>management's own targets</em> (e.g., an internally set ROE goal)</td></tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Two common pitfalls</h3>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <span class="pf-num">1</span>
+        <h3>Timing Issues</h3>
+        <p>Mixing income statement and balance sheet data from firms with <strong>different fiscal year-ends</strong> distorts comparisons — especially for <strong>seasonal firms</strong>. Two identical swimsuit makers with Dec. 31 vs. June 30 balance sheet dates will report different asset levels and different ROA despite identical performance.</p>
+      </div>
+      <div class="pitfall-card">
+        <span class="pf-num">2</span>
+        <h3>Accounting Issues</h3>
+        <p><strong>Accrual accounting</strong> allows real variation in reported results (depreciation method, inventory valuation). Understand each firm's accounting choices before assuming ratios are truly comparable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="art-science">
+    <h2>08 · The Art and Science of Ratios</h2>
+    <p class="section-sub">Topic 4.8 — refinement and adjustment</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Before comparing firms, analysts <strong>"scrub" (recast)</strong> the data. That is the <em>science</em>:</p>
+    <ul class="quicklist">
+      <li><strong>Timing differences</strong> — align fiscal year-ends across the comparison set.</li>
+      <li><strong>Accounting differences</strong> — reconcile things like differing depreciation useful-life assumptions.</li>
+    </ul>
+
+    <p style="font-size:.87rem;line-height:1.65;margin:1.25rem 0 .75rem">The harder, more subjective <em>art</em> is judgment:</p>
+    <ul class="quicklist">
+      <li><strong>Which firms belong in the comparison set?</strong> The whole industry, direct competitors, or only <em>successful</em> competitors?</li>
+      <li><strong>What time period is relevant?</strong> Structural or technological change can make older data useless.</li>
+      <li><strong>Which ratios matter for this industry?</strong> The quick ratio is critical for car dealers (big, slow-moving inventory) but less relevant for a high-volume, low-price retailer with liquid, fast-turning inventory.</li>
+    </ul>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">The four-step firm analysis process</h3>
+    <div class="chain-flow">
+      <div class="chain-node">1 · Ratios<br><span style="font-size:.75rem">gather &amp; calculate</span></div><span class="chain-sep">&rarr;</span>
+      <div class="chain-node">2 · Differences<br><span style="font-size:.75rem">across time / vs. peers</span></div><span class="chain-sep">&rarr;</span>
+      <div class="chain-node">3 · Deepen Analysis<br><span style="font-size:.75rem">hypothesize why</span></div><span class="chain-sep">&rarr;</span>
+      <div class="chain-node good">4 · Cause &amp; Cure<br><span style="font-size:.75rem">report and recommend</span></div>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem">Worked example — shrinking industry</h3>
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Firm A's operating margin and TAT fell much more sharply than Firm B's, even though both saw similar gross margin declines from price competition.</p>
+    <ul class="quicklist">
+      <li><strong>Cause:</strong> Firm A failed to cut operating expenses or reduce/redeploy assets as sales fell.</li>
+      <li><strong>Cure:</strong> reduce non-production expenses (labor, supplies) and evaluate underused assets for disposal or redeployment.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="wisdom">
+    <h2>09 · Risk, Legality, and Social Responsibility</h2>
+    <p class="section-sub">Topic 4.9 — from insight to wisdom</p>
+
+    <p style="font-size:.87rem;line-height:1.65;margin-bottom:.75rem">Ratio analysis is only one piece of a firm's true economic character. Layer it with three macro considerations:</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Consideration</th><th>What to look at</th></tr>
+        <tr>
+          <td><strong>Risk &mdash; external</strong></td>
+          <td>Macroeconomic cycle, competitive forces, technology shifts, demographic and societal change</td>
+        </tr>
+        <tr>
+          <td><strong>Risk &mdash; internal</strong></td>
+          <td>Financial flexibility, willingness to innovate, compliance culture, company culture. <strong>Enron</strong> is the classic firm destroyed by internal forces.</td>
+        </tr>
+        <tr>
+          <td><strong>Legality</strong></td>
+          <td>Ratios can hint at compliance culture. A management team willing to "stretch" accounting rules to smooth volatility signals a <strong>weak compliance culture</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Social responsibility</strong></td>
+          <td>Profitability earned at the expense of employees, community, or environment tends to <strong>erode long-term performance</strong>. Human capital and community health feed back into productivity and customer relationships.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="cheat-sheet">
+    <h2>10 · Formula Cheat Sheet &amp; Key Terms</h2>
+    <p class="section-sub">Everything worth committing to memory</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Category</th><th>Ratio</th><th>Formula</th></tr>
+        <tr><td>Liquidity</td><td><strong>Current Ratio</strong></td><td>Current Assets &divide; Current Liabilities</td></tr>
+        <tr><td>Liquidity</td><td><strong>Quick Ratio</strong></td><td>(Current Assets &minus; Inventory) &divide; Current Liabilities</td></tr>
+        <tr><td>Efficiency</td><td><strong>AR Turnover</strong></td><td>Credit Sales &divide; AR</td></tr>
+        <tr><td>Efficiency</td><td><strong>Average Collection Period</strong></td><td>365 &divide; AR Turnover</td></tr>
+        <tr><td>Efficiency</td><td><strong>Inventory Turnover</strong></td><td>COGS &divide; Inventory</td></tr>
+        <tr><td>Efficiency</td><td><strong>Days Inventory on Hand</strong></td><td>365 &divide; Inventory Turnover</td></tr>
+        <tr><td>Efficiency</td><td><strong>Total Asset Turnover</strong></td><td>Sales &divide; Total Assets</td></tr>
+        <tr><td>Efficiency</td><td><strong>Fixed Asset Turnover</strong></td><td>Sales &divide; Fixed Assets</td></tr>
+        <tr><td>Financing</td><td><strong>Debt Ratio</strong></td><td>Total Liabilities &divide; Total Assets</td></tr>
+        <tr><td>Financing</td><td><strong>Debt-to-Equity</strong></td><td>Total Liabilities &divide; Total Equity</td></tr>
+        <tr><td>Financing</td><td><strong>Times Interest Earned</strong></td><td>EBIT &divide; Interest Expense</td></tr>
+        <tr><td>Financing</td><td><strong>Financial Leverage Ratio</strong></td><td>Total Assets &divide; Equity</td></tr>
+        <tr><td>Profitability</td><td><strong>Gross Margin</strong></td><td>Gross Profit &divide; Sales</td></tr>
+        <tr><td>Profitability</td><td><strong>Operating Margin</strong></td><td>EBIT &divide; Sales</td></tr>
+        <tr><td>Profitability</td><td><strong>Net Margin</strong></td><td>Net Income &divide; Sales</td></tr>
+        <tr><td>Profitability</td><td><strong>ROA</strong></td><td>Net Income &divide; Total Assets</td></tr>
+        <tr><td>Profitability</td><td><strong>ROE</strong></td><td>Net Income &divide; Equity</td></tr>
+        <tr><td>Integrated</td><td><strong>DuPont (ROE)</strong></td><td>Net Margin &times; TAT &times; (1 + D/E)</td></tr>
+      </table>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Term</th><th>Meaning</th></tr>
+        <tr><td><strong>Ratio analysis</strong></td><td>Using financial analysis to determine the health of a firm.</td></tr>
+        <tr><td><strong>Trend analysis</strong></td><td>Comparing a firm's ratios across time.</td></tr>
+        <tr><td><strong>Cross-sectional analysis</strong></td><td>Comparing a firm's ratios to other firms or industry averages.</td></tr>
+        <tr><td><strong>Seasonal firms</strong></td><td>Firms whose performance varies by season, creating timing-comparison issues.</td></tr>
+        <tr><td><strong>Liquid asset</strong></td><td>An asset that can be converted to cash quickly without loss of significant value.</td></tr>
+        <tr><td><strong>DuPont formula</strong></td><td>A breakdown of ROE into profitability, efficiency, and leverage components.</td></tr>
+        <tr><td><strong>Financial risk</strong></td><td>Increased volatility in earnings resulting from the use of debt.</td></tr>
+        <tr><td><strong>Leverage</strong></td><td>Using cost structure or debt to magnify returns (and risk).</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section" id="exam-traps">
+    <h2>11 · Exam-Trap Cheat Sheet</h2>
+    <p class="section-sub">The distinctions Topic 4 questions are built on</p>
+
+    <ul class="quicklist">
+      <li><strong>Quick ratio: subtract inventory</strong> from current assets — don't add it, and don't divide inventory by current liabilities.</li>
+      <li><strong>Turnover &rarr; days needs 365 &divide; turnover.</strong> Stopping at the turnover, or multiplying by 365, is the classic slip.</li>
+      <li><strong>Inventory pairs with COGS;</strong> receivables pair with <em>credit</em> sales. Don't use total sales for either.</li>
+      <li><strong>D/E &ne; debt ratio.</strong> D/E divides by equity; the debt ratio divides by total assets.</li>
+      <li><strong>TIE starts at EBIT</strong>, not net income — net income is already after interest.</li>
+      <li><strong>DuPont uses (1 + D/E)</strong>, not D/E. Assets &divide; Equity = 1 + D/E.</li>
+      <li><strong>Working backwards:</strong> ROE &divide; ROA = 1 + D/E, then subtract 1 for D/E.</li>
+      <li><strong>Identical ROEs can hide different firms.</strong> Break ROE into margin, turnover, and leverage before judging quality.</li>
+      <li><strong>Leverage cuts both ways</strong> — it magnifies losses as well as gains.</li>
+      <li><strong>A high TAT is not automatically good</strong>; it can mean outdated, under-reinvested assets.</li>
+      <li><strong>Slower depreciation &rarr; lower turnover</strong> — an accounting artifact, not an economic difference.</li>
+      <li><strong>Same-size margin gaps at gross and operating level</strong> point to COGS, not operating expenses.</li>
+      <li><strong>No single ratio</strong> settles liquidity — take an integrated view.</li>
+      <li><strong>Ratios tell you what questions to ask,</strong> not what is happening.</li>
+      <li><strong>Timing vs. accounting pitfalls:</strong> different fiscal year-ends = timing; different depreciation or inventory methods = accounting.</li>
+      <li><strong>Ratio analysis is analyst judgment; statement entries follow GAAP.</strong></li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

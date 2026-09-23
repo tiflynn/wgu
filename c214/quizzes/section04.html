@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C214 Financial Management · Topic 4 Quiz</title>
+      <link rel="stylesheet" href="../../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Topics</a>
+            <a class="back-link notes" href="../notes/section04.html" target="_blank" rel="noopener">📄 Topic 4 Notes</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C214 Financial Management · Topic 4</p>
+            <h1>Financial Ratio <span>Analysis</span></h1>
+      </header>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  /* ========== 4.1 — WHY RATIOS? ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'Why is a head-to-head comparison of raw figures like revenue, profit, and debt often meaningless?',
+                        opts: ['Because firms differ in size — a ratio scales one number against an economically relevant variable so firms can be compared fairly',
+                              'Because different firms are required to follow different accounting standards',
+                              'Because raw figures are audited less carefully than ratios',
+                              'Because revenue, profit, and debt are reported in different currencies'],
+                        correct: 0,
+                        explanation: 'A big firm will almost always show bigger dollar figures than a small one. Ratio analysis divides one number by a relevant variable (for example sales ÷ assets = asset turnover) so that size drops out of the comparison.',
+                        mnemonic: '💡 Memory tip: A ratio is a size-remover. It turns "how big" into "how much per dollar."'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are reasons ratio analysis is so popular? (Select all that apply)',
+                        opts: ['Standardization — scaling by an economically relevant variable makes dollar figures comparable',
+                              'Flexibility — it is not governed by a fixed rulebook the way GAAP is',
+                              'Focus — ratios show which questions to ask',
+                              'Mandate — GAAP requires every firm to publish the same standard set of ratios'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'The three reasons are Standardization, Flexibility, and Focus. There is no GAAP mandate for ratios — that lack of a rulebook is exactly what makes them flexible.',
+                        mnemonic: '💡 Memory tip: S-F-F — Standardize, be Flexible, stay Focused.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'A ratio that shifts over time or deviates from industry norms tells you exactly what is going wrong inside the firm.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. Ratios do not tell you what is happening — they tell you what questions to ask. A shifting or off-norm ratio is a flag that says "investigate here."',
+                        mnemonic: '💡 Memory tip: A ratio is a smoke alarm, not a diagnosis. It says something is burning; you still have to find the fire.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Ratios fall into four categories. Drag each ratio into its category.',
+                        cols: ['Liquidity', 'Efficiency', 'Financing', 'Profitability'],
+                        items: [
+                              { text: 'Current ratio', answer: 'Liquidity' },
+                              { text: 'Quick ratio', answer: 'Liquidity' },
+                              { text: 'Inventory turnover', answer: 'Efficiency' },
+                              { text: 'Average collection period', answer: 'Efficiency' },
+                              { text: 'Debt-to-equity', answer: 'Financing' },
+                              { text: 'Times interest earned', answer: 'Financing' },
+                              { text: 'Net margin', answer: 'Profitability' },
+                              { text: 'Return on equity', answer: 'Profitability' },
+                        ],
+                        explanation: 'Liquidity = short-term obligations. Efficiency = how well assets generate sales. Financing (solvency) = the mix of debt and equity. Profitability = margins and returns.',
+                        mnemonic: '💡 Memory tip: L-E-F-P — Liquidity, Efficiency, Financing, Profitability. Can I pay? Do I use assets well? Who funds me? Do I earn?'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Because ratio analysis is not governed by a fixed rulebook, which of the following are left to the analyst\'s judgment? (Select all that apply)',
+                        opts: ['Which ratios to use',
+                              'How many years of data to examine',
+                              'How to handle accounting differences between firms',
+                              'How revenue must be recognized in the audited financial statements'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Ratio selection, time horizon, and treatment of accounting differences are all judgment calls. How the underlying statement entries are recorded is set by GAAP — that is where set guidelines apply.',
+                        mnemonic: '💡 Memory tip: GAAP writes the numbers; the analyst chooses what to do with them.'
+                  },
+
+                  /* ========== 4.2 — LIQUIDITY RATIOS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'A firm has current assets of 900, inventory of 360, and current liabilities of 600. What is its quick ratio?',
+                        opts: ['0.90',
+                              '1.50',
+                              '0.60',
+                              '2.10'],
+                        correct: 0,
+                        explanation: 'Quick ratio = (Current assets − Inventory) ÷ Current liabilities = (900 − 360) ÷ 600 = 0.90. Answering 1.50 gives the current ratio; 0.60 divides inventory by current liabilities; 2.10 adds inventory instead of subtracting it. (Some sources use (Cash + AR) ÷ CL, which usually gives the same result, but the assessment formula sheet uses Current assets − Inventory.)',
+                        mnemonic: '💡 Memory tip: Quick = quit the inventory. Take inventory OUT of current assets before dividing.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why does the quick ratio strip inventory out of current assets?',
+                        opts: ['Inventory is the least liquid current asset, so removing it gives a stricter test of short-term solvency',
+                              'Inventory is a long-term asset and does not belong in current assets',
+                              'Inventory is not owned by the firm until it is sold',
+                              'Inventory is already counted in current liabilities'],
+                        correct: 0,
+                        explanation: 'Inventory has to be sold — often at a discount — before it becomes cash, so it is the current asset hardest to turn into cash quickly. Dropping it makes the test stricter than the current ratio.',
+                        mnemonic: '💡 Memory tip: Cash is a wallet, receivables are an IOU, inventory is a garage full of stuff you still have to sell.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'A current ratio comfortably above 1 is enough on its own to conclude that a firm\'s liquidity is strong.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. You cannot judge liquidity from any single ratio. Take an integrated view — the current ratio, the quick ratio, and the efficiency ratios for receivables and inventory tell the fuller story.',
+                        mnemonic: '💡 Memory tip: One ratio is one photo. Liquidity needs the whole album.'
+                  },
+
+                  /* ========== 4.3 — EFFICIENCY RATIOS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'A firm reports sales of 5,600, total assets of 3,500, and fixed assets of 2,000. What is its fixed asset turnover?',
+                        opts: ['2.80',
+                              '1.60',
+                              '0.36',
+                              '1.75'],
+                        correct: 0,
+                        explanation: 'FAT = Sales ÷ Fixed assets = 5,600 ÷ 2,000 = 2.80. Answering 1.60 uses total assets (that is total asset turnover); 0.36 flips the fraction; 1.75 is total assets ÷ fixed assets.',
+                        mnemonic: '💡 Memory tip: Turnover always puts SALES on top. Fixed asset turnover = sales over fixed assets only.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Fixed asset turnover leaves current assets out of the denominator. What is the reason?',
+                        opts: ['Current assets reflect management\'s risk tolerance, so removing them isolates the long-term assets the industry actually requires',
+                              'Current assets are always zero at year-end',
+                              'Current assets are financed entirely by debt',
+                              'Current assets are already included in sales'],
+                        correct: 0,
+                        explanation: 'How much cash, receivables, and inventory a firm chooses to hold is a management risk decision. Fixed asset turnover strips that choice out and focuses on the long-term asset base that the industry requires.',
+                        mnemonic: '💡 Memory tip: Current assets are a choice; fixed assets are the industry\'s entry fee.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm has credit sales of 7,300 and accounts receivable of 1,000. What is its average collection period?',
+                        opts: ['50 days',
+                              '7.3 days',
+                              '20 days',
+                              '2,665 days'],
+                        correct: 0,
+                        explanation: 'AR turnover = Credit sales ÷ AR = 7,300 ÷ 1,000 = 7.3. Average collection period = 365 ÷ AR turnover = 365 ÷ 7.3 = 50 days. Answering 7.3 stops at the turnover; 20 is daily credit sales (7,300 ÷ 365); 2,665 multiplied by 365 instead of dividing.',
+                        mnemonic: '💡 Memory tip: Turnover is TIMES per year; collection period is DAYS per turn. Divide 365 by the turns.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm has sales of 12,000, cost of goods sold of 8,400, and inventory of 1,400. Approximately how many days of inventory does it have on hand?',
+                        opts: ['About 61 days',
+                              'About 43 days',
+                              '6 days',
+                              '2,190 days'],
+                        correct: 0,
+                        explanation: 'Inventory turnover = COGS ÷ Inventory = 8,400 ÷ 1,400 = 6.0. DOH = 365 ÷ 6 ≈ 61 days. The 43-day answer divides sales, not COGS, by inventory; 6 stops at the turnover; 2,190 multiplies by 365.',
+                        mnemonic: '💡 Memory tip: Inventory is recorded at COST, so it pairs with COGS — never with sales.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'A high total asset turnover always means management is using assets efficiently.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. A high TAT might reflect efficient asset use — or it might mean the firm has failed to reinvest in modern equipment and is squeezing sales from outdated assets. Do not assume higher is better without context.',
+                        mnemonic: '💡 Memory tip: "When is good really bad?" — when a high number means the machines are ancient and nobody replaced them.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Two firms have identical operations, but Firm X depreciates its assets more slowly than Firm Y. How will the two firms\' asset turnover ratios compare?',
+                        opts: ['Firm X will show LOWER turnover — slower depreciation leaves higher reported asset values — and the gap is an accounting artifact, not an economic difference',
+                              'Firm X will show HIGHER turnover because slower depreciation raises sales',
+                              'The two will be identical because depreciation does not affect the balance sheet',
+                              'Firm X will show lower turnover because it genuinely operates less efficiently'],
+                        correct: 0,
+                        explanation: 'Slower depreciation keeps asset book values higher. With the same sales on a bigger asset base, turnover looks lower — even though nothing about the operations differs. Accounting choices distort efficiency ratios.',
+                        mnemonic: '💡 Memory tip: Slower write-down → bigger denominator → smaller turnover. Same business, different bookkeeping.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Drag each ratio to the balance sheet item that serves as its denominator.',
+                        cols: ['Total assets', 'Fixed assets', 'Accounts receivable', 'Inventory'],
+                        items: [
+                              { text: 'Total asset turnover', answer: 'Total assets' },
+                              { text: 'Debt ratio', answer: 'Total assets' },
+                              { text: 'Return on assets', answer: 'Total assets' },
+                              { text: 'Fixed asset turnover', answer: 'Fixed assets' },
+                              { text: 'Accounts receivable turnover', answer: 'Accounts receivable' },
+                              { text: 'Inventory turnover', answer: 'Inventory' },
+                        ],
+                        explanation: 'Total assets sits under TAT, the debt ratio, and ROA. Fixed asset turnover uses fixed assets, AR turnover uses receivables (over credit sales), and inventory turnover uses inventory (under COGS).',
+                        mnemonic: '💡 Memory tip: Name the asset in the ratio and that is your denominator — fixed asset turnover, inventory turnover, AR turnover.'
+                  },
+
+                  /* ========== 4.4 — FINANCING (SOLVENCY) RATIOS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'A firm has total liabilities of 1,800 and total equity of 1,200. What is its debt-to-equity ratio?',
+                        opts: ['1.50',
+                              '0.60',
+                              '0.67',
+                              '2.50'],
+                        correct: 0,
+                        explanation: 'D/E = Total liabilities ÷ Total equity = 1,800 ÷ 1,200 = 1.50. Answering 0.60 is the debt ratio (1,800 ÷ 3,000 of assets); 0.67 flips the fraction to equity ÷ liabilities; 2.50 is total assets ÷ equity.',
+                        mnemonic: '💡 Memory tip: D/E — Debt on TOP, Equity on the bottom. Total assets never appear in this one.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm\'s debt ratio is 0.75. How many cents of every asset-dollar are financed by equity?',
+                        opts: ['25¢',
+                              '75¢',
+                              '33¢',
+                              '$3.00'],
+                        correct: 0,
+                        explanation: 'Assets = Liabilities + Equity, and there are only two financing sources. If 75¢ of each asset-dollar is debt-financed, the remaining 25¢ must be equity. ($3.00 is the D/E ratio, 0.75 ÷ 0.25.)',
+                        mnemonic: '💡 Memory tip: Two financing sources means the pie has two slices. Know one slice and the other is 1 minus it.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm has EBIT of 840, interest expense of 120, and net income of 400. What is its times interest earned ratio?',
+                        opts: ['7.0',
+                              '3.3',
+                              '8.0',
+                              '0.14'],
+                        correct: 0,
+                        explanation: 'TIE = EBIT ÷ Interest expense = 840 ÷ 120 = 7.0. Answering 3.3 uses net income (which is already after interest); 8.0 adds the interest back to EBIT; 0.14 flips the fraction.',
+                        mnemonic: '💡 Memory tip: TIE asks "how many times could earnings BEFORE interest cover the interest bill?" So start at EBIT.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Financial risk is best described as:',
+                        opts: ['Increased volatility in earnings resulting from the use of debt',
+                              'The chance that customers fail to pay their receivables',
+                              'Changes in the macroeconomic cycle that affect all firms',
+                              'The risk that GAAP rules will change'],
+                        correct: 0,
+                        explanation: 'Fixed interest obligations magnify swings in earnings available to owners. Using debt to magnify returns is leverage — and leverage magnifies risk too.',
+                        mnemonic: '💡 Memory tip: Debt is a lever — it lifts good years higher and pushes bad years lower.'
+                  },
+
+                  /* ========== 4.5 — PROFITABILITY RATIOS ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'A firm has sales of 8,000, COGS of 5,200, operating expenses of 1,800, interest expense of 200, and a 40% tax rate. What is its net margin?',
+                        opts: ['6.0%',
+                              '12.5%',
+                              '35.0%',
+                              '10.0%'],
+                        correct: 0,
+                        explanation: 'Gross profit = 8,000 − 5,200 = 2,800. EBIT = 2,800 − 1,800 = 1,000. Pre-tax income = 1,000 − 200 = 800; tax = 320; net income = 480. Net margin = 480 ÷ 8,000 = 6.0%. The 35.0% is gross margin, 12.5% is operating margin, and 10.0% is pre-tax income ÷ sales (taxes forgotten).',
+                        mnemonic: '💡 Memory tip: Walk down the income statement — gross profit, then EBIT, then net income. Each margin stops at a different rung.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place the margin numerators in the order they appear from the top of the income statement to the bottom.',
+                        items: [
+                              { text: 'Gross profit (Gross margin)', order: 0 },
+                              { text: 'EBIT (Operating margin)', order: 1 },
+                              { text: 'Net income (Net margin)', order: 2 },
+                        ],
+                        explanation: 'The sales-based margins trace the flow of the income statement: gross profit (after COGS), then EBIT (after operating expenses), then net income (after interest and taxes). That is why they are analyzed together as a set.',
+                        mnemonic: '💡 Memory tip: G-O-N — Gross, Operating, Net. Each one is what is left after another layer of costs.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm\'s gross margin is 28% against an industry average of 34%, and its operating margin is 9% against an industry average of 15%. What does this pattern suggest?',
+                        opts: ['The shortfall traces back to cost of goods sold — the gap is the same 6 points at both levels, so operating expenses are in line with the industry',
+                              'Poor operating expense control, because the operating margin is lower than the industry',
+                              'Excessive interest expense, because the gap widens at the bottom of the income statement',
+                              'Weak asset turnover, because margins depend on sales per dollar of assets'],
+                        correct: 0,
+                        explanation: 'The gross margin gap (6 points) carries straight through to the operating margin gap (6 points). Nothing further down the income statement made it worse, so the problem sits at the top — COGS. Margins must be read together, not in isolation.',
+                        mnemonic: '💡 Memory tip: If the gap does not grow as you go down the statement, the leak is at the top.'
+                  },
+
+                  {
+                        type: 'dd',
+                        q: 'Profitability ratios split into sales-based margins and investment-based returns. Drag each ratio to its group.',
+                        cols: ['Sales-based margin', 'Investment-based return'],
+                        items: [
+                              { text: 'Gross margin', answer: 'Sales-based margin' },
+                              { text: 'Operating margin', answer: 'Sales-based margin' },
+                              { text: 'Net margin', answer: 'Sales-based margin' },
+                              { text: 'Return on assets', answer: 'Investment-based return' },
+                              { text: 'Return on equity', answer: 'Investment-based return' },
+                        ],
+                        explanation: 'Margins divide a profit measure by sales. Returns (ROA and ROE) divide net income by the capital invested — total assets or owner\'s equity.',
+                        mnemonic: '💡 Memory tip: Margins divide by SALES. Returns divide by what was INVESTED.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm earns net income of 360 with total assets of 4,000 and owner\'s equity of 1,600. What is its return on equity?',
+                        opts: ['22.5%',
+                              '9.0%',
+                              '15.0%',
+                              '40.0%'],
+                        correct: 0,
+                        explanation: 'ROE = Net income ÷ Owner\'s equity = 360 ÷ 1,600 = 22.5%. Answering 9.0% is ROA (360 ÷ 4,000); 15.0% divides by liabilities (2,400); 40.0% is equity ÷ assets, not a return at all.',
+                        mnemonic: '💡 Memory tip: ROE asks the OWNER\'s question — what did I earn per dollar I put in? So divide by equity.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following statements about ROA and ROE are correct? (Select all that apply)',
+                        opts: ['ROA measures earnings as a percentage of all the capital entrusted to management, so it is comparable across industries',
+                              'ROE answers "as an owner, how much did I earn per dollar invested?" and is the ratio managers are most often judged by',
+                              'ROA and ROE share the same numerator, and a firm using debt effectively will show ROE above ROA',
+                              'ROE uses total assets as its denominator'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'Both ratios divide net income; only the denominators differ (total assets for ROA, owner\'s equity for ROE). Because equity is smaller than assets when debt is used, a firm using debt effectively shows ROE > ROA. ROE\'s denominator is equity, not assets.',
+                        mnemonic: '💡 Memory tip: Same top, different bottoms. All capital → ROA. Owner\'s capital → ROE.'
+                  },
+
+                  /* ========== 4.6 — THE DUPONT DECOMPOSITION ========== */
+
+                  {
+                        type: 'mc',
+                        q: 'A firm has a net margin of 4.5%, total asset turnover of 2.0, and a debt-to-equity ratio of 1.2. Using the DuPont formula, what is its ROE?',
+                        opts: ['19.8%',
+                              '10.8%',
+                              '9.0%',
+                              '9.9%'],
+                        correct: 0,
+                        explanation: 'ROE = Net margin × TAT × (1 + D/E) = 4.5% × 2.0 × 2.2 = 19.8%. The 10.8% answer uses D/E (1.2) instead of 1 + D/E; 9.0% is ROA only (4.5% × 2.0), with no leverage; 9.9% skips turnover.',
+                        mnemonic: '💡 Memory tip: DuPont is three multipliers — margin, turnover, and (1 + D/E). Do not forget the "1 +".'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'A firm earns a ROA of 8% and a ROE of 20%. What is its debt-to-equity ratio?',
+                        opts: ['1.5',
+                              '2.5',
+                              '0.4',
+                              '12.0'],
+                        correct: 0,
+                        explanation: 'ROE = ROA × (1 + D/E), so 1 + D/E = 20% ÷ 8% = 2.5 and D/E = 1.5. (2.5 is Assets ÷ Equity, which equals 1 + D/E because Assets = Liabilities + Equity — subtract the 1 to get D/E.) 0.4 flips the ratio, and 12.0 is the difference between ROE and ROA.',
+                        mnemonic: '💡 Memory tip: ROE ÷ ROA gives Assets ÷ Equity. Take away 1 to get Debt ÷ Equity.'
+                  },
+
+                  {
+                        type: 'ms',
+                        q: 'Which of the following are levers a firm can pull to raise its ROE? (Select all that apply)',
+                        opts: ['Higher margins — cut costs relative to sales',
+                              'Greater efficiency — more sales per dollar of assets',
+                              'More leverage — more debt relative to equity',
+                              'A lower assets-to-equity multiplier'],
+                        correctSet: [0, 1, 2],
+                        explanation: 'ROE = Net margin × TAT × (1 + D/E). Raise any one of the three drivers and ROE rises. A lower assets-to-equity multiplier means less leverage, which pulls ROE down.',
+                        mnemonic: '💡 Memory tip: Margin, Efficiency, Leverage — Earn more per sale, sell more per asset, borrow more per equity dollar.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Firm P has a 5% net margin, TAT of 2.0, and (1 + D/E) of 2.0. Firm Q has a 2.5% net margin, TAT of 1.0, and (1 + D/E) of 8.0. Both post a 20% ROE. Which statement is most accurate?',
+                        opts: ['Firm P\'s ROE is higher quality — it rests on stronger margins and efficiency — while Firm Q matches it only by taking on far more leverage, and so carries more risk',
+                              'The two firms are equivalent because their ROEs are identical',
+                              'Firm Q is the better performer because more leverage means more return to owners',
+                              'Firm P is the riskier firm because its margin is higher'],
+                        correct: 0,
+                        explanation: 'P: 5% × 2.0 × 2.0 = 20%. Q: 2.5% × 1.0 × 8.0 = 20%. The DuPont breakdown shows why identical ROEs can hide very different firms: Q underperforms on both fundamentals and gets to 20% only through heavy leverage.',
+                        mnemonic: '💡 Memory tip: Same ROE, different recipe. Ask how the firm got there before you praise the number.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'Because leverage only magnifies returns upward, taking on more debt can never reduce a firm\'s ROE.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. Leverage cuts both ways. If the earnings on debt-financed assets fall below the cost of debt, ROE swings hard in the other direction.',
+                        mnemonic: '💡 Memory tip: A lever works in both directions — it can lift you or drop you.'
+                  },
+
+                  /* ========== 4.7 — HOW TO USE RATIOS ========== */
+
+                  {
+                        type: 'dd',
+                        q: 'A ratio is meaningless without a comparison standard. Drag each situation to the standard it uses.',
+                        cols: ['Trend analysis', 'Cross-sectional analysis', 'Internal goal monitoring'],
+                        items: [
+                              { text: 'Comparing this year\'s net margin with the firm\'s own results over the past five years', answer: 'Trend analysis' },
+                              { text: 'Comparing the firm\'s quick ratio with the industry average', answer: 'Cross-sectional analysis' },
+                              { text: 'Benchmarking asset turnover against a direct competitor', answer: 'Cross-sectional analysis' },
+                              { text: 'Checking whether ROE reached the target management set for the year', answer: 'Internal goal monitoring' },
+                              { text: 'Watching whether inventory turnover has been sliding since last year', answer: 'Trend analysis' },
+                        ],
+                        explanation: 'Trend analysis compares a firm to its own history. Cross-sectional analysis compares it with peers or industry averages. Internal goal monitoring compares it with management\'s own targets.',
+                        mnemonic: '💡 Memory tip: Me then (trend), me versus them (cross-sectional), me versus my plan (internal goals).'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Two otherwise identical snow-removal companies perform identically, yet report different ROAs. One has a balance sheet dated in July; the other\'s is dated in January. Which common pitfall is at work?',
+                        opts: ['Timing issues — fiscal year-ends differ, and for seasonal firms the asset levels on the balance sheet date can vary widely',
+                              'Accounting issues — the two firms are using different depreciation methods',
+                              'Weak compliance culture at one of the firms',
+                              'A trend analysis error caused by using five years of history'],
+                        correct: 0,
+                        explanation: 'Mixing income statement and balance sheet data from firms with different fiscal year-ends distorts comparisons, especially for seasonal firms whose asset levels swing through the year.',
+                        mnemonic: '💡 Memory tip: A seasonal firm photographed in July and one photographed in January are two different pictures.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'Why must analysts understand each firm\'s accounting choices, such as depreciation method and inventory valuation, before comparing ratios?',
+                        opts: ['Because accrual accounting allows real variation in reported results, so ratios may not be truly comparable',
+                              'Because GAAP requires all firms to use identical methods, and any deviation is an error',
+                              'Because accounting choices change a firm\'s cash balance',
+                              'Because ratios are computed only from the income statement'],
+                        correct: 0,
+                        explanation: 'Accrual accounting gives management legitimate choices. Two firms with the same economics can report different numbers, so ratios are comparable only after the analyst understands and adjusts for those choices.',
+                        mnemonic: '💡 Memory tip: Same ingredients, different recipe cards. Read the accounting policies before comparing the dishes.'
+                  },
+
+                  /* ========== 4.8 — THE ART AND SCIENCE OF RATIOS ========== */
+
+                  {
+                        type: 'dd',
+                        q: 'Before comparing firms, analysts "scrub" the data, and then make judgment calls. Drag each task to the correct group.',
+                        cols: ['Scrubbing (recasting the data)', 'Analyst judgment (the "art")'],
+                        items: [
+                              { text: 'Aligning fiscal year-ends across the comparison set', answer: 'Scrubbing (recasting the data)' },
+                              { text: 'Reconciling different depreciation useful-life assumptions', answer: 'Scrubbing (recasting the data)' },
+                              { text: 'Deciding whether to compare against the whole industry, direct competitors, or only successful ones', answer: 'Analyst judgment (the "art")' },
+                              { text: 'Deciding how far back the data is still relevant given technological change', answer: 'Analyst judgment (the "art")' },
+                              { text: 'Deciding which ratios actually matter for this industry', answer: 'Analyst judgment (the "art")' },
+                        ],
+                        explanation: 'Scrubbing fixes timing and accounting differences so the numbers line up. The harder, subjective art is choosing the peer group, the time period, and the ratios that matter.',
+                        mnemonic: '💡 Memory tip: Science cleans the data; art decides what to look at.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'An analyst treats the quick ratio as critical for an auto dealer but of little importance for a high-volume, low-price retailer. What is the reasoning?',
+                        opts: ['A dealer holds large, slow-moving inventory that is hard to convert to cash quickly, while the retailer\'s fast-turning inventory is nearly as liquid as cash',
+                              'Auto dealers have no current liabilities',
+                              'A retailer\'s inventory is not reported on the balance sheet',
+                              'The quick ratio only applies to firms that sell on credit'],
+                        correct: 0,
+                        explanation: 'Which ratios matter depends on the industry. The quick ratio penalizes inventory, which is a heavy and slow-moving asset for a car dealer but turns over rapidly for a high-volume retailer.',
+                        mnemonic: '💡 Memory tip: Pick the ratio to fit the industry — the quick ratio bites hardest where inventory is slowest.'
+                  },
+
+                  {
+                        type: 'ord',
+                        q: 'Place the four steps of the firm analysis process in the correct order.',
+                        items: [
+                              { text: 'Ratios — gather and calculate the relevant ratios', order: 0 },
+                              { text: 'Differences — spot where the ratios diverge across time or versus peers', order: 1 },
+                              { text: 'Deepen Analysis — form reasonable hypotheses for why the differences exist', order: 2 },
+                              { text: 'Report Causes and Cure — state the underlying cause and recommend a fix', order: 3 },
+                        ],
+                        explanation: 'Calculate the ratios, find where they differ, dig into why, then report the cause and recommend the cure. You cannot hypothesize about a difference you have not yet found.',
+                        mnemonic: '💡 Memory tip: R-D-D-R — Ratios, Differences, Deepen, Report.'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'In a shrinking industry, Firm C\'s operating margin and total asset turnover fell far more sharply than Firm D\'s, even though both firms\' gross margins fell by about the same amount from price competition. What is the most likely cause and cure?',
+                        opts: ['Cause: Firm C did not cut operating expenses or reduce its assets as sales fell. Cure: cut non-production expenses and evaluate underused assets for disposal or redeployment',
+                              'Cause: Firm C\'s cost of goods sold rose faster. Cure: renegotiate supplier contracts',
+                              'Cause: Firm C uses too little debt. Cure: borrow more to raise ROE',
+                              'Cause: Firm C\'s prices were too high. Cure: cut prices further'],
+                        correct: 0,
+                        explanation: 'Because gross margins fell equally, the extra damage came below the gross profit line (operating expenses) and in the asset base (turnover). Firm C stayed sized for a bigger business. The cure is trimming non-production expenses and redeploying idle assets.',
+                        mnemonic: '💡 Memory tip: When sales shrink, the firm has to shrink with them — costs and assets both.'
+                  },
+
+                  /* ========== 4.9 — RISK, LEGALITY, AND SOCIAL RESPONSIBILITY ========== */
+
+                  {
+                        type: 'dd',
+                        q: 'Ratio analysis must be layered with an assessment of risk. Drag each risk to the correct type.',
+                        cols: ['External risk', 'Internal risk'],
+                        items: [
+                              { text: 'The macroeconomic cycle', answer: 'External risk' },
+                              { text: 'Competitive forces', answer: 'External risk' },
+                              { text: 'Technology shifts', answer: 'External risk' },
+                              { text: 'Demographic and societal change', answer: 'External risk' },
+                              { text: 'Financial flexibility', answer: 'Internal risk' },
+                              { text: 'Willingness to innovate', answer: 'Internal risk' },
+                              { text: 'Compliance culture', answer: 'Internal risk' },
+                              { text: 'Company culture', answer: 'Internal risk' },
+                        ],
+                        explanation: 'External risks come from the environment the firm operates in. Internal risks come from within the firm — its flexibility, innovation, compliance culture, and company culture. Enron is the classic example of a firm destroyed by internal forces.',
+                        mnemonic: '💡 Memory tip: External = happens TO the firm. Internal = the firm does it to itself (think Enron).'
+                  },
+
+                  {
+                        type: 'mc',
+                        q: 'What can a management team\'s willingness to "stretch" accounting rules to smooth earnings volatility signal?',
+                        opts: ['A weak compliance culture — a legality concern that ratios can hint at',
+                              'Strong financial flexibility',
+                              'A low debt ratio',
+                              'An excellent quick ratio'],
+                        correct: 0,
+                        explanation: 'Ratios can hint at how a firm treats the rules. Smoothing volatility by stretching accounting is a sign of a weak compliance culture, which is a legality risk layered on top of the numbers.',
+                        mnemonic: '💡 Memory tip: Numbers that are too smooth deserve a second look.'
+                  },
+
+                  {
+                        type: 'tf',
+                        q: 'Profitability earned at the expense of employees, the community, or the environment tends to strengthen long-term performance, because the costs are borne by others.',
+                        opts: ['True', 'False'],
+                        correct: 1,
+                        explanation: 'False. Such profitability tends to erode long-term performance. Human capital and community health feed back into the firm\'s productivity and customer relationships.',
+                        mnemonic: '💡 Memory tip: You cannot outrun your own workforce and community forever — the cost comes back around.'
+                  },
+
+            ];
+
+            initQuiz(questions, 'Topic 4');
+      </script>
+</body>
+
+</html>
