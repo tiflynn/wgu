@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>C207 Data-Driven Decision Making · Section 4 Notes</title>
+<link rel="stylesheet" href="../../assets/css/quiz.css">
+<link rel="stylesheet" href="../../assets/css/notes.css">
+<style>
+  /* Section 4 notes: keep every line of body text at 12pt (16px) or larger */
+  .quicklist li, .formula-name, .formula-meaning, .compare-table, .compare-table td, .compare-table th, .callout, .section .section-sub, .notes-toc a, .notes-toc-label, .chain-flow, .chain-node, .eyebrow, .back-link, .subtitle { font-size: 1rem; }
+  .section-sub { margin-bottom: .6rem; }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← All Sections</a>
+
+<header>
+  <p class="eyebrow">C207 Data-Driven Decision Making · Section 4</p>
+  <h1>Quality Metrics<br><span>and Tools</span></h1>
+  <p class="subtitle">Quick-reference notes</p>
+</header>
+
+<div class="notes-wrap">
+
+  <div class="notes-toc">
+    <p class="notes-toc-label">Jump to a topic</p>
+    <ol>
+      <li><span class="n">01</span><a href="#qm">Quality Management: QA vs QC</a></li>
+      <li><span class="n">02</span><a href="#pdca">PDCA: Plan-Do-Check-Act</a></li>
+      <li><span class="n">03</span><a href="#tools">The Seven Basic Quality Tools</a></li>
+      <li><span class="n">04</span><a href="#spc">Statistical Process Control and Control Charts</a></li>
+      <li><span class="n">05</span><a href="#sipoc">SIPOC, Flowcharts and the Five Quality Points</a></li>
+      <li><span class="n">06</span><a href="#programs">Lean, Six Sigma, JIT and ISO</a></li>
+      <li><span class="n">07</span><a href="#confuse">Easy to Confuse and Exam Tips</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="qm">
+    <h2>01 · Quality Management: QA vs QC</h2>
+    <p class="section-sub">Quality is a culture, and it needs both prevention and detection</p>
+
+    <ul class="quicklist">
+      <li><strong>Quality is a culture.</strong> Purchasing, manufacturing, customer service and talent management each own the quality of their process, with a customer focus.</li>
+      <li>An effective program uses <strong>both quality assurance (QA) and quality control (QC)</strong>. Leaders define and communicate the vision and goals.</li>
+      <li>Every member must at least <strong>identify and communicate defective product, inefficiencies and irregularities</strong>.</li>
+      <li>Senior leadership commitment leads to fact-based decisions, which reduce bias and build trust in plans.</li>
+    </ul>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Quality control (QC)</th><th>Quality assurance (QA)</th></tr>
+        <tr><td>Focus</td><td>Uncover defects so they can be fixed</td><td>Prevent defects from occurring at all</td></tr>
+        <tr><td>Purpose</td><td>Assess performance, recommend <strong>corrective</strong> action</td><td>Assess process capability, recommend <strong>preventive</strong> action</td></tr>
+        <tr><td>Response</td><td><strong>Reactive</strong> (after the problem)</td><td><strong>Proactive</strong> (before the problem)</td></tr>
+        <tr><td>Level</td><td>Basic: recognize problems so they can be fixed</td><td>Advanced: understand the process well enough to predict outcomes</td></tr>
+        <tr><td>Major activity</td><td>Inspection of results to find defects</td><td>Training, standards, procedures</td></tr>
+        </table>
+    </div>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 250' role='img' aria-label='Timeline showing quality assurance acting before a defect and quality control acting after it' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar1' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='30' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>When does each one act?</text><line x1='40' y1='120' x2='560' y2='120' stroke='#5C677D' stroke-width='3' marker-end='url(#ar1)'/><circle cx='330' cy='120' r='10' fill='#DC2626'/><text x='330' y='100' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>Defect occurs</text><rect x='40' y='150' width='270' height='78' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='175' y='178' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>QA: BEFORE the defect</text><text x='175' y='202' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>proactive, preventive</text><text x='175' y='222' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>training, standards</text><rect x='350' y='150' width='210' height='78' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='455' y='178' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>QC: AFTER the defect</text><text x='455' y='202' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>reactive, corrective</text><text x='455' y='222' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>inspect, find, fix</text></svg>
+    <div class="callout warn">
+      <strong>Inspection wording:</strong> the course text lists "training and inspections" as QA examples (such as testing an update before launch), while the Express session calls inspection QC's major activity. Decide by <strong>timing</strong>: preventing a defect before it exists is QA; finding or fixing one that already exists is QC.
+    </div>
+    <ul class="quicklist">
+      <li><strong>Walter Shewhart</strong> began quality control in <strong>1931</strong>; the charts were first called Shewhart control charts.</li>
+      <li><strong>W. Edwards Deming</strong> promoted control charts and statistical process control after World War II. When few Americans listened, he went to Japan, and Japanese quality rose.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="pdca">
+    <h2>02 · PDCA: Plan-Do-Check-Act</h2>
+    <p class="section-sub">The problem-solving and pilot-test cycle</p>
+
+    <div class="chain-flow"><div class="chain-node">1 · Plan</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">2 · Do</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">3 · Check</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">4 · Act</div></div>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Step</th><th>What happens</th><th>Keyword</th></tr>
+        <tr><td><strong>Plan</strong></td><td>Investigate the cause, then plan a solution</td><td>investigate</td></tr>
+        <tr><td><strong>Do</strong></td><td>Try the solution on a small scale</td><td>trial, try</td></tr>
+        <tr><td><strong>Check</strong></td><td>Is the problem still occurring? If yes, loop back to Plan</td><td>still spoiled? is it reduced?</td></tr>
+        <tr><td><strong>Act</strong></td><td>Institutionalize the solution that worked so it cannot recur</td><td>make permanent, standardize</td></tr>
+        </table>
+    </div>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 260' role='img' aria-label='PDCA cycle: Plan, Do and Check are quality control; Act is quality assurance' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar2' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='30' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Plan, Do and Check = QC · Act = QA</text><rect x='18' y='80' width='114' height='84' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='75' y='108' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Plan</text><text x='75' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Investigate</text><text x='75' y='152' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>and plan</text><rect x='168' y='80' width='114' height='84' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='225' y='108' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Do</text><text x='225' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Try the fix</text><text x='225' y='152' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>on a trial</text><rect x='318' y='80' width='114' height='84' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='375' y='108' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Check</text><text x='375' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Did it work?</text><text x='375' y='152' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>If not, loop</text><rect x='468' y='80' width='114' height='84' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='525' y='108' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Act</text><text x='525' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Make it the</text><text x='525' y='152' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>new standard</text><path d='M132 122H168' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar2)'/><path d='M282 122H318' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar2)'/><path d='M432 122H468' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar2)'/><path d='M375 80V54H75V80' fill='none' stroke='#DC2626' stroke-width='2' marker-end='url(#ar2)'/><text x='225' y='48' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='400'>still failing: investigate again</text><path d='M18 184V194H282V184' fill='none' stroke='#5C677D' stroke-width='2'/><text x='150' y='218' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Quality control</text><text x='150' y='238' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>reactive: fixes the defect</text><path d='M468 184V194H582V184' fill='none' stroke='#2563EB' stroke-width='2'/><text x='525' y='218' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Quality assurance</text><text x='525' y='238' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>proactive: prevents</text></svg>
+    <ul class="quicklist">
+      <li><strong>Plan, Do and Check parallel QC</strong> (fix a problem that exists). <strong>Act parallels QA</strong> (prevent it from returning).</li>
+      <li>Unknown cause (a customer reports defects)? Start with <strong>PDCA's investigation</strong>, not QC. QC assumes the problem is already identified.</li>
+      <li><strong>PDSA</strong> replaces Check with <strong>Study</strong>. PDCA is for day-to-day operations; PDSA leads toward a Six Sigma approach.</li>
+      <li>In Lean Six Sigma, PDCA is the pilot-test cycle used in the <strong>Improve</strong> phase.</li>
+      <li>"Keep an eye on" a process so no problems occur = <strong>QA</strong>, even if the tool is a control chart.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="tools">
+    <h2>03 · The Seven Basic Quality Tools</h2>
+    <p class="section-sub">They solve roughly 90 to 95% of quality problems</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Tool</th><th>Question it answers</th><th>Keyword</th><th>Remember</th></tr>
+        <tr><td><strong>Run chart</strong></td><td>How is performance changing?</td><td><strong>over time</strong></td><td>Line chart; x-axis is always time. Parts: data points, median line, trend, shift.</td></tr>
+        <tr><td><strong>Fishbone</strong> (cause-and-effect, Ishikawa)</td><td><strong>Why</strong> is it happening?</td><td>possible causes</td><td>Problem at the head; bones = people, machines, methods, materials, measurement, environment.</td></tr>
+        <tr><td><strong>Flowchart</strong></td><td><strong>Where</strong> in the process?</td><td>steps, order</td><td>Maps steps and decisions. SIPOC is a high-level flowchart.</td></tr>
+        <tr><td><strong>Check sheet</strong></td><td>How many times?</td><td>collect, count, tally</td><td>Collects data; can be keyed into a spreadsheet.</td></tr>
+        <tr><td><strong>Histogram</strong></td><td>How is the data <strong>distributed</strong>?</td><td>distributed</td><td>Bars = frequency per category; tallest in the middle, like a bell curve.</td></tr>
+        <tr><td><strong>Pareto chart</strong></td><td>Which causes matter most?</td><td>prioritize, 80/20</td><td>Histogram sorted tallest to shortest; fix the biggest bar first.</td></tr>
+        <tr><td><strong>Scatter diagram</strong></td><td>Are two variables related?</td><td>relationship</td><td>Strength of association (R²); not significance and not cause.</td></tr>
+        </table>
+    </div>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 194' role='img' aria-label='Chain of quality tools: flowchart, fishbone, check sheet, Pareto' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar3' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Tools used as a chain</text><rect x='14' y='62' width='124' height='74' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='76' y='94' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Flowchart</text><text x='76' y='120' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>which step?</text><path d='M140 99H158' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar3)'/><rect x='162' y='62' width='124' height='74' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='224' y='94' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Fishbone</text><text x='224' y='120' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>why?</text><path d='M288 99H306' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar3)'/><rect x='310' y='62' width='124' height='74' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='372' y='94' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Check sheet</text><text x='372' y='120' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>count it</text><path d='M436 99H454' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar3)'/><rect x='458' y='62' width='124' height='74' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='520' y='94' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Pareto</text><text x='520' y='120' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>prioritize</text><text x='300' y='176' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Locate it, explain it, count it, rank it</text></svg>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 272' role='img' aria-label='Histogram with the tallest bar in the middle next to a Pareto chart sorted from tallest to shortest' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar4' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>A Pareto chart is a re-sorted histogram</text><text x='150' y='62' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Histogram</text><text x='150' y='84' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>tallest bar in the middle</text><text x='450' y='62' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Pareto</text><text x='450' y='84' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>tallest bar first</text><rect x='32' y='205' width='30' height='20' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='68' y='180' width='30' height='45' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='104' y='145' width='30' height='80' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='140' y='115' width='30' height='110' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='176' y='150' width='30' height='75' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='212' y='185' width='30' height='40' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='248' y='210' width='30' height='15' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='332' y='115' width='30' height='110' rx='3' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><rect x='368' y='145' width='30' height='80' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='404' y='150' width='30' height='75' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='440' y='180' width='30' height='45' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='476' y='185' width='30' height='40' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='512' y='205' width='30' height='20' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='548' y='210' width='30' height='15' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><line x1='26' x2='284' y1='225' y2='225' stroke='#5C677D' stroke-width='2'/><line x1='326' x2='584' y1='225' y2='225' stroke='#5C677D' stroke-width='2'/><text x='347' y='106' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Fix first</text><text x='300' y='254' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Bar height = frequency of each category</text></svg>
+    <ul class="quicklist">
+      <li>A <strong>control chart</strong> is a run chart plus an upper and lower control limit.</li>
+      <li><strong>Histogram</strong>: when the mean, median and mode are close together, the shape is a normal (bell) curve.</li>
+      <li><strong>Pareto principle</strong>: about 80% of problems come from about 20% of causes.</li>
+      <li>Read the keyword: "over time" = run chart; "distributed" = histogram; "prioritize" = Pareto.</li>
+    </ul>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 292' role='img' aria-label='Fishbone diagram with six cause categories feeding into one problem' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar5' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Fishbone: causes of one problem</text><line x1='20' y1='150' x2='470' y2='150' stroke='#5C677D' stroke-width='3' marker-end='url(#ar5)'/><line x1='90' y1='78' x2='150' y2='150' stroke='#5C677D' stroke-width='2'/><line x1='90' y1='222' x2='150' y2='150' stroke='#5C677D' stroke-width='2'/><text x='90' y='66' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>People</text><text x='90' y='246' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Materials</text><line x1='220' y1='78' x2='280' y2='150' stroke='#5C677D' stroke-width='2'/><line x1='220' y1='222' x2='280' y2='150' stroke='#5C677D' stroke-width='2'/><text x='220' y='66' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Methods</text><text x='220' y='246' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Measurement</text><line x1='350' y1='78' x2='410' y2='150' stroke='#5C677D' stroke-width='2'/><line x1='350' y1='222' x2='410' y2='150' stroke='#5C677D' stroke-width='2'/><text x='350' y='66' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Machines</text><text x='350' y='246' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Environment</text><rect x='474' y='118' width='112' height='64' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='530' y='146' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Problem</text><text x='530' y='168' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>(effect)</text><text x='300' y='276' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Each bone = a category of possible causes</text></svg>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="spc">
+    <h2>04 · Statistical Process Control and Control Charts</h2>
+    <p class="section-sub">Telling normal variation from a real problem</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Control limits (3 sigma)</div>
+      <div class="formula-eq">UCL = mean + 3 SD &nbsp;·&nbsp; LCL = mean − 3 SD</div>
+      <div class="formula-meaning">By the empirical rule, about <strong>99.7%</strong> of points fall inside, so only about <strong>0.3% (3 in 1,000)</strong> should fall outside. Example: mean 50, SD 4 gives LCL 38 and UCL 62.</div>
+    </div>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 292' role='img' aria-label='Control chart with upper and lower control limits and one point outside the upper limit' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar6' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Control chart: mean ± 3 SD</text><rect x='92' y='75' width='480' height='150' fill='#EEF1F6' fill-opacity='.7'/><line x1='92' x2='572' y1='75' y2='75' stroke='#5C677D' stroke-width='2' stroke-dasharray='6 4'/><text x='84' y='80' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>UCL</text><line x1='92' x2='572' y1='150' y2='150' stroke='#5C677D' stroke-width='2' /><text x='84' y='155' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>Mean</text><line x1='92' x2='572' y1='225' y2='225' stroke='#5C677D' stroke-width='2' stroke-dasharray='6 4'/><text x='84' y='230' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>LCL</text><path d='M92 142.5L112 162.5L132 130.0L152 155.0L172 137.5L192 177.5L212 145.0L232 127.5L252 167.5L272 147.5L292 160.0L312 67.5L332 135.0L352 172.5L372 140.0L392 152.5L412 125.0L432 165.0L452 145.0L472 182.5L492 132.5L512 157.5L532 137.5L552 170.0L572 147.5' fill='none' stroke='#5C677D' stroke-width='2'/><circle cx='92' cy='142.5' r='4' fill='#1A2035'/><circle cx='112' cy='162.5' r='4' fill='#1A2035'/><circle cx='132' cy='130.0' r='4' fill='#1A2035'/><circle cx='152' cy='155.0' r='4' fill='#1A2035'/><circle cx='172' cy='137.5' r='4' fill='#1A2035'/><circle cx='192' cy='177.5' r='4' fill='#1A2035'/><circle cx='212' cy='145.0' r='4' fill='#1A2035'/><circle cx='232' cy='127.5' r='4' fill='#1A2035'/><circle cx='252' cy='167.5' r='4' fill='#1A2035'/><circle cx='272' cy='147.5' r='4' fill='#1A2035'/><circle cx='292' cy='160.0' r='4' fill='#1A2035'/><circle cx='312' cy='67.5' r='4' fill='#DC2626'/><circle cx='332' cy='135.0' r='4' fill='#1A2035'/><circle cx='352' cy='172.5' r='4' fill='#1A2035'/><circle cx='372' cy='140.0' r='4' fill='#1A2035'/><circle cx='392' cy='152.5' r='4' fill='#1A2035'/><circle cx='412' cy='125.0' r='4' fill='#1A2035'/><circle cx='432' cy='165.0' r='4' fill='#1A2035'/><circle cx='452' cy='145.0' r='4' fill='#1A2035'/><circle cx='472' cy='182.5' r='4' fill='#1A2035'/><circle cx='492' cy='132.5' r='4' fill='#1A2035'/><circle cx='512' cy='157.5' r='4' fill='#1A2035'/><circle cx='532' cy='137.5' r='4' fill='#1A2035'/><circle cx='552' cy='170.0' r='4' fill='#1A2035'/><circle cx='572' cy='147.5' r='4' fill='#1A2035'/><circle cx='312' cy='67.5' r='11' fill='none' stroke='#DC2626' stroke-width='2'/><text x='332' y='72.5' font-size='16' fill='#DC2626' text-anchor='start' font-weight='700'>Special cause</text><text x='330' y='252' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Inside the limits: common cause (random)</text><text x='330' y='276' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Schematic points, time runs left to right</text></svg>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th></th><th>Common cause variation</th><th>Special cause variation</th></tr>
+        <tr><td>Also called</td><td>Random, natural, normal fluctuation</td><td>Non-random, assignable cause, systematic error</td></tr>
+        <tr><td>On the chart</td><td>Points inside the limits</td><td>Points outside the limits</td></tr>
+        <tr><td>Response</td><td>Expected; do not tamper</td><td>Find and correct the cause</td></tr>
+        </table>
+    </div>
+    <div class="callout">
+      <strong>Reading a chart:</strong> if 3 of 12 points (25%) fall outside 3-sigma limits, that is far above the 0.3% expected, so the process is <strong>out of control</strong>.
+    </div>
+    <div class="callout">
+      <strong>Working backward:</strong> if the mean is 16, UCL 17 and LCL 15, the gap of 1 equals 3 SD, so <strong>1 SD = 1/3</strong>. Variance is the <em>square</em> of the SD (1/9); the SD is the square root of the variance.
+    </div>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Data type</th><th>Meaning</th><th>Example</th></tr>
+        <tr><td><strong>Variable data</strong></td><td>Numerical; shows exactly where you are in a range</td><td>Weight in grams, minutes to finish</td></tr>
+        <tr><td><strong>Attribute data</strong></td><td>Categorical; shows whether you met the target</td><td>Pass or fail, on time yes or no</td></tr>
+        </table>
+    </div>
+    <ul class="quicklist">
+      <li>SPC is used in the <strong>Measure</strong> and <strong>Control</strong> phases, and in <strong>Improve</strong> to verify a change worked.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="sipoc">
+    <h2>05 · SIPOC, Flowcharts and the Five Quality Points</h2>
+    <p class="section-sub">High-level process views and where to put inspection effort</p>
+
+    <div class="chain-flow"><div class="chain-node">S · Suppliers</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">I · Inputs</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">P · Process</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">O · Outputs</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">C · Customers</div></div>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 230' role='img' aria-label='SIPOC diagram: Supplier, Input, Process, Output, Customer' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar7' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>SIPOC: high-level flowchart</text><rect x='8' y='62' width='96' height='90' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='56' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Supplier</text><text x='56' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>gives</text><path d='M106 107H128' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar7)'/><rect x='126' y='62' width='96' height='90' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='174' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Input</text><text x='174' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>resources</text><path d='M224 107H246' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar7)'/><rect x='244' y='62' width='96' height='90' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='292' y='100' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Process</text><text x='292' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>steps</text><path d='M342 107H364' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar7)'/><rect x='362' y='62' width='96' height='90' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='410' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Output</text><text x='410' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>product</text><path d='M460 107H482' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar7)'/><rect x='480' y='62' width='96' height='90' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='528' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Customer</text><text x='528' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>receives</text><text x='300' y='186' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>S, I, P, O, C spells SIPOC</text><text x='300' y='212' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>A flowchart showing the whole organization</text></svg>
+    <ul class="quicklist">
+      <li><strong>SIPOC</strong> is a high-level <strong>flowchart</strong> of the whole organization, mostly used in the <strong>Define</strong> phase to set boundaries, key inputs and outputs, and who is affected.</li>
+      <li>Flowchart symbols: <strong>ovals</strong> for start and end, <strong>diamonds</strong> for decision points, boxes for steps.</li>
+    </ul>
+    <p class="section-sub" style="margin-top:1rem">Lee Iacocca's five quality points (from the Express session)</p>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Point</th><th>Meaning</th><th>Idea</th></tr>
+        <tr><td><strong>Q1</strong></td><td>Manage your suppliers</td><td>Strong supplier management means less incoming inspection</td></tr>
+        <tr><td><strong>Q2</strong></td><td>Incoming quality</td><td>Reduced by Q1</td></tr>
+        <tr><td><strong>Q3</strong></td><td>Quality within the process</td><td>Statistical process control, control charts</td></tr>
+        <tr><td><strong>Q4</strong></td><td>Outgoing quality</td><td>Reduced by Q3</td></tr>
+        <tr><td><strong>Q5</strong></td><td>Define customers' quality expectations</td><td>Know what the customer demands</td></tr>
+        </table>
+    </div>
+    <div class="callout">
+      <strong>Payoff:</strong> shifting effort from heavy inspection to suppliers, in-process checks and customer needs balances costs, improves outgoing quality and wins the marketplace.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="programs">
+    <h2>06 · Lean, Six Sigma, JIT and ISO</h2>
+    <p class="section-sub">Programs that improve how work is done, and DMAIC to structure them</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Program</th><th>Goal</th><th>Keyword</th></tr>
+        <tr><td><strong>Lean</strong></td><td>Eliminate waste and non-value-adding activity</td><td>waste, non-value-adding</td></tr>
+        <tr><td><strong>Just-in-Time</strong> (Kanban)</td><td>Minimize or eliminate inventory; parts arrive as needed. A kind of lean.</td><td>inventory</td></tr>
+        <tr><td><strong>Six Sigma</strong></td><td>Reduce variation and defects (target 3.4 per million opportunities)</td><td>reduce defects, variation</td></tr>
+        <tr><td><strong>Lean Six Sigma</strong></td><td>Both together: speed plus consistency, in manufacturing and service</td><td>faster and more consistent</td></tr>
+        <tr><td><strong>ISO</strong></td><td>Certifies documented, audited quality standards (International Organization for Standardization, Geneva)</td><td>certification, audit</td></tr>
+        </table>
+    </div>
+    <p class="section-sub" style="margin-top:1rem">The five Lean principles</p>
+    <div class="chain-flow"><div class="chain-node">1 · Identify value</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">2 · Map the value stream</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">3 · Create flow</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">4 · Establish pull</div>
+      <span class="chain-sep">→</span>
+      <div class="chain-node">5 · Seek perfection</div></div>
+    <div class="callout">
+      <strong>Eight Lean wastes (DOWNTIME):</strong> <strong>D</strong>efects, <strong>O</strong>verproduction, <strong>W</strong>aiting, <strong>N</strong>on-utilized (unused) talent, <strong>T</strong>ransportation, <strong>I</strong>nventory (excess), <strong>M</strong>otion, <strong>E</strong>xtra processing.
+    </div>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 294' role='img' aria-label='Bar chart showing defects per million falling from 66,807 at 3 sigma to 3.4 at 6 sigma' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar8' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Defects per million opportunities</text><text x='24' y='82' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>3 sigma</text><rect x='120' y='56' width='380' height='36' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='510.0' y='82' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>66,807</text><text x='24' y='134' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>4 sigma</text><rect x='120' y='108' width='299' height='36' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='428.74665801563606' y='134' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>6,210</text><text x='24' y='186' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>5 sigma</text><rect x='120' y='160' width='187' height='36' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='316.5977270047101' y='186' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>233</text><text x='24' y='238' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>6 sigma</text><rect x='120' y='212' width='51' height='36' rx='6' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='180.67786731710805' y='238' font-size='16' fill='#2563EB' text-anchor='start' font-weight='700'>3.4</text><text x='300' y='276' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Higher sigma level = fewer defects (bar length is log scale)</text></svg>
+    <div class="callout warn">
+      <strong>Typo alert:</strong> the Lean Six Sigma video narration says "3.4 defects per billion". The correct figure is <strong>per million</strong>. Any effort to reduce variation and defects counts as Six Sigma, even before the 3.4 target is reached.
+    </div>
+    <p class="section-sub" style="margin-top:1rem">DMAIC and where the tools fit</p>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 236' role='img' aria-label='DMAIC loop: Define, Measure, Analyze, Improve, Control' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar9' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>DMAIC: five phases, then repeat</text><rect x='8' y='62' width='96' height='96' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='56' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Define</text><text x='56' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>scope and</text><text x='56' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>customers</text><path d='M106 110H128' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><rect x='126' y='62' width='96' height='96' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='174' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Measure</text><text x='174' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>baseline</text><text x='174' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>data</text><path d='M224 110H246' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><rect x='244' y='62' width='96' height='96' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='292' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Analyze</text><text x='292' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>root</text><text x='292' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>causes</text><path d='M342 110H364' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><rect x='362' y='62' width='96' height='96' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='410' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Improve</text><text x='410' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>test</text><text x='410' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>solutions</text><path d='M460 110H482' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><rect x='480' y='62' width='96' height='96' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='528' y='96' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Control</text><text x='528' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>sustain</text><text x='528' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>gains</text><path d='M528 158V192H56V158' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><text x='300' y='218' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>continuous improvement</text></svg>
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Phase</th><th>Question</th><th>Common tools</th></tr>
+        <tr><td><strong>Define</strong></td><td>What is the problem, scope and process?</td><td>SIPOC, flowchart</td></tr>
+        <tr><td><strong>Measure</strong></td><td>What is current performance?</td><td>Check sheet, run chart, histogram, Pareto, SPC</td></tr>
+        <tr><td><strong>Analyze</strong></td><td>Why is it happening?</td><td>Fishbone, Pareto, scatter diagram, flowchart</td></tr>
+        <tr><td><strong>Improve</strong></td><td>Does the fix work?</td><td>PDCA pilot, then run chart, histogram, Pareto, scatter or check sheet to confirm</td></tr>
+        <tr><td><strong>Control</strong></td><td>Are the gains holding?</td><td>Statistical process control (control charts)</td></tr>
+        </table>
+    </div>
+    <div class="callout">
+      <strong>ISO vs. Lean Six Sigma:</strong> ISO is not a Lean Six Sigma method. <strong>ISO standardizes and audits how work is managed</strong> (process adherence); <strong>Lean Six Sigma improves how work is done</strong> (process improvement). A certified exporter lets importers use acceptance sampling instead of heavy inspection.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="section top-anchor" id="confuse">
+    <h2>07 · Easy to Confuse and Exam Tips</h2>
+    <p class="section-sub">Read each question twice and underline the keyword</p>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <tr><th>Mix-up</th><th>How to tell them apart</th></tr>
+        <tr><td>QC vs. QA</td><td>Corrective and reactive vs. preventive and proactive. "Keep an eye on" or "make sure there are no problems" = QA.</td></tr>
+        <tr><td>PDCA vs. QC</td><td>Cause unknown? Start with PDCA's investigation. QC assumes you already know the problem.</td></tr>
+        <tr><td>Do vs. Check vs. Act</td><td>Trial = Do. "Is it reduced?" = Check. Make permanent = Act.</td></tr>
+        <tr><td>Run chart vs. control chart</td><td>"Over time" alone = run chart. Add UCL and LCL = control chart.</td></tr>
+        <tr><td>Histogram vs. Pareto</td><td>"Distributed" = histogram. "Prioritize" or "highest first" = Pareto.</td></tr>
+        <tr><td>Fishbone vs. flowchart</td><td>Fishbone asks <em>why</em>; flowchart asks <em>where</em> in the process.</td></tr>
+        <tr><td>Check sheet vs. histogram</td><td>The check sheet collects and counts; the histogram displays the counts.</td></tr>
+        <tr><td>Common vs. special cause</td><td>Inside the limits = random and expected. Outside = assignable, fix it.</td></tr>
+        <tr><td>Variable vs. attribute data</td><td>Numbers on a scale vs. yes/no categories.</td></tr>
+        <tr><td>Lean vs. Six Sigma vs. JIT</td><td>Waste vs. variation and defects vs. inventory. JIT is one example of lean.</td></tr>
+        <tr><td>ISO vs. Lean Six Sigma</td><td>ISO audits adherence; Lean Six Sigma improves the process.</td></tr>
+        </table>
+    </div>
+    <ul class="quicklist">
+      <li><strong>Express practice answers:</strong> "reduce defects per batch" = Six Sigma; "how defects are distributed among teams" = histogram; "are defects reducing over time" = run chart.</li>
+      <li><strong>Keyword strategy:</strong> read the question straight through for context, then again starting from the question itself to find the keyword.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
