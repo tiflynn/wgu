@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C207 Data-Driven Decision Making · Section 2 Quiz</title>
+      <link rel="stylesheet" href="../../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Sections</a>
+            <a class="back-link notes" href="../notes/section02.html" target="_blank" rel="noopener">📄 Section 2 Notes</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C207 Data-Driven Decision Making · Section 2</p>
+            <h1>Quantitative<br><span>Statistical Tools</span></h1>
+      </header>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  // ══ PLANNING & DECISION TOOLS ══════════
+
+                  {
+                        type: 'dd',
+                        q: "Match each quantitative technique to what it does.",
+                        cols: ["Linear programming", "Control chart", "Break-even analysis", "Cluster analysis", "Monte Carlo simulation", "What-if analysis"],
+                        items: [
+                              { text: "Maximizes or minimizes an outcome (profit or cost) under constraints by changing the mix of products", answer: "Linear programming" },
+                              { text: "Plots a process over time against an average line with upper and lower limits", answer: "Control chart" },
+                              { text: "Finds the volume where total revenue equals total cost", answer: "Break-even analysis" },
+                              { text: "Groups customers into segments based on similar behavior", answer: "Cluster analysis" },
+                              { text: "Runs thousands of random trials to show the range of possible outcomes", answer: "Monte Carlo simulation" },
+                              { text: "Changes one input at a time to see how the output changes", answer: "What-if analysis" }
+                        ],
+                        explanation: "Each tool answers a different question. <strong>Linear programming</strong> = best mix under limits. <strong>Control chart</strong> = statistical quality control: a point outside the upper or lower control limit (UCL/LCL) signals special-cause variation. <strong>Break-even</strong> = revenue equals cost. <strong>Cluster</strong> = natural customer segments (K-means, Z-scores), most powerful AFTER data exists. <strong>Monte Carlo</strong> = many random runs. <strong>What-if</strong> = tweak one input and watch the output.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 236' role='img' aria-label='Control chart with an average line, upper and lower control limits, and one point outside the upper limit' style='display:block;width:100%;max-width:480px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><line x1='50' y1='64' x2='430' y2='64' stroke='#DC2626' stroke-width='2' stroke-dasharray='6 4'/><line x1='50' y1='115' x2='430' y2='115' stroke='#5C677D' stroke-width='2'/><line x1='50' y1='166' x2='430' y2='166' stroke='#DC2626' stroke-width='2' stroke-dasharray='6 4'/><text x='436' y='68' font-size='12.5' fill='#DC2626' text-anchor='start' font-weight='700'>UCL</text><text x='436' y='119' font-size='12.5' fill='#1A2035' text-anchor='start' font-weight='400'>Mean</text><text x='436' y='170' font-size='12.5' fill='#DC2626' text-anchor='start' font-weight='700'>LCL</text><polyline points='50,111.6 77,121.8 104,101.4 131,116.7 158,92.9 185,113.3 212,125.2 239,104.8 266,98 293,118.4 320,109.9 347,48.7 374,115 401,120.1' fill='none' stroke='#2563EB' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='50' cy='111.6' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='77' cy='121.8' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='104' cy='101.4' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='131' cy='116.7' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='158' cy='92.9' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='185' cy='113.3' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='212' cy='125.2' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='239' cy='104.8' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='266' cy='98' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='293' cy='118.4' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='320' cy='109.9' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='347' cy='48.7' r='7' fill='#DC2626' stroke='#fff' stroke-width='2'/><circle cx='374' cy='115' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><circle cx='401' cy='120.1' r='4' fill='#2563EB' stroke='none' stroke-width='2'/><text x='331' y='36.7' font-size='12.5' fill='#DC2626' text-anchor='end' font-weight='700'>outside the limits =</text><text x='331' y='52.7' font-size='12.5' fill='#DC2626' text-anchor='end' font-weight='700'>special-cause variation</text><text x='240' y='226' font-size='12.5' fill='#5C677D' text-anchor='middle' font-weight='400'>time →</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>M for Monte, M for Many</strong> random runs; <strong>L</strong>inear programming = <strong>L</strong>imits; control chart = <strong>UCL / LCL</strong> guardrails like lane lines on a road; what-if = change <strong>one</strong> knob."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each IT business situation to the best planning tool.",
+                        cols: ["Monte Carlo simulation", "Decision tree", "Linear programming", "Break-even analysis", "Crossover analysis"],
+                        items: [
+                              { text: "Estimate the likely total cost of an IT project when each task's cost is uncertain (low, most likely, high)", answer: "Monte Carlo simulation" },
+                              { text: "Choose among three risky site or vendor options, each with a probability of high or low payoff", answer: "Decision tree" },
+                              { text: "Split limited server capacity among services to maximize revenue", answer: "Linear programming" },
+                              { text: "Find how many subscribers cover a $3,800 monthly fixed cost at $10 contribution each", answer: "Break-even analysis" },
+                              { text: "Pick the cheapest of three payment vendors, knowing the cheapest one changes with volume", answer: "Crossover analysis" }
+                        ],
+                        explanation: "Match the QUESTION to the tool: uncertainty over a range → <strong>Monte Carlo</strong>; risky choices with probabilities → <strong>decision tree</strong> (highest expected value); limited resources → <strong>linear programming</strong>; cost equals revenue → <strong>break-even</strong>; cheapest option flips as volume grows → <strong>crossover</strong>.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 262' role='img' aria-label='Flowchart for choosing a test: counts use chi-square, means use t-tests or ANOVA, relationships use regression' style='display:block;width:100%;max-width:480px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><rect x='165' y='10' width='150' height='32' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='240' y='31' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>What are you testing?</text><line x1='240' y1='42' x2='70' y2='70' stroke='#5C677D' stroke-width='1.5'/><line x1='240' y1='42' x2='240' y2='70' stroke='#5C677D' stroke-width='1.5'/><line x1='240' y1='42' x2='410' y2='70' stroke='#5C677D' stroke-width='1.5'/><rect x='10' y='70' width='120' height='44' rx='8' fill='#FEF3C7' stroke='#B45309' stroke-width='1.5'/><text x='70' y='88' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Counts in</text><text x='70' y='105' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>categories</text><rect x='145' y='70' width='190' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='240' y='88' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Means (averages)</text><text x='240' y='105' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>of numbers</text><rect x='350' y='70' width='120' height='44' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='1.5'/><text x='410' y='88' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Relationship:</text><text x='410' y='105' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='700'>predict Y from X</text><line x1='70' y1='114' x2='70' y2='132' stroke='#5C677D' stroke-width='1.5'/><line x1='240' y1='114' x2='240' y2='132' stroke='#5C677D' stroke-width='1.5'/><line x1='410' y1='114' x2='410' y2='132' stroke='#5C677D' stroke-width='1.5'/><rect x='10' y='132' width='120' height='118' rx='8' fill='#FEF3C7' stroke='#B45309' stroke-width='1.5'/><text x='70' y='154' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Chi-square</text><text x='70' y='174' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>observed vs</text><text x='70' y='191' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>expected counts</text><text x='70' y='214' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>one-way: 1 group</text><text x='70' y='231' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>two-way: 2 groups</text><rect x='145' y='132' width='190' height='118' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='240' y='154' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>1 group vs a target</text><text x='240' y='171' font-size='13' fill='#2563EB' text-anchor='middle' font-weight='700'>→ 1-sample t-test</text><text x='240' y='192' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>2 groups, same thing</text><text x='240' y='209' font-size='13' fill='#2563EB' text-anchor='middle' font-weight='700'>→ 2-sample t-test</text><text x='240' y='230' font-size='13' fill='#2563EB' text-anchor='middle' font-weight='700'>3+ groups → ANOVA</text><text x='240' y='245' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>(then post hoc)</text><rect x='350' y='132' width='120' height='118' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='1.5'/><text x='410' y='154' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>1 X → simple</text><text x='410' y='175' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>2+ X → multiple</text><text x='410' y='196' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>yes/no Y →</text><text x='410' y='213' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>logistic</text><text x='410' y='238' font-size='11.5' fill='#1A2035' text-anchor='middle' font-weight='400'>time as X → time series</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Range, Risk, Resources, Revenue-equals-cost, Rate-flip</strong> = Monte Carlo, Decision tree, Linear programming, Break-even, Crossover."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Monte Carlo simulation needs a distribution for each uncertain input. Match each input to the information used to describe it.",
+                        cols: ["Mean and standard deviation", "Minimum, most likely, and maximum", "Percent defective (success or failure rate)"],
+                        items: [
+                              { text: "Unit cost that averages $4.35 with an SD of $0.30", answer: "Mean and standard deviation" },
+                              { text: "Daily order counts that cluster around an average and spread evenly on both sides", answer: "Mean and standard deviation" },
+                              { text: "A project phase that takes 2 weeks at best, 3 weeks typically, 6 weeks at worst", answer: "Minimum, most likely, and maximum" },
+                              { text: "A delivery time with a best case, a typical case, and a worst case", answer: "Minimum, most likely, and maximum" },
+                              { text: "5% of units fail inspection", answer: "Percent defective (success or failure rate)" },
+                              { text: "2% of orders are returned", answer: "Percent defective (success or failure rate)" }
+                        ],
+                        explanation: "A Monte Carlo model replaces each uncertain input with a random draw. Bell-shaped inputs are described by <strong>mean and SD</strong>; inputs with three estimates use <strong>min, most likely, max</strong>; yes/no inputs use a <strong>percent defective</strong> rate. The model then repeats thousands of times to build a distribution of outcomes.",
+                        mnemonic: "💡 Memory tip: <strong>Bell = Mean+SD, Three guesses = Min/Likely/Max, Yes-No = Percent.</strong> Pick the input's shape and you know its description."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Blue Owl ran a Monte Carlo simulation of unit cost (10,000 iterations): mean $4.35, SD $0.30, min $3.17, max $5.53, and 95% of runs between $3.75 and $4.95. The budgeted cost is $5.00 per unit. What is the best conclusion?",
+                        opts: ["The $5.00 budget is above the 95% range, so it is very likely sufficient, though a small chance of exceeding it remains",
+                              "The $5.00 budget is too low because the maximum run was $5.53, so it must be rejected",
+                              "The budget should be set to the $4.35 mean because the mean is the only reliable result",
+                              "The simulation proves unit cost will never exceed $5.00"],
+                        correct: 0,
+                        explanation: "Only about 5% of runs fall outside $3.75 to $4.95, and the budget sits above that range, so it is very likely enough. A simulation shows probabilities, never certainty: the max run ($5.53) shows a small chance of overrun, which is worth disclosing.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 224' role='img' aria-label='Histogram of 10,000 simulated unit costs centered at $4.35 with the 95% range $3.75 to $4.95 shaded and a $5.00 budget line' style='display:block;width:100%;max-width:470px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><polygon points='132.5,190 132.5,171.1 135.2,168.5 138,165.5 140.7,162.4 143.4,158.9 146.2,155.2 148.9,151.2 151.6,146.9 154.4,142.4 157.1,137.6 159.8,132.6 162.6,127.4 165.3,122 168,116.5 170.8,110.9 173.5,105.3 176.2,99.7 179,94.1 181.7,88.6 184.4,83.3 187.2,78.2 189.9,73.4 192.6,68.9 195.4,64.8 198.1,61.1 200.8,57.9 203.6,55.2 206.3,53.1 209,51.6 211.8,50.7 214.5,50.4 217.2,50.7 220,51.6 222.7,53.1 225.4,55.2 228.2,57.9 230.9,61.1 233.6,64.8 236.4,68.9 239.1,73.4 241.8,78.2 244.6,83.3 247.3,88.6 250,94.1 252.8,99.7 255.5,105.3 258.2,110.9 261,116.5 263.7,122 266.4,127.4 269.2,132.6 271.9,137.6 274.6,142.4 277.4,146.9 280.1,151.2 282.8,155.2 285.6,158.9 288.3,162.4 291,165.5 293.8,168.5 296.5,171.1 296.5,190' fill='#BFDBFE' opacity='.8'/><line x1='30' y1='190' x2='440' y2='190' stroke='#5C677D' stroke-width='1.5'/><polyline points='53.2,189.9 56,189.9 58.7,189.9 61.4,189.9 64.2,189.8 66.9,189.8 69.6,189.7 72.4,189.7 75.1,189.6 77.8,189.5 80.6,189.3 83.3,189.2 86,189 88.8,188.7 91.5,188.4 94.2,188.1 97,187.7 99.7,187.2 102.4,186.7 105.2,186 107.9,185.2 110.6,184.4 113.4,183.3 116.1,182.2 118.8,180.8 121.6,179.3 124.3,177.6 127,175.7 129.8,173.5 132.5,171.1 135.2,168.5 138,165.5 140.7,162.4 143.4,158.9 146.2,155.2 148.9,151.2 151.6,146.9 154.4,142.4 157.1,137.6 159.8,132.6 162.6,127.4 165.3,122 168,116.5 170.8,110.9 173.5,105.3 176.2,99.7 179,94.1 181.7,88.6 184.4,83.3 187.2,78.2 189.9,73.4 192.6,68.9 195.4,64.8 198.1,61.1 200.8,57.9 203.6,55.2 206.3,53.1 209,51.6 211.8,50.7 214.5,50.4 217.2,50.7 220,51.6 222.7,53.1 225.4,55.2 228.2,57.9 230.9,61.1 233.6,64.8 236.4,68.9 239.1,73.4 241.8,78.2 244.6,83.3 247.3,88.6 250,94.1 252.8,99.7 255.5,105.3 258.2,110.9 261,116.5 263.7,122 266.4,127.4 269.2,132.6 271.9,137.6 274.6,142.4 277.4,146.9 280.1,151.2 282.8,155.2 285.6,158.9 288.3,162.4 291,165.5 293.8,168.5 296.5,171.1 299.2,173.5 302,175.7 304.7,177.6 307.4,179.3 310.2,180.8 312.9,182.2 315.6,183.3 318.4,184.4 321.1,185.2 323.8,186 326.6,186.7 329.3,187.2 332,187.7 334.8,188.1 337.5,188.4 340.2,188.7 343,189 345.7,189.2 348.4,189.3 351.2,189.5 353.9,189.6 356.6,189.7 359.4,189.7 362.1,189.8 364.8,189.8 367.6,189.9 370.3,189.9 373,189.9 375.8,189.9' fill='none' stroke='#2563EB' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/><line x1='214.5' y1='40' x2='214.5' y2='190' stroke='#1A2035' stroke-width='1.5' stroke-dasharray='5 4'/><text x='214.5' y='32' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>mean $4.35</text><line x1='303.3' y1='70' x2='303.3' y2='190' stroke='#7C3AED' stroke-width='2' stroke-dasharray='5 4'/><text x='309.3' y='80' font-size='13' fill='#7C3AED' text-anchor='start' font-weight='700'>$5.00</text><text x='309.3' y='96' font-size='12.5' fill='#7C3AED' text-anchor='start' font-weight='400'>budgeted</text><line x1='98.3' y1='190' x2='98.3' y2='196' stroke='#5C677D' stroke-width='1.2'/><text x='98.3' y='212' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>$3.50</text><line x1='166.7' y1='190' x2='166.7' y2='196' stroke='#5C677D' stroke-width='1.2'/><text x='166.7' y='212' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>$4.00</text><line x1='235' y1='190' x2='235' y2='196' stroke='#5C677D' stroke-width='1.2'/><text x='235' y='212' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>$4.50</text><line x1='303.3' y1='190' x2='303.3' y2='196' stroke='#5C677D' stroke-width='1.2'/><text x='303.3' y='212' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>$5.00</text><line x1='371.7' y1='190' x2='371.7' y2='196' stroke='#5C677D' stroke-width='1.2'/><text x='371.7' y='212' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>$5.50</text><text x='214.5' y='140' font-size='13' fill='#1E3A8A' text-anchor='middle' font-weight='700'>95% of runs</text><text x='214.5' y='157' font-size='12.5' fill='#1E3A8A' text-anchor='middle' font-weight='400'>$3.75 to $4.95</text><text x='53.2' y='182' font-size='11.5' fill='#5C677D' text-anchor='middle' font-weight='400'>min</text><text x='375.8' y='182' font-size='11.5' fill='#5C677D' text-anchor='middle' font-weight='400'>max</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Monte Carlo = Many tries, Odds not guarantees.</strong> Compare your budget to the <strong>95% band</strong>, not to the single worst run."
+                  },
+
+                  {
+                        type: 'ord',
+                        q: "Put the steps for calculating a decision tree's expected value (EV) for one option in the correct order.",
+                        items: [
+                              { text: "Calculate each payoff (profit per unit × demand)", order: 0 },
+                              { text: "Step 1: Multiply the favorable payoff by the favorable probability", order: 1 },
+                              { text: "Step 2: Multiply the unfavorable payoff by the unfavorable probability", order: 2 },
+                              { text: "Step 3: Add the results of Steps 1 and 2 to get the expected value", order: 3 },
+                              { text: "Compare options and choose the highest expected value", order: 4 }
+                        ],
+                        explanation: "Payoffs come first (e.g., campus: 1,800 × $2.20 = $3,960 and 900 × $2.20 = $1,980). Then EV = (favorable payoff × favorable probability) + (unfavorable payoff × unfavorable probability) = ($3,960 × 70%) + ($1,980 × 30%) = <strong>$3,366.00</strong>. Probabilities for an option must total 100%, and the tool is done by hand or formula (no Excel on the OA).",
+                        mnemonic: "💡 Memory tip: <strong>Payoff, Favorable, Unfavorable, Add, Pick: P-F-U-A-P.</strong> Weight each payoff by its probability, then add."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "The shopping center has the LOWEST profit per unit ($1.70) of Blue Owl's three locations, yet the decision tree recommends it. Why?",
+                        opts: ["Its expected value ($4,909.60) is the highest because high demand (3,200 at 76% probability) outweighs the lower margin",
+                              "Its favorable and unfavorable probabilities add up to more than 100%, which inflates the result",
+                              "A lower profit per unit always means lower risk, and decision trees pick the lowest risk",
+                              "Campus and downtown were removed because their payoffs were negative"],
+                        correct: 0,
+                        explanation: "Shopping center: ($5,440 × 76%) + ($3,230 × 24%) = <strong>$4,909.60</strong>. Campus is $3,366.00 and downtown is $3,268.80. Decision trees choose the highest EV, not the highest margin. Probabilities always total 100% (76% + 24%), and non-financial limits such as new competitors or layoffs at a nearby employer should be disclosed with the EV.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 268' role='img' aria-label='Decision tree: campus EV 3,366, downtown EV 3,268.80, shopping center EV 4,909.60 which is highest' style='display:block;width:100%;max-width:480px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><rect x='18' y='138' width='22' height='22' rx='3' fill='#A5608A' stroke='#1A2035' stroke-width='1.5'/><line x1='40' y1='149' x2='170' y2='62' stroke='#5C677D' stroke-width='2.2'/><circle cx='186' cy='62' r='16' fill='#FED7AA' stroke='#5C677D' stroke-width='1.5'/><text x='186' y='38' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='700'>Campus · EV $3,366.00</text><line x1='202' y1='58' x2='292' y2='42' stroke='#5C677D' stroke-width='1.8'/><line x1='202' y1='66' x2='292' y2='82' stroke='#5C677D' stroke-width='1.8'/><text x='298' y='47' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>70%  →  $3,960</text><text x='298' y='87' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>30%  →  $1,980</text><line x1='40' y1='149' x2='170' y2='146' stroke='#5C677D' stroke-width='2.2'/><circle cx='186' cy='146' r='16' fill='#FED7AA' stroke='#5C677D' stroke-width='1.5'/><text x='186' y='122' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='700'>Downtown · EV $3,268.80</text><line x1='202' y1='142' x2='292' y2='126' stroke='#5C677D' stroke-width='1.8'/><line x1='202' y1='150' x2='292' y2='166' stroke='#5C677D' stroke-width='1.8'/><text x='298' y='131' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>56%  →  $4,140</text><text x='298' y='171' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>44%  →  $2,160</text><line x1='40' y1='149' x2='170' y2='230' stroke='#059669' stroke-width='3.5'/><circle cx='186' cy='230' r='16' fill='#D1FAE5' stroke='#059669' stroke-width='3'/><text x='186' y='206' font-size='12.5' fill='#065F46' text-anchor='middle' font-weight='700'>Shopping center · EV $4,909.60 ★ highest</text><line x1='202' y1='226' x2='292' y2='210' stroke='#059669' stroke-width='1.8'/><line x1='202' y1='234' x2='292' y2='250' stroke='#059669' stroke-width='1.8'/><text x='298' y='215' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>76%  →  $5,440</text><text x='298' y='255' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>24%  →  $3,230</text><text x='298' y='12' font-size='12.5' fill='#5C677D' text-anchor='start' font-weight='400'>probability → payoff</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Volume beats margin.</strong> Pennies × a crowd can outrun dollars × a trickle. Always <strong>pick the highest EV</strong>."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which are limitations that should be disclosed with a decision tree's expected value? (Select all that apply.)",
+                        opts: ["A change in raw material costs could change the profit per unit",
+                              "Layoffs at a large local employer could change the probability of a favorable market",
+                              "Changing diet habits could change demand for menu items",
+                              "Non-financial factors such as emerging competitors or delays opening are not captured by the EV",
+                              "Probabilities that add up to 100% make the tree invalid"],
+                        correctSet: [0,1,2,3],
+                        explanation: "A limitation is any factor that can influence the decision that the analysis did not consider. Each input has one: <strong>profit per unit</strong> (raw material costs), <strong>probability</strong> (layoffs), <strong>demand</strong> (diet habits). The tree itself only gives a financial EV, so competitors, delays and market shifts must be disclosed. Probabilities totaling 100% is a requirement, not a flaw.",
+                        mnemonic: "💡 Memory tip: <strong>P-P-D + N:</strong> <strong>P</strong>rofit/unit, <strong>P</strong>robability, <strong>D</strong>emand each have limits, plus <strong>N</strong>on-financial factors."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which pieces belong in Blue Owl's linear programming seating model? (Select all that apply.)",
+                        opts: ["Objective: maximize profit, Z = 60x₁ + 120x₂ + 120x₃",
+                              "Space constraint: 60x₁ + 100x₂ + 140x₃ ≤ 2,200 square feet",
+                              "Minimum tables: at least 5 two-tops, 5 four-tops and 2 six-tops",
+                              "Decision variables: the number of 2-tops (x₁), 4-tops (x₂) and 6-tops (x₃)",
+                              "Constraint: probabilities of all tables must total 100%"],
+                        correctSet: [0,1,2,3],
+                        explanation: "LP = objective + constraints + decision variables. Profit per table: 2-top = 2 × 3 turns × $10 = $60; 4-top = 4 × 3 × $10 = $120; 6-top = 6 × 2 × $10 = $120. Solver result: 5 two-tops, 16.2 four-tops, 2 six-tops = <strong>$2,484</strong>. Rounding 16.2 down to 16 four-tops earns $2,460, so note the difference.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 178' role='img' aria-label='Stacked bar showing 5 two-tops, 16 four-tops and 2 six-tops using 2,180 of 2,200 square feet' style='display:block;width:100%;max-width:460px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='230' y='22' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>2,200 sq ft dining area</text><line x1='20' y1='30' x2='440' y2='30' stroke='#5C677D' stroke-width='1.5'/><line x1='20' y1='26' x2='20' y2='34' stroke='#5C677D' stroke-width='1.5'/><line x1='440' y1='26' x2='440' y2='34' stroke='#5C677D' stroke-width='1.5'/><rect x='20' y='44' width='57.3' height='42' rx='0' fill='#2563EB' stroke='#fff' stroke-width='1'/><rect x='77.3' y='44' width='305.5' height='42' rx='0' fill='#7C3AED' stroke='#fff' stroke-width='1'/><rect x='382.7' y='44' width='53.5' height='42' rx='0' fill='#EA580C' stroke='#fff' stroke-width='1'/><rect x='436.2' y='44' width='3.8' height='42' rx='0' fill='#CBD5E1' stroke='#fff' stroke-width='1'/><rect x='20' y='101' width='14' height='14' rx='3' fill='#2563EB' stroke='none' stroke-width='1.5'/><text x='42' y='113' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>2-tops: 5 × 60 = 300 sq ft</text><rect x='245' y='101' width='14' height='14' rx='3' fill='#7C3AED' stroke='none' stroke-width='1.5'/><text x='267' y='113' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>4-tops: 16 × 100 = 1,600 sq ft</text><rect x='20' y='125' width='14' height='14' rx='3' fill='#EA580C' stroke='none' stroke-width='1.5'/><text x='42' y='137' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>6-tops: 2 × 140 = 280 sq ft</text><rect x='245' y='125' width='14' height='14' rx='3' fill='#CBD5E1' stroke='none' stroke-width='1.5'/><text x='267' y='137' font-size='13' fill='#1A2035' text-anchor='start' font-weight='400'>Unused: 20 sq ft</text><text x='230' y='168' font-size='13' fill='#059669' text-anchor='middle' font-weight='700'>300 + 1,600 + 280 = 2,180 ≤ 2,200</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>M words: Maximize under Mix and Maximums.</strong> Think of a freezer: fixed space, choose the mix of foods that gives the most value."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Blue Owl has $3,800 in fixed monthly costs and earns $15.00 revenue per customer at a $5.00 cost per order. How many customers per month are needed to break even?",
+                        opts: ["380 customers",
+                              "253 customers",
+                              "760 customers",
+                              "3,800 customers"],
+                        correct: 0,
+                        explanation: "Break-even = fixed costs ÷ contribution margin. Contribution margin = $15 − $5 = <strong>$10</strong> per customer, so $3,800 ÷ $10 = <strong>380</strong>. At this point total revenue equals total costs; every customer after is profit. Distractors: $3,800 ÷ $15 ≈ 253 (used price), $3,800 ÷ $5 = 760 (used cost).<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 304' role='img' aria-label='Break-even chart: revenue crosses total costs at 380 customers' style='display:block;width:100%;max-width:470px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><line x1='70' y1='230' x2='440' y2='230' stroke='#5C677D' stroke-width='1.5'/><line x1='70' y1='30' x2='70' y2='230' stroke='#5C677D' stroke-width='1.5'/><line x1='70' y1='205' x2='440' y2='205' stroke='#E2E8F0' stroke-width='1'/><text x='64' y='209' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$3,000</text><line x1='70' y1='155' x2='440' y2='155' stroke='#E2E8F0' stroke-width='1'/><text x='64' y='159' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$4,000</text><line x1='70' y1='105' x2='440' y2='105' stroke='#E2E8F0' stroke-width='1'/><text x='64' y='109' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$5,000</text><line x1='70' y1='55' x2='440' y2='55' stroke='#E2E8F0' stroke-width='1'/><text x='64' y='59' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$6,000</text><line x1='70' y1='230' x2='70' y2='236' stroke='#5C677D' stroke-width='1.2'/><text x='70' y='252' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>200</text><line x1='154.1' y1='230' x2='154.1' y2='236' stroke='#5C677D' stroke-width='1.2'/><text x='154.1' y='252' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>250</text><line x1='238.2' y1='230' x2='238.2' y2='236' stroke='#5C677D' stroke-width='1.2'/><text x='238.2' y='252' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>300</text><line x1='322.3' y1='230' x2='322.3' y2='236' stroke='#5C677D' stroke-width='1.2'/><text x='322.3' y='252' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>350</text><line x1='406.4' y1='230' x2='406.4' y2='236' stroke='#5C677D' stroke-width='1.2'/><text x='406.4' y='252' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>400</text><line x1='70' y1='165' x2='440' y2='165' stroke='#2563EB' stroke-width='2.5'/><line x1='70' y1='115' x2='440' y2='60' stroke='#EA580C' stroke-width='2.8'/><line x1='70' y1='205' x2='440' y2='40' stroke='#059669' stroke-width='2.8'/><circle cx='372.7' cy='70' r='8' fill='none' stroke='#1A2035' stroke-width='2.5'/><line x1='366.7' y1='62' x2='332.7' y2='52' stroke='#1A2035' stroke-width='1.2'/><text x='222.7' y='46' font-size='13' fill='#1A2035' text-anchor='start' font-weight='700'>Break-even: 380 customers</text><text x='255' y='270' font-size='12.5' fill='#5C677D' text-anchor='middle' font-weight='400'>Customers per month</text><line x1='70' y1='290' x2='92' y2='290' stroke='#2563EB' stroke-width='2.5'/><text x='98' y='294' font-size='12.5' fill='#1A2035' text-anchor='start' font-weight='400'>Fixed costs $3,800</text><line x1='235' y1='290' x2='257' y2='290' stroke='#EA580C' stroke-width='2.8'/><text x='263' y='294' font-size='12.5' fill='#1A2035' text-anchor='start' font-weight='400'>Total costs</text><line x1='350' y1='290' x2='372' y2='290' stroke='#059669' stroke-width='2.8'/><text x='378' y='294' font-size='12.5' fill='#1A2035' text-anchor='start' font-weight='400'>Revenue</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Fixed ÷ Margin, never ÷ price.</strong> Margin is what each customer <strong>leaves behind</strong> after paying for their own food."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Three credit-card vendors: Vendor 1 ($0 fixed, $0.45 per transaction), Vendor 2 ($500 fixed, $0.38), Vendor 3 ($750 fixed, $0.29). Blue Owl expects roughly 150 transactions a day, about 4,500 a month, and growing. Which vendor does the course recommend, and why?",
+                        opts: ["Vendor 3: the highest fixed fee but the lowest per-transaction rate, so it is cheapest at higher volume",
+                              "Vendor 1: no fixed fee, so it is the cheapest at every volume",
+                              "Vendor 2: the middle fixed fee and middle rate always give the lowest total",
+                              "Any vendor, because crossover analysis shows total costs are identical"],
+                        correct: 0,
+                        explanation: "Crossover analysis finds the volume where the cheapest option CHANGES. Low fixed fee wins at low volume; low variable rate wins at high volume. The course chooses <strong>Vendor 3</strong>. Check the math: Vendor 1 and Vendor 3 actually cross near 4,688 transactions (750 ÷ 0.16), so at exactly 4,500 Vendor 1 is about $30 cheaper, but Vendor 3 wins beyond that as volume grows.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 316' role='img' aria-label='Crossover chart: monthly cost of three credit-card vendors by transaction volume' style='display:block;width:100%;max-width:470px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><line x1='70' y1='240' x2='440' y2='240' stroke='#5C677D' stroke-width='1.5'/><line x1='70' y1='30' x2='70' y2='240' stroke='#5C677D' stroke-width='1.5'/><line x1='70' y1='240' x2='440' y2='240' stroke='#E2E8F0' stroke-width='1'/><text x='64' y='244' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$0</text><line x1='70' y1='170' x2='440' y2='170' stroke='#E2E8F0' stroke-width='1'/><text x='64' y='174' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$1,000</text><line x1='70' y1='100' x2='440' y2='100' stroke='#E2E8F0' stroke-width='1'/><text x='64' y='104' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$2,000</text><line x1='70' y1='30' x2='440' y2='30' stroke='#E2E8F0' stroke-width='1'/><text x='64' y='34' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$3,000</text><line x1='70' y1='240' x2='70' y2='246' stroke='#5C677D' stroke-width='1.2'/><text x='70' y='262' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>0</text><line x1='162.5' y1='240' x2='162.5' y2='246' stroke='#5C677D' stroke-width='1.2'/><text x='162.5' y='262' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>1,500</text><line x1='255' y1='240' x2='255' y2='246' stroke='#5C677D' stroke-width='1.2'/><text x='255' y='262' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>3,000</text><line x1='347.5' y1='240' x2='347.5' y2='246' stroke='#5C677D' stroke-width='1.2'/><text x='347.5' y='262' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>4,500</text><line x1='440' y1='240' x2='440' y2='246' stroke='#5C677D' stroke-width='1.2'/><text x='440' y='262' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>6,000</text><line x1='70' y1='240' x2='440' y2='51' stroke='#EA580C' stroke-width='2.8'/><line x1='70' y1='205' x2='440' y2='45.4' stroke='#5C677D' stroke-width='2.4'/><line x1='70' y1='187.5' x2='440' y2='65.7' stroke='#059669' stroke-width='2.8'/><line x1='347.5' y1='34' x2='347.5' y2='240' stroke='#7C3AED' stroke-width='1.8' stroke-dasharray='5 4'/><text x='343.5' y='28' font-size='12.5' fill='#7C3AED' text-anchor='middle' font-weight='700'>4,500/mo</text><circle cx='359.1' cy='92.3' r='6' fill='none' stroke='#1A2035' stroke-width='2'/><text x='255' y='282' font-size='12.5' fill='#5C677D' text-anchor='middle' font-weight='400'>Credit-card transactions per month</text><line x1='70' y1='302' x2='92' y2='302' stroke='#EA580C' stroke-width='2.8'/><text x='98' y='306' font-size='12.5' fill='#1A2035' text-anchor='start' font-weight='400'>Vendor 1</text><line x1='190' y1='302' x2='212' y2='302' stroke='#5C677D' stroke-width='2.4'/><text x='218' y='306' font-size='12.5' fill='#1A2035' text-anchor='start' font-weight='400'>Vendor 2</text><line x1='310' y1='302' x2='332' y2='302' stroke='#059669' stroke-width='2.8'/><text x='338' y='306' font-size='12.5' fill='#1A2035' text-anchor='start' font-weight='400'>Vendor 3</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Crossover = Cheapest Changes.</strong> Cheap-to-start vendors lose as volume climbs; <strong>big fixed fee, small rate</strong> wins the marathon."
+                  },
+
+                  {
+                        type: 'ord',
+                        q: "Put the steps of the cluster analysis (K-means) process in the correct order.",
+                        items: [
+                              { text: "Standardize each variable with Z-scores so all contribute equally", order: 0 },
+                              { text: "Assign initial cluster centers (k = 3)", order: 1 },
+                              { text: "Calculate the distance between each customer and each cluster center", order: 2 },
+                              { text: "Assign each customer to the nearest cluster", order: 3 },
+                              { text: "Update the cluster centers and repeat until the groups are stable", order: 4 }
+                        ],
+                        explanation: "Blue Owl standardized visits per month, average spend, lunch visits % and takeout % with <strong>Z-scores</strong> so no variable dominates, then used K-means (k = 3): start with centers, measure distance, assign to the nearest, update centers, and repeat until stable. Clusters emerge from actual behavior, not demographic assumptions.",
+                        mnemonic: "💡 Memory tip: <strong>Z, Start, Distance, Nearest, Update: Z-S-D-N-U.</strong> Like picking team captains, sorting players to the nearest one, then re-picking captains until nobody moves."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each customer cluster to its characteristics or recommended action.",
+                        cols: ["Budget Lunch Regulars", "Convenience-Driven Customers", "Casual Loyal Diners"],
+                        items: [
+                              { text: "15 visits per month, $8.28 average spend, 90% lunch", answer: "Budget Lunch Regulars" },
+                              { text: "Loyalty program and value-meal combos", answer: "Budget Lunch Regulars" },
+                              { text: "3 visits per month, $16.95 average spend, 75% takeout", answer: "Convenience-Driven Customers" },
+                              { text: "Faster takeout and mobile or online ordering", answer: "Convenience-Driven Customers" },
+                              { text: "8 visits per month, $11.70 average spend", answer: "Casual Loyal Diners" },
+                              { text: "Premium or limited-time menu items and upselling", answer: "Casual Loyal Diners" }
+                        ],
+                        explanation: "Budget Regulars are the most frequent but lowest-spending (steady revenue; reward loyalty). Convenience customers visit rarely but spend the most, mostly on takeout (improve takeout, mobile ordering, retention). Casual Diners sit in the middle and value the dining experience (upsell premium items).<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 282' role='img' aria-label='Cluster scatter plot of visits per month against average spend showing three customer clusters' style='display:block;width:100%;max-width:470px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><line x1='60' y1='230' x2='450' y2='230' stroke='#5C677D' stroke-width='1.5'/><line x1='60' y1='30' x2='60' y2='230' stroke='#5C677D' stroke-width='1.5'/><text x='60' y='248' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>0</text><text x='155' y='248' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>4</text><text x='250' y='248' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>8</text><text x='345' y='248' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>12</text><text x='440' y='248' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>16</text><text x='54' y='234' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$6</text><text x='54' y='167.3' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$10</text><text x='54' y='100.6' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$14</text><text x='54' y='34' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>$18</text><circle cx='416.3' cy='192' r='38' fill='#2563EB' opacity='.16' stroke='none' stroke-width='1.5'/><circle cx='402.7' cy='211' r='3' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='422.1' cy='211.6' r='3' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='392.8' cy='208.4' r='3' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='409' cy='171.4' r='3' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='393.8' cy='214.3' r='3' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='440.8' cy='193.4' r='3' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='413.7' cy='194.2' r='3' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='416.3' cy='192' r='6' fill='#2563EB' stroke='#fff' stroke-width='2'/><text x='450.3' y='144' font-size='13' fill='#2563EB' text-anchor='end' font-weight='700'>Budget Regulars</text><circle cx='250' cy='135' r='38' fill='#7C3AED' opacity='.16' stroke='none' stroke-width='1.5'/><circle cx='255.5' cy='147.7' r='3' fill='#7C3AED' stroke='none' stroke-width='1.5'/><circle cx='264.6' cy='131.2' r='3' fill='#7C3AED' stroke='none' stroke-width='1.5'/><circle cx='248.7' cy='151.2' r='3' fill='#7C3AED' stroke='none' stroke-width='1.5'/><circle cx='242.8' cy='134.1' r='3' fill='#7C3AED' stroke='none' stroke-width='1.5'/><circle cx='228.8' cy='146.4' r='3' fill='#7C3AED' stroke='none' stroke-width='1.5'/><circle cx='267.4' cy='128.5' r='3' fill='#7C3AED' stroke='none' stroke-width='1.5'/><circle cx='233.3' cy='157.1' r='3' fill='#7C3AED' stroke='none' stroke-width='1.5'/><circle cx='250' cy='135' r='6' fill='#7C3AED' stroke='#fff' stroke-width='2'/><text x='250' y='87' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>Casual Diners</text><circle cx='131.3' cy='47.5' r='38' fill='#EA580C' opacity='.16' stroke='none' stroke-width='1.5'/><circle cx='111.6' cy='45.4' r='3' fill='#EA580C' stroke='none' stroke-width='1.5'/><circle cx='129' cy='29.4' r='3' fill='#EA580C' stroke='none' stroke-width='1.5'/><circle cx='111.2' cy='53.1' r='3' fill='#EA580C' stroke='none' stroke-width='1.5'/><circle cx='145.4' cy='28.4' r='3' fill='#EA580C' stroke='none' stroke-width='1.5'/><circle cx='136.7' cy='67.1' r='3' fill='#EA580C' stroke='none' stroke-width='1.5'/><circle cx='119.1' cy='51.6' r='3' fill='#EA580C' stroke='none' stroke-width='1.5'/><circle cx='123.6' cy='38.9' r='3' fill='#EA580C' stroke='none' stroke-width='1.5'/><circle cx='131.3' cy='47.5' r='6' fill='#EA580C' stroke='#fff' stroke-width='2'/><text x='175.3' y='52.5' font-size='13' fill='#EA580C' text-anchor='start' font-weight='700'>Convenience</text><text x='255' y='270' font-size='12.5' fill='#5C677D' text-anchor='middle' font-weight='400'>Visits per month</text><text x='14' y='130' font-size='12.5' fill='#5C677D' text-anchor='start' font-weight='400' transform='rotate(-90 14 130)'>Average spend</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Frequent-Cheap, Rare-Rich, Middle-Mellow.</strong> <strong>15 / 8 / 3</strong> visits ↔ <strong>$8 / $12 / $17</strong> spend: as visits fall, spend rises."
+                  },
+
+
+                  // ══ HYPOTHESIS TESTING ══════════
+
+                  {
+                        type: 'mc',
+                        q: "What is hypothesis testing?",
+                        opts: ["A statistical method that uses sample data to decide whether there is enough evidence to reject the null hypothesis (no difference or no relationship)",
+                              "A method that proves the alternative hypothesis is true with certainty",
+                              "A way to calculate the average of a sample",
+                              "A technique for forecasting future values from past trends"],
+                        correct: 0,
+                        explanation: "Hypothesis testing uses a <strong>sample</strong> to judge a claim about a population. The <strong>null</strong> hypothesis says there is no significant difference (or relationship); the <strong>alternative</strong> says there is. Results are probabilities, so we only ever reject or fail to reject the null; we never 'prove' anything. The question you were asked is the null flipped around, so write both before analysis.",
+                        mnemonic: "💡 Memory tip: <strong>Null = Nothing going on.</strong> Courtroom logic: innocent (null) until the evidence is strong enough to reject it."
+                  },
+
+                  {
+                        type: 'ord',
+                        q: "Put the four steps of hypothesis testing in the correct order.",
+                        items: [
+                              { text: "State the null and alternative hypotheses", order: 0 },
+                              { text: "Decide on the significance level (alpha = 0.05, or 95% confidence)", order: 1 },
+                              { text: "Compute the test statistic and compare it to the critical value", order: 2 },
+                              { text: "Compute the p-value and compare it to the significance level", order: 3 }
+                        ],
+                        explanation: "Hypotheses first, then alpha (0.05 = 95% confidence), then the test statistic versus the critical value, and finally the p-value versus alpha. The two comparisons must agree. If they don't, recheck for E-notation (E-34 is tiny) or the absolute value of t.",
+                        mnemonic: "💡 Memory tip: <strong>Hypothesize, Alpha, Statistic, P: H-A-S-P.</strong> Say it with a <strong>HASP</strong> you lock before opening the data."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which conditions should be met before running these hypothesis tests? (Select all that apply.)",
+                        opts: ["The sample size is 30 or more",
+                              "The sample is selected at random",
+                              "The population must contain more than one million items",
+                              "Every value in the data set must be positive",
+                              "The data must come from exactly two groups"],
+                        correctSet: [0,1],
+                        explanation: "The course's rules: a <strong>random</strong> sample with <strong>n ≥ 30</strong>. Population size, positive values and exactly two groups are not requirements (ANOVA uses three or more groups). Non-random samples can bias the result in a way no p-value can fix.",
+                        mnemonic: "💡 Memory tip: <strong>30 and Random: 'Thirty, Random.'</strong> A sample that isn't random is a survey of your friends."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "A test returns p = 0.032 at alpha = 0.05. What is the correct decision?",
+                        opts: ["The result is significant; reject the null hypothesis",
+                              "The result is not significant; fail to reject the null hypothesis",
+                              "The result is significant; accept the null hypothesis",
+                              "The test is invalid because p must be above 0.05"],
+                        correct: 0,
+                        explanation: "<strong>If p &lt; 0.05, the result is significant and you reject the null.</strong> 0.032 is less than 0.05, so the data are unlikely under the null. Never say 'accept' the null; the options are reject or fail to reject.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 136' role='img' aria-label='Number line: p-values below 0.05 are significant and reject the null; above 0.05 are not significant' style='display:block;width:100%;max-width:460px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><rect x='30' y='34' width='90' height='52' rx='6' fill='#D1FAE5' stroke='#059669' stroke-width='1.5'/><rect x='120' y='34' width='310' height='52' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='75' y='56' font-size='13' fill='#065F46' text-anchor='middle' font-weight='700'>p &lt; 0.05</text><text x='75' y='75' font-size='13' fill='#065F46' text-anchor='middle' font-weight='400'>Reject H₀</text><text x='275' y='56' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>p &gt; 0.05</text><text x='275' y='75' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>Not significant: fail to reject H₀</text><text x='30' y='106' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>0</text><text x='120' y='106' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>0.05</text><text x='430' y='106' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>1</text><polygon points='88,30 82,18 94,18' fill='#7C3AED'/><text x='88' y='14' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>p = 0.032</text><text x='230' y='126' font-size='13' fill='#5C677D' text-anchor='middle' font-weight='400'>S-S → R: Smaller and Significant → Reject  (not to scale)</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>S-S → R:</strong> <strong>S</strong>maller than 0.05 → <strong>S</strong>ignificant → <strong>R</strong>eject. (R comes right before S in the alphabet, too.)"
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Sort each result into the correct decision at alpha = 0.05.",
+                        cols: ["Reject the null (significant)", "Fail to reject the null (not significant)"],
+                        items: [
+                              { text: "p-value = 0.032", answer: "Reject the null (significant)" },
+                              { text: "t = 5.24, critical value = 2.00", answer: "Reject the null (significant)" },
+                              { text: "p-value = 2.1E-08", answer: "Reject the null (significant)" },
+                              { text: "p-value = 0.41", answer: "Fail to reject the null (not significant)" },
+                              { text: "t = 1.1, critical value = 2.00", answer: "Fail to reject the null (not significant)" },
+                              { text: "χ² = 0.762, critical value = 3.841", answer: "Fail to reject the null (not significant)" }
+                        ],
+                        explanation: "<strong>Reject</strong> when p &lt; 0.05 or when the test statistic is larger than the critical value (t uses its absolute value). <strong>Fail to reject</strong> when p &gt; 0.05 or the statistic does not beat the critical value. E-08 means 0.000000021, a very small number.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 136' role='img' aria-label='Number line: p-values below 0.05 are significant and reject the null; above 0.05 are not significant' style='display:block;width:100%;max-width:460px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><rect x='30' y='34' width='90' height='52' rx='6' fill='#D1FAE5' stroke='#059669' stroke-width='1.5'/><rect x='120' y='34' width='310' height='52' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='75' y='56' font-size='13' fill='#065F46' text-anchor='middle' font-weight='700'>p &lt; 0.05</text><text x='75' y='75' font-size='13' fill='#065F46' text-anchor='middle' font-weight='400'>Reject H₀</text><text x='275' y='56' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>p &gt; 0.05</text><text x='275' y='75' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>Not significant: fail to reject H₀</text><text x='30' y='106' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>0</text><text x='120' y='106' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>0.05</text><text x='430' y='106' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>1</text><polygon points='88,30 82,18 94,18' fill='#7C3AED'/><text x='88' y='14' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>p = 0.032</text><text x='230' y='126' font-size='13' fill='#5C677D' text-anchor='middle' font-weight='400'>S-S → R: Smaller and Significant → Reject  (not to scale)</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Big stat beats the bar, small p beats alpha.</strong> Statistic <strong>over</strong> the critical value = significant; p <strong>under</strong> 0.05 = significant."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "A t-test returns t = −3.4, critical value = 2.00, and p = 2.1E-08. What should you conclude?",
+                        opts: ["Both agree: |−3.4| is greater than 2.00 and 2.1E-08 is far below 0.05, so the result is significant",
+                              "They disagree: −3.4 is less than 2.00, so the result is not significant",
+                              "2.1E-08 is bigger than 0.05 because 2.1 is bigger than 0.05, so the result is not significant",
+                              "A negative t-value means the test failed and must be rerun"],
+                        correct: 0,
+                        explanation: "Use the <strong>absolute value</strong> of t: |−3.4| = 3.4 &gt; 2.00. And <strong>E-08</strong> moves the decimal eight places left (0.000000021), so p is tiny. Both methods say significant, and they must always agree.",
+                        mnemonic: "💡 Memory tip: <strong>Ignore the minus, read the E-minus.</strong> Negative sign = direction only; <strong>E-minus</strong> = tiny number."
+                  },
+
+                  {
+                        type: 'tf',
+                        q: "True or False: A p-value of 0.41 proves there is no difference between the two groups.",
+                        opts: ["True",
+                              "False"],
+                        correct: 1,
+                        explanation: "False. p = 0.41 is greater than 0.05, so the result is <strong>not significant</strong>: you <strong>fail to reject</strong> the null. That means there isn't enough evidence of a difference, not proof of none. Say 'fail to reject', never 'accept' or 'prove'.",
+                        mnemonic: "💡 Memory tip: <strong>Fail to reject ≠ prove.</strong> 'Not guilty' doesn't mean 'innocent', only that the evidence fell short."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which analyses are used to find a significant DIFFERENCE (rather than a relationship)? (Select all that apply.)",
+                        opts: ["Chi-square",
+                              "Two-sample t-test",
+                              "ANOVA",
+                              "Simple linear regression",
+                              "Logistic regression"],
+                        correctSet: [0,1,2],
+                        explanation: "Chi-square, t-tests (1- and 2-sample) and ANOVA find a significant <strong>difference</strong>. Regression (simple, multiple, logistic, time series) finds a significant <strong>relationship</strong>. Mixing the words up is a classic exam trap, and a bar chart suits the difference tests.",
+                        mnemonic: "💡 Memory tip: <strong>Difference = Chi, T, A-nova; Relationship = Regression.</strong> <strong>R</strong>elationship goes with <strong>R</strong>egression."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Which test compares nurse practitioner salaries to midwife salaries (two groups measuring the same thing)?",
+                        opts: ["Two-sample t-test",
+                              "One-sample t-test",
+                              "ANOVA",
+                              "Chi-square test"],
+                        correct: 0,
+                        explanation: "Two groups, same measurement → <strong>two-sample t-test</strong> (the video found p = 0.0457 &lt; 0.05, significant). A one-sample test compares one group to a standard; ANOVA needs three or more groups; chi-square works on counts.",
+                        mnemonic: "💡 Memory tip: <strong>Two T's, 'sample' has 'same'.</strong> <strong>T</strong>wo-sample <strong>t</strong>-test = <strong>same</strong> thing, two groups."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Blue Owl's daily revenue averaged $3,190.33 against a standard of $2,250 (t = 5.24, critical value 2.00, p ≈ 0.0000023). What is the interpretation?",
+                        opts: ["Significant: actual revenue differs from the $2,250 standard, so revenue forecasts should be adjusted",
+                              "Not significant: the difference could be due to chance, so keep the forecast",
+                              "Significant: revenue is exactly $3,190.33 every day",
+                              "Not significant: p is too small to be reliable"],
+                        correct: 0,
+                        explanation: "One group versus a standard → <strong>one-sample t-test</strong>. 5.24 &gt; 2.00 and p &lt; 0.05, so reject the null. Use the <strong>two-tailed</strong> critical value (2.00) for 'different' and the one-tailed value (1.67) for 'greater' or 'less'.",
+                        mnemonic: "💡 Memory tip: <strong>One sample, one standard.</strong> Tiny p = the data are screaming 'different'."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Blue Owl's ANOVA on weekday revenue gives F = 4.12 (critical 2.68) and p = 0.0081. A post hoc test shows p = .002, .009 and .032 for the Monday pairs and p above 0.05 for every other pair. What is the best conclusion?",
+                        opts: ["Revenue differs by weekday, and Monday is the day that differs from the others",
+                              "No weekday differs from the others",
+                              "All four weekdays differ from each other",
+                              "Tuesday and Wednesday differ most (p = .778)"],
+                        correct: 0,
+                        explanation: "ANOVA only says a difference exists somewhere; the <strong>post hoc</strong> test finds WHERE. Only the Monday pairs are below 0.05 (Monday averaged about $2,537 versus $2,869 to $3,043 for the other days), so target Monday. p = .778 for Tuesday-Wednesday is far above 0.05.<div style='overflow-x:auto'><table style='border-collapse:collapse;margin:.8rem auto;font-size:.88rem'><tr><th style='border:1px solid #C8D1E4;padding:.35rem .7rem;background:#E6ECF8'>p-values</th><th style='border:1px solid #C8D1E4;padding:.35rem .7rem;background:#E6ECF8'>Tuesday</th><th style='border:1px solid #C8D1E4;padding:.35rem .7rem;background:#E6ECF8'>Wednesday</th><th style='border:1px solid #C8D1E4;padding:.35rem .7rem;background:#E6ECF8'>Thursday</th></tr><tr><th style='border:1px solid #C8D1E4;padding:.35rem .7rem;background:#E6ECF8'>Monday</th><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#D1FAE5;font-weight:700'>0.002</td><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#D1FAE5;font-weight:700'>0.009</td><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#D1FAE5;font-weight:700'>0.032</td></tr><tr><th style='border:1px solid #C8D1E4;padding:.35rem .7rem;background:#E6ECF8'>Tuesday</th><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#EEF1F6;font-weight:400'></td><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#EEF1F6;font-weight:400'>0.778</td><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#EEF1F6;font-weight:400'>0.239</td></tr><tr><th style='border:1px solid #C8D1E4;padding:.35rem .7rem;background:#E6ECF8'>Wednesday</th><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#EEF1F6;font-weight:400'></td><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#EEF1F6;font-weight:400'></td><td style='border:1px solid #C8D1E4;padding:.35rem .7rem;text-align:center;background:#EEF1F6;font-weight:400'>0.43</td></tr></table></div>",
+                        mnemonic: "💡 Memory tip: <strong>ANOVA = 'something differs'; post hoc = 'who'.</strong> Look for the <strong>green</strong> cells in the grid."
+                  },
+
+                  {
+                        type: 'tf',
+                        q: "True or False: Blue Owl's booth/counter split of 66/34 was NOT significantly different from the expected 70/30 split (χ² = 0.762, critical value 3.841).",
+                        opts: ["True",
+                              "False"],
+                        correct: 0,
+                        explanation: "True. 0.762 is less than 3.841 (p ≈ 0.38 &gt; 0.05), so fail to reject the null: the 70/30 plan can stay. <strong>Chi-square</strong> compares observed versus expected <strong>counts</strong> of categories (one-way = one population; two-way = two).",
+                        mnemonic: "💡 Memory tip: <strong>C = Count, Compare, Category.</strong> Chi-square counts what <strong>happened</strong> versus what you <strong>expected</strong>."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each question to the hypothesis test that answers it.",
+                        cols: ["1-sample t-test", "2-sample t-test", "ANOVA", "Chi-square"],
+                        items: [
+                              { text: "Is average daily revenue different from the $2,250 standard?", answer: "1-sample t-test" },
+                              { text: "Is average ticket-resolution time different from the 8-hour service target?", answer: "1-sample t-test" },
+                              { text: "Do Team A and Team B resolve help-desk tickets at different average speeds?", answer: "2-sample t-test" },
+                              { text: "Does average page-load time differ across Chrome, Safari and Edge?", answer: "ANOVA" },
+                              { text: "Is the share of tickets by channel (email, chat, phone) different from the expected 50/30/20?", answer: "Chi-square" },
+                              { text: "Is the 66/34 booth versus counter split different from the planned 70/30?", answer: "Chi-square" }
+                        ],
+                        explanation: "<strong>Means</strong>: one group vs a standard → 1-sample t; two groups → 2-sample t; three or more → ANOVA (F statistic, then post hoc). <strong>Counts in categories</strong> → chi-square.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 262' role='img' aria-label='Flowchart for choosing a test: counts use chi-square, means use t-tests or ANOVA, relationships use regression' style='display:block;width:100%;max-width:480px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><rect x='165' y='10' width='150' height='32' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='240' y='31' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>What are you testing?</text><line x1='240' y1='42' x2='70' y2='70' stroke='#5C677D' stroke-width='1.5'/><line x1='240' y1='42' x2='240' y2='70' stroke='#5C677D' stroke-width='1.5'/><line x1='240' y1='42' x2='410' y2='70' stroke='#5C677D' stroke-width='1.5'/><rect x='10' y='70' width='120' height='44' rx='8' fill='#FEF3C7' stroke='#B45309' stroke-width='1.5'/><text x='70' y='88' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Counts in</text><text x='70' y='105' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>categories</text><rect x='145' y='70' width='190' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='240' y='88' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Means (averages)</text><text x='240' y='105' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>of numbers</text><rect x='350' y='70' width='120' height='44' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='1.5'/><text x='410' y='88' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Relationship:</text><text x='410' y='105' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='700'>predict Y from X</text><line x1='70' y1='114' x2='70' y2='132' stroke='#5C677D' stroke-width='1.5'/><line x1='240' y1='114' x2='240' y2='132' stroke='#5C677D' stroke-width='1.5'/><line x1='410' y1='114' x2='410' y2='132' stroke='#5C677D' stroke-width='1.5'/><rect x='10' y='132' width='120' height='118' rx='8' fill='#FEF3C7' stroke='#B45309' stroke-width='1.5'/><text x='70' y='154' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Chi-square</text><text x='70' y='174' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>observed vs</text><text x='70' y='191' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>expected counts</text><text x='70' y='214' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>one-way: 1 group</text><text x='70' y='231' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>two-way: 2 groups</text><rect x='145' y='132' width='190' height='118' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='240' y='154' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>1 group vs a target</text><text x='240' y='171' font-size='13' fill='#2563EB' text-anchor='middle' font-weight='700'>→ 1-sample t-test</text><text x='240' y='192' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='400'>2 groups, same thing</text><text x='240' y='209' font-size='13' fill='#2563EB' text-anchor='middle' font-weight='700'>→ 2-sample t-test</text><text x='240' y='230' font-size='13' fill='#2563EB' text-anchor='middle' font-weight='700'>3+ groups → ANOVA</text><text x='240' y='245' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>(then post hoc)</text><rect x='350' y='132' width='120' height='118' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='1.5'/><text x='410' y='154' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>1 X → simple</text><text x='410' y='175' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>2+ X → multiple</text><text x='410' y='196' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>yes/no Y →</text><text x='410' y='213' font-size='13' fill='#7C3AED' text-anchor='middle' font-weight='700'>logistic</text><text x='410' y='238' font-size='11.5' fill='#1A2035' text-anchor='middle' font-weight='400'>time as X → time series</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>1 → 1, 2 → 2, 3+ → ANOVA, Counts → Chi.</strong> <strong>A</strong> in ANOVA = <strong>A</strong>nother group (3 or more)."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Which test statistic goes with ANOVA, and who is it named for?",
+                        opts: ["The F statistic, named for Sir Ronald Fisher",
+                              "The t statistic, named for Sir Ronald Fisher",
+                              "The F statistic, named for Karl Pearson",
+                              "The χ² statistic, named for Sir Ronald Fisher"],
+                        correct: 0,
+                        explanation: "ANOVA's statistic is <strong>F</strong> for <strong>Fisher</strong>. Reject when F &gt; F critical (Blue Owl: 4.12 &gt; 2.68). The t statistic belongs to t-tests and χ² to chi-square.",
+                        mnemonic: "💡 Memory tip: <strong>F is for Fisher.</strong> ANOVA = <strong>F</strong>isher's <strong>F</strong>."
+                  },
+
+
+                  // ══ REGRESSION & TIME SERIES ══════════
+
+                  {
+                        type: 'mc',
+                        q: "Which statement correctly describes R² (R Square) in regression?",
+                        opts: ["It measures goodness of fit from 0 to 1: the share of the dependent variable's variation explained by the independent variable",
+                              "It is the correlation coefficient and ranges from −1 to 1",
+                              "It is the probability that the results happened by chance",
+                              "It is the slope of the regression line"],
+                        correct: 0,
+                        explanation: "<strong>R²</strong> = goodness of fit (0 = no fit, 1 = perfect). It is NOT r (correlation, −1 to 1) and NOT the p-value (significance). Report it as a fit word plus a percent, e.g. '2.1% of the variation in employment is explained by wages.'<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 130' role='img' aria-label='R-squared scale from 0 (no fit) to 1 (perfect fit) with 0.339 marked as a weak fit' style='display:block;width:100%;max-width:460px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><linearGradient id='r2g' x1='0' x2='1'><stop offset='0' stop-color='#FCA5A5'/><stop offset='.5' stop-color='#FDE68A'/><stop offset='1' stop-color='#6EE7B7'/></linearGradient></defs><rect x='30' y='50' width='400' height='26' rx='6' fill='url(#r2g)' stroke='#5C677D' stroke-width='1.5'/><line x1='30' y1='76' x2='30' y2='84' stroke='#5C677D' stroke-width='1.5'/><text x='30' y='100' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>0</text><text x='30' y='117' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>No fit</text><line x1='230' y1='76' x2='230' y2='84' stroke='#5C677D' stroke-width='1.5'/><text x='230' y='100' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>0.5</text><text x='230' y='117' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>Moderate</text><line x1='430' y1='76' x2='430' y2='84' stroke='#5C677D' stroke-width='1.5'/><text x='430' y='100' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>1.0</text><text x='430' y='117' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>Perfect</text><polygon points='165.6,46 158.6,32 172.6,32' fill='#7C3AED'/><text x='177.6' y='30' font-size='13' fill='#7C3AED' text-anchor='start' font-weight='700'>R² = 0.339 (34%): weak fit</text><text x='230' y='14' font-size='12.5' fill='#5C677D' text-anchor='middle' font-weight='400'>weak ← goodness of fit → strong</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>R² = Reach: how far X reaches into Y's variation.</strong> r = direction, p = proof, <strong>R² = reach</strong>."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "A manager asks whether training hours predict order efficiency. Which is the independent variable (X)?",
+                        opts: ["Training hours, because it goes 'in' to the equation to predict the outcome",
+                              "Order efficiency, because it is what we care about most",
+                              "Both variables are independent",
+                              "Neither; the independent variable is the p-value"],
+                        correct: 0,
+                        explanation: "The <strong>independent</strong> variable (X) is the one used to predict; the <strong>dependent</strong> variable (Y) is the outcome that depends on it. Regression relates two different groups of data, so the same data cannot be both.",
+                        mnemonic: "💡 Memory tip: <strong>Independent goes IN.</strong> X goes <strong>IN</strong> to the equation; Y comes <strong>out</strong>."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Training hours versus order efficiency gives R² = 0.339 and p = 0.00073. What is the correct interpretation?",
+                        opts: ["A statistically significant relationship with a weak fit: training explains about 34% of the variation in efficiency",
+                              "Not significant, because R² is below 0.5",
+                              "A strong fit, because the p-value is so small",
+                              "Training causes 34% of the efficiency changes"],
+                        correct: 0,
+                        explanation: "<strong>p-value</strong> (0.00073 &lt; 0.05) tells you the relationship is significant. <strong>R²</strong> tells you the fit is weak (34%). A model can be significant yet weak. R² describes variation explained, not cause.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 130' role='img' aria-label='R-squared scale from 0 (no fit) to 1 (perfect fit) with 0.339 marked as a weak fit' style='display:block;width:100%;max-width:460px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><linearGradient id='r2h' x1='0' x2='1'><stop offset='0' stop-color='#FCA5A5'/><stop offset='.5' stop-color='#FDE68A'/><stop offset='1' stop-color='#6EE7B7'/></linearGradient></defs><rect x='30' y='50' width='400' height='26' rx='6' fill='url(#r2h)' stroke='#5C677D' stroke-width='1.5'/><line x1='30' y1='76' x2='30' y2='84' stroke='#5C677D' stroke-width='1.5'/><text x='30' y='100' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>0</text><text x='30' y='117' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>No fit</text><line x1='230' y1='76' x2='230' y2='84' stroke='#5C677D' stroke-width='1.5'/><text x='230' y='100' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>0.5</text><text x='230' y='117' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>Moderate</text><line x1='430' y1='76' x2='430' y2='84' stroke='#5C677D' stroke-width='1.5'/><text x='430' y='100' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>1.0</text><text x='430' y='117' font-size='12.5' fill='#1A2035' text-anchor='middle' font-weight='400'>Perfect</text><polygon points='165.6,46 158.6,32 172.6,32' fill='#7C3AED'/><text x='177.6' y='30' font-size='13' fill='#7C3AED' text-anchor='start' font-weight='700'>R² = 0.339 (34%): weak fit</text><text x='230' y='14' font-size='12.5' fill='#5C677D' text-anchor='middle' font-weight='400'>weak ← goodness of fit → strong</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>p = 'is it real?', R² = 'how big?'.</strong> Real but <strong>small</strong> is still real."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Using y = 0.013x + 0.869 (x = training hours, y = efficiency), what efficiency does the model predict for 10 training hours?",
+                        opts: ["0.999",
+                              "0.130",
+                              "0.882",
+                              "0.869"],
+                        correct: 0,
+                        explanation: "Plug in: 0.013 × 10 + 0.869 = 0.13 + 0.869 = <strong>0.999</strong>. In y = mx + b, the Excel <strong>intercept</strong> is b (listed first) and the X-variable coefficient is the slope m. Predicting is the point of the equation.",
+                        mnemonic: "💡 Memory tip: <strong>B before M in Excel.</strong> Intercept (b) is listed first; <strong>m</strong>ultiply by x, then add <strong>b</strong>."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "For a simple (OLS) regression task, which items from Excel's Summary Output should you report? (Select all that apply.)",
+                        opts: ["R Square",
+                              "The p-value for the X variable",
+                              "The two coefficients (intercept and slope)",
+                              "Observations (sample size)",
+                              "The p-value for the intercept",
+                              "The residual output table"],
+                        correctSet: [0,1,2,3],
+                        explanation: "Report <strong>R Square</strong> (fit), the <strong>X variable's p-value</strong> (the bottom one, for significance), the two <strong>coefficients</strong> (to write y = mx + b) and <strong>Observations</strong> (count of one column). Skip the intercept's p-value and the residuals.",
+                        mnemonic: "💡 Memory tip: <strong>R-P-C-O:</strong> <strong>R</strong>² fit, <strong>P</strong>-value of X, <strong>C</strong>oefficients, <strong>O</strong>bservations."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each scatter plot to the type of spread it shows.",
+                        cols: ["Homoscedastic (even spread, like a pencil)", "Heteroscedastic (changing spread, like an ice cream cone)"],
+                        items: [
+                              { text: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 84' role='img' aria-label='Scatter plot with an even, band-shaped spread' style='display:block;width:150px;height:84px;background:#fff;border:1px solid #CBD5E9;border-radius:6px'><line x1='10' y1='42' x2='140' y2='42' stroke='#5C677D' stroke-width='1.2' stroke-dasharray='4 3'/><circle cx='14' cy='35.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='18.2' cy='43.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='22.4' cy='51.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='26.6' cy='49.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='30.8' cy='39' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='35' cy='51.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='39.2' cy='45.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='43.4' cy='39.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='47.7' cy='29.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='51.9' cy='48.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='56.1' cy='33.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='60.3' cy='49.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='64.5' cy='43.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='68.7' cy='48.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='72.9' cy='47' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='77.1' cy='52.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='81.3' cy='33.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='85.5' cy='38.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='89.7' cy='36.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='93.9' cy='36.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='98.1' cy='44.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='102.3' cy='35' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='106.6' cy='39.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='110.8' cy='41' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='115' cy='38.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='119.2' cy='44.4' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='123.4' cy='49.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='127.6' cy='52.8' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='131.8' cy='51.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='136' cy='54.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/></svg>", answer: "Homoscedastic (even spread, like a pencil)" },
+                              { text: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 84' role='img' aria-label='Scatter plot rising with an even spread' style='display:block;width:150px;height:84px;background:#fff;border:1px solid #CBD5E9;border-radius:6px'><line x1='10' y1='67.5' x2='140' y2='18.1' stroke='#5C677D' stroke-width='1.2' stroke-dasharray='4 3'/><circle cx='14' cy='62.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='18.2' cy='67.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='22.4' cy='59.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='26.6' cy='66.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='30.8' cy='62.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='35' cy='56.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='39.2' cy='56.4' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='43.4' cy='50.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='47.7' cy='46.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='51.9' cy='56.8' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='56.1' cy='43.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='60.3' cy='43.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='64.5' cy='46.8' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='68.7' cy='47.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='72.9' cy='38.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='77.1' cy='46.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='81.3' cy='40.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='85.5' cy='37.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='89.7' cy='42.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='93.9' cy='29.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='98.1' cy='40.8' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='102.3' cy='30.4' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='106.6' cy='34.4' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='110.8' cy='30.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='115' cy='29' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='119.2' cy='25.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='123.4' cy='31.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='127.6' cy='22.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='131.8' cy='21.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='136' cy='15.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/></svg>", answer: "Homoscedastic (even spread, like a pencil)" },
+                              { text: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 84' role='img' aria-label='Scatter plot spreading wider to the right like a cone' style='display:block;width:150px;height:84px;background:#fff;border:1px solid #CBD5E9;border-radius:6px'><line x1='10' y1='46.3' x2='140' y2='35.9' stroke='#5C677D' stroke-width='1.2' stroke-dasharray='4 3'/><circle cx='14' cy='45.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='18.2' cy='43.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='22.4' cy='49' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='26.6' cy='40' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='30.8' cy='43.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='35' cy='42.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='39.2' cy='39.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='43.4' cy='51' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='47.7' cy='34.4' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='51.9' cy='33.4' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='56.1' cy='52.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='60.3' cy='53.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='64.5' cy='39.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='68.7' cy='40' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='72.9' cy='25.8' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='77.1' cy='48.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='81.3' cy='24.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='85.5' cy='38.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='89.7' cy='20.8' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='93.9' cy='45.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='98.1' cy='51.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='102.3' cy='44.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='106.6' cy='35' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='110.8' cy='60.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='115' cy='12.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='119.2' cy='21.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='123.4' cy='29.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='127.6' cy='38' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='131.8' cy='53' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='136' cy='49.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/></svg>", answer: "Heteroscedastic (changing spread, like an ice cream cone)" },
+                              { text: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 84' role='img' aria-label='Scatter plot narrowing to the right like a funnel' style='display:block;width:150px;height:84px;background:#fff;border:1px solid #CBD5E9;border-radius:6px'><line x1='10' y1='46.3' x2='140' y2='35.9' stroke='#5C677D' stroke-width='1.2' stroke-dasharray='4 3'/><circle cx='14' cy='29.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='18.2' cy='32.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='22.4' cy='36.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='26.6' cy='21.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='30.8' cy='56.4' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='35' cy='62.5' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='39.2' cy='23' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='43.4' cy='54.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='47.7' cy='24.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='51.9' cy='30.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='56.1' cy='55' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='60.3' cy='32.8' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='64.5' cy='36.4' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='68.7' cy='36.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='72.9' cy='41.9' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='77.1' cy='45.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='81.3' cy='37.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='85.5' cy='39.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='89.7' cy='44.6' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='93.9' cy='37' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='98.1' cy='30.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='102.3' cy='44.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='106.6' cy='44.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='110.8' cy='29.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='115' cy='34.7' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='119.2' cy='32.1' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='123.4' cy='38.2' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='127.6' cy='32' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='131.8' cy='35.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/><circle cx='136' cy='39.3' r='2.6' fill='#2563EB' stroke='none' stroke-width='1.5'/></svg>", answer: "Heteroscedastic (changing spread, like an ice cream cone)" }
+                        ],
+                        explanation: "<strong>Homoscedastic</strong> = the points stay the same distance from the line (a pencil shape). <strong>Heteroscedastic</strong> = the spread widens or narrows (a cone), which makes predictions less reliable at some values of X.",
+                        mnemonic: "💡 Memory tip: <strong>Pencil = Same, Cone = Changing.</strong> Homo = <strong>same</strong> spread; hetero = <strong>different</strong> spread."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Using y = 0.009(Training) + 0.010(Experience) + 0.855, what is the predicted efficiency for 10 training hours and 2 years of experience?",
+                        opts: ["0.965",
+                              "0.110",
+                              "0.945",
+                              "0.875"],
+                        correct: 0,
+                        explanation: "0.009 × 10 + 0.010 × 2 + 0.855 = 0.09 + 0.02 + 0.855 = <strong>0.965</strong>. Both predictors are significant (p = 0.020 and 0.044). In <strong>multiple regression</strong>, judge fit with <strong>adjusted R²</strong> (0.39): about 39% explained and 61% unexplained.",
+                        mnemonic: "💡 Memory tip: <strong>Multiple = more X's, so use Adjusted R².</strong> Add each <strong>coefficient × value</strong>, then the intercept."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which two problems should you watch for in regression models? (Select all that apply.)",
+                        opts: ["Multicollinearity: independent variables are correlated with each other",
+                              "Autocorrelation: in a time series, each point is influenced by the previous one",
+                              "Binary bias: the dependent variable only has two values",
+                              "Post hoc drift: p-values change after an ANOVA"],
+                        correctSet: [0,1],
+                        explanation: "<strong>Multicollinearity</strong> (predictors overlap, which is why 'total experience' replaced 'tenure' alongside 'training') and <strong>autocorrelation</strong> (time series data). A binary outcome simply calls for logistic regression, and post hoc drift isn't a thing.",
+                        mnemonic: "💡 Memory tip: <strong>Multi = Many X's tangled; Auto = Auto-follow the last point.</strong> Predictors should be <strong>independent</strong>, not twins."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each situation to the type of regression.",
+                        cols: ["Simple (OLS) linear", "Multiple linear", "Logistic"],
+                        items: [
+                              { text: "Training hours → order efficiency", answer: "Simple (OLS) linear" },
+                              { text: "Weekly ad spend → weekly sales", answer: "Simple (OLS) linear" },
+                              { text: "Training hours + total experience → order efficiency", answer: "Multiple linear" },
+                              { text: "Price, ad spend and season → monthly demand", answer: "Multiple linear" },
+                              { text: "Job satisfaction → whether an employee stays (yes/no)", answer: "Logistic" },
+                              { text: "Login frequency → whether a customer churns (yes/no)", answer: "Logistic" }
+                        ],
+                        explanation: "Count the X's and look at the Y. <strong>1 X</strong> and a numeric Y → simple (OLS). <strong>2+ X</strong> and a numeric Y → multiple. A <strong>binary</strong> Y (yes/no, 0/1, win/lose) → logistic.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 206' role='img' aria-label='Diagram of simple, multiple, and logistic regression showing how many predictors feed one outcome' style='display:block;width:100%;max-width:470px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='12' y='28' font-size='13' fill='#2563EB' text-anchor='start' font-weight='700'>Simple (OLS)</text><text x='12' y='46' font-size='12.5' fill='#5C677D' text-anchor='start' font-weight='400'>1 X → 1 Y</text><rect x='190' y='20' width='56' height='34' rx='6' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='218' y='42' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>X</text><line x1='246' y1='37' x2='300' y2='36' stroke='#2563EB' stroke-width='1.8'/><polygon points='300,36 292,31 292,41' fill='#2563EB'/><rect x='304' y='16' width='156' height='40' rx='8' fill='#fff' stroke='#2563EB' stroke-width='2'/><text x='382' y='34' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Y: continuous</text><text x='382' y='49' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>e.g. efficiency rate</text><text x='12' y='94' font-size='13' fill='#7C3AED' text-anchor='start' font-weight='700'>Multiple</text><text x='12' y='112' font-size='12.5' fill='#5C677D' text-anchor='start' font-weight='400'>2+ X → 1 Y</text><rect x='190' y='80' width='56' height='24' rx='6' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='218' y='97' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>X1</text><line x1='246' y1='92' x2='300' y2='102' stroke='#7C3AED' stroke-width='1.8'/><rect x='190' y='110' width='56' height='24' rx='6' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='218' y='127' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>X2</text><line x1='246' y1='122' x2='300' y2='102' stroke='#7C3AED' stroke-width='1.8'/><polygon points='300,102 292,97 292,107' fill='#7C3AED'/><rect x='304' y='82' width='156' height='40' rx='8' fill='#fff' stroke='#7C3AED' stroke-width='2'/><text x='382' y='100' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Y: continuous</text><text x='382' y='115' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>e.g. efficiency rate</text><text x='12' y='164' font-size='13' fill='#EA580C' text-anchor='start' font-weight='700'>Logistic</text><text x='12' y='182' font-size='12.5' fill='#5C677D' text-anchor='start' font-weight='400'>1+ X → binary Y</text><rect x='190' y='156' width='56' height='34' rx='6' fill='#EAF0FC' stroke='#2563EB' stroke-width='1.5'/><text x='218' y='178' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>X</text><line x1='246' y1='173' x2='300' y2='172' stroke='#EA580C' stroke-width='1.8'/><polygon points='300,172 292,167 292,177' fill='#EA580C'/><rect x='304' y='152' width='156' height='40' rx='8' fill='#fff' stroke='#EA580C' stroke-width='2'/><text x='382' y='170' font-size='13' fill='#1A2035' text-anchor='middle' font-weight='700'>Y: yes/no (0 or 1)</text><text x='382' y='185' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>e.g. stay or leave</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>One, Many, Binary.</strong> R words: <strong>R</strong>elationship, <strong>R</strong>egression, <strong>R</strong>² and prediction."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "A logistic regression of job satisfaction on whether employees stay gives a coefficient of 1.829, p = 0.009 and an odds ratio of 6.228. What is the interpretation?",
+                        opts: ["Significant: higher satisfaction makes employees more likely to stay; each 1-point increase multiplies the odds of staying by about 6.2",
+                              "Not significant, because the coefficient is greater than 1",
+                              "Each 1-point increase raises the probability of staying by exactly 6.2 percentage points",
+                              "Higher satisfaction makes employees more likely to leave"],
+                        correct: 0,
+                        explanation: "p = 0.009 &lt; 0.05 → significant. An <strong>odds ratio</strong> above 1 means the odds of the outcome (staying) rise as X rises; it multiplies odds, not percentage points. The logistic curve is S-shaped, bounded between 0% and 100%.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 252' role='img' aria-label='S-shaped logistic curve: probability of staying rises as job satisfaction rises' style='display:block;width:100%;max-width:470px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><line x1='60' y1='200' x2='440' y2='200' stroke='#5C677D' stroke-width='1.5'/><line x1='60' y1='30' x2='60' y2='200' stroke='#5C677D' stroke-width='1.5'/><line x1='60' y1='200' x2='440' y2='200' stroke='#E2E8F0' stroke-width='1'/><text x='54' y='204' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>0%</text><line x1='60' y1='115' x2='440' y2='115' stroke='#E2E8F0' stroke-width='1'/><text x='54' y='119' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>50%</text><line x1='60' y1='30' x2='440' y2='30' stroke='#E2E8F0' stroke-width='1'/><text x='54' y='34' font-size='12' fill='#1A2035' text-anchor='end' font-weight='400'>100%</text><text x='60' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>2</text><text x='107.5' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>3</text><text x='155' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>4</text><text x='202.5' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>5</text><text x='250' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>6</text><text x='297.5' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>7</text><text x='345' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>8</text><text x='392.5' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>9</text><text x='440' y='218' font-size='12' fill='#1A2035' text-anchor='middle' font-weight='400'>10</text><polyline points='60,199.9 64.8,199.9 69.5,199.9 74.3,199.8 79,199.8 83.8,199.8 88.5,199.7 93.3,199.7 98,199.6 102.8,199.5 107.5,199.5 112.3,199.3 117,199.2 121.8,199.1 126.5,198.9 131.3,198.7 136,198.4 140.8,198.1 145.5,197.7 150.3,197.2 155,196.7 159.8,196 164.5,195.2 169.3,194.3 174,193.2 178.8,191.9 183.5,190.4 188.2,188.6 193,186.5 197.7,184.1 202.5,181.2 207.2,177.9 212,174.2 216.7,169.9 221.5,165.1 226.2,159.8 231,153.9 235.7,147.5 240.5,140.6 245.2,133.4 250,125.8 254.7,118.1 259.5,110.3 264.2,102.6 269,95.2 273.7,88 278.5,81.2 283.2,74.9 288,69.1 292.7,63.9 297.5,59.2 302.2,55 307,51.4 311.7,48.2 316.5,45.4 321.2,43 326,41 330.7,39.3 335.5,37.8 340.2,36.5 345,35.5 349.7,34.6 354.5,33.8 359.2,33.2 364,32.7 368.7,32.2 373.5,31.9 378.2,31.6 383,31.3 387.7,31.1 392.5,30.9 397.2,30.8 402,30.6 406.7,30.5 411.5,30.4 416.2,30.4 421,30.3 425.7,30.3 430.5,30.2 435.2,30.2 440,30.1' fill='none' stroke='#EA580C' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'/><line x1='256.6' y1='30' x2='256.6' y2='200' stroke='#5C677D' stroke-width='1.3' stroke-dasharray='5 4'/><text x='262.6' y='50' font-size='12.5' fill='#1A2035' text-anchor='start' font-weight='400'>50/50 near 6.1</text><text x='250' y='240' font-size='12.5' fill='#5C677D' text-anchor='middle' font-weight='400'>Job satisfaction score (1 to 10)</text><text x='14' y='150' font-size='12.5' fill='#5C677D' text-anchor='start' font-weight='400' transform='rotate(-90 14 150)'>Probability of staying</text><text x='300' y='150' font-size='13' fill='#059669' text-anchor='start' font-weight='700'>Higher satisfaction →</text><text x='300' y='167' font-size='13' fill='#059669' text-anchor='start' font-weight='700'>more likely to stay</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Logistic = Likelihood of a Yes/No.</strong> Odds ratio &gt; 1 = <strong>more likely</strong>; &lt; 1 = less likely."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which outcomes are suited to logistic regression (a binary dependent variable)? (Select all that apply.)",
+                        opts: ["Whether a customer renews or cancels",
+                              "Whether a loan defaults or is repaid",
+                              "Whether an email is spam or not spam",
+                              "Whether a candidate passes or fails an exam",
+                              "Monthly revenue in dollars",
+                              "Time to resolve a ticket in hours"],
+                        correctSet: [0,1,2,3],
+                        explanation: "Logistic regression predicts a <strong>binary</strong> (yes/no, 0/1) outcome. Dollars and hours are continuous, so they use simple or multiple linear regression.",
+                        mnemonic: "💡 Memory tip: <strong>Two outcomes → Logistic.</strong> If the answer fits on a <strong>light switch</strong> (on/off), it's logistic."
+                  },
+
+                  {
+                        type: 'tf',
+                        q: "True or False: A time series regression of Blue Owl's patty weights by week (R² = 0.034, p = 0.329) shows no significant trend over time.",
+                        opts: ["True",
+                              "False"],
+                        correct: 0,
+                        explanation: "True. p = 0.329 &gt; 0.05 and R² = 0.034 (about 3% explained), so the trend is <strong>not significant</strong>. In a time series, time is the independent variable, you need 30 or more equal intervals (this data had 30 weeks), and the fitted line y = −0.0006x + 0.2705 is nearly flat. Weeks 6 to 20 were inconsistent, so watch for autocorrelation.",
+                        mnemonic: "💡 Memory tip: <strong>Time is the X.</strong> Flat line + big p = <strong>no trend</strong>."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each business situation to the time series pattern it shows.",
+                        cols: ["Trend", "Cyclicality", "Seasonality", "Irregularity", "Random variation"],
+                        items: [
+                              { text: "Monthly active users climb steadily over several years", answer: "Trend" },
+                              { text: "IT spending booms and busts over multi-year economic swings", answer: "Cyclicality" },
+                              { text: "Retail website traffic spikes every December", answer: "Seasonality" },
+                              { text: "A one-time data-center outage crashes a week's orders", answer: "Irregularity" },
+                              { text: "Small, unpredictable week-to-week wobble in order counts", answer: "Random variation" }
+                        ],
+                        explanation: "<strong>Trend</strong> = long-run direction. <strong>Cyclicality</strong> = multi-year ups and downs. <strong>Seasonality</strong> = repeats at the same time each year. <strong>Irregularity</strong> = a one-time shock. <strong>Random variation</strong> = chance noise that cannot be anticipated or removed.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 262' role='img' aria-label='Four small line charts showing trend, cyclicality, seasonality and irregularity patterns' style='display:block;width:100%;max-width:480px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><rect x='10' y='10' width='220' height='106' rx='8' fill='#fff' stroke='#C8D1E4' stroke-width='1.5'/><text x='20' y='30' font-size='12.5' fill='#2563EB' text-anchor='start' font-weight='700'>Trend</text><polyline points='22,92.6 28.8,89.7 35.5,91.1 42.3,91.3 49,87.6 55.8,86 62.6,87.8 69.3,86.7 76.1,82.8 82.8,82.7 89.6,84.2 96.3,81.7 103.1,78.4 109.9,79.5 116.6,80.2 123.4,76.6 130.1,74.6 136.9,76.4 143.7,75.6 150.4,71.7 157.2,71.1 163.9,72.9 170.7,70.7 177.4,67.2 184.2,68 191,69 197.7,65.6 204.5,63.2 211.2,64.8 218,64.5' fill='none' stroke='#2563EB' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/><rect x='245' y='10' width='220' height='106' rx='8' fill='#fff' stroke='#C8D1E4' stroke-width='1.5'/><text x='255' y='30' font-size='12.5' fill='#7C3AED' text-anchor='start' font-weight='700'>Cyclicality (multi-year)</text><polyline points='257,76 263.8,69.8 270.5,64.6 277.3,61.4 284,60.7 290.8,62.7 297.6,67 304.3,72.8 311.1,79.2 317.8,85 324.6,89.3 331.3,91.3 338.1,90.6 344.9,87.4 351.6,82.2 358.4,76 365.1,69.8 371.9,64.6 378.7,61.4 385.4,60.7 392.2,62.7 398.9,67 405.7,72.8 412.4,79.2 419.2,85 426,89.3 432.7,91.3 439.5,90.6 446.2,87.4 453,82.2' fill='none' stroke='#7C3AED' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/><rect x='10' y='128' width='220' height='106' rx='8' fill='#fff' stroke='#C8D1E4' stroke-width='1.5'/><text x='20' y='148' font-size='12.5' fill='#059669' text-anchor='start' font-weight='700'>Seasonality (same time each year)</text><polyline points='22,206.8 28.8,205.5 35.5,203 42.3,196.6 49,178.6 55.8,192.7 62.6,201.7 69.3,204.9 76.1,206.2 82.8,206.8 89.6,206.8 96.3,205.5 103.1,203 109.9,196.6 116.6,178.6 123.4,192.7 130.1,201.7 136.9,204.9 143.7,206.2 150.4,206.8 157.2,206.8 163.9,205.5 170.7,203 177.4,196.6 184.2,178.6 191,192.7 197.7,201.7 204.5,204.9 211.2,206.2 218,206.8' fill='none' stroke='#059669' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/><rect x='245' y='128' width='220' height='106' rx='8' fill='#fff' stroke='#C8D1E4' stroke-width='1.5'/><text x='255' y='148' font-size='12.5' fill='#DC2626' text-anchor='start' font-weight='700'>Irregularity (one-time shock)</text><polyline points='257,197.8 263.8,196.4 270.5,199.7 277.3,196.7 284,197.4 290.8,199.5 297.6,196 304.3,198.6 311.1,198.7 317.8,196 324.6,199.5 331.3,197.5 338.1,196.6 344.9,199.8 351.6,196.5 358.4,197.7 365.1,199.3 371.9,220.9 378.7,210.6 385.4,203 392.2,196.1 398.9,199.6 405.7,197.2 412.4,196.9 419.2,199.7 426,196.3 432.7,198.1 439.5,199.1 446.2,195.9 453,199.1' fill='none' stroke='#DC2626' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/><text x='240' y='252' font-size='12.5' fill='#5C677D' text-anchor='middle' font-weight='400'>Random variation = chance noise that cannot be anticipated or removed</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>T-C-S-I-R:</strong> <strong>T</strong>owards, <strong>C</strong>ycles, <strong>S</strong>eason, <strong>I</strong>ncident, <strong>R</strong>andom."
+                  },
+
+                  {
+                        type: 'tf',
+                        q: "True or False: An R² of 0.7238 between daily temperature and lemonade sales proves that temperature causes lemonade sales.",
+                        opts: ["True",
+                              "False"],
+                        correct: 1,
+                        explanation: "False. Regression shows <strong>association</strong>, not <strong>causation</strong>. Say 'explained by', 'associated with' or 'related to', not 'caused'. Also, a positive relationship is not automatically a 'good' one; positive and negative describe direction only.",
+                        mnemonic: "💡 Memory tip: <strong>Association ≠ Causation.</strong> Ice cream sales and sunburns rise together, but the <strong>sun</strong> drives both."
+                  },
+
+            ];
+
+            initQuiz(questions, 'Section 2');
+      </script>
+</body>
+
+</html>
