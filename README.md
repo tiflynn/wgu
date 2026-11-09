@@ -9,7 +9,7 @@ questions.
 | Course | Status |
 |---|---|
 | **C213** Accounting for Decision Makers | 11 sections, 2 practice exams, 2 formula sheets |
-| **C207** Data-Driven Decision Making | 4 sections (more added as the course progresses) |
+| **C207** Data-Driven Decision Making | 5 sections (more added as the course progresses) |
 
 ---
 
@@ -58,6 +58,7 @@ relative paths; the hub's question-count script keys off that `quizzes/` prefix.
 | 2 | The Nature & Purpose of Accounting |
 | 3 | Overview of Financial Statements |
 | 4 | The Balance Sheet |
+| 5 | Real-World Data-Driven Decisions |
 | 5 | The Income Statement |
 | 6 | The Statement of Cash Flows |
 | 7 | Introduction to Financial Statement Analysis |
