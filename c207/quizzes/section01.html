@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C207 Data-Driven Decision Making · Section 1 Quiz</title>
+      <link rel="stylesheet" href="../../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Sections</a>
+            <a class="back-link notes" href="../notes/section01.html" target="_blank" rel="noopener">📄 Section 1 Notes</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C207 Data-Driven Decision Making · Section 1</p>
+            <h1>The Case for<br><span>Quantitative Analysis</span></h1>
+      </header>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  // ══ PURPOSE, QUALITY DATA & DECISION TOOLS ═════════════
+
+                  {
+                        type: 'mc',
+                        q: "What is the purpose of analytics?",
+                        opts: ["To transform data into information that supports fact-based decisions and helps reduce risk",
+                              "To transform information into raw data that supports gut-feel decisions and helps reduce cost",
+                              "To transform data into information that supports fact-based decisions and helps reduce headcount",
+                              "To transform opinions into data that replaces the need for decision makers"],
+                        correct: 0,
+                        explanation: "Analytics turns raw DATA into INFORMATION so decisions are based on facts instead of intuition. Fact-based decision-making reduces RISK. Informed decisions (choosing a home by school ratings and price-per-square-foot, or a school by tuition and graduation rates) are good decisions.",
+                        mnemonic: "💡 Memory tip: <strong>D → I → R</strong>. <strong>D</strong>ata becomes <strong>I</strong>nformation, and the payoff is less <strong>R</strong>isk. Data in, information out, risk down."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Which description best defines quality data?",
+                        opts: ["Accurate, reliable, and relevant information that is collected, stored, and analyzed in a systematic and consistent way",
+                              "Large, fast-moving data sets stored in the cloud by a third-party provider",
+                              "Numeric data that has been entered once and never edited",
+                              "Any data that supports the decision the manager already wanted to make"],
+                        correct: 0,
+                        explanation: "Quality data is ACCURATE, RELIABLE, and RELEVANT. To keep it that way, verify the sources, check for errors or inconsistencies, and keep it up to date. Size and speed describe big data, not quality.",
+                        mnemonic: "💡 Memory tip: <strong>A-R-R</strong>: <strong>A</strong>ccurate, <strong>R</strong>eliable, <strong>R</strong>elevant. Bad data in means bad decisions out."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each decision-making tool to the setting where it is applied in the lesson.",
+                        cols: ["Business", "Healthcare", "Government"],
+                        items: [
+                              { text: "Cost-benefit analysis", answer: "Business" },
+                              { text: "Scenario planning", answer: "Business" },
+                              { text: "Decision trees", answer: "Healthcare" },
+                              { text: "Predictive analytics to diagnose disease and recommend treatment", answer: "Healthcare" },
+                              { text: "Policy modeling", answer: "Government" },
+                              { text: "Impact assessments", answer: "Government" },
+                        ],
+                        explanation: "Business managers use cost-benefit analysis and scenario planning for strategic choices such as investments and market opportunities. Healthcare uses decision trees and predictive analytics. Government uses policy modeling and impact assessments to judge the effects of policies on society. Tools range from simple frameworks like SWOT analysis to complex algorithms and simulations.",
+                        mnemonic: "💡 Memory tip: Business = <strong>money moves</strong> (cost-benefit, scenarios). Healthcare = <strong>diagnose</strong> (trees, prediction). Government = <strong>policy</strong> (modeling, impact)."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which factors should you consider when choosing a decision-making tool or technique? (Select all that apply)",
+                        opts: ["The specific context and goals of the decision",
+                              "The complexity of the problem",
+                              "The availability of data",
+                              "The level of uncertainty involved",
+                              "Whichever tool the team used on its last project",
+                              "The number of people on the project team"],
+                        correctSet: [0, 1, 2, 3],
+                        explanation: "The right tool depends on the decision's context and goals, how complex the problem is, whether data is available, and how much uncertainty is involved. Habit and team size do not make a tool suitable.",
+                        mnemonic: "💡 Memory tip: <strong>C-C-D-U</strong>: <strong>C</strong>ontext/goals, <strong>C</strong>omplexity, <strong>D</strong>ata availability, <strong>U</strong>ncertainty. Pick the tool to fit the job, not the job to fit the tool."
+                  },
+
+                  // ══ BIG DATA & DATA MINING ═════════════════════════════
+
+                  {
+                        type: 'mc',
+                        q: "What is big data?",
+                        opts: ["Extremely large amounts of structured and unstructured data that are too large for traditional tools to process efficiently",
+                              "Any spreadsheet with more than 30 rows of numeric data",
+                              "Only unstructured data such as videos and comments",
+                              "Data collected from a random sample of a population"],
+                        correct: 0,
+                        explanation: "Big data is extremely large volumes of BOTH structured and unstructured data, too much to store on a personal computer or in an Excel file or to process with standard software. Companies like Amazon and Facebook generate it.",
+                        mnemonic: "💡 Memory tip: Big data is too big for <strong>Excel</strong>. If it fits in a spreadsheet on your laptop, it is not big data."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which of the following are common sources of big data? (Select all that apply)",
+                        opts: ["Social media posts, comments, likes, and shares",
+                              "Mobile apps and GPS location data",
+                              "Healthcare records and wearable health data",
+                              "Streaming service viewing habits",
+                              "Website clicks and search activity",
+                              "One local shop's Excel list of customer addresses",
+                              "A small team's paper sign-in sheet"],
+                        correctSet: [0, 1, 2, 3, 4],
+                        explanation: "Big data comes from sources that continuously generate huge volumes at high speed: social media, mobile apps and GPS, healthcare records and wearables, streaming services, web activity, and also scientific research. A single shop's address list or a paper sign-in sheet is small enough for one spreadsheet or a filing cabinet.",
+                        mnemonic: "💡 Memory tip: Think <strong>S-M-H-S-W</strong>: <strong>S</strong>ocial, <strong>M</strong>obile/GPS, <strong>H</strong>ealthcare, <strong>S</strong>treaming, <strong>W</strong>eb clicks. Anything your phone and watch quietly record all day."
+                  },
+
+                  {
+                        type: 'tf',
+                        q: "A sewing machine shop searches a year of customer addresses, stored in one Excel file, to send out Christmas cards. This is an example of big data.",
+                        opts: ["True", "False"],
+                        correct: 1,
+                        explanation: "FALSE. One local shop's addresses fit easily in an Excel file, so this is not big data. By contrast, the FBI's nationwide database of criminal records, connected through the cloud, IS big data.",
+                        mnemonic: "💡 Memory tip: <strong>Sewing shop = spreadsheet. FBI = cloud.</strong> If one Excel file can hold it, it's not big."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Where do organizations typically store big data?",
+                        opts: ["In a data warehouse that is often hosted in the cloud by a third-party provider responsible for securing it",
+                              "On the manager's personal computer in a password-protected file",
+                              "In one local spreadsheet that the whole team shares",
+                              "In paper files in a locked cabinet"],
+                        correct: 0,
+                        explanation: "Big data goes in a big data WAREHOUSE that uses multiple servers, usually hosted in the CLOUD by a third-party provider. Collecting and storing large volumes has become cheaper, and protecting the data is part of the provider's business model.",
+                        mnemonic: "💡 Memory tip: <strong>Warehouse in the cloud.</strong> Big data is too big for your house, so it rents a warehouse."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "What is data mining?",
+                        opts: ["The process of discovering patterns in large data sets",
+                              "The process of deleting duplicate and blank records from a database",
+                              "The process of collecting survey responses from a sample",
+                              "The process of moving data into cloud storage"],
+                        correct: 0,
+                        explanation: "Data mining discovers PATTERNS in large data sets, so decision makers can explore trends and possible correlations. Companies use it to understand buying behavior, attract new customers, target them more effectively, and innovate.",
+                        mnemonic: "💡 Memory tip: A miner with a headlamp digging through a mountain of data to find <strong>patterns</strong> (the gold)."
+                  },
+
+                  // ══ TYPES OF DATA ══════════════════════════════════════
+
+                  {
+                        type: 'dd',
+                        q: "Sort each example into structured or unstructured data.",
+                        cols: ["Structured", "Unstructured"],
+                        items: [
+                              { text: "A purchase date entered as MM/DD/YYYY", answer: "Structured" },
+                              { text: "Multiple-choice survey answers (A, B, C, D)", answer: "Structured" },
+                              { text: "Predefined good / better / best answer choices", answer: "Structured" },
+                              { text: "Numbers and dates organized in columns with a set format", answer: "Structured" },
+                              { text: "Comments typed into a comment box", answer: "Unstructured" },
+                              { text: "Hospital notes searched for any mention of depression", answer: "Unstructured" },
+                              { text: "A free-text 'other' answer on a form", answer: "Unstructured" },
+                              { text: "A 2,000-character product description written by a seller", answer: "Unstructured" },
+                        ],
+                        explanation: "Structured data follows a predefined, set format, so it is easy to search and sort. Unstructured data is open-ended and has no fixed format, so a search may not return exact matches. A search for a 24-inch screen could return laptops, TVs, and window screens.",
+                        mnemonic: "💡 Memory tip: <strong>Structured = a form with boxes. Unstructured = a blank page.</strong> Predefined choices mean structured. 'Other, please explain' means unstructured."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Classify each numeric measurement as discrete or continuous.",
+                        cols: ["Discrete", "Continuous"],
+                        items: [
+                              { text: "Number of people in a household", answer: "Discrete" },
+                              { text: "Number of shirts sold", answer: "Discrete" },
+                              { text: "Number of items purchased on an order", answer: "Discrete" },
+                              { text: "Height", answer: "Continuous" },
+                              { text: "Weight, such as 135.4 lbs", answer: "Continuous" },
+                              { text: "A percentage on a 0 to 1 scale, such as 0.75", answer: "Continuous" },
+                              { text: "Average customer wait time", answer: "Continuous" },
+                        ],
+                        explanation: "Quantitative (numerical) data is either discrete or continuous. DISCRETE data is whole numbers only, like 1, 2, 3 (you can't have 1.5 people). CONTINUOUS data can fall anywhere in a range, including decimals, like 63.5 inches or 0.75. Qualitative data, by contrast, is categorical.",
+                        mnemonic: "💡 Memory tip: Discrete = <strong>the pretty whole numbers</strong> (dots on a number line). Continuous = <strong>the unbroken line with every decimal in between</strong>."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Classify each variable by its level of measurement.",
+                        cols: ["Nominal", "Ordinal", "Interval", "Ratio"],
+                        items: [
+                              { text: "Customer payment method (cash, credit card, PayPal)", answer: "Nominal" },
+                              { text: "Make of a car", answer: "Nominal" },
+                              { text: "Customer satisfaction from very dissatisfied to very satisfied", answer: "Ordinal" },
+                              { text: "Car size class: economy, compact, intermediate, full-size", answer: "Ordinal" },
+                              { text: "Temperature in degrees Fahrenheit", answer: "Interval" },
+                              { text: "Calendar year (2023, 2024, 2025)", answer: "Interval" },
+                              { text: "Monthly sales revenue", answer: "Ratio" },
+                              { text: "Miles per gallon", answer: "Ratio" },
+                        ],
+                        explanation: "NOMINAL = names with no order. ORDINAL = categories with a meaningful order, but unequal gaps (even a 1 to 5 rating is ordinal). INTERVAL = numbers with equal spacing where zero is only a placeholder. RATIO = numbers where zero means none. Revenue of $0 means nothing was earned, and 0 mpg means no distance per gallon, so both are ratio. Year 0 is just the BC/AD changeover, so calendar years are interval.",
+                        mnemonic: "💡 Memory tip: <strong>NOIR</strong> (French for black). <strong>NO</strong> = no number (nominal, ordinal). <strong>IR</strong> = real numbers (interval, ratio). Then ask: <strong>Does zero mean none?</strong> No = interval. Yes = ratio."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Why is temperature in degrees Fahrenheit interval data rather than ratio data?",
+                        opts: ["Zero is just a placeholder on the scale, not the absence of temperature, so 40°F is not twice as hot as 20°F",
+                              "Temperature is a category with no numeric spacing",
+                              "Temperature values cannot be subtracted to find a difference",
+                              "Temperature can never be negative"],
+                        correct: 0,
+                        explanation: "On an interval scale the spacing is equal, so differences are meaningful (40°F is 10 degrees warmer than 30°F), but zero is arbitrary. 0°F does not mean there is no temperature; it means it is very cold, and you can go below it. That is why ratios like 'twice as hot' make no sense. Kelvin has a true zero, but the course uses Fahrenheit and Celsius.",
+                        mnemonic: "💡 Memory tip: <strong>Interval = zero is a placeholder</strong> (below-zero days exist). <strong>Ratio = zero is truly none</strong> (no pounds, no dollars). Nominal data is summarized with counts and the mode. Interval and ratio data allow the mean, median, mode, and measures of spread."
+                  },
+
+                  // ══ RELIABILITY, VALIDITY & DATA QUALITY ═══════════════
+
+                  {
+                        type: 'dd',
+                        q: "Match each description to reliability or validity.",
+                        cols: ["Reliability", "Validity"],
+                        items: [
+                              { text: "Consistent, repeatable results", answer: "Reliability" },
+                              { text: "Measuring what you actually intend to measure", answer: "Validity" },
+                              { text: "A scale that shows the same weight three times in a row", answer: "Reliability" },
+                              { text: "Three thermometer readings of 98.6, 96.8, then 94.5 seconds apart fail this test", answer: "Reliability" },
+                              { text: "Using cholesterol to represent a patient's heart disease risk", answer: "Validity" },
+                              { text: "Judging a person's health by running speed fails this test", answer: "Validity" },
+                        ],
+                        explanation: "Reliable data is consistent and repeatable and depends on the quality of the measuring instrument. Valid data is accurate and appropriate: it represents what is intended to be measured. A puzzle isn't a valid measure of IQ, and running speed isn't a valid measure of health, but blood pressure, cholesterol, and glucose are better measures.",
+                        mnemonic: "💡 Memory tip: <strong>Reliable = same every time. Valid = hits the bullseye.</strong> Good data needs both."
+                  },
+
+                  {
+                        type: 'tf',
+                        q: "Data can be reliable (consistent and repeatable) and still not be valid.",
+                        opts: ["True", "False"],
+                        correct: 0,
+                        explanation: "TRUE. Reliability and validity are two separate considerations. A 100-piece puzzle can give the same completion time every time (reliable) and still not measure IQ (not valid). Good data must be both.",
+                        mnemonic: "💡 Memory tip: A bathroom scale can show the same wrong number every time. <strong>Consistent is not the same as correct.</strong>"
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each data problem to the error type it illustrates.",
+                        cols: ["Omission error", "Out-of-range error", "Inconsistent coding"],
+                        items: [
+                              { text: "A vehicle priced at $0 because the price field was never completed", answer: "Omission error" },
+                              { text: "A zip code field left blank during data entry", answer: "Omission error" },
+                              { text: "A 2028 model year in data collected in 2026", answer: "Out-of-range error" },
+                              { text: "A birth year of 2013 in a study limited to people born 2015 to 2020", answer: "Out-of-range error" },
+                              { text: "An age of 14 on a survey that allows ages 18 to 99", answer: "Out-of-range error" },
+                              { text: "Car color entered as GRY in one row and Gray in another", answer: "Inconsistent coding" },
+                              { text: "The same color spelled both Gray and GREY", answer: "Inconsistent coding" },
+                        ],
+                        explanation: "OMISSION = a field is blank or incomplete (the value is missing). OUT-OF-RANGE = a value falls outside the acceptable range for the study (too high or too low). INCONSISTENT CODING = the same thing entered different ways, a data entry error.",
+                        mnemonic: "💡 Memory tip: <strong>Omission = Missing. Out-of-range = Outside the fence. Coding = Confusing spelling.</strong> Lying by omission means the answer was left out."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "You have a spreadsheet with hundreds of rows. What is a simple, effective way to find blank fields and out-of-range values?",
+                        opts: ["Sort the data by the column you want to check",
+                              "Calculate the average of the column",
+                              "Delete every row that looks unusual",
+                              "Read each row by eye from top to bottom"],
+                        correct: 0,
+                        explanation: "Sorting puts the smallest and largest values at the top and bottom, so a $0 price, a blank, or a 188 mpg Jaguar is easy to spot. This is one technique for CLEANING the data. Deleting rows or averaging hides the problem instead of finding it.",
+                        mnemonic: "💡 Memory tip: <strong>Sort to spot.</strong> Errors hide in the middle of a mess but float to the top and bottom of a sorted list."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Classify each error as systematic or random.",
+                        cols: ["Systematic error", "Random error"],
+                        items: [
+                              { text: "A temperature sensor reads 3°F too high every time", answer: "Systematic error" },
+                              { text: "A phone number with a missing digit, so the call cannot be completed as dialed", answer: "Systematic error" },
+                              { text: "Analysts consistently skip the middle name field in patient records", answer: "Systematic error" },
+                              { text: "A lightning strike fries a neighbor's computer, which has to be replaced", answer: "Systematic error" },
+                              { text: "Static during a call that clears up by itself", answer: "Random error" },
+                              { text: "Measurements of the same part vary slightly from natural variation", answer: "Random error" },
+                              { text: "A lightning strike shuts off your computer, and it works again after a restart", answer: "Random error" },
+                        ],
+                        explanation: "SYSTEMATIC errors are consistent and repeatable. They will not fix themselves, so someone must intervene (recalibrate the sensor, enter the missing digit, buy a new computer). RANDOM errors are temporary and intermittent and correct themselves.",
+                        mnemonic: "💡 Memory tip: <strong>Systematic = Must fix it. Random = may fix itself.</strong> A hard stop is systematic; a hiccup is random."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Data analysts consistently fail to enter middle names in live patient records, and nurses need them to identify patients. What type of error does this CAUSE?",
+                        opts: ["Systematic error",
+                              "Random error",
+                              "Omission error",
+                              "Logic error"],
+                        correct: 0,
+                        explanation: "The question asks what type of error this CAUSES, not how it happened. Leaving out data is an omission error (how it happened), but the effect is a systematic error: the data stays unavailable until someone goes back and enters it. A random error would fix itself. 'Logic error' is not a term from the course.",
+                        mnemonic: "💡 Memory tip: <strong>Lightning is HOW. The fried computer is WHAT it caused.</strong> Classify the result, not the cause."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Emma receives sales numbers from every store, but several locations reported missing transaction data. How can this impact the dataset?",
+                        opts: ["Reliability",
+                              "Distorted",
+                              "Consistency",
+                              "Random errors"],
+                        correct: 1,
+                        explanation: "Missing transaction data is an omission error, and the Lesson 5 case study says a dataset with an omission error is DISTORTED. Totals and averages built on incomplete data do not reflect what really happened. The error itself falls under systematic error, not random error.",
+                        mnemonic: "💡 Memory tip: <strong>Omission → Distorted.</strong> Holes in the data bend the picture, like a jigsaw puzzle with missing pieces."
+                  },
+
+                  // ══ RESEARCH DESIGN ════════════════════════════════════
+
+                  {
+                        type: 'dd',
+                        q: "Decide whether each scenario describes an observational study or an experimental study.",
+                        cols: ["Observational study", "Experimental study"],
+                        items: [
+                              { text: "No treatment is applied and there is no control group", answer: "Observational study" },
+                              { text: "Reviewing past transactions to see if high satisfaction goes with repeat purchases", answer: "Observational study" },
+                              { text: "Comparing productivity of employees who chose to work remote vs. in the office", answer: "Observational study" },
+                              { text: "The researcher applies a treatment and measures the response", answer: "Experimental study" },
+                              { text: "Showing web page A to half of visitors and page B to the other half", answer: "Experimental study" },
+                              { text: "Randomly assigning customers to one of three email subject lines", answer: "Experimental study" },
+                        ],
+                        explanation: "The key difference is whether a treatment is applied. Observational studies only observe and record, with no treatment and no control group. Experimental studies apply a treatment and measure the response. Employees who chose where to work self-selected, so no treatment was applied, which makes it observational.",
+                        mnemonic: "💡 Memory tip: <strong>Observe = watch. Experiment = do something.</strong> Self-selected or volunteered means observational. Researcher assigned means experimental."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Emma studies purchasing behavior by reviewing loyalty card data collected over several years without assigning any treatment. Which type of study is being conducted?",
+                        opts: ["Experimental study",
+                              "Cohort study",
+                              "Randomized experiment",
+                              "Controlled trial"],
+                        correct: 1,
+                        explanation: "A cohort study is an observational study that follows a specific group with shared characteristics over time, observing and classifying without intervening. Experimental studies, randomized experiments, and controlled trials all require the researcher to apply a treatment.",
+                        mnemonic: "💡 Memory tip: <strong>Cohort = a crowd you follow.</strong> Same group, watched over time, no treatment."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "BrightWave compares the purchasing habits of customers who voluntarily joined a rewards program with those who did not. No customers were randomly assigned. This is best classified as:",
+                        opts: ["True experiment",
+                              "Cohort study",
+                              "Observational study",
+                              "Controlled experiment"],
+                        correct: 2,
+                        explanation: "Customers chose to join, and the researcher assigned no one to a group and applied no treatment, so this is an observational study. A true or controlled experiment requires the researcher to apply a treatment, usually with random assignment to treatment and control groups.",
+                        mnemonic: "💡 Memory tip: <strong>'Voluntarily joined' + 'no random assignment' = observational.</strong> If people picked their own group, the researcher didn't control it."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "Which THREE elements are required in every experimental study? (Select all that apply)",
+                        opts: ["Unit", "Treatment", "Response", "Cohort", "Population", "Operationalization"],
+                        correctSet: [0, 1, 2],
+                        explanation: "An experiment has three elements: the UNIT (who or what is studied, like a patient), the TREATMENT (what is applied, like a medication), and the RESPONSE (what is measured, like whether the fever went down).",
+                        mnemonic: "💡 Memory tip: <strong>U-T-R</strong>: <strong>U</strong>nit gets the <strong>T</strong>reatment and shows a <strong>R</strong>esponse. Who, what's done to them, what happened."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each item to its role in an experiment.",
+                        cols: ["Unit", "Treatment", "Response"],
+                        items: [
+                              { text: "Customers visiting a festival booth", answer: "Unit" },
+                              { text: "A patient given a new medication", answer: "Unit" },
+                              { text: "A free ornament promotion", answer: "Treatment" },
+                              { text: "Different types of fat added to cookie batches", answer: "Treatment" },
+                              { text: "The increase in shirt sales", answer: "Response" },
+                              { text: "Whether the patient's fever went down", answer: "Response" },
+                        ],
+                        explanation: "The unit is who or what you study, the treatment is what you apply, and the response is the outcome you measure. For the free ornament test: customers are the unit, the ornament is the treatment, and the increase in shirt sales is the response. For the bakery: the type of fat is the treatment, and the cookies' color and consistency are the response.",
+                        mnemonic: "💡 Memory tip: <strong>Who? What did we do to them? What happened?</strong> Unit, Treatment, Response."
+                  },
+
+                  {
+                        type: 'tf',
+                        q: "A study that compares two groups under different conditions, without randomly assigning them to treatment and control groups, is still an observational study.",
+                        opts: ["True", "False"],
+                        correct: 0,
+                        explanation: "TRUE. This is a quasi-experimental design. It can feel like an experiment, but because there is no randomly assigned treatment and control group, it is not a true experiment and is still observational.",
+                        mnemonic: "💡 Memory tip: <strong>Quasi means 'almost'.</strong> Almost an experiment is still not an experiment."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each description to the blinding level it describes.",
+                        cols: ["Blind", "Double-blind", "Triple-blind"],
+                        items: [
+                              { text: "Only the participants don't know which group they are in", answer: "Blind" },
+                              { text: "Cups of lemonade are covered so tasters can't see the color", answer: "Blind" },
+                              { text: "Participants and the person administering the treatment don't know", answer: "Double-blind" },
+                              { text: "The person handing out coded capsules doesn't know which hold the real medication", answer: "Double-blind" },
+                              { text: "Participants, the researcher, and the data analyst all don't know", answer: "Triple-blind" },
+                              { text: "Analysts only see 'Capsule A' and 'Capsule B' and never learn which is the real drug", answer: "Triple-blind" },
+                        ],
+                        explanation: "Blinding reduces bias, and the level is how many parties are kept in the dark. The unit is always blinded. Double-blind adds the researcher or administrator. Triple-blind adds the person collecting or analyzing the data. A placebo is the look-alike substance with no active treatment that the control group receives.",
+                        mnemonic: "💡 Memory tip: <strong>Count the blindfolds.</strong> One for the participant, two adds the researcher, three adds the analyst."
+                  },
+
+                  // ══ BIAS & OPERATIONALIZATION ══════════════════════════
+
+                  {
+                        type: 'ms',
+                        q: "Measurement bias occurs when the sample has which problems? (Select all that apply)",
+                        opts: ["It is not large enough",
+                              "It does not accurately represent the population",
+                              "It is not chosen randomly",
+                              "The participants are not truthful with the researcher",
+                              "The question is worded in a persuasive way"],
+                        correctSet: [0, 1, 2],
+                        explanation: "Measurement bias comes from how the SAMPLE is selected: too small, not representative of the population, or not random. Untruthful answers and persuasive wording are information bias.",
+                        mnemonic: "💡 Memory tip: <strong>S-R-R</strong>: <strong>S</strong>ize, <strong>R</strong>epresentative, <strong>R</strong>andom. A good sample is a 'mini me' of the population, like a nesting doll."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Both are information bias. Match each scenario to response bias (who is asking) or conscious bias (how it is worded).",
+                        cols: ["Response bias", "Conscious bias"],
+                        items: [
+                              { text: "Your teacher asks if the assignment was helpful", answer: "Response bias" },
+                              { text: "Your boss asks if you are happy with the new overtime hours", answer: "Response bias" },
+                              { text: "The officer who pulled you over asks if you knew you were speeding", answer: "Response bias" },
+                              { text: "You ask a customer if they like your new raspberry lemonade recipe", answer: "Response bias" },
+                              { text: "Members are asked if healthier organic meals should win over dangerous sports equipment", answer: "Conscious bias" },
+                              { text: "A candidate asks if the unfair tax increases were warranted", answer: "Conscious bias" },
+                              { text: "'Don't you agree that this product is better?'", answer: "Conscious bias" },
+                        ],
+                        explanation: "RESPONSE bias is about WHO is asking: people hold back the truth because of discomfort or pressure, or to avoid hurting someone's feelings. CONSCIOUS bias is about HOW the question is worded: persuasive language or a benefit pushes people toward an answer. To reduce response bias, use an anonymous survey or a third party (for example, an outside firm running a Great Places to Work survey).",
+                        mnemonic: "💡 Memory tip: <strong>Response = Who. Conscious = How.</strong> Conscious bias gets into your head through the words on the page."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "Which scenario shows NO bias?",
+                        opts: ["A company randomly selects employees from all departments, locations, and shifts for a workplace survey",
+                              "A company tests a new product with its most loyal customers",
+                              "A researcher surveys the first three people who walk in the door",
+                              "A manager asks her direct reports whether they like the new overtime policy"],
+                        correct: 0,
+                        explanation: "Random selection across all departments, locations, and shifts gives a representative, random sample. Loyal customers are not representative, the first three people are not random, and employees asked by their own manager may answer untruthfully (response bias).",
+                        mnemonic: "💡 Memory tip: <strong>Random + representative + large enough = clean sample.</strong> Everyone in the population has an equal chance, like names drawn from a hat."
+                  },
+
+                  {
+                        type: 'dd',
+                        q: "Match each flawed sample to the problem with it.",
+                        cols: ["Not random", "Not representative", "Too small"],
+                        items: [
+                              { text: "Calling the buyers of the last 30 used cars sold", answer: "Not random" },
+                              { text: "Surveying the first three people who walk in", answer: "Not random" },
+                              { text: "Measuring only 2-door coupes to make claims about convertibles", answer: "Not representative" },
+                              { text: "Testing a new product only with the most loyal customers", answer: "Not representative" },
+                              { text: "Talking only to your three best friends", answer: "Too small" },
+                              { text: "Surveying 50 people to represent a population of over 5 million", answer: "Too small" },
+                        ],
+                        explanation: "A good sample is random (everyone has an equal chance), representative (like a mini version of the population, such as only graduate students for a graduate student study), and large enough. The last 30 purchases are merely convenient, so the bigger problem is randomness, not the number 30. There is no magic sample size; it depends on the statistical test, and the square root of the population is only a starting point.",
+                        mnemonic: "💡 Memory tip: <strong>Convenient is not random.</strong> Last-in-line, first-through-the-door, or best-friend samples all fail the fair-draw test."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "What does it mean to avoid faulty operationalization?",
+                        opts: ["Clearly define in advance the sampling method, the questions, how responses are coded, and how results are interpreted",
+                              "Use the largest sample size possible regardless of how it was chosen",
+                              "Blind the participants so they cannot see the treatment",
+                              "Remove any outliers before the data is collected"],
+                        correct: 0,
+                        explanation: "Operationalization means defining how you measure concepts, collect data, and interpret results. If 'happy' and 'disgruntled' are not defined, different interviewers will code the same answer differently, giving inconsistent, invalid data. Decide up front how to handle an answer like 'maybe' to a yes/no question, and use shared definitions across all researchers.",
+                        mnemonic: "💡 Memory tip: <strong>Define it before you do it.</strong> If two researchers could read the same answer differently, you haven't operationalized it."
+                  },
+
+                  // ══ ASSOCIATION VS. CAUSATION ══════════════════════════
+
+                  {
+                        type: 'mc',
+                        q: "A teacher compares test scores of 60 students who attended live webinars and 60 who studied asynchronously. A t-test shows a significant difference, with higher scores for the webinar group. What can the teacher conclude?",
+                        opts: ["Average scores are significantly higher for the webinar group, but the webinars cannot be assumed to be the cause",
+                              "The live webinars caused the higher test scores",
+                              "The result proves the asynchronous format does not work",
+                              "No conclusion can be drawn because the groups are the same size"],
+                        correct: 0,
+                        explanation: "A t-test compares the averages of two groups and tells you whether the difference is statistically significant, but significance is not causation. Other variables, called limitations (hours of sleep before the exam, prior experience with the subject), could explain the difference and should be evaluated first.",
+                        mnemonic: "💡 Memory tip: <strong>Significant is not the same as causes.</strong> A t-test shows a gap exists, not why."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "A regression shows a strong positive relationship between temperature and lemonade sales. Which statements are acceptable ways to report it? (Select all that apply)",
+                        opts: ["Temperature is associated with lemonade sales",
+                              "There is a strong positive relationship between temperature and lemonade sales",
+                              "Higher temperatures cause lemonade sales to rise",
+                              "Heat reduces the number of unsold glasses",
+                              "Temperature impacts lemonade sales"],
+                        correctSet: [0, 1],
+                        explanation: "With correlation (association), say 'associated with' or 'a relationship exists.' Avoid causation words like causes, reduces, increases, and impacts. Only a controlled experiment supports causation. A hidden factor may explain the pattern, like ice cream sales and swimming pool visits both rising because it's hot.",
+                        mnemonic: "💡 Memory tip: <strong>Correlation = 'goes with'. Causation = 'makes happen'.</strong> Ban the words causes, reduces, increases, impacts."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "A regression analysis gives R² = 0.7238. What does this mean?",
+                        opts: ["The line fits the data about 72%, on a scale from 0 (weak fit) to 1 (strong fit)",
+                              "Temperature causes 72% of the change in sales",
+                              "The relationship is weak because the value is below 1",
+                              "There is a 72% chance that the data is accurate"],
+                        correct: 0,
+                        explanation: "R² is the goodness of fit, ranging from 0 (weak) to 1 (strong), or 0% to 100%. At 0.7238 the trend line fits the data points about 72%, like a 72% quiz score. A good fit shows a strong relationship but still does not prove causation.",
+                        mnemonic: "💡 Memory tip: <strong>R² is the line's quiz grade.</strong> Dots right on the line = 100%. Dots all over the place = 0%."
+                  },
+
+                  {
+                        type: 'tf',
+                        q: "A negative relationship between two variables is always a bad thing, and a positive relationship is always a good thing.",
+                        opts: ["True", "False"],
+                        correct: 1,
+                        explanation: "FALSE. Positive and negative describe direction, not good and bad. A positive relationship trends up from left to right: eating more and gaining weight is positive but not good. A negative relationship trends down: exercising more and weighing less is negative but not bad.",
+                        mnemonic: "💡 Memory tip: <strong>Positive and negative describe the slope, not the mood.</strong> Up the hill or down the hill."
+                  },
+
+                  // ══ ANALYTICS & THE DECISION PROCESS ═══════════════════
+
+                  {
+                        type: 'dd',
+                        q: "Match each scenario to the type of analytics it uses.",
+                        cols: ["Descriptive", "Predictive", "Prescriptive"],
+                        items: [
+                              { text: "Car prices rose 2% over the past year", answer: "Descriptive" },
+                              { text: "Analyzing the past five years of safety statistics for Honda, Toyota, and Ford", answer: "Descriptive" },
+                              { text: "Using the past 10 years of satisfaction scores to estimate next year", answer: "Predictive" },
+                              { text: "Car prices are expected to rise 1.5% next year based on past data", answer: "Predictive" },
+                              { text: "Increase rebates by 2% in anticipation of a 5% increase in revenue", answer: "Prescriptive" },
+                              { text: "Add an ad campaign to last year's $2,000 month, expecting a 5% increase", answer: "Prescriptive" },
+                        ],
+                        explanation: "DESCRIPTIVE = what happened (past and present, the lowest form). PREDICTIVE = what will happen (uses past data to forecast, no optimizing). PRESCRIPTIVE = what should we do (prediction plus optimization, the highest form and the most valuable). Ask: Am I predicting? If no, descriptive. If yes, am I optimizing? If yes, prescriptive; if no, predictive. Diagnostic is not one of the three types.",
+                        mnemonic: "💡 Memory tip: <strong>Rear-view mirror, windshield, GPS.</strong> Descriptive looks back, predictive looks ahead, prescriptive tells you which way to turn."
+                  },
+
+                  {
+                        type: 'ms',
+                        q: "A quantitative analysis model is a mathematical representation of the problem. Which characteristics should a good model have? (Select all that apply)",
+                        opts: ["It should be solvable",
+                              "It should be realistic",
+                              "It should be easy to understand and modify",
+                              "Its input data should be attainable",
+                              "It should be as complex as possible",
+                              "It should avoid using real data"],
+                        correctSet: [0, 1, 2, 3],
+                        explanation: "A good model is solvable, realistic, easy to understand and modify, and its input data is attainable. Accurate input data is essential: even a perfect model gives misleading results with bad data, and collecting accurate data can be one of the hardest steps.",
+                        mnemonic: "💡 Memory tip: <strong>S-R-E-A</strong>: <strong>S</strong>olvable, <strong>R</strong>ealistic, <strong>E</strong>asy to modify, <strong>A</strong>ttainable data. Simple, true, and fed with real data."
+                  },
+
+                  // ══ ORDERING ═══════════════════════════════════════════
+
+                  {
+                        type: 'ord',
+                        q: "Place the steps of the quantitative analysis approach in the correct order.",
+                        items: [
+                              { text: "Define the problem", order: 0 },
+                              { text: "Develop the model and acquire accurate input data", order: 1 },
+                              { text: "Develop and test the solution", order: 2 },
+                              { text: "Analyze the results, communicate recommendations, and implement", order: 3 },
+                        ],
+                        explanation: "1) Define the problem: the most important and often most difficult step; go beyond symptoms to the true cause and review previous findings. 2) Develop the model and acquire accurate data. 3) Develop and test the solution; both model and data need testing for accuracy and completeness. 4) Analyze the results, communicate recommendations to stakeholders, and implement. After implementation, keep monitoring, because a changing economy or demand may require changes.",
+                        mnemonic: "💡 Memory tip: <strong>D-M-S-A</strong>: <strong>D</strong>efine, <strong>M</strong>odel, <strong>S</strong>olve, <strong>A</strong>nalyze and act. 'Don't Make Strange Assumptions.'"
+                  },
+
+                  {
+                        type: 'ord',
+                        q: "Place the data-driven decision process in the correct order.",
+                        items: [
+                              { text: "Frame the problem", order: 0 },
+                              { text: "Solve the problem", order: 1 },
+                              { text: "Communicate the results", order: 2 },
+                        ],
+                        explanation: "The data-driven decision process guides problem resolution by FRAMING the problem (understand the scope, decide who in the organization to collaborate with, and develop a research question), SOLVING it, and COMMUNICATING the results.",
+                        mnemonic: "💡 Memory tip: <strong>Frame → Solve → Communicate.</strong> Define the picture, do the work, show it off."
+                  },
+
+            ];
+
+            initQuiz(questions, 'Section 1');
+      </script>
+</body>
+
+</html>

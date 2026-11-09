@@ -9,6 +9,7 @@ questions.
 | Course | Status |
 |---|---|
 | **C213** Accounting for Decision Makers | 11 sections, 2 practice exams, 2 formula sheets |
+| **C207** Data-Driven Decision Making | 1 section (more added as the course progresses) |
 
 ---
 
@@ -35,6 +36,10 @@ root and is used by every course, so a fix lands once.
 │       ├── section02.html …    Study notes per section
 │       ├── formulas-provided.html   Formulas available during testing
 │       └── formulas-memorize.html   Formulas to memorize
+├── c207/
+│   ├── index.html          Course hub
+│   ├── quizzes/section01.html …    One quiz per course section
+│   └── notes/section01.html …      Study notes per section
 └── docs/PROMPT.md          Reusable prompt for generating a new section quiz
 ```
 
@@ -61,6 +66,12 @@ relative paths; the hub's question-count script keys off that `quizzes/` prefix.
 | 10 | Management Accounting & Cost Concepts |
 | 11 | Activity-Based Costing (ABC) |
 | 12 | Cost Behavior & C-V-P Analysis |
+
+### C207 sections
+
+| Section | Topic |
+|---|---|
+| 1 | The Case for Quantitative Analysis |
 
 
 ---
