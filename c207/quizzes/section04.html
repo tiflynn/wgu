@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C207 Data-Driven Decision Making · Section 4 Quiz</title>
+      <link rel="stylesheet" href="../../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Sections</a>
+            <a class="back-link notes" href="../notes/section04.html" target="_blank" rel="noopener">📄 Section 4 Notes</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C207 Data-Driven Decision Making · Section 4</p>
+            <h1>Quality Metrics<br><span>and Tools</span></h1>
+      </header>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  // ══ QUALITY MANAGEMENT: QA vs QC ══════════
+                  {
+                        type: "mc",
+                        q: "Which statement best describes an effective quality management program?",
+                        opts: [
+                              "It uses both quality assurance (preventing defects) and quality control (detecting defects) in every function, guided by clear goals from leadership.",
+                              "It relies only on final inspection by a separate quality department.",
+                              "It uses quality control alone, because trying to prevent defects costs too much.",
+                              "It applies only to manufacturing, since service functions do not have defects to measure."
+                        ],
+                        correct: 0,
+                        explanation: "Quality is a <strong>culture</strong>, not one department. Purchasing, manufacturing, customer service and talent management each own the quality of their own process with a customer focus. A holistic program combines <strong>assurance (prevent)</strong> and <strong>control (detect)</strong>, and leaders must define and communicate the vision and goals. Fact-based decisions also reduce bias.",
+                        mnemonic: "💡 Memory tip: <strong>Quality is everybody's job.</strong> A fire plan needs both smoke prevention (QA) and a fire extinguisher (QC)."
+                  },
+                  {
+                        type: "ms",
+                        q: "At a minimum, every member of an organization should be responsible for identifying and communicating which of the following? Select all that apply.",
+                        opts: [
+                              "Defective product",
+                              "Inefficiencies",
+                              "Irregularities",
+                              "Competitors' pricing strategies",
+                              "Executive compensation decisions",
+                              "Supplier contract terms"
+                        ],
+                        correctSet: [0, 1, 2],
+                        explanation: "Everyone must know the goals and specifications of the product or service and, at a minimum, <strong>identify and communicate defective product, inefficiencies and irregularities</strong>. Pricing strategy, executive pay and supplier contracts are managed by specific roles, not part of every employee's quality duty.",
+                        mnemonic: "💡 Memory tip: <strong>D-I-I: Defects, Inefficiencies, Irregularities.</strong> If you see it, say it."
+                  },
+                  {
+                        type: "dd",
+                        q: "Sort each description under quality control (QC) or quality assurance (QA).",
+                        cols: ["Quality Control (QC)", "Quality Assurance (QA)"],
+                        items: [
+                              { text: "Reactive: acts after a problem has occurred", answer: "Quality Control (QC)" },
+                              { text: "Corrective action", answer: "Quality Control (QC)" },
+                              { text: "Basic level: recognizes problems so they can be fixed", answer: "Quality Control (QC)" },
+                              { text: "Goal: uncover defects so they can be fixed", answer: "Quality Control (QC)" },
+                              { text: "Proactive: acts before a problem occurs", answer: "Quality Assurance (QA)" },
+                              { text: "Preventive action", answer: "Quality Assurance (QA)" },
+                              { text: "Advanced level: understands the process well enough to predict outcomes", answer: "Quality Assurance (QA)" },
+                              { text: "Major activity: training people so mistakes are not made", answer: "Quality Assurance (QA)" }
+                        ],
+                        explanation: "<strong>QC</strong> is <strong>reactive</strong>: it assesses performance and recommends <strong>corrective</strong> action after defects appear. <strong>QA</strong> is <strong>proactive</strong>: it assesses the capability of the system or process and recommends <strong>preventive</strong> action. QA is the more advanced level because it requires understanding the process well enough to predict outcomes, which is why <strong>training</strong> is its major activity.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 250' role='img' aria-label='Timeline showing quality assurance acting before a defect and quality control acting after it' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar1' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='30' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>When does each one act?</text><line x1='40' y1='120' x2='560' y2='120' stroke='#5C677D' stroke-width='3' marker-end='url(#ar1)'/><circle cx='330' cy='120' r='10' fill='#DC2626'/><text x='330' y='100' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>Defect occurs</text><rect x='40' y='150' width='270' height='78' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='175' y='178' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>QA: BEFORE the defect</text><text x='175' y='202' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>proactive, preventive</text><text x='175' y='222' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>training, standards</text><rect x='350' y='150' width='210' height='78' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='455' y='178' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>QC: AFTER the defect</text><text x='455' y='202' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>reactive, corrective</text><text x='455' y='222' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>inspect, find, fix</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>QC = Catch and Clean up. QA = Avoid it in the first place.</strong> Control = Corrective; Assurance = Anticipate."
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: Quality assurance is reactive, because it takes action only after a defect has occurred.",
+                        opts: ["True", "False"],
+                        correct: 1,
+                        explanation: "False. <strong>Quality assurance is proactive</strong>: it acts before problems occur, by preventing defects. It is <strong>quality control</strong> that is reactive and responds after a defect has already happened.",
+                        mnemonic: "💡 Memory tip: <strong>QA = Ahead of the problem. QC = Chasing the problem.</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "Which of the following is an example of quality assurance rather than quality control?",
+                        opts: [
+                              "Training staff and writing standard operating procedures so that mistakes are not made",
+                              "Rejecting a defective batch at final inspection and sending it for rework",
+                              "Repairing a defective unit found on the production line",
+                              "Recalling a product after customers report a defect"
+                        ],
+                        correct: 0,
+                        explanation: "QA <strong>prevents</strong> errors or defects, for example through training, standard operating procedures, or internal users testing an update before it launches. The other choices all respond to a defect that <strong>already exists</strong>, which makes them QC.",
+                        mnemonic: "💡 Memory tip: <strong>Recipe card vs. taste test.</strong> A recipe card (QA) stops bad soup; the taste test (QC) finds it after cooking."
+                  },
+                  {
+                        type: "mc",
+                        q: "Who started quality control in 1931 with control charts that were originally named after him?",
+                        opts: [
+                              "Walter Shewhart",
+                              "W. Edwards Deming",
+                              "Kaoru Ishikawa",
+                              "Vilfredo Pareto"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>Walter Shewhart</strong> began quality control in 1931; the first control charts were called <strong>Shewhart control charts</strong>. Deming carried the ideas forward after World War II, Ishikawa is linked to the seven basic tools, and Pareto gave his name to the 80/20 rule.",
+                        mnemonic: "💡 Memory tip: <strong>Shewhart Started it in 1931.</strong> S for Shewhart, S for Start."
+                  },
+                  {
+                        type: "mc",
+                        q: "After World War II, who promoted statistical process control and control charts, first in the United States and then in Japan, where they helped rebuild Japanese quality?",
+                        opts: [
+                              "W. Edwards Deming",
+                              "Walter Shewhart",
+                              "Lee Iacocca",
+                              "Kaoru Ishikawa"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>W. Edwards Deming</strong> used control charts and statistical process control. Few Americans listened at first, so he went to Japan, where manufacturers adopted his methods and grew into global leaders. Shewhart invented the charts in 1931.",
+                        mnemonic: "💡 Memory tip: <strong>Deming took it Diaspora:</strong> when the US did not listen, he went to Japan."
+                  },
+
+                  // ══ PLAN-DO-CHECK-ACT ══════════
+                  {
+                        type: "ord",
+                        q: "Place the steps of the PDCA cycle in the correct order.",
+                        items: [
+                              { text: "Plan: investigate the cause of the problem and plan a solution", order: 0 },
+                              { text: "Do: try the solution on a small scale", order: 1 },
+                              { text: "Check: see whether the problem is still occurring", order: 2 },
+                              { text: "Act: make the solution that worked a permanent part of the process", order: 3 }
+                        ],
+                        explanation: "PDCA is the problem-solving cycle: <strong>Plan</strong> (investigate and plan a fix), <strong>Do</strong> (try it), <strong>Check</strong> (did it work?), <strong>Act</strong> (institutionalize what worked). Plan, Do and Check repeat until something works. In Lean Six Sigma, PDCA is the pilot-test cycle used in the <strong>Improve</strong> phase.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 260' role='img' aria-label='PDCA cycle: Plan, Do and Check are quality control; Act is quality assurance' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar2' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='30' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Plan, Do and Check = QC · Act = QA</text><rect x='18' y='80' width='114' height='84' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='75' y='108' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Plan</text><text x='75' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Investigate</text><text x='75' y='152' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>and plan</text><rect x='168' y='80' width='114' height='84' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='225' y='108' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Do</text><text x='225' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Try the fix</text><text x='225' y='152' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>on a trial</text><rect x='318' y='80' width='114' height='84' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='375' y='108' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Check</text><text x='375' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Did it work?</text><text x='375' y='152' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>If not, loop</text><rect x='468' y='80' width='114' height='84' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='525' y='108' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Act</text><text x='525' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Make it the</text><text x='525' y='152' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>new standard</text><path d='M132 122H168' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar2)'/><path d='M282 122H318' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar2)'/><path d='M432 122H468' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar2)'/><path d='M375 80V54H75V80' fill='none' stroke='#DC2626' stroke-width='2' marker-end='url(#ar2)'/><text x='225' y='48' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='400'>still failing: investigate again</text><path d='M18 184V194H282V184' fill='none' stroke='#5C677D' stroke-width='2'/><text x='150' y='218' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Quality control</text><text x='150' y='238' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>reactive: fixes the defect</text><path d='M468 184V194H582V184' fill='none' stroke='#2563EB' stroke-width='2'/><text x='525' y='218' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Quality assurance</text><text x='525' y='238' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>proactive: prevents</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>\"Please Don't Cut Apples.\"</strong> Plan, Do, Check, Act."
+                  },
+                  {
+                        type: "mc",
+                        q: "In the PDCA cycle, which step parallels quality assurance rather than quality control?",
+                        opts: [
+                              "Act",
+                              "Plan",
+                              "Do",
+                              "Check"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>Act</strong> institutionalizes the solution that worked so the problem cannot occur again, which is <strong>prevention</strong>, the heart of QA. Plan, Do and Check fix a problem that already exists, so they parallel QC.",
+                        mnemonic: "💡 Memory tip: <strong>P-D-C fix it, A keeps it fixed.</strong> Act = Assurance."
+                  },
+                  {
+                        type: "mc",
+                        q: "In PDCA, a team completes the Check step and finds the problem still occurs. What should it do next?",
+                        opts: [
+                              "Return to investigating and planning, try a different solution, and check again until one works",
+                              "Move to Act and make the current solution permanent anyway",
+                              "Stop, because Check is the final step of the cycle",
+                              "Skip to quality assurance training and end the project"
+                        ],
+                        correct: 0,
+                        explanation: "You only reach <strong>Act</strong> once Check shows a solution actually works. If the problem persists, the team <strong>iterates</strong> through Plan, Do and Check again. A trial of a solution is <strong>Do</strong>, not Act, and institutionalizing a failed fix would lock in the problem.",
+                        mnemonic: "💡 Memory tip: <strong>No pass, no promotion.</strong> A fix must pass Check before it graduates to Act."
+                  },
+                  {
+                        type: "mc",
+                        q: "A customer reports receiving a batch of defective products, and nobody yet knows why. Which approach should the team begin with?",
+                        opts: [
+                              "PDCA, starting by investigating what is causing the problem",
+                              "Quality control, because defects have already been found",
+                              "Quality assurance training, because training prevents defects",
+                              "Just-in-Time ordering of new supplies"
+                        ],
+                        correct: 0,
+                        explanation: "When the cause is <strong>unknown</strong>, you cannot yet apply a QC fix. <strong>PDCA</strong> starts with investigating, then planning, trying and checking a solution. QC assumes the problem is already identified. Basic quality tools such as a flowchart can support the investigation, but they are not the whole approach.",
+                        mnemonic: "💡 Memory tip: <strong>Detective first, repair second.</strong> Investigate before you plan."
+                  },
+                  {
+                        type: "mc",
+                        q: "A variation of PDCA replaces \"Check\" with \"Study.\" What is it called?",
+                        opts: [
+                              "PDSA (Plan, Do, Study, Act)",
+                              "DMAIC",
+                              "SIPOC",
+                              "PDQA"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>PDSA</strong> swaps Check for <strong>Study</strong>. In the Express session PDCA was described as the version for day-to-day operations, while PDSA is the version that leads toward a Six Sigma approach in quality assurance.",
+                        mnemonic: "💡 Memory tip: <strong>Check = tick the box. Study = learn from it.</strong> PDSA: S for Study."
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: Using a control chart to keep an eye on a process so that problems never develop is an example of quality assurance, even though it is called a control chart.",
+                        opts: ["True", "False"],
+                        correct: 0,
+                        explanation: "True. The purpose matters more than the name. If you are <strong>keeping an eye on</strong> a process to make sure there are <strong>no problems</strong>, that is <strong>assurance</strong>, even when the tool is a control chart. Shewhart's original aim was to confirm that nothing was wrong with the system.",
+                        mnemonic: "💡 Memory tip: <strong>\"Keep an eye on\" = Assure.</strong> Read the keyword, not the tool name."
+                  },
+
+                  // ══ SEVEN BASIC QUALITY TOOLS ══════════
+                  {
+                        type: "mc",
+                        q: "Roughly what share of quality-related problems can the seven basic quality tools solve?",
+                        opts: [
+                              "90 to 95%",
+                              "50 to 60%",
+                              "70 to 75%",
+                              "99 to 100%"
+                        ],
+                        correct: 0,
+                        explanation: "The seven basic quality tools can solve about <strong>90 to 95%</strong> of the quality problems an organization sees, which is why they are called basic. Each can be used on its own or in combination.",
+                        mnemonic: "💡 Memory tip: <strong>Seven tools, ninety-five percent.</strong> 7 tools → 90–95%."
+                  },
+                  {
+                        type: "ms",
+                        q: "Select all of the seven basic quality tools.",
+                        opts: [
+                              "Run chart",
+                              "Fishbone (cause-and-effect) diagram",
+                              "Flowchart",
+                              "Check sheet",
+                              "Histogram",
+                              "Pareto chart",
+                              "Scatter diagram",
+                              "SWOT matrix",
+                              "Gantt chart",
+                              "Decision tree"
+                        ],
+                        correctSet: [0, 1, 2, 3, 4, 5, 6],
+                        explanation: "The seven basic tools are the <strong>run chart, fishbone (cause-and-effect) diagram, flowchart, check sheet, histogram, Pareto chart and scatter diagram</strong>. A control chart is a run chart with limits added. SWOT, Gantt charts and decision trees are useful planning tools but are not among the seven.",
+                        mnemonic: "💡 Memory tip: <strong>\"Real Fish Frequently Cook Healthy Pasta Soup.\"</strong> Run, Fishbone, Flowchart, Check, Histogram, Pareto, Scatter."
+                  },
+                  {
+                        type: "dd",
+                        q: "Match each description to the tool it fits: run chart, fishbone diagram or flowchart.",
+                        cols: ["Run chart", "Fishbone diagram", "Flowchart"],
+                        items: [
+                              { text: "Tracks performance over time", answer: "Run chart" },
+                              { text: "Reveals trends, cycles and seasonal patterns", answer: "Run chart" },
+                              { text: "Answers WHY the problem is occurring", answer: "Fishbone diagram" },
+                              { text: "Groups possible causes into categories such as people, machines and methods", answer: "Fishbone diagram" },
+                              { text: "Answers WHERE in the process the problem occurs", answer: "Flowchart" },
+                              { text: "Maps the steps of a process and the order they follow", answer: "Flowchart" }
+                        ],
+                        explanation: "Match the <strong>question the tool answers</strong>. <strong>Run chart</strong> = performance <em>over time</em>. <strong>Fishbone</strong> (cause-and-effect, also called Ishikawa) = <em>why</em>. <strong>Flowchart</strong> = <em>where</em> in the process. Both fishbone and flowchart help identify a part of the process.",
+                        mnemonic: "💡 Memory tip: <strong>Run = Time, Fish = Why, Flow = Where.</strong> The Three Ws and a clock."
+                  },
+                  {
+                        type: "dd",
+                        q: "Match each description to the tool it fits.",
+                        cols: ["Check sheet", "Histogram", "Pareto chart", "Scatter diagram"],
+                        items: [
+                              { text: "Collects and tallies how often something occurs", answer: "Check sheet" },
+                              { text: "Its data can later be keyed into a spreadsheet or software for analysis", answer: "Check sheet" },
+                              { text: "Shows how data is distributed, with the tallest bar in the middle", answer: "Histogram" },
+                              { text: "Mean, median and mode are close together, giving a bell-shaped pattern", answer: "Histogram" },
+                              { text: "Bars are sorted from tallest to shortest, left to right", answer: "Pareto chart" },
+                              { text: "Based on the 80/20 rule: fix the biggest cause first", answer: "Pareto chart" },
+                              { text: "Shows the relationship between two variables", answer: "Scatter diagram" },
+                              { text: "Shows the strength of an association but not its cause", answer: "Scatter diagram" }
+                        ],
+                        explanation: "The <strong>check sheet</strong> <em>collects</em> the counts. The <strong>histogram</strong> and <strong>Pareto</strong> both <em>display</em> frequencies as bars: the histogram is centered on the mode, while the Pareto is re-sorted high to low to <em>prioritize</em>. The <strong>scatter diagram</strong> examines how two variables relate.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 272' role='img' aria-label='Histogram with the tallest bar in the middle next to a Pareto chart sorted from tallest to shortest' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar3' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>A Pareto chart is a re-sorted histogram</text><text x='150' y='62' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Histogram</text><text x='150' y='84' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>tallest bar in the middle</text><text x='450' y='62' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Pareto</text><text x='450' y='84' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>tallest bar first</text><rect x='32' y='205' width='30' height='20' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='68' y='180' width='30' height='45' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='104' y='145' width='30' height='80' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='140' y='115' width='30' height='110' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='176' y='150' width='30' height='75' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='212' y='185' width='30' height='40' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='248' y='210' width='30' height='15' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='332' y='115' width='30' height='110' rx='3' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><rect x='368' y='145' width='30' height='80' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='404' y='150' width='30' height='75' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='440' y='180' width='30' height='45' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='476' y='185' width='30' height='40' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='512' y='205' width='30' height='20' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><rect x='548' y='210' width='30' height='15' rx='3' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><line x1='26' x2='284' y1='225' y2='225' stroke='#5C677D' stroke-width='2'/><line x1='326' x2='584' y1='225' y2='225' stroke='#5C677D' stroke-width='2'/><text x='347' y='106' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Fix first</text><text x='300' y='254' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Bar height = frequency of each category</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Check = Count. Histogram = Hill. Pareto = Priority staircase. Scatter = Sweethearts (two variables).</strong>"
+                  },
+                  {
+                        type: "ms",
+                        q: "Which of the following are labeled parts of a run chart? Select all that apply.",
+                        opts: [
+                              "Data points",
+                              "Median line",
+                              "Trend",
+                              "Shift",
+                              "Upper control limit",
+                              "Lower control limit"
+                        ],
+                        correctSet: [0, 1, 2, 3],
+                        explanation: "A run chart shows <strong>data points</strong> over time with a <strong>median line</strong>, and it helps you spot a <strong>trend</strong> (drifting in one direction) or a <strong>shift</strong> (a sustained move above or below the median). Control limits are not part of a run chart; adding them turns it into a control chart.",
+                        mnemonic: "💡 Memory tip: <strong>\"Dots Make Trends and Shifts.\"</strong> Data, Median, Trend, Shift."
+                  },
+                  {
+                        type: "mc",
+                        q: "What turns a run chart into a control chart?",
+                        opts: [
+                              "Adding an upper control limit (UCL) and a lower control limit (LCL)",
+                              "Adding a median line",
+                              "Adding a second variable to the x-axis",
+                              "Sorting the points from highest to lowest"
+                        ],
+                        correct: 0,
+                        explanation: "Both plot a measure <strong>over time</strong>. A <strong>control chart</strong> is simply a run chart with <strong>UCL and LCL</strong> lines added, so you can judge whether points are within normal variation.",
+                        mnemonic: "💡 Memory tip: <strong>Run chart + fences = control chart.</strong> UCL and LCL are the fences."
+                  },
+                  {
+                        type: "ms",
+                        q: "Which of these are typical cause categories on a fishbone (cause-and-effect) diagram? Select all that apply.",
+                        opts: [
+                              "People",
+                              "Machines",
+                              "Methods",
+                              "Materials",
+                              "Measurement",
+                              "Environment",
+                              "Revenue",
+                              "Competitors"
+                        ],
+                        correctSet: [0, 1, 2, 3, 4, 5],
+                        explanation: "The head of the fish is the <strong>problem (effect)</strong> and each bone is a category of possible causes. Common categories are <strong>people, machines, methods, materials, measurement and environment</strong>. Revenue and competitors are business outcomes or outside forces, not standard cause categories.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 292' role='img' aria-label='Fishbone diagram with six cause categories feeding into one problem' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar4' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Fishbone: causes of one problem</text><line x1='20' y1='150' x2='470' y2='150' stroke='#5C677D' stroke-width='3' marker-end='url(#ar4)'/><line x1='90' y1='78' x2='150' y2='150' stroke='#5C677D' stroke-width='2'/><line x1='90' y1='222' x2='150' y2='150' stroke='#5C677D' stroke-width='2'/><text x='90' y='66' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>People</text><text x='90' y='246' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Materials</text><line x1='220' y1='78' x2='280' y2='150' stroke='#5C677D' stroke-width='2'/><line x1='220' y1='222' x2='280' y2='150' stroke='#5C677D' stroke-width='2'/><text x='220' y='66' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Methods</text><text x='220' y='246' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Measurement</text><line x1='350' y1='78' x2='410' y2='150' stroke='#5C677D' stroke-width='2'/><line x1='350' y1='222' x2='410' y2='150' stroke='#5C677D' stroke-width='2'/><text x='350' y='66' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Machines</text><text x='350' y='246' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Environment</text><rect x='474' y='118' width='112' height='64' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='530' y='146' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Problem</text><text x='530' y='168' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>(effect)</text><text x='300' y='276' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Each bone = a category of possible causes</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>The 6 Ms:</strong> Manpower (people), Machines, Methods, Materials, Measurement, Mother nature (environment)."
+                  },
+                  {
+                        type: "ord",
+                        q: "A manager is tracking down and prioritizing a defect. Place the tools in the order they are commonly chained.",
+                        items: [
+                              { text: "Flowchart: locate the step of the process where the defect appears", order: 0 },
+                              { text: "Fishbone diagram: brainstorm possible root causes within that step", order: 1 },
+                              { text: "Check sheet: count how often each cause occurs", order: 2 },
+                              { text: "Pareto chart: rank the causes so the biggest is fixed first", order: 3 }
+                        ],
+                        explanation: "Use the tools as a chain: the <strong>flowchart</strong> shows <em>where</em>, the <strong>fishbone</strong> lists <em>why</em>, the <strong>check sheet</strong> <em>counts</em> each cause, and the <strong>Pareto</strong> <em>ranks</em> them so you attack the tallest bar first.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 194' role='img' aria-label='Chain of quality tools: flowchart, fishbone, check sheet, Pareto' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar5' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Tools used as a chain</text><rect x='14' y='62' width='124' height='74' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='76' y='94' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Flowchart</text><text x='76' y='120' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>which step?</text><path d='M140 99H158' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar5)'/><rect x='162' y='62' width='124' height='74' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='224' y='94' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Fishbone</text><text x='224' y='120' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>why?</text><path d='M288 99H306' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar5)'/><rect x='310' y='62' width='124' height='74' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='372' y='94' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Check sheet</text><text x='372' y='120' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>count it</text><path d='M436 99H454' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar5)'/><rect x='458' y='62' width='124' height='74' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='520' y='94' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Pareto</text><text x='520' y='120' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>prioritize</text><text x='300' y='176' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Locate it, explain it, count it, rank it</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>\"Where, Why, How many, Which first?\"</strong> Flow, Fish, Check, Pareto."
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: A check sheet is mainly used to display how data is distributed across categories.",
+                        opts: ["True", "False"],
+                        correct: 1,
+                        explanation: "False. A <strong>check sheet collects and tallies data</strong> (such as attendance, or satisfactory vs. not satisfactory inspections). The <strong>histogram</strong> is what displays how that data is distributed.",
+                        mnemonic: "💡 Memory tip: <strong>Check sheet = clipboard. Histogram = picture.</strong> Collect first, then display."
+                  },
+                  {
+                        type: "mc",
+                        q: "A histogram has its tallest bar in the middle, and the mean, median and mode are nearly equal. Which distribution does it most resemble?",
+                        opts: [
+                              "A normal (bell-shaped) distribution",
+                              "A right-skewed distribution",
+                              "A uniform distribution where every bar is the same height",
+                              "A Pareto staircase"
+                        ],
+                        correct: 0,
+                        explanation: "When the <strong>mode, mean and median are close together or equal</strong>, the data is centered and bell-shaped, like a <strong>normal distribution</strong>. A Pareto re-sorts the bars so the tallest is on the left instead.",
+                        mnemonic: "💡 Memory tip: <strong>Three M's in the middle = bell.</strong> Mean, Median, Mode huddle together."
+                  },
+                  {
+                        type: "mc",
+                        q: "According to the Pareto principle (the 80/20 rule), what is typically true?",
+                        opts: [
+                              "About 80% of problems come from about 20% of the causes",
+                              "About 20% of problems come from 80% of the causes",
+                              "About 50% of problems come from 50% of the causes",
+                              "About 99.7% of problems come from 3% of the causes"
+                        ],
+                        correct: 0,
+                        explanation: "The <strong>Pareto principle</strong> says roughly <strong>20% of causes are responsible for 80% of outcomes</strong>. That is why the Pareto chart sorts causes from highest to lowest frequency: fix the few biggest causes first. It is named for Vilfredo Pareto, who started the 80/20 rule.",
+                        mnemonic: "💡 Memory tip: <strong>The vital few, the trivial many.</strong> A few big bars make most of the mess."
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: A scatter diagram proves that a change in one variable causes a change in the other.",
+                        opts: ["True", "False"],
+                        correct: 1,
+                        explanation: "False. A scatter diagram shows whether two variables are <strong>related</strong> and how strongly (for example with R²). It does not check significance, and it cannot prove <strong>cause</strong>. If a relationship exists, you can investigate cause later in the root cause analysis.",
+                        mnemonic: "💡 Memory tip: <strong>Scatter shows togetherness, not blame.</strong> Association is not causation."
+                  },
+
+                  // ══ STATISTICAL PROCESS CONTROL ══════════
+                  {
+                        type: "mc",
+                        q: "What is statistical process control (SPC) designed to do?",
+                        opts: [
+                              "Identify variation within a process and signal when there is too much and correction is needed",
+                              "Eliminate every bit of variation so every output is identical",
+                              "Collect customer opinions after delivery",
+                              "Rank the causes of defects by cost"
+                        ],
+                        correct: 0,
+                        explanation: "Every process has a <strong>normal amount of variation</strong>. SPC charts show when a process has <strong>too much</strong> variation and needs correction. They are used mainly in the <strong>Measure</strong> and <strong>Control</strong> phases and in Improve to verify that a change worked. SPC separates common cause from special cause variation.",
+                        mnemonic: "💡 Memory tip: <strong>SPC is a smoke detector, not a fire eliminator.</strong> It tells you when variation is abnormal."
+                  },
+                  {
+                        type: "mc",
+                        q: "A control chart uses 3-sigma limits. The process mean is 50 and the standard deviation is 4. What are the lower and upper control limits?",
+                        opts: [
+                              "38 and 62",
+                              "46 and 54",
+                              "42 and 58",
+                              "34 and 66"
+                        ],
+                        correct: 0,
+                        explanation: "The limits sit <strong>3 standard deviations</strong> either side of the mean: 50 − (3 × 4) = <strong>38</strong> and 50 + (3 × 4) = <strong>62</strong>. By the empirical rule about <strong>99.7%</strong> of points should fall between them. 46 and 54 are ±1 SD, 42 and 58 are ±2 SD, and 34 and 66 are ±4 SD.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 292' role='img' aria-label='Control chart with upper and lower control limits and one point outside the upper limit' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar6' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Control chart: mean ± 3 SD</text><rect x='92' y='75' width='480' height='150' fill='#EEF1F6' fill-opacity='.7'/><line x1='92' x2='572' y1='75' y2='75' stroke='#5C677D' stroke-width='2' stroke-dasharray='6 4'/><text x='84' y='80' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>UCL</text><line x1='92' x2='572' y1='150' y2='150' stroke='#5C677D' stroke-width='2' /><text x='84' y='155' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>Mean</text><line x1='92' x2='572' y1='225' y2='225' stroke='#5C677D' stroke-width='2' stroke-dasharray='6 4'/><text x='84' y='230' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>LCL</text><path d='M92 142.5L112 162.5L132 130.0L152 155.0L172 137.5L192 177.5L212 145.0L232 127.5L252 167.5L272 147.5L292 160.0L312 67.5L332 135.0L352 172.5L372 140.0L392 152.5L412 125.0L432 165.0L452 145.0L472 182.5L492 132.5L512 157.5L532 137.5L552 170.0L572 147.5' fill='none' stroke='#5C677D' stroke-width='2'/><circle cx='92' cy='142.5' r='4' fill='#1A2035'/><circle cx='112' cy='162.5' r='4' fill='#1A2035'/><circle cx='132' cy='130.0' r='4' fill='#1A2035'/><circle cx='152' cy='155.0' r='4' fill='#1A2035'/><circle cx='172' cy='137.5' r='4' fill='#1A2035'/><circle cx='192' cy='177.5' r='4' fill='#1A2035'/><circle cx='212' cy='145.0' r='4' fill='#1A2035'/><circle cx='232' cy='127.5' r='4' fill='#1A2035'/><circle cx='252' cy='167.5' r='4' fill='#1A2035'/><circle cx='272' cy='147.5' r='4' fill='#1A2035'/><circle cx='292' cy='160.0' r='4' fill='#1A2035'/><circle cx='312' cy='67.5' r='4' fill='#DC2626'/><circle cx='332' cy='135.0' r='4' fill='#1A2035'/><circle cx='352' cy='172.5' r='4' fill='#1A2035'/><circle cx='372' cy='140.0' r='4' fill='#1A2035'/><circle cx='392' cy='152.5' r='4' fill='#1A2035'/><circle cx='412' cy='125.0' r='4' fill='#1A2035'/><circle cx='432' cy='165.0' r='4' fill='#1A2035'/><circle cx='452' cy='145.0' r='4' fill='#1A2035'/><circle cx='472' cy='182.5' r='4' fill='#1A2035'/><circle cx='492' cy='132.5' r='4' fill='#1A2035'/><circle cx='512' cy='157.5' r='4' fill='#1A2035'/><circle cx='532' cy='137.5' r='4' fill='#1A2035'/><circle cx='552' cy='170.0' r='4' fill='#1A2035'/><circle cx='572' cy='147.5' r='4' fill='#1A2035'/><circle cx='312' cy='67.5' r='11' fill='none' stroke='#DC2626' stroke-width='2'/><text x='332' y='72.5' font-size='16' fill='#DC2626' text-anchor='start' font-weight='700'>Special cause</text><text x='330' y='252' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Inside the limits: common cause (random)</text><text x='330' y='276' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Schematic points, time runs left to right</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Mean ± 3 SD: \"Three steps each way.\"</strong> 50 ± 12."
+                  },
+                  {
+                        type: "dd",
+                        q: "Sort each description under common cause or special cause variation.",
+                        cols: ["Common cause variation", "Special cause variation"],
+                        items: [
+                              { text: "Random, natural fluctuation in the process", answer: "Common cause variation" },
+                              { text: "Points fall inside the control limits", answer: "Common cause variation" },
+                              { text: "Expected in every process", answer: "Common cause variation" },
+                              { text: "Example: hitting a few more red lights on one trip than another", answer: "Common cause variation" },
+                              { text: "Non-random; has an assignable cause", answer: "Special cause variation" },
+                              { text: "A point falls outside the control limits", answer: "Special cause variation" },
+                              { text: "Systematic error that must be found and corrected", answer: "Special cause variation" },
+                              { text: "Example: a storm or a sudden machine breakdown", answer: "Special cause variation" }
+                        ],
+                        explanation: "<strong>Common cause</strong> variation is the normal, random fluctuation you expect inside the limits. <strong>Special cause</strong> variation is non-random: it has an assignable cause (systematic error) and shows up outside the limits, so you must find and fix it.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 292' role='img' aria-label='Control chart with upper and lower control limits and one point outside the upper limit' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar7' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Control chart: mean ± 3 SD</text><rect x='92' y='75' width='480' height='150' fill='#EEF1F6' fill-opacity='.7'/><line x1='92' x2='572' y1='75' y2='75' stroke='#5C677D' stroke-width='2' stroke-dasharray='6 4'/><text x='84' y='80' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>UCL</text><line x1='92' x2='572' y1='150' y2='150' stroke='#5C677D' stroke-width='2' /><text x='84' y='155' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>Mean</text><line x1='92' x2='572' y1='225' y2='225' stroke='#5C677D' stroke-width='2' stroke-dasharray='6 4'/><text x='84' y='230' font-size='16' fill='#1A2035' text-anchor='end' font-weight='700'>LCL</text><path d='M92 142.5L112 162.5L132 130.0L152 155.0L172 137.5L192 177.5L212 145.0L232 127.5L252 167.5L272 147.5L292 160.0L312 67.5L332 135.0L352 172.5L372 140.0L392 152.5L412 125.0L432 165.0L452 145.0L472 182.5L492 132.5L512 157.5L532 137.5L552 170.0L572 147.5' fill='none' stroke='#5C677D' stroke-width='2'/><circle cx='92' cy='142.5' r='4' fill='#1A2035'/><circle cx='112' cy='162.5' r='4' fill='#1A2035'/><circle cx='132' cy='130.0' r='4' fill='#1A2035'/><circle cx='152' cy='155.0' r='4' fill='#1A2035'/><circle cx='172' cy='137.5' r='4' fill='#1A2035'/><circle cx='192' cy='177.5' r='4' fill='#1A2035'/><circle cx='212' cy='145.0' r='4' fill='#1A2035'/><circle cx='232' cy='127.5' r='4' fill='#1A2035'/><circle cx='252' cy='167.5' r='4' fill='#1A2035'/><circle cx='272' cy='147.5' r='4' fill='#1A2035'/><circle cx='292' cy='160.0' r='4' fill='#1A2035'/><circle cx='312' cy='67.5' r='4' fill='#DC2626'/><circle cx='332' cy='135.0' r='4' fill='#1A2035'/><circle cx='352' cy='172.5' r='4' fill='#1A2035'/><circle cx='372' cy='140.0' r='4' fill='#1A2035'/><circle cx='392' cy='152.5' r='4' fill='#1A2035'/><circle cx='412' cy='125.0' r='4' fill='#1A2035'/><circle cx='432' cy='165.0' r='4' fill='#1A2035'/><circle cx='452' cy='145.0' r='4' fill='#1A2035'/><circle cx='472' cy='182.5' r='4' fill='#1A2035'/><circle cx='492' cy='132.5' r='4' fill='#1A2035'/><circle cx='512' cy='157.5' r='4' fill='#1A2035'/><circle cx='532' cy='137.5' r='4' fill='#1A2035'/><circle cx='552' cy='170.0' r='4' fill='#1A2035'/><circle cx='572' cy='147.5' r='4' fill='#1A2035'/><circle cx='312' cy='67.5' r='11' fill='none' stroke='#DC2626' stroke-width='2'/><text x='332' y='72.5' font-size='16' fill='#DC2626' text-anchor='start' font-weight='700'>Special cause</text><text x='330' y='252' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Inside the limits: common cause (random)</text><text x='330' y='276' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Schematic points, time runs left to right</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Common = Calm. Special = Spike.</strong> A spike outside the fence needs a detective."
+                  },
+                  {
+                        type: "mc",
+                        q: "A chart with 3-sigma limits shows 3 of 12 plotted points outside the limits. What is the best conclusion?",
+                        opts: [
+                              "The process is out of control: 25% outside is far more than the roughly 0.3% expected",
+                              "The process is in control, because 9 of 12 points (75%) are inside",
+                              "The process is in control, because 3-sigma limits allow about 25% to fall outside",
+                              "No conclusion is possible without knowing the mean"
+                        ],
+                        correct: 0,
+                        explanation: "Three-sigma limits should contain about <strong>99.7%</strong> of points, so only about <strong>0.3% (3 in 1,000)</strong> should fall outside. Three of 12 is <strong>25%</strong>, far above that, so the process is <strong>out of control</strong>, and the outside points point to assignable (special) causes.",
+                        mnemonic: "💡 Memory tip: <strong>0.3% allowed, 25% found = alarm.</strong> 3 in 1,000 vs. 3 in 12."
+                  },
+                  {
+                        type: "mc",
+                        q: "A control chart is built with 3-sigma limits. The mean is 16, the upper control limit is 17 and the lower control limit is 15. What is one standard deviation?",
+                        opts: [
+                              "1/3 (about 0.33)",
+                              "1",
+                              "3",
+                              "1/9 (about 0.11)"
+                        ],
+                        correct: 0,
+                        explanation: "The gap between the mean (16) and either limit is 1, and that gap equals <strong>3 standard deviations</strong>, so one SD = 1 ÷ 3 ≈ <strong>0.33</strong>. Do not confuse SD with <strong>variance</strong>: variance is the <em>square</em> of the standard deviation (1/9), and the SD is the square root of the variance.",
+                        mnemonic: "💡 Memory tip: <strong>Distance ÷ 3 = sigma.</strong> And variance is sigma squared, SD is the square root of variance."
+                  },
+                  {
+                        type: "dd",
+                        q: "Classify each measurement as variable data or attribute data.",
+                        cols: ["Variable data", "Attribute data"],
+                        items: [
+                              { text: "Weight of a product in grams", answer: "Variable data" },
+                              { text: "Minutes needed to complete a task", answer: "Variable data" },
+                              { text: "A temperature reading", answer: "Variable data" },
+                              { text: "Pass or fail", answer: "Attribute data" },
+                              { text: "Delivered on time: yes or no", answer: "Attribute data" },
+                              { text: "Defective or not defective", answer: "Attribute data" }
+                        ],
+                        explanation: "<strong>Variable data</strong> is numerical and shows exactly where a result sits within a range (25 minutes, 31 grams). <strong>Attribute data</strong> is categorical and only says whether you achieved what you intended (yes or no, pass or fail).",
+                        mnemonic: "💡 Memory tip: <strong>Variable = a Value on a ruler. Attribute = Aye or nay.</strong>"
+                  },
+
+                  // ══ SIPOC AND THE FIVE QUALITY POINTS ══════════
+                  {
+                        type: "ord",
+                        q: "Place the parts of a SIPOC diagram in order, from first to last.",
+                        items: [
+                              { text: "Suppliers: provide the resources", order: 0 },
+                              { text: "Inputs: the materials or information supplied", order: 1 },
+                              { text: "Process: the steps that transform the inputs", order: 2 },
+                              { text: "Outputs: the product or service produced", order: 3 },
+                              { text: "Customers: those who receive the outputs", order: 4 }
+                        ],
+                        explanation: "<strong>SIPOC</strong> stands for <strong>Suppliers, Inputs, Process, Outputs, Customers</strong>. It is a high-level <strong>flowchart</strong> of the whole organization, used mostly in the <strong>Define</strong> phase to set process boundaries, key inputs and outputs, and who is affected.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 230' role='img' aria-label='SIPOC diagram: Supplier, Input, Process, Output, Customer' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar8' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>SIPOC: high-level flowchart</text><rect x='8' y='62' width='96' height='90' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='56' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Supplier</text><text x='56' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>gives</text><path d='M106 107H128' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar8)'/><rect x='126' y='62' width='96' height='90' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='174' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Input</text><text x='174' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>resources</text><path d='M224 107H246' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar8)'/><rect x='244' y='62' width='96' height='90' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='292' y='100' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Process</text><text x='292' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>steps</text><path d='M342 107H364' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar8)'/><rect x='362' y='62' width='96' height='90' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='410' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Output</text><text x='410' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>product</text><path d='M460 107H482' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar8)'/><rect x='480' y='62' width='96' height='90' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='528' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Customer</text><text x='528' y='126' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>receives</text><text x='300' y='186' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>S, I, P, O, C spells SIPOC</text><text x='300' y='212' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>A flowchart showing the whole organization</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>\"Sam In Pittsburgh Often Calls\"</strong>: S-I-P-O-C. Follow the product from the supplier to the customer."
+                  },
+                  {
+                        type: "ord",
+                        q: "Lee Iacocca described five quality points. Place them in order, Q1 through Q5.",
+                        items: [
+                              { text: "Q1: Manage your suppliers", order: 0 },
+                              { text: "Q2: Check the quality of incoming materials", order: 1 },
+                              { text: "Q3: Check quality within the process (statistical process control)", order: 2 },
+                              { text: "Q4: Check the quality of outgoing product", order: 3 },
+                              { text: "Q5: Identify and define customers' quality expectations", order: 4 }
+                        ],
+                        explanation: "The five points are <strong>Q1 suppliers, Q2 incoming quality, Q3 in-process quality (statistical process control with control charts), Q4 outgoing quality, Q5 customers' expectations</strong>. Iacocca argued that better supplier management and in-process checks reduce costly incoming and outgoing inspection; with customer needs defined, an organization can balance costs, improve outgoing quality and dominate its market.",
+                        mnemonic: "💡 Memory tip: <strong>Follow the product's trip:</strong> Supplier → Arrives → Made → Leaves → Customer wants. S-A-M-L-C."
+                  },
+
+                  // ══ LEAN, SIX SIGMA, JIT AND ISO ══════════
+                  {
+                        type: "dd",
+                        q: "Match each description to the quality program it describes.",
+                        cols: ["Lean", "Just-in-Time", "Six Sigma", "ISO"],
+                        items: [
+                              { text: "Eliminate waste and non-value-adding activity", answer: "Lean" },
+                              { text: "Cut scrap, downtime and unneeded steps", answer: "Lean" },
+                              { text: "Minimize or eliminate inventory", answer: "Just-in-Time" },
+                              { text: "Parts arrive just as they are needed (also called Kanban)", answer: "Just-in-Time" },
+                              { text: "Reduce variation and defects", answer: "Six Sigma" },
+                              { text: "Aims for 3.4 defects per million opportunities", answer: "Six Sigma" },
+                              { text: "Certifies that documented quality-management standards are followed", answer: "ISO" },
+                              { text: "Based in Geneva; inspectors audit operations", answer: "ISO" }
+                        ],
+                        explanation: "<strong>Lean</strong> removes waste and non-value-adding steps. <strong>Just-in-Time (Kanban)</strong> is one kind of lean because it minimizes inventory, which adds cost but no value. <strong>Six Sigma</strong> reduces variation and defects (target 3.4 per million). <strong>ISO</strong> (International Organization for Standardization, in Geneva) certifies that operations follow quality standards, so importers of certified goods can inspect less.",
+                        mnemonic: "💡 Memory tip: <strong>Lean = Less waste. JIT = Just when needed. Six Sigma = Spread (variation) shrinks. ISO = Inspected Standards, Officially.</strong>"
+                  },
+                  {
+                        type: "ms",
+                        q: "Which of the following are among the eight Lean wastes? Select all that apply.",
+                        opts: [
+                              "Defects that require rework",
+                              "Overproduction",
+                              "Waiting",
+                              "Unused talent",
+                              "Transportation of materials or information",
+                              "Extra processing",
+                              "Customer feedback",
+                              "Process documentation",
+                              "Preventive maintenance"
+                        ],
+                        correctSet: [0, 1, 2, 3, 4, 5],
+                        explanation: "The eight wastes are <strong>defects, overproduction, waiting, unused talent, transportation, excess inventory, unnecessary motion and extra processing</strong> (doing more work than the customer requires). Customer feedback, documentation and preventive maintenance are not wastes.",
+                        mnemonic: "💡 Memory tip: <strong>\"DOWNTIME\"</strong>: Defects, Overproduction, Waiting, Non-utilized talent, Transportation, Inventory, Motion, Extra-processing."
+                  },
+                  {
+                        type: "ord",
+                        q: "Place the five principles of Lean in order.",
+                        items: [
+                              { text: "Identify value from the customer's perspective", order: 0 },
+                              { text: "Map the value stream", order: 1 },
+                              { text: "Create flow", order: 2 },
+                              { text: "Establish pull instead of push", order: 3 },
+                              { text: "Seek perfection", order: 4 }
+                        ],
+                        explanation: "The five Lean principles run: <strong>identify value, map the value stream, create flow, establish pull, seek perfection</strong>. Together they help you tell value-added steps from waste.",
+                        mnemonic: "💡 Memory tip: <strong>\"Very Many Fish Prefer Plankton\":</strong> Value, Map, Flow, Pull, Perfection."
+                  },
+                  {
+                        type: "ord",
+                        q: "Place the phases of the DMAIC framework in order.",
+                        items: [
+                              { text: "Define: clarify the problem, scope and customers", order: 0 },
+                              { text: "Measure: collect data and set a baseline", order: 1 },
+                              { text: "Analyze: find the root causes", order: 2 },
+                              { text: "Improve: develop, test and implement solutions", order: 3 },
+                              { text: "Control: monitor and sustain the improvements", order: 4 }
+                        ],
+                        explanation: "<strong>DMAIC</strong> is the Lean Six Sigma structure: <strong>Define, Measure, Analyze, Improve, Control</strong>. Tools are not locked to one phase, but common matches are: SIPOC and flowchart (Define); check sheet, run chart, histogram (Measure); fishbone, Pareto, scatter (Analyze); PDCA (Improve); statistical process control (Control).<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 236' role='img' aria-label='DMAIC loop: Define, Measure, Analyze, Improve, Control' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar9' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>DMAIC: five phases, then repeat</text><rect x='8' y='62' width='96' height='96' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='56' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Define</text><text x='56' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>scope and</text><text x='56' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>customers</text><path d='M106 110H128' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><rect x='126' y='62' width='96' height='96' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='174' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Measure</text><text x='174' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>baseline</text><text x='174' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>data</text><path d='M224 110H246' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><rect x='244' y='62' width='96' height='96' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='292' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Analyze</text><text x='292' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>root</text><text x='292' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>causes</text><path d='M342 110H364' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><rect x='362' y='62' width='96' height='96' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='410' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Improve</text><text x='410' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>test</text><text x='410' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>solutions</text><path d='M460 110H482' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><rect x='480' y='62' width='96' height='96' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='528' y='96' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Control</text><text x='528' y='122' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>sustain</text><text x='528' y='144' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>gains</text><path d='M528 158V192H56V158' fill='none' stroke='#5C677D' stroke-width='2' marker-end='url(#ar9)'/><text x='300' y='218' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>continuous improvement</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>\"Dogs Make Awesome Indoor Companions.\"</strong> Define, Measure, Analyze, Improve, Control."
+                  },
+                  {
+                        type: "mc",
+                        q: "Which statement about Six Sigma levels is correct?",
+                        opts: [
+                              "A 6-sigma process has about 3.4 defects per million opportunities, far fewer than a 3-sigma process (about 66,807)",
+                              "A 3-sigma process has fewer defects than a 6-sigma process",
+                              "A 6-sigma process allows about 3.4 defects per billion opportunities",
+                              "A 6-sigma process allows about 66,807 defects per million opportunities"
+                        ],
+                        correct: 0,
+                        explanation: "As the <strong>sigma level rises, defects fall</strong>: 3 sigma ≈ 66,807, 4 sigma ≈ 6,210, 5 sigma ≈ 233 and 6 sigma ≈ <strong>3.4 defects per million</strong> opportunities. The curve also gets narrower, meaning less variation. Any effort to reduce variation and defects is Six Sigma, even before the 3.4 target is reached.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 294' role='img' aria-label='Bar chart showing defects per million falling from 66,807 at 3 sigma to 3.4 at 6 sigma' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='ar10' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Defects per million opportunities</text><text x='24' y='82' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>3 sigma</text><rect x='120' y='56' width='380' height='36' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='510.0' y='82' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>66,807</text><text x='24' y='134' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>4 sigma</text><rect x='120' y='108' width='299' height='36' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='428.74665801563606' y='134' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>6,210</text><text x='24' y='186' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>5 sigma</text><rect x='120' y='160' width='187' height='36' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='316.5977270047101' y='186' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>233</text><text x='24' y='238' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>6 sigma</text><rect x='120' y='212' width='51' height='36' rx='6' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='180.67786731710805' y='238' font-size='16' fill='#2563EB' text-anchor='start' font-weight='700'>3.4</text><text x='300' y='276' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Higher sigma level = fewer defects (bar length is log scale)</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Higher sigma, lower defects: 6 sigma = 3.4 per Million.</strong> Not billion."
+                  },
+                  {
+                        type: "dd",
+                        q: "Match each tool or method to the DMAIC phase where it most commonly appears.",
+                        cols: ["Define", "Measure", "Analyze", "Improve", "Control"],
+                        items: [
+                              { text: "SIPOC diagram", answer: "Define" },
+                              { text: "Check sheet to collect baseline data", answer: "Measure" },
+                              { text: "Fishbone diagram to find root causes", answer: "Analyze" },
+                              { text: "PDCA pilot test of a solution", answer: "Improve" },
+                              { text: "Statistical process control chart", answer: "Control" }
+                        ],
+                        explanation: "Tools can be reused across phases, but these are the <strong>most typical</strong> matches: SIPOC clarifies the process in <strong>Define</strong>; check sheets, run charts and histograms gather and summarize data in <strong>Measure</strong>; fishbone, Pareto and scatter diagrams find causes in <strong>Analyze</strong>; PDCA tests fixes in <strong>Improve</strong>; SPC monitors in <strong>Control</strong>.",
+                        mnemonic: "💡 Memory tip: <strong>Map it, Measure it, Mine the cause, Make it better, Monitor it.</strong> SIPOC → Check → Fishbone → PDCA → SPC."
+                  },
+                  {
+                        type: "mc",
+                        q: "Which best describes how ISO and Lean Six Sigma relate?",
+                        opts: [
+                              "ISO standardizes and audits how work is managed (process adherence); Lean Six Sigma improves how work is done (process improvement)",
+                              "ISO is a Lean Six Sigma method that is used in the Control phase",
+                              "Lean Six Sigma audits and certifies organizations, while ISO reduces waste",
+                              "They are competing approaches, so an organization must choose only one"
+                        ],
+                        correct: 0,
+                        explanation: "ISO is <strong>not</strong> a Lean Six Sigma methodology. It sets formal standards, documents and <strong>audits</strong> that procedures are followed. Lean Six Sigma <strong>improves</strong> those processes by reducing variation and waste, and supports ISO through consistency, fewer defects and repeatable processes. Together they sustain quality, and a certified supplier often needs less inspection from its customers.",
+                        mnemonic: "💡 Memory tip: <strong>ISO = Follow the rulebook. LSS = Improve the rulebook.</strong> Adherence vs. improvement."
+                  },
+
+
+            ];
+
+            initQuiz(questions, 'Section 4');
+      </script>
+</body>
+
+</html>
