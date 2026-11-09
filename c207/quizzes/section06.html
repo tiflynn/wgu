@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>C207 Data-Driven Decision Making · Section 6 Quiz</title>
+      <link rel="stylesheet" href="../../assets/css/quiz.css">
+</head>
+
+<body>
+
+      <div class="top-nav">
+            <a class="back-link" href="../index.html">← All Sections</a>
+            <a class="back-link notes" href="../notes/section06.html" target="_blank" rel="noopener">📄 Section 6 Notes</a>
+      </div>
+
+      <header>
+            <p class="eyebrow">C207 Data-Driven Decision Making · Section 6</p>
+            <h1>Improving Organizational<br><span>Performance</span></h1>
+      </header>
+
+      <div class="progress-wrap">
+            <div class="progress-meta">
+                  <span id="qCounter">Question 1 of 1</span>
+                  <span id="pctLabel">0%</span>
+            </div>
+            <div class="bar-bg">
+                  <div class="bar-fill" id="barFill"></div>
+            </div>
+      </div>
+
+      <div class="chips">
+            <div class="chip" id="chipTotal">Score: 0 / 0</div>
+            <div class="chip c" id="chipCorrect">✓ 0 correct</div>
+            <div class="chip w" id="chipWrong">✗ 0 wrong</div>
+      </div>
+
+      <div class="card" id="quizCard">
+            <div class="q-meta">
+                  <span class="q-label" id="qLabel">Question 1</span>
+                  <span class="type-badge" id="typeBadge"></span>
+            </div>
+            <p class="q-text" id="qText"></p>
+            <p class="q-hint" id="qHint" style="display:none"></p>
+            <div id="interactionZone"></div>
+            <div class="feedback" id="feedback">
+                  <div class="feedback-head" id="fbHead"></div>
+                  <div id="fbBody"></div>
+                  <div class="mnemonic" id="fbMnemonic"></div>
+            </div>
+            <div class="btn-wrap" id="btnWrap">
+                  <button class="btn-next" id="btnNext">Next Question →</button>
+            </div>
+      </div>
+
+      <div id="results">
+            <p class="grade-label">Final Score</p>
+            <div class="big-score" id="bigScore"></div>
+            <p class="grade-label" id="gradeMsg"></p>
+            <div class="breakdown">
+                  <div class="bk-card">
+                        <div class="num" id="rcCorrect" style="color:var(--correct)"></div>
+                        <div class="lbl">Correct</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcWrong" style="color:var(--wrong)"></div>
+                        <div class="lbl">Wrong</div>
+                  </div>
+                  <div class="bk-card">
+                        <div class="num" id="rcTotal"></div>
+                        <div class="lbl">Total</div>
+                  </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+            <button class="btn-restart" onclick="restart()">↺ Retake Quiz</button>
+      </div>
+
+      <script src="../../assets/js/quiz.js"></script>
+      <script>
+            const questions = [
+
+                  {
+                        type: "mc",
+                        q: "What does performance measurement involve?",
+                        opts: [
+                              "Collecting data and applying analytics to monitor progress and stimulate improvement toward set goals",
+                              "Reviewing the financial statements once a year to confirm they were prepared correctly",
+                              "Ranking employees against each other so the lowest performers can be replaced",
+                              "Surveying customers one time to decide which products to discontinue"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>Performance measurement</strong> is the collection of data and the application of analytics to <strong>monitor progress and stimulate improvements</strong> toward meeting set goals. Leadership must communicate the goals clearly (financial, safety or process goals) so that activities can be put in place to reach them, and metrics are then used to track and improve performance.",
+                        mnemonic: "💡 Memory tip: <strong>Measure → Monitor → Improve.</strong> You cannot improve what you do not measure, just as you cannot say you are making good time if you do not know where you are headed."
+                  },
+                  {
+                        type: "mc",
+                        q: "Which statement correctly distinguishes a critical success factor (CSF) from a key performance indicator (KPI)?",
+                        opts: [
+                              "A CSF is a goal or area that is essential to the organization's success; a KPI is the specific metric used to measure performance on it",
+                              "A CSF is a numeric metric that is calculated each month; a KPI is a broad goal set by leadership",
+                              "A CSF measures customer loyalty; a KPI measures employee learning",
+                              "The two terms mean the same thing and are used interchangeably"
+                        ],
+                        correct: 0,
+                        explanation: "The goals leadership sets are the <strong>critical success factors</strong>: the things that must go well. A <strong>KPI</strong> is the number that tracks one of them. For example, <em>growing the customer base</em> is a CSF, while <em>the number of new customers each month</em> is the KPI that measures it.",
+                        mnemonic: "💡 Memory tip: <strong>CSF = the destination. KPI = the speedometer reading.</strong> What must go well vs. the number that shows how well it is going."
+                  },
+                  {
+                        type: "ms",
+                        q: "To get valid measurements of performance, businesses collect and analyze relevant data from multiple sources. Which of the following are sources of that data? Select all that apply.",
+                        opts: [
+                              "Financial statements",
+                              "Sales figures",
+                              "Customer feedback",
+                              "Employee performance metrics",
+                              "Production data",
+                              "Market research",
+                              "Unverified opinions of individual managers",
+                              "Data selected because it makes the results look good"
+                        ],
+                        correctSet: [0, 1, 2, 3, 4, 5],
+                        explanation: "Valid measurements need <strong>relevant data from multiple sources</strong>: financial statements, sales figures, customer feedback, employee performance metrics, production data and market research. The data must be <strong>accurate and reliable</strong> so that the measurements are objective, consistent and reflect the true state of operations. Opinions and cherry-picked data are neither.",
+                        mnemonic: "💡 Memory tip: <strong>Money, Sales, Customers, Employees, Production, Market.</strong> If it is measured and reliable, it counts; if it is an opinion or hand-picked, it does not."
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: Not every performance measure relates to business finances, but performance measures usually affect the financial bottom line.",
+                        opts: [
+                              "True",
+                              "False"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>True.</strong> Goals can be financial, safety-related or process-related. Non-financial measures such as safety, customer loyalty and process quality are not dollar figures, but they usually flow through to profit.",
+                        mnemonic: "💡 Memory tip: <strong>Non-financial measures are the roots; the bottom line is the fruit.</strong>"
+                  },
+                  {
+                        type: "dd",
+                        q: "Match each performance-measurement tool to the scenario it best fits.",
+                        cols: ["KPI", "KPI dashboard", "Balanced scorecard", "Net Promoter Score", "Results-based management"],
+                        items: [
+                              { text: "Tracking one measure of one target, such as monthly revenue", answer: "KPI" },
+                              { text: "Viewing several KPIs side by side on one screen", answer: "KPI dashboard" },
+                              { text: "Balancing financial, learning, process and customer goals against long-term strategy", answer: "Balanced scorecard" },
+                              { text: "Asking customers how likely they are to recommend the company", answer: "Net Promoter Score" },
+                              { text: "Ongoing, life cycle monitoring of actual results against goals", answer: "Results-based management" }
+                        ],
+                        explanation: "Each tool answers a different question. <strong>KPI</strong>: one measure, one target. <strong>Dashboard</strong>: two or more KPIs displayed together. <strong>Balanced scorecard</strong>: four perspectives (FLIC) tied to long-term strategy. <strong>NPS</strong>: customer loyalty from a would-you-recommend question. <strong>RBM</strong>: ongoing, team based, results-driven management across the life cycle.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 316' role='img' aria-label='Chooser matching business scenarios to KPI, dashboard, balanced scorecard, NPS or results-based management' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='art1' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Match the scenario to the measure</text><rect x='20' y='44' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='72' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>One target, e.g. revenue only</text><line x1='344' y1='66' x2='372' y2='66' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='44' width='204' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='478' y='72' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>KPI</text><rect x='20' y='98' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='126' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Several KPIs on one screen</text><line x1='344' y1='120' x2='372' y2='120' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='98' width='204' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='478' y='126' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>KPI dashboard</text><rect x='20' y='152' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='180' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Strategy across F, L, I and C</text><line x1='344' y1='174' x2='372' y2='174' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='152' width='204' height='44' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='2'/><text x='478' y='180' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>Balanced scorecard</text><rect x='20' y='206' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='234' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Would customers recommend us?</text><line x1='344' y1='228' x2='372' y2='228' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='206' width='204' height='44' rx='8' fill='#FEF3C7' stroke='#B45309' stroke-width='2'/><text x='478' y='234' font-size='16' fill='#B45309' text-anchor='middle' font-weight='700'>Net Promoter Score</text><rect x='20' y='260' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='288' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Ongoing, life cycle, results</text><line x1='344' y1='282' x2='372' y2='282' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='260' width='204' height='44' rx='8' fill='#D1FAE5' stroke='#059669' stroke-width='2'/><text x='478' y='288' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>Results-based mgmt</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>One, Many, Balanced, Recommend, Results.</strong> Keywords in the question usually give it away: life cycle or ongoing results = RBM; recommend = NPS; four perspectives = BSC."
+                  },
+                  {
+                        type: "ms",
+                        q: "Which of the following describe results-based management (RBM)? Select all that apply.",
+                        opts: [
+                              "It uses a life cycle approach",
+                              "It is team based, involving everyone who can influence the outcome",
+                              "It focuses on long-term impacts and sustainable outcomes",
+                              "It emphasizes simplified indicators that make progress easier to track and ensure accountability",
+                              "It focuses only on short-term financial results",
+                              "It is carried out only by senior management"
+                        ],
+                        correctSet: [0, 1, 2, 3],
+                        explanation: "RBM has four hallmarks: a <strong>life cycle approach</strong>, <strong>team based</strong> partnership (everyone who can influence the result), a <strong>long-term impact</strong> focus, and <strong>simplified indicators</strong> that streamline evaluation and accountability. It is not limited to short-term finances and it is not owned by senior management alone.",
+                        mnemonic: "💡 Memory tip: <strong>Let's Track Long-term Success: Life cycle, Team, Long-term, Simplified indicators.</strong> Exam keywords: results, life cycle, partnership, ongoing."
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: In results-based management, only managers and analysts take part, because other staff cannot influence the outcome.",
+                        opts: [
+                              "True",
+                              "False"
+                        ],
+                        correct: 1,
+                        explanation: "<strong>False.</strong> RBM is <strong>team based</strong> and involves <strong>everyone who can influence the outcome</strong>, which collaboration draws on the strengths and insights of all contributors. Even the person who cleans the offices at night matters: if they do not show up, the next day's work suffers.",
+                        mnemonic: "💡 Memory tip: <strong>If the night cleaner skips a shift, the whole day suffers.</strong> Everyone is on the RBM team."
+                  },
+                  {
+                        type: "ord",
+                        q: "Place the stages of the results-based management chain in the correct order.",
+                        items: [
+                              { text: "Inputs: the resources needed to start activities (money, people, tools, materials)", order: 0 },
+                              { text: "Activities: the actions that transform inputs into tangible results", order: 1 },
+                              { text: "Outputs: the immediate products of the activities (goods, services, new skills)", order: 2 },
+                              { text: "Outcomes: the short-term effects, the direct benefits or changes from the outputs", order: 3 },
+                              { text: "Impact: the long-term, broader and sustainable change achieved over time", order: 4 }
+                        ],
+                        explanation: "RBM follows resources through to results: <strong>Inputs → Activities → Outputs → Outcomes → Impact</strong>. Outputs happen right after the activity, outcomes are the short-term effects, and impact is the long-term effect. The whole chain is measured over the life cycle.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 340' role='img' aria-label='Results-based management chain: inputs, activities, outputs, outcomes, impact' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='arq11' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Results-based management: resources to long-term change</text><rect x='20' y='44' width='170' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='105' y='72' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Inputs</text><text x='210' y='72' font-size='16' fill='#1A2035' text-anchor='start' font-weight='400'>Resources: money, people, tools, materials</text><line x1='105' y1='88' x2='105' y2='104' stroke='#5C677D' stroke-width='2' marker-end='url(#arq11)'/><rect x='20' y='104' width='170' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='105' y='132' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Activities</text><text x='210' y='132' font-size='16' fill='#1A2035' text-anchor='start' font-weight='400'>Actions that turn inputs into results</text><line x1='105' y1='148' x2='105' y2='164' stroke='#5C677D' stroke-width='2' marker-end='url(#arq11)'/><rect x='20' y='164' width='170' height='44' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='105' y='192' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Outputs</text><text x='210' y='192' font-size='16' fill='#1A2035' text-anchor='start' font-weight='400'>Immediate products: goods, services, skills</text><line x1='105' y1='208' x2='105' y2='224' stroke='#5C677D' stroke-width='2' marker-end='url(#arq11)'/><rect x='20' y='224' width='170' height='44' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='105' y='252' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Outcomes</text><text x='210' y='252' font-size='16' fill='#1A2035' text-anchor='start' font-weight='400'>Short-term effects: direct benefits</text><line x1='105' y1='268' x2='105' y2='284' stroke='#5C677D' stroke-width='2' marker-end='url(#arq11)'/><rect x='20' y='284' width='170' height='44' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='2'/><text x='105' y='312' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>Impact</text><text x='210' y='312' font-size='16' fill='#1A2035' text-anchor='start' font-weight='400'>Long-term, sustainable change over time</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>In All Organizations, Outputs Open Impact:</strong> Inputs, Activities, Outputs, Outcomes, Impact. Immediate, then short term, then long term."
+                  },
+                  {
+                        type: "dd",
+                        q: "A job-training program is being managed with results-based management. Match each item to its stage in the RBM chain.",
+                        cols: ["Inputs", "Activities", "Outputs", "Outcomes", "Impact"],
+                        items: [
+                              { text: "Funding, instructors and classroom materials", answer: "Inputs" },
+                              { text: "Teaching the training courses", answer: "Activities" },
+                              { text: "The number of people who complete the course and earn a certificate", answer: "Outputs" },
+                              { text: "Graduates find jobs within six months", answer: "Outcomes" },
+                              { text: "Lower unemployment in the region over many years", answer: "Impact" }
+                        ],
+                        explanation: "<strong>Inputs</strong> are what you put in. <strong>Activities</strong> are what you do with them. <strong>Outputs</strong> are the immediate, countable products. <strong>Outcomes</strong> are the short-term benefits to the target group. <strong>Impact</strong> is the broad, sustainable change that shows up much later.",
+                        mnemonic: "💡 Memory tip: <strong>Put in money, teach, count graduates, watch them get jobs, see the region change.</strong> Immediate = output, short term = outcome, long term = impact."
+                  },
+                  {
+                        type: "dd",
+                        q: "RBM measures performance across sectors. Match each typical indicator to its sector.",
+                        cols: ["Business", "Healthcare", "Education", "Government", "Nonprofit"],
+                        items: [
+                              { text: "Return on sales (how efficiently sales generate profit)", answer: "Business" },
+                              { text: "Hospital-acquired infections (keep them to a minimum)", answer: "Healthcare" },
+                              { text: "Graduation rates", answer: "Education" },
+                              { text: "Dollars spent (are public funds allocated efficiently?)", answer: "Government" },
+                              { text: "Donor retention (secures future funding)", answer: "Nonprofit" }
+                        ],
+                        explanation: "Performance measures are used in different settings. <strong>Business</strong>: return on sales. <strong>Healthcare</strong>: hospital-acquired infections. <strong>Education</strong>: graduation rates, an indicator of student success and institutional effectiveness. <strong>Government</strong>: dollars spent, to confirm public funds are used efficiently. <strong>Nonprofit</strong>: donor retention, which shows how well funding is maintained.",
+                        mnemonic: "💡 Memory tip: <strong>Profit per sale, patients stay healthy, students graduate, taxes spent wisely, donors stay.</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "A nonprofit charity wants an ongoing monitoring strategy to make sure it is achieving its goals, as measured through actual results. Which approach should it use?",
+                        opts: [
+                              "Results-based management",
+                              "Net Promoter Score",
+                              "Balanced scorecard",
+                              "Big data analysis"
+                        ],
+                        correct: 0,
+                        explanation: "The keywords are <strong>ongoing</strong>, <strong>goals</strong> and <strong>results</strong>, which point to <strong>results-based management</strong>. NPS only measures customer loyalty, the balanced scorecard balances four perspectives against strategy, and big data analysis is a data-handling approach rather than a monitoring strategy.",
+                        mnemonic: "💡 Memory tip: <strong>Ongoing + goals + results = RBM.</strong> Spot the keyword, then eliminate the two answers that cannot fit."
+                  },
+                  {
+                        type: "mc",
+                        q: "What does a single key performance indicator (KPI) measure?",
+                        opts: [
+                              "One target of performance",
+                              "All four perspectives of the organization at once",
+                              "Customer loyalty across the whole customer base",
+                              "The organization's long-term strategy"
+                        ],
+                        correct: 0,
+                        explanation: "A KPI is used to measure <strong>a target of performance</strong>, and <strong>one KPI measures only one target</strong>. That is why a large organization can have dozens, hundreds or even thousands of them.",
+                        mnemonic: "💡 Memory tip: <strong>One KPI, one target</strong>, like one gauge in a car with one reading."
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: Because one KPI can measure several targets at once, even a large organization needs only a handful of KPIs.",
+                        opts: [
+                              "True",
+                              "False"
+                        ],
+                        correct: 1,
+                        explanation: "<strong>False.</strong> One KPI measures <strong>only one target</strong>. Organizations may have dozens, hundreds or even thousands of KPIs, depending on the size and diversity of their products and services.",
+                        mnemonic: "💡 Memory tip: <strong>One gauge, one reading.</strong> More targets means more KPIs."
+                  },
+                  {
+                        type: "mc",
+                        q: "What is a KPI dashboard?",
+                        opts: [
+                              "A visual display of the performance of a collection of targets or KPIs",
+                              "A single metric that measures one target of performance",
+                              "A survey that classifies customers as promoters, passives or detractors",
+                              "A scorecard that balances financial, learning, process and customer measures against strategy"
+                        ],
+                        correct: 0,
+                        explanation: "A <strong>KPI dashboard</strong> is a visual for the performance of a collection of targets, which means two or more KPIs shown together so decision makers can track them simultaneously. A single metric is a KPI, the survey is the NPS, and the four-perspective tool is the balanced scorecard.",
+                        mnemonic: "💡 Memory tip: <strong>Dashboard = a car's instrument panel:</strong> many gauges, one view."
+                  },
+                  {
+                        type: "mc",
+                        q: "A manager wants to compare monthly sales for each of eight regions side by side on one screen. Which tool fits best?",
+                        opts: [
+                              "A KPI dashboard",
+                              "A single KPI",
+                              "A balanced scorecard",
+                              "A Net Promoter Score"
+                        ],
+                        correct: 0,
+                        explanation: "Each region's monthly sales is its own KPI. Viewing <strong>several KPIs together</strong> to compare them is exactly what a <strong>KPI dashboard</strong> does. One KPI would show only a single region, a balanced scorecard is tied to strategy across four perspectives, and NPS measures loyalty.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 222' role='img' aria-label='A single KPI tile compared with a dashboard of four KPI tiles' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>One KPI vs. a KPI dashboard</text><rect x='20' y='44' width='210' height='140' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='125' y='72' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>One KPI</text><text x='125' y='114' font-size='32' fill='#1A2035' text-anchor='middle' font-weight='700'>120</text><text x='125' y='140' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>new customers</text><text x='125' y='162' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>this month</text><rect x='250' y='44' width='330' height='140' rx='8' fill='#F2F5FC' stroke='#5C677D' stroke-width='2'/><text x='415' y='68' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>KPI dashboard</text><rect x='262' y='78' width='146' height='44' rx='6' fill='#FFFFFF' stroke='#2563EB' stroke-width='1.5'/><text x='335' y='106' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Sales</text><rect x='422' y='78' width='146' height='44' rx='6' fill='#FFFFFF' stroke='#2563EB' stroke-width='1.5'/><text x='495' y='106' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Costs</text><rect x='262' y='128' width='146' height='44' rx='6' fill='#FFFFFF' stroke='#2563EB' stroke-width='1.5'/><text x='335' y='156' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Quality</text><rect x='422' y='128' width='146' height='44' rx='6' fill='#FFFFFF' stroke='#2563EB' stroke-width='1.5'/><text x='495' y='156' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Satisfaction</text><text x='125' y='208' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>one KPI = one target</text><text x='415' y='208' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>many KPIs, one view</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Many KPIs, one screen = dashboard.</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "Who typically uses KPIs and KPI dashboards, and for what purpose?",
+                        opts: [
+                              "Employees, supervisors and managers, to improve daily operations within their own responsibilities",
+                              "Only the board of directors, to set the long-term corporate strategy",
+                              "Only external auditors, to verify the financial statements",
+                              "Only customers, to rate whether they would recommend the company"
+                        ],
+                        correct: 0,
+                        explanation: "KPIs and dashboards are <strong>operational, day-to-day tools</strong>. Each department tracks what it controls: marketing might track new customers, production might track output and quality, and every department may track costs or sales. Together these KPIs contribute to overall performance, which is monitored at the strategic level with the balanced scorecard.",
+                        mnemonic: "💡 Memory tip: <strong>KPIs = the team's daily scoreboard.</strong> The balanced scorecard is the company's season plan."
+                  },
+                  {
+                        type: "dd",
+                        q: "Sort each statement under an advantage or a disadvantage of using KPIs.",
+                        cols: ["Advantage of KPIs", "Disadvantage of KPIs"],
+                        items: [
+                              { text: "Clearly communicate the organization's goals", answer: "Advantage of KPIs" },
+                              { text: "Provide quantifiable evidence of performance that is consistent across the organization", answer: "Advantage of KPIs" },
+                              { text: "Results can be used for internal benchmarking going forward", answer: "Advantage of KPIs" },
+                              { text: "Take time and money to set up and maintain", answer: "Disadvantage of KPIs" },
+                              { text: "Changes between measurements may not be statistically significant", answer: "Disadvantage of KPIs" },
+                              { text: "Investigating the causes of fluctuations takes analytical skill and time", answer: "Disadvantage of KPIs" },
+                              { text: "Changing a metric is difficult as time moves forward", answer: "Disadvantage of KPIs" },
+                              { text: "Can encourage a short-term focus over long-term strategic goals", answer: "Disadvantage of KPIs" }
+                        ],
+                        explanation: "<strong>Advantages:</strong> KPIs communicate goals clearly, give quantifiable and consistent evidence, and support internal benchmarking. <strong>Disadvantages:</strong> cost and time to maintain, small changes that may not be statistically significant but get misread as real improvement, the analytical skill needed to find causes, difficulty changing a metric later, and a pull toward short-term results.",
+                        mnemonic: "💡 Memory tip: <strong>Pros: Clear, Countable, Comparable. Cons: Costly, Chance wiggles, Cause-hunting, Can't change, Current-quarter focus.</strong>"
+                  },
+                  {
+                        type: "dd",
+                        q: "Match each letter of the SMART criteria to what a good KPI must be.",
+                        cols: ["Specific", "Measurable", "Attainable", "Relevant", "Time bound"],
+                        items: [
+                              { text: "Focused and clearly defined, such as increasing sales by 10%", answer: "Specific" },
+                              { text: "There is a clear way to track progress", answer: "Measurable" },
+                              { text: "Realistic and achievable given the available resources", answer: "Attainable" },
+                              { text: "Supports the objectives of the organization", answer: "Relevant" },
+                              { text: "Has a clear deadline", answer: "Time bound" }
+                        ],
+                        explanation: "A good KPI target is <strong>S</strong>pecific, <strong>M</strong>easurable, <strong>A</strong>ttainable, <strong>R</strong>elevant and <strong>T</strong>ime bound. Something like motivation is hard to measure, so it makes a weak KPI. Increasing sales by 10% in a year can be attainable; the same 10% in a week usually is not.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 232' role='img' aria-label='SMART criteria: specific, measurable, attainable, relevant, time bound' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>A SMART KPI</text><rect x='20' y='44' width='104' height='170' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='72' y='86' font-size='32' fill='#2563EB' text-anchor='middle' font-weight='700'>S</text><text x='72' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Specific</text><text x='72' y='154' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>clear and</text><text x='72' y='176' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>focused</text><rect x='134' y='44' width='104' height='170' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='186' y='86' font-size='32' fill='#2563EB' text-anchor='middle' font-weight='700'>M</text><text x='186' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Measurable</text><text x='186' y='154' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>can be</text><text x='186' y='176' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>tracked</text><rect x='248' y='44' width='104' height='170' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='300' y='86' font-size='32' fill='#2563EB' text-anchor='middle' font-weight='700'>A</text><text x='300' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Attainable</text><text x='300' y='154' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>realistic</text><text x='300' y='176' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>to achieve</text><rect x='362' y='44' width='104' height='170' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='414' y='86' font-size='32' fill='#2563EB' text-anchor='middle' font-weight='700'>R</text><text x='414' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Relevant</text><text x='414' y='154' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>supports</text><text x='414' y='176' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>objectives</text><rect x='476' y='44' width='104' height='170' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='528' y='86' font-size='32' fill='#2563EB' text-anchor='middle' font-weight='700'>T</text><text x='528' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Time bound</text><text x='528' y='154' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>has a</text><text x='528' y='176' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>deadline</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>A SMART goal has a number, a way to track it, a realistic path, a purpose and a due date.</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "A manager sets this KPI target: \"Double our sales by next Friday, using the same resources we have now.\" Which SMART criterion does this goal most clearly fail?",
+                        opts: [
+                              "Attainable",
+                              "Specific",
+                              "Time bound",
+                              "Relevant"
+                        ],
+                        correct: 0,
+                        explanation: "The goal is specific (double sales), measurable, relevant (sales support the organization) and time bound (next Friday). What fails is <strong>attainable</strong>: doubling sales in days with no extra resources is not realistic.",
+                        mnemonic: "💡 Memory tip: <strong>Attainable = can we actually pull this off with what we have?</strong> A deadline and a number do not make an impossible goal smart."
+                  },
+                  {
+                        type: "ms",
+                        q: "Which of the following goals satisfy all five SMART criteria? Select all that apply.",
+                        opts: [
+                              "Increase online sales by 8% over the next 12 months by running two new email campaigns",
+                              "Reduce customer-service response time from 48 hours to 24 hours by the end of next quarter",
+                              "Improve employee motivation as much as possible",
+                              "Become the best company in our industry",
+                              "Increase sales by 10% over the next week with no additional resources",
+                              "Reduce operating costs by 5% within six months by consolidating two suppliers"
+                        ],
+                        correctSet: [0, 1, 5],
+                        explanation: "A SMART goal names a measurable target, is realistic, supports the organization, and has a deadline. <strong>Motivation</strong> is hard to measure and has no deadline. <strong>Best in the industry</strong> is vague and untimed. <strong>10% in a week with no extra resources</strong> is not attainable.",
+                        mnemonic: "💡 Memory tip: <strong>Number + deadline + reality check = SMART.</strong> Vague words like best or as much as possible are red flags."
+                  },
+                  {
+                        type: "mc",
+                        q: "The balanced scorecard (BSC) measures an organization's performance in which four perspectives?",
+                        opts: [
+                              "Financial, learning and growth, internal processes, and customer satisfaction",
+                              "Financial, legal, innovation, and competition",
+                              "Specific, measurable, attainable, and relevant",
+                              "Inputs, activities, outputs, and outcomes"
+                        ],
+                        correct: 0,
+                        explanation: "The four BSC perspectives are <strong>Financial, Learning and growth, Internal processes and Customer satisfaction</strong>, remembered with the acronym <strong>FLIC</strong>. The third option is part of SMART and the fourth is the RBM chain.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 340' role='img' aria-label='Balanced scorecard with four perspectives around the vision and strategy' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Balanced scorecard = FLIC</text><rect x='20' y='44' width='260' height='92' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='150' y='80' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>F = Financial</text><text x='150' y='110' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>costs, sales, profit</text><rect x='320' y='44' width='260' height='92' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='450' y='80' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>L = Learning and growth</text><text x='450' y='110' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>skills, innovation</text><rect x='20' y='206' width='260' height='92' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='150' y='242' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>I = Internal processes</text><text x='150' y='272' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>efficiency, new products</text><rect x='320' y='206' width='260' height='92' rx='8' fill='#DBE7FE' stroke='#2563EB' stroke-width='2'/><text x='450' y='242' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>C = Customer satisfaction</text><text x='450' y='272' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>loyalty, retention</text><rect x='190' y='150' width='220' height='44' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='2'/><text x='300' y='178' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>Vision and strategy</text><text x='300' y='324' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>keep all four 'table legs' level</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>FLIC:</strong> F = Financial, L = Learning and growth, I = Internal processes, C = Customer satisfaction."
+                  },
+                  {
+                        type: "dd",
+                        q: "Match each example measure to the balanced scorecard perspective it belongs to.",
+                        cols: ["Financial", "Learning and growth", "Internal processes", "Customer satisfaction"],
+                        items: [
+                              { text: "Profitability and cost control", answer: "Financial" },
+                              { text: "Revenue growth", answer: "Financial" },
+                              { text: "Employee training and skill development", answer: "Learning and growth" },
+                              { text: "Innovation by employees", answer: "Learning and growth" },
+                              { text: "Streamlining processes to make them more efficient", answer: "Internal processes" },
+                              { text: "Developing and launching a new product", answer: "Internal processes" },
+                              { text: "Customer survey satisfaction scores", answer: "Customer satisfaction" },
+                              { text: "Keeping customers happy so they stay", answer: "Customer satisfaction" }
+                        ],
+                        explanation: "<strong>Financial</strong> covers how the finances are doing. <strong>Learning and growth</strong> covers keeping employees up to date and innovating. <strong>Internal processes</strong> covers efficiency and things like launching a new product. <strong>Customer satisfaction</strong> covers whether customers are happy. The scorecard tries to keep all four in balance.",
+                        mnemonic: "💡 Memory tip: <strong>F: the money. L: people grow. I: how we work. C: how customers feel.</strong>"
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: The balanced scorecard is designed to gauge long-term performance in alignment with the company's vision and strategic growth.",
+                        opts: [
+                              "True",
+                              "False"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>True.</strong> The BSC takes a balanced approach to gauge <strong>long-term performance</strong> in alignment with the <strong>vision and strategic growth</strong> of the company, which is what separates it from a plain dashboard of operating KPIs.",
+                        mnemonic: "💡 Memory tip: <strong>BSC = Balance + Strategy + the long run.</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "A company raises its prices as high as possible to maximize profit and ignores how customers react. Many customers leave. Which principle of the balanced scorecard does this violate?",
+                        opts: [
+                              "Performance must be balanced across all four perspectives rather than driven by financial results alone",
+                              "Every KPI must be time bound",
+                              "Passives must be excluded when calculating customer loyalty",
+                              "Outputs must be measured before outcomes"
+                        ],
+                        correct: 0,
+                        explanation: "Chasing only the <strong>financial</strong> perspective can wreck the <strong>customer</strong> perspective, and the reverse is also true: keeping customers happy at any cost can lose money. The scorecard keeps every perspective in balance so the organization lasts.",
+                        mnemonic: "💡 Memory tip: <strong>A table with one short leg wobbles.</strong> Keep all four FLIC legs the same length."
+                  },
+                  {
+                        type: "mc",
+                        q: "Which statement best distinguishes a balanced scorecard from a KPI dashboard?",
+                        opts: [
+                              "A balanced scorecard links performance in four perspectives to long-term strategy; a dashboard simply displays several KPIs together",
+                              "A balanced scorecard measures only one target; a dashboard measures four perspectives",
+                              "A balanced scorecard is used only by frontline employees; a dashboard is used only by executives",
+                              "A balanced scorecard rates customer loyalty on a 1 to 10 scale; a dashboard shows financial results only"
+                        ],
+                        correct: 0,
+                        explanation: "Both can show many measures, but the <strong>balanced scorecard</strong> is aligned with <strong>long-term strategic objectives</strong> and balances four perspectives, rather than focusing solely on financial outcomes. A <strong>KPI dashboard</strong> just displays two or more KPIs at once.",
+                        mnemonic: "💡 Memory tip: <strong>Dashboard = what is happening. Scorecard = are we balanced and on strategy?</strong>"
+                  },
+                  {
+                        type: "ms",
+                        q: "Which of the following are advantages of the balanced scorecard? Select all that apply.",
+                        opts: [
+                              "It supports internal and external communication",
+                              "It links performance to the overall corporate strategy",
+                              "It helps align departments and teams with the same overarching goals",
+                              "It is cheap and quick to build and maintain",
+                              "It always shows the complete picture of company performance",
+                              "It automatically changes employee behavior"
+                        ],
+                        correctSet: [0, 1, 2],
+                        explanation: "<strong>Advantages:</strong> better internal and external communication, a link between operations and corporate strategy, and alignment of departments around common goals. <strong>Disadvantages:</strong> time and cost to build and maintain, it is limited and may not display the full picture, it may not encourage the desired behavior changes (especially if metrics are poorly aligned), and it can be hard to roll out across diverse departments.",
+                        mnemonic: "💡 Memory tip: <strong>Pros are the three C's: Communicate, Connect to strategy, Coordinate teams.</strong> Cons: Cost, Context missing, Changes in behavior not guaranteed."
+                  },
+                  {
+                        type: "mc",
+                        q: "How do KPIs and the balanced scorecard relate to tactics and strategy?",
+                        opts: [
+                              "KPIs track tactical, day-to-day performance of individual targets; the balanced scorecard brings performance together to monitor long-term strategy",
+                              "KPIs set the corporate strategy; the balanced scorecard tracks daily tasks",
+                              "Both are used only to report financial results to investors",
+                              "KPIs are strategic and the balanced scorecard is tactical because it has fewer measures"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>KPIs and dashboards</strong> help employees, supervisors and managers improve daily operations (<strong>tactics</strong>). Each KPI contributes to overall performance, which is measured with the <strong>balanced scorecard</strong> against the company's vision and long-term <strong>strategy</strong>.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 242' role='img' aria-label='Three KPI tiles feeding up into the balanced scorecard which represents strategy' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='art2' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>How KPIs and the scorecard relate</text><rect x='40' y='44' width='520' height='64' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='2'/><text x='300' y='72' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>Strategy: balanced scorecard (FLIC)</text><text x='300' y='96' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>long-term, all four perspectives</text><rect x='40' y='150' width='160' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='120' y='178' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>KPI: sales</text><line x1='120' y1='148' x2='120' y2='112' stroke='#5C677D' stroke-width='2' marker-end='url(#art2)'/><rect x='220' y='150' width='160' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='300' y='178' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>KPI: quality</text><line x1='300' y1='148' x2='300' y2='112' stroke='#5C677D' stroke-width='2' marker-end='url(#art2)'/><rect x='400' y='150' width='160' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='480' y='178' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>KPI: satisfaction</text><line x1='480' y1='148' x2='480' y2='112' stroke='#5C677D' stroke-width='2' marker-end='url(#art2)'/><text x='300' y='226' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Tactics: KPIs and dashboards track daily operations</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>KPIs are the bricks (tactics); the scorecard is the building plan (strategy).</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "How is variance calculated in performance measurement?",
+                        opts: [
+                              "Actual performance − target performance",
+                              "Target performance − actual performance",
+                              "Actual performance ÷ target performance",
+                              "The average of all actual results over time"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>Variance = actual performance − target performance.</strong> It is the difference between the predicted (target) performance and the actual performance, interpreted as positive or negative, which translates to favorable or unfavorable performance.",
+                        mnemonic: "💡 Memory tip: <strong>Actual minus Target: A comes before T</strong> in the alphabet and in the formula."
+                  },
+                  {
+                        type: "mc",
+                        q: "An organization targeted a 5% monthly increase in new customers but achieved only 3%. What is the variance, and how is it interpreted?",
+                        opts: [
+                              "−2 percentage points; a negative variance, an unfavorable result",
+                              "+2 percentage points; a positive variance, a favorable result",
+                              "−2 percentage points; a negative variance, a favorable result",
+                              "+2 percentage points; a positive variance, an unfavorable result"
+                        ],
+                        correct: 0,
+                        explanation: "Variance = actual − target = 3% − 5% = <strong>−2 percentage points</strong>. The target was not achieved, so it is a <strong>negative, unfavorable</strong> variance. Had the organization achieved 7%, the variance would be +2: positive and favorable.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 248' role='img' aria-label='Number line showing a result below target as negative and above target as positive' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Variance against the target</text><rect x='40' y='60' width='260' height='50' rx='8' fill='#FEE2E2' stroke='#DC2626' stroke-width='2'/><text x='170' y='92' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>negative: unfavorable</text><rect x='300' y='60' width='260' height='50' rx='8' fill='#D1FAE5' stroke='#059669' stroke-width='2'/><text x='430' y='92' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>positive: favorable</text><line x1='40' y1='140' x2='560' y2='140' stroke='#5C677D' stroke-width='3'/><circle cx='180' cy='140' r='8' fill='#DC2626'/><text x='180' y='172' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>3%</text><circle cx='300' cy='140' r='8' fill='#1A2035'/><text x='300' y='172' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>5%</text><circle cx='420' cy='140' r='8' fill='#059669'/><text x='420' y='172' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>7%</text><text x='180' y='196' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='400'>actual (missed)</text><text x='300' y='196' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>target</text><text x='420' y='196' font-size='16' fill='#059669' text-anchor='middle' font-weight='400'>actual (beat it)</text><text x='300' y='232' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Variance = actual - target</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Fell short → negative → unfavorable. Beat it → positive → favorable.</strong>"
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: If actual performance exceeds the target, the variance is positive, which is interpreted as a favorable result.",
+                        opts: [
+                              "True",
+                              "False"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>True.</strong> Beating the target gives a positive variance (actual − target) and a <strong>favorable</strong> result. Missing the target gives a negative variance and an <strong>unfavorable</strong> result.",
+                        mnemonic: "💡 Memory tip: <strong>Beat the target → plus sign → good news.</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "What does the Net Promoter Score (NPS) measure?",
+                        opts: [
+                              "Customer loyalty, based on how likely customers are to recommend the company's product or service",
+                              "Employee engagement, based on how likely staff are to stay with the company",
+                              "Process efficiency, based on the number of defects per batch",
+                              "Financial performance, based on profit per sale"
+                        ],
+                        correct: 0,
+                        explanation: "The NPS is obtained by asking customers <strong>how likely they are to recommend</strong> the company's product or service, and it measures <strong>customer loyalty</strong> by classifying customers as promoters, passives or detractors.",
+                        mnemonic: "💡 Memory tip: <strong>NPS = would you tell a friend?</strong> Loyalty shows up as willingness to recommend."
+                  },
+                  {
+                        type: "dd",
+                        q: "Sort each customer response or behavior into its NPS category.",
+                        cols: ["Promoter", "Passive", "Detractor"],
+                        items: [
+                              { text: "A customer who rates 10", answer: "Promoter" },
+                              { text: "A customer who rates 9", answer: "Promoter" },
+                              { text: "A customer who rates 8", answer: "Passive" },
+                              { text: "A customer who rates 7", answer: "Passive" },
+                              { text: "A customer who rates 6", answer: "Detractor" },
+                              { text: "A customer who rates 3", answer: "Detractor" },
+                              { text: "Satisfied, but less likely to share an opinion to persuade others", answer: "Passive" },
+                              { text: "Likely to voice a negative opinion to others", answer: "Detractor" }
+                        ],
+                        explanation: "On the 1 to 10 scale, <strong>promoters rate 9 or 10</strong> (most satisfied, likely to recommend), <strong>passives rate 7 or 8</strong> (satisfied but unlikely to persuade others), and <strong>detractors rate 6 or below</strong> (likely to voice negative opinions).<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 236' role='img' aria-label='Net Promoter Score scale from 1 to 10 grouped into detractors, passives and promoters' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>How likely are you to recommend us?</text><rect x='23' y='44' width='50' height='46' rx='6' fill='#DC2626' stroke='#DC2626' stroke-width='1'/><text x='48' y='74' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>1</text><rect x='79' y='44' width='50' height='46' rx='6' fill='#DC2626' stroke='#DC2626' stroke-width='1'/><text x='104' y='74' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>2</text><rect x='135' y='44' width='50' height='46' rx='6' fill='#DC2626' stroke='#DC2626' stroke-width='1'/><text x='160' y='74' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>3</text><rect x='191' y='44' width='50' height='46' rx='6' fill='#DC2626' stroke='#DC2626' stroke-width='1'/><text x='216' y='74' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>4</text><rect x='247' y='44' width='50' height='46' rx='6' fill='#DC2626' stroke='#DC2626' stroke-width='1'/><text x='272' y='74' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>5</text><rect x='303' y='44' width='50' height='46' rx='6' fill='#DC2626' stroke='#DC2626' stroke-width='1'/><text x='328' y='74' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>6</text><rect x='359' y='44' width='50' height='46' rx='6' fill='#F59E0B' stroke='#F59E0B' stroke-width='1'/><text x='384' y='74' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>7</text><rect x='415' y='44' width='50' height='46' rx='6' fill='#F59E0B' stroke='#F59E0B' stroke-width='1'/><text x='440' y='74' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>8</text><rect x='471' y='44' width='50' height='46' rx='6' fill='#059669' stroke='#059669' stroke-width='1'/><text x='496' y='74' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>9</text><rect x='527' y='44' width='50' height='46' rx='6' fill='#059669' stroke='#059669' stroke-width='1'/><text x='552' y='74' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>10</text><text x='191' y='122' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>Detractors</text><text x='191' y='144' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='400'>6 or below</text><text x='415' y='122' font-size='16' fill='#B45309' text-anchor='middle' font-weight='700'>Passives</text><text x='415' y='144' font-size='16' fill='#B45309' text-anchor='middle' font-weight='400'>7-8</text><text x='527' y='122' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>Promoters</text><text x='527' y='144' font-size='16' fill='#059669' text-anchor='middle' font-weight='400'>9-10</text><text x='300' y='192' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>NPS = % promoters - % detractors</text><text x='300' y='218' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>passives are left out of the formula</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>9-10 Promote, 7-8 Pass, 6-and-below Detract.</strong> A 6 is the highest rating that still counts as a detractor."
+                  },
+                  {
+                        type: "ord",
+                        q: "Place the steps for obtaining a Net Promoter Score in the correct order.",
+                        items: [
+                              { text: "Ask customers how likely they are to recommend the product or service", order: 0 },
+                              { text: "Classify each customer as a promoter, passive or detractor based on the rating", order: 1 },
+                              { text: "Calculate the percentage of promoters and the percentage of detractors", order: 2 },
+                              { text: "Subtract the percentage of detractors from the percentage of promoters", order: 3 }
+                        ],
+                        explanation: "NPS starts with the survey question, sorts each response into a category, converts the groups to percentages, and then subtracts: <strong>% promoters − % detractors</strong>.",
+                        mnemonic: "💡 Memory tip: <strong>Ask → Sort → Percent → Subtract.</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "Which formula correctly calculates the Net Promoter Score?",
+                        opts: [
+                              "% promoters − % detractors",
+                              "% detractors − % promoters",
+                              "% promoters + % passives − % detractors",
+                              "% promoters ÷ % detractors"
+                        ],
+                        correct: 0,
+                        explanation: "<strong>NPS = % promoters − % detractors.</strong> Passives are not in the formula. Because it is a subtraction, the score can range from −100 to +100.",
+                        mnemonic: "💡 Memory tip: <strong>Promoters minus Detractors:</strong> start with the good, take away the bad. Passives sit on the bench."
+                  },
+                  {
+                        type: "mc",
+                        q: "A survey of 200 customers finds 100 promoters, 60 passives and 40 detractors. What is the NPS?",
+                        opts: [
+                              "30",
+                              "50",
+                              "60",
+                              "−30"
+                        ],
+                        correct: 0,
+                        explanation: "Convert to percentages first: promoters 100/200 = 50%, detractors 40/200 = 20%. NPS = 50 − 20 = <strong>30</strong>. The 50 comes from counting promoters only, the 60 from also adding passives, and −30 from flipping the subtraction.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 208' role='img' aria-label='Stacked bar of promoters 50 percent, passives 30 percent and detractors 20 percent giving NPS 30' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Example: 100 promoters, 60 passives, 40 detractors</text><rect x='20' y='44' width='280' height='52' fill='#059669' stroke='#F7F9FD' stroke-width='2'/><text x='160' y='78' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>50%</text><text x='160' y='122' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>Promoters</text><rect x='300' y='44' width='168' height='52' fill='#F59E0B' stroke='#F7F9FD' stroke-width='2'/><text x='384' y='78' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>30%</text><text x='384' y='122' font-size='16' fill='#B45309' text-anchor='middle' font-weight='700'>Passives</text><rect x='468' y='44' width='112' height='52' fill='#DC2626' stroke='#F7F9FD' stroke-width='2'/><text x='524' y='78' font-size='16' fill='#FFFFFF' text-anchor='middle' font-weight='700'>20%</text><text x='524' y='122' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>Detractors</text><text x='300' y='166' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>NPS = 50% - 20% = 30</text><text x='300' y='192' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>passives (30%) are left out of the formula</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Percents first, then 50 − 20 = 30.</strong> Ignore the 30% passives."
+                  },
+                  {
+                        type: "mc",
+                        q: "A company's survey results are 15% promoters, 25% passives and 60% detractors. What does its NPS indicate?",
+                        opts: [
+                              "The NPS is −45, a negative score that reflects an immediate need to improve the customer experience",
+                              "The NPS is 45, a strong score showing that customers are loyal",
+                              "The NPS is −45, but a negative score is impossible, so the survey must be invalid",
+                              "The NPS is 15, because only promoters count toward the score"
+                        ],
+                        correct: 0,
+                        explanation: "NPS = 15 − 60 = <strong>−45</strong>. A <strong>negative NPS is possible</strong> and reflects an <strong>immediate need to improve customer experience</strong>, because detractors outnumber promoters.",
+                        mnemonic: "💡 Memory tip: <strong>More detractors than promoters → NPS below zero → fire alarm for customer experience.</strong>"
+                  },
+                  {
+                        type: "mc",
+                        q: "According to the course, what range is the average NPS, and what should an organization do with its own score?",
+                        opts: [
+                              "20 to 30; compare it with what is standard for its industry and focus on detractors' feedback",
+                              "50 to 60; compare it only with its own past scores",
+                              "20 to 30; ignore the industry, because every company is different",
+                              "0 to 10; focus on promoters' feedback only"
+                        ],
+                        correct: 0,
+                        explanation: "The <strong>average NPS is between 20 and 30</strong>, though some industries score much higher. An organization needs to know what is <strong>standard for its industry</strong> and should focus on the <strong>feedback of detractors</strong> to improve in the future.",
+                        mnemonic: "💡 Memory tip: <strong>Average 20-30. Know your industry, listen to your detractors.</strong>"
+                  },
+                  {
+                        type: "tf",
+                        q: "True or False: Passives (customers rating 7 or 8) are counted as positive responses in the NPS calculation.",
+                        opts: [
+                              "True",
+                              "False"
+                        ],
+                        correct: 1,
+                        explanation: "<strong>False.</strong> Passives are satisfied but not enthusiastic and less likely to persuade others, and they are <strong>left out of the NPS formula</strong>. Only the percentage of promoters and the percentage of detractors are used.",
+                        mnemonic: "💡 Memory tip: <strong>Passives are bench-warmers:</strong> they never get into the formula."
+                  },
+                  {
+                        type: "mc",
+                        q: "The average NPS for an industry is 15. A company will launch a marketing campaign only if its own NPS is higher than the industry's; otherwise it will focus on improving the experience of its current customers. Its survey shows 30% promoters, 50% passives and 20% detractors. What should it do?",
+                        opts: [
+                              "Focus on current customers, because its NPS of 10 is below 15",
+                              "Launch the campaign, because 30% promoters is above 15",
+                              "Launch the campaign, because its NPS of 30 is above 15",
+                              "Focus on current customers, because its NPS of −10 is below 15"
+                        ],
+                        correct: 0,
+                        explanation: "NPS = 30% − 20% = <strong>10</strong>, which is below the industry's 15, so the company should <strong>work on keeping its current customers</strong> first. Using the promoter percentage alone, or flipping the subtraction, leads to the wrong decision.",
+                        mnemonic: "💡 Memory tip: <strong>Do not pour water into a leaky bucket:</strong> fix retention before chasing new customers."
+                  },
+                  {
+                        type: "mc",
+                        q: "A telecommunications company focuses on three critical success factors: revenue growth, customer satisfaction and operational efficiency. Which tool is most appropriate for assessing only whether its revenue growth goal is being achieved?",
+                        opts: [
+                              "Key performance indicator (KPI)",
+                              "Balanced scorecard",
+                              "Pareto chart",
+                              "Net Promoter Score"
+                        ],
+                        correct: 0,
+                        explanation: "Start at the question mark and work backward: it asks about <strong>one</strong> goal, revenue, so you need <strong>one indicator</strong>, a KPI. The other two focus areas in the scenario are distractors. Had the question asked about all three together (financial, customer and process goals), the answer would be the balanced scorecard.<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 316' role='img' aria-label='Chooser matching business scenarios to KPI, dashboard, balanced scorecard, NPS or results-based management' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><defs><marker id='art1' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#5C677D'/></marker></defs><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Match the scenario to the measure</text><rect x='20' y='44' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='72' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>One target, e.g. revenue only</text><line x1='344' y1='66' x2='372' y2='66' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='44' width='204' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='478' y='72' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>KPI</text><rect x='20' y='98' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='126' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Several KPIs on one screen</text><line x1='344' y1='120' x2='372' y2='120' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='98' width='204' height='44' rx='8' fill='#EAF0FC' stroke='#2563EB' stroke-width='2'/><text x='478' y='126' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>KPI dashboard</text><rect x='20' y='152' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='180' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Strategy across F, L, I and C</text><line x1='344' y1='174' x2='372' y2='174' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='152' width='204' height='44' rx='8' fill='#EDE9FE' stroke='#7C3AED' stroke-width='2'/><text x='478' y='180' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>Balanced scorecard</text><rect x='20' y='206' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='234' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Would customers recommend us?</text><line x1='344' y1='228' x2='372' y2='228' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='206' width='204' height='44' rx='8' fill='#FEF3C7' stroke='#B45309' stroke-width='2'/><text x='478' y='234' font-size='16' fill='#B45309' text-anchor='middle' font-weight='700'>Net Promoter Score</text><rect x='20' y='260' width='320' height='44' rx='8' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='180' y='288' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Ongoing, life cycle, results</text><line x1='344' y1='282' x2='372' y2='282' stroke='#5C677D' stroke-width='2' marker-end='url(#art1)'/><rect x='376' y='260' width='204' height='44' rx='8' fill='#D1FAE5' stroke='#059669' stroke-width='2'/><text x='478' y='288' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>Results-based mgmt</text></svg>",
+                        mnemonic: "💡 Memory tip: <strong>Read the question mark first.</strong> One thing being assessed = KPI; several perspectives balanced against strategy = BSC."
+                  },
+
+
+            ];
+
+            initQuiz(questions, 'Section 6');
+      </script>
+</body>
+
+</html>
