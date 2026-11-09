@@ -260,10 +260,10 @@
                               { text: "Measuring what you actually intend to measure", answer: "Validity" },
                               { text: "A scale that shows the same weight three times in a row", answer: "Reliability" },
                               { text: "Three thermometer readings of 98.6, 96.8, then 94.5 seconds apart fail this test", answer: "Reliability" },
-                              { text: "Using cholesterol to represent a patient's heart disease risk", answer: "Validity" },
+                              { text: "Using a person's shoe size to represent their intelligence", answer: "Validity" },
                               { text: "Judging a person's health by running speed fails this test", answer: "Validity" },
                         ],
-                        explanation: "Reliable data is consistent and repeatable and depends on the quality of the measuring instrument. Valid data is accurate and appropriate: it represents what is intended to be measured. A puzzle isn't a valid measure of IQ, and running speed isn't a valid measure of health, but blood pressure, cholesterol, and glucose are better measures.",
+                        explanation: "Reliable data is consistent and repeatable and depends on the quality of the measuring instrument. Valid data is accurate and appropriate: it represents what is intended to be measured. A puzzle isn't a valid measure of IQ, and running speed isn't a valid measure of health.",
                         mnemonic: "💡 Memory tip: <strong>Reliable = same every time. Valid = hits the bullseye.</strong> Good data needs both."
                   },
 
@@ -289,7 +289,7 @@
                               { text: "Car color entered as GRY in one row and Gray in another", answer: "Inconsistent coding" },
                               { text: "The same color spelled both Gray and GREY", answer: "Inconsistent coding" },
                         ],
-                        explanation: "OMISSION = a field is blank or incomplete (the value is missing). OUT-OF-RANGE = a value falls outside the acceptable range for the study (too high or too low). INCONSISTENT CODING = the same thing entered different ways, a data entry error.",
+                        explanation: "OMISSION = a field is blank or incomplete (the value is missing), which leaves the dataset incomplete, or 'distorted,' because totals and averages no longer reflect what really happened. OUT-OF-RANGE = a value falls outside the acceptable range for the study (too high or too low). INCONSISTENT CODING = the same thing entered different ways, a data entry error.",
                         mnemonic: "💡 Memory tip: <strong>Omission = Missing. Out-of-range = Outside the fence. Coding = Confusing spelling.</strong> Lying by omission means the answer was left out."
                   },
 
@@ -324,26 +324,14 @@
 
                   {
                         type: 'mc',
-                        q: "Data analysts consistently fail to enter middle names in live patient records, and nurses need them to identify patients. What type of error does this CAUSE?",
+                        q: "Data analysts consistently fail to enter middle names in live patient records, and the missing names will not fill themselves in. Classifying the error by its EFFECT on the data (not by how it happened), what type of error is this?",
                         opts: ["Systematic error",
                               "Random error",
-                              "Omission error",
-                              "Logic error"],
+                              "Out-of-range error",
+                              "Inconsistent coding"],
                         correct: 0,
-                        explanation: "The question asks what type of error this CAUSES, not how it happened. Leaving out data is an omission error (how it happened), but the effect is a systematic error: the data stays unavailable until someone goes back and enters it. A random error would fix itself. 'Logic error' is not a term from the course.",
+                        explanation: "Classify by the EFFECT. Leaving out data is an omission (how it happened), but the effect is a systematic error: it is consistent and repeatable, and the data stays missing until someone goes back and enters it. A random error would correct itself. The values are not outside an acceptable range and are not spelled inconsistently, so those two do not fit.",
                         mnemonic: "💡 Memory tip: <strong>Lightning is HOW. The fried computer is WHAT it caused.</strong> Classify the result, not the cause."
-                  },
-
-                  {
-                        type: 'mc',
-                        q: "Emma receives sales numbers from every store, but several locations reported missing transaction data. How can this impact the dataset?",
-                        opts: ["Reliability",
-                              "Distorted",
-                              "Consistency",
-                              "Random errors"],
-                        correct: 1,
-                        explanation: "Missing transaction data is an omission error, and the Lesson 5 case study says a dataset with an omission error is DISTORTED. Totals and averages built on incomplete data do not reflect what really happened. The error itself falls under systematic error, not random error.",
-                        mnemonic: "💡 Memory tip: <strong>Omission → Distorted.</strong> Holes in the data bend the picture, like a jigsaw puzzle with missing pieces."
                   },
 
                   // ══ RESEARCH DESIGN ════════════════════════════════════
@@ -402,24 +390,15 @@
                         q: "Match each item to its role in an experiment.",
                         cols: ["Unit", "Treatment", "Response"],
                         items: [
-                              { text: "Customers visiting a festival booth", answer: "Unit" },
+                              { text: "Each customer taking part in a promotion test", answer: "Unit" },
                               { text: "A patient given a new medication", answer: "Unit" },
-                              { text: "A free ornament promotion", answer: "Treatment" },
-                              { text: "Different types of fat added to cookie batches", answer: "Treatment" },
-                              { text: "The increase in shirt sales", answer: "Response" },
+                              { text: "A free gift offered to customers in the promotion", answer: "Treatment" },
+                              { text: "The type of fat added to a batch of cookies", answer: "Treatment" },
+                              { text: "The change in sales after the promotion", answer: "Response" },
                               { text: "Whether the patient's fever went down", answer: "Response" },
                         ],
-                        explanation: "The unit is who or what you study, the treatment is what you apply, and the response is the outcome you measure. For the free ornament test: customers are the unit, the ornament is the treatment, and the increase in shirt sales is the response. For the bakery: the type of fat is the treatment, and the cookies' color and consistency are the response.",
+                        explanation: "The unit is who or what you study, the treatment is what you apply, and the response is the outcome you measure. For a promotion test: customers are the unit, the free gift is the treatment, and the change in sales is the response. For a bakery test: each batch is the unit, the type of fat is the treatment, and the cookies' color and consistency are the response.",
                         mnemonic: "💡 Memory tip: <strong>Who? What did we do to them? What happened?</strong> Unit, Treatment, Response."
-                  },
-
-                  {
-                        type: 'tf',
-                        q: "A study that compares two groups under different conditions, without randomly assigning them to treatment and control groups, is still an observational study.",
-                        opts: ["True", "False"],
-                        correct: 0,
-                        explanation: "TRUE. This is a quasi-experimental design. It can feel like an experiment, but because there is no randomly assigned treatment and control group, it is not a true experiment and is still observational.",
-                        mnemonic: "💡 Memory tip: <strong>Quasi means 'almost'.</strong> Almost an experiment is still not an experiment."
                   },
 
                   {
@@ -487,15 +466,15 @@
                         q: "Match each flawed sample to the problem with it.",
                         cols: ["Not random", "Not representative", "Too small"],
                         items: [
-                              { text: "Calling the buyers of the last 30 used cars sold", answer: "Not random" },
-                              { text: "Surveying the first three people who walk in", answer: "Not random" },
+                              { text: "Interviewing whichever customers are easiest to reach near the entrance", answer: "Not random" },
+                              { text: "Surveying whichever coworkers happen to sit closest to your desk", answer: "Not random" },
                               { text: "Measuring only 2-door coupes to make claims about convertibles", answer: "Not representative" },
                               { text: "Testing a new product only with the most loyal customers", answer: "Not representative" },
-                              { text: "Talking only to your three best friends", answer: "Too small" },
+                              { text: "Asking 4 randomly chosen customers out of 20,000 and generalizing to all of them", answer: "Too small" },
                               { text: "Surveying 50 people to represent a population of over 5 million", answer: "Too small" },
                         ],
-                        explanation: "A good sample is random (everyone has an equal chance), representative (like a mini version of the population, such as only graduate students for a graduate student study), and large enough. The last 30 purchases are merely convenient, so the bigger problem is randomness, not the number 30. There is no magic sample size; it depends on the statistical test, and the square root of the population is only a starting point.",
-                        mnemonic: "💡 Memory tip: <strong>Convenient is not random.</strong> Last-in-line, first-through-the-door, or best-friend samples all fail the fair-draw test."
+                        explanation: "A good sample is random (everyone has an equal chance), representative (like a mini version of the population, such as only graduate students for a graduate student study), and large enough. Picking whoever is easiest to reach is convenient, not a fair draw. There is no magic sample size; it depends on the statistical test, and the square root of the population is only a starting point.",
+                        mnemonic: "💡 Memory tip: <strong>Convenient is not random.</strong> Easiest-to-reach or nearest-to-you samples fail the fair-draw test."
                   },
 
                   {
@@ -615,6 +594,43 @@
                         ],
                         explanation: "The data-driven decision process guides problem resolution by FRAMING the problem (understand the scope, decide who in the organization to collaborate with, and develop a research question), SOLVING it, and COMMUNICATING the results.",
                         mnemonic: "💡 Memory tip: <strong>Frame → Solve → Communicate.</strong> Define the picture, do the work, show it off."
+                  },
+
+
+                  {
+                        type: 'mc',
+                        q: "A survey records each respondent's favorite color, the number of children in their household, and their commute time in minutes. Which of these is qualitative (categorical) data?",
+                        opts: ["Favorite color",
+                              "Number of children in the household",
+                              "Commute time in minutes",
+                              "All three are qualitative"],
+                        correct: 0,
+                        explanation: "Qualitative data describes categories or qualities, such as a color. Quantitative data is numerical and is either discrete (number of children, whole numbers only) or continuous (commute time, which can include decimals).",
+                        mnemonic: "💡 Memory tip: <strong>Qualitative = Quality (a label). Quantitative = Quantity (a number).</strong> If you can only name it, it is qualitative."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "In a drug trial, the control group receives a pill that looks identical to the real medication but contains no active ingredient. What is this pill called?",
+                        opts: ["A placebo",
+                              "The active treatment",
+                              "The response",
+                              "A cohort"],
+                        correct: 0,
+                        explanation: "A placebo is a look-alike substance with no active treatment. It lets the researcher compare the treatment group with a control group, and keeps participants blind to which group they are in.",
+                        mnemonic: "💡 Memory tip: <strong>Placebo = 'I will please.'</strong> It looks like the real thing so the patient is pleased, but it does nothing."
+                  },
+
+                  {
+                        type: 'mc',
+                        q: "In the quantitative analysis approach, which step is the most important and often the most difficult?",
+                        opts: ["Define the problem",
+                              "Develop the model",
+                              "Test the solution",
+                              "Implement the results"],
+                        correct: 0,
+                        explanation: "Defining the problem comes first and is the most important and often the most difficult step. You must go beyond symptoms to find the true cause. A wrong definition sends every later step in the wrong direction.",
+                        mnemonic: "💡 Memory tip: <strong>Aim before you fire.</strong> A perfect model that answers the wrong question is still wrong."
                   },
 
             ];
