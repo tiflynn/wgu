@@ -7,13 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A static, dependency-free study site for WGU MBA courses, served by GitHub Pages at
 https://tiflynn.github.io/wgu/. No package.json, no build step, no test suite, no linter — every page
 is hand-written HTML that links three shared stylesheets and one shared JS engine. Work is measured in
-*sections* (C213) or *topics* (C214): each one is a quiz page, a notes page, and a card on its course hub.
+*sections*: each one is a quiz page, a notes page, and a card on its course hub.
 
 ## Commands
 
 ```bash
 python3 -m http.server 8000          # from the repo root, then open http://localhost:8000/
-grep -c "type: '" c214/quizzes/section03.html   # question count for a quiz file
+grep -c "type: '" c213/quizzes/section03.html   # question count for a quiz file
 ```
 
 Always preview over `http://`, not by opening the file. Under `file://` the browser blocks `fetch`, so
@@ -46,7 +46,7 @@ Three levels, each with a different link convention — getting these wrong is t
 `assets/js/quiz.js` owns everything interactive: deck and option shuffling, per-type rendering and
 grading, the progress bar, the live score chips, touch-drag support, the results screen, and the
 missed-question review list. A quiz page is only a shell — it defines a `questions` array and calls
-`initQuiz(questions, 'Topic 3')`. Never inline the CSS or the engine into a page, and never fork the
+`initQuiz(questions, 'Section 3')`. Never inline the CSS or the engine into a page, and never fork the
 engine per course; a fix belongs in the shared file.
 
 Question shapes, all of which also require `explanation` and `mnemonic`:
@@ -71,8 +71,8 @@ Each course hub re-counts questions at load by fetching every card's quiz file a
 - The number written into `.hub-tag` is only the `file://` fallback — keep it accurate anyway.
 - The regex matches `type:` followed by a quote, so avoid writing `type: '…'` inside a comment or an
   explanation string in a quiz file — it inflates the count.
-- The **root** `index.html` section/topic tags have no script behind them. They are hardcoded and are
-  the one number that must be bumped by hand when a topic lands.
+- The **root** `index.html` section tags have no script behind them. They are hardcoded and are
+  the one number that must be bumped by hand when a section lands.
 
 ### Styling
 
@@ -89,11 +89,11 @@ attributes for font size and spacing are the established pattern inside notes se
 ## Conventions
 
 - Section files are zero-padded: `section03.html`, never `section3.html`.
-- Filenames say `section` in both courses, but the user-facing vocabulary differs: C213 says
-  "Section N" with a `← All Sections` back link, C214 says "Topic N" with `← All Topics`. Match the course.
+- User-facing vocabulary is "Section N" with a `← All Sections` back link. If a future course uses
+  different wording (e.g. "Topic N"), match that course's hub.
 - Hub cards carry a prose summary description and a **single** question-count tag. Question-type pills
   were deliberately removed — do not reintroduce them.
-- Quiz pages carry a `.top-nav` with both the hub back link and a `📄 Topic N Notes` link; notes pages
+- Quiz pages carry a `.top-nav` with both the hub back link and a `📄 Section N Notes` link; notes pages
   carry only the back link.
 - `docs/PROMPT.md` is the authoritative spec for generating a new quiz — including the rule that a
   numbered "Step 1 / Step 2 / …" sequence in the notes becomes *one* `ord` question, not several `mc`
@@ -102,10 +102,10 @@ attributes for font size and spacing are the established pattern inside notes se
   should be plausible — ideally each distractor is a specific, nameable mistake (a skipped add-back, a
   flipped sign), and the `explanation` should say so.
 
-## Adding a topic
+## Adding a section
 
 1. Read `docs/PROMPT.md`, then build `cNNN/quizzes/sectionNN.html` by copying the nearest sibling's shell.
 2. Build `cNNN/notes/sectionNN.html` from the sibling notes shell, reusing `notes.css` classes.
 3. Add the card to `cNNN/index.html` (href relative, count tag accurate).
 4. Bump the course's count tag on the root `index.html`.
-5. Update `README.md` — the course status table and the per-course section/topic table.
+5. Update `README.md` — the course status table and the per-course section table.

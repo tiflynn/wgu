@@ -3,7 +3,7 @@
 Reusable prompt for generating a new section quiz that plugs into this site.
 Fill in the `[BRACKETED]` placeholders and paste your section notes at the bottom.
 
-The site holds one directory per course (`c213/`, `c214/`, …), each with its own
+The site holds one directory per course (`c213/`, …), each with its own
 `quizzes/` and `notes/` folders and its own hub `index.html`. `[COURSE]` below is that
 directory — e.g. `c213` — and `[COURSE TITLE]` is the full name, e.g.
 "C213 Accounting for Decision Makers".

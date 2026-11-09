@@ -9,7 +9,6 @@ questions.
 | Course | Status |
 |---|---|
 | **C213** Accounting for Decision Makers | 11 sections, 2 practice exams, 2 formula sheets |
-| **C214** Financial Management | Topics 1–4 — more added as the course progresses |
 
 ---
 
@@ -36,7 +35,6 @@ root and is used by every course, so a fix lands once.
 │       ├── section02.html …    Study notes per section
 │       ├── formulas-provided.html   Formulas available during testing
 │       └── formulas-memorize.html   Formulas to memorize
-├── c214/                   Same shape — Topics 1–4 built, more to come
 └── docs/PROMPT.md          Reusable prompt for generating a new section quiz
 ```
 
@@ -64,14 +62,6 @@ relative paths; the hub's question-count script keys off that `quizzes/` prefix.
 | 11 | Activity-Based Costing (ABC) |
 | 12 | Cost Behavior & C-V-P Analysis |
 
-### C214 topics
-
-| Topic | Title |
-|---|---|
-| 1 | Overview of Finance |
-| 2 | Financial Statements Part 1 — Income Statement & Balance Sheet |
-| 3 | Financial Statements Part 2 — The Statement of Cash Flows |
-| 4 | Financial Ratio Analysis |
 
 ---
 
