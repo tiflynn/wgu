@@ -9,7 +9,7 @@ questions.
 | Course | Status |
 |---|---|
 | **C213** Accounting for Decision Makers | 11 sections, 2 practice exams, 2 formula sheets |
-| **C207** Data-Driven Decision Making | 5 sections (more added as the course progresses) |
+| **C207** Data-Driven Decision Making | 6 sections (more added as the course progresses) |
 
 ---
 
@@ -76,6 +76,7 @@ relative paths; the hub's question-count script keys off that `quizzes/` prefix.
 | 2 | Quantitative Statistical Tools |
 | 3 | Statistics as a Managerial Tool |
 | 4 | Quality Metrics and Tools |
+| 6 | Improving Organizational Performance |
 
 
 ---
