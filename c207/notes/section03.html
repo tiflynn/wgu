@@ -1,249 +1,871 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>C207 Data-Driven Decision Making · Section 3 Notes</title>
-<link rel="stylesheet" href="../../assets/css/quiz.css">
-<link rel="stylesheet" href="../../assets/css/notes.css">
-<style>
-  /* Section 3 notes: keep every line of body text at 12pt (16px) or larger */
-  .quicklist li, .formula-name, .formula-meaning, .compare-table, .compare-table td, .compare-table th, .callout, .section .section-sub, .notes-toc a, .notes-toc-label, .chain-flow, .chain-node, .eyebrow, .back-link, .subtitle { font-size: 1rem; }
-  .section-sub { margin-bottom: .6rem; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C207 Data-Driven Decision Making · Section 3 Notes</title>
+  <link rel="stylesheet" href="../../assets/css/quiz.css">
+  <link rel="stylesheet" href="../../assets/css/notes.css">
+  <style>
+    /* Section 3 notes: keep every line of body text at 12pt (16px) or larger */
+    .quicklist li,
+    .formula-name,
+    .formula-meaning,
+    .compare-table,
+    .compare-table td,
+    .compare-table th,
+    .callout,
+    .section .section-sub,
+    .notes-toc a,
+    .notes-toc-label,
+    .chain-flow,
+    .chain-node,
+    .eyebrow,
+    .back-link,
+    .subtitle {
+      font-size: 1rem;
+    }
+
+    .section-sub {
+      margin-bottom: .6rem;
+    }
+  </style>
 </head>
+
 <body>
 
-<a class="back-link" href="../index.html">← All Sections</a>
+  <a class="back-link" href="../index.html">← All Sections</a>
 
-<header>
-  <p class="eyebrow">C207 Data-Driven Decision Making · Section 3</p>
-  <h1>Statistics as a<br><span>Managerial Tool</span></h1>
-  <p class="subtitle">Quick-reference notes</p>
-</header>
+  <header>
+    <p class="eyebrow">C207 Data-Driven Decision Making · Section 3</p>
+    <h1>Statistics as a<br><span>Managerial Tool</span></h1>
+    <p class="subtitle">Quick-reference notes</p>
+  </header>
 
-<div class="notes-wrap">
+  <div class="notes-wrap">
 
-  <div class="notes-toc">
-    <p class="notes-toc-label">Jump to a topic</p>
-    <ol>
-      <li><span class="n">01</span><a href="#risk">Probability: Measuring Risk</a></li>
-      <li><span class="n">02</span><a href="#combine">Combining Probabilities</a></li>
-      <li><span class="n">03</span><a href="#center">Measures of Central Tendency</a></li>
-      <li><span class="n">04</span><a href="#spread">Measures of Spread</a></li>
-      <li><span class="n">05</span><a href="#box">Box Plots and Skew</a></li>
-      <li><span class="n">06</span><a href="#normal">The Normal Distribution</a></li>
-      <li><span class="n">07</span><a href="#z">Z-Scores</a></li>
-      <li><span class="n">08</span><a href="#confuse">Easy to Confuse and Exam Tips</a></li>
-    </ol>
+    <div class="notes-toc">
+      <p class="notes-toc-label">Jump to a topic</p>
+      <ol>
+        <li><span class="n">01</span><a href="#risk">Probability: Measuring Risk</a></li>
+        <li><span class="n">02</span><a href="#combine">Combining Probabilities</a></li>
+        <li><span class="n">03</span><a href="#center">Measures of Central Tendency</a></li>
+        <li><span class="n">04</span><a href="#spread">Measures of Spread</a></li>
+        <li><span class="n">05</span><a href="#box">Box Plots and Skew</a></li>
+        <li><span class="n">06</span><a href="#normal">The Normal Distribution</a></li>
+        <li><span class="n">07</span><a href="#z">Z-Scores</a></li>
+        <li><span class="n">08</span><a href="#confuse">Easy to Confuse and Exam Tips</a></li>
+      </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <section class="section top-anchor" id="risk">
+      <h2>01 · Probability: Measuring Risk</h2>
+      <p class="section-sub">Risk, probability and the single-event rules</p>
+
+      <div class="formula-card">
+        <div class="formula-name">Why statistics is a managerial tool</div>
+        <div class="formula-eq">Lower risk → higher chance of success → profit</div>
+        <div class="formula-meaning"><strong>Risk</strong> = things did not go as planned (or not as well as planned).
+          <strong>Success</strong> = the desired outcome. Probability helps you manage both: know the options, the
+          comparative risk of each, the uncertainties and the outcomes you want. Managing risk costs money, time and
+          energy, but done well it raises profit and efficiency.
+        </div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-name">Probability of an event</div>
+        <div class="formula-eq">P(E) = desired outcomes ÷ all possible outcomes</div>
+        <div class="formula-meaning">Example: 2 of 5 associates can still give a discount, so P = 2/5 =
+          <strong>40%</strong>.
+        </div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-name">Complement</div>
+        <div class="formula-eq">P(not E) = 1 − P(E)</div>
+        <div class="formula-meaning">With only two outcomes (happens or not), the two probabilities always total 1 (or
+          100%). Given 0.35 for success, failure is <strong>0.65</strong>. Questions often give only one side.</div>
+      </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 190' role='img'
+        aria-label='Bar split into success 0.35 and failure 0.65 showing complements add to 1'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='34' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Only two outcomes: they
+          always complete 100%</text>
+        <rect x='50' y='56' width='175' height='54' fill='#2563EB' fill-opacity='.25' stroke='#2563EB'
+          stroke-width='2' />
+        <rect x='225' y='56' width='325' height='54' fill='#EEF1F6' stroke='#5C677D' stroke-width='2' /><text x='137'
+          y='90' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Success 0.35</text><text x='387'
+          y='90' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Failure 0.65</text><text x='300'
+          y='142' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>P(not E) = 1 − P(E) = 1 − 0.35 =
+          0.65</text><text x='300' y='168' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Percent
+          version: 100% − 35% = 65%</text>
+      </svg>
+      <ul class="quicklist">
+        <li><strong>Mutually exclusive:</strong> events that cannot both happen. The intersection is 0, so the union is
+          just the <strong>sum</strong>.</li>
+        <li><strong>Without replacement:</strong> when an item is taken and not returned, the denominator changes (and
+          the numerator too if it was a "success"). 20 tickets with 5 winners: after one winner is drawn, P(winner) =
+          <strong>4/19</strong>.
+        </li>
+      </ul><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 240' role='img'
+        aria-label='Two separate circles for mutually exclusive events and two overlapping circles for events that can both happen'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='150' y='30' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Mutually
+          exclusive</text><text x='450' y='30' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Not
+          exclusive (overlap)</text>
+        <circle cx='95' cy='105' r='55' fill='#2563EB' fill-opacity='.25' stroke='#2563EB' stroke-width='2' />
+        <circle cx='205' cy='105' r='55' fill='#7C3AED' fill-opacity='.25' stroke='#7C3AED' stroke-width='2' /><text
+          x='95' y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>A</text><text x='205'
+          y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>B</text>
+        <circle cx='415' cy='105' r='60' fill='#2563EB' fill-opacity='.25' stroke='#2563EB' stroke-width='2' />
+        <circle cx='485' cy='105' r='60' fill='#7C3AED' fill-opacity='.25' stroke='#7C3AED' stroke-width='2' /><text
+          x='385' y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>A</text><text x='515'
+          y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>B</text><text x='450' y='111'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>A∩B</text><text x='150' y='190'
+          font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>P(A and B) = 0</text><text x='150'
+          y='214' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Union = P(A) + P(B)</text><text
+          x='450' y='190' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>P(A and B) &gt;
+          0</text><text x='450' y='214' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Union = sum
+          − overlap</text>
+      </svg>
+    </section>
+
+    <!-- ============================================================ -->
+    <section class="section top-anchor" id="combine">
+      <h2>02 · Combining Probabilities</h2>
+      <p class="section-sub">Intersection, union and Bayes: read the keywords</p>
+
+      <div class="table-scroll">
+        <table class="compare-table">
+          <tr>
+            <th>Rule</th>
+            <th>Cue words</th>
+            <th>What you do</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td><strong>Intersection</strong> (∩)</td>
+            <td>"and", "both", "all", "every"</td>
+            <td>Multiply: P(A) × P(B)</td>
+            <td>0.60 × 0.30 = <strong>0.18</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Union</strong> (∪)</td>
+            <td>"or", "either", "any"</td>
+            <td>Add, then subtract the overlap: P(A) + P(B) − P(A and B)</td>
+            <td>0.60 + 0.30 − 0.18 = <strong>0.72</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Bayes / conditional</strong></td>
+            <td>"given", "knowing", "if this happens, what is the chance that…"</td>
+            <td>One event happens first; divide by its probability</td>
+            <td>0.12 ÷ 0.40 = <strong>0.30</strong></td>
+          </tr>
+        </table>
+      </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300' role='img'
+        aria-label='Venn diagram of events A and B: A only 0.42, both 0.18, B only 0.12, neither 0.28'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='200' y='30' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>A: P = 0.60</text><text
+          x='400' y='30' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>B: P = 0.30</text>
+        <circle cx='235' cy='125' r='90' fill='#2563EB' fill-opacity='.25' stroke='#2563EB' stroke-width='2' />
+        <circle cx='365' cy='125' r='90' fill='#7C3AED' fill-opacity='.25' stroke='#7C3AED' stroke-width='2' /><text
+          x='180' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>A only</text><text
+          x='180' y='142' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.42</text><text x='300'
+          y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Both</text><text x='300' y='142'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.18</text><text x='420' y='120'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>B only</text><text x='420' y='142'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.12</text><text x='34' y='228'
+          font-size='16' fill='#5C677D' text-anchor='start' font-weight='400'>Neither</text><text x='34' y='250'
+          font-size='16' fill='#5C677D' text-anchor='start' font-weight='700'>0.28</text><text x='300' y='252'
+          font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>AND (multiply): 0.60 × 0.30 =
+          0.18</text><text x='300' y='278' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>OR (add,
+          subtract overlap): 0.60 + 0.30 − 0.18 = 0.72</text>
+      </svg>
+      <div class="callout warn">
+        <strong>Union trap:</strong> a union means "A or B, but not counted twice". The question never says so. If one
+        answer is the plain sum (0.90), it is the wrong one. A union is always at least as large as the intersection.
+      </div>
+      <div class="formula-card">
+        <div class="formula-name">Bayes (conditional) formula</div>
+        <div class="formula-eq">P(B | A) = P(A and B) ÷ P(A)</div>
+        <div class="formula-meaning">Read "the probability of B <strong>given</strong> A". The given event is the
+          trigger, so there is an <strong>order</strong>. That order is the difference between Bayes and an
+          intersection. If P(B | A) = P(B), A tells you nothing about B (independent events). Think of it like the
+          decision-tree work in Section 2: combine branch probabilities, then compare outcomes.</div>
+      </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 296' role='img'
+        aria-label='Venn diagram where circle A is the given event and the overlap with B is divided by A'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Given A, the universe
+          shrinks to circle A</text>
+        <circle cx='345' cy='130' r='85' fill='none' stroke='#5C677D' stroke-width='2' stroke-dasharray='6 5' />
+        <circle cx='235' cy='130' r='85' fill='#2563EB' fill-opacity='.20' stroke='#2563EB' stroke-width='4' />
+        <path d='M290.0,65.2 A85,85 0 0 1 290.0,194.8 A85,85 0 0 1 290.0,65.2 Z' fill='#059669' fill-opacity='.55'
+          stroke='none' /><text x='190' y='125' font-size='16' fill='#1A2035' text-anchor='middle'
+          font-weight='400'>A</text><text x='190' y='147' font-size='16' fill='#1A2035' text-anchor='middle'
+          font-weight='400'>(given)</text><text x='290.0' y='136' font-size='16' fill='#1A2035' text-anchor='middle'
+          font-weight='700'>A∩B</text><text x='400' y='136' font-size='16' fill='#5C677D' text-anchor='middle'
+          font-weight='400'>B</text><text x='300' y='252' font-size='16' fill='#2563EB' text-anchor='middle'
+          font-weight='700'>P(B | A) = P(A and B) ÷ P(A)</text><text x='300' y='278' font-size='16' fill='#059669'
+          text-anchor='middle' font-weight='700'>= 0.12 ÷ 0.40 = 0.30</text>
+      </svg>
+      <p class="section-sub" style="margin-top:1rem">Probability tree: multiply along a path; all paths total 1.00</p>
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 620 350' role='img'
+        aria-label='Probability tree with two stages; each path probability is the product of its branches and all paths total 1.00'
+        style='display:block;width:100%;max-width:620px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='310' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Multiply ALONG a path. All
+          paths add to 1.00.</text>
+        <circle cx='40' cy='170' r='8' fill='#1A2035' />
+        <line x1='40' y1='170' x2='210' y2='95' stroke='#5C677D' stroke-width='2' /><text x='100' y='77' font-size='16'
+          fill='#2563EB' text-anchor='middle' font-weight='700'>0.60</text><text x='235' y='100' font-size='16'
+          fill='#1A2035' text-anchor='middle' font-weight='700'>A</text>
+        <line x1='40' y1='170' x2='210' y2='245' stroke='#5C677D' stroke-width='2' /><text x='100' y='279'
+          font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.40</text><text x='235' y='250'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>not A</text>
+        <line x1='265' y1='95' x2='335' y2='55' stroke='#5C677D' stroke-width='2' /><text x='293' y='63.0'
+          font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.25</text><text x='365' y='60'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>B</text><text x='410' y='60'
+          font-size='16' fill='#059669' text-anchor='start' font-weight='700'>= 0.15</text>
+        <line x1='265' y1='95' x2='335' y2='135' stroke='#5C677D' stroke-width='2' /><text x='293' y='141.0'
+          font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.75</text><text x='365' y='140'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>not B</text><text x='410' y='140'
+          font-size='16' fill='#059669' text-anchor='start' font-weight='700'>= 0.45</text>
+        <line x1='265' y1='245' x2='335' y2='205' stroke='#5C677D' stroke-width='2' /><text x='293' y='213.0'
+          font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.25</text><text x='365' y='210'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>B</text><text x='410' y='210'
+          font-size='16' fill='#059669' text-anchor='start' font-weight='700'>= 0.10</text>
+        <line x1='265' y1='245' x2='335' y2='285' stroke='#5C677D' stroke-width='2' /><text x='293' y='291.0'
+          font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.75</text><text x='365' y='290'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>not B</text><text x='410' y='290'
+          font-size='16' fill='#059669' text-anchor='start' font-weight='700'>= 0.30</text><text x='310' y='330'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='700'>0.15 + 0.45 + 0.10 + 0.30 = 1.00</text>
+      </svg>
+      <ul class="quicklist">
+        <li><strong>Permutations:</strong> order matters (first place vs. second). <strong>Combinations:</strong> order
+          does not matter (who is on the team). Both return a whole-number count. Choosing 2 of 5: 20 permutations, 10
+          combinations.</li>
+        <li>Formulas (not emphasized): nPr = n! ÷ (n − r)! and nCr = n! ÷ (r! × (n − r)!). The instructor said
+          combinations are not a focus of the objective assessment.</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <section class="section top-anchor" id="center">
+      <h2>03 · Measures of Central Tendency</h2>
+      <p class="section-sub">Mean, median and mode</p>
+
+      <div class="table-scroll">
+        <table class="compare-table">
+          <tr>
+            <th>Measure</th>
+            <th>How to find it</th>
+            <th>Cue / use</th>
+            <th>Strength or weakness</th>
+          </tr>
+          <tr>
+            <td><strong>Mean</strong></td>
+            <td>Add all values, divide by the count</td>
+            <td>"Average"</td>
+            <td>Pulled by outliers; never use it alone, pair it with a measure of spread</td>
+          </tr>
+          <tr>
+            <td><strong>Median</strong></td>
+            <td>Sort low to high and take the middle. Even count: average the two middle values</td>
+            <td>"Middle"; half the data is below and half above</td>
+            <td>Robust to outliers; says nothing about spread</td>
+          </tr>
+          <tr>
+            <td><strong>Mode</strong></td>
+            <td>The value that occurs most often (none, one or several)</td>
+            <td>The word <strong>"typical"</strong></td>
+            <td>Robust to outliers; shows frequency</td>
+          </tr>
+        </table>
+      </div>
+      <ul class="quicklist">
+        <li><strong>Median position:</strong> 9 values → the 5th; 11 values → the 6th; 10 values → average of the 5th
+          and 6th.</li>
+        <li><strong>Sales example (7 reps):</strong> $1,000, $4,500, $4,600, $4,900, $5,200, $5,200, $7,500. Sum =
+          $32,900, so <strong>mean = $4,700</strong>; <strong>median = $4,900</strong>; <strong>mode = $5,200</strong>.
+          The two outliers (Juan and Jacqueline) are why the mean misleads.</li>
+      </ul><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 214' role='img'
+        aria-label='Nine sorted numbers with the fifth value highlighted as the median'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>SORT first, then take the
+          middle value</text>
+        <rect x='21' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5' /><text
+          x='49' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>3</text><text x='49'
+          y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>1</text>
+        <rect x='83' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5' /><text
+          x='111' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>5</text><text x='111'
+          y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>2</text>
+        <rect x='145' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5' /><text
+          x='173' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>7</text><text x='173'
+          y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>3</text>
+        <rect x='207' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5' /><text
+          x='235' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>9</text><text x='235'
+          y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>4</text>
+        <rect x='269' y='50' width='56' height='56' rx='6' fill='#059669' fill-opacity='.30' stroke='#059669'
+          stroke-width='3' /><text x='297' y='86' font-size='16' fill='#1A2035' text-anchor='middle'
+          font-weight='700'>11</text><text x='297' y='128' font-size='16' fill='#5C677D' text-anchor='middle'
+          font-weight='400'>5</text>
+        <rect x='331' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5' /><text
+          x='359' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>14</text><text x='359'
+          y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>6</text>
+        <rect x='393' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5' /><text
+          x='421' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>16</text><text x='421'
+          y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>7</text>
+        <rect x='455' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5' /><text
+          x='483' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>18</text><text x='483'
+          y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>8</text>
+        <rect x='517' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5' /><text
+          x='545' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>21</text><text x='545'
+          y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>9</text><text x='300' y='170'
+          font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>Position 5 of 9 holds the median:
+          11</text><text x='300' y='196' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>4 values
+          below, 4 values above</text>
+      </svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 248' role='img'
+        aria-label='Dot plot with an outlier at 40 where the mean is 10.5 and the median stays at 5'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>One outlier drags the
+          mean, not the median</text>
+        <line x1='30' y1='140' x2='580' y2='140' stroke='#5C677D' stroke-width='2' />
+        <line x1='40' y1='135' x2='40' y2='145' stroke='#5C677D' stroke-width='2' /><text x='40' y='166' font-size='16'
+          fill='#5C677D' text-anchor='middle' font-weight='400'>0</text>
+        <line x1='100' y1='135' x2='100' y2='145' stroke='#5C677D' stroke-width='2' /><text x='100' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>5</text>
+        <line x1='160' y1='135' x2='160' y2='145' stroke='#5C677D' stroke-width='2' /><text x='160' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>10</text>
+        <line x1='220' y1='135' x2='220' y2='145' stroke='#5C677D' stroke-width='2' /><text x='220' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>15</text>
+        <line x1='280' y1='135' x2='280' y2='145' stroke='#5C677D' stroke-width='2' /><text x='280' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>20</text>
+        <line x1='340' y1='135' x2='340' y2='145' stroke='#5C677D' stroke-width='2' /><text x='340' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>25</text>
+        <line x1='400' y1='135' x2='400' y2='145' stroke='#5C677D' stroke-width='2' /><text x='400' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>30</text>
+        <line x1='460' y1='135' x2='460' y2='145' stroke='#5C677D' stroke-width='2' /><text x='460' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>35</text>
+        <line x1='520' y1='135' x2='520' y2='145' stroke='#5C677D' stroke-width='2' /><text x='520' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>40</text>
+        <line x1='580' y1='135' x2='580' y2='145' stroke='#5C677D' stroke-width='2' /><text x='580' y='166'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>45</text>
+        <circle cx='76' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2' />
+        <circle cx='88' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2' />
+        <circle cx='100' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2' />
+        <circle cx='100' cy='102' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2' />
+        <circle cx='112' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2' />
+        <circle cx='520' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2' /><text
+          x='520' y='100' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>outlier</text>
+        <polygon points='100,92 92,76 108,76' fill='#059669' /><text x='120' y='66' font-size='16' fill='#059669'
+          text-anchor='middle' font-weight='700'>Median = 5</text>
+        <polygon points='166.0,192 158.0,208 174.0,208' fill='#DC2626' /><text x='126.0' y='232' font-size='16'
+          fill='#DC2626' text-anchor='start' font-weight='700'>Mean = 10.5 (pulled right)</text>
+      </svg>
+      <div class="callout tip">
+        <strong>Takeaway:</strong> the median is the most robust center, the mode shows what happens most, and the mean
+        needs a measure of spread beside it (usually the standard deviation).
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section class="section top-anchor" id="spread">
+      <h2>04 · Measures of Spread</h2>
+      <p class="section-sub">Range, IQR, variance and standard deviation</p>
+
+      <ul class="quicklist">
+        <li><strong>Range</strong> = highest − lowest. Sales example: $7,500 − $1,000 = <strong>$6,500</strong>. Uses
+          only the extremes.</li>
+        <li><strong>Interquartile range (IQR)</strong> = Q3 − Q1. Q1 is the median of the lower half ($4,500) and Q3 the
+          median of the upper half ($5,200), so IQR = <strong>$700</strong>. Leaves out the extremes.</li>
+        <li><strong>Variance</strong> and <strong>standard deviation (SD)</strong> both measure how spread out the data
+          is. The course uses them almost interchangeably when asked "which is a measure of spread?" The SD is the
+          square root of the variance, so it is in the original units.</li>
+      </ul>
+      <p class="section-sub" style="margin-top:1rem">Sample variance and SD in five steps</p>
+      <div class="chain-flow">
+        <div class="chain-node">1 · Subtract the mean</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">2 · Square each difference</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">3 · Add them up</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">4 · Divide by n − 1 = variance</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">5 · Square root = SD</div>
+      </div>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <tr>
+            <th>Employee</th>
+            <th>Sales</th>
+            <th>Sales − mean</th>
+            <th>Squared difference</th>
+          </tr>
+          <tr>
+            <td>Juan</td>
+            <td>$1,000</td>
+            <td>−$3,700</td>
+            <td>13,690,000</td>
+          </tr>
+          <tr>
+            <td>Penny</td>
+            <td>$4,500</td>
+            <td>−$200</td>
+            <td>40,000</td>
+          </tr>
+          <tr>
+            <td>Alec</td>
+            <td>$4,600</td>
+            <td>−$100</td>
+            <td>10,000</td>
+          </tr>
+          <tr>
+            <td>Ramone</td>
+            <td>$4,900</td>
+            <td>$200</td>
+            <td>40,000</td>
+          </tr>
+          <tr>
+            <td>Mack</td>
+            <td>$5,200</td>
+            <td>$500</td>
+            <td>250,000</td>
+          </tr>
+          <tr>
+            <td>Khara</td>
+            <td>$5,200</td>
+            <td>$500</td>
+            <td>250,000</td>
+          </tr>
+          <tr>
+            <td>Jacqueline</td>
+            <td>$7,500</td>
+            <td>$2,800</td>
+            <td>7,840,000</td>
+          </tr>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td></td>
+            <td><strong>22,120,000</strong></td>
+          </tr>
+        </table>
+      </div>
+      <div class="callout">
+        <strong>Result:</strong> variance = 22,120,000 ÷ 6 = <strong>3,686,667</strong>; SD = √3,686,667 =
+        <strong>$1,920.07</strong>. Squaring is why variance looks "too big".
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section class="section top-anchor" id="box">
+      <h2>05 · Box Plots and Skew</h2>
+      <p class="section-sub">A communication tool built from five numbers</p>
+
+      <div class="chain-flow">
+        <div class="chain-node">1 · Sort</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">2 · Find the median</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">3 · Find Q1 and Q3</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">4 · Draw the box (Q1 to Q3)</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">5 · Whiskers to min and max</div>
+      </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 288' role='img'
+        aria-label='Labeled box plot showing minimum 3, Q1 5, median 10, Q3 15, maximum 21, an IQR of 10 and a range of 18'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='24' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Five numbers build a box
+          plot</text>
+        <line x1='160' y1='84' x2='400' y2='84' stroke='#2563EB' stroke-width='3' />
+        <line x1='160' y1='78' x2='160' y2='90' stroke='#2563EB' stroke-width='3' />
+        <line x1='400' y1='78' x2='400' y2='90' stroke='#2563EB' stroke-width='3' /><text x='280' y='70' font-size='16'
+          fill='#2563EB' text-anchor='middle' font-weight='700'>IQR = Q3 − Q1 = 15 − 5 = 10</text>
+        <line x1='112' y1='135' x2='160' y2='135' stroke='#1A2035' stroke-width='3' />
+        <line x1='400' y1='135' x2='544' y2='135' stroke='#1A2035' stroke-width='3' />
+        <line x1='112' y1='118' x2='112' y2='152' stroke='#1A2035' stroke-width='3' />
+        <line x1='544' y1='118' x2='544' y2='152' stroke='#1A2035' stroke-width='3' />
+        <rect x='160' y='102' width='240' height='66' fill='#2563EB' fill-opacity='.18' stroke='#2563EB'
+          stroke-width='3' />
+        <line x1='280' y1='102' x2='280' y2='168' stroke='#DC2626' stroke-width='5' /><text x='112' y='196'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Min</text><text x='112' y='218'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>3</text><text x='160' y='196'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Q1</text><text x='160' y='218'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>5</text><text x='280' y='196'
+          font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>Median</text><text x='280' y='218'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>10</text><text x='400' y='196'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Q3</text><text x='400' y='218'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>15</text><text x='544' y='196'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Max</text><text x='544' y='218'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>21</text>
+        <line x1='112' y1='246' x2='544' y2='246' stroke='#5C677D' stroke-width='2' /><text x='328' y='270'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='700'>Range = Max − Min = 21 − 3 = 18
+          (whiskers)</text>
+      </svg>
+      <ul class="quicklist">
+        <li>The <strong>box width is the IQR</strong>; the <strong>whiskers</strong> span the range.</li>
+        <li>Sales example: min $1,000, Q1 $4,500, median $4,900, Q3 $5,200, max $7,500.</li>
+      </ul><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 336' role='img'
+        aria-label='Three box plots: left-skewed, symmetric and right-skewed'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>The LONG whisker points
+          toward the skew</text><text x='30' y='69' font-size='16' fill='#1A2035' text-anchor='start'
+          font-weight='700'>Left-skewed: long whisker on the left</text>
+        <line x1='73.2' y1='105' x2='354.0' y2='105' stroke='#1A2035' stroke-width='3' />
+        <line x1='489.00000000000006' y1='105' x2='526.8' y2='105' stroke='#1A2035' stroke-width='3' />
+        <line x1='73.2' y1='93' x2='73.2' y2='117' stroke='#1A2035' stroke-width='3' />
+        <line x1='526.8' y1='93' x2='526.8' y2='117' stroke='#1A2035' stroke-width='3' />
+        <rect x='354.0' y='83' width='135.00000000000006' height='44' fill='#2563EB' fill-opacity='.18' stroke='#2563EB'
+          stroke-width='3' />
+        <line x1='435.0' y1='83' x2='435.0' y2='127' stroke='#DC2626' stroke-width='4' /><text x='30' y='164'
+          font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>Symmetric: balanced box and
+          whiskers</text>
+        <line x1='138.0' y1='200' x2='246.0' y2='200' stroke='#1A2035' stroke-width='3' />
+        <line x1='354.0' y1='200' x2='462.0' y2='200' stroke='#1A2035' stroke-width='3' />
+        <line x1='138.0' y1='188' x2='138.0' y2='212' stroke='#1A2035' stroke-width='3' />
+        <line x1='462.0' y1='188' x2='462.0' y2='212' stroke='#1A2035' stroke-width='3' />
+        <rect x='246.0' y='178' width='108.0' height='44' fill='#2563EB' fill-opacity='.18' stroke='#2563EB'
+          stroke-width='3' />
+        <line x1='300.0' y1='178' x2='300.0' y2='222' stroke='#DC2626' stroke-width='4' /><text x='30' y='259'
+          font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>Right-skewed: long whisker on the
+          right</text>
+        <line x1='73.2' y1='295' x2='111.0' y2='295' stroke='#1A2035' stroke-width='3' />
+        <line x1='246.0' y1='295' x2='526.8' y2='295' stroke='#1A2035' stroke-width='3' />
+        <line x1='73.2' y1='283' x2='73.2' y2='307' stroke='#1A2035' stroke-width='3' />
+        <line x1='526.8' y1='283' x2='526.8' y2='307' stroke='#1A2035' stroke-width='3' />
+        <rect x='111.0' y='273' width='135.0' height='44' fill='#2563EB' fill-opacity='.18' stroke='#2563EB'
+          stroke-width='3' />
+        <line x1='165.0' y1='273' x2='165.0' y2='317' stroke='#DC2626' stroke-width='4' />
+      </svg>
+      <div class="callout tip">
+        <strong>Skew rule:</strong> the long whisker points toward the skew. A well-controlled process is
+        <strong>symmetric</strong>; a shift in one hour shows up as skew.
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section class="section top-anchor" id="normal">
+      <h2>06 · The Normal Distribution</h2>
+      <p class="section-sub">Empirical Rule, slices and what the mean and SD do</p>
+
+      <div class="callout">
+        <strong>Conditions for the Empirical Rule:</strong> mean ≈ median ≈ mode; sample size greater than 30; about 50%
+        of the data on each side of the mean.
+      </div>
+      <div class="formula-card">
+        <div class="formula-name">Memorize</div>
+        <div class="formula-eq">±1 SD ≈ 68% · ±2 SD ≈ 95% · ±3 SD ≈ 99.7%</div>
+      </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 346' role='img'
+        aria-label='Bell curve with bands: 34.1 percent per half within one SD, 13.6 percent from one to two SD, 2.1 percent from two to three SD'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='22' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Empirical Rule: 68 – 95 –
+          99.7</text>
+        <path
+          d='M60.0,300 L60.0,298.3 L62.0,298.2 L64.0,298.1 L66.0,297.9 L68.0,297.8 L70.0,297.6 L72.0,297.4 L74.0,297.2 L76.0,297.0 L78.0,296.8 L80.0,296.6 L82.0,296.3 L84.0,296.1 L86.0,295.8 L88.0,295.5 L90.0,295.2 L92.0,294.9 L94.0,294.6 L96.0,294.2 L98.0,293.8 L100.0,293.4 L102.0,293.0 L104.0,292.6 L106.0,292.1 L108.0,291.6 L110.0,291.1 L112.0,290.5 L114.0,290.0 L116.0,289.4 L118.0,288.8 L120.0,288.1 L122.0,287.4 L124.0,286.7 L126.0,285.9 L128.0,285.2 L130.0,284.4 L132.0,283.5 L134.0,282.6 L136.0,281.7 L138.0,280.7 L140.0,279.8 L140.0,300 Z'
+          fill='#2563EB' fill-opacity='0.25' stroke='none' />
+        <path
+          d='M140.0,300 L140.0,279.8 L142.0,278.7 L144.0,277.7 L146.0,276.5 L148.0,275.4 L150.0,274.2 L152.0,273.0 L154.0,271.7 L156.0,270.4 L158.0,269.0 L160.0,267.6 L162.0,266.2 L164.0,264.7 L166.0,263.2 L168.0,261.7 L170.0,260.0 L172.0,258.4 L174.0,256.7 L176.0,255.0 L178.0,253.2 L180.0,251.4 L182.0,249.6 L184.0,247.7 L186.0,245.8 L188.0,243.9 L190.0,241.9 L192.0,239.9 L194.0,237.8 L196.0,235.7 L198.0,233.6 L200.0,231.5 L202.0,229.4 L204.0,227.2 L206.0,225.0 L208.0,222.8 L210.0,220.5 L212.0,218.3 L214.0,216.1 L216.0,213.8 L218.0,211.5 L220.0,209.3 L220.0,300 Z'
+          fill='#2563EB' fill-opacity='0.45' stroke='none' />
+        <path
+          d='M220.0,300 L220.0,209.3 L222.0,207.0 L224.0,204.7 L226.0,202.5 L228.0,200.2 L230.0,198.0 L232.0,195.8 L234.0,193.6 L236.0,191.4 L238.0,189.2 L240.0,187.1 L242.0,185.0 L244.0,182.9 L246.0,180.9 L248.0,178.9 L250.0,176.9 L252.0,175.0 L254.0,173.2 L256.0,171.4 L258.0,169.7 L260.0,168.0 L262.0,166.4 L264.0,164.8 L266.0,163.3 L268.0,161.9 L270.0,160.6 L272.0,159.3 L274.0,158.1 L276.0,157.0 L278.0,155.9 L280.0,155.0 L282.0,154.1 L284.0,153.4 L286.0,152.7 L288.0,152.1 L290.0,151.6 L292.0,151.1 L294.0,150.8 L296.0,150.6 L298.0,150.4 L300.0,150.4 L300.0,300 Z'
+          fill='#2563EB' fill-opacity='0.75' stroke='none' />
+        <path
+          d='M300.0,300 L300.0,150.4 L302.0,150.4 L304.0,150.6 L306.0,150.8 L308.0,151.1 L310.0,151.6 L312.0,152.1 L314.0,152.7 L316.0,153.4 L318.0,154.1 L320.0,155.0 L322.0,155.9 L324.0,157.0 L326.0,158.1 L328.0,159.3 L330.0,160.6 L332.0,161.9 L334.0,163.3 L336.0,164.8 L338.0,166.4 L340.0,168.0 L342.0,169.7 L344.0,171.4 L346.0,173.2 L348.0,175.0 L350.0,176.9 L352.0,178.9 L354.0,180.9 L356.0,182.9 L358.0,185.0 L360.0,187.1 L362.0,189.2 L364.0,191.4 L366.0,193.6 L368.0,195.8 L370.0,198.0 L372.0,200.2 L374.0,202.5 L376.0,204.7 L378.0,207.0 L380.0,209.3 L380.0,300 Z'
+          fill='#2563EB' fill-opacity='0.75' stroke='none' />
+        <path
+          d='M380.0,300 L380.0,209.3 L382.0,211.5 L384.0,213.8 L386.0,216.1 L388.0,218.3 L390.0,220.5 L392.0,222.8 L394.0,225.0 L396.0,227.2 L398.0,229.4 L400.0,231.5 L402.0,233.6 L404.0,235.7 L406.0,237.8 L408.0,239.9 L410.0,241.9 L412.0,243.9 L414.0,245.8 L416.0,247.7 L418.0,249.6 L420.0,251.4 L422.0,253.2 L424.0,255.0 L426.0,256.7 L428.0,258.4 L430.0,260.0 L432.0,261.7 L434.0,263.2 L436.0,264.7 L438.0,266.2 L440.0,267.6 L442.0,269.0 L444.0,270.4 L446.0,271.7 L448.0,273.0 L450.0,274.2 L452.0,275.4 L454.0,276.5 L456.0,277.7 L458.0,278.7 L460.0,279.8 L460.0,300 Z'
+          fill='#2563EB' fill-opacity='0.45' stroke='none' />
+        <path
+          d='M460.0,300 L460.0,279.8 L462.0,280.7 L464.0,281.7 L466.0,282.6 L468.0,283.5 L470.0,284.4 L472.0,285.2 L474.0,285.9 L476.0,286.7 L478.0,287.4 L480.0,288.1 L482.0,288.8 L484.0,289.4 L486.0,290.0 L488.0,290.5 L490.0,291.1 L492.0,291.6 L494.0,292.1 L496.0,292.6 L498.0,293.0 L500.0,293.4 L502.0,293.8 L504.0,294.2 L506.0,294.6 L508.0,294.9 L510.0,295.2 L512.0,295.5 L514.0,295.8 L516.0,296.1 L518.0,296.3 L520.0,296.6 L522.0,296.8 L524.0,297.0 L526.0,297.2 L528.0,297.4 L530.0,297.6 L532.0,297.8 L534.0,297.9 L536.0,298.1 L538.0,298.2 L540.0,298.3 L540.0,300 Z'
+          fill='#2563EB' fill-opacity='0.25' stroke='none' />
+        <polyline
+          points='12.0,299.8 16.8,299.7 21.6,299.6 26.4,299.6 31.2,299.5 36.0,299.4 40.8,299.2 45.6,299.0 50.4,298.8 55.2,298.6 60.0,298.3 64.8,298.0 69.6,297.6 74.4,297.2 79.2,296.7 84.0,296.1 88.8,295.4 93.6,294.6 98.4,293.7 103.2,292.7 108.0,291.6 112.8,290.3 117.6,288.9 122.4,287.3 127.2,285.5 132.0,283.5 136.8,281.3 141.6,278.9 146.4,276.3 151.2,273.5 156.0,270.4 160.8,267.1 165.6,263.5 170.4,259.7 175.2,255.7 180.0,251.4 184.8,247.0 189.6,242.3 194.4,237.4 199.2,232.4 204.0,227.2 208.8,221.9 213.6,216.5 218.4,211.1 223.2,205.6 228.0,200.2 232.8,194.9 237.6,189.6 242.4,184.6 247.2,179.7 252.0,175.0 256.8,170.7 261.6,166.7 266.4,163.0 271.2,159.8 276.0,157.0 280.8,154.6 285.6,152.8 290.4,151.5 295.2,150.7 300.0,150.4 304.8,150.7 309.6,151.5 314.4,152.8 319.2,154.6 324.0,157.0 328.8,159.8 333.6,163.0 338.4,166.7 343.2,170.7 348.0,175.0 352.8,179.7 357.6,184.6 362.4,189.6 367.2,194.9 372.0,200.2 376.8,205.6 381.6,211.1 386.4,216.5 391.2,221.9 396.0,227.2 400.8,232.4 405.6,237.4 410.4,242.3 415.2,247.0 420.0,251.4 424.8,255.7 429.6,259.7 434.4,263.5 439.2,267.1 444.0,270.4 448.8,273.5 453.6,276.3 458.4,278.9 463.2,281.3 468.0,283.5 472.8,285.5 477.6,287.3 482.4,288.9 487.2,290.3 492.0,291.6 496.8,292.7 501.6,293.7 506.4,294.6 511.2,295.4 516.0,296.1 520.8,296.7 525.6,297.2 530.4,297.6 535.2,298.0 540.0,298.3 544.8,298.6 549.6,298.8 554.4,299.0 559.2,299.2 564.0,299.4 568.8,299.5 573.6,299.6 578.4,299.6 583.2,299.7 588.0,299.8'
+          fill='none' stroke='#1A2035' stroke-width='2' />
+        <line x1='20' y1='300' x2='580' y2='300' stroke='#1A2035' stroke-width='2' />
+        <line x1='60' y1='300' x2='60' y2='298.3' stroke='#fff' stroke-width='2' /><text x='60' y='326' font-size='16'
+          fill='#1A2035' text-anchor='middle' font-weight='400'>−3 SD</text>
+        <line x1='140' y1='300' x2='140' y2='279.8' stroke='#fff' stroke-width='2' /><text x='140' y='326'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>−2 SD</text>
+        <line x1='220' y1='300' x2='220' y2='209.3' stroke='#fff' stroke-width='2' /><text x='220' y='326'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>−1 SD</text>
+        <line x1='300' y1='300' x2='300' y2='150.4' stroke='#fff' stroke-width='2' /><text x='300' y='326'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>mean</text>
+        <line x1='380' y1='300' x2='380' y2='209.3' stroke='#fff' stroke-width='2' /><text x='380' y='326'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>+1 SD</text>
+        <line x1='460' y1='300' x2='460' y2='279.8' stroke='#fff' stroke-width='2' /><text x='460' y='326'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>+2 SD</text>
+        <line x1='540' y1='300' x2='540' y2='298.3' stroke='#fff' stroke-width='2' /><text x='540' y='326'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>+3 SD</text><text x='260' y='260'
+          font-size='16' fill='#fff' text-anchor='middle' font-weight='700'>34.1%</text><text x='340' y='260'
+          font-size='16' fill='#fff' text-anchor='middle' font-weight='700'>34.1%</text><text x='180' y='280'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>13.6%</text><text x='420' y='280'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>13.6%</text><text x='100' y='272'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>2.1%</text><text x='500' y='272'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>2.1%</text><text x='42' y='272'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.15%</text><text x='558' y='272'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.15%</text>
+        <line x1='60' y1='62' x2='540' y2='62' stroke='#7C3AED' stroke-width='3' />
+        <line x1='60' y1='55' x2='60' y2='69' stroke='#7C3AED' stroke-width='3' />
+        <line x1='540' y1='55' x2='540' y2='69' stroke='#7C3AED' stroke-width='3' /><text x='300' y='52' font-size='16'
+          fill='#7C3AED' text-anchor='middle' font-weight='700'>99.7% within ±3 SD</text>
+        <line x1='140' y1='98' x2='460' y2='98' stroke='#7C3AED' stroke-width='3' />
+        <line x1='140' y1='91' x2='140' y2='105' stroke='#7C3AED' stroke-width='3' />
+        <line x1='460' y1='91' x2='460' y2='105' stroke='#7C3AED' stroke-width='3' /><text x='300' y='88' font-size='16'
+          fill='#7C3AED' text-anchor='middle' font-weight='700'>95% within ±2 SD</text>
+        <line x1='220' y1='134' x2='380' y2='134' stroke='#7C3AED' stroke-width='3' />
+        <line x1='220' y1='127' x2='220' y2='141' stroke='#7C3AED' stroke-width='3' />
+        <line x1='380' y1='127' x2='380' y2='141' stroke='#7C3AED' stroke-width='3' /><text x='300' y='124'
+          font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>68% within ±1 SD</text>
+      </svg>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <tr>
+            <th>Slice</th>
+            <th>Size</th>
+            <th>How to get it</th>
+          </tr>
+          <tr>
+            <td>Mean to ±1 SD</td>
+            <td>34.1% each side</td>
+            <td>68.2% ÷ 2</td>
+          </tr>
+          <tr>
+            <td>±1 SD to ±2 SD</td>
+            <td>13.6% each side</td>
+            <td>(95.4 − 68.2) ÷ 2</td>
+          </tr>
+          <tr>
+            <td>±2 SD to ±3 SD</td>
+            <td>2.1% each side</td>
+            <td>(99.7 − 95.4) ÷ 2</td>
+          </tr>
+          <tr>
+            <td>Beyond ±3 SD</td>
+            <td>0.15% each side</td>
+            <td>(100 − 99.7) ÷ 2</td>
+          </tr>
+        </table>
+      </div>
+      <p class="section-sub" style="margin-top:1rem">Draw it out</p>
+      <div class="chain-flow">
+        <div class="chain-node">1 · Sketch the curve, mark the mean</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">2 · Mark ±1, ±2, ±3 SD</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">3 · Label the slices</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">4 · Shade the region</div>
+        <span class="chain-sep">→</span>
+        <div class="chain-node">5 · Add the slices</div>
+      </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 314' role='img'
+        aria-label='Normal curve with the region between 46 and 58 shaded, adding to 81.8 percent'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='24' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Mean 50, SD 4: shade from
+          46 (−1 SD) to 58 (+2 SD)</text>
+        <path
+          d='M220.0,225 L220.0,145.1 L226.0,139.2 L232.0,133.3 L238.0,127.5 L244.0,122.0 L250.0,116.7 L256.0,111.8 L262.0,107.4 L268.0,103.5 L274.0,100.1 L280.0,97.4 L286.0,95.3 L292.0,94.0 L298.0,93.4 L304.0,93.5 L310.0,94.4 L316.0,96.0 L322.0,98.2 L328.0,101.2 L334.0,104.7 L340.0,108.8 L346.0,113.4 L352.0,118.4 L358.0,123.8 L364.0,129.4 L370.0,135.2 L376.0,141.2 L382.0,147.1 L388.0,153.1 L394.0,159.0 L400.0,164.7 L406.0,170.3 L412.0,175.6 L418.0,180.6 L424.0,185.4 L430.0,189.8 L436.0,194.0 L442.0,197.8 L448.0,201.2 L454.0,204.4 L460.0,207.2 L460.0,225 Z'
+          fill='#059669' fill-opacity='0.4' stroke='none' />
+        <polyline
+          points='12.0,224.8 16.8,224.7 21.6,224.7 26.4,224.6 31.2,224.5 36.0,224.4 40.8,224.3 45.6,224.2 50.4,224.0 55.2,223.8 60.0,223.5 64.8,223.3 69.6,222.9 74.4,222.5 79.2,222.1 84.0,221.6 88.8,221.0 93.6,220.3 98.4,219.5 103.2,218.6 108.0,217.6 112.8,216.5 117.6,215.2 122.4,213.8 127.2,212.2 132.0,210.5 136.8,208.6 141.6,206.5 146.4,204.2 151.2,201.7 156.0,198.9 160.8,196.0 165.6,192.9 170.4,189.6 175.2,186.0 180.0,182.3 184.8,178.3 189.6,174.2 194.4,169.9 199.2,165.5 204.0,160.9 208.8,156.3 213.6,151.5 218.4,146.7 223.2,142.0 228.0,137.2 232.8,132.5 237.6,127.9 242.4,123.4 247.2,119.1 252.0,115.0 256.8,111.2 261.6,107.7 266.4,104.5 271.2,101.6 276.0,99.1 280.8,97.1 285.6,95.5 290.4,94.3 295.2,93.6 300.0,93.3 304.8,93.6 309.6,94.3 314.4,95.5 319.2,97.1 324.0,99.1 328.8,101.6 333.6,104.5 338.4,107.7 343.2,111.2 348.0,115.0 352.8,119.1 357.6,123.4 362.4,127.9 367.2,132.5 372.0,137.2 376.8,142.0 381.6,146.7 386.4,151.5 391.2,156.3 396.0,160.9 400.8,165.5 405.6,169.9 410.4,174.2 415.2,178.3 420.0,182.3 424.8,186.0 429.6,189.6 434.4,192.9 439.2,196.0 444.0,198.9 448.8,201.7 453.6,204.2 458.4,206.5 463.2,208.6 468.0,210.5 472.8,212.2 477.6,213.8 482.4,215.2 487.2,216.5 492.0,217.6 496.8,218.6 501.6,219.5 506.4,220.3 511.2,221.0 516.0,221.6 520.8,222.1 525.6,222.5 530.4,222.9 535.2,223.3 540.0,223.5 544.8,223.8 549.6,224.0 554.4,224.2 559.2,224.3 564.0,224.4 568.8,224.5 573.6,224.6 578.4,224.7 583.2,224.7 588.0,224.8'
+          fill='none' stroke='#1A2035' stroke-width='2' />
+        <line x1='20' y1='225' x2='580' y2='225' stroke='#1A2035' stroke-width='2' />
+        <line x1='60' y1='225' x2='60' y2='233' stroke='#1A2035' stroke-width='2' /><text x='60' y='255' font-size='16'
+          fill='#1A2035' text-anchor='middle' font-weight='400'>38</text>
+        <line x1='140' y1='225' x2='140' y2='233' stroke='#1A2035' stroke-width='2' /><text x='140' y='255'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>42</text>
+        <line x1='220' y1='225' x2='220' y2='233' stroke='#1A2035' stroke-width='2' /><text x='220' y='255'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>46</text>
+        <line x1='300' y1='225' x2='300' y2='233' stroke='#1A2035' stroke-width='2' /><text x='300' y='255'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>50</text>
+        <line x1='380' y1='225' x2='380' y2='233' stroke='#1A2035' stroke-width='2' /><text x='380' y='255'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>54</text>
+        <line x1='460' y1='225' x2='460' y2='233' stroke='#1A2035' stroke-width='2' /><text x='460' y='255'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>58</text>
+        <line x1='540' y1='225' x2='540' y2='233' stroke='#1A2035' stroke-width='2' /><text x='540' y='255'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>62</text><text x='260' y='175'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>34.1%</text><text x='340' y='175'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>34.1%</text><text x='420' y='205'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>13.6%</text><text x='300' y='293'
+          font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>34.1% + 34.1% + 13.6% = 81.8%</text>
+      </svg>
+      <ul class="quicklist">
+        <li><strong>Example:</strong> mean 50, SD 4, between 46 and 58 → 34.1 + 34.1 + 13.6 = <strong>81.8%</strong>.
+        </li>
+        <li><strong>One tail:</strong> above mean + 1 SD = (100 − 68.2) ÷ 2 = <strong>15.9%</strong>. Above mean − 1 SD
+          = 34.1 + 50 = <strong>84.1%</strong>.</li>
+      </ul><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 274' role='img'
+        aria-label='Two panels: raising the mean slides the curve right; changing the standard deviation widens or narrows it'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='150' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Mean changes</text><text
+          x='450' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>SD changes</text>
+        <polyline
+          points='9.2,199.8 11.3,199.7 13.5,199.6 15.6,199.5 17.8,199.4 19.9,199.2 22.1,199.0 24.2,198.7 26.4,198.4 28.5,198.0 30.7,197.6 32.8,197.0 34.9,196.4 37.1,195.7 39.2,194.8 41.4,193.8 43.5,192.7 45.7,191.4 47.8,190.0 50.0,188.4 52.1,186.7 54.2,184.8 56.4,182.8 58.5,180.6 60.7,178.3 62.8,175.9 65.0,173.4 67.1,170.8 69.3,168.2 71.4,165.6 73.6,163.1 75.7,160.6 77.8,158.3 80.0,156.1 82.1,154.1 84.3,152.4 86.4,150.9 88.6,149.7 90.7,148.8 92.9,148.3 95.0,148.1 97.1,148.3 99.3,148.8 101.4,149.7 103.6,150.9 105.7,152.4 107.9,154.1 110.0,156.1 112.2,158.3 114.3,160.6 116.5,163.1 118.6,165.6 120.7,168.2 122.9,170.8 125.0,173.4 127.2,175.9 129.3,178.3 131.5,180.6 133.6,182.8 135.8,184.8 137.9,186.7 140.0,188.4 142.2,190.0 144.3,191.4 146.5,192.7 148.6,193.8 150.8,194.8 152.9,195.7 155.1,196.4 157.2,197.0 159.4,197.6 161.5,198.0 163.6,198.4 165.8,198.7 167.9,199.0 170.1,199.2 172.2,199.4 174.4,199.5 176.5,199.6 178.7,199.7 180.8,199.8'
+          fill='none' stroke='#5C677D' stroke-width='3' />
+        <polyline
+          points='104.2,199.8 106.3,199.7 108.5,199.6 110.6,199.5 112.8,199.4 114.9,199.2 117.1,199.0 119.2,198.7 121.4,198.4 123.5,198.0 125.7,197.6 127.8,197.0 129.9,196.4 132.1,195.7 134.2,194.8 136.4,193.8 138.5,192.7 140.7,191.4 142.8,190.0 145.0,188.4 147.1,186.7 149.2,184.8 151.4,182.8 153.5,180.6 155.7,178.3 157.8,175.9 160.0,173.4 162.1,170.8 164.3,168.2 166.4,165.6 168.6,163.1 170.7,160.6 172.8,158.3 175.0,156.1 177.1,154.1 179.3,152.4 181.4,150.9 183.6,149.7 185.7,148.8 187.9,148.3 190.0,148.1 192.1,148.3 194.3,148.8 196.4,149.7 198.6,150.9 200.7,152.4 202.9,154.1 205.0,156.1 207.2,158.3 209.3,160.6 211.4,163.1 213.6,165.6 215.7,168.2 217.9,170.8 220.0,173.4 222.2,175.9 224.3,178.3 226.5,180.6 228.6,182.8 230.8,184.8 232.9,186.7 235.0,188.4 237.2,190.0 239.3,191.4 241.5,192.7 243.6,193.8 245.8,194.8 247.9,195.7 250.1,196.4 252.2,197.0 254.4,197.6 256.5,198.0 258.6,198.4 260.8,198.7 262.9,199.0 265.1,199.2 267.2,199.4 269.4,199.5 271.5,199.6 273.7,199.7 275.8,199.8'
+          fill='none' stroke='#2563EB' stroke-width='3' /><text x='70' y='128' font-size='16' fill='#5C677D'
+          text-anchor='middle' font-weight='700'>old</text><text x='215' y='128' font-size='16' fill='#2563EB'
+          text-anchor='middle' font-weight='700'>new</text>
+        <line x1='10' y1='200' x2='285' y2='200' stroke='#1A2035' stroke-width='2' /><text x='150' y='232'
+          font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Curve SLIDES right</text><text x='150'
+          y='254' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>same shape and width</text>
+        <polyline
+          points='359.5,199.9 361.7,199.8 363.9,199.7 366.1,199.6 368.2,199.5 370.4,199.4 372.6,199.2 374.8,199.0 377.0,198.7 379.2,198.3 381.4,197.8 383.6,197.3 385.8,196.6 387.9,195.8 390.1,194.9 392.3,193.8 394.5,192.5 396.7,191.0 398.9,189.4 401.1,187.5 403.2,185.3 405.4,183.0 407.6,180.4 409.8,177.6 412.0,174.5 414.2,171.3 416.4,168.0 418.6,164.5 420.8,160.9 422.9,157.3 425.1,153.8 427.3,150.3 429.5,146.9 431.7,143.8 433.9,140.9 436.1,138.4 438.2,136.2 440.4,134.5 442.6,133.2 444.8,132.4 447.0,132.2 449.2,132.4 451.4,133.2 453.6,134.5 455.8,136.2 457.9,138.4 460.1,140.9 462.3,143.8 464.5,146.9 466.7,150.3 468.9,153.8 471.1,157.3 473.2,160.9 475.4,164.5 477.6,168.0 479.8,171.3 482.0,174.5 484.2,177.6 486.4,180.4 488.6,183.0 490.8,185.3 492.9,187.5 495.1,189.4 497.3,191.0 499.5,192.5 501.7,193.8 503.9,194.9 506.1,195.8 508.2,196.6 510.4,197.3 512.6,197.8 514.8,198.3 517.0,198.7 519.2,199.0 521.4,199.2 523.6,199.4 525.8,199.5 527.9,199.6 530.1,199.7 532.3,199.8 534.5,199.9'
+          fill='none' stroke='#7C3AED' stroke-width='3' />
+        <polyline
+          points='302.0,199.5 305.6,199.4 309.2,199.2 312.9,199.1 316.5,198.9 320.1,198.6 323.8,198.4 327.4,198.1 331.0,197.7 334.6,197.3 338.2,196.8 341.9,196.3 345.5,195.7 349.1,195.0 352.8,194.3 356.4,193.4 360.0,192.5 363.6,191.6 367.2,190.5 370.9,189.4 374.5,188.1 378.1,186.9 381.8,185.5 385.4,184.1 389.0,182.7 392.6,181.2 396.2,179.7 399.9,178.3 403.5,176.8 407.1,175.3 410.8,173.9 414.4,172.6 418.0,171.3 421.6,170.2 425.2,169.2 428.9,168.2 432.5,167.5 436.1,166.9 439.8,166.4 443.4,166.2 447.0,166.1 450.6,166.2 454.2,166.4 457.9,166.9 461.5,167.5 465.1,168.2 468.8,169.2 472.4,170.2 476.0,171.3 479.6,172.6 483.2,173.9 486.9,175.3 490.5,176.8 494.1,178.3 497.8,179.7 501.4,181.2 505.0,182.7 508.6,184.1 512.2,185.5 515.9,186.9 519.5,188.1 523.1,189.4 526.8,190.5 530.4,191.6 534.0,192.5 537.6,193.4 541.2,194.3 544.9,195.0 548.5,195.7 552.1,196.3 555.8,196.8 559.4,197.3 563.0,197.7 566.6,198.1 570.2,198.4 573.9,198.6 577.5,198.9 581.1,199.1 584.8,199.2 588.4,199.4 592.0,199.5'
+          fill='none' stroke='#DC2626' stroke-width='3' stroke-dasharray='6 4' /><text x='447' y='56' font-size='16'
+          fill='#7C3AED' text-anchor='middle' font-weight='700'>small SD: tall, narrow</text><text x='447' y='78'
+          font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>large SD: wide, flat</text>
+        <line x1='305' y1='200' x2='590' y2='200' stroke='#1A2035' stroke-width='2' /><text x='447' y='232'
+          font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>Curve SPREADS or TIGHTENS</text><text
+          x='447' y='254' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>same center</text>
+      </svg>
+      <div class="callout tip">
+        <strong>Qualitative questions:</strong> a change in the <strong>mean</strong> slides the whole curve left or
+        right. A change in the <strong>SD</strong> makes it wider and flatter (larger) or narrower and taller (smaller).
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section class="section top-anchor" id="z">
+      <h2>07 · Z-Scores</h2>
+      <p class="section-sub">How many standard deviations from the mean</p>
+
+      <div class="formula-card">
+        <div class="formula-name">Formula (memorize)</div>
+        <div class="formula-eq">z = (x − mean) ÷ SD</div>
+        <div class="formula-meaning">Subtract first, then divide. The <strong>size</strong> counts the SDs; the
+          <strong>sign</strong> gives the side: positive = above the mean, negative = below, 0 = exactly at the mean.
+          For a population: z = (x − μ) ÷ σ.
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <tr>
+            <th>Situation</th>
+            <th>Calculation</th>
+            <th>Meaning</th>
+          </tr>
+          <tr>
+            <td>Typing 50 wpm; peers average 45, SD 2</td>
+            <td>(50 − 45) ÷ 2 = <strong>+2.5</strong></td>
+            <td>2.5 SDs above peers</td>
+          </tr>
+          <tr>
+            <td>Typing 40 wpm; peers average 42, SD 2</td>
+            <td>(40 − 42) ÷ 2 = <strong>−1</strong></td>
+            <td>1 SD below peers</td>
+          </tr>
+          <tr>
+            <td>Processed 58; average 68, SD 11</td>
+            <td>(58 − 68) ÷ 11 = <strong>−0.91</strong></td>
+            <td>About 1 SD below the mean</td>
+          </tr>
+        </table>
+      </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 292' role='img'
+        aria-label='Normal curve with mean 50 and SD 8 marking 38 hours at a z-score of negative 1.5'
+        style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text
+          x='300' y='24' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>z = (38 − 50) ÷ 8 =
+          −1.5</text>
+        <path
+          d='M12.0,220 L12.0,219.8 L16.2,219.8 L20.4,219.7 L24.6,219.7 L28.8,219.6 L33.0,219.6 L37.2,219.5 L41.4,219.4 L45.6,219.3 L49.8,219.1 L54.0,219.0 L58.2,218.8 L62.4,218.6 L66.6,218.4 L70.8,218.1 L75.0,217.8 L79.2,217.4 L83.4,217.0 L87.6,216.6 L91.8,216.1 L96.0,215.5 L100.2,214.9 L104.4,214.2 L108.6,213.4 L112.8,212.5 L117.0,211.5 L121.2,210.5 L125.4,209.3 L129.6,208.0 L133.8,206.6 L138.0,205.1 L142.2,203.5 L146.4,201.7 L150.6,199.8 L154.8,197.7 L159.0,195.5 L163.2,193.2 L167.4,190.7 L171.6,188.1 L175.8,185.3 L180.0,182.4 L180.0,220 Z'
+          fill='#DC2626' fill-opacity='0.35' stroke='none' />
+        <polyline
+          points='12.0,219.8 16.8,219.8 21.6,219.7 26.4,219.7 31.2,219.6 36.0,219.5 40.8,219.4 45.6,219.3 50.4,219.1 55.2,218.9 60.0,218.7 64.8,218.5 69.6,218.2 74.4,217.8 79.2,217.4 84.0,217.0 88.8,216.5 93.6,215.9 98.4,215.2 103.2,214.4 108.0,213.5 112.8,212.5 117.6,211.4 122.4,210.2 127.2,208.8 132.0,207.2 136.8,205.6 141.6,203.7 146.4,201.7 151.2,199.5 156.0,197.1 160.8,194.5 165.6,191.8 170.4,188.9 175.2,185.7 180.0,182.4 184.8,179.0 189.6,175.4 194.4,171.6 199.2,167.7 204.0,163.7 208.8,159.6 213.6,155.4 218.4,151.2 223.2,147.0 228.0,142.8 232.8,138.7 237.6,134.7 242.4,130.7 247.2,126.9 252.0,123.4 256.8,120.0 261.6,116.9 266.4,114.1 271.2,111.6 276.0,109.4 280.8,107.6 285.6,106.2 290.4,105.1 295.2,104.5 300.0,104.3 304.8,104.5 309.6,105.1 314.4,106.2 319.2,107.6 324.0,109.4 328.8,111.6 333.6,114.1 338.4,116.9 343.2,120.0 348.0,123.4 352.8,126.9 357.6,130.7 362.4,134.7 367.2,138.7 372.0,142.8 376.8,147.0 381.6,151.2 386.4,155.4 391.2,159.6 396.0,163.7 400.8,167.7 405.6,171.6 410.4,175.4 415.2,179.0 420.0,182.4 424.8,185.7 429.6,188.9 434.4,191.8 439.2,194.5 444.0,197.1 448.8,199.5 453.6,201.7 458.4,203.7 463.2,205.6 468.0,207.2 472.8,208.8 477.6,210.2 482.4,211.4 487.2,212.5 492.0,213.5 496.8,214.4 501.6,215.2 506.4,215.9 511.2,216.5 516.0,217.0 520.8,217.4 525.6,217.8 530.4,218.2 535.2,218.5 540.0,218.7 544.8,218.9 549.6,219.1 554.4,219.3 559.2,219.4 564.0,219.5 568.8,219.6 573.6,219.7 578.4,219.7 583.2,219.8 588.0,219.8'
+          fill='none' stroke='#1A2035' stroke-width='2' />
+        <line x1='20' y1='220' x2='580' y2='220' stroke='#1A2035' stroke-width='2' />
+        <line x1='60' y1='220' x2='60' y2='228' stroke='#1A2035' stroke-width='2' /><text x='60' y='250' font-size='16'
+          fill='#1A2035' text-anchor='middle' font-weight='400'>26</text><text x='60' y='272' font-size='16'
+          fill='#5C677D' text-anchor='middle' font-weight='400'>z = -3</text>
+        <line x1='140' y1='220' x2='140' y2='228' stroke='#1A2035' stroke-width='2' /><text x='140' y='250'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>34</text><text x='140' y='272'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = -2</text>
+        <line x1='220' y1='220' x2='220' y2='228' stroke='#1A2035' stroke-width='2' /><text x='220' y='250'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>42</text><text x='220' y='272'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = -1</text>
+        <line x1='300' y1='220' x2='300' y2='228' stroke='#1A2035' stroke-width='2' /><text x='300' y='250'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>50</text><text x='300' y='272'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = 0</text>
+        <line x1='380' y1='220' x2='380' y2='228' stroke='#1A2035' stroke-width='2' /><text x='380' y='250'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>58</text><text x='380' y='272'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = 1</text>
+        <line x1='460' y1='220' x2='460' y2='228' stroke='#1A2035' stroke-width='2' /><text x='460' y='250'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>66</text><text x='460' y='272'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = 2</text>
+        <line x1='540' y1='220' x2='540' y2='228' stroke='#1A2035' stroke-width='2' /><text x='540' y='250'
+          font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>74</text><text x='540' y='272'
+          font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = 3</text>
+        <line x1='180.0' y1='220' x2='180.0' y2='182.4' stroke='#DC2626' stroke-width='4' />
+        <line x1='180.0' y1='96' x2='180.0' y2='182.4' stroke='#DC2626' stroke-width='2' stroke-dasharray='5 4' /><text
+          x='180.0' y='88' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>38 hours</text><text
+          x='300' y='70' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='700'>mean 50</text>
+      </svg>
+      <div class="callout">
+        <strong>Why it matters:</strong> z-scores put values from different samples on one scale, so you can compare and
+        benchmark. A negative z-score is not automatically "bad"; it only means below the mean. You may have to
+        calculate a z-score or place a point on a distribution, but you will not draw a graph for it.
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section class="section top-anchor" id="confuse">
+      <h2>08 · Easy to Confuse and Exam Tips</h2>
+      <p class="section-sub">The mix-ups that show up most often</p>
+
+      <div class="table-scroll">
+        <table class="compare-table">
+          <tr>
+            <th>Mix-up</th>
+            <th>How to tell them apart</th>
+          </tr>
+          <tr>
+            <td>Intersection vs. union</td>
+            <td>"and / both / all / every" multiply. "or / either" add and subtract the overlap, so the union is larger.
+            </td>
+          </tr>
+          <tr>
+            <td>Intersection vs. Bayes</td>
+            <td>Bayes has an <strong>order</strong> ("given", "knowing", "if"). An intersection has no trigger.</td>
+          </tr>
+          <tr>
+            <td>Median vs. mean</td>
+            <td>The median counts positions (half above, half below); the mean uses size, so outliers move it.</td>
+          </tr>
+          <tr>
+            <td>Mode wording</td>
+            <td>"Typical" or "most common" means mode.</td>
+          </tr>
+          <tr>
+            <td>Range vs. IQR</td>
+            <td>Range uses the extremes; IQR (Q3 − Q1) is the box.</td>
+          </tr>
+          <tr>
+            <td>Variance vs. SD</td>
+            <td>Both measure spread. SD is the square root of variance, in the original units.</td>
+          </tr>
+          <tr>
+            <td>Z-score sign</td>
+            <td>Negative means below the mean, not "bad". The size tells how many SDs.</td>
+          </tr>
+          <tr>
+            <td>68-95-99.7 vs. "less than"</td>
+            <td>The rule gives ± bands. For one-sided questions, add the slices.</td>
+          </tr>
+          <tr>
+            <td>Permutation vs. combination</td>
+            <td>Order matters = permutation. Order does not matter = combination.</td>
+          </tr>
+        </table>
+      </div>
+      <ul class="quicklist">
+        <li><strong>Objective assessment:</strong> part vocabulary, part math. Questions can include numbers you do not
+          need. Expect normal-distribution problems. You will not run a regression in Excel.</li>
+        <li><strong>Bring:</strong> a whiteboard and a <strong>dry-erase</strong> marker (not permanent).</li>
+      </ul>
+    </section>
+
   </div>
 
-  <!-- ============================================================ -->
-  <section class="section top-anchor" id="risk">
-    <h2>01 · Probability: Measuring Risk</h2>
-    <p class="section-sub">Risk, probability and the single-event rules</p>
-
-    <div class="formula-card">
-      <div class="formula-name">Why statistics is a managerial tool</div>
-      <div class="formula-eq">Lower risk → higher chance of success → profit</div>
-      <div class="formula-meaning"><strong>Risk</strong> = things did not go as planned (or not as well as planned). <strong>Success</strong> = the desired outcome. Probability helps you manage both: know the options, the comparative risk of each, the uncertainties and the outcomes you want. Managing risk costs money, time and energy, but done well it raises profit and efficiency.</div>
-    </div><div class="formula-card">
-      <div class="formula-name">Probability of an event</div>
-      <div class="formula-eq">P(E) = desired outcomes ÷ all possible outcomes</div>
-      <div class="formula-meaning">Example: 2 of 5 associates can still give a discount, so P = 2/5 = <strong>40%</strong>.</div>
-    </div><div class="formula-card">
-      <div class="formula-name">Complement</div>
-      <div class="formula-eq">P(not E) = 1 − P(E)</div>
-      <div class="formula-meaning">With only two outcomes (happens or not), the two probabilities always total 1 (or 100%). Given 0.35 for success, failure is <strong>0.65</strong>. Questions often give only one side.</div>
-    </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 190' role='img' aria-label='Bar split into success 0.35 and failure 0.65 showing complements add to 1' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='34' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Only two outcomes: they always complete 100%</text><rect x='50' y='56' width='175' height='54' fill='#2563EB' fill-opacity='.25' stroke='#2563EB' stroke-width='2'/><rect x='225' y='56' width='325' height='54' fill='#EEF1F6' stroke='#5C677D' stroke-width='2'/><text x='137' y='90' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Success 0.35</text><text x='387' y='90' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Failure 0.65</text><text x='300' y='142' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>P(not E) = 1 − P(E) = 1 − 0.35 = 0.65</text><text x='300' y='168' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>Percent version: 100% − 35% = 65%</text></svg><ul class="quicklist">
-      <li><strong>Mutually exclusive:</strong> events that cannot both happen. The intersection is 0, so the union is just the <strong>sum</strong>.</li>
-      <li><strong>Without replacement:</strong> when an item is taken and not returned, the denominator changes (and the numerator too if it was a "success"). 20 tickets with 5 winners: after one winner is drawn, P(winner) = <strong>4/19</strong>.</li>
-    </ul><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 240' role='img' aria-label='Two separate circles for mutually exclusive events and two overlapping circles for events that can both happen' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='150' y='30' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Mutually exclusive</text><text x='450' y='30' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Not exclusive (overlap)</text><circle cx='95' cy='105' r='55' fill='#2563EB' fill-opacity='.25' stroke='#2563EB' stroke-width='2'/><circle cx='205' cy='105' r='55' fill='#7C3AED' fill-opacity='.25' stroke='#7C3AED' stroke-width='2'/><text x='95' y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>A</text><text x='205' y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>B</text><circle cx='415' cy='105' r='60' fill='#2563EB' fill-opacity='.25' stroke='#2563EB' stroke-width='2'/><circle cx='485' cy='105' r='60' fill='#7C3AED' fill-opacity='.25' stroke='#7C3AED' stroke-width='2'/><text x='385' y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>A</text><text x='515' y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>B</text><text x='450' y='111' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>A∩B</text><text x='150' y='190' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>P(A and B) = 0</text><text x='150' y='214' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Union = P(A) + P(B)</text><text x='450' y='190' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>P(A and B) &gt; 0</text><text x='450' y='214' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>Union = sum − overlap</text></svg>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="section top-anchor" id="combine">
-    <h2>02 · Combining Probabilities</h2>
-    <p class="section-sub">Intersection, union and Bayes: read the keywords</p>
-
-    <div class="table-scroll">
-      <table class="compare-table">
-        <tr><th>Rule</th><th>Cue words</th><th>What you do</th><th>Example</th></tr>
-        <tr><td><strong>Intersection</strong> (∩)</td><td>"and", "both", "all", "every"</td><td>Multiply: P(A) × P(B)</td><td>0.60 × 0.30 = <strong>0.18</strong></td></tr>
-        <tr><td><strong>Union</strong> (∪)</td><td>"or", "either", "any"</td><td>Add, then subtract the overlap: P(A) + P(B) − P(A and B)</td><td>0.60 + 0.30 − 0.18 = <strong>0.72</strong></td></tr>
-        <tr><td><strong>Bayes / conditional</strong></td><td>"given", "knowing", "if this happens, what is the chance that…"</td><td>One event happens first; divide by its probability</td><td>0.12 ÷ 0.40 = <strong>0.30</strong></td></tr>
-        </table>
-    </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300' role='img' aria-label='Venn diagram of events A and B: A only 0.42, both 0.18, B only 0.12, neither 0.28' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='200' y='30' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>A: P = 0.60</text><text x='400' y='30' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>B: P = 0.30</text><circle cx='235' cy='125' r='90' fill='#2563EB' fill-opacity='.25' stroke='#2563EB' stroke-width='2'/><circle cx='365' cy='125' r='90' fill='#7C3AED' fill-opacity='.25' stroke='#7C3AED' stroke-width='2'/><text x='180' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>A only</text><text x='180' y='142' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.42</text><text x='300' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Both</text><text x='300' y='142' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.18</text><text x='420' y='120' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>B only</text><text x='420' y='142' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.12</text><text x='34' y='228' font-size='16' fill='#5C677D' text-anchor='start' font-weight='400'>Neither</text><text x='34' y='250' font-size='16' fill='#5C677D' text-anchor='start' font-weight='700'>0.28</text><text x='300' y='252' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>AND (multiply): 0.60 × 0.30 = 0.18</text><text x='300' y='278' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>OR (add, subtract overlap): 0.60 + 0.30 − 0.18 = 0.72</text></svg><div class="callout warn">
-      <strong>Union trap:</strong> a union means "A or B, but not counted twice". The question never says so. If one answer is the plain sum (0.90), it is the wrong one. A union is always at least as large as the intersection.
-    </div><div class="formula-card">
-      <div class="formula-name">Bayes (conditional) formula</div>
-      <div class="formula-eq">P(B | A) = P(A and B) ÷ P(A)</div>
-      <div class="formula-meaning">Read "the probability of B <strong>given</strong> A". The given event is the trigger, so there is an <strong>order</strong>. That order is the difference between Bayes and an intersection. If P(B | A) = P(B), A tells you nothing about B (independent events). Think of it like the decision-tree work in Section 2: combine branch probabilities, then compare outcomes.</div>
-    </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 296' role='img' aria-label='Venn diagram where circle A is the given event and the overlap with B is divided by A' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Given A, the universe shrinks to circle A</text><circle cx='345' cy='130' r='85' fill='none' stroke='#5C677D' stroke-width='2' stroke-dasharray='6 5'/><circle cx='235' cy='130' r='85' fill='#2563EB' fill-opacity='.20' stroke='#2563EB' stroke-width='4'/><path d='M290.0,65.2 A85,85 0 0 1 290.0,194.8 A85,85 0 0 1 290.0,65.2 Z' fill='#059669' fill-opacity='.55' stroke='none'/><text x='190' y='125' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>A</text><text x='190' y='147' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>(given)</text><text x='290.0' y='136' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>A∩B</text><text x='400' y='136' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>B</text><text x='300' y='252' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>P(B | A) = P(A and B) ÷ P(A)</text><text x='300' y='278' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>= 0.12 ÷ 0.40 = 0.30</text></svg><p class="section-sub" style="margin-top:1rem">Probability tree: multiply along a path; all paths total 1.00</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 620 350' role='img' aria-label='Probability tree with two stages; each path probability is the product of its branches and all paths total 1.00' style='display:block;width:100%;max-width:620px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='310' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Multiply ALONG a path. All paths add to 1.00.</text><circle cx='40' cy='170' r='8' fill='#1A2035'/><line x1='40' y1='170' x2='210' y2='95' stroke='#5C677D' stroke-width='2'/><text x='100' y='77' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.60</text><text x='235' y='100' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>A</text><line x1='40' y1='170' x2='210' y2='245' stroke='#5C677D' stroke-width='2'/><text x='100' y='279' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.40</text><text x='235' y='250' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>not A</text><line x1='265' y1='95' x2='335' y2='55' stroke='#5C677D' stroke-width='2'/><text x='293' y='63.0' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.25</text><text x='365' y='60' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>B</text><text x='410' y='60' font-size='16' fill='#059669' text-anchor='start' font-weight='700'>= 0.15</text><line x1='265' y1='95' x2='335' y2='135' stroke='#5C677D' stroke-width='2'/><text x='293' y='141.0' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.75</text><text x='365' y='140' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>not B</text><text x='410' y='140' font-size='16' fill='#059669' text-anchor='start' font-weight='700'>= 0.45</text><line x1='265' y1='245' x2='335' y2='205' stroke='#5C677D' stroke-width='2'/><text x='293' y='213.0' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.25</text><text x='365' y='210' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>B</text><text x='410' y='210' font-size='16' fill='#059669' text-anchor='start' font-weight='700'>= 0.10</text><line x1='265' y1='245' x2='335' y2='285' stroke='#5C677D' stroke-width='2'/><text x='293' y='291.0' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>0.75</text><text x='365' y='290' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>not B</text><text x='410' y='290' font-size='16' fill='#059669' text-anchor='start' font-weight='700'>= 0.30</text><text x='310' y='330' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='700'>0.15 + 0.45 + 0.10 + 0.30 = 1.00</text></svg><ul class="quicklist">
-      <li><strong>Permutations:</strong> order matters (first place vs. second). <strong>Combinations:</strong> order does not matter (who is on the team). Both return a whole-number count. Choosing 2 of 5: 20 permutations, 10 combinations.</li>
-      <li>Formulas (not emphasized): nPr = n! ÷ (n − r)! and nCr = n! ÷ (r! × (n − r)!). The instructor said combinations are not a focus of the objective assessment.</li>
-    </ul>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="section top-anchor" id="center">
-    <h2>03 · Measures of Central Tendency</h2>
-    <p class="section-sub">Mean, median and mode</p>
-
-    <div class="table-scroll">
-      <table class="compare-table">
-        <tr><th>Measure</th><th>How to find it</th><th>Cue / use</th><th>Strength or weakness</th></tr>
-        <tr><td><strong>Mean</strong></td><td>Add all values, divide by the count</td><td>"Average"</td><td>Pulled by outliers; never use it alone, pair it with a measure of spread</td></tr>
-        <tr><td><strong>Median</strong></td><td>Sort low to high and take the middle. Even count: average the two middle values</td><td>"Middle"; half the data is below and half above</td><td>Robust to outliers; says nothing about spread</td></tr>
-        <tr><td><strong>Mode</strong></td><td>The value that occurs most often (none, one or several)</td><td>The word <strong>"typical"</strong></td><td>Robust to outliers; shows frequency</td></tr>
-        </table>
-    </div><ul class="quicklist">
-      <li><strong>Median position:</strong> 9 values → the 5th; 11 values → the 6th; 10 values → average of the 5th and 6th.</li>
-      <li><strong>Sales example (7 reps):</strong> $1,000, $4,500, $4,600, $4,900, $5,200, $5,200, $7,500. Sum = $32,900, so <strong>mean = $4,700</strong>; <strong>median = $4,900</strong>; <strong>mode = $5,200</strong>. The two outliers (Juan and Jacqueline) are why the mean misleads.</li>
-    </ul><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 214' role='img' aria-label='Nine sorted numbers with the fifth value highlighted as the median' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='28' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>SORT first, then take the middle value</text><rect x='21' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='49' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>3</text><text x='49' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>1</text><rect x='83' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='111' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>5</text><text x='111' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>2</text><rect x='145' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='173' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>7</text><text x='173' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>3</text><rect x='207' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='235' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>9</text><text x='235' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>4</text><rect x='269' y='50' width='56' height='56' rx='6' fill='#059669' fill-opacity='.30' stroke='#059669' stroke-width='3'/><text x='297' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>11</text><text x='297' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>5</text><rect x='331' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='359' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>14</text><text x='359' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>6</text><rect x='393' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='421' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>16</text><text x='421' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>7</text><rect x='455' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='483' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>18</text><text x='483' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>8</text><rect x='517' y='50' width='56' height='56' rx='6' fill='#EEF1F6' stroke='#5C677D' stroke-width='1.5'/><text x='545' y='86' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>21</text><text x='545' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>9</text><text x='300' y='170' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>Position 5 of 9 holds the median: 11</text><text x='300' y='196' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>4 values below, 4 values above</text></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 248' role='img' aria-label='Dot plot with an outlier at 40 where the mean is 10.5 and the median stays at 5' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>One outlier drags the mean, not the median</text><line x1='30' y1='140' x2='580' y2='140' stroke='#5C677D' stroke-width='2'/><line x1='40' y1='135' x2='40' y2='145' stroke='#5C677D' stroke-width='2'/><text x='40' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>0</text><line x1='100' y1='135' x2='100' y2='145' stroke='#5C677D' stroke-width='2'/><text x='100' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>5</text><line x1='160' y1='135' x2='160' y2='145' stroke='#5C677D' stroke-width='2'/><text x='160' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>10</text><line x1='220' y1='135' x2='220' y2='145' stroke='#5C677D' stroke-width='2'/><text x='220' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>15</text><line x1='280' y1='135' x2='280' y2='145' stroke='#5C677D' stroke-width='2'/><text x='280' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>20</text><line x1='340' y1='135' x2='340' y2='145' stroke='#5C677D' stroke-width='2'/><text x='340' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>25</text><line x1='400' y1='135' x2='400' y2='145' stroke='#5C677D' stroke-width='2'/><text x='400' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>30</text><line x1='460' y1='135' x2='460' y2='145' stroke='#5C677D' stroke-width='2'/><text x='460' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>35</text><line x1='520' y1='135' x2='520' y2='145' stroke='#5C677D' stroke-width='2'/><text x='520' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>40</text><line x1='580' y1='135' x2='580' y2='145' stroke='#5C677D' stroke-width='2'/><text x='580' y='166' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>45</text><circle cx='76' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2'/><circle cx='88' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2'/><circle cx='100' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2'/><circle cx='100' cy='102' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2'/><circle cx='112' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2'/><circle cx='520' cy='124' r='9' fill='#2563EB' fill-opacity='.7' stroke='#2563EB' stroke-width='2'/><text x='520' y='100' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>outlier</text><polygon points='100,92 92,76 108,76' fill='#059669'/><text x='120' y='66' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>Median = 5</text><polygon points='166.0,192 158.0,208 174.0,208' fill='#DC2626'/><text x='126.0' y='232' font-size='16' fill='#DC2626' text-anchor='start' font-weight='700'>Mean = 10.5 (pulled right)</text></svg><div class="callout tip">
-      <strong>Takeaway:</strong> the median is the most robust center, the mode shows what happens most, and the mean needs a measure of spread beside it (usually the standard deviation).
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="section top-anchor" id="spread">
-    <h2>04 · Measures of Spread</h2>
-    <p class="section-sub">Range, IQR, variance and standard deviation</p>
-
-    <ul class="quicklist">
-      <li><strong>Range</strong> = highest − lowest. Sales example: $7,500 − $1,000 = <strong>$6,500</strong>. Uses only the extremes.</li>
-      <li><strong>Interquartile range (IQR)</strong> = Q3 − Q1. Q1 is the median of the lower half ($4,500) and Q3 the median of the upper half ($5,200), so IQR = <strong>$700</strong>. Leaves out the extremes.</li>
-      <li><strong>Variance</strong> and <strong>standard deviation (SD)</strong> both measure how spread out the data is. The course uses them almost interchangeably when asked "which is a measure of spread?" The SD is the square root of the variance, so it is in the original units.</li>
-    </ul><p class="section-sub" style="margin-top:1rem">Sample variance and SD in five steps</p><div class="chain-flow"><div class="chain-node">1 · Subtract the mean</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">2 · Square each difference</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">3 · Add them up</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">4 · Divide by n − 1 = variance</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">5 · Square root = SD</div></div><div class="table-scroll">
-      <table class="compare-table">
-        <tr><th>Employee</th><th>Sales</th><th>Sales − mean</th><th>Squared difference</th></tr>
-        <tr><td>Juan</td><td>$1,000</td><td>−$3,700</td><td>13,690,000</td></tr>
-        <tr><td>Penny</td><td>$4,500</td><td>−$200</td><td>40,000</td></tr>
-        <tr><td>Alec</td><td>$4,600</td><td>−$100</td><td>10,000</td></tr>
-        <tr><td>Ramone</td><td>$4,900</td><td>$200</td><td>40,000</td></tr>
-        <tr><td>Mack</td><td>$5,200</td><td>$500</td><td>250,000</td></tr>
-        <tr><td>Khara</td><td>$5,200</td><td>$500</td><td>250,000</td></tr>
-        <tr><td>Jacqueline</td><td>$7,500</td><td>$2,800</td><td>7,840,000</td></tr>
-        <tr><td><strong>Total</strong></td><td></td><td></td><td><strong>22,120,000</strong></td></tr>
-        </table>
-    </div><div class="callout">
-      <strong>Result:</strong> variance = 22,120,000 ÷ 6 = <strong>3,686,667</strong>; SD = √3,686,667 = <strong>$1,920.07</strong>. The course text prints the variance as "$3,686.667", which is a typo; the SD is correct. Squaring is why variance looks "too big".
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="section top-anchor" id="box">
-    <h2>05 · Box Plots and Skew</h2>
-    <p class="section-sub">A communication tool built from five numbers</p>
-
-    <div class="chain-flow"><div class="chain-node">1 · Sort</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">2 · Find the median</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">3 · Find Q1 and Q3</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">4 · Draw the box (Q1 to Q3)</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">5 · Whiskers to min and max</div></div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 288' role='img' aria-label='Labeled box plot showing minimum 3, Q1 5, median 10, Q3 15, maximum 21, an IQR of 10 and a range of 18' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='24' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Five numbers build a box plot</text><line x1='160' y1='84' x2='400' y2='84' stroke='#2563EB' stroke-width='3'/><line x1='160' y1='78' x2='160' y2='90' stroke='#2563EB' stroke-width='3'/><line x1='400' y1='78' x2='400' y2='90' stroke='#2563EB' stroke-width='3'/><text x='280' y='70' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>IQR = Q3 − Q1 = 15 − 5 = 10</text><line x1='112' y1='135' x2='160' y2='135' stroke='#1A2035' stroke-width='3'/><line x1='400' y1='135' x2='544' y2='135' stroke='#1A2035' stroke-width='3'/><line x1='112' y1='118' x2='112' y2='152' stroke='#1A2035' stroke-width='3'/><line x1='544' y1='118' x2='544' y2='152' stroke='#1A2035' stroke-width='3'/><rect x='160' y='102' width='240' height='66' fill='#2563EB' fill-opacity='.18' stroke='#2563EB' stroke-width='3'/><line x1='280' y1='102' x2='280' y2='168' stroke='#DC2626' stroke-width='5'/><text x='112' y='196' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Min</text><text x='112' y='218' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>3</text><text x='160' y='196' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Q1</text><text x='160' y='218' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>5</text><text x='280' y='196' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>Median</text><text x='280' y='218' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>10</text><text x='400' y='196' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Q3</text><text x='400' y='218' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>15</text><text x='544' y='196' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Max</text><text x='544' y='218' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>21</text><line x1='112' y1='246' x2='544' y2='246' stroke='#5C677D' stroke-width='2'/><text x='328' y='270' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='700'>Range = Max − Min = 21 − 3 = 18 (whiskers)</text></svg><ul class="quicklist">
-      <li>The <strong>box width is the IQR</strong>; the <strong>whiskers</strong> span the range (this course ignores outliers on box plots).</li>
-      <li>Sales example: min $1,000, Q1 $4,500, median $4,900, Q3 $5,200, max $7,500.</li>
-      <li>You will <strong>not draw</strong> a box plot on the objective assessment, but you may need to read the range, median, quartiles and IQR, and spot skew. Managers read box plots fast, once someone explains how.</li>
-    </ul><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 336' role='img' aria-label='Three box plots: left-skewed, symmetric and right-skewed' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>The LONG whisker points toward the skew</text><text x='30' y='69' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>Left-skewed: long whisker on the left</text><line x1='73.2' y1='105' x2='354.0' y2='105' stroke='#1A2035' stroke-width='3'/><line x1='489.00000000000006' y1='105' x2='526.8' y2='105' stroke='#1A2035' stroke-width='3'/><line x1='73.2' y1='93' x2='73.2' y2='117' stroke='#1A2035' stroke-width='3'/><line x1='526.8' y1='93' x2='526.8' y2='117' stroke='#1A2035' stroke-width='3'/><rect x='354.0' y='83' width='135.00000000000006' height='44' fill='#2563EB' fill-opacity='.18' stroke='#2563EB' stroke-width='3'/><line x1='435.0' y1='83' x2='435.0' y2='127' stroke='#DC2626' stroke-width='4'/><text x='30' y='164' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>Symmetric: balanced box and whiskers</text><line x1='138.0' y1='200' x2='246.0' y2='200' stroke='#1A2035' stroke-width='3'/><line x1='354.0' y1='200' x2='462.0' y2='200' stroke='#1A2035' stroke-width='3'/><line x1='138.0' y1='188' x2='138.0' y2='212' stroke='#1A2035' stroke-width='3'/><line x1='462.0' y1='188' x2='462.0' y2='212' stroke='#1A2035' stroke-width='3'/><rect x='246.0' y='178' width='108.0' height='44' fill='#2563EB' fill-opacity='.18' stroke='#2563EB' stroke-width='3'/><line x1='300.0' y1='178' x2='300.0' y2='222' stroke='#DC2626' stroke-width='4'/><text x='30' y='259' font-size='16' fill='#1A2035' text-anchor='start' font-weight='700'>Right-skewed: long whisker on the right</text><line x1='73.2' y1='295' x2='111.0' y2='295' stroke='#1A2035' stroke-width='3'/><line x1='246.0' y1='295' x2='526.8' y2='295' stroke='#1A2035' stroke-width='3'/><line x1='73.2' y1='283' x2='73.2' y2='307' stroke='#1A2035' stroke-width='3'/><line x1='526.8' y1='283' x2='526.8' y2='307' stroke='#1A2035' stroke-width='3'/><rect x='111.0' y='273' width='135.0' height='44' fill='#2563EB' fill-opacity='.18' stroke='#2563EB' stroke-width='3'/><line x1='165.0' y1='273' x2='165.0' y2='317' stroke='#DC2626' stroke-width='4'/></svg><div class="callout tip">
-      <strong>Skew rule:</strong> the long whisker points toward the skew. A well-controlled process is <strong>symmetric</strong>; a shift in one hour shows up as skew.
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="section top-anchor" id="normal">
-    <h2>06 · The Normal Distribution</h2>
-    <p class="section-sub">Empirical Rule, slices and what the mean and SD do</p>
-
-    <div class="callout">
-      <strong>Conditions for the Empirical Rule:</strong> mean ≈ median ≈ mode; sample size greater than 30; about 50% of the data on each side of the mean.
-    </div><div class="formula-card">
-      <div class="formula-name">Memorize</div>
-      <div class="formula-eq">±1 SD ≈ 68% · ±2 SD ≈ 95% · ±3 SD ≈ 99.7%</div>
-      <div class="formula-meaning">Range = mean ± (number of SDs × SD). Mean 60 and SD 5: 55–65 (68%), 50–70 (95%), 45–75 (99.7%). The text uses 68.3 / 95.4 / 99.7 and the lecture 68.2 / 95.4 / 99.7; they are the same rule, so choose the closest answer.</div>
-    </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 346' role='img' aria-label='Bell curve with bands: 34.1 percent per half within one SD, 13.6 percent from one to two SD, 2.1 percent from two to three SD' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='22' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Empirical Rule: 68 – 95 – 99.7</text><path d='M60.0,300 L60.0,298.3 L62.0,298.2 L64.0,298.1 L66.0,297.9 L68.0,297.8 L70.0,297.6 L72.0,297.4 L74.0,297.2 L76.0,297.0 L78.0,296.8 L80.0,296.6 L82.0,296.3 L84.0,296.1 L86.0,295.8 L88.0,295.5 L90.0,295.2 L92.0,294.9 L94.0,294.6 L96.0,294.2 L98.0,293.8 L100.0,293.4 L102.0,293.0 L104.0,292.6 L106.0,292.1 L108.0,291.6 L110.0,291.1 L112.0,290.5 L114.0,290.0 L116.0,289.4 L118.0,288.8 L120.0,288.1 L122.0,287.4 L124.0,286.7 L126.0,285.9 L128.0,285.2 L130.0,284.4 L132.0,283.5 L134.0,282.6 L136.0,281.7 L138.0,280.7 L140.0,279.8 L140.0,300 Z' fill='#2563EB' fill-opacity='0.25' stroke='none'/><path d='M140.0,300 L140.0,279.8 L142.0,278.7 L144.0,277.7 L146.0,276.5 L148.0,275.4 L150.0,274.2 L152.0,273.0 L154.0,271.7 L156.0,270.4 L158.0,269.0 L160.0,267.6 L162.0,266.2 L164.0,264.7 L166.0,263.2 L168.0,261.7 L170.0,260.0 L172.0,258.4 L174.0,256.7 L176.0,255.0 L178.0,253.2 L180.0,251.4 L182.0,249.6 L184.0,247.7 L186.0,245.8 L188.0,243.9 L190.0,241.9 L192.0,239.9 L194.0,237.8 L196.0,235.7 L198.0,233.6 L200.0,231.5 L202.0,229.4 L204.0,227.2 L206.0,225.0 L208.0,222.8 L210.0,220.5 L212.0,218.3 L214.0,216.1 L216.0,213.8 L218.0,211.5 L220.0,209.3 L220.0,300 Z' fill='#2563EB' fill-opacity='0.45' stroke='none'/><path d='M220.0,300 L220.0,209.3 L222.0,207.0 L224.0,204.7 L226.0,202.5 L228.0,200.2 L230.0,198.0 L232.0,195.8 L234.0,193.6 L236.0,191.4 L238.0,189.2 L240.0,187.1 L242.0,185.0 L244.0,182.9 L246.0,180.9 L248.0,178.9 L250.0,176.9 L252.0,175.0 L254.0,173.2 L256.0,171.4 L258.0,169.7 L260.0,168.0 L262.0,166.4 L264.0,164.8 L266.0,163.3 L268.0,161.9 L270.0,160.6 L272.0,159.3 L274.0,158.1 L276.0,157.0 L278.0,155.9 L280.0,155.0 L282.0,154.1 L284.0,153.4 L286.0,152.7 L288.0,152.1 L290.0,151.6 L292.0,151.1 L294.0,150.8 L296.0,150.6 L298.0,150.4 L300.0,150.4 L300.0,300 Z' fill='#2563EB' fill-opacity='0.75' stroke='none'/><path d='M300.0,300 L300.0,150.4 L302.0,150.4 L304.0,150.6 L306.0,150.8 L308.0,151.1 L310.0,151.6 L312.0,152.1 L314.0,152.7 L316.0,153.4 L318.0,154.1 L320.0,155.0 L322.0,155.9 L324.0,157.0 L326.0,158.1 L328.0,159.3 L330.0,160.6 L332.0,161.9 L334.0,163.3 L336.0,164.8 L338.0,166.4 L340.0,168.0 L342.0,169.7 L344.0,171.4 L346.0,173.2 L348.0,175.0 L350.0,176.9 L352.0,178.9 L354.0,180.9 L356.0,182.9 L358.0,185.0 L360.0,187.1 L362.0,189.2 L364.0,191.4 L366.0,193.6 L368.0,195.8 L370.0,198.0 L372.0,200.2 L374.0,202.5 L376.0,204.7 L378.0,207.0 L380.0,209.3 L380.0,300 Z' fill='#2563EB' fill-opacity='0.75' stroke='none'/><path d='M380.0,300 L380.0,209.3 L382.0,211.5 L384.0,213.8 L386.0,216.1 L388.0,218.3 L390.0,220.5 L392.0,222.8 L394.0,225.0 L396.0,227.2 L398.0,229.4 L400.0,231.5 L402.0,233.6 L404.0,235.7 L406.0,237.8 L408.0,239.9 L410.0,241.9 L412.0,243.9 L414.0,245.8 L416.0,247.7 L418.0,249.6 L420.0,251.4 L422.0,253.2 L424.0,255.0 L426.0,256.7 L428.0,258.4 L430.0,260.0 L432.0,261.7 L434.0,263.2 L436.0,264.7 L438.0,266.2 L440.0,267.6 L442.0,269.0 L444.0,270.4 L446.0,271.7 L448.0,273.0 L450.0,274.2 L452.0,275.4 L454.0,276.5 L456.0,277.7 L458.0,278.7 L460.0,279.8 L460.0,300 Z' fill='#2563EB' fill-opacity='0.45' stroke='none'/><path d='M460.0,300 L460.0,279.8 L462.0,280.7 L464.0,281.7 L466.0,282.6 L468.0,283.5 L470.0,284.4 L472.0,285.2 L474.0,285.9 L476.0,286.7 L478.0,287.4 L480.0,288.1 L482.0,288.8 L484.0,289.4 L486.0,290.0 L488.0,290.5 L490.0,291.1 L492.0,291.6 L494.0,292.1 L496.0,292.6 L498.0,293.0 L500.0,293.4 L502.0,293.8 L504.0,294.2 L506.0,294.6 L508.0,294.9 L510.0,295.2 L512.0,295.5 L514.0,295.8 L516.0,296.1 L518.0,296.3 L520.0,296.6 L522.0,296.8 L524.0,297.0 L526.0,297.2 L528.0,297.4 L530.0,297.6 L532.0,297.8 L534.0,297.9 L536.0,298.1 L538.0,298.2 L540.0,298.3 L540.0,300 Z' fill='#2563EB' fill-opacity='0.25' stroke='none'/><polyline points='12.0,299.8 16.8,299.7 21.6,299.6 26.4,299.6 31.2,299.5 36.0,299.4 40.8,299.2 45.6,299.0 50.4,298.8 55.2,298.6 60.0,298.3 64.8,298.0 69.6,297.6 74.4,297.2 79.2,296.7 84.0,296.1 88.8,295.4 93.6,294.6 98.4,293.7 103.2,292.7 108.0,291.6 112.8,290.3 117.6,288.9 122.4,287.3 127.2,285.5 132.0,283.5 136.8,281.3 141.6,278.9 146.4,276.3 151.2,273.5 156.0,270.4 160.8,267.1 165.6,263.5 170.4,259.7 175.2,255.7 180.0,251.4 184.8,247.0 189.6,242.3 194.4,237.4 199.2,232.4 204.0,227.2 208.8,221.9 213.6,216.5 218.4,211.1 223.2,205.6 228.0,200.2 232.8,194.9 237.6,189.6 242.4,184.6 247.2,179.7 252.0,175.0 256.8,170.7 261.6,166.7 266.4,163.0 271.2,159.8 276.0,157.0 280.8,154.6 285.6,152.8 290.4,151.5 295.2,150.7 300.0,150.4 304.8,150.7 309.6,151.5 314.4,152.8 319.2,154.6 324.0,157.0 328.8,159.8 333.6,163.0 338.4,166.7 343.2,170.7 348.0,175.0 352.8,179.7 357.6,184.6 362.4,189.6 367.2,194.9 372.0,200.2 376.8,205.6 381.6,211.1 386.4,216.5 391.2,221.9 396.0,227.2 400.8,232.4 405.6,237.4 410.4,242.3 415.2,247.0 420.0,251.4 424.8,255.7 429.6,259.7 434.4,263.5 439.2,267.1 444.0,270.4 448.8,273.5 453.6,276.3 458.4,278.9 463.2,281.3 468.0,283.5 472.8,285.5 477.6,287.3 482.4,288.9 487.2,290.3 492.0,291.6 496.8,292.7 501.6,293.7 506.4,294.6 511.2,295.4 516.0,296.1 520.8,296.7 525.6,297.2 530.4,297.6 535.2,298.0 540.0,298.3 544.8,298.6 549.6,298.8 554.4,299.0 559.2,299.2 564.0,299.4 568.8,299.5 573.6,299.6 578.4,299.6 583.2,299.7 588.0,299.8' fill='none' stroke='#1A2035' stroke-width='2'/><line x1='20' y1='300' x2='580' y2='300' stroke='#1A2035' stroke-width='2'/><line x1='60' y1='300' x2='60' y2='298.3' stroke='#fff' stroke-width='2'/><text x='60' y='326' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>−3 SD</text><line x1='140' y1='300' x2='140' y2='279.8' stroke='#fff' stroke-width='2'/><text x='140' y='326' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>−2 SD</text><line x1='220' y1='300' x2='220' y2='209.3' stroke='#fff' stroke-width='2'/><text x='220' y='326' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>−1 SD</text><line x1='300' y1='300' x2='300' y2='150.4' stroke='#fff' stroke-width='2'/><text x='300' y='326' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>mean</text><line x1='380' y1='300' x2='380' y2='209.3' stroke='#fff' stroke-width='2'/><text x='380' y='326' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>+1 SD</text><line x1='460' y1='300' x2='460' y2='279.8' stroke='#fff' stroke-width='2'/><text x='460' y='326' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>+2 SD</text><line x1='540' y1='300' x2='540' y2='298.3' stroke='#fff' stroke-width='2'/><text x='540' y='326' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>+3 SD</text><text x='260' y='260' font-size='16' fill='#fff' text-anchor='middle' font-weight='700'>34.1%</text><text x='340' y='260' font-size='16' fill='#fff' text-anchor='middle' font-weight='700'>34.1%</text><text x='180' y='280' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>13.6%</text><text x='420' y='280' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>13.6%</text><text x='100' y='272' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>2.1%</text><text x='500' y='272' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>2.1%</text><text x='42' y='272' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.15%</text><text x='558' y='272' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>0.15%</text><line x1='60' y1='62' x2='540' y2='62' stroke='#7C3AED' stroke-width='3'/><line x1='60' y1='55' x2='60' y2='69' stroke='#7C3AED' stroke-width='3'/><line x1='540' y1='55' x2='540' y2='69' stroke='#7C3AED' stroke-width='3'/><text x='300' y='52' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>99.7% within ±3 SD</text><line x1='140' y1='98' x2='460' y2='98' stroke='#7C3AED' stroke-width='3'/><line x1='140' y1='91' x2='140' y2='105' stroke='#7C3AED' stroke-width='3'/><line x1='460' y1='91' x2='460' y2='105' stroke='#7C3AED' stroke-width='3'/><text x='300' y='88' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>95% within ±2 SD</text><line x1='220' y1='134' x2='380' y2='134' stroke='#7C3AED' stroke-width='3'/><line x1='220' y1='127' x2='220' y2='141' stroke='#7C3AED' stroke-width='3'/><line x1='380' y1='127' x2='380' y2='141' stroke='#7C3AED' stroke-width='3'/><text x='300' y='124' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>68% within ±1 SD</text></svg><div class="table-scroll">
-      <table class="compare-table">
-        <tr><th>Slice</th><th>Size</th><th>How to get it</th></tr>
-        <tr><td>Mean to ±1 SD</td><td>34.1% each side</td><td>68.2% ÷ 2</td></tr>
-        <tr><td>±1 SD to ±2 SD</td><td>13.6% each side</td><td>(95.4 − 68.2) ÷ 2</td></tr>
-        <tr><td>±2 SD to ±3 SD</td><td>2.1% each side</td><td>(99.7 − 95.4) ÷ 2</td></tr>
-        <tr><td>Beyond ±3 SD</td><td>0.15% each side</td><td>(100 − 99.7) ÷ 2</td></tr>
-        </table>
-    </div><p class="section-sub" style="margin-top:1rem">Draw it out (bring a whiteboard and a dry-erase marker)</p><div class="chain-flow"><div class="chain-node">1 · Sketch the curve, mark the mean</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">2 · Mark ±1, ±2, ±3 SD</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">3 · Label the slices</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">4 · Shade the region</div>
-      <span class="chain-sep">→</span>
-      <div class="chain-node">5 · Add the slices</div></div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 314' role='img' aria-label='Normal curve with the region between 46 and 58 shaded, adding to 81.8 percent' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='24' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Mean 50, SD 4: shade from 46 (−1 SD) to 58 (+2 SD)</text><path d='M220.0,225 L220.0,145.1 L226.0,139.2 L232.0,133.3 L238.0,127.5 L244.0,122.0 L250.0,116.7 L256.0,111.8 L262.0,107.4 L268.0,103.5 L274.0,100.1 L280.0,97.4 L286.0,95.3 L292.0,94.0 L298.0,93.4 L304.0,93.5 L310.0,94.4 L316.0,96.0 L322.0,98.2 L328.0,101.2 L334.0,104.7 L340.0,108.8 L346.0,113.4 L352.0,118.4 L358.0,123.8 L364.0,129.4 L370.0,135.2 L376.0,141.2 L382.0,147.1 L388.0,153.1 L394.0,159.0 L400.0,164.7 L406.0,170.3 L412.0,175.6 L418.0,180.6 L424.0,185.4 L430.0,189.8 L436.0,194.0 L442.0,197.8 L448.0,201.2 L454.0,204.4 L460.0,207.2 L460.0,225 Z' fill='#059669' fill-opacity='0.4' stroke='none'/><polyline points='12.0,224.8 16.8,224.7 21.6,224.7 26.4,224.6 31.2,224.5 36.0,224.4 40.8,224.3 45.6,224.2 50.4,224.0 55.2,223.8 60.0,223.5 64.8,223.3 69.6,222.9 74.4,222.5 79.2,222.1 84.0,221.6 88.8,221.0 93.6,220.3 98.4,219.5 103.2,218.6 108.0,217.6 112.8,216.5 117.6,215.2 122.4,213.8 127.2,212.2 132.0,210.5 136.8,208.6 141.6,206.5 146.4,204.2 151.2,201.7 156.0,198.9 160.8,196.0 165.6,192.9 170.4,189.6 175.2,186.0 180.0,182.3 184.8,178.3 189.6,174.2 194.4,169.9 199.2,165.5 204.0,160.9 208.8,156.3 213.6,151.5 218.4,146.7 223.2,142.0 228.0,137.2 232.8,132.5 237.6,127.9 242.4,123.4 247.2,119.1 252.0,115.0 256.8,111.2 261.6,107.7 266.4,104.5 271.2,101.6 276.0,99.1 280.8,97.1 285.6,95.5 290.4,94.3 295.2,93.6 300.0,93.3 304.8,93.6 309.6,94.3 314.4,95.5 319.2,97.1 324.0,99.1 328.8,101.6 333.6,104.5 338.4,107.7 343.2,111.2 348.0,115.0 352.8,119.1 357.6,123.4 362.4,127.9 367.2,132.5 372.0,137.2 376.8,142.0 381.6,146.7 386.4,151.5 391.2,156.3 396.0,160.9 400.8,165.5 405.6,169.9 410.4,174.2 415.2,178.3 420.0,182.3 424.8,186.0 429.6,189.6 434.4,192.9 439.2,196.0 444.0,198.9 448.8,201.7 453.6,204.2 458.4,206.5 463.2,208.6 468.0,210.5 472.8,212.2 477.6,213.8 482.4,215.2 487.2,216.5 492.0,217.6 496.8,218.6 501.6,219.5 506.4,220.3 511.2,221.0 516.0,221.6 520.8,222.1 525.6,222.5 530.4,222.9 535.2,223.3 540.0,223.5 544.8,223.8 549.6,224.0 554.4,224.2 559.2,224.3 564.0,224.4 568.8,224.5 573.6,224.6 578.4,224.7 583.2,224.7 588.0,224.8' fill='none' stroke='#1A2035' stroke-width='2'/><line x1='20' y1='225' x2='580' y2='225' stroke='#1A2035' stroke-width='2'/><line x1='60' y1='225' x2='60' y2='233' stroke='#1A2035' stroke-width='2'/><text x='60' y='255' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>38</text><line x1='140' y1='225' x2='140' y2='233' stroke='#1A2035' stroke-width='2'/><text x='140' y='255' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>42</text><line x1='220' y1='225' x2='220' y2='233' stroke='#1A2035' stroke-width='2'/><text x='220' y='255' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>46</text><line x1='300' y1='225' x2='300' y2='233' stroke='#1A2035' stroke-width='2'/><text x='300' y='255' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>50</text><line x1='380' y1='225' x2='380' y2='233' stroke='#1A2035' stroke-width='2'/><text x='380' y='255' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>54</text><line x1='460' y1='225' x2='460' y2='233' stroke='#1A2035' stroke-width='2'/><text x='460' y='255' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>58</text><line x1='540' y1='225' x2='540' y2='233' stroke='#1A2035' stroke-width='2'/><text x='540' y='255' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>62</text><text x='260' y='175' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>34.1%</text><text x='340' y='175' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>34.1%</text><text x='420' y='205' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>13.6%</text><text x='300' y='293' font-size='16' fill='#059669' text-anchor='middle' font-weight='700'>34.1% + 34.1% + 13.6% = 81.8%</text></svg><ul class="quicklist">
-      <li><strong>Example:</strong> mean 50, SD 4, between 46 and 58 → 34.1 + 34.1 + 13.6 = <strong>81.8%</strong>.</li>
-      <li><strong>One tail:</strong> above mean + 1 SD = (100 − 68.2) ÷ 2 = <strong>15.9%</strong>. Above mean − 1 SD = 34.1 + 50 = <strong>84.1%</strong>.</li>
-      <li><strong>Lecture rounding:</strong> the lecture quoted about 97.5%, 83.9% and 15.7% for its practice problems; slice sums give 97.7%, 84.1% and 15.9%. Expect answer choices close to these, not exact.</li>
-      <li><strong>IQ example (mean 100, SD 15):</strong> 70–130 = ±2 SD = 95.4%; 85–115 = ±1 SD = 68.3%; above 115 = 15.87%.</li>
-    </ul><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 274' role='img' aria-label='Two panels: raising the mean slides the curve right; changing the standard deviation widens or narrows it' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='150' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>Mean changes</text><text x='450' y='26' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='700'>SD changes</text><polyline points='9.2,199.8 11.3,199.7 13.5,199.6 15.6,199.5 17.8,199.4 19.9,199.2 22.1,199.0 24.2,198.7 26.4,198.4 28.5,198.0 30.7,197.6 32.8,197.0 34.9,196.4 37.1,195.7 39.2,194.8 41.4,193.8 43.5,192.7 45.7,191.4 47.8,190.0 50.0,188.4 52.1,186.7 54.2,184.8 56.4,182.8 58.5,180.6 60.7,178.3 62.8,175.9 65.0,173.4 67.1,170.8 69.3,168.2 71.4,165.6 73.6,163.1 75.7,160.6 77.8,158.3 80.0,156.1 82.1,154.1 84.3,152.4 86.4,150.9 88.6,149.7 90.7,148.8 92.9,148.3 95.0,148.1 97.1,148.3 99.3,148.8 101.4,149.7 103.6,150.9 105.7,152.4 107.9,154.1 110.0,156.1 112.2,158.3 114.3,160.6 116.5,163.1 118.6,165.6 120.7,168.2 122.9,170.8 125.0,173.4 127.2,175.9 129.3,178.3 131.5,180.6 133.6,182.8 135.8,184.8 137.9,186.7 140.0,188.4 142.2,190.0 144.3,191.4 146.5,192.7 148.6,193.8 150.8,194.8 152.9,195.7 155.1,196.4 157.2,197.0 159.4,197.6 161.5,198.0 163.6,198.4 165.8,198.7 167.9,199.0 170.1,199.2 172.2,199.4 174.4,199.5 176.5,199.6 178.7,199.7 180.8,199.8' fill='none' stroke='#5C677D' stroke-width='3'/><polyline points='104.2,199.8 106.3,199.7 108.5,199.6 110.6,199.5 112.8,199.4 114.9,199.2 117.1,199.0 119.2,198.7 121.4,198.4 123.5,198.0 125.7,197.6 127.8,197.0 129.9,196.4 132.1,195.7 134.2,194.8 136.4,193.8 138.5,192.7 140.7,191.4 142.8,190.0 145.0,188.4 147.1,186.7 149.2,184.8 151.4,182.8 153.5,180.6 155.7,178.3 157.8,175.9 160.0,173.4 162.1,170.8 164.3,168.2 166.4,165.6 168.6,163.1 170.7,160.6 172.8,158.3 175.0,156.1 177.1,154.1 179.3,152.4 181.4,150.9 183.6,149.7 185.7,148.8 187.9,148.3 190.0,148.1 192.1,148.3 194.3,148.8 196.4,149.7 198.6,150.9 200.7,152.4 202.9,154.1 205.0,156.1 207.2,158.3 209.3,160.6 211.4,163.1 213.6,165.6 215.7,168.2 217.9,170.8 220.0,173.4 222.2,175.9 224.3,178.3 226.5,180.6 228.6,182.8 230.8,184.8 232.9,186.7 235.0,188.4 237.2,190.0 239.3,191.4 241.5,192.7 243.6,193.8 245.8,194.8 247.9,195.7 250.1,196.4 252.2,197.0 254.4,197.6 256.5,198.0 258.6,198.4 260.8,198.7 262.9,199.0 265.1,199.2 267.2,199.4 269.4,199.5 271.5,199.6 273.7,199.7 275.8,199.8' fill='none' stroke='#2563EB' stroke-width='3'/><text x='70' y='128' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='700'>old</text><text x='215' y='128' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>new</text><line x1='10' y1='200' x2='285' y2='200' stroke='#1A2035' stroke-width='2'/><text x='150' y='232' font-size='16' fill='#2563EB' text-anchor='middle' font-weight='700'>Curve SLIDES right</text><text x='150' y='254' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>same shape and width</text><polyline points='359.5,199.9 361.7,199.8 363.9,199.7 366.1,199.6 368.2,199.5 370.4,199.4 372.6,199.2 374.8,199.0 377.0,198.7 379.2,198.3 381.4,197.8 383.6,197.3 385.8,196.6 387.9,195.8 390.1,194.9 392.3,193.8 394.5,192.5 396.7,191.0 398.9,189.4 401.1,187.5 403.2,185.3 405.4,183.0 407.6,180.4 409.8,177.6 412.0,174.5 414.2,171.3 416.4,168.0 418.6,164.5 420.8,160.9 422.9,157.3 425.1,153.8 427.3,150.3 429.5,146.9 431.7,143.8 433.9,140.9 436.1,138.4 438.2,136.2 440.4,134.5 442.6,133.2 444.8,132.4 447.0,132.2 449.2,132.4 451.4,133.2 453.6,134.5 455.8,136.2 457.9,138.4 460.1,140.9 462.3,143.8 464.5,146.9 466.7,150.3 468.9,153.8 471.1,157.3 473.2,160.9 475.4,164.5 477.6,168.0 479.8,171.3 482.0,174.5 484.2,177.6 486.4,180.4 488.6,183.0 490.8,185.3 492.9,187.5 495.1,189.4 497.3,191.0 499.5,192.5 501.7,193.8 503.9,194.9 506.1,195.8 508.2,196.6 510.4,197.3 512.6,197.8 514.8,198.3 517.0,198.7 519.2,199.0 521.4,199.2 523.6,199.4 525.8,199.5 527.9,199.6 530.1,199.7 532.3,199.8 534.5,199.9' fill='none' stroke='#7C3AED' stroke-width='3'/><polyline points='302.0,199.5 305.6,199.4 309.2,199.2 312.9,199.1 316.5,198.9 320.1,198.6 323.8,198.4 327.4,198.1 331.0,197.7 334.6,197.3 338.2,196.8 341.9,196.3 345.5,195.7 349.1,195.0 352.8,194.3 356.4,193.4 360.0,192.5 363.6,191.6 367.2,190.5 370.9,189.4 374.5,188.1 378.1,186.9 381.8,185.5 385.4,184.1 389.0,182.7 392.6,181.2 396.2,179.7 399.9,178.3 403.5,176.8 407.1,175.3 410.8,173.9 414.4,172.6 418.0,171.3 421.6,170.2 425.2,169.2 428.9,168.2 432.5,167.5 436.1,166.9 439.8,166.4 443.4,166.2 447.0,166.1 450.6,166.2 454.2,166.4 457.9,166.9 461.5,167.5 465.1,168.2 468.8,169.2 472.4,170.2 476.0,171.3 479.6,172.6 483.2,173.9 486.9,175.3 490.5,176.8 494.1,178.3 497.8,179.7 501.4,181.2 505.0,182.7 508.6,184.1 512.2,185.5 515.9,186.9 519.5,188.1 523.1,189.4 526.8,190.5 530.4,191.6 534.0,192.5 537.6,193.4 541.2,194.3 544.9,195.0 548.5,195.7 552.1,196.3 555.8,196.8 559.4,197.3 563.0,197.7 566.6,198.1 570.2,198.4 573.9,198.6 577.5,198.9 581.1,199.1 584.8,199.2 588.4,199.4 592.0,199.5' fill='none' stroke='#DC2626' stroke-width='3' stroke-dasharray='6 4'/><text x='447' y='56' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>small SD: tall, narrow</text><text x='447' y='78' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>large SD: wide, flat</text><line x1='305' y1='200' x2='590' y2='200' stroke='#1A2035' stroke-width='2'/><text x='447' y='232' font-size='16' fill='#7C3AED' text-anchor='middle' font-weight='700'>Curve SPREADS or TIGHTENS</text><text x='447' y='254' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>same center</text></svg><div class="callout tip">
-      <strong>Qualitative questions:</strong> a change in the <strong>mean</strong> slides the whole curve left or right. A change in the <strong>SD</strong> makes it wider and flatter (larger) or narrower and taller (smaller).
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="section top-anchor" id="z">
-    <h2>07 · Z-Scores</h2>
-    <p class="section-sub">How many standard deviations from the mean</p>
-
-    <div class="formula-card">
-      <div class="formula-name">Formula (memorize)</div>
-      <div class="formula-eq">z = (x − mean) ÷ SD</div>
-      <div class="formula-meaning">Subtract first, then divide. The <strong>size</strong> counts the SDs; the <strong>sign</strong> gives the side: positive = above the mean, negative = below, 0 = exactly at the mean. For a population: z = (x − μ) ÷ σ.</div>
-    </div><div class="table-scroll">
-      <table class="compare-table">
-        <tr><th>Situation</th><th>Calculation</th><th>Meaning</th></tr>
-        <tr><td>Typing 50 wpm; peers average 45, SD 2</td><td>(50 − 45) ÷ 2 = <strong>+2.5</strong></td><td>2.5 SDs above peers</td></tr>
-        <tr><td>Typing 40 wpm; peers average 42, SD 2</td><td>(40 − 42) ÷ 2 = <strong>−1</strong></td><td>1 SD below peers</td></tr>
-        <tr><td>Processed 58; average 68, SD 11</td><td>(58 − 68) ÷ 11 = <strong>−0.91</strong></td><td>About 1 SD below the mean</td></tr>
-        </table>
-    </div><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 292' role='img' aria-label='Normal curve with mean 50 and SD 8 marking 38 hours at a z-score of negative 1.5' style='display:block;width:100%;max-width:600px;height:auto;margin:.8rem auto .3rem;background:#F7F9FD;border:1px solid #C8D1E4;border-radius:8px'><text x='300' y='24' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>z = (38 − 50) ÷ 8 = −1.5</text><path d='M12.0,220 L12.0,219.8 L16.2,219.8 L20.4,219.7 L24.6,219.7 L28.8,219.6 L33.0,219.6 L37.2,219.5 L41.4,219.4 L45.6,219.3 L49.8,219.1 L54.0,219.0 L58.2,218.8 L62.4,218.6 L66.6,218.4 L70.8,218.1 L75.0,217.8 L79.2,217.4 L83.4,217.0 L87.6,216.6 L91.8,216.1 L96.0,215.5 L100.2,214.9 L104.4,214.2 L108.6,213.4 L112.8,212.5 L117.0,211.5 L121.2,210.5 L125.4,209.3 L129.6,208.0 L133.8,206.6 L138.0,205.1 L142.2,203.5 L146.4,201.7 L150.6,199.8 L154.8,197.7 L159.0,195.5 L163.2,193.2 L167.4,190.7 L171.6,188.1 L175.8,185.3 L180.0,182.4 L180.0,220 Z' fill='#DC2626' fill-opacity='0.35' stroke='none'/><polyline points='12.0,219.8 16.8,219.8 21.6,219.7 26.4,219.7 31.2,219.6 36.0,219.5 40.8,219.4 45.6,219.3 50.4,219.1 55.2,218.9 60.0,218.7 64.8,218.5 69.6,218.2 74.4,217.8 79.2,217.4 84.0,217.0 88.8,216.5 93.6,215.9 98.4,215.2 103.2,214.4 108.0,213.5 112.8,212.5 117.6,211.4 122.4,210.2 127.2,208.8 132.0,207.2 136.8,205.6 141.6,203.7 146.4,201.7 151.2,199.5 156.0,197.1 160.8,194.5 165.6,191.8 170.4,188.9 175.2,185.7 180.0,182.4 184.8,179.0 189.6,175.4 194.4,171.6 199.2,167.7 204.0,163.7 208.8,159.6 213.6,155.4 218.4,151.2 223.2,147.0 228.0,142.8 232.8,138.7 237.6,134.7 242.4,130.7 247.2,126.9 252.0,123.4 256.8,120.0 261.6,116.9 266.4,114.1 271.2,111.6 276.0,109.4 280.8,107.6 285.6,106.2 290.4,105.1 295.2,104.5 300.0,104.3 304.8,104.5 309.6,105.1 314.4,106.2 319.2,107.6 324.0,109.4 328.8,111.6 333.6,114.1 338.4,116.9 343.2,120.0 348.0,123.4 352.8,126.9 357.6,130.7 362.4,134.7 367.2,138.7 372.0,142.8 376.8,147.0 381.6,151.2 386.4,155.4 391.2,159.6 396.0,163.7 400.8,167.7 405.6,171.6 410.4,175.4 415.2,179.0 420.0,182.4 424.8,185.7 429.6,188.9 434.4,191.8 439.2,194.5 444.0,197.1 448.8,199.5 453.6,201.7 458.4,203.7 463.2,205.6 468.0,207.2 472.8,208.8 477.6,210.2 482.4,211.4 487.2,212.5 492.0,213.5 496.8,214.4 501.6,215.2 506.4,215.9 511.2,216.5 516.0,217.0 520.8,217.4 525.6,217.8 530.4,218.2 535.2,218.5 540.0,218.7 544.8,218.9 549.6,219.1 554.4,219.3 559.2,219.4 564.0,219.5 568.8,219.6 573.6,219.7 578.4,219.7 583.2,219.8 588.0,219.8' fill='none' stroke='#1A2035' stroke-width='2'/><line x1='20' y1='220' x2='580' y2='220' stroke='#1A2035' stroke-width='2'/><line x1='60' y1='220' x2='60' y2='228' stroke='#1A2035' stroke-width='2'/><text x='60' y='250' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>26</text><text x='60' y='272' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = -3</text><line x1='140' y1='220' x2='140' y2='228' stroke='#1A2035' stroke-width='2'/><text x='140' y='250' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>34</text><text x='140' y='272' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = -2</text><line x1='220' y1='220' x2='220' y2='228' stroke='#1A2035' stroke-width='2'/><text x='220' y='250' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>42</text><text x='220' y='272' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = -1</text><line x1='300' y1='220' x2='300' y2='228' stroke='#1A2035' stroke-width='2'/><text x='300' y='250' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>50</text><text x='300' y='272' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = 0</text><line x1='380' y1='220' x2='380' y2='228' stroke='#1A2035' stroke-width='2'/><text x='380' y='250' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>58</text><text x='380' y='272' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = 1</text><line x1='460' y1='220' x2='460' y2='228' stroke='#1A2035' stroke-width='2'/><text x='460' y='250' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>66</text><text x='460' y='272' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = 2</text><line x1='540' y1='220' x2='540' y2='228' stroke='#1A2035' stroke-width='2'/><text x='540' y='250' font-size='16' fill='#1A2035' text-anchor='middle' font-weight='400'>74</text><text x='540' y='272' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='400'>z = 3</text><line x1='180.0' y1='220' x2='180.0' y2='182.4' stroke='#DC2626' stroke-width='4'/><line x1='180.0' y1='96' x2='180.0' y2='182.4' stroke='#DC2626' stroke-width='2' stroke-dasharray='5 4'/><text x='180.0' y='88' font-size='16' fill='#DC2626' text-anchor='middle' font-weight='700'>38 hours</text><text x='300' y='70' font-size='16' fill='#5C677D' text-anchor='middle' font-weight='700'>mean 50</text></svg><div class="callout">
-      <strong>Why it matters:</strong> z-scores put values from different samples on one scale, so you can compare and benchmark. A negative z-score is not automatically "bad"; it only means below the mean. You may have to calculate a z-score or place a point on a distribution, but you will not draw a graph for it.
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="section top-anchor" id="confuse">
-    <h2>08 · Easy to Confuse and Exam Tips</h2>
-    <p class="section-sub">The mix-ups that show up most often</p>
-
-    <div class="table-scroll">
-      <table class="compare-table">
-        <tr><th>Mix-up</th><th>How to tell them apart</th></tr>
-        <tr><td>Intersection vs. union</td><td>"and / both / all / every" multiply. "or / either" add and subtract the overlap, so the union is larger.</td></tr>
-        <tr><td>Intersection vs. Bayes</td><td>Bayes has an <strong>order</strong> ("given", "knowing", "if"). An intersection has no trigger.</td></tr>
-        <tr><td>Median vs. mean</td><td>The median counts positions (half above, half below); the mean uses size, so outliers move it.</td></tr>
-        <tr><td>Mode wording</td><td>"Typical" or "most common" means mode.</td></tr>
-        <tr><td>Range vs. IQR</td><td>Range uses the extremes; IQR (Q3 − Q1) is the box.</td></tr>
-        <tr><td>Variance vs. SD</td><td>Both measure spread. SD is the square root of variance, in the original units.</td></tr>
-        <tr><td>Z-score sign</td><td>Negative means below the mean, not "bad". The size tells how many SDs.</td></tr>
-        <tr><td>68-95-99.7 vs. "less than"</td><td>The rule gives ± bands. For one-sided questions, add the slices.</td></tr>
-        <tr><td>Permutation vs. combination</td><td>Order matters = permutation. Order does not matter = combination.</td></tr>
-        </table>
-    </div><ul class="quicklist">
-      <li><strong>Objective assessment:</strong> part vocabulary, part math. Questions can include numbers you do not need. Expect normal-distribution problems. You will not run a regression in Excel.</li>
-      <li><strong>Bring:</strong> a whiteboard and a <strong>dry-erase</strong> marker (not permanent).</li>
-    </ul>
-  </section>
-
-</div>
-
 </body>
+
 </html>
